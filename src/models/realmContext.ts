@@ -1,7 +1,5 @@
-/* eslint-disable linebreak-style */
-/* eslint-disable prettier/prettier */
 import "react-native-get-random-values";
-import { Realm, createRealmContext } from "@realm/react";
+import { createRealmContext } from "@realm/react";
 import { Actor } from "./Actor";
 import { Farmland } from "./Farmland";
 import { Institution } from "./Institution";

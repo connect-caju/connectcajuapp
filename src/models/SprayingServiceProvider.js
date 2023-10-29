@@ -13,7 +13,6 @@ export const SprayingServiceProvider = {
     year: { type: "int", default: () => new Date().getFullYear() },
     beneficiaries: "SprayingServiceBeneficiary[]",
     isActive: { type: "bool", default: true }, // if true, then this farmer is an active spraying service provider
-    //  status: 'string?', // active, inactive
     assets: "Assets[]",
     services: "SprayingService[]",
 
