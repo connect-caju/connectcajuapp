@@ -1,6 +1,6 @@
-import React from "react"
-import { View, Text, ActivityIndicator } from "react-native"
-import COLORS from "../../consts/colors"
+import React from "react";
+import { View, Text, ActivityIndicator } from "react-native";
+import COLORS from "../../consts/colors";
 
 function SearchScreen() {
   return (
@@ -31,7 +31,7 @@ function SearchScreen() {
         Tente mais tarde...
       </Text>
     </View>
-  )
+  );
 }
 
-export default SearchScreen
+export default SearchScreen;

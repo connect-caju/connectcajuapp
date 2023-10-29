@@ -164,6 +164,7 @@ const FarmersListLayout = ({ route, navigation }) => {
                             </TouchableOpacity>
                             <View style={{ width: 16 }} />
                             <TouchableOpacity
+                                // disabled
                                 style={{
                                     borderRadius: 100,
                                     backgroundColor: COLORS.lightgrey,

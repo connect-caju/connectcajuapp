@@ -46,7 +46,7 @@ export const filterByCriteria = [
         focusedOption: 4,
     },
     {
-        criteriaName: "Validados",
+        criteriaName: "Deferidos",
         criteriaType: "status",
         searchKey: resourceValidation.status.validated,
         farmerType: farmerTypes.farmer,
@@ -81,7 +81,7 @@ export const filterByCriteria = [
         focusedOption: 4,
     },
     {
-        criteriaName: "Validados",
+        criteriaName: "Deferidos",
         criteriaType: "status",
         searchKey: resourceValidation.status.validated,
         farmerType: farmerTypes.group,
@@ -109,7 +109,7 @@ export const filterByCriteria = [
         focusedOption: 4,
     },
     {
-        criteriaName: "Validados",
+        criteriaName: "Deferidos",
         criteriaType: "status",
         searchKey: resourceValidation.status.validated,
         farmerType: farmerTypes.institution,

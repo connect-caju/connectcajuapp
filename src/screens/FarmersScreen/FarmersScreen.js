@@ -436,13 +436,25 @@ export default function FarmersScreen({ route, navigation }) {
                   style={{
                     justifyContent: "center",
                     borderRadius: 100,
-                    borderColor: COLORS.lightestgrey,
+                    borderColor: COLORS.grey,
                     backgroundColor: COLORS.lightestgrey,
                     padding: 6,
                   }}
                 >
                   <TouchableOpacity onPress={()=>{}}>
-                    <FontAwesomeIcon icon={faBell} size={25} color={COLORS.black} />
+                    <View 
+                      style={{
+                        width: 10,
+                        height: 10,
+                        backgroundColor: COLORS.danger,
+                        borderRadius: 50,
+                        position: "absolute",
+                        right: 4,
+                        top: 0,
+                        zIndex: 1,
+                      }}
+                    />
+                    <FontAwesomeIcon icon={faBell} size={25} color={COLORS.main} />
                   </TouchableOpacity>
                 </View>
               </View>
