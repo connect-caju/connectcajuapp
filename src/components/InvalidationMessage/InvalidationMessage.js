@@ -106,7 +106,7 @@ const InvalidationMessage = ({ resource, resourceType, }) => {
                         <Text
                             style={{
                                 textAlign: "left",
-                                color: COLORS.red,
+                                color: COLORS.danger,
                                 fontSize: 14,
                                 fontFamily: "JosefinSans-Bold",
                             }}
@@ -187,7 +187,7 @@ const InvalidationMessage = ({ resource, resourceType, }) => {
                                 margin: 5,
                                 maxWidth: "80%",
                                 minWidth: "10%",
-                                alignSelf: "flex-end",
+                                alignSelf: roles.haveReadAndWritePermissions.some(role => role === customUserData.role) ? "flex-start" : "flex-end",
                             }}
                         >
                             <Text
@@ -212,7 +212,7 @@ const InvalidationMessage = ({ resource, resourceType, }) => {
                                     margin: 5,
                                     maxWidth: "80%",
                                     minWidth: "10%",
-                                    alignSelf: "flex-end",
+                                    // alignSelf: roles.haveReadAndWritePermissions.some(role => role === customUserData.role) ? "flex-end" : "flex-start",
                                 }}
                             >
                                 <Text

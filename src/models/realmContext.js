@@ -1,5 +1,7 @@
+/* eslint-disable linebreak-style */
+/* eslint-disable prettier/prettier */
 import "react-native-get-random-values";
-import { createRealmContext } from "@realm/react";
+import { Realm, createRealmContext } from "@realm/react";
 import { Actor } from "./Actor";
 import { Farmland } from "./Farmland";
 import { Institution } from "./Institution";
@@ -54,6 +56,5 @@ export const realmContext = createRealmContext({
     UserStat,
     User,
   ],
-  schemaVersion: 11,
-  // deleteRealmIfMigrationNeeded: true,
+  schemaVersion: 0,
 });

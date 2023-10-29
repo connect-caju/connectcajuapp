@@ -503,7 +503,7 @@ export default function FarmlandRegistration({ route, navigation }) {
         realm.write(() => {
           let isAssetUpdated = false;
           for (let i = 0; i < owner?.assets?.length; i++) {
-            if (owner.assets[i].assetType === "Pomar") {
+            if (owner.assets[i].assetType === assetTypes.farmland) {
               owner.assets[i].subcategory = subcategory;
               owner.assets[i].assets = farmlandIds;
 

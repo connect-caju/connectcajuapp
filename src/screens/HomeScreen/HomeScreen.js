@@ -109,7 +109,7 @@ export default function HomeScreen({ route, navigation }) {
     .map((stat) => stat.rFarmlands)
     .reduce((ac, cur) => ac + cur, 0);
 
-    
+
 
   // ----------------------------------------------------------------
   //  extract stats from whole district
@@ -421,7 +421,7 @@ export default function HomeScreen({ route, navigation }) {
             pFarmlandsPercentage={getPercentage(rpFarmlands, tpFarmlands)}
             tpFarmers={tpFarmers}
             tpFarmlands={tpFarmlands}
-            
+
           />
         </>
         // <ScrollView

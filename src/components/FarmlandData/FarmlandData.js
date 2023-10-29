@@ -473,7 +473,7 @@ const FarmlandData = ({
                       }}
                     >
                       <Box
-                        w="40%"
+                        w="25%"
                         style={{
                           justifyContent: "center",
                         }}
@@ -481,22 +481,28 @@ const FarmlandData = ({
                         <Text
                           style={{
                             color: COLORS.grey,
-                            fontSize: responsiveFontSize(1.8),
+                            fontSize: 15,
                             fontFamily: "JosefinSans-Regular",
                           }}
                         >
-                          Ponto {coords?.position}
+                          Ponto {coords?.position}:
                         </Text>
                       </Box>
-                      <Box w="60%">
+                      <Box 
+                        w="70%"
+                        style={{
+                          flexDirection: "row",
+                          justifyContent: "space-evenly",
+                        }}
+                      >
                         <Text
                           style={{
                             color: COLORS.grey,
-                            fontSize: responsiveFontSize(1.8),
+                            fontSize: 15,
                             fontFamily: "JosefinSans-Regular",
                           }}
                         >
-                          Latitude: {coords?.latitude}
+                          Lat.{coords?.latitude}
                         </Text>
                         <Text
                           style={{
@@ -505,7 +511,7 @@ const FarmlandData = ({
                             fontFamily: "JosefinSans-Regular",
                           }}
                         >
-                          Longitude: {coords?.longitude}
+                          Long.{coords?.longitude}
                         </Text>
                       </Box>
                     </Stack>
@@ -595,7 +601,6 @@ const FarmlandData = ({
               </Stack>
               {farmland?.geolocation?.latitude &&
                 farmland?.geolocation?.longitude && (
-                  <>
                     <Stack w="100%" direction="row">
                       <Box w="40%">
                         <Text
@@ -605,7 +610,7 @@ const FarmlandData = ({
                             fontFamily: "JosefinSans-Regular",
                           }}
                         >
-                          Latitude
+                          Lat.{farmland?.geolocation?.latitude}
                         </Text>
                       </Box>
                       <Box>
@@ -616,36 +621,10 @@ const FarmlandData = ({
                             fontFamily: "JosefinSans-Regular",
                           }}
                         >
-                          {farmland?.geolocation?.latitude}
+                          Long.{farmland?.geolocation?.longitude}
                         </Text>
                       </Box>
                     </Stack>
-
-                    <Stack w="100%" direction="row">
-                      <Box w="40%">
-                        <Text
-                          style={{
-                            color: COLORS.grey,
-                            fontSize: responsiveFontSize(1.8),
-                            fontFamily: "JosefinSans-Regular",
-                          }}
-                        >
-                          Longitude
-                        </Text>
-                      </Box>
-                      <Box>
-                        <Text
-                          style={{
-                            color: COLORS.grey,
-                            fontSize: responsiveFontSize(1.8),
-                            fontFamily: "JosefinSans-Regular",
-                          }}
-                        >
-                          {farmland?.geolocation?.longitude}
-                        </Text>
-                      </Box>
-                    </Stack>
-                  </>
                 )}
               {!farmland?.geolocation && (
                 <Stack w="100%" direction="row">
