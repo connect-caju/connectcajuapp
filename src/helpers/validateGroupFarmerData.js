@@ -1,8 +1,8 @@
-import { assetTypes } from "../consts/assetTypes"
-import categories from "../consts/categories"
-import { groupAffiliationStatus } from "../consts/groupAffiliationStatus"
-import { capitalize } from "./capitalize"
-import { containsNonNumeric } from "./containsNonNumeric"
+import { assetTypes } from "../consts/assetTypes";
+import categories from "../consts/categories";
+import { groupAffiliationStatus } from "../consts/groupAffiliationStatus";
+import { capitalize } from "./capitalize";
+import { containsNonNumeric } from "./containsNonNumeric";
 
 const validateGroupFarmerData = (
   {
@@ -17,6 +17,7 @@ const validateGroupFarmerData = (
     groupCreationYear,
     groupAffiliationYear,
     groupOperatingLicence,
+    groupNuel,
     groupNuit,
     groupAdminPost,
     groupVillage,
@@ -28,22 +29,23 @@ const validateGroupFarmerData = (
   errors,
   setErrors,
 ) => {
-  const retrievedIsGroupActive = isGroupActive
-  const retrievedIsGroupInactive = isGroupInactive
-  const retrievedGroupType = groupType?.trim()
-  const retrievedGroupName = capitalize(groupName?.trim())
-  const retrievedGroupGoals = groupGoals
-  const retrievedGroupMembersNumber = parseInt(groupMembersNumber)
-  const retrievedGroupWomenNumber = parseInt(groupWomenNumber)
-  const retrievedGroupLegalStatus = groupLegalStatus?.trim()
-  const retrievedGroupCreationYear = parseInt(groupCreationYear)
-  const retrievedGroupAffiliationYear = parseInt(groupAffiliationYear)
-  const retrievedGroupOperatingLicence = groupOperatingLicence?.trim()
-  const retrievedGroupNuit = parseInt(groupNuit)
-  const retrievedGroupProvince = groupProvince?.trim()
-  const retrievedGroupDistrict = groupDistrict?.trim()
-  const retrievedGroupAdminPost = groupAdminPost?.trim()
-  const retrievedGroupVillage = groupVillage?.trim()
+  const retrievedIsGroupActive = isGroupActive;
+  const retrievedIsGroupInactive = isGroupInactive;
+  const retrievedGroupType = groupType?.trim();
+  const retrievedGroupName = capitalize(groupName?.trim());
+  const retrievedGroupGoals = groupGoals;
+  const retrievedGroupMembersNumber = parseInt(groupMembersNumber);
+  const retrievedGroupWomenNumber = parseInt(groupWomenNumber);
+  const retrievedGroupLegalStatus = groupLegalStatus?.trim();
+  const retrievedGroupCreationYear = parseInt(groupCreationYear);
+  const retrievedGroupAffiliationYear = parseInt(groupAffiliationYear);
+  const retrievedGroupOperatingLicence = groupOperatingLicence?.trim();
+  const retrievedGroupNuit = parseInt(groupNuit);
+  const retrievedGroupNuel = parseInt(groupNuel);
+  const retrievedGroupProvince = groupProvince?.trim();
+  const retrievedGroupDistrict = groupDistrict?.trim();
+  const retrievedGroupAdminPost = groupAdminPost?.trim();
+  const retrievedGroupVillage = groupVillage?.trim();
   // const retrievedGroupManagerName = capitalize(groupManagerName.trim());
   // const retrievedGroupManagerPhone = Number(parseInt(groupManagerPhone)) ? Number(parseInt(groupManagerPhone)) : 0;
 
@@ -54,8 +56,8 @@ const validateGroupFarmerData = (
       category: categories.group.category,
       subcategory: asset,
       assetType: assetTypes.cashew,
-    }
-  })
+    };
+  });
   // console.log('assets: ', assets)
   // if (assets?.lenght > 0) {
 
@@ -72,57 +74,57 @@ const validateGroupFarmerData = (
     setErrors({
       ...errors,
       isGroupActive: "Escolha um estado de funcionamento",
-    })
-    return false
+    });
+    return false;
   }
 
   if (!retrievedGroupType) {
-    setErrors({ ...errors, groupType: "Indica tipo de grupo." })
-    return false
+    setErrors({ ...errors, groupType: "Indica tipo de grupo." });
+    return false;
   }
 
   if (!retrievedGroupName) {
-    setErrors({ ...errors, groupName: "Indica nome de grupo." })
-    return false
+    setErrors({ ...errors, groupName: "Indica nome de grupo." });
+    return false;
   }
 
   if (!retrievedGroupMembersNumber && retrievedGroupMembersNumber !== 0) {
-    setErrors({ ...errors, groupMembersNumber: "Número total de membros." })
-    return false
+    setErrors({ ...errors, groupMembersNumber: "Número total de membros." });
+    return false;
   }
 
   if (!retrievedGroupWomenNumber && retrievedGroupWomenNumber !== 0) {
-    setErrors({ ...errors, groupWomenNumber: "Número total de mulheres." })
-    return false
+    setErrors({ ...errors, groupWomenNumber: "Número total de mulheres." });
+    return false;
   } else if (
     parseInt(retrievedGroupWomenNumber) > parseInt(retrievedGroupMembersNumber)
   ) {
     setErrors({
       ...errors,
       groupWomenNumber: "Número de mulheres superior ao total.",
-    })
-    return false
+    });
+    return false;
   }
 
   if (retrievedGroupGoals?.length === 0) {
     setErrors({
       ...errors,
       groupGoals: "Indica a finalidade do grupo.",
-    })
-    return false
+    });
+    return false;
   }
 
   if (!retrievedGroupLegalStatus) {
     setErrors({
       ...errors,
       groupLegalStatus: "Indica a situação Legal",
-    })
-    return false
+    });
+    return false;
   }
 
   if (!retrievedGroupCreationYear) {
-    setErrors({ ...errors, groupCreationYear: "Indica ano de criação." })
-    return false
+    setErrors({ ...errors, groupCreationYear: "Indica ano de criação." });
+    return false;
   }
 
   if (retrievedGroupLegalStatus === groupAffiliationStatus.affiliated) {
@@ -130,9 +132,9 @@ const validateGroupFarmerData = (
       setErrors({
         ...errors,
         groupAffiliationYear: "Indica ano de legalização.",
-      })
+      });
 
-      return false
+      return false;
     }
 
     if (retrievedGroupCreationYear > retrievedGroupAffiliationYear) {
@@ -140,25 +142,33 @@ const validateGroupFarmerData = (
         ...errors,
         groupCreationYear: "Ano de criação posterior ao ano de legalização",
         // groupAffiYear: 'Ano de criação superior a ano de legalização'
-      })
+      });
 
-      return false
+      return false;
     }
 
     if (!retrievedGroupOperatingLicence) {
       setErrors({
         ...errors,
         groupOperatingLicence: "Indica o alvará.",
-      })
-      return false
+      });
+      return false;
     }
 
     if (!retrievedGroupNuit) {
       setErrors({
         ...errors,
         groupNuit: "Indica o NUIT.",
-      })
-      return false
+      });
+      return false;
+    }
+
+    if (!retrievedGroupNuel) {
+      setErrors({
+        ...errors,
+        groupNuel: "Indica o NUEL.",
+      });
+      return false;
     }
   }
 
@@ -168,13 +178,23 @@ const validateGroupFarmerData = (
       retrievedGroupNuit?.toString().length !== 9 ||
       containsNonNumeric(retrievedGroupNuit))
   ) {
-    setErrors({ ...errors, groupNuit: "NUIT inválido." })
-    return false
+    setErrors({ ...errors, groupNuit: "NUIT inválido." });
+    return false;
+  }
+
+  if (
+    retrievedGroupNuel &&
+    (!Number.isInteger(parseInt(retrievedGroupNuel)) ||
+      retrievedGroupNuel?.toString().length !== 9 ||
+      containsNonNumeric(retrievedGroupNuel))
+  ) {
+    setErrors({ ...errors, groupNuel: "NUEL inválido." });
+    return false;
   }
 
   if (!retrievedGroupAdminPost) {
-    setErrors({ ...errors, groupAdminPost: "Indica Posto Administrativo." })
-    return false
+    setErrors({ ...errors, groupAdminPost: "Indica Posto Administrativo." });
+    return false;
   }
 
   const farmerData = {
@@ -203,9 +223,10 @@ const validateGroupFarmerData = (
     },
 
     licence: retrievedGroupOperatingLicence,
+    nuel: retrievedGroupNuel ? parseInt(retrievedGroupNuel) : 0,
     nuit: retrievedGroupNuit ? parseInt(retrievedGroupNuit) : 0,
-  }
-  return farmerData
-}
+  };
+  return farmerData;
+};
 
-export default validateGroupFarmerData
+export default validateGroupFarmerData;

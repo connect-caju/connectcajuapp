@@ -259,7 +259,7 @@ export default function FarmersScreen({ route, navigation }) {
     Show this if the user is a provincial manager
 */}
 
-      {roles.haveReadAndValidatePermissions.some(role => role === customUserData?.role) && (
+      {/* {roles.haveReadAndValidatePermissions.some(role => role === customUserData?.role) && (
         <View>
           <View
             style={{
@@ -378,7 +378,7 @@ export default function FarmersScreen({ route, navigation }) {
             </Box>
           )}
         </View>
-      )}
+      )} */}
 
       {/*
    Show this if the user is a field agent only

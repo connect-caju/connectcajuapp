@@ -80,6 +80,7 @@ export default function GroupModal({
         assets,
         // manager,
         licence,
+        nuel,
         nuit,
       } = farmerData;
 
@@ -98,6 +99,7 @@ export default function GroupModal({
           assets,
           // manager,
           licence,
+          nuel,
           nuit,
           userDistrict: customUserData?.userDistrict,
           userProvince: customUserData?.userProvince,
@@ -287,7 +289,7 @@ export default function GroupModal({
                   <Box>
                     <Text style={styles.values}>{farmerData?.legalStatus}</Text>
                     <Text style={styles.values}>
-                      {farmerData?.creationYear} (an de criação)
+                      {farmerData?.creationYear} (ano de criação)
                     </Text>
                     {farmerData?.legalStatus ===
                       groupAffiliationStatus.affiliated && (
@@ -310,10 +312,15 @@ export default function GroupModal({
 
                     <Stack direction="row" w="100%" my="1">
                       <Box w="40%">
-                        <Text style={styles.keys}>Documentos:</Text>
+                        <Text style={styles.keys}>NUIT:</Text>
                       </Box>
                       <Box w="60%">
                         <Box>
+                          <Text style={styles.values}>
+                            {farmerData?.nuel
+                              ? farmerData?.nuel + " (NUEL)"
+                              : "Nenhum (NUEL"}
+                          </Text>
                           <Text style={styles.values}>
                             {farmerData?.nuit
                               ? farmerData?.nuit + " (NUIT)"

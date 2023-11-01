@@ -21,7 +21,8 @@ export const Group = {
     // manager: 'Manager',
     manager: "string?", // actor _id (the manager is a registered actor)
 
-    licence: "string?",
+    licence: "string?", // alvara
+    nuel: { type: "int?", default: 0 }, // Numero Unico da Entidade Legal
     nuit: { type: "int?", default: 0 },
     image: { type: "string", default: "" },
     assets: "Assets[]",
@@ -42,4 +43,4 @@ export const Group = {
     modifiedAt: { type: "date", default: () => new Date() },
     modifiedBy: "string?",
   },
-}
+};

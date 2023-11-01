@@ -22,6 +22,7 @@ export default function HomeStackScreen() {
           fontFamily: "JosefinSans-Italic",
         },
       }}
+      initialRouteName="Home"
     >
       <HomeStack.Screen
         options={{ title: "Painel do Extensionista" }}

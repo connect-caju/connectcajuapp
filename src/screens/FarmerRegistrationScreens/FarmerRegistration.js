@@ -32,6 +32,7 @@ import COLORS from "../../consts/colors";
 import { realmContext } from "../../models/realmContext";
 import { generateUniqueNumber } from "../../helpers/generateUniqueNumber";
 import { dateLimits } from "../../helpers/dates";
+import { farmerTypes } from "../../consts/farmerTypes";
 const { useRealm } = realmContext;
 
 export default function FarmerRegistration({ route, navigation }) {
@@ -86,6 +87,7 @@ export default function FarmerRegistration({ route, navigation }) {
   const [groupVillage, setGroupVillage] = useState("");
   const [groupOperatingLicence, setGroupOperatingLicence] = useState("");
   const [groupNuit, setGroupNuit] = useState("");
+  const [groupNuel, setGroupNuel] = useState("");
   const [groupAffiliationYear, setGroupAffiliationYear] = useState("");
   const [groupMembersNumber, setGroupMembersNumber] = useState("");
   const [groupWomenNumber, setGroupWomenNumber] = useState("");
@@ -127,7 +129,7 @@ export default function FarmerRegistration({ route, navigation }) {
     let farmerData;
     let retrievedFarmerData;
 
-    if (farmerType === "Indivíduo") {
+    if (farmerType === farmerTypes.farmer) {
       farmerData = {
         isSprayingAgent,
         isNotSprayingAgent,
@@ -164,7 +166,7 @@ export default function FarmerRegistration({ route, navigation }) {
       // generate actor identifier
       let identifier = generateUniqueNumber(
         retrievedFarmerData.address,
-        "Indivíduo",
+        farmerTypes.farmer,
       );
       let foundIdentierMatches = realm
         .objects("Actor")
@@ -174,7 +176,7 @@ export default function FarmerRegistration({ route, navigation }) {
       while (foundIdentierMatches?.length > 0) {
         identifier = generateUniqueNumber(
           retrievedFarmerData.address,
-          "Indivíduo",
+          farmerTypes.farmer,
         );
         foundIdentierMatches = realm
           .objects("Actor")
@@ -209,7 +211,7 @@ export default function FarmerRegistration({ route, navigation }) {
           return;
         }
       }
-    } else if (farmerType === "Instituição") {
+    } else if (farmerType === farmerTypes.institution) {
       farmerData = {
         isInstitutionPrivate,
         isInstitutionPublic,
@@ -238,7 +240,7 @@ export default function FarmerRegistration({ route, navigation }) {
       // generate actor identifier
       let identifier = generateUniqueNumber(
         retrievedFarmerData.address,
-        "Instituição",
+        farmerTypes.institution,
       );
       let foundIdentierMatches = realm
         .objects("Institution")
@@ -248,7 +250,7 @@ export default function FarmerRegistration({ route, navigation }) {
       while (foundIdentierMatches?.length > 0) {
         identifier = generateUniqueNumber(
           retrievedFarmerData.address,
-          "Instituição",
+          farmerTypes.institution,
         );
         foundIdentierMatches = realm
           .objects("Institution")
@@ -260,7 +262,7 @@ export default function FarmerRegistration({ route, navigation }) {
       setFarmerData(retrievedFarmerData);
 
       setFarmerData(retrievedFarmerData);
-    } else if (farmerType === "Grupo") {
+    } else if (farmerType === farmerTypes.group) {
       farmerData = {
         isGroupActive,
         isGroupInactive,
@@ -273,6 +275,7 @@ export default function FarmerRegistration({ route, navigation }) {
         groupCreationYear,
         groupAffiliationYear,
         groupOperatingLicence,
+        groupNuel,
         groupNuit,
         groupProvince: customUserData?.userProvince,
         groupDistrict: customUserData?.userDistrict,
@@ -294,7 +297,7 @@ export default function FarmerRegistration({ route, navigation }) {
       // generate actor identifier
       let identifier = generateUniqueNumber(
         retrievedFarmerData.address,
-        "Grupo",
+        farmerTypes.group,
       );
       let foundIdentierMatches = realm
         .objects("Group")
@@ -302,7 +305,7 @@ export default function FarmerRegistration({ route, navigation }) {
 
       // keep checking until no match is found
       while (foundIdentierMatches?.length > 0) {
-        identifier = generateUniqueNumber(retrievedFarmerData.address, "Grupo");
+        identifier = generateUniqueNumber(retrievedFarmerData.address, farmerTypes.group);
         foundIdentierMatches = realm
           .objects("Group")
           .filtered("identifier == $0", identifier);
@@ -443,7 +446,7 @@ export default function FarmerRegistration({ route, navigation }) {
         {/* {
    !loadingActivitiyIndicator && ( */}
         <Box alignItems={"center"}>
-          {farmerType === "Indivíduo" && (
+          {farmerType === farmerTypes.farmer && (
             <IndividualFarmerForm
               gender={gender}
               setGender={setGender}
@@ -496,7 +499,7 @@ export default function FarmerRegistration({ route, navigation }) {
 
           {/* Group data collecting form */}
 
-          {farmerType === "Instituição" && (
+          {farmerType === farmerTypes.institution && (
             <InstitutionFarmerForm
               institutionType={institutionType}
               setInstitutionType={setInstitutionType}
@@ -529,7 +532,7 @@ export default function FarmerRegistration({ route, navigation }) {
             />
           )}
 
-          {farmerType === "Grupo" && (
+          {farmerType === farmerTypes.group && (
             <GroupFarmerForm
               groupType={groupType}
               setGroupType={setGroupType}
@@ -541,6 +544,8 @@ export default function FarmerRegistration({ route, navigation }) {
               setGroupVillage={setGroupVillage}
               groupOperatingLicence={groupOperatingLicence}
               setGroupOperatingLicence={setGroupOperatingLicence}
+              groupNuel={groupNuel}
+              setGroupNuel={setGroupNuel}
               groupNuit={groupNuit}
               setGroupNuit={setGroupNuit}
               groupAffiliationYear={groupAffiliationYear}
@@ -603,7 +608,7 @@ export default function FarmerRegistration({ route, navigation }) {
           </Center>
 
           <Center flex={1} px="3">
-            {farmerType?.includes("Indiv") && (
+            {farmerType?.includes(farmerTypes.farmer) && (
               <IndividualModal
                 modalVisible={modalVisible}
                 setModalVisible={setModalVisible}
@@ -638,7 +643,7 @@ export default function FarmerRegistration({ route, navigation }) {
                 setActorCategory={setActorCategory}
               />
             )}
-            {farmerType?.includes("Grup") && (
+            {farmerType?.includes(farmerTypes.group) && (
               <GroupModal
                 modalVisible={modalVisible}
                 setModalVisible={setModalVisible}
@@ -660,7 +665,7 @@ export default function FarmerRegistration({ route, navigation }) {
                 customUserData={customUserData}
               />
             )}
-            {farmerType?.includes("Instit") && (
+            {farmerType?.includes(farmerTypes.institution) && (
               <InstitutionModal
                 modalVisible={modalVisible}
                 setModalVisible={setModalVisible}

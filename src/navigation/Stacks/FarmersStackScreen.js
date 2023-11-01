@@ -2,7 +2,7 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable prettier/prettier */
 
-import React from "react";
+import React, { useState, useEffect, } from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import FarmersScreen from "../../screens/FarmersScreen/FarmersScreen";
@@ -27,7 +27,10 @@ import FarmersSearchScreen from "../../screens/FarmersSearchScreen/FarmersSearch
 
 const FarmersStack = createNativeStackNavigator();
 
-export default function FarmersStackScreen() {
+
+export default function FarmersStackScreen({ route, navigation }) {
+
+
   return (
     <FarmersStack.Navigator
       screenOptions={{
@@ -42,8 +45,9 @@ export default function FarmersStackScreen() {
         },
         title: "Produtores",
       }}
+      initialRouteName={"Farmers"}
     >
-      <FarmersStack.Screen name="Farmers" component={FarmersScreen} />
+      <FarmersStack.Screen name={"Farmers"} component={FarmersScreen} />
       <FarmersStack.Screen name="FarmerForm1" component={FarmerRegistration} />
       <FarmersStack.Screen
         name="FarmlandForm1"
@@ -55,9 +59,6 @@ export default function FarmersStackScreen() {
       />
       <FarmersStack.Screen name="Geolocation" component={GeolocationScreen} />
       <FarmersStack.Screen name="UserStat" component={UserStat} />
-      {/* <FarmersStack.Screen name="Farmer" component={FarmerScreen} /> */}
-      {/* <FarmersStack.Screen name="Group" component={GroupScreen} /> */}
-      {/* <FarmersStack.Screen name="Institution" component={InstitutionScreen} /> */}
       <FarmersStack.Screen name="Membership" component={MembershipScreen} />
       <FarmersStack.Screen
         name="GroupRepresentative"
@@ -65,12 +66,10 @@ export default function FarmersStackScreen() {
       />
       <FarmersStack.Screen name="GroupMembers" component={GroupMembersScreen} />
       <FarmersStack.Screen name="FarmerGroups" component={FarmerGroupsScreen} />
-      {/* <FarmersStack.Screen name="FarmersList" component={FarmersListScreen} /> */}
       <FarmersStack.Screen name="FarmersListLayout" component={FarmersListLayout} />
       <FarmersStack.Screen name="Camera" component={CameraScreen} />
       <FarmersStack.Screen name="Profile" component={ProfileScreen} />
       <FarmersStack.Screen name="FarmersSearch" component={FarmersSearchScreen} />
-      {/* <FarmersStack.Screen name="Duplicates" component={DuplicatesAlert} /> */}
     </FarmersStack.Navigator>
   );
 }

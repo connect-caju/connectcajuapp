@@ -1,3 +1,5 @@
+/* eslint-disable linebreak-style */
+/* eslint-disable prettier/prettier */
 module.exports = {
 	presets: ["module:metro-react-native-babel-preset"],
 	env: {

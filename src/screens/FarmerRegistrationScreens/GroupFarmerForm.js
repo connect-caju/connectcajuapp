@@ -1,9 +1,10 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable prettier/prettier */
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable prettier/prettier */
 /* eslint-disable prettier/prettier */
-import { Text, SafeAreaView, ScrollView, TextInput, View } from "react-native"
-import React, { useState, useEffect } from "react"
+import { Text, SafeAreaView, ScrollView, TextInput, View } from "react-native";
+import React, { useState, useEffect } from "react";
 import {
   Box,
   FormControl,
@@ -12,17 +13,17 @@ import {
   CheckIcon,
   Center,
   Radio,
-} from "native-base"
-import { Icon, Button, CheckBox } from "@rneui/themed"
+} from "native-base";
+import { Icon, Button, CheckBox } from "@rneui/themed";
 import {
   MultipleSelectList,
   SelectList,
-} from "react-native-dropdown-select-list"
+} from "react-native-dropdown-select-list";
 
-import { CustomInput } from "../../components/Inputs/CustomInput"
-import villages from "../../consts/villages"
-import CustomDivider from "../../components/Divider/CustomDivider"
-import styles from "./styles"
+import { CustomInput } from "../../components/Inputs/CustomInput";
+import villages from "../../consts/villages";
+import CustomDivider from "../../components/Divider/CustomDivider";
+import styles from "./styles";
 
 import {
   fullYears,
@@ -30,18 +31,18 @@ import {
   getFullYears2,
   localeDateService,
   useDatepickerState,
-} from "../../helpers/dates"
-import CustomActivityIndicator from "../../components/ActivityIndicator/CustomActivityIndicator"
-import { groups, institutions } from "../../consts/farmerTypes"
-import { groupPurposes } from "../../consts/groupPurposes"
+} from "../../helpers/dates";
+import CustomActivityIndicator from "../../components/ActivityIndicator/CustomActivityIndicator";
+import { groups, institutions } from "../../consts/farmerTypes";
+import { groupPurposes } from "../../consts/groupPurposes";
 
-import { realmContext } from "../../models/realmContext"
-import COLORS from "../../consts/colors"
+import { realmContext } from "../../models/realmContext";
+import COLORS from "../../consts/colors";
 import {
   groupAffiliationStatus,
   groupAffiliationStatus2,
-} from "../../consts/groupAffiliationStatus"
-const { useRealm } = realmContext
+} from "../../consts/groupAffiliationStatus";
+const { useRealm } = realmContext;
 
 export default function GroupFarmerForm({
   route,
@@ -58,6 +59,8 @@ export default function GroupFarmerForm({
   // groupManagerPhone, setGroupManagerPhone,
   groupOperatingLicence,
   setGroupOperatingLicence,
+  groupNuel,
+  setGroupNuel,
   groupNuit,
   setGroupNuit,
   groupAffiliationYear,
@@ -132,12 +135,12 @@ export default function GroupFarmerForm({
                     />
                   }
                   onPress={() => {
-                    setIsGroupInactive(false)
-                    setIsGroupActive(true)
+                    setIsGroupInactive(false);
+                    setIsGroupActive(true);
                     setErrors({
                       ...errors,
                       isGroupActive: "",
-                    })
+                    });
                   }}
                 />
               </Box>
@@ -175,12 +178,12 @@ export default function GroupFarmerForm({
                     />
                   }
                   onPress={() => {
-                    setIsGroupInactive(true)
-                    setIsGroupActive(false)
+                    setIsGroupInactive(true);
+                    setIsGroupActive(false);
                     setErrors({
                       ...errors,
                       isGroupActive: "",
-                    })
+                    });
                   }}
                 />
               </Box>
@@ -230,8 +233,8 @@ export default function GroupFarmerForm({
                   )
                 }
                 onValueChange={(newGroupType) => {
-                  setErrors((prev) => ({ ...prev, groupType: "" }))
-                  setGroupType(newGroupType)
+                  setErrors((prev) => ({ ...prev, groupType: "" }));
+                  setGroupType(newGroupType);
                 }}
               >
                 {groups?.map((group, index) => (
@@ -260,8 +263,8 @@ export default function GroupFarmerForm({
                 placeholder="Nome do grupo"
                 value={groupName}
                 onChangeText={(newGroupName) => {
-                  setErrors((prev) => ({ ...prev, groupName: "" }))
-                  setGroupName(newGroupName)
+                  setErrors((prev) => ({ ...prev, groupName: "" }));
+                  setGroupName(newGroupName);
                 }}
               />
               {"groupName" in errors ? (
@@ -290,8 +293,8 @@ export default function GroupFarmerForm({
                 keyboardType="numeric"
                 value={groupMembersNumber}
                 onChangeText={(groupMembers) => {
-                  setErrors((prev) => ({ ...prev, groupMembersNumber: "" }))
-                  setGroupMembersNumber(groupMembers)
+                  setErrors((prev) => ({ ...prev, groupMembersNumber: "" }));
+                  setGroupMembersNumber(groupMembers);
                 }}
               />
               {"groupMembersNumber" in errors ? (
@@ -318,8 +321,8 @@ export default function GroupFarmerForm({
                 value={groupWomenNumber}
                 keyboardType="numeric"
                 onChangeText={(womenNumber) => {
-                  setErrors((prev) => ({ ...prev, groupWomenNumber: "" }))
-                  setGroupWomenNumber(womenNumber)
+                  setErrors((prev) => ({ ...prev, groupWomenNumber: "" }));
+                  setGroupWomenNumber(womenNumber);
                 }}
               />
               {"groupWomenNumber" in errors ? (
@@ -344,8 +347,8 @@ export default function GroupFarmerForm({
               </FormControl.Label>
               <MultipleSelectList
                 setSelected={(goal) => {
-                  setErrors((prev) => ({ ...prev, groupGoals: "" }))
-                  setGroupGoals(goal)
+                  setErrors((prev) => ({ ...prev, groupGoals: "" }));
+                  setGroupGoals(goal);
                 }}
                 data={groupPurposes}
                 notFoundText={"Finalidade não encontrada"}
@@ -433,8 +436,8 @@ export default function GroupFarmerForm({
               <SelectList
                 data={getFullYears2(50)}
                 setSelected={(newYear) => {
-                  setErrors((prev) => ({ ...prev, groupCreationYear: "" }))
-                  setGroupCreationYear(newYear)
+                  setErrors((prev) => ({ ...prev, groupCreationYear: "" }));
+                  setGroupCreationYear(newYear);
                 }}
                 save="value"
                 placeholder="Escolher ano"
@@ -494,14 +497,15 @@ export default function GroupFarmerForm({
                     ...prev,
                     groupCreationYear: "",
                     groupLegalStatus: "",
+                    groupNuel: "",
                     groupNuit: "",
                     groupOperatingLicence: "",
                     groupAffiliationYear: "",
-                  }))
-                  setGroupLegalStatus(status)
-                  setGroupNuit()
-                  setGroupOperatingLicence("")
-                  setGroupAffiliationYear("")
+                  }));
+                  setGroupLegalStatus(status);
+                  setGroupNuit();
+                  setGroupOperatingLicence("");
+                  setGroupAffiliationYear("");
                 }}
                 save="value"
                 placeholder="Escolher situação"
@@ -568,8 +572,8 @@ export default function GroupFarmerForm({
                       setErrors((prev) => ({
                         ...prev,
                         groupAffiliationYear: "",
-                      }))
-                      setGroupAffiliationYear(newYear)
+                      }));
+                      setGroupAffiliationYear(newYear);
                     }}
                     save="value"
                     placeholder="Escolher ano"
@@ -637,8 +641,8 @@ export default function GroupFarmerForm({
                       setErrors((prev) => ({
                         ...prev,
                         groupOperatingLicence: "",
-                      }))
-                      setGroupOperatingLicence(newOperatingLicence)
+                      }));
+                      setGroupOperatingLicence(newOperatingLicence);
                     }}
                   />
                   {groupLegalStatus === groupAffiliationStatus.affiliated &&
@@ -675,8 +679,8 @@ export default function GroupFarmerForm({
                     value={groupNuit}
                     keyboardType="numeric"
                     onChangeText={(newNuit) => {
-                      setErrors((prev) => ({ ...prev, groupNuit: "" }))
-                      setGroupNuit(newNuit)
+                      setErrors((prev) => ({ ...prev, groupNuit: "" }));
+                      setGroupNuit(newNuit);
                     }}
                   />
                   {groupLegalStatus === groupAffiliationStatus.affiliated &&
@@ -695,7 +699,41 @@ export default function GroupFarmerForm({
                 </FormControl>
               </Box>
 
-              <Box w="50%" px="1" my="2"></Box>
+              <Box w="50%" px="1" my="2">
+                <FormControl
+                  isInvalid={
+                    groupLegalStatus === groupAffiliationStatus.affiliated &&
+                    "groupNuel" in errors
+                  }
+                  isRequired
+                >
+                  <FormControl.Label>NUEL</FormControl.Label>
+                  <CustomInput
+                    width="100%"
+                    type="number"
+                    placeholder="NUEL"
+                    value={groupNuel}
+                    keyboardType="numeric"
+                    onChangeText={(newNuel) => {
+                      setErrors((prev) => ({ ...prev, groupNuel: "" }));
+                      setGroupNuel(newNuel);
+                    }}
+                  />
+                  {groupLegalStatus === groupAffiliationStatus.affiliated &&
+                    "groupNuel" in errors ? (
+                    <FormControl.ErrorMessage
+                      leftIcon={
+                        <Icon name="error-outline" size={16} color="red" />
+                      }
+                      _text={{ fontSize: "xs" }}
+                    >
+                      {errors?.groupNuel}
+                    </FormControl.ErrorMessage>
+                  ) : (
+                    <FormControl.HelperText></FormControl.HelperText>
+                  )}
+                </FormControl>
+              </Box>
             </Stack>
           </>
         )}
@@ -741,8 +779,8 @@ export default function GroupFarmerForm({
                 }
                 mt={1}
                 onValueChange={(newAdminPost) => {
-                  setErrors((prev) => ({ ...prev, groupAdminPost: "" }))
-                  setGroupAdminPost(newAdminPost)
+                  setErrors((prev) => ({ ...prev, groupAdminPost: "" }));
+                  setGroupAdminPost(newAdminPost);
                 }}
               >
                 {selectedAddressAdminPosts?.map((adminPost, index) => (
@@ -870,5 +908,5 @@ export default function GroupFarmerForm({
 
     </Box> */}
     </Box>
-  )
+  );
 }

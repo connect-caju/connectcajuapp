@@ -17,7 +17,6 @@ import { useFocusEffect } from "@react-navigation/native";
 import { realmContext } from "../../models/realmContext";
 import CustomActivityIndicator from "../../components/ActivityIndicator/CustomActivityIndicator";
 import COLORS from "../../consts/colors";
-import { customizeItem } from "../../helpers/customizeItem";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import {
   faEllipsisVertical,

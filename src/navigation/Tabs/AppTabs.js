@@ -17,14 +17,16 @@ import HomeStackScreen from "../Stacks/HomeStackScreen";
 import FarmersStackScreen from "../Stacks/FarmersStackScreen";
 import COLORS from "../../consts/colors";
 
-// import { realmContext } from "../../models/realmContext";
-// import { useRealm } from "@realm/react";
-// const { RealmProvider } = realmContext;
+
+import { useUser } from "@realm/react";
+import { roles } from "../../consts/roles";
+import UsersStackScreen from "../Stacks/UsersStackScreen";
 
 const Tab = createBottomTabNavigator();
 
-
 export default function AppTabs() {
+  const user = useUser();
+  const customUserData = user?.customData;
 
   return (
     <>
@@ -66,7 +68,9 @@ export default function AppTabs() {
             name="HomeStack"
             component={HomeStackScreen}
           />
-          <Tab.Screen
+          {
+            !roles.haveReadAndValidatePermissions.some((role)=>role === customUserData?.role) ?
+            <Tab.Screen
             options={({ route }) => ({
               tabBarIcon: (tabInfo) => (
                 <Icon
@@ -79,7 +83,7 @@ export default function AppTabs() {
 
               tabBarStyle: ((route) => {
                 const routeName = getFocusedRouteNameFromRoute(route) ?? "";
-               
+
                 if (routeName === "FarmersSearch") {
                   return { display: "none" };
                 }
@@ -90,6 +94,32 @@ export default function AppTabs() {
             name="FarmersStack"
             component={FarmersStackScreen}
           />
+            :
+            <Tab.Screen
+            options={({ route }) => ({
+              tabBarIcon: (tabInfo) => (
+                <Icon
+                  name="app-registration"
+                  color={tabInfo.focused ? COLORS.main : COLORS.grey}
+                  size={wp("10%")}
+                />
+              ),
+              tabBarLabel: "Usuários",
+
+              tabBarStyle: ((route) => {
+                const routeName = getFocusedRouteNameFromRoute(route) ?? "";
+
+                if (routeName === "FarmersSearch") {
+                  return { display: "none" };
+                }
+                return;
+              })(route),
+
+            })}
+            name="UsersStack"
+            component={UsersStackScreen}
+          />
+          }
           {/* <Tab.Screen
             options={{
               tabBarIcon: (tabInfo)=><Icon 
