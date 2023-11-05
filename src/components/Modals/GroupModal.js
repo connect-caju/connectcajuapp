@@ -236,7 +236,7 @@ export default function GroupModal({
                   <Box>
                     {farmerData?.assets?.map((asset, index) => (
                       <Text key={index} style={styles.values}>
-                        - {asset?.subcategory}
+                        {asset?.subcategory}
                       </Text>
                     ))}
                   </Box>
@@ -312,7 +312,7 @@ export default function GroupModal({
 
                     <Stack direction="row" w="100%" my="1">
                       <Box w="40%">
-                        <Text style={styles.keys}>NUIT:</Text>
+                        <Text style={styles.keys}>Documentação:</Text>
                       </Box>
                       <Box w="60%">
                         <Box>

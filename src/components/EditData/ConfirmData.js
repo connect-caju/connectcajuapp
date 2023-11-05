@@ -1,3 +1,5 @@
+/* eslint-disable linebreak-style */
+/* eslint-disable prettier/prettier */
 /* eslint-disable react/prop-types */
 import React, { useState, useEffect, useCallback } from "react";
 import { View, Text, StyleSheet, ScrollView } from "react-native";
@@ -42,8 +44,6 @@ const ConfirmData = ({
   const realm = useRealm();
   const user = useUser();
   const customUserData = user?.customData;
-
-  console.log("successLottie", successLottieVisible);
 
   const onUpdateData = (
     resource,
@@ -137,6 +137,8 @@ const ConfirmData = ({
         resource.legalStatus = newDataObject?.legalStatus;
         resource.licence = newDataObject?.licence;
         resource.nuit = newDataObject?.nuit;
+        resource.nuel = newDataObject?.nuel;
+        
 
         resource.modifiedAt = new Date();
         resource.modifiedBy = customUserData?.name;
@@ -156,8 +158,7 @@ const ConfirmData = ({
 
         resource.modifiedAt = new Date();
         resource.modifiedBy = customUserData?.name;
-        // resource.userProvince = newData?.province;
-        // resource.userDistrict = newData?.district;
+
         resource.status = resourceValidation.status.pending;
       }
 
@@ -172,12 +173,7 @@ const ConfirmData = ({
 
         resource.modifiedAt = new Date();
         resource.modifiedBy = customUserData?.name;
-        // resource.userProvince = newData?.province;
-        // resource.userDistrict = newData?.district;
 
-        // check blocksTrees and totalTrees consistency
-        // only update the resource status if there is consistency
-        // if (resource.status === resourceValidation.status.invalidated){
         let blocksTrees = resource?.blocks
           ?.map((block) => block?.trees)
           .reduce((acc, el) => acc + el, 0);
@@ -242,7 +238,6 @@ const ConfirmData = ({
             resource.status = resourceValidation.status.pending;
           }
         }
-        // resource.status = resourceValidation.status.pending;
       }
     });
     setSuccessLottieVisible(true);
@@ -1153,6 +1148,29 @@ const ConfirmData = ({
                             paddingTop: 2,
                           }}
                         >
+                          NUEL
+                        </Text>
+                      </Box>
+                      <Box w="50%">
+                        <Text
+                          style={{
+                            fontFamily: "JosefinSans-Regular",
+                            paddingTop: 2,
+                          }}
+                        >
+                          {oldDataObject?.nuel ? oldDataObject?.nuel : "Nenhum"}
+                        </Text>
+                      </Box>
+                    </Stack>
+
+                    <Stack direction="row">
+                      <Box w="50%">
+                        <Text
+                          style={{
+                            fontFamily: "JosefinSans-Bold",
+                            paddingTop: 2,
+                          }}
+                        >
                           Alvará
                         </Text>
                       </Box>
@@ -1278,6 +1296,29 @@ const ConfirmData = ({
                           }}
                         >
                           {newDataObject?.nuit ? newDataObject.nuit : "Nenhum"}
+                        </Text>
+                      </Box>
+                    </Stack>
+
+                    <Stack direction="row">
+                      <Box w="50%">
+                        <Text
+                          style={{
+                            fontFamily: "JosefinSans-Bold",
+                            paddingTop: 2,
+                          }}
+                        >
+                          NUEL
+                        </Text>
+                      </Box>
+                      <Box w="50%">
+                        <Text
+                          style={{
+                            fontFamily: "JosefinSans-Regular",
+                            paddingTop: 2,
+                          }}
+                        >
+                          {newDataObject?.nuel ? newDataObject.nuel : "Nenhum"}
                         </Text>
                       </Box>
                     </Stack>

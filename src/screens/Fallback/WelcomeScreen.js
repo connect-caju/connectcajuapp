@@ -1003,7 +1003,7 @@ export default function WelcomeScreen() {
                           color: COLORS.grey,
                         }}
                       >
-                        Esqueceu Senha?
+                        Esqueceu senha?
                       </Text>
                     </Pressable>
                   </Box>

@@ -1,3 +1,6 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable prettier/prettier */
+/* eslint-disable linebreak-style */
 import React, { useState, useEffect, useCallback } from "react";
 import {
   Text,
@@ -28,12 +31,13 @@ import { CustomInput } from "../Inputs/CustomInput";
 
 import { groupPurposes } from "../../consts/groupPurposes";
 import { groups, groups2, institutions } from "../../consts/farmerTypes";
-import { groupAffiliationStatus } from "../../consts/groupAffiliationStatus";
+import { groupAffiliationStatus, groupAffiliationStatus2 } from "../../consts/groupAffiliationStatus";
 
 import validateGroupEditedData from "../../helpers/validateGroupEditedData";
 
 import { useUser } from "@realm/react";
 import { realmContext } from "../../models/realmContext";
+import { getFullYears, getFullYears2 } from "../../helpers/dates";
 const { useRealm } = realmContext;
 
 const EditGroupData = ({
@@ -66,12 +70,14 @@ const EditGroupData = ({
 
   // ------------------------------------------------
   const [oldGroupNuit, setOldGroupNuit] = useState("");
+  const [oldGroupNuel, setOldGroupNuel] = useState("");
   const [oldGroupAffiliationYear, setOldGroupAffiliationYear] = useState("");
   const [oldGroupCreationYear, setOldGroupCreationYear] = useState("");
   const [oldGroupLegalStatus, setOldGroupLegalStatus] = useState("");
   const [oldGroupOperatingLicence, setOldGroupOperatingLicence] = useState("");
 
   const [groupNuit, setGroupNuit] = useState("");
+  const [groupNuel, setGroupNuel] = useState("");
   const [groupAffiliationYear, setGroupAffiliationYear] = useState("");
   const [groupCreationYear, setGroupCreationYear] = useState("");
   const [groupLegalStatus, setGroupLegalStatus] = useState("");
@@ -100,6 +106,7 @@ const EditGroupData = ({
     if (groupLegalStatus !== groupAffiliationYear.affiliated) {
       setGroupAffiliationYear("");
       setGroupNuit("");
+      setGroupNuel("");
       setGroupOperatingLicence("");
     }
   }, [groupLegalStatus]);
@@ -135,6 +142,7 @@ const EditGroupData = ({
       setGroupAffiliationYear(farmer?.affiliationYear);
       setGroupOperatingLicence(farmer?.licence);
       setGroupNuit(farmer?.nuit);
+      setGroupNuel(farmer?.nuel);
       setGroupCreationYear(farmer?.creationYear);
       setGroupLegalStatus(farmer?.legalStatus);
 
@@ -143,6 +151,7 @@ const EditGroupData = ({
       setOldGroupAffiliationYear(farmer?.affiliationYear);
       setOldGroupOperatingLicence(farmer?.licence);
       setOldGroupNuit(farmer?.nuit);
+      setOldGroupNuel(farmer?.nuel);
       setOldGroupCreationYear(farmer?.creationYear);
       setOldGroupLegalStatus(farmer?.legalStatus);
     }
@@ -171,6 +180,8 @@ const EditGroupData = ({
         oldGroupOperatingLicence,
         groupNuit,
         oldGroupNuit,
+        groupNuel,
+        oldGroupNuel,
 
         // user changing group efectivity
         isGroupActive,
@@ -230,6 +241,9 @@ const EditGroupData = ({
       newData["nuit"] = validatedData?.nuit
         ? Number(parseInt(validatedData?.nuit))
         : 0;
+      newData["nuel"] = validatedData?.nuel
+        ? Number(parseInt(validatedData?.nuel))
+        : 0;
 
       // old data
       oldData["legalStatus"] = oldGroupLegalStatus
@@ -245,6 +259,7 @@ const EditGroupData = ({
         ? Number(parseInt(oldGroupAffiliationYear))
         : 0;
       oldData["nuit"] = oldGroupNuit ? Number(parseInt(oldGroupNuit)) : 0;
+      oldData["nuel"] = oldGroupNuel ? Number(parseInt(oldGroupNuel)) : 0;
 
       setNewDataObject(newData);
       setOldDataObject(oldData);
@@ -521,7 +536,84 @@ const EditGroupData = ({
               {dataToBeUpdated === "groupIdentity" &&
                 resourceName === "Group" && (
                   <Stack direction="column">
+
                     <FormControl
+                      isRequired
+                      my="1"
+                      isInvalid={"groupCreationYear" in errors}
+                    >
+                      <FormControl.Label>
+                        Ano de criação
+                      </FormControl.Label>
+                      <SelectList
+                        data={() => getFullYears2(70)}
+                        setSelected={(newYear) => {
+                          setErrors((prev) => ({
+                            ...prev,
+                            groupCreationYear: "",
+                          }));
+                          setGroupCreationYear(newYear);
+                        }}
+                        save="value"
+                        placeholder="Escolher ano"
+                        searchPlaceholder="Procurar ano"
+                        maxHeight={400}
+                        fontFamily="JosefinSans-Regular"
+                        notFoundText="Ano não encontrado"
+                        dropdownTextStyles={{
+                          fontSize: 16,
+                          color: COLORS.black,
+                          padding: 5,
+                        }}
+                        arrowicon={
+                          <Icon
+                            name="arrow-drop-down"
+                            color={COLORS.main}
+                          />
+                        }
+                        closeicon={
+                          <Icon
+                            name="close"
+                            size={20}
+                            color={COLORS.grey}
+                          />
+                        }
+                        inputStyles={{
+                          fontSize: 15,
+                          color: groupCreationYear
+                            ? COLORS.black
+                            : COLORS.grey,
+                        }}
+                        boxStyles={{
+                          minHeight: 55,
+                          borderRadius: 5,
+                          borderColor: COLORS.lightgrey,
+                          marginTop: 5,
+                        }}
+                      />
+
+                      {"groupCreationYear" in errors ? (
+                        <FormControl.ErrorMessage
+                          leftIcon={
+                            <Icon
+                              name="error-outline"
+                              size={16}
+                              color="red"
+                            />
+                          }
+                          _text={{ fontSize: "xs" }}
+                        >
+                          {errors?.groupCreationYear}
+                        </FormControl.ErrorMessage>
+                      ) : (
+                        <FormControl.HelperText></FormControl.HelperText>
+                      )}
+                    </FormControl>
+
+
+
+
+                    {/* <FormControl
                       isRequired
                       my="1"
                       isInvalid={"groupCreationYear" in errors}
@@ -582,9 +674,85 @@ const EditGroupData = ({
                       ) : (
                         <FormControl.HelperText></FormControl.HelperText>
                       )}
-                    </FormControl>
+                    </FormControl> */}
+
+
 
                     <FormControl
+                      isRequired
+                      my="1"
+                      isInvalid={"groupLegalStatus" in errors}
+                    >
+                      <FormControl.Label>
+                        Situação Legal
+                      </FormControl.Label>
+                      <SelectList
+                        data={groupAffiliationStatus2.map(op=>op.value)}
+                        setSelected={(newLegalStatus) => {
+                          setErrors((prev) => ({
+                            ...prev,
+                            groupLegalStatus: "",
+                          }));
+                          setGroupLegalStatus(newLegalStatus);
+                        }}
+                        save="value"
+                        placeholder="Escolher uma opção"
+                        searchPlaceholder="Procurar"
+                        maxHeight={400}
+                        fontFamily="JosefinSans-Regular"
+                        notFoundText="Não encontrado"
+                        dropdownTextStyles={{
+                          fontSize: 16,
+                          color: COLORS.black,
+                          padding: 5,
+                        }}
+                        arrowicon={
+                          <Icon
+                            name="arrow-drop-down"
+                            color={COLORS.main}
+                          />
+                        }
+                        closeicon={
+                          <Icon
+                            name="close"
+                            size={20}
+                            color={COLORS.grey}
+                          />
+                        }
+                        inputStyles={{
+                          fontSize: 15,
+                          color: groupLegalStatus
+                            ? COLORS.black
+                            : COLORS.grey,
+                        }}
+                        boxStyles={{
+                          minHeight: 55,
+                          borderRadius: 5,
+                          borderColor: COLORS.lightgrey,
+                          marginTop: 5,
+                        }}
+                      />
+
+                      {"groupLegalStatus" in errors ? (
+                        <FormControl.ErrorMessage
+                          leftIcon={
+                            <Icon
+                              name="error-outline"
+                              size={16}
+                              color="red"
+                            />
+                          }
+                          _text={{ fontSize: "xs" }}
+                        >
+                          {errors?.groupLegalStatus}
+                        </FormControl.ErrorMessage>
+                      ) : (
+                        <FormControl.HelperText></FormControl.HelperText>
+                      )}
+                    </FormControl>
+
+
+                    {/* <FormControl
                       isRequired
                       my="1"
                       isInvalid={"groupLegalStatus" in errors}
@@ -651,11 +819,85 @@ const EditGroupData = ({
                       ) : (
                         <FormControl.HelperText></FormControl.HelperText>
                       )}
-                    </FormControl>
+                    </FormControl> */}
 
                     {groupLegalStatus === groupAffiliationStatus.affiliated && (
                       <>
                         <FormControl
+                          isRequired
+                          my="1"
+                          isInvalid={"groupAffiliationYear" in errors}
+                        >
+                          <FormControl.Label>
+                            Ano de legalização
+                          </FormControl.Label>
+                          <SelectList
+                            data={() => getFullYears2(70)}
+                            setSelected={(newYear) => {
+                              setErrors((prev) => ({
+                                ...prev,
+                                groupAffiliationYear: "",
+                              }));
+                              setGroupAffiliationYear(newYear);
+                            }}
+                            save="value"
+                            placeholder="Escolher ano"
+                            searchPlaceholder="Procurar ano"
+                            maxHeight={400}
+                            fontFamily="JosefinSans-Regular"
+                            notFoundText="Ano não encontrado"
+                            dropdownTextStyles={{
+                              fontSize: 16,
+                              color: COLORS.black,
+                              padding: 5,
+                            }}
+                            arrowicon={
+                              <Icon
+                                name="arrow-drop-down"
+                                color={COLORS.main}
+                              />
+                            }
+                            closeicon={
+                              <Icon
+                                name="close"
+                                size={20}
+                                color={COLORS.grey}
+                              />
+                            }
+                            inputStyles={{
+                              fontSize: 15,
+                              color: groupAffiliationYear
+                                ? COLORS.black
+                                : COLORS.grey,
+                            }}
+                            boxStyles={{
+                              minHeight: 55,
+                              borderRadius: 5,
+                              borderColor: COLORS.lightgrey,
+                              marginTop: 5,
+                            }}
+                          />
+
+                          {"groupAffiliationYear" in errors ? (
+                            <FormControl.ErrorMessage
+                              leftIcon={
+                                <Icon
+                                  name="error-outline"
+                                  size={16}
+                                  color="red"
+                                />
+                              }
+                              _text={{ fontSize: "xs" }}
+                            >
+                              {errors?.groupAffiliationYear}
+                            </FormControl.ErrorMessage>
+                          ) : (
+                            <FormControl.HelperText></FormControl.HelperText>
+                          )}
+                        </FormControl>
+
+
+                        {/* <FormControl
                           isRequired
                           my="1"
                           isInvalid={"groupAffiliationYear" in errors}
@@ -722,7 +964,7 @@ const EditGroupData = ({
                           ) : (
                             <FormControl.HelperText></FormControl.HelperText>
                           )}
-                        </FormControl>
+                        </FormControl> */}
 
                         <FormControl
                           isInvalid={"groupOperatingLicence" in errors}
@@ -793,6 +1035,44 @@ const EditGroupData = ({
                               _text={{ fontSize: "xs" }}
                             >
                               {errors?.groupNuit}
+                            </FormControl.ErrorMessage>
+                          ) : (
+                            <FormControl.HelperText></FormControl.HelperText>
+                          )}
+                        </FormControl>
+
+
+                        <FormControl
+                          isInvalid={"groupNuel" in errors}
+                          isRequired
+                        >
+                          <FormControl.Label>NUEL</FormControl.Label>
+                          <CustomInput
+                            width="100%"
+                            type="number"
+                            placeholder={
+                              groupNuel ? groupNuel.toString() : "Nenhum"
+                            }
+                            value={groupNuel}
+                            // isDisabled={groupType === '' ? true : false}
+                            keyboardType="numeric"
+                            onChangeText={(newNuel) => {
+                              setErrors((prev) => ({ ...prev, groupNuel: "" }));
+                              setGroupNuel(newNuel);
+                            }}
+                          />
+                          {"groupNuel" in errors ? (
+                            <FormControl.ErrorMessage
+                              leftIcon={
+                                <Icon
+                                  name="error-outline"
+                                  size={16}
+                                  color="red"
+                                />
+                              }
+                              _text={{ fontSize: "xs" }}
+                            >
+                              {errors?.groupNuel}
                             </FormControl.ErrorMessage>
                           ) : (
                             <FormControl.HelperText></FormControl.HelperText>
@@ -1022,7 +1302,9 @@ const EditGroupData = ({
                       oldGroupLegalStatus,
                       oldGroupOperatingLicence,
                       groupNuit,
+                      groupNuel,
                       oldGroupNuit,
+                      oldGroupNuel,
 
                       isGroupActive,
                       isGroupInactive,

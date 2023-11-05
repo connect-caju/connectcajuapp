@@ -19,6 +19,7 @@ export const User = {
     nuit: { type: "int?", default: 0 },
     image: "string?",
     role: "string?", // should be an array of strings
+    roles: "string[]",
     userProvince: "string?",
     userDistrict: "string?",
     lastLoginAt: { type: "date", default: () => new Date() },

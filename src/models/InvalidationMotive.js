@@ -8,4 +8,4 @@ export const InvalidationMotive = {
     messages: "InvalidationMessage[]",
     createdAt: { type: "date", default: () => new Date() },
   },
-}
+};

@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 /* eslint-disable prettier/prettier */
 export const errorMessages = {
   automaticInvalidationMessage: {
@@ -27,7 +28,7 @@ export const errorMessages = {
     cancelText: "  Não  ",
     confirmText: "  Sim  ",
     invalidationMessage:
-      "Caro usuário, detectou-se que este pomar tem parcelas de cajueiros que não foram registadas e incentiva o usuário a completar o registo, adicionando mais parcelas com cajueiros.",
+      "Caro usuário, detectou-se que este pomar tem parcelas de cajueiros que não foram registadas. Por favor, complete o registo, adicionando mais parcelas com cajueiros.",
     onCancelPressed: () => { },
     onConfirmPressed: () => { },
   },
@@ -42,7 +43,7 @@ export const errorMessages = {
     cancelText: "  Não  ",
     confirmText: "  Sim  ",
     invalidationMessage:
-      "Caro usuário, detectou-se que este pomar possui dados incompletos e incetiva o usuário a completar o registo, adicionando dados sobre as parcelas deste pomar.",
+      "Caro usuário, detectou-se que este pomar possui dados incompletos. Por favor, complete o registo, adicionando dados sobre as parcelas deste pomar.",
     onCancelPressed: () => { },
     onConfirmPressed: () => { },
   },
@@ -57,7 +58,7 @@ export const errorMessages = {
     cancelText: "  Não  ",
     confirmText: "  Sim  ",
     invalidationMessage:
-      "Caro usuário, detectou-se que a área total deste pomar é inferior à soma das áreas das parcelas e incentiva o usuário a corrigir os dados, rectificando a área por parcela com cajueiros.",
+      "Caro usuário, detectou-se que a área total deste pomar é inferior à soma das áreas das parcelas. Por favor, corrija os dados, rectificando a área por parcela com cajueiros.",
     onCancelPressed: () => { },
     onConfirmPressed: () => { },
   },

@@ -506,12 +506,12 @@ const GroupDetails = ({ resource, manager }) => {
                                 fontFamily: "JosefinSans-Bold",
                                 color: COLORS.black,
                             }}
-                        >NUIT:</Text>
+                        >NUIT | NUEL:</Text>
                         <Text
                             style={{
                                 color: resource?.nuit ? COLORS.grey : COLORS.danger,
                             }}
-                        >{resource?.nuit ? resource?.nuit : "Nenhum"}</Text>
+                        >{resource?.nuit ? resource?.nuit : "Nenhum"} | {resource?.nuel ? resource?.nuel : "Nenhum"}</Text>
                     </Box>
                 </Box>
             </View>

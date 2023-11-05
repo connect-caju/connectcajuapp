@@ -2,9 +2,10 @@
 export const secrets = {
   baseUrl: "https://realm.mongodb.com",
   apiKey: "XDoM1VeE5DA85zOOlUpTFDRRhaXM8Q1GbR8dgbUB0o03io5xctKJ4zXljCxYKWvR", // HTTPEndpoints
-  appID: "test-knqjv",
+  // appID: "test-knqjv",
+  appID: "connectcaju-app-uvwua",
   serviceName: "mongodb-atlas",
-  databaseName: "test",
+  databaseName: "ccDB",
   userCollectionName: "User",
   databaseAccess: {
     user: "musekwa",

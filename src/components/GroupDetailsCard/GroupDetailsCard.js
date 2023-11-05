@@ -575,6 +575,15 @@ export default function GroupDetailsCard({
                     fontFamily: "JosefinSans-Regular",
                   }}
                 >
+                  NUEL: {farmer?.nuel ? farmer?.nuel : "Nenhum"}
+                </Text>
+                <Text
+                  style={{
+                    color: "grey",
+                    fontSize: 13,
+                    fontFamily: "JosefinSans-Regular",
+                  }}
+                >
                   Alvará: {farmer?.licence ? farmer?.licence : "Nenhum"}
                 </Text>
               </View>
