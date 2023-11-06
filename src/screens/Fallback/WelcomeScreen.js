@@ -8,6 +8,7 @@ import {
   Image,
   StatusBar,
   TextInput,
+  TouchableOpacity,
 } from "react-native";
 import React, { useEffect, useState, useCallback } from "react";
 import { Button, Icon, BottomSheet } from "@rneui/themed";
@@ -41,6 +42,7 @@ import { roles } from "../../consts/roles";
 import { errorMessages } from "../../consts/errorMessages";
 import CustomActivityIndicator from "../../components/ActivityIndicator/CustomActivityIndicator";
 import { cooperatives } from "../../consts/cooperatives";
+import PrimaryButton from "../../components/Buttons/PrimaryButton";
 
 export default function WelcomeScreen() {
   const [isLoggingIn, setIsLoggingIn] = useState(true);
@@ -90,7 +92,7 @@ export default function WelcomeScreen() {
 
   // on user login
   const onLogin = useCallback(async (email, password) => {
-    
+
     // try {
     // } catch (error) {
     //   console.log("Could not encrypt password:", { cause: error })
@@ -938,26 +940,10 @@ export default function WelcomeScreen() {
                   </Stack>
                 )}
 
-              <Center w="100%" py="2">
-                <Button
-                  title={isLoggingIn ? " Entrar" : "Registar-se"}
+              <Center w="100%" py="8">
+                <PrimaryButton  
                   onPress={async () => {
                     if (isLoggingIn) {
-                      // app?.currentUser?.logOut();
-                      // try {
-                      //   if (!app?.currentUser) {
-                      //     const creds = Realm.Credentials.emailPassword(
-                      //       email,
-                      //       password,
-                      //     );
-                      //     await app?.logIn(creds);
-                      //   }
-                      //   return app.currentUser;
-                      // } catch (error) {
-                      //   setAlert(true);
-                      //   setErrorFlag(error);
-                      //   return;
-                      // }
                       await onLogin(email, password);
                     } else {
                       await onSignUp(
@@ -973,11 +959,45 @@ export default function WelcomeScreen() {
                       );
                     }
                   }}
-                  type="outline"
-                  containerStyle={{
-                    width: "100%",
-                  }}
+                  disabled={(!email || !password) ? true : false}
+                  title={isLoggingIn ? "Entrar" : "Registar-se"}
                 />
+                {/* <TouchableOpacity
+                  disabled={(!email || !password) ? true : false}
+                  onPress={async () => {
+                    if (isLoggingIn) {
+                      await onLogin(email, password);
+                    } else {
+                      await onSignUp(
+                        name,
+                        email,
+                        password,
+                        passwordConfirm,
+                        phone,
+                        role,
+                        userDistrict,
+                        userProvince,
+                        coop,
+                      );
+                    }
+                  }}
+                  style={{
+                    backgroundColor: COLORS.main,
+                    width: "100%",
+                    height: 50,
+                    justifyContent: "center",
+                    alignItems: "center",
+                    borderRadius: 8,
+                  }}
+                >
+                  <Text
+                    style={{
+                      fontSize: 18,
+                      fontFamily: "RobotoCondensed-Thin",
+                      color: COLORS.white,
+                    }}
+                  >{isLoggingIn ? " Entrar" : "Registar-se"}</Text>
+                </TouchableOpacity> */}
               </Center>
             </Stack>
 

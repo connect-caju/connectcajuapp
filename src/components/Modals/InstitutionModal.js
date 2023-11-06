@@ -29,6 +29,7 @@ import { user } from "../../consts/user";
 import { realmContext } from "../../models/realmContext";
 import COLORS from "../../consts/colors";
 import { generateUniqueNumber } from "../../helpers/generateUniqueNumber";
+import PrimaryButton from "../Buttons/PrimaryButton";
 const { useRealm, useObject, useQuery } = realmContext;
 
 export default function InstitutionModal({
@@ -153,7 +154,7 @@ export default function InstitutionModal({
             width: "100%",
             height: 50,
             flexDirection: "row",
-            backgroundColor: COLORS.main,
+            backgroundColor: COLORS.lightgrey,
             borderTopLeftRadius: 8,
             borderTopRightRadius: 8,
           }}
@@ -164,7 +165,7 @@ export default function InstitutionModal({
                 fontFamily: "JosefinSans-Bold",
                 fontSize: 18,
                 // fontWeigth: 'bold',
-                color: COLORS.ghostwhite,
+                color: COLORS.black,
                 paddingTop: 15,
                 textAlign: "center",
               }}
@@ -182,7 +183,7 @@ export default function InstitutionModal({
             <Icon
               name="close"
               size={20}
-              color={COLORS.ghostwhite}
+              color={COLORS.black}
               onPress={() => setModalVisible(false)}
             // style={{ position: 'relative', top: 10, right: 10, }}
             />
@@ -365,8 +366,8 @@ export default function InstitutionModal({
                 bg={COLORS.lightgrey}
               />
 
-              <Center w="100%">
-                <Button
+              <Center w="100%" py="3">
+                <PrimaryButton 
                   onPress={() => {
                     try {
                       addInstitution(farmerData, realm);
@@ -387,13 +388,8 @@ export default function InstitutionModal({
                       setInstitutionNuit(null);
                       setIsPrivateInstitution(false);
                     }
-                  }}
-                  type="outline"
-                  title="Salvar Dados"
-                  containerStyle={{
-                    width: "100%",
-                    // backgroundColor: COLORS.main,
-                  }}
+                  }}  
+                  title="Salvar dados"                
                 />
               </Center>
             </Box>

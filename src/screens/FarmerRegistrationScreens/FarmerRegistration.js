@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable linebreak-style */
 /* eslint-disable prettier/prettier */
-import { Text, SafeAreaView, Pressable, View } from "react-native";
+import { Text, SafeAreaView, Pressable, View, TouchableOpacity } from "react-native";
 import React, { useState, useEffect } from "react";
 import { Box, Stack, Center } from "native-base";
 import { Icon, Button } from "@rneui/themed";
@@ -33,6 +33,7 @@ import { realmContext } from "../../models/realmContext";
 import { generateUniqueNumber } from "../../helpers/generateUniqueNumber";
 import { dateLimits } from "../../helpers/dates";
 import { farmerTypes } from "../../consts/farmerTypes";
+import PrimaryButton from "../../components/Buttons/PrimaryButton";
 const { useRealm } = realmContext;
 
 export default function FarmerRegistration({ route, navigation }) {
@@ -577,14 +578,9 @@ export default function FarmerRegistration({ route, navigation }) {
             w="94%"
           >
             {farmerType !== "" ? (
-              <Button
-                // loading={loadinButton ? true : false}
-                type="outline"
-                containerStyle={{
-                  width: "100%",
-                }}
-                title="Pré-visualizar dados"
+              <PrimaryButton 
                 onPress={() => addFarmer(farmerType, realm)}
+                title="Pré-visualizar dados"
               />
             ) : (
               <Center

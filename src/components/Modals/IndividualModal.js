@@ -18,6 +18,7 @@ import { realmContext } from "../../models/realmContext";
 import { useEffect } from "react";
 import COLORS from "../../consts/colors";
 import { dateLimits } from "../../helpers/dates";
+import PrimaryButton from "../Buttons/PrimaryButton";
 const { useRealm, useQuery, useObject } = realmContext;
 
 export default function IndividualModal({
@@ -222,7 +223,7 @@ export default function IndividualModal({
             width: "100%",
             height: 50,
             flexDirection: "row",
-            backgroundColor: COLORS.main,
+            backgroundColor: COLORS.lightgrey,
             borderTopLeftRadius: 8,
             borderTopRightRadius: 8,
           }}
@@ -232,7 +233,7 @@ export default function IndividualModal({
               style={{
                 fontFamily: "JosefinSans-Bold",
                 fontSize: 16,
-                color: COLORS.ghostwhite,
+                color: COLORS.black,
                 paddingTop: 15,
                 textAlign: "center",
               }}
@@ -250,7 +251,7 @@ export default function IndividualModal({
             <Icon
               name="close"
               size={20}
-              color={COLORS.ghostwhite}
+              color={COLORS.black}
               onPress={() => setModalVisible(false)}
             />
           </View>
@@ -504,8 +505,8 @@ export default function IndividualModal({
                 thickness={1}
                 bg={COLORS.lightgrey}
               />
-              <Center w="100%">
-                <Button
+              <Center w="100%" py="3">
+                <PrimaryButton 
                   onPress={() => {
                     try {
                       addFarmer(farmerData, realm);
@@ -534,11 +535,7 @@ export default function IndividualModal({
                       setNuit(null);
                     }
                   }}
-                  type="outline"
-                  title="Salvar Dados"
-                  containerStyle={{
-                    width: "100%",
-                  }}
+                  title="Salvar dados"
                 />
               </Center>
             </Box>

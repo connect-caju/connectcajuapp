@@ -1,6 +1,6 @@
+/* eslint-disable linebreak-style */
 /* eslint-disable prettier/prettier */
 import React, { useState } from "react";
-import { Box, Stack, Radio } from "native-base";
 import COLORS from "../../consts/colors";
 import { farmerTypes } from "../../consts/farmerTypes";
 import { View } from "react-native";
@@ -83,7 +83,7 @@ const FarmerTypeRadioButtons = ({ farmerType, setFarmerType }) => {
             >
 
                 <FontAwesomeIcon
-                  icon={item.iconName} size={30} color={((focusedOption === item.focusedOption) || (farmerType === item.farmerType))
+                  icon={item.iconName} size={20} color={((focusedOption === item.focusedOption) || (farmerType === item.farmerType))
                     ? COLORS.ghostwhite
                     : COLORS.grey} />
 

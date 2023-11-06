@@ -12,6 +12,7 @@ import {
 } from "react-native";
 import {
   Box,
+  Center,
   FormControl,
   Stack,
 } from "native-base";
@@ -38,6 +39,7 @@ import validateBlockData from "../../helpers/validateBlockData";
 import AwesomeAlert from "react-native-awesome-alerts";
 import { errorMessages } from "../../consts/errorMessages";
 import { KeyboardAwareScrollView } from "react-native-keyboard-tools";
+import PrimaryButton from "../Buttons/PrimaryButton";
 const { useRealm, useQuery, useObject } = realmContext;
 
 export default function FarmlandBlockRegistration({
@@ -321,127 +323,496 @@ export default function FarmlandBlockRegistration({
               <Icon name="close" color={COLORS.grey} size={25} />
             </TouchableOpacity>
           </Box>
-            <Animated.ScrollView
-              decelerationRate={"normal"}
-              fadingEdgeLength={2}
-              style={{}}
+          <Animated.ScrollView
+            decelerationRate={"normal"}
+            fadingEdgeLength={2}
+            style={{}}
+          >
+            <View
+              style={{
+                minHeight: "70%",
+                justifyContent: "center",
+                alignItems: "center",
+                paddingTop: 2,
+                paddingBottom: 50,
+              }}
             >
-              <View
+              <Box
+                w="100%"
+                px="1"
                 style={{
-                  minHeight: "70%",
-                  justifyContent: "center",
+                  flexDirection: "row",
+                  justifyContent: "space-between",
                   alignItems: "center",
-                  paddingTop: 2,
-                  paddingBottom: 50,
+                  paddingTop: 10,
+                  paddingBottom: 20,
                 }}
               >
-                <Box
-                  w="100%"
-                  px="1"
-                  style={{
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                    paddingTop: 10,
-                    paddingBottom: 20,
-                  }}
-                >
-                  {ownerImage ? (
-                    <Image
-                      source={{ uri: ownerImage }}
-                      style={{
-                        width: 60,
-                        height: 60,
-                        borderColor: COLORS.main,
-                        marginHorizontal: 3,
-                        borderRadius: 120,
-                      }}
-                    />
-                  ) : (
-                    <Icon
-                      name="account-circle"
-                      size={80}
-                      color={COLORS.lightgrey}
-                    />
-                  )}
-                  <Box>
-                    <Text
-                      style={{
-                        fontSize: 14,
-                        color: treeRedFlag ? COLORS.red : COLORS.main,
-                        fontFamily: "JosefinSans-Regular",
-                        textAlign: "right",
-                      }}
-                    >
-                      Quantas das {totalTrees - treesFlag} árvores?
-                    </Text>
-                    <Text
-                      style={{
-                        fontSize: 14,
-                        color: areaRedFlag ? COLORS.red : COLORS.main,
-                        fontFamily: "JosefinSans-Regular",
-                        textAlign: "right",
-                      }}
-                    >
-                      Quais dos {(totalArea - areaFlag).toFixed(1)} hectares?
-                    </Text>
-                  </Box>
+                {ownerImage ? (
+                  <Image
+                    source={{ uri: ownerImage }}
+                    style={{
+                      width: 60,
+                      height: 60,
+                      borderColor: COLORS.main,
+                      marginHorizontal: 3,
+                      borderRadius: 120,
+                    }}
+                  />
+                ) : (
+                  <Icon
+                    name="account-circle"
+                    size={80}
+                    color={COLORS.lightgrey}
+                  />
+                )}
+                <Box>
+                  <Text
+                    style={{
+                      fontSize: 14,
+                      color: treeRedFlag ? COLORS.red : COLORS.main,
+                      fontFamily: "JosefinSans-Regular",
+                      textAlign: "right",
+                    }}
+                  >
+                    Quantas das {totalTrees - treesFlag} árvores?
+                  </Text>
+                  <Text
+                    style={{
+                      fontSize: 14,
+                      color: areaRedFlag ? COLORS.red : COLORS.main,
+                      fontFamily: "JosefinSans-Regular",
+                      textAlign: "right",
+                    }}
+                  >
+                    Quais dos {(totalArea - areaFlag).toFixed(1)} hectares?
+                  </Text>
                 </Box>
-                <Stack direction="row" mx="3" w="100%">
-                  <Box w="100%" px="1">
+              </Box>
+              <Stack direction="row" mx="3" w="100%">
+                <Box w="100%" px="1">
+                  <FormControl
+                    isRequired
+                    my="1"
+                    isInvalid={"plantingYear" in errors}
+                  >
+                    <FormControl.Label>Ano de plantio</FormControl.Label>
+
+                    <SelectList
+                      data={() => getFullYears2(70)}
+                      setSelected={(newYear) => {
+                        setErrors((prev) => ({ ...prev, plantingYear: "" }));
+                        setPlantingYear(newYear);
+                      }}
+                      save="value"
+                      placeholder="Escolher ano"
+                      searchPlaceholder="Procurar ano"
+                      maxHeight={400}
+                      fontFamily="JosefinSans-Regular"
+                      notFoundText="Ano não encontrado"
+                      dropdownTextStyles={{
+                        fontSize: 16,
+                        color: COLORS.black,
+                        padding: 5,
+                      }}
+                      arrowicon={
+                        <Icon
+                          // size={35}
+                          name="arrow-drop-down"
+                          color={COLORS.main}
+                        />
+                      }
+                      closeicon={
+                        <Icon name="close" size={20} color={COLORS.grey} />
+                      }
+                      inputStyles={{
+                        fontSize: 15,
+                        color: plantingYear ? COLORS.black : COLORS.grey,
+                      }}
+                      boxStyles={{
+                        minHeight: 55,
+                        borderRadius: 5,
+                        borderColor: COLORS.lightgrey,
+                        marginTop: 5,
+                      }}
+                    />
+                    {"plantingYear" in errors ? (
+                      <FormControl.ErrorMessage
+                        leftIcon={
+                          <Icon name="error-outline" size={16} color="red" />
+                        }
+                        _text={{ fontSize: "xs" }}
+                      >
+                        {errors?.plantingYear}
+                      </FormControl.ErrorMessage>
+                    ) : (
+                      <FormControl.HelperText></FormControl.HelperText>
+                    )}
+                  </FormControl>
+                </Box>
+              </Stack>
+
+              <Box style={{}}>
+                <Stack direction="row" w="100%" space={2}>
+                  <Box w={"48%"}>
                     <FormControl
                       isRequired
-                      my="1"
-                      isInvalid={"plantingYear" in errors}
+                      my="2"
+                      isInvalid={"usedArea" in errors}
                     >
-                      <FormControl.Label>Ano de plantio</FormControl.Label>
-
-                      <SelectList
-                        data={() => getFullYears2(70)}
-                        setSelected={(newYear) => {
-                          setErrors((prev) => ({ ...prev, plantingYear: "" }));
-                          setPlantingYear(newYear);
-                        }}
-                        save="value"
-                        placeholder="Escolher ano"
-                        searchPlaceholder="Procurar ano"
-                        maxHeight={400}
-                        fontFamily="JosefinSans-Regular"
-                        notFoundText="Ano não encontrado"
-                        dropdownTextStyles={{
-                          fontSize: 16,
-                          color: COLORS.black,
-                          padding: 5,
-                        }}
-                        arrowicon={
-                          <Icon
-                            // size={35}
-                            name="arrow-drop-down"
-                            color={COLORS.main}
-                          />
-                        }
-                        closeicon={
-                          <Icon name="close" size={20} color={COLORS.grey} />
-                        }
-                        inputStyles={{
-                          fontSize: 15,
-                          color: plantingYear ? COLORS.black : COLORS.grey,
-                        }}
-                        boxStyles={{
-                          minHeight: 55,
-                          borderRadius: 5,
-                          borderColor: COLORS.lightgrey,
-                          marginTop: 5,
+                      <FormControl.Label>Área Aproveitada</FormControl.Label>
+                      <CustomInput
+                        width="100%"
+                        keyboardType="numeric"
+                        textAlign="center"
+                        placeholder="Hectares"
+                        value={usedArea}
+                        onChangeText={(newNumber) => {
+                          setErrors((prev) => ({
+                            ...prev,
+                            blockTrees: null,
+                            usedArea: null,
+                            treeDensity: null,
+                          }));
+                          setUsedArea(newNumber);
                         }}
                       />
-                      {"plantingYear" in errors ? (
+                    </FormControl>
+                  </Box>
+
+                  <Box
+                    w="48%"
+                    style={{
+                      justifyContent: "flex-end",
+                    }}
+                  >
+                    <FormControl
+                      isRequired
+                      my="2"
+                      isInvalid={"blockTrees" in errors}
+                    >
+                      <FormControl.Label>N° de Cajueiros</FormControl.Label>
+                      <CustomInput
+                        width="100%"
+                        keyboardType="numeric"
+                        textAlign="center"
+                        placeholder="Cajueiros"
+                        value={blockTrees}
+                        onChangeText={(newNumber) => {
+                          setErrors((prev) => ({
+                            ...prev,
+                            blockTrees: null,
+                            usedArea: null,
+                            treeDensity: null,
+                          }));
+                          setBlockTrees(newNumber);
+                        }}
+                      />
+                    </FormControl>
+                  </Box>
+                </Stack>
+
+                {errors?.blockTrees && errors?.usedArea && (
+                  <Box
+                    style={{
+                      backgroundColor: COLORS.danger,
+                    }}
+                  >
+                    <Text
+                      style={{
+                        fontSize: 14,
+                        color: COLORS.ghostwhite,
+                        padding: 6,
+                      }}
+                    >
+                      {" "}
+                      <Icon
+                        name="error-outline"
+                        size={20}
+                        color={COLORS.ghostwhite}
+                      />{" "}
+                      {errors?.usedArea}
+                    </Text>
+                    <Text
+                      style={{
+                        fontSize: 14,
+                        color: COLORS.ghostwhite,
+                        padding: 6,
+                      }}
+                    >
+                      {" "}
+                      <Icon
+                        name="error-outline"
+                        size={20}
+                        color={COLORS.ghostwhite}
+                      />{" "}
+                      {errors?.blockTrees}
+                    </Text>
+                    <Text
+                      style={{
+                        fontSize: 14,
+                        color: COLORS.ghostwhite,
+                        padding: 6,
+                      }}
+                    >
+                      {" "}
+                      <Icon
+                        name="error-outline"
+                        size={20}
+                        color={COLORS.ghostwhite}
+                      />{" "}
+                      {errors?.treeDensity}
+                    </Text>
+                  </Box>
+                )}
+
+                {errors?.blockTrees && !errors?.usedArea && (
+                  <Box>
+                    <Text
+                      style={{ fontSize: 14, color: COLORS.red, padding: 6 }}
+                    >
+                      {" "}
+                      <Icon
+                        name="error-outline"
+                        size={20}
+                        color={COLORS.red}
+                      />{" "}
+                      {errors?.blockTrees}
+                    </Text>
+                  </Box>
+                )}
+
+                {!errors?.blockTrees && errors?.usedArea && (
+                  <Box>
+                    <Text
+                      style={{ fontSize: 14, color: COLORS.red, padding: 6 }}
+                    >
+                      {" "}
+                      <Icon
+                        name="error-outline"
+                        size={20}
+                        color={COLORS.red}
+                      />{" "}
+                      {errors?.usedArea}
+                    </Text>
+                  </Box>
+                )}
+              </Box>
+
+              <Box
+                w="100%"
+                style={{
+                  marginTop: errors?.usedArea && errors?.blockTrees ? 0 : 0,
+                }}
+              >
+                <FormControl
+                  isRequired
+                  my="1"
+                  isInvalid={"densityMode" in errors}
+                >
+                  <FormControl.Label>
+                    <Text
+                      style={{
+                        fontSize: 16,
+                        fontFamily: "JosefinSans-Regular",
+                        color: COLORS.grey,
+                        paddingLeft: 15,
+                      }}
+                    >
+                      Compasso
+                    </Text>
+                  </FormControl.Label>
+                  <Stack direction="row" mx="3" w="100%">
+                    <Box w="50%" px="1">
+                      <CheckBox
+                        center
+                        fontFamily="JosefinSans-Bold"
+                        containerStyle={{
+                          backgroundColor: COLORS.ghostwhite,
+                        }}
+                        textStyle={{
+                          fontWeight: "120",
+                          color: isDensityModeRegular
+                            ? COLORS.main
+                            : COLORS.grey,
+                        }}
+                        title="Regular"
+                        checked={isDensityModeRegular}
+                        checkedIcon={
+                          <Icon
+                            name="check-box"
+                            color={COLORS.main}
+                            size={30}
+                            iconStyle={{ marginRight: 1 }}
+                          />
+                        }
+                        uncheckedIcon={
+                          <Icon
+                            name="radio-button-unchecked"
+                            color={COLORS.grey}
+                            size={30}
+                            iconStyle={{ marginRight: 1 }}
+                          />
+                        }
+                        onPress={() => {
+                          setIsDensityModeRegular(true);
+                          setIsDensityModeIrregular(false);
+                          setErrors({
+                            ...errors,
+                            densityMode: "",
+                          });
+                        }}
+                      />
+                    </Box>
+                    <Box w="50%" px="1">
+                      <CheckBox
+                        center
+                        fontFamily="JosefinSans-Bold"
+                        containerStyle={{
+                          backgroundColor: COLORS.ghostwhite,
+                        }}
+                        textStyle={{
+                          fontWeight: "120",
+                          color: isDensityModeIrregular
+                            ? COLORS.main
+                            : COLORS.grey,
+                        }}
+                        title="Irregular"
+                        checked={isDensityModeIrregular}
+                        checkedIcon={
+                          <Icon
+                            name="check-box"
+                            color={COLORS.main}
+                            size={30}
+                            iconStyle={{ marginRight: 1 }}
+                          />
+                        }
+                        uncheckedIcon={
+                          <Icon
+                            name="radio-button-unchecked"
+                            color={COLORS.grey}
+                            size={30}
+                            iconStyle={{ marginRight: 1 }}
+                          />
+                        }
+                        onPress={() => {
+                          setIsDensityModeIrregular(true);
+                          setIsDensityModeRegular(false);
+                          setErrors({
+                            ...errors,
+                            densityMode: "",
+                          });
+                          setDensityWidth("");
+                          setDensityLength("");
+                        }}
+                      />
+                    </Box>
+                  </Stack>
+                  {"densityMode" in errors ? (
+                    <FormControl.ErrorMessage
+                      leftIcon={
+                        <Icon name="error-outline" size={16} color="red" />
+                      }
+                      _text={{ fontSize: "xs" }}
+                    >
+                      {errors?.densityMode}
+                    </FormControl.ErrorMessage>
+                  ) : (
+                    <FormControl.HelperText></FormControl.HelperText>
+                  )}
+                </FormControl>
+              </Box>
+
+              {isDensityModeRegular && (
+                <Stack direction="row" mx="3" w="100%">
+                  <Box w="45%" px="1">
+                    <FormControl
+                      my="1"
+                      isRequired
+                      isInvalid={"density" in errors}
+                    >
+                      <FormControl.Label>Comprimento</FormControl.Label>
+                      <CustomInput
+                        width="100%"
+                        textAlign="center"
+                        keyboardType="numeric"
+                        placeholder="Comprimento"
+                        value={densityLength}
+                        onChangeText={(newNumber) => {
+                          setErrors((prev) => ({
+                            ...prev,
+                            density: "",
+                            blockTrees: null,
+                            usedArea: null,
+                            treeDensity: null,
+                          }));
+                          setDensityLength(newNumber);
+                        }}
+                      />
+
+                      {"density" in errors ? (
                         <FormControl.ErrorMessage
                           leftIcon={
                             <Icon name="error-outline" size={16} color="red" />
                           }
                           _text={{ fontSize: "xs" }}
                         >
-                          {errors?.plantingYear}
+                          {errors?.density}
+                        </FormControl.ErrorMessage>
+                      ) : (
+                        <FormControl.HelperText></FormControl.HelperText>
+                      )}
+                    </FormControl>
+                  </Box>
+                  <Box
+                    w="10%"
+                    style={{
+                      justifyContent: "center",
+                      alignItems: "center",
+                      paddingTop: "density" in errors ? 10 : 20,
+                    }}
+                  >
+                    <Text
+                      style={{
+                        fontSize: 20,
+                      }}
+                    >
+                      X
+                    </Text>
+                  </Box>
+                  <Box w="45%" px="1">
+                    <FormControl
+                      my="1"
+                      isRequired
+                      isInvalid={"density" in errors}
+                    >
+                      <FormControl.Label>Largura</FormControl.Label>
+                      <CustomInput
+                        width="100%"
+                        keyboardType="numeric"
+                        textAlign="center"
+                        placeholder="Largura"
+                        value={densityWidth}
+                        onChangeText={(newNumber) => {
+                          setErrors((prev) => ({
+                            ...prev,
+                            density: "",
+                            blockTrees: null,
+                            usedArea: null,
+                            treeDensity: null,
+                          }));
+                          setDensityWidth(newNumber);
+                        }}
+                      />
+
+                      {"density" in errors ? (
+                        <FormControl.ErrorMessage
+                          leftIcon={
+                            <Icon name="error-outline" size={16} color="red" />
+                          }
+                          _text={{ fontSize: "xs" }}
+                        >
+                          {errors?.density}
                         </FormControl.ErrorMessage>
                       ) : (
                         <FormControl.HelperText></FormControl.HelperText>
@@ -449,763 +820,384 @@ export default function FarmlandBlockRegistration({
                     </FormControl>
                   </Box>
                 </Stack>
+              )}
 
-                <Box style={{}}>
-                  <Stack direction="row" w="100%" space={2}>
-                    <Box w={"48%"}>
-                      <FormControl
-                        isRequired
-                        my="2"
-                        isInvalid={"usedArea" in errors}
-                      >
-                        <FormControl.Label>Área Aproveitada</FormControl.Label>
-                        <CustomInput
-                          width="100%"
-                          keyboardType="numeric"
-                          textAlign="center"
-                          placeholder="Hectares"
-                          value={usedArea}
-                          onChangeText={(newNumber) => {
-                            setErrors((prev) => ({
-                              ...prev,
-                              blockTrees: null,
-                              usedArea: null,
-                              treeDensity: null,
-                            }));
-                            setUsedArea(newNumber);
-                          }}
-                        />
-                      </FormControl>
-                    </Box>
-
-                    <Box
-                      w="48%"
-                      style={{
-                        justifyContent: "flex-end",
-                      }}
-                    >
-                      <FormControl
-                        isRequired
-                        my="2"
-                        isInvalid={"blockTrees" in errors}
-                      >
-                        <FormControl.Label>N° de Cajueiros</FormControl.Label>
-                        <CustomInput
-                          width="100%"
-                          keyboardType="numeric"
-                          textAlign="center"
-                          placeholder="Cajueiros"
-                          value={blockTrees}
-                          onChangeText={(newNumber) => {
-                            setErrors((prev) => ({
-                              ...prev,
-                              blockTrees: null,
-                              usedArea: null,
-                              treeDensity: null,
-                            }));
-                            setBlockTrees(newNumber);
-                          }}
-                        />
-                      </FormControl>
-                    </Box>
-                  </Stack>
-
-                  {errors?.blockTrees && errors?.usedArea && (
-                    <Box
-                      style={{
-                        backgroundColor: COLORS.danger,
-                      }}
-                    >
-                      <Text
-                        style={{
-                          fontSize: 14,
-                          color: COLORS.ghostwhite,
-                          padding: 6,
-                        }}
-                      >
-                        {" "}
-                        <Icon
-                          name="error-outline"
-                          size={20}
-                          color={COLORS.ghostwhite}
-                        />{" "}
-                        {errors?.usedArea}
-                      </Text>
-                      <Text
-                        style={{
-                          fontSize: 14,
-                          color: COLORS.ghostwhite,
-                          padding: 6,
-                        }}
-                      >
-                        {" "}
-                        <Icon
-                          name="error-outline"
-                          size={20}
-                          color={COLORS.ghostwhite}
-                        />{" "}
-                        {errors?.blockTrees}
-                      </Text>
-                      <Text
-                        style={{
-                          fontSize: 14,
-                          color: COLORS.ghostwhite,
-                          padding: 6,
-                        }}
-                      >
-                        {" "}
-                        <Icon
-                          name="error-outline"
-                          size={20}
-                          color={COLORS.ghostwhite}
-                        />{" "}
-                        {errors?.treeDensity}
-                      </Text>
-                    </Box>
-                  )}
-
-                  {errors?.blockTrees && !errors?.usedArea && (
-                    <Box>
-                      <Text
-                        style={{ fontSize: 14, color: COLORS.red, padding: 6 }}
-                      >
-                        {" "}
-                        <Icon
-                          name="error-outline"
-                          size={20}
-                          color={COLORS.red}
-                        />{" "}
-                        {errors?.blockTrees}
-                      </Text>
-                    </Box>
-                  )}
-
-                  {!errors?.blockTrees && errors?.usedArea && (
-                    <Box>
-                      <Text
-                        style={{ fontSize: 14, color: COLORS.red, padding: 6 }}
-                      >
-                        {" "}
-                        <Icon
-                          name="error-outline"
-                          size={20}
-                          color={COLORS.red}
-                        />{" "}
-                        {errors?.usedArea}
-                      </Text>
-                    </Box>
-                  )}
-                </Box>
-
-                <Box
-                  w="100%"
-                  style={{
-                    marginTop: errors?.usedArea && errors?.blockTrees ? 0 : 0,
+              <FormControl isRequired my="1" isInvalid={"plantTypes" in errors}>
+                <FormControl.Label>Tipo de plantas</FormControl.Label>
+                <MultipleSelectList
+                  setSelected={(type) => {
+                    setErrors((prev) => ({ ...prev, plantTypes: "" }));
+                    setPlantTypes(type);
                   }}
-                >
-                  <FormControl
-                    isRequired
-                    my="1"
-                    isInvalid={"densityMode" in errors}
+                  data={plantingTypes}
+                  notFoundText={"Tipo de planta não encontrado"}
+                  placeholder="Tipo de plantas"
+                  searchPlaceholder="Seleccionar tipo de plantas"
+                  save="value"
+                  label="Tipo de plantas"
+                  badgeStyles={{
+                    backgroundColor: COLORS.main,
+                  }}
+                  badgeTextStyles={{
+                    fontSize: 16,
+                  }}
+                  arrowicon={
+                    <Icon
+                      // size={45}
+                      name="arrow-drop-down"
+                      color={COLORS.main}
+                    />
+                  }
+                  closeicon={
+                    <Icon name="close" size={20} color={COLORS.grey} />
+                  }
+                  fontFamily="JosefinSans-Regular"
+                  dropdownTextStyles={{
+                    fontSize: 16,
+                    color: COLORS.black,
+                    padding: 5,
+                  }}
+                  inputStyles={{
+                    fontSize: 16,
+                    color: "#A8A8A8",
+                  }}
+                  boxStyles={{
+                    minHeight: 55,
+                    borderRadius: 5,
+                    borderColor: COLORS.lightgrey,
+                  }}
+                />
+                {"plantTypes" in errors ? (
+                  <FormControl.ErrorMessage
+                    leftIcon={
+                      <Icon name="error-outline" size={16} color="red" />
+                    }
+                    _text={{ fontSize: "xs" }}
                   >
-                    <FormControl.Label>
-                      <Text
-                        style={{
-                          fontSize: 16,
-                          fontFamily: "JosefinSans-Regular",
-                          color: COLORS.grey,
-                          paddingLeft: 15,
-                        }}
-                      >
-                        Compasso
-                      </Text>
-                    </FormControl.Label>
-                    <Stack direction="row" mx="3" w="100%">
-                      <Box w="50%" px="1">
-                        <CheckBox
-                          center
-                          fontFamily="JosefinSans-Bold"
-                          containerStyle={{
-                            backgroundColor: COLORS.ghostwhite,
-                          }}
-                          textStyle={{
-                            fontWeight: "120",
-                            color: isDensityModeRegular
-                              ? COLORS.main
-                              : COLORS.grey,
-                          }}
-                          title="Regular"
-                          checked={isDensityModeRegular}
-                          checkedIcon={
-                            <Icon
-                              name="check-box"
-                              color={COLORS.main}
-                              size={30}
-                              iconStyle={{ marginRight: 1 }}
-                            />
-                          }
-                          uncheckedIcon={
-                            <Icon
-                              name="radio-button-unchecked"
-                              color={COLORS.grey}
-                              size={30}
-                              iconStyle={{ marginRight: 1 }}
-                            />
-                          }
-                          onPress={() => {
-                            setIsDensityModeRegular(true);
-                            setIsDensityModeIrregular(false);
-                            setErrors({
-                              ...errors,
-                              densityMode: "",
-                            });
-                          }}
+                    {errors?.plantTypes}
+                  </FormControl.ErrorMessage>
+                ) : (
+                  <FormControl.HelperText></FormControl.HelperText>
+                )}
+              </FormControl>
+
+              {plantTypes?.some((el) => el?.includes("enxert")) && (
+                <>
+                  <FormControl my="1" isRequired isInvalid={"clones" in errors}>
+                    <FormControl.Label>Clones</FormControl.Label>
+                    <MultipleSelectList
+                      setSelected={(type) => {
+                        setErrors((prev) => ({ ...prev, clones: "" }));
+                        setClones(type);
+                      }}
+                      data={cloneList}
+                      notFoundText={"Clone não encontrado"}
+                      placeholder="clones"
+                      searchPlaceholder="Seleccionar tipo de plantas"
+                      save="value"
+                      label="Clones"
+                      badgeStyles={{
+                        backgroundColor: COLORS.main,
+                      }}
+                      badgeTextStyles={{
+                        fontSize: 16,
+                      }}
+                      arrowicon={
+                        <Icon
+                          // size={45}
+                          name="arrow-drop-down"
+                          color={COLORS.main}
                         />
-                      </Box>
-                      <Box w="50%" px="1">
-                        <CheckBox
-                          center
-                          fontFamily="JosefinSans-Bold"
-                          containerStyle={{
-                            backgroundColor: COLORS.ghostwhite,
-                          }}
-                          textStyle={{
-                            fontWeight: "120",
-                            color: isDensityModeIrregular
-                              ? COLORS.main
-                              : COLORS.grey,
-                          }}
-                          title="Irregular"
-                          checked={isDensityModeIrregular}
-                          checkedIcon={
-                            <Icon
-                              name="check-box"
-                              color={COLORS.main}
-                              size={30}
-                              iconStyle={{ marginRight: 1 }}
-                            />
-                          }
-                          uncheckedIcon={
-                            <Icon
-                              name="radio-button-unchecked"
-                              color={COLORS.grey}
-                              size={30}
-                              iconStyle={{ marginRight: 1 }}
-                            />
-                          }
-                          onPress={() => {
-                            setIsDensityModeIrregular(true);
-                            setIsDensityModeRegular(false);
-                            setErrors({
-                              ...errors,
-                              densityMode: "",
-                            });
-                            setDensityWidth("");
-                            setDensityLength("");
-                          }}
-                        />
-                      </Box>
-                    </Stack>
-                    {"densityMode" in errors ? (
+                      }
+                      closeicon={
+                        <Icon name="close" size={20} color={COLORS.grey} />
+                      }
+                      fontFamily="JosefinSans-Regular"
+                      dropdownTextStyles={{
+                        fontSize: 16,
+                        color: COLORS.black,
+                        padding: 5,
+                      }}
+                      inputStyles={{
+                        fontSize: 16,
+                        color: "#A8A8A8",
+                      }}
+                      boxStyles={{
+                        minHeight: 55,
+                        borderRadius: 5,
+                        borderColor: COLORS.lightgrey,
+                      }}
+                    />
+                    {"clones" in errors ? (
                       <FormControl.ErrorMessage
                         leftIcon={
                           <Icon name="error-outline" size={16} color="red" />
                         }
                         _text={{ fontSize: "xs" }}
                       >
-                        {errors?.densityMode}
+                        {errors?.clones}
                       </FormControl.ErrorMessage>
-                    ) : (
-                      <FormControl.HelperText></FormControl.HelperText>
-                    )}
+                    ) : null}
                   </FormControl>
-                </Box>
 
-                {isDensityModeRegular && (
-                  <Stack direction="row" mx="3" w="100%">
-                    <Box w="45%" px="1">
-                      <FormControl
-                        my="1"
-                        isRequired
-                        isInvalid={"density" in errors}
-                      >
-                        <FormControl.Label>Comprimento</FormControl.Label>
-                        <CustomInput
-                          width="100%"
-                          textAlign="center"
-                          keyboardType="numeric"
-                          placeholder="Comprimento"
-                          value={densityLength}
-                          onChangeText={(newNumber) => {
-                            setErrors((prev) => ({
-                              ...prev,
-                              density: "",
-                              blockTrees: null,
-                              usedArea: null,
-                              treeDensity: null,
-                            }));
-                            setDensityLength(newNumber);
-                          }}
-                        />
-
-                        {"density" in errors ? (
-                          <FormControl.ErrorMessage
-                            leftIcon={
-                              <Icon name="error-outline" size={16} color="red" />
-                            }
-                            _text={{ fontSize: "xs" }}
-                          >
-                            {errors?.density}
-                          </FormControl.ErrorMessage>
-                        ) : (
-                          <FormControl.HelperText></FormControl.HelperText>
-                        )}
-                      </FormControl>
-                    </Box>
+                  {clones?.find((clone) => clone === "Outro") && (
                     <Box
-                      w="10%"
+                      w="100%"
+                      alignItems={"center"}
                       style={{
-                        justifyContent: "center",
-                        alignItems: "center",
-                        paddingTop: "density" in errors ? 10 : 20,
+                        flexDirection: "row",
                       }}
                     >
-                      <Text
-                        style={{
-                          fontSize: 20,
-                        }}
-                      >
-                        X
-                      </Text>
-                    </Box>
-                    <Box w="45%" px="1">
-                      <FormControl
-                        my="1"
-                        isRequired
-                        isInvalid={"density" in errors}
-                      >
-                        <FormControl.Label>Largura</FormControl.Label>
-                        <CustomInput
-                          width="100%"
-                          keyboardType="numeric"
-                          textAlign="center"
-                          placeholder="Largura"
-                          value={densityWidth}
-                          onChangeText={(newNumber) => {
-                            setErrors((prev) => ({
-                              ...prev,
-                              density: "",
-                              blockTrees: null,
-                              usedArea: null,
-                              treeDensity: null,
-                            }));
-                            setDensityWidth(newNumber);
-                          }}
-                        />
-
-                        {"density" in errors ? (
-                          <FormControl.ErrorMessage
-                            leftIcon={
-                              <Icon name="error-outline" size={16} color="red" />
-                            }
-                            _text={{ fontSize: "xs" }}
-                          >
-                            {errors?.density}
-                          </FormControl.ErrorMessage>
-                        ) : (
-                          <FormControl.HelperText></FormControl.HelperText>
-                        )}
-                      </FormControl>
-                    </Box>
-                  </Stack>
-                )}
-
-                <FormControl isRequired my="1" isInvalid={"plantTypes" in errors}>
-                  <FormControl.Label>Tipo de plantas</FormControl.Label>
-                  <MultipleSelectList
-                    setSelected={(type) => {
-                      setErrors((prev) => ({ ...prev, plantTypes: "" }));
-                      setPlantTypes(type);
-                    }}
-                    data={plantingTypes}
-                    notFoundText={"Tipo de planta não encontrado"}
-                    placeholder="Tipo de plantas"
-                    searchPlaceholder="Seleccionar tipo de plantas"
-                    save="value"
-                    label="Tipo de plantas"
-                    badgeStyles={{
-                      backgroundColor: COLORS.main,
-                    }}
-                    badgeTextStyles={{
-                      fontSize: 16,
-                    }}
-                    arrowicon={
-                      <Icon
-                        // size={45}
-                        name="arrow-drop-down"
-                        color={COLORS.main}
-                      />
-                    }
-                    closeicon={
-                      <Icon name="close" size={20} color={COLORS.grey} />
-                    }
-                    fontFamily="JosefinSans-Regular"
-                    dropdownTextStyles={{
-                      fontSize: 16,
-                      color: COLORS.black,
-                      padding: 5,
-                    }}
-                    inputStyles={{
-                      fontSize: 16,
-                      color: "#A8A8A8",
-                    }}
-                    boxStyles={{
-                      minHeight: 55,
-                      borderRadius: 5,
-                      borderColor: COLORS.lightgrey,
-                    }}
-                  />
-                  {"plantTypes" in errors ? (
-                    <FormControl.ErrorMessage
-                      leftIcon={
-                        <Icon name="error-outline" size={16} color="red" />
-                      }
-                      _text={{ fontSize: "xs" }}
-                    >
-                      {errors?.plantTypes}
-                    </FormControl.ErrorMessage>
-                  ) : (
-                    <FormControl.HelperText></FormControl.HelperText>
-                  )}
-                </FormControl>
-
-                {plantTypes?.some((el) => el?.includes("enxert")) && (
-                  <>
-                    <FormControl my="1" isRequired isInvalid={"clones" in errors}>
-                      <FormControl.Label>Clones</FormControl.Label>
-                      <MultipleSelectList
-                        setSelected={(type) => {
-                          setErrors((prev) => ({ ...prev, clones: "" }));
-                          setClones(type);
-                        }}
-                        data={cloneList}
-                        notFoundText={"Clone não encontrado"}
-                        placeholder="clones"
-                        searchPlaceholder="Seleccionar tipo de plantas"
-                        save="value"
-                        label="Clones"
-                        badgeStyles={{
-                          backgroundColor: COLORS.main,
-                        }}
-                        badgeTextStyles={{
-                          fontSize: 16,
-                        }}
-                        arrowicon={
-                          <Icon
-                            // size={45}
-                            name="arrow-drop-down"
-                            color={COLORS.main}
+                      <Box w="70%">
+                        <FormControl my="1" isInvalid={"addedClone" in errors}>
+                          <FormControl.Label>
+                            Adiciona novo clone
+                          </FormControl.Label>
+                          <CustomInput
+                            width="100%"
+                            type="text"
+                            placeholder="Clone não econtrado na lista"
+                            value={addedClone}
+                            onChangeText={(newClone) => {
+                              setErrors({
+                                ...errors,
+                                addedClone: "",
+                              });
+                              setAddedClone(newClone);
+                            }}
                           />
-                        }
-                        closeicon={
-                          <Icon name="close" size={20} color={COLORS.grey} />
-                        }
-                        fontFamily="JosefinSans-Regular"
-                        dropdownTextStyles={{
-                          fontSize: 16,
-                          color: COLORS.black,
-                          padding: 5,
-                        }}
-                        inputStyles={{
-                          fontSize: 16,
-                          color: "#A8A8A8",
-                        }}
-                        boxStyles={{
-                          minHeight: 55,
-                          borderRadius: 5,
-                          borderColor: COLORS.lightgrey,
-                        }}
-                      />
-                      {"clones" in errors ? (
-                        <FormControl.ErrorMessage
-                          leftIcon={
-                            <Icon name="error-outline" size={16} color="red" />
-                          }
-                          _text={{ fontSize: "xs" }}
-                        >
-                          {errors?.clones}
-                        </FormControl.ErrorMessage>
-                      ) : null}
-                    </FormControl>
-
-                    {clones?.find((clone) => clone === "Outro") && (
+                          {"addedClone" in errors ? (
+                            <FormControl.ErrorMessage
+                              leftIcon={
+                                <Icon
+                                  name="error-outline"
+                                  size={16}
+                                  color="red"
+                                />
+                              }
+                              _text={{ fontSize: "xs" }}
+                            >
+                              {errors?.addedClone}
+                            </FormControl.ErrorMessage>
+                          ) : (
+                            <FormControl.HelperText></FormControl.HelperText>
+                          )}
+                        </FormControl>
+                      </Box>
                       <Box
-                        w="100%"
-                        alignItems={"center"}
+                        // w="15%"
                         style={{
-                          flexDirection: "row",
+                          justifyContent: "center",
+                          alignItems: "center",
+                          // backgroundColor: 'red',
+                          position: "relative",
+                          bottom: -5,
+                          left: 0,
                         }}
                       >
-                        <Box w="70%">
-                          <FormControl my="1" isInvalid={"addedClone" in errors}>
-                            <FormControl.Label>
-                              Adiciona novo clone
-                            </FormControl.Label>
-                            <CustomInput
-                              width="100%"
-                              type="text"
-                              placeholder="Clone não econtrado na lista"
-                              value={addedClone}
-                              onChangeText={(newClone) => {
-                                setErrors({
-                                  ...errors,
-                                  addedClone: "",
-                                });
-                                setAddedClone(newClone);
-                              }}
-                            />
-                            {"addedClone" in errors ? (
-                              <FormControl.ErrorMessage
-                                leftIcon={
-                                  <Icon
-                                    name="error-outline"
-                                    size={16}
-                                    color="red"
-                                  />
-                                }
-                                _text={{ fontSize: "xs" }}
-                              >
-                                {errors?.addedClone}
-                              </FormControl.ErrorMessage>
-                            ) : (
-                              <FormControl.HelperText></FormControl.HelperText>
-                            )}
-                          </FormControl>
-                        </Box>
-                        <Box
-                          // w="15%"
+                        <TouchableOpacity
                           style={{
                             justifyContent: "center",
                             alignItems: "center",
-                            // backgroundColor: 'red',
-                            position: "relative",
-                            bottom: -5,
-                            left: 0,
+                            marginHorizontal: 10,
+                            marginTop: 10,
+                            padding: 5,
+                            borderRadius: 100,
+                            backgroundColor: COLORS.main,
+                            borderColor: COLORS.main,
+                            borderWidth: 1,
+                          }}
+                          onPress={() => {
+                            if (addedClone) {
+                              setClones((prev) => [...prev, addedClone]);
+
+                              setAddedClone("");
+                            } else {
+                              setErrors({
+                                ...errors,
+                                addedClone: "Indica novo clone",
+                              });
+                            }
                           }}
                         >
-                          <TouchableOpacity
-                            style={{
-                              justifyContent: "center",
-                              alignItems: "center",
-                              marginHorizontal: 10,
-                              marginTop: 10,
-                              padding: 5,
-                              borderRadius: 100,
-                              backgroundColor: COLORS.main,
-                              borderColor: COLORS.main,
-                              borderWidth: 1,
-                            }}
-                            onPress={() => {
-                              if (addedClone) {
-                                setClones((prev) => [...prev, addedClone]);
+                          <Icon
+                            name="arrow-downward"
+                            size={35}
+                            color={COLORS.ghostwhite}
+                          />
+                        </TouchableOpacity>
+                      </Box>
+                      <Box w="15%"></Box>
+                    </Box>
+                  )}
+                </>
+              )}
 
-                                setAddedClone("");
-                              } else {
-                                setErrors({
-                                  ...errors,
-                                  addedClone: "Indica novo clone",
-                                });
-                              }
+              {plantTypes.length > 0 && sameTypeTreesList.length > 0 && (
+                <Box w="100%" my="5">
+                  {errors?.sameTypeTrees && (
+                    <Box
+                      style={{
+                        flexDirection: "row",
+                        paddingHorizontal: 10,
+                      }}
+                    >
+                      <Icon name="error-outline" size={26} color="red" />
+                      <Text
+                        style={{
+                          color: COLORS.red,
+                          fontSize: 14,
+                          fontFamily: "JosefinSans-Regular",
+                          paddingLeft: 5,
+                          marginLeft: 5,
+                        }}
+                      >
+                        {errors?.sameTypeTrees}
+                      </Text>
+                    </Box>
+                  )}
+
+                  <Box w="100%" mb="2">
+                    <Stack direction="row" space={2}>
+                      <Box w="65%">
+                        <Text
+                          style={{
+                            color: COLORS.main,
+                            fontSize: 16,
+                            fontFamily: "JosefinSans-Bold",
+                          }}
+                        >
+                          Tipos de plantas
+                        </Text>
+                      </Box>
+                      <Box w="35%">
+                        <Text
+                          style={{
+                            color: COLORS.main,
+                            fontSize: 16,
+                            fontFamily: "JosefinSans-Bold",
+                          }}
+                        >
+                          Cajueiros
+                        </Text>
+                      </Box>
+                    </Stack>
+                  </Box>
+
+                  {sameTypeTreesList?.map((sameTypeTree, index) => (
+                    <Box w="100%" key={index} mb="1">
+                      <Stack
+                        direction="row"
+                        w="100%"
+                        space={2}
+                      // mt="1"
+                      >
+                        <Box
+                          w="65%"
+                          style={{
+                            justifyContent: "center",
+                          }}
+                        >
+                          <Text
+                            style={{
+                              fontSize: 16,
+                              fontFamily: "JosefinSans-Regular",
+                              color: COLORS.grey,
                             }}
                           >
                             <Icon
-                              name="arrow-downward"
-                              size={35}
-                              color={COLORS.ghostwhite}
-                            />
-                          </TouchableOpacity>
-                        </Box>
-                        <Box w="15%"></Box>
-                      </Box>
-                    )}
-                  </>
-                )}
-
-                {plantTypes.length > 0 && sameTypeTreesList.length > 0 && (
-                  <Box w="100%" my="5">
-                    {errors?.sameTypeTrees && (
-                      <Box
-                        style={{
-                          flexDirection: "row",
-                          paddingHorizontal: 10,
-                        }}
-                      >
-                        <Icon name="error-outline" size={26} color="red" />
-                        <Text
-                          style={{
-                            color: COLORS.red,
-                            fontSize: 14,
-                            fontFamily: "JosefinSans-Regular",
-                            paddingLeft: 5,
-                            marginLeft: 5,
-                          }}
-                        >
-                          {errors?.sameTypeTrees}
-                        </Text>
-                      </Box>
-                    )}
-
-                    <Box w="100%" mb="2">
-                      <Stack direction="row" space={2}>
-                        <Box w="65%">
-                          <Text
-                            style={{
-                              color: COLORS.main,
-                              fontSize: 16,
-                              fontFamily: "JosefinSans-Bold",
-                            }}
-                          >
-                            Tipos de plantas
+                              name="arrow-forward"
+                              color={COLORS.grey}
+                              size={10}
+                            />{" "}
+                            {sameTypeTree?.treeType}
                           </Text>
                         </Box>
                         <Box w="35%">
-                          <Text
-                            style={{
-                              color: COLORS.main,
-                              fontSize: 16,
-                              fontFamily: "JosefinSans-Bold",
+                          <CustomInput
+                            width="90%"
+                            textAlign="center"
+                            keyboardType="numeric"
+                            placeholder="Cajueiros"
+                            value={sameTypeTree?.trees}
+                            onChangeText={(newTrees) => {
+                              setErrors((prev) => ({
+                                ...prev,
+                                sameTypeTrees: "",
+                              }));
+                              setSameTypeTreesList(
+                                sameTypeTreesList.map((object) => {
+                                  if (
+                                    object?.treeType === sameTypeTree?.treeType
+                                  ) {
+                                    object.trees = newTrees;
+                                  }
+                                  return object;
+                                }),
+                              );
                             }}
-                          >
-                            Cajueiros
-                          </Text>
+                          />
                         </Box>
                       </Stack>
                     </Box>
+                  ))}
+                </Box>
+              )}
+              <Center
+                style={{
+                  width: "100%",
+                }}
+                py="3"
+              >
+                <PrimaryButton
+                  onPress={() => {
+                    // validate data before you update flags
+                    let blockData = {
+                      plantingYear,
+                      usedArea,
+                      densityWidth,
+                      densityLength,
+                      blockTrees,
+                      plantTypes,
+                      clones,
+                      isDensityModeIrregular,
+                      isDensityModeRegular,
+                      sameTypeTreesList,
+                    };
+                    // if any required data is not validated
+                    // a alert message is sent to the user
+                    if (!validateBlockData(blockData, errors, setErrors)) {
+                      setAlert(true);
+                      // setValidated(true);
+                      setTitleAlert(errorMessages.farmlandError.title);
+                      setMessageAlert(errorMessages.farmlandError.message);
+                      setShowCancelButton(
+                        errorMessages.farmlandError.showCancelButton,
+                      );
+                      setShowConfirmButton(
+                        errorMessages.farmlandError.showConfirmButton,
+                      );
+                      setCancelText(errorMessages.farmlandError.cancelText);
+                      setConfirmText(errorMessages.farmlandError.confirmText);
 
-                    {sameTypeTreesList?.map((sameTypeTree, index) => (
-                      <Box w="100%" key={index} mb="1">
-                        <Stack
-                          direction="row"
-                          w="100%"
-                          space={2}
-                        // mt="1"
-                        >
-                          <Box
-                            w="65%"
-                            style={{
-                              justifyContent: "center",
-                            }}
-                          >
-                            <Text
-                              style={{
-                                fontSize: 16,
-                                fontFamily: "JosefinSans-Regular",
-                                color: COLORS.grey,
-                              }}
-                            >
-                              <Icon
-                                name="arrow-forward"
-                                color={COLORS.grey}
-                                size={10}
-                              />{" "}
-                              {sameTypeTree?.treeType}
-                            </Text>
-                          </Box>
-                          <Box w="35%">
-                            <CustomInput
-                              width="90%"
-                              textAlign="center"
-                              keyboardType="numeric"
-                              placeholder="Cajueiros"
-                              value={sameTypeTree?.trees}
-                              onChangeText={(newTrees) => {
-                                setErrors((prev) => ({
-                                  ...prev,
-                                  sameTypeTrees: "",
-                                }));
-                                setSameTypeTreesList(
-                                  sameTypeTreesList.map((object) => {
-                                    if (
-                                      object?.treeType === sameTypeTree?.treeType
-                                    ) {
-                                      object.trees = newTrees;
-                                    }
-                                    return object;
-                                  }),
-                                );
-                              }}
-                            />
-                          </Box>
-                        </Stack>
-                      </Box>
-                    ))}
-                  </Box>
-                )}
-                <View
-                  style={{
-                    width: "100%",
+                      return;
+                    }
+                    // created the validated data object to be passed to the FarmlandModal component
+                    // let retrievedBlockData = validateBlockData(blockData, errors, setErrors);
+
+                    setTreesFlag((prev) => prev + parseInt(blockTrees));
+                    setAreaFlag((prev) => prev + parseFloat(usedArea));
+
+                    setAddBlockIsOn(true);
+
+                    setAreaRedFlag(false);
+                    setTreeRedFlag(false);
                   }}
-                >
-                  <Button
-                    title="Salvar Parcela"
-                    titleStyle={{
-                      color: COLORS.ghostwhite,
-                      fontFamily: "JosefinSans-Bold",
-                    }}
-                    iconPosition="right"
-                    containerStyle={{
-                      backgroundColor: COLORS.main,
-                      borderRadius: 10,
-                      width: "100%",
-                    }}
-                    type="outline"
-                    onPress={() => {
-                      // validate data before you update flags
-                      let blockData = {
-                        plantingYear,
-                        usedArea,
-                        densityWidth,
-                        densityLength,
-                        blockTrees,
-                        plantTypes,
-                        clones,
-                        isDensityModeIrregular,
-                        isDensityModeRegular,
-                        sameTypeTreesList,
-                      };
-                      // if any required data is not validated
-                      // a alert message is sent to the user
-                      if (!validateBlockData(blockData, errors, setErrors)) {
-                        setAlert(true);
-                        // setValidated(true);
-                        setTitleAlert(errorMessages.farmlandError.title);
-                        setMessageAlert(errorMessages.farmlandError.message);
-                        setShowCancelButton(
-                          errorMessages.farmlandError.showCancelButton,
-                        );
-                        setShowConfirmButton(
-                          errorMessages.farmlandError.showConfirmButton,
-                        );
-                        setCancelText(errorMessages.farmlandError.cancelText);
-                        setConfirmText(errorMessages.farmlandError.confirmText);
-
-                        return;
-                      }
-                      // created the validated data object to be passed to the FarmlandModal component
-                      // let retrievedBlockData = validateBlockData(blockData, errors, setErrors);
-
-                      setTreesFlag((prev) => prev + parseInt(blockTrees));
-                      setAreaFlag((prev) => prev + parseFloat(usedArea));
-
-                      setAddBlockIsOn(true);
-
-                      setAreaRedFlag(false);
-                      setTreeRedFlag(false);
-                    }}
-                  />
-                </View>
-              </View>
-            </Animated.ScrollView>
+                  title="Salvar parcela"
+                />
+              </Center>
+            </View>
+          </Animated.ScrollView>
         </Animated.View>
       </SafeAreaView>
     </Modal>
