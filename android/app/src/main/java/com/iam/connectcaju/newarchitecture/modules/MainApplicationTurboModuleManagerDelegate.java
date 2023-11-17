@@ -1,4 +1,4 @@
-package com.farmersapp.newarchitecture.modules;
+package com.iam.connectcaju.newarchitecture.modules;
 
 import com.facebook.jni.HybridData;
 import com.facebook.react.ReactPackage;

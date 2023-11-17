@@ -1,4 +1,4 @@
-package com.farmersapp.newarchitecture;
+package com.iam.connectcaju.newarchitecture;
 
 import android.app.Application;
 import androidx.annotation.NonNull;
@@ -19,9 +19,9 @@ import com.facebook.react.fabric.CoreComponentsRegistry;
 import com.facebook.react.fabric.FabricJSIModuleProvider;
 import com.facebook.react.fabric.ReactNativeConfig;
 import com.facebook.react.uimanager.ViewManagerRegistry;
-import com.farmersapp.BuildConfig;
-import com.farmersapp.newarchitecture.components.MainComponentsRegistry;
-import com.farmersapp.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
+import com.iam.connectcaju.BuildConfig;
+import com.iam.connectcaju.newarchitecture.components.MainComponentsRegistry;
+import com.iam.connectcaju.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
 import java.util.ArrayList;
 import java.util.List;
 

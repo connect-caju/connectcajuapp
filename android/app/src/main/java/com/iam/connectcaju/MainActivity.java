@@ -1,4 +1,4 @@
-package com.farmersapp;
+package com.iam.connectcaju;
 
 import android.os.Bundle;
 import com.facebook.react.ReactActivity;

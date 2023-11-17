@@ -1,4 +1,4 @@
-package com.farmersapp.newarchitecture.components;
+package com.iam.connectcaju.newarchitecture.components;
 
 import com.facebook.jni.HybridData;
 import com.facebook.proguard.annotations.DoNotStrip;
