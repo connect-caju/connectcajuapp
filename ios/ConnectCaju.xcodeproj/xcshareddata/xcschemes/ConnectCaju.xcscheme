@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "farmersapp.app"
-               BlueprintName = "farmersapp"
-               ReferencedContainer = "container:farmersapp.xcodeproj">
+               BuildableName = "ConnectCaju.app"
+               BlueprintName = "ConnectCaju"
+               ReferencedContainer = "container:ConnectCaju.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "farmersappTests.xctest"
-               BlueprintName = "farmersappTests"
-               ReferencedContainer = "container:farmersapp.xcodeproj">
+               BuildableName = "ConnectCajuTests.xctest"
+               BlueprintName = "ConnectCajuTests"
+               ReferencedContainer = "container:ConnectCaju.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -55,9 +55,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "farmersapp.app"
-            BlueprintName = "farmersapp"
-            ReferencedContainer = "container:farmersapp.xcodeproj">
+            BuildableName = "ConnectCaju.app"
+            BlueprintName = "ConnectCaju"
+            ReferencedContainer = "container:ConnectCaju.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -72,9 +72,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "farmersapp.app"
-            BlueprintName = "farmersapp"
-            ReferencedContainer = "container:farmersapp.xcodeproj">
+            BuildableName = "ConnectCaju.app"
+            BlueprintName = "ConnectCaju"
+            ReferencedContainer = "container:ConnectCaju.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
