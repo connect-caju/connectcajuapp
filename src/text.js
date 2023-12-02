@@ -1,5 +1,5 @@
-const byDistrict = "byDistrict"
-const byUserId = "byUserId"
+const byDistrict = "byDistrict";
+const byUserId = "byUserId";
 
 export default function Component({ navigation }) {
   // some code here
@@ -7,25 +7,25 @@ export default function Component({ navigation }) {
   useEffect(() => {
     if (switched) {
       realm.subscriptions.update((mutableSubs) => {
-        mutableSubs.removeByName(byUserId)
+        mutableSubs.removeByName(byUserId);
         mutableSubs.add(
           realm
             .objects("Farmer")
             .filtered(`userDistrict == "${user?.customData?.userDistrict}"`),
           { name: byDistrict },
-        )
-      })
+        );
+      });
     } else {
       realm.subscriptions.update((mutableSubs) => {
-        mutableSubs.removeByName(byDistrict)
+        mutableSubs.removeByName(byDistrict);
         mutableSubs.add(
           realm
             .objects("Farmer")
             .filtered(`userId == "${user?.customData?.userId}"`),
           { name: byUserId },
-        )
-      })
+        );
+      });
     }
-  }, [switched, realm])
+  }, [switched, realm]);
   // some code there
 }

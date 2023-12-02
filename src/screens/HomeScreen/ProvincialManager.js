@@ -28,98 +28,38 @@ const ProvincialManager = ({ tpFarmers, tpFarmlands, provincialUserStats, pFarml
 
     return (
         <ScrollView
-            style={{
-                flex: 1,
-                paddingVertical: 20,
-                paddingHorizontal: 10,
-                height: "100%"
-            }}
+            className="flex-1 h-full py-10 px-5"
         >
             <View
-                style={{
-                    borderRadius: 100,
-                    backgroundColor: COLORS.lightgrey,
-                    width: 150,
-                    height: 150,
-                    alignSelf: "center",
-                    justifyContent: "center",
-                    alignItems: "center",
-                }}
+                className="rounded-full border-2 border-slate-400 w-fit h-fit p-10 self-center items-center justify-center"
             >
                 <View
-                    style={{
-                        width: 80,
-                        height: 50,
-                        alignSelf: "center",
-                        borderWidth: 1,
-                        borderColor: COLORS.lightestdanger,
-                        justifyContent: "center",
-                        alignItems: "center",
-                        backgroundColor: COLORS.lightestdanger,
-                        borderTopLeftRadius: 6,
-                        borderTopRightRadius: 6,
-
-                    }}
+                    className="w-20 h-12 justify-end items-center bg-slate-400 rounded-t-lg"
                 >
                     <View
-                        style={{
-                            position: "absolute",
-                            top: -30,
-                            borderRadius: 50,
-                            padding: 6,
-                            elevation: 3,
-                            borderColor: COLORS.lightgrey,
-                            backgroundColor: COLORS.lightdanger,
-
-                        }}
+                        className="absolute -top-9 rounded-full p-2 bg-slate-400 border-white border-2"
                     >
                         <FontAwesomeIcon icon={faUserGroup} color={COLORS.white} size={30} />
                     </View>
 
                     <Text
-                        style={{
-                            color: COLORS.white,
-                            fontSize: 26,
-                            fontFamily: "JosefinSans-Bold",
-                        }}
+                        className="text-white text-2xl py-1 font-normal"
                     >{provincialUserStats?.length}</Text>
 
                 </View>
                 <View
-                    style={{
-                        width: 80,
-                        height: 30,
-                        alignSelf: "center",
-                        borderWidth: 1,
-                        borderColor: COLORS.lightdanger,
-                        justifyContent: "center",
-                        alignItems: "center",
-                        backgroundColor: COLORS.lightdanger,
-                    }}
+                    className="w-20 h-7 justify-center items-center bg-slate-500"
                 >
                     <Text
-                        style={{
-                            color: COLORS.white,
-                            fontSize: 16,
-                            fontFamily: "JosefinSans-Bold",
-                        }}
+                        className="text-white text-base font-semibold"
                     >Usuários</Text>
                 </View>
             </View>
 
-            <View
-                style={{
-                    paddingTop: 20,
-                }}
-            >
-                <Text
-                    style={{
-                        color: COLORS.grey,
-                        fontSize: 16,
-                        fontFamily: "JosefinSans-Bold",
-                    }}
-                >Realização</Text>
-            </View>
+            <Text
+                className="font-semibold text-slate-400 text-lg"
+            >Realização</Text>
+
             <View
                 style={{
                     justifyContent: "space-around",
@@ -128,7 +68,7 @@ const ProvincialManager = ({ tpFarmers, tpFarmlands, provincialUserStats, pFarml
                     paddingVertical: 10,
                 }}
             >
-                <LinearGradient colors={["#009900", "#001200"]} style={{
+                <LinearGradient colors={["#009900", "#3ABBDF"]} style={{
                     flex: 1,
                     paddingLeft: 15,
                     paddingRight: 15,
@@ -138,19 +78,10 @@ const ProvincialManager = ({ tpFarmers, tpFarmlands, provincialUserStats, pFarml
                     // marginHorizontal: 5,
                 }}>
                     <Text
-                        style={{
-                            textAlign: "center",
-                            color: COLORS.white,
-                            fontSize: 16,
-                            fontFamily: "JosefinSans-Italic",
-                        }}>Produtores</Text>
+                        className="font-normal text-lg text-white text-center"
+                    >Produtores</Text>
                     <Text
-                        style={{
-                            textAlign: "center",
-                            color: COLORS.white,
-                            fontSize: 20,
-                            fontFamily: "JosefinSans-Bold",
-                        }}
+                        className="font-normal text-xl text-white text-center"
                     >{pFarmersPercentage}</Text>
                 </LinearGradient>
                 <View
@@ -159,50 +90,26 @@ const ProvincialManager = ({ tpFarmers, tpFarmlands, provincialUserStats, pFarml
                     }}
                 />
 
-                <LinearGradient colors={["#001200", "#00aa00"]} style={{
+                <LinearGradient colors={["#57A1BE", "#00aa00"]} style={{
                     flex: 1,
                     paddingLeft: 15,
                     paddingRight: 15,
                     borderRadius: 5,
                     minHeight: 60,
                     width: width / 2,
-                    // marginHorizontal: 5,
                 }}>
                     <Text
-                        style={{
-                            textAlign: "center",
-                            color: COLORS.white,
-                            fontSize: 16,
-                            fontFamily: "JosefinSans-Italic",
-                        }}>Pomares</Text>
+                        className="font-normal text-lg text-white text-center"
+                    >Pomares</Text>
                     <Text
-                        style={{
-                            textAlign: "center",
-                            color: COLORS.white,
-                            fontSize: 20,
-                            fontFamily: "JosefinSans-Bold",
-                        }}
+                        className="font-normal text-xl text-white text-center"
                     >{pFarmlandsPercentage}</Text>
                 </LinearGradient>
             </View>
 
-
-
-
-
-            <View
-                style={{
-                    paddingTop: 20,
-                }}
-            >
-                <Text
-                    style={{
-                        color: COLORS.grey,
-                        fontSize: 16,
-                        fontFamily: "JosefinSans-Bold",
-                    }}
-                >Metas</Text>
-            </View>
+            <Text
+                className="font-semibold text-slate-400 text-lg"
+            >Metas</Text>
             <View
                 style={{
                     justifyContent: "space-around",
@@ -211,7 +118,7 @@ const ProvincialManager = ({ tpFarmers, tpFarmlands, provincialUserStats, pFarml
                     paddingVertical: 10,
                 }}
             >
-                <LinearGradient colors={["#009900", "#001200"]} style={{
+                <LinearGradient colors={["#009900", "#3ABBDF"]} style={{
                     flex: 1,
                     paddingLeft: 15,
                     paddingRight: 15,
@@ -221,19 +128,10 @@ const ProvincialManager = ({ tpFarmers, tpFarmlands, provincialUserStats, pFarml
                     // marginHorizontal: 5,
                 }}>
                     <Text
-                        style={{
-                            textAlign: "center",
-                            color: COLORS.white,
-                            fontSize: 16,
-                            fontFamily: "JosefinSans-Italic",
-                        }}>Produtores</Text>
+                        className="font-normal text-lg text-white text-center"
+                    >Produtores</Text>
                     <Text
-                        style={{
-                            textAlign: "center",
-                            color: COLORS.white,
-                            fontSize: 20,
-                            fontFamily: "JosefinSans-Bold",
-                        }}
+                        className="font-normal text-xl text-white text-center"
                     >{tpFarmers}</Text>
                 </LinearGradient>
                 <View
@@ -242,7 +140,7 @@ const ProvincialManager = ({ tpFarmers, tpFarmlands, provincialUserStats, pFarml
                     }}
                 />
 
-                <LinearGradient colors={["#001200", "#00aa00"]} style={{
+                <LinearGradient colors={["#57A1BE", "#00aa00"]} style={{
                     flex: 1,
                     paddingLeft: 15,
                     paddingRight: 15,
@@ -252,19 +150,10 @@ const ProvincialManager = ({ tpFarmers, tpFarmlands, provincialUserStats, pFarml
                     // marginHorizontal: 5,
                 }}>
                     <Text
-                        style={{
-                            textAlign: "center",
-                            color: COLORS.white,
-                            fontSize: 16,
-                            fontFamily: "JosefinSans-Italic",
-                        }}>Pomares</Text>
+                        className="font-normal text-lg text-white text-center"
+                    >Pomares</Text>
                     <Text
-                        style={{
-                            textAlign: "center",
-                            color: COLORS.white,
-                            fontSize: 20,
-                            fontFamily: "JosefinSans-Bold",
-                        }}
+                        className="font-normal text-xl text-white text-center"
                     >{tpFarmlands}</Text>
                 </LinearGradient>
             </View>

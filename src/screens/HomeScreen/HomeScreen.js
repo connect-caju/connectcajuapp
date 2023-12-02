@@ -8,7 +8,7 @@ import {
   SafeAreaView,
   Image,
   TouchableOpacity,
-  ScrollView,
+  // ScrollView,
 } from "react-native";
 import React, { useCallback, useState, useEffect } from "react";
 import { Box, Stack, Center } from "native-base";
@@ -16,10 +16,10 @@ import { Icon } from "@rneui/themed";
 import { useFocusEffect } from "@react-navigation/native";
 import {
   widthPercentageToDP as wp,
-  heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 
 import { responsiveFontSize } from "react-native-responsive-dimensions";
+// import { t } from "reac"
 
 
 import COLORS from "../../consts/colors";
@@ -34,6 +34,9 @@ import { getPercentage, getPercentage2 } from "../../helpers/getPercentage";
 import { useUser } from "@realm/react";
 import { realmContext } from "../../models/realmContext";
 import ProvincialManager from "./ProvincialManager";
+import { Badge } from "../../components/ui/Badge";
+import UserPerformanceItem from "../../components/UserPerformanceItem/UserPerformanceItem";
+import { backgroundStyle } from "../../styles/globals";
 // import InternetInfo from "../../components/InternetInfo/InternetInfo";
 const { useRealm, useQuery } = realmContext;
 
@@ -316,26 +319,10 @@ export default function HomeScreen({ route, navigation }) {
 
   return (
     <SafeAreaView
-      style={{
-        flex: 1,
-        backgroundColor: "ghostwhite",
-        // alignItems: 'center',
-      }}
+      className={`${backgroundStyle} flex-1`}
     >
       <View
-        style={{
-          width: "100%",
-          borderBottomWidth: 1,
-          borderRightWidth: 1,
-          borderLeftWidth: 1,
-          borderColor: "#EBEBE4",
-          backgroundColor: "#EBEBE4",
-          borderBottomLeftRadius: wp("15%"),
-          borderBottomRightRadius: wp("15%"),
-          // marginBottom: 20,
-
-          shadowColor: COLORS.main,
-        }}
+        className={"w-full bg-[#EBEBE4]"}
       >
         <Box
           style={{
@@ -346,20 +333,14 @@ export default function HomeScreen({ route, navigation }) {
           <Stack
             direction="row"
             w="100%"
-          // py="5"
-          >
+             >
             <Box w="40%" alignItems={"center"}>
               <Image
                 style={{ width: 55, height: 55, borderRadius: 100 }}
                 source={require("../../../assets/images/iamLogo2.png")}
               />
               <Text
-                style={{
-                  textAlign: "center",
-                  color: COLORS.main,
-                  fontSize: responsiveFontSize(2),
-                  fontFamily: "JosefinSans-Bold",
-                }}
+                className="text-center text-green-600 font-bold text-lg"
               >
                 IAM, IP
               </Text>
@@ -370,29 +351,20 @@ export default function HomeScreen({ route, navigation }) {
                 onPress={() => {
                   setIsUserProfileVisible((prev) => !prev);
                 }}
+                className="-mt-1"
               >
                 <Icon
                   name="account-circle"
                   color={COLORS.main}
-                  size={wp("15%")}
+                  size={60}
                 />
                 <Text
-                  style={{
-                    textAlign: "center",
-                    color: COLORS.grey,
-                    fontFamily: "JosefinSans-Bold",
-                    fontSize: responsiveFontSize(2),
-                  }}
+                  className="text-center text-gray-500 font-normal text-lg -mt-1"
                 >
                   {customUserData?.name?.split(" ")[0]}
                 </Text>
               </TouchableOpacity>
             </Box>
-          </Stack>
-
-          <Stack direction="row" w="100%">
-            <Center w="30%"></Center>
-            <Box w="70%"></Box>
           </Stack>
         </Box>
       </View>
@@ -401,14 +373,7 @@ export default function HomeScreen({ route, navigation }) {
       {!isFieldAgent && customUserData?.role === roles.provincialManager && (
         <>
           <Text
-            style={{
-              fontSize: 18,
-              color: COLORS.grey,
-              fontFamily: "Roboto-MediumItalic",
-              textAlign: "center",
-              paddingLeft: 10,
-
-            }}
+            className="text-xl pt-4 text-center text-gray-400"
           >
             {customUserData?.userProvince}
           </Text>
@@ -427,146 +392,78 @@ export default function HomeScreen({ route, navigation }) {
       )}
 
       {isFieldAgent && (
-        <View
-          style={{
-            padding: 10,
-          }}
-        >
+        <>
           <View
-            style={{
-              width: "100%",
-              borderTopLeftRadius: wp("10%"),
-              borderTopRightRadius: wp("10%"),
-              shadowColor: COLORS.main,
-              shadowOffset: {
-                width: 1,
-                height: 1,
-              },
-              shadowOpacity: 1,
-              shadowRadius: 0.65,
-              elevation: 2,
-            }}
+            className="w-full rounded-t-2xl shadow-md bg-white px-2 my-6 mx-2 self-center overflow-y-scroll"
           >
             <Box
-              style={{
-                backgroundColor: COLORS.main,
-                width: "100%",
-                paddingRight: wp("4%"),
-                alignItems: "center",
-                borderTopLeftRadius: wp("5%"),
-                borderTopRightRadius: wp("5%"),
-              }}
+              className="bg-green-600 w-full items-center  rounded-t-2xl"
             >
-              <Box pb="2" alignItems={"center"}>
-                <Text
+              <Text
+                className="text-white text-xl py-4 font-normal"
+              >
+                Desempenho
+              </Text>
+              <View
+                className="w-full flex-row justify-between self-center"
+              >
+                <TouchableOpacity
+                  className="w-1/2 sm:w-1/3 rounded-t-2xl border-t-2 border-r-2 border-l-2 border-white py-2"
+                  onPress={() => {
+                    setIsPerformanceButtonActive((prev) => !prev);
+                  }}
                   style={{
-                    color: "white",
-                    fontSize: responsiveFontSize(2.5),
-                    fontFamily: "JosefinSans-Bold",
-                    textAlign: "center",
+                    backgroundColor: isPerformanceButtonActive
+                      ? COLORS.second
+                      : COLORS.white,
                   }}
                 >
-                  Desempenho
-                </Text>
-              </Box>
-
-              <Stack direction="row" w="90%" space={4}>
-                <Box w="50%" alignItems={"center"} style={{}}>
-                  <TouchableOpacity
-                    onPress={() => {
-                      setIsPerformanceButtonActive((prev) => !prev);
-                    }}
+                  <Text
                     style={{
-                      backgroundColor: isPerformanceButtonActive
-                        ? COLORS.second
-                        : COLORS.ghostwhite,
-                      width: "100%",
-                      borderTopRightRadius: wp("2%"),
-                      borderTopLeftRadius: wp("2%"),
-                      borderTopWidth: 1,
-                      borderLeftWidth: 1,
-                      borderRightWidth: 1,
-                      borderColor: COLORS.ghostwhite,
-                      paddingTop: 5,
-                      position: "relative",
-                      bottom: isPerformanceButtonActive ? -2 : -2,
+                      color: isPerformanceButtonActive
+                        ? COLORS.white
+                        : COLORS.lightdanger,
                     }}
+                    className="text-center font-bold text-sm"
                   >
-                    <Text
-                      style={{
-                        color: isPerformanceButtonActive
-                          ? COLORS.ghostwhite
-                          : COLORS.lightdanger,
-                        fontSize: responsiveFontSize(2),
-                        fontFamily: "JosefinSans-Bold",
-                        paddingBottom: 5,
-                        textAlign: "center",
-                      }}
-                    >
-                      Produtores
-                    </Text>
-                  </TouchableOpacity>
-                </Box>
-                <Box w="50%" alignItems={"center"}>
-                  <TouchableOpacity
-                    onPress={() => {
-                      setIsPerformanceButtonActive((prev) => !prev);
-                    }}
+                    Produtores
+                  </Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  className="w-1/2 sm:w-1/3 rounded-t-2xl border-t-2 border-r-2 border-l-2 border-white py-2"
+                  onPress={() => {
+                    setIsPerformanceButtonActive((prev) => !prev);
+                  }}
+                  style={{
+                    backgroundColor: isPerformanceButtonActive
+                      ? COLORS.white
+                      : COLORS.second,
+                  }}
+                >
+                  <Text
                     style={{
-                      backgroundColor: isPerformanceButtonActive
-                        ? COLORS.ghostwhite
-                        : COLORS.second,
-                      width: "100%",
-                      borderTopRightRadius: wp("2%"),
-                      borderTopLeftRadius: wp("2%"),
-                      borderTopWidth: 1,
-                      borderLeftWidth: 1,
-                      borderRightWidth: 1,
-
-                      borderColor: COLORS.ghostwhite,
-                      paddingTop: 5,
-                      position: "relative",
-                      bottom: isPerformanceButtonActive ? -2 : -2,
+                      color: isPerformanceButtonActive
+                        ? COLORS.danger
+                        : COLORS.white,
                     }}
+                    className="text-center font-bold text-sm"
                   >
-                    <Text
-                      style={{
-                        color: isPerformanceButtonActive
-                          ? COLORS.danger
-                          : COLORS.ghostwhite,
-                        fontSize: responsiveFontSize(2),
-                        fontFamily: "JosefinSans-Bold",
-                        paddingBottom: 5,
-                        textAlign: "center",
-                      }}
-                    >
-                      Pomares
-                    </Text>
-                  </TouchableOpacity>
-                </Box>
-              </Stack>
+                    Pomares
+                  </Text>
+                </TouchableOpacity>
+              </View>
             </Box>
             {!isPerformanceButtonActive && (
               <Stack direction="column" w="100%" pt="4">
                 <Stack direction="row">
                   <Box w="50%">
                     <Text
-                      style={{
-                        textAlign: "center",
-                        color: COLORS.black,
-                        fontSize: responsiveFontSize(1.5),
-                        fontFamily: "JosefinSans-Bold",
-                      }}
+                      className={`font-bold text-sm text-center text-[${COLORS.lightdanger}]`}
                     >
                       Realização
                     </Text>
                     <Text
-                      style={{
-                        textAlign: "center",
-                        color: COLORS.grey,
-                        fontSize: responsiveFontSize(1.5),
-                        fontFamily: "JosefinSans-Bold",
-                      }}
+                      className="font-normal text-xs text-center text-slate-500"
                     >
                       Até {months[new Date().getMonth()]}{" "}
                       {new Date().getFullYear()}
@@ -574,239 +471,40 @@ export default function HomeScreen({ route, navigation }) {
                   </Box>
                   <Box w="50%">
                     <Text
-                      style={{
-                        textAlign: "center",
-                        color: COLORS.black,
-                        fontSize: responsiveFontSize(1.5),
-                        fontFamily: "JosefinSans-Bold",
-                      }}
+                      className={`font-bold text-sm text-center text-[${COLORS.lightdanger}]`}
                     >
                       Meta
                     </Text>
                     <Text
-                      style={{
-                        textAlign: "center",
-                        color: COLORS.grey,
-                        fontSize: responsiveFontSize(1.5),
-                        fontFamily: "JosefinSans-Bold",
-                      }}
+                      className="font-normal text-xs text-center text-slate-500"
                     >
                       Até Dezembro {new Date().getFullYear()}
                     </Text>
                   </Box>
                 </Stack>
                 <CustomDivider />
-                <Text
-                  style={{
-                    textAlign: "center",
-                    color: isPerformanceButtonActive
-                      ? COLORS.ghostwhite
-                      : COLORS.lightdanger,
-                    fontFamily: "JosefinSans-Bold",
-                    fontSize: responsiveFontSize(1.5),
-                    paddingTop: 10,
-                  }}
-                >
-                  Provincial ({customUserData?.userProvince})
-                </Text>
+                <UserPerformanceItem
+                  achieved={rpFarmers}
+                  target={tpFarmers}
+                  bgColor={COLORS.lightdanger}
+                  label={`Provincial (${customUserData?.userProvince})`}
+                />
+                <CustomDivider />
+                <UserPerformanceItem
+                  achieved={rdFarmers}
+                  target={tdFarmers}
+                  bgColor={COLORS.lightdanger}
+                  label={`Distrital (${customUserData?.userDistrict})`}
 
-                <Stack w="100%" direction="row" space={4} py="2">
-                  <Box w="50%" alignItems={"center"}>
-                    <Center w="100%">
-                      <Center
-                        w="50%"
-                        style={{
-                          backgroundColor: isPerformanceButtonActive
-                            ? COLORS.ghostwhite
-                            : COLORS.lightdanger,
-                          borderRadius: 30,
-                          paddingVertical: 5,
-                        }}
-                      >
-                        <Text
-                          style={{
-                            fontFamily: "JosefinSans-Regular",
-                            fontSize: responsiveFontSize(1.5),
-                            color: isPerformanceButtonActive
-                              ? COLORS.lightdanger
-                              : COLORS.ghostwhite,
-                          }}
-                        >
-                          {getPercentage(rpFarmers, tpFarmers)}
-                        </Text>
-                      </Center>
-                    </Center>
-                  </Box>
-
-                  <Box w="50%" alignItems={"center"}>
-                    <Center w="100%">
-                      <Center
-                        w="50%"
-                        style={{
-                          backgroundColor: isPerformanceButtonActive
-                            ? COLORS.ghostwhite
-                            : COLORS.lightdanger,
-                          borderRadius: 30,
-                          paddingVertical: 5,
-                        }}
-                      >
-                        <Text
-                          style={{
-                            fontFamily: "JosefinSans-Regular",
-                            fontSize: responsiveFontSize(1.5),
-                            color: isPerformanceButtonActive
-                              ? COLORS.lightdanger
-                              : COLORS.ghostwhite,
-                          }}
-                        >
-                          {tpFarmers}
-                        </Text>
-                      </Center>
-                    </Center>
-                  </Box>
-                </Stack>
+                />
 
                 <CustomDivider />
-                <Text
-                  style={{
-                    textAlign: "center",
-                    color: isPerformanceButtonActive
-                      ? COLORS.ghostwhite
-                      : COLORS.lightdanger,
-                    fontFamily: "JosefinSans-Bold",
-                    fontSize: responsiveFontSize(1.5),
-                    paddingTop: 10,
-                  }}
-                >
-                  Distrital ({customUserData?.userDistrict})
-                </Text>
-
-                <Stack w="100%" direction="row" space={4} py="2">
-                  <Box w="50%" alignItems={"center"}>
-                    <Center w="100%">
-                      <Center
-                        w="50%"
-                        style={{
-                          backgroundColor: isPerformanceButtonActive
-                            ? COLORS.ghostwhite
-                            : COLORS.lightdanger,
-                          borderRadius: 30,
-                          paddingVertical: 5,
-                        }}
-                      >
-                        <Text
-                          style={{
-                            fontFamily: "JosefinSans-Regular",
-                            fontSize: responsiveFontSize(1.5),
-                            color: isPerformanceButtonActive
-                              ? COLORS.lightdanger
-                              : COLORS.ghostwhite,
-                          }}
-                        >
-                          {getPercentage(rdFarmers, tdFarmers)}
-                        </Text>
-                      </Center>
-                    </Center>
-                  </Box>
-
-                  <Box w="50%" alignItems={"center"}>
-                    <Center w="100%">
-                      <Center
-                        w="50%"
-                        style={{
-                          backgroundColor: isPerformanceButtonActive
-                            ? COLORS.ghostwhite
-                            : COLORS.lightdanger,
-                          borderRadius: 30,
-                          paddingVertical: 5,
-                        }}
-                      >
-                        <Text
-                          style={{
-                            fontFamily: "JosefinSans-Regular",
-                            fontSize: responsiveFontSize(1.5),
-                            color: isPerformanceButtonActive
-                              ? COLORS.lightdanger
-                              : COLORS.ghostwhite,
-                          }}
-                        >
-                          {tdFarmers}
-                        </Text>
-                      </Center>
-                    </Center>
-                  </Box>
-                </Stack>
-
-                <CustomDivider />
-                <Text
-                  style={{
-                    textAlign: "center",
-                    color: isPerformanceButtonActive
-                      ? COLORS.ghostwhite
-                      : COLORS.lightdanger,
-                    fontFamily: "JosefinSans-Bold",
-                    fontSize: responsiveFontSize(1.5),
-                    paddingTop: 10,
-                  }}
-                >
-                  Individual ({customUserData?.name})
-                </Text>
-
-                <Stack w="100%" direction="row" space={4} py="2">
-                  <Box w="50%" alignItems={"center"}>
-                    <Center w="100%">
-                      <Center
-                        w="50%"
-                        style={{
-                          backgroundColor: isPerformanceButtonActive
-                            ? COLORS.ghostwhite
-                            : COLORS.lightdanger,
-                          borderRadius: 30,
-                          paddingVertical: 5,
-                        }}
-                      >
-                        <Text
-                          style={{
-                            fontFamily: "JosefinSans-Regular",
-                            fontSize: responsiveFontSize(1.5),
-                            color: isPerformanceButtonActive
-                              ? COLORS.lightdanger
-                              : COLORS.ghostwhite,
-                          }}
-                        >
-                          {getPercentage(ruFarmers, tuFarmers)}
-                        </Text>
-                      </Center>
-                    </Center>
-                  </Box>
-
-                  <Box w="50%" alignItems={"center"}>
-                    <Center w="100%">
-                      <Center
-                        w="50%"
-                        style={{
-                          backgroundColor: isPerformanceButtonActive
-                            ? COLORS.ghostwhite
-                            : COLORS.lightdanger,
-                          borderRadius: 30,
-                          paddingVertical: 5,
-                        }}
-                      >
-                        <Text
-                          style={{
-                            fontFamily: "JosefinSans-Regular",
-                            fontSize: responsiveFontSize(1.5),
-                            color: isPerformanceButtonActive
-                              ? COLORS.lightdanger
-                              : COLORS.ghostwhite,
-                          }}
-                        >
-                          {tuFarmers}
-                        </Text>
-                      </Center>
-                    </Center>
-                  </Box>
-                </Stack>
+                <UserPerformanceItem
+                  achieved={ruFarmers}
+                  target={tuFarmers}
+                  bgColor={COLORS.lightdanger}
+                  label={`Individual (${customUserData?.name})`}
+                />
               </Stack>
             )}
 
@@ -815,22 +513,13 @@ export default function HomeScreen({ route, navigation }) {
                 <Stack direction="row">
                   <Box w="50%">
                     <Text
-                      style={{
-                        textAlign: "center",
-                        color: COLORS.black,
-                        fontSize: responsiveFontSize(1.5),
-                        fontFamily: "JosefinSans-Bold",
-                      }}
+                      className={`font-bold text-sm text-center text-[${COLORS.danger}]`}
+
                     >
                       Realização
                     </Text>
                     <Text
-                      style={{
-                        textAlign: "center",
-                        color: COLORS.grey,
-                        fontSize: responsiveFontSize(1.5),
-                        fontFamily: "JosefinSans-Bold",
-                      }}
+                      className="font-normal text-xs text-center text-slate-500"
                     >
                       Até {months[new Date().getMonth()]}{" "}
                       {new Date().getFullYear()}
@@ -838,230 +527,48 @@ export default function HomeScreen({ route, navigation }) {
                   </Box>
                   <Box w="50%">
                     <Text
-                      style={{
-                        textAlign: "center",
-                        color: COLORS.black,
-                        fontSize: responsiveFontSize(1.5),
-                        fontFamily: "JosefinSans-Bold",
-                      }}
+                      className={`font-bold text-sm text-center text-[${COLORS.danger}]`}
+
                     >
                       Meta
                     </Text>
                     <Text
-                      style={{
-                        textAlign: "center",
-                        color: COLORS.grey,
-                        fontFamily: "JosefinSans-Bold",
-                        fontSize: responsiveFontSize(1.5),
-                      }}
+                      className="font-normal text-xs text-center text-slate-500"
+
                     >
                       Até Dezembro {new Date().getFullYear()}
                     </Text>
                   </Box>
                 </Stack>
                 <CustomDivider />
-                <Text
-                  style={{
-                    textAlign: "center",
-                    color: isPerformanceButtonActive
-                      ? COLORS.danger
-                      : COLORS.main,
-                    fontFamily: "JosefinSans-Bold",
-                    paddingTop: 10,
-                    fontSize: responsiveFontSize(1.5),
-                  }}
-                >
-                  Provincial ({customUserData?.userProvince})
-                </Text>
-
-                <Stack w="100%" direction="row" space={4} py="2">
-                  <Box w="50%" alignItems={"center"}>
-                    <Center w="100%">
-                      <Center
-                        w="50%"
-                        style={{
-                          backgroundColor: isPerformanceButtonActive
-                            ? COLORS.danger
-                            : COLORS.main,
-                          borderRadius: 30,
-                          paddingVertical: 5,
-                        }}
-                      >
-                        <Text
-                          style={{
-                            fontFamily: "JosefinSans-Regular",
-                            color: COLORS.ghostwhite,
-                            fontSize: responsiveFontSize(1.5),
-                          }}
-                        >
-                          {getPercentage(rpFarmlands, tpFarmlands)}
-                        </Text>
-                      </Center>
-                    </Center>
-                  </Box>
-
-                  <Box w="50%" alignItems={"center"}>
-                    <Center w="100%">
-                      <Center
-                        w="50%"
-                        style={{
-                          backgroundColor: isPerformanceButtonActive
-                            ? COLORS.danger
-                            : COLORS.main,
-                          borderRadius: 30,
-                          paddingVertical: 5,
-                        }}
-                      >
-                        <Text
-                          style={{
-                            fontFamily: "JosefinSans-Regular",
-                            color: COLORS.ghostwhite,
-                            fontSize: responsiveFontSize(1.5),
-                          }}
-                        >
-                          {tpFarmlands}
-                        </Text>
-                      </Center>
-                    </Center>
-                  </Box>
-                </Stack>
+                <UserPerformanceItem
+                  achieved={rpFarmlands}
+                  target={tpFarmlands}
+                  bgColor={COLORS.danger}
+                  label={`Provincial (${customUserData?.userProvince})`}
+                />
 
                 <CustomDivider />
-                <Text
-                  style={{
-                    textAlign: "center",
-                    color: isPerformanceButtonActive
-                      ? COLORS.danger
-                      : COLORS.main,
-                    fontFamily: "JosefinSans-Bold",
-                    paddingTop: 10,
-                    fontSize: responsiveFontSize(1.5),
-                  }}
-                >
-                  Distrital ({customUserData?.userDistrict})
-                </Text>
 
-                <Stack w="100%" direction="row" space={4} py="2">
-                  <Box w="50%" alignItems={"center"}>
-                    <Center w="100%">
-                      <Center
-                        w="50%"
-                        style={{
-                          backgroundColor: isPerformanceButtonActive
-                            ? COLORS.danger
-                            : COLORS.main,
-                          borderRadius: 30,
-                          paddingVertical: 5,
-                        }}
-                      >
-                        <Text
-                          style={{
-                            fontFamily: "JosefinSans-Regular",
-                            color: COLORS.ghostwhite,
-                            fontSize: responsiveFontSize(1.5),
-                          }}
-                        >
-                          {getPercentage(rdFarmlands, tdFarmlands)}
-                        </Text>
-                      </Center>
-                    </Center>
-                  </Box>
-
-                  <Box w="50%" alignItems={"center"}>
-                    <Center w="100%">
-                      <Center
-                        w="50%"
-                        style={{
-                          backgroundColor: isPerformanceButtonActive
-                            ? COLORS.danger
-                            : COLORS.main,
-                          borderRadius: 30,
-                          paddingVertical: 5,
-                        }}
-                      >
-                        <Text
-                          style={{
-                            fontFamily: "JosefinSans-Regular",
-                            color: COLORS.ghostwhite,
-                            fontSize: responsiveFontSize(1.5),
-                          }}
-                        >
-                          {tdFarmlands}
-                        </Text>
-                      </Center>
-                    </Center>
-                  </Box>
-                </Stack>
+                <UserPerformanceItem
+                  achieved={rdFarmlands}
+                  target={tdFarmlands}
+                  bgColor={COLORS.danger}
+                  label={`Distrital (${customUserData?.userDistrict})`}
+                />
 
                 <CustomDivider />
-                <Text
-                  style={{
-                    textAlign: "center",
-                    color: isPerformanceButtonActive
-                      ? COLORS.danger
-                      : COLORS.main,
-                    fontFamily: "JosefinSans-Bold",
-                    paddingTop: 10,
-                    fontSize: responsiveFontSize(1.5),
-                  }}
-                >
-                  Individual ({customUserData?.name})
-                </Text>
+                <UserPerformanceItem
+                  achieved={ruFarmlands}
+                  target={tuFarmlands}
+                  bgColor={COLORS.danger}
+                  label={`Individual (${customUserData?.name})`}
+                />
 
-                <Stack w="100%" direction="row" space={4} py="2">
-                  <Box w="50%" alignItems={"center"}>
-                    <Center w="100%">
-                      <Center
-                        w="50%"
-                        style={{
-                          backgroundColor: isPerformanceButtonActive
-                            ? COLORS.danger
-                            : COLORS.main,
-                          borderRadius: 30,
-                          paddingVertical: 5,
-                        }}
-                      >
-                        <Text
-                          style={{
-                            fontFamily: "JosefinSans-Regular",
-                            color: COLORS.ghostwhite,
-                            fontSize: responsiveFontSize(1.5),
-                          }}
-                        >
-                          {getPercentage(ruFarmlands, tuFarmlands)}
-                        </Text>
-                      </Center>
-                    </Center>
-                  </Box>
-
-                  <Box w="50%" alignItems={"center"}>
-                    <Center w="100%">
-                      <Center
-                        w="50%"
-                        style={{
-                          backgroundColor: isPerformanceButtonActive
-                            ? COLORS.danger
-                            : COLORS.main,
-                          borderRadius: 30,
-                          paddingVertical: 5,
-                        }}
-                      >
-                        <Text
-                          style={{
-                            fontFamily: "JosefinSans-Regular",
-                            color: COLORS.ghostwhite,
-                          }}
-                        >
-                          {tuFarmlands}
-                        </Text>
-                      </Center>
-                    </Center>
-                  </Box>
-                </Stack>
               </Stack>
             )}
           </View>
-        </View>
+        </>
       )}
 
       <UserProfile
@@ -1074,7 +581,6 @@ export default function HomeScreen({ route, navigation }) {
         isGoalUpdateVisible={isGoalUpdateVisible}
         setIsGoalUpdateVisible={setIsGoalUpdateVisible}
       />
-      {/* <InternetInfo isNetInfoVisible={isNetInfoVisible} setIsNetInfoVisible={setIsNetInfoVisible} /> */}
     </SafeAreaView>
   );
 }

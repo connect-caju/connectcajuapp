@@ -2,7 +2,7 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable linebreak-style */
 import {
-  // View,
+  View,
   Text,
   // InteractionManager,
   // SafeAreaView,
@@ -29,6 +29,8 @@ import { errorMessages } from "../../consts/errorMessages";
 // import { useUser, useApp } from "@realm/react";
 import { realmContext } from "../../models/realmContext";
 import AwesomeAlert from "react-native-awesome-alerts";
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import { faHome, faMessage, faPhone } from "@fortawesome/free-solid-svg-icons";
 const { useRealm, useQuery, useObject } = realmContext;
 
 export default function UserProfile({
@@ -107,12 +109,7 @@ export default function UserProfile({
 
   return (
     <Overlay
-      overlayStyle={{
-        width: "100%",
-        height: "100%",
-        backgroundColor: COLORS.lightestgrey,
-        paddingTop: 10,
-      }}
+      overlayStyle={styles.container}
       isVisible={isUserProfileVisible}
       onBackdropPress={toggleOverlay}
     >
@@ -148,7 +145,7 @@ export default function UserProfile({
         <Stack w="100%" direction="row">
           <Box w="10%">
             <Icon
-              name="close"
+              name="arrow-back"
               color={COLORS.grey}
               size={25}
               onPress={() => {
@@ -159,14 +156,14 @@ export default function UserProfile({
         </Stack>
 
         <ScrollView>
-          <Center>
-            <Box
-              w="95%"
+          {/* <Center> */}
+          {/* <Box
+              w="100%"
               style={{
                 marginTop: 5,
               }}
-            >
-              <Box
+            > */}
+          {/* <Box
                 style={{
                   flex: 1,
                   width: "100%",
@@ -177,247 +174,172 @@ export default function UserProfile({
                   borderRadius: 20,
                   backgroundColor: COLORS.white,
                 }}
-              >
-                <TouchableOpacity
-                  disabled={true}
-                  onPress={() => {
-                    setIsAddPhoto(true);
-                    setTitleAlert(errorMessages.addPhoto.title);
-                    setMessageAlert(errorMessages.addPhoto.message);
-                    setShowCancelButton(errorMessages.addPhoto.showCancelButton);
-                    setShowConfirmButtom(
-                      errorMessages.addPhoto.showConfirmButton,
-                    );
-                    setCancelText(errorMessages.addPhoto.cancelText);
-                    setConfirmText(errorMessages.addPhoto.confirmText);
-                    setAlert(true);
-                  }}
-                >
-                  {customUserData?.image && (
-                    <Box>
-                      <Image
-                        source={{ uri: customUserData?.image }}
-                        style={styles.images}
-                      />
-                    </Box>
-                  )}
-
-                  {!customUserData?.image && (
-                    <Box>
-                      <Icon
-                        name="account-circle"
-                        size={200}
-                        color={COLORS.lightgrey}
-                      />
-                    </Box>
-                  )}
-                </TouchableOpacity>
-
-                <Box
-                  style={{
-                    paddingBottom: 20,
-                  }}
-                >
-                  <Text
-                    style={{
-                      textAlign: "center",
-                      fontSize: 20,
-                      fontFamily: "JosefinSans-Bold",
-                      color: COLORS.black,
-                    }}
-                  >
-                    {customUserData?.name}
-                  </Text>
-                  <Text
-                    style={{
-                      textAlign: "center",
-                      fontSize: 14,
-                      fontFamily: "JosefinSans-Regular",
-                      color: COLORS.grey,
-                    }}
-                  >
-                    (
-                    {customUserData?.role?.includes(roles.coopManager)
-                      ? roles.coopManager
-                      : customUserData?.role}
-                    )
-                  </Text>
-                </Box>
-
-                <CustomDivider thickness={2} my={2} bg={COLORS.second} />
-
-                <Box
-                  style={{
-                    paddingVertical: 20,
-                  }}
-                >
-                  <Stack w="100%" direction="row" my="1">
-                    <Box w="40%">
-                      <Text
-                        style={{
-                          fontSize: 14,
-                          fontFamily: "JosefinSans-Bold",
-                          color: COLORS.grey,
-                        }}
-                      >
-                        Província:
-                      </Text>
-                    </Box>
-                    <Box w="60%">
-                      <Text>{customUserData?.userProvince}</Text>
-                    </Box>
-                  </Stack>
-                  <Stack w="100%" direction="row" my="1">
-                    <Box w="40%">
-                      <Text
-                        style={{
-                          fontSize: 14,
-                          fontFamily: "JosefinSans-Bold",
-                          color: COLORS.grey,
-                        }}
-                      >
-                        Distrito:
-                      </Text>
-                    </Box>
-                    <Box w="60%">
-                      <Text>
-                        {customUserData?.userDistrict?.includes("NA")
-                          ? "Não Aplicável"
-                          : customUserData?.userDistrict}
-                      </Text>
-                    </Box>
-                  </Stack>
-                  <Stack w="100%" direction="row" my="1">
-                    <Box w="40%">
-                      <Text
-                        style={{
-                          fontSize: 14,
-                          fontFamily: "JosefinSans-Bold",
-                          color: COLORS.grey,
-                        }}
-                      >
-                        Telefone:
-                      </Text>
-                    </Box>
-                    <Box w="60%">
-                      <Text>{customUserData?.phone}</Text>
-                    </Box>
-                  </Stack>
-                  <Stack w="100%" direction="row" my="1">
-                    <Box w="40%">
-                      <Text
-                        style={{
-                          fontSize: 14,
-                          fontFamily: "JosefinSans-Bold",
-                          color: COLORS.grey,
-                        }}
-                      >
-                        Email:
-                      </Text>
-                    </Box>
-                    <Box w="60%">
-                      <Text>{customUserData?.email}</Text>
-                    </Box>
-                  </Stack>
-                </Box>
-
-                <CustomDivider thickness={2} my={2} bg={COLORS.second} />
-
-                <Box
-                  style={{
-                    marginTop: 20,
-                  }}
-                >
-                  {(customUserData?.role.includes(roles.provincialManager) ||
-                    customUserData?.email.includes("connectcaju2023")) && (
-                      <TouchableOpacity
-                        onPress={() => {
-                          setIsGoalUpdateVisible(true);
-                        }}
-                      >
-                        <Stack
-                          w="100%"
-                          direction="row"
-                          space={5}
-                          style={{
-                            borderColor: COLORS.grey,
-                            paddingVertical: 5,
-                            borderRadius: 10,
-                          }}
-                        >
-                          <Icon name="update" size={25} color={COLORS.grey} />
-                          <Text
-                            style={{
-                              color: COLORS.grey,
-                              fontSize: 16,
-                              fontFamily: "JosefinSans-Regular",
-                            }}
-                          >
-                            Actualizar metas
-                          </Text>
-                        </Stack>
-                      </TouchableOpacity>
-                    )}
-
-                  <TouchableOpacity disabled style={{}} onPress={() => { }}>
-                    <Stack
-                      w="100%"
-                      direction="row"
-                      space={5}
-                      style={{
-                        borderColor: COLORS.grey,
-                        paddingVertical: 5,
-                        borderRadius: 10,
-                      }}
-                    >
-                      <Icon
-                        name="integration-instructions"
-                        size={25}
-                        color={COLORS.grey}
-                      />
-                      <Text
-                        style={{
-                          color: COLORS.grey,
-                          fontSize: 16,
-                          fontFamily: "JosefinSans-Regular",
-                        }}
-                      >
-                        Manual de usuários
-                      </Text>
-                    </Stack>
-                  </TouchableOpacity>
-
-                  <TouchableOpacity
-                    onPress={() => {
-                      user?.logOut();
-                    }}
-                  >
-                    <Stack
-                      w="100%"
-                      direction="row"
-                      space={5}
-                      style={{
-                        // borderColor: COLORS.grey,
-                        paddingVertical: 5,
-                        borderRadius: 10,
-                      }}
-                    >
-                      <Icon name="logout" size={25} color={COLORS.danger} />
-                      <Text
-                        style={{
-                          color: COLORS.danger,
-                          fontSize: 16,
-                          fontFamily: "JosefinSans-Regular",
-                        }}
-                      >
-                        Terminar sessão
-                      </Text>
-                    </Stack>
-                  </TouchableOpacity>
-                </Box>
+              > */}
+          <TouchableOpacity
+            disabled={true}
+            onPress={() => {
+              setIsAddPhoto(true);
+              setTitleAlert(errorMessages.addPhoto.title);
+              setMessageAlert(errorMessages.addPhoto.message);
+              setShowCancelButton(errorMessages.addPhoto.showCancelButton);
+              setShowConfirmButtom(
+                errorMessages.addPhoto.showConfirmButton,
+              );
+              setCancelText(errorMessages.addPhoto.cancelText);
+              setConfirmText(errorMessages.addPhoto.confirmText);
+              setAlert(true);
+            }}
+          >
+            {customUserData?.image && (
+              <Box>
+                <Image
+                  source={{ uri: customUserData?.image }}
+                  style={styles.images}
+                />
               </Box>
-            </Box>
-          </Center>
+            )}
+
+            {!customUserData?.image && (
+              <Box>
+                <Icon
+                  name="account-circle"
+                  size={200}
+                  color={COLORS.lightgrey}
+                />
+              </Box>
+            )}
+          </TouchableOpacity>
+
+          <Box
+            style={{
+              paddingBottom: 20,
+            }}
+          >
+            <Text
+              className="text-xl font-semibold text-black text-center"
+            >
+              {customUserData?.name}
+            </Text>
+            <Text
+              className="text-md font-normal text-center text-gray-400"
+            >
+              (
+              {customUserData?.role?.includes(roles.coopManager)
+                ? roles.coopManager
+                : customUserData?.role}
+              )
+            </Text>
+          </Box>
+
+          <CustomDivider thickness={2} my={2} bg={COLORS.second} />
+
+          <Box
+            className="mx-2 py-4"
+          >
+            <View
+              className="flex flex-row justify-between my-1"
+            >
+              <Icon
+                name="home"
+                size={25}
+                color={COLORS.grey}
+              />
+
+              <Text
+                className="text-md font-normal text-gray-400"
+              >{customUserData?.userProvince}
+                {customUserData?.userDistrict?.includes("NA")
+                  ? ""
+                  : `(${customUserData?.userDistrict})`}
+              </Text>
+            </View>
+            <View
+              className="flex flex-row justify-between my-1"
+            >
+              <Icon
+                name="phone"
+                size={25}
+                color={COLORS.grey}
+              />
+
+              <Text
+                className="text-md font-normal text-gray-400"
+              >{customUserData?.phone}</Text>
+            </View>
+            <View
+              className="flex flex-row justify-between my-1"
+            >
+              <Icon
+                name="email"
+                size={25}
+                color={COLORS.grey}
+              />
+              <Text
+                className="text-md font-normal text-gray-400"
+              >{customUserData?.email}</Text>
+            </View>
+          </Box>
+
+          <CustomDivider thickness={2} my={2} bg={COLORS.second} />
+          <Box
+            // style={{
+            //   marginTop: 20,
+            // }}
+            className="w-full mx-2 my-7 items-center justify-center flex flex-col gap-1"
+          >
+
+            {(customUserData?.role.includes(roles.provincialManager) ||
+              customUserData?.email.includes("connectcaju2023")) && (
+                <TouchableOpacity
+                  onPress={() => {
+                    setIsGoalUpdateVisible(true);
+                  }}
+                  className="rounded-md flex flex-row w-full gap-4"
+                >
+                  <Icon name="update" size={25} color={COLORS.grey} />
+                  <Text
+                    className="text-slate-700 text-md font-normal"
+                  >
+                    Actualizar metas
+                  </Text>
+                </TouchableOpacity>
+              )}
+
+            <TouchableOpacity disabled style={{}} onPress={() => { }}
+              className=" rounded-md flex flex-row w-full gap-4"
+
+            >
+
+              <Icon
+                name="integration-instructions"
+                size={25}
+                color={COLORS.grey}
+              />
+              <Text
+                className="text-slate-700 text-md font-normal"
+              >
+                Manual de usuários
+              </Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              onPress={() => {
+                user?.logOut();
+              }}
+              className=" rounded-md flex flex-row w-full gap-4"
+            >
+
+              <Icon name="logout" size={25} color={COLORS.danger} />
+              <Text
+                className={`text-[${COLORS.danger}] text-md font-normal`}
+              >
+                Terminar sessão
+              </Text>
+            </TouchableOpacity>
+            {/* </Box> */}
+          </Box>
+          {/* </Box> */}
+          {/* </Center> */}
         </ScrollView>
       </Box>
       <PhotoModal

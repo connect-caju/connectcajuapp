@@ -34,10 +34,19 @@ import { toastConfig } from "./config/toastConfig";
 import { syncConfig } from "./syncConfig";
 import { useState } from "react";
 import ClientResetModal from "./components/Modals/ClientResetModal";
+import { setCustomText } from "react-native-global-props";
 
 export default function App() {
   const [isManualResetConfirmed, setIsManualResetConfirmed] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
+
+  const customTextProps = {
+    style: {
+      fontFamily: "Roboto-Regular",
+    },
+  };
+
+  setCustomText(customTextProps);
 
   useEffect(() => {
     SplashScreen.hide(); //hides the splash screen on app load.
