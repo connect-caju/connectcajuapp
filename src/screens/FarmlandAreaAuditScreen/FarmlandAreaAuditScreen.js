@@ -267,7 +267,7 @@ const FarmlandAreaAuditScreen = ({ route, navigation }) => {
         showCancelButton={false}
         showConfirmButton={true}
         confirmText="   OK   "
-        confirmButtonColor="#DD6B55"
+        confirmButtonColor={COLORS.danger}
         onConfirmPressed={() => {
           setFailedGeoLocationRequest(false);
         }}
@@ -285,7 +285,7 @@ const FarmlandAreaAuditScreen = ({ route, navigation }) => {
         confirmText=" Confirmar "
         cancelText=" Rejeitar  "
         confirmButtonColor={COLORS.main}
-        cancelButtonColor="#DD6B55"
+        cancelButtonColor={COLORS.danger}
         onConfirmPressed={() => {
           saveAuditedArea(area); // save the auditedarea
           setIsCalculatedArea(false);
@@ -324,7 +324,7 @@ const FarmlandAreaAuditScreen = ({ route, navigation }) => {
         showConfirmButton={true}
         cancelText="  Sim  "
         confirmText="  Não  "
-        cancelButtonColor="#DD6B55"
+        cancelButtonColor={COLORS.danger}
         confirmButtonColor={COLORS.main}
         onCancelPressed={() => {
           setRejectGeoAlert(false);
@@ -347,14 +347,15 @@ const FarmlandAreaAuditScreen = ({ route, navigation }) => {
       <Box
         style={{
           backgroundColor: COLORS.fourth,
-          paddingVertical: 20,
+          paddingTop: 20,
+          paddingBottom: 10,
         }}
       >
         <Stack
           direction="row"
           w="100%"
           // pt="3"
-          bg="#EBEBE4"
+          bg={COLORS.fourth}
         >
           <Box>
             <Pressable
@@ -381,39 +382,60 @@ const FarmlandAreaAuditScreen = ({ route, navigation }) => {
                 color: COLORS.black,
               }}
             >
-              Geolocalização
+              Pontos Extremos
             </Text>
           </Center>
         </Stack>
-      </Box>
-
-      <Box
-        // bg="#EBEBE4"
-        w="100%"
-        px="3"
-
-      >
-        <Stack
-          direction="row"
-        >
-          <Box
-            w={farmland?.extremeCoordinates.length === 0 ? "0%" : "50%"}
-            alignItems={"flex-end"}
-            style={{
-              flex: 1,
-              justifyContent: "center",
-            }}
-          >
-            {farmland?.extremeCoordinates.length > 0 && (
-              <TouchableOpacity onPress={async () => await getGeolocation()}>
+        <View>
+          {farmland?.extremeCoordinates.length > 0 && (
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-around",
+                marginHorizontal: 10,
+                marginTop: 10,
+              }}
+              >
+              <View
+                style={{
+                  // marginRight: 10,
+                  width: "65%",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <Text
+                  style={{
+                    color: COLORS.grey,
+                    fontFamily: "Roboto-Regular",
+                    fontSize: 14,
+                    textAlign: "center",
+                  }}
+                >
+                  Pontos extremos da área do pomar.
+                </Text>
+              </View>
+              <TouchableOpacity
+                style={{
+                  alignItems: "flex-end",
+                  marginLeft: 10,
+                  width: "35%",
+                }}
+                onPress={async () => await getGeolocation()}
+              >
                 <GeoPin />
               </TouchableOpacity>
-            )}
-          </Box>
-        </Stack>
+            </View>
+          )}
+
+        </View>
       </Box>
+
+
+
+
       {farmland?.extremeCoordinates.length === 0 && (
-        <Center style={{ minHeight: 300 }}>
+        <Center style={{ minHeight: "100%" }}>
           <Box
             style={{
               justifyContent: "center",
@@ -466,43 +488,33 @@ const FarmlandAreaAuditScreen = ({ route, navigation }) => {
           return <CoordinatesItem item={item} farmland={farmland} />;
         }}
       />
-      <Center
-        style={{
-          paddingVertical: 10,
-        }}
-      >
-        {farmland?.extremeCoordinates.length > 2 && (
-          <TouchableOpacity
-            onPress={() => {
-              handleCalculateArea();
-              setIsCalculatedArea(true);
+      {farmland?.extremeCoordinates.length > 2 && (
+        <TouchableOpacity
+          onPress={() => {
+            handleCalculateArea();
+            setIsCalculatedArea(true);
+          }}
+          style={{
+            backgroundColor: COLORS.main,
+            borderRadius: 10,
+            paddingHorizontal: 10,
+            paddingVertical: 10,
+            margin: 10,
+          }}
+        >
+
+          <Text
+            style={{
+              fontSize: 15,
+              fontFamily: "Roboto-Regular",
+              color: COLORS.ghostwhite,
+              textAlign: "center",
             }}
           >
-            <Box
-              style={{
-                borderWidth: 1,
-                borderColor: COLORS.second,
-                backgroundColor: COLORS.second,
-                borderRadius: 30,
-                paddingHorizontal: 20,
-                paddingVertical: 10,
-                justifyContent: "center",
-              }}
-            >
-              <Text
-                style={{
-                  fontSize: 16,
-                  fontFamily: "JosefinSans-Bold",
-                  color: COLORS.ghostwhite,
-                  textAlign: "center",
-                }}
-              >
-                Calcular Área
-              </Text>
-            </Box>
-          </TouchableOpacity>
-        )}
-      </Center>
+            Calcular Área
+          </Text>
+        </TouchableOpacity>
+      )}
       <MapModal
         farmlandId={farmland._id}
         isMapVisible={isMapVisible}

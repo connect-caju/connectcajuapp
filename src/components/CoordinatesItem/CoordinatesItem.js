@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react"
+import React, { useCallback, useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -6,37 +6,37 @@ import {
   ScrollView,
   TouchableOpacity,
   Pressable,
-} from "react-native"
-import { Stack, Box, Center } from "native-base"
-import { Icon } from "@rneui/base"
-import AwesomeAlert from "react-native-awesome-alerts"
+} from "react-native";
+import { Stack, Box, Center } from "native-base";
+import { Icon } from "@rneui/base";
+import AwesomeAlert from "react-native-awesome-alerts";
 
-import CustomDivider from "../Divider/CustomDivider"
+import CustomDivider from "../Divider/CustomDivider";
 
-import { realmContext } from "../../models/realmContext"
-import { updateCoordinates } from "../../helpers/updateCoordinates"
-import COLORS from "../../consts/colors"
-const { useRealm, useObject, useQuery } = realmContext
+import { realmContext } from "../../models/realmContext";
+import { updateCoordinates } from "../../helpers/updateCoordinates";
+import COLORS from "../../consts/colors";
+const { useRealm, useObject, useQuery } = realmContext;
 
-let FLAG = false
+let FLAG = false;
 
 const CoordinatesItem = ({ item, farmland }) => {
-  const realm = useRealm()
+  const realm = useRealm();
 
-  const [deleteAlert, setDeleteAlert] = useState(false)
+  const [deleteAlert, setDeleteAlert] = useState(false);
 
   const onDeletePoint = () => {
     if (item.icon === "delete-forever") {
       realm.write(() => {
-        farmland.extremeCoordinates.pop()
-      })
+        farmland.extremeCoordinates.pop();
+      });
     }
-  }
+  };
 
   if (FLAG) {
-    onDeletePoint()
-    FLAG = false
-    return
+    onDeletePoint();
+    FLAG = false;
+    return;
   }
 
   return (
@@ -71,14 +71,14 @@ const CoordinatesItem = ({ item, farmland }) => {
           showConfirmButton={true}
           cancelText="Não Apagar"
           confirmText="   Apagar   "
-          cancelButtonColor="#005000"
-          confirmButtonColor="#DD6B55"
+          cancelButtonColor={COLORS.main}
+          confirmButtonColor={COLORS.danger}
           onCancelPressed={() => {
-            setDeleteAlert(false)
+            setDeleteAlert(false);
           }}
           onConfirmPressed={() => {
-            setDeleteAlert(false)
-            FLAG = true
+            setDeleteAlert(false);
+            FLAG = true;
           }}
         />
 
@@ -154,7 +154,7 @@ const CoordinatesItem = ({ item, farmland }) => {
                 disabled={item?.icon === "check-circle" ? true : false}
                 onPress={() => {
                   if (item.icon === "delete-forever") {
-                    setDeleteAlert(true)
+                    setDeleteAlert(true);
                   }
                 }}
               >
@@ -169,7 +169,7 @@ const CoordinatesItem = ({ item, farmland }) => {
         </Stack>
       </View>
     </Center>
-  )
-}
+  );
+};
 
-export default CoordinatesItem
+export default CoordinatesItem;

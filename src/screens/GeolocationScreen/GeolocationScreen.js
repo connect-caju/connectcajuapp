@@ -416,15 +416,19 @@ const GeolocationScreen = ({ route, navigation }) => {
         <TouchableOpacity onPress={async () => await getGeolocation()}>
           <GeoPin />
         </TouchableOpacity>
+
         <Text
           style={{
             color: COLORS.grey,
             fontSize: 15,
             fontFamily: "JosefinSans-Regular",
             textAlign: "center",
+            backgroundColor: COLORS.lightestgrey,
+            paddingHorizontal: 20,
+            paddingVertical: 5,
           }}
         >
-          Captura das coordenadas
+          Capturar das coordenadas
         </Text>
       </Center>
 
