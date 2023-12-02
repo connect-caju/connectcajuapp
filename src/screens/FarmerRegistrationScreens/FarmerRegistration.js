@@ -444,8 +444,6 @@ export default function FarmerRegistration({ route, navigation }) {
           />
         )}
 
-        {/* {
-   !loadingActivitiyIndicator && ( */}
         <Box alignItems={"center"}>
           {farmerType === farmerTypes.farmer && (
             <IndividualFarmerForm

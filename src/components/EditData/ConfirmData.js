@@ -283,25 +283,9 @@ const ConfirmData = ({
             borderTopRightRadius: 8,
           }}
         >
-          {/* <View style={{ width: "90%" }}>
-            <Text
-              style={{
-                fontFamily: "JosefinSans-Bold",
-                fontSize: 16,
-                // fontWeigth: 'bold',
-                color: COLORS.ghostwhite,
-                paddingTop: 15,
-                textAlign: "center",
-              }}
-            >
-              {ownerName}
-            </Text>
-          </View> */}
           <View
             style={{
-              // width: "10%",
               alignSelf: "flex-end",
-              // alignItems: "center",
             }}
           >
             <Icon
@@ -874,6 +858,7 @@ const ConfirmData = ({
                         style={{
                           fontFamily: "JosefinSans-Bold",
                           paddingTop: 2,
+                          color: COLORS.grey,
                         }}
                       >
                         Nome
@@ -884,6 +869,7 @@ const ConfirmData = ({
                         style={{
                           fontFamily: "JosefinSans-Regular",
                           paddingTop: 2,
+                          color: COLORS.grey,
                         }}
                       >
                         {oldDataObject?.name ? oldDataObject?.name : "Nenhum"}
@@ -896,6 +882,7 @@ const ConfirmData = ({
                         style={{
                           fontFamily: "JosefinSans-Bold",
                           paddingTop: 2,
+                          color: COLORS.grey,
                         }}
                       >
                         Tipo
@@ -906,6 +893,7 @@ const ConfirmData = ({
                         style={{
                           fontFamily: "JosefinSans-Regular",
                           paddingTop: 2,
+                          color: COLORS.grey,
                         }}
                       >
                         {oldDataObject?.type ? oldDataObject?.type : "Nenhum"}
@@ -918,6 +906,7 @@ const ConfirmData = ({
                         style={{
                           fontFamily: "JosefinSans-Bold",
                           paddingTop: 2,
+                          color: COLORS.grey,
                         }}
                       >
                         Finalidade
@@ -928,6 +917,7 @@ const ConfirmData = ({
                         style={{
                           fontFamily: "JosefinSans-Regular",
                           paddingTop: 2,
+                          color: COLORS.grey,
                         }}
                       >
                         {oldDataObject?.goals?.length > 0
@@ -959,6 +949,7 @@ const ConfirmData = ({
                         style={{
                           fontFamily: "JosefinSans-Bold",
                           paddingTop: 2,
+                          color: COLORS.grey,
                         }}
                       >
                         Nome
@@ -969,6 +960,7 @@ const ConfirmData = ({
                         style={{
                           fontFamily: "JosefinSans-Regular",
                           paddingTop: 2,
+                          color: COLORS.grey,
                         }}
                       >
                         {newDataObject?.name ? newDataObject?.name : "Nenhum"}
@@ -981,6 +973,7 @@ const ConfirmData = ({
                         style={{
                           fontFamily: "JosefinSans-Bold",
                           paddingTop: 2,
+                          color: COLORS.grey,
                         }}
                       >
                         Tipo
@@ -991,6 +984,7 @@ const ConfirmData = ({
                         style={{
                           fontFamily: "JosefinSans-Regular",
                           paddingTop: 2,
+                          color: COLORS.grey,
                         }}
                       >
                         {newDataObject?.type ? newDataObject?.type : "Nenhum"}
@@ -1003,6 +997,7 @@ const ConfirmData = ({
                         style={{
                           fontFamily: "JosefinSans-Bold",
                           paddingTop: 2,
+                          color: COLORS.grey,
                         }}
                       >
                         Finalidade
@@ -1013,6 +1008,7 @@ const ConfirmData = ({
                         style={{
                           fontFamily: "JosefinSans-Regular",
                           paddingTop: 2,
+                          color: COLORS.grey,
                         }}
                       >
                         {newDataObject?.goals?.length > 0
@@ -1050,6 +1046,7 @@ const ConfirmData = ({
                           style={{
                             fontFamily: "JosefinSans-Bold",
                             paddingTop: 2,
+                            color: COLORS.grey,
                           }}
                         >
                           Situação Legal
@@ -1060,6 +1057,7 @@ const ConfirmData = ({
                           style={{
                             fontFamily: "JosefinSans-Regular",
                             paddingTop: 2,
+                            color: COLORS.grey,
                           }}
                         >
                           {oldDataObject?.legalStatus
@@ -1074,6 +1072,7 @@ const ConfirmData = ({
                           style={{
                             fontFamily: "JosefinSans-Bold",
                             paddingTop: 2,
+                            color: COLORS.grey,
                           }}
                         >
                           Ano de Criação
@@ -1084,6 +1083,7 @@ const ConfirmData = ({
                           style={{
                             fontFamily: "JosefinSans-Regular",
                             paddingTop: 2,
+                            color: COLORS.grey,
                           }}
                         >
                           {oldDataObject?.creationYear
@@ -1098,6 +1098,7 @@ const ConfirmData = ({
                           style={{
                             fontFamily: "JosefinSans-Bold",
                             paddingTop: 2,
+                            color: COLORS.grey,
                           }}
                         >
                           Ano de Legalização
@@ -1108,6 +1109,7 @@ const ConfirmData = ({
                           style={{
                             fontFamily: "JosefinSans-Regular",
                             paddingTop: 2,
+                            color: COLORS.grey,
                           }}
                         >
                           {oldDataObject?.affiliationYear
@@ -1123,6 +1125,7 @@ const ConfirmData = ({
                           style={{
                             fontFamily: "JosefinSans-Bold",
                             paddingTop: 2,
+                            color: COLORS.grey,
                           }}
                         >
                           NUIT
@@ -1133,6 +1136,7 @@ const ConfirmData = ({
                           style={{
                             fontFamily: "JosefinSans-Regular",
                             paddingTop: 2,
+                            color: COLORS.grey,
                           }}
                         >
                           {oldDataObject?.nuit ? oldDataObject?.nuit : "Nenhum"}
@@ -1146,6 +1150,7 @@ const ConfirmData = ({
                           style={{
                             fontFamily: "JosefinSans-Bold",
                             paddingTop: 2,
+                            color: COLORS.grey,
                           }}
                         >
                           NUEL
@@ -1156,6 +1161,7 @@ const ConfirmData = ({
                           style={{
                             fontFamily: "JosefinSans-Regular",
                             paddingTop: 2,
+                            color: COLORS.grey,
                           }}
                         >
                           {oldDataObject?.nuel ? oldDataObject?.nuel : "Nenhum"}
@@ -1169,6 +1175,7 @@ const ConfirmData = ({
                           style={{
                             fontFamily: "JosefinSans-Bold",
                             paddingTop: 2,
+                            color: COLORS.grey,
                           }}
                         >
                           Alvará
@@ -1179,6 +1186,7 @@ const ConfirmData = ({
                           style={{
                             fontFamily: "JosefinSans-Regular",
                             paddingTop: 2,
+                            color: COLORS.grey,
                           }}
                         >
                           {oldDataObject?.licence
@@ -1210,6 +1218,7 @@ const ConfirmData = ({
                           style={{
                             fontFamily: "JosefinSans-Bold",
                             paddingTop: 2,
+                            color: COLORS.grey,
                           }}
                         >
                           Situação Legal
@@ -1220,6 +1229,7 @@ const ConfirmData = ({
                           style={{
                             fontFamily: "JosefinSans-Regular",
                             paddingTop: 2,
+                            color: COLORS.grey,
                           }}
                         >
                           {newDataObject?.legalStatus
@@ -1234,6 +1244,7 @@ const ConfirmData = ({
                           style={{
                             fontFamily: "JosefinSans-Bold",
                             paddingTop: 2,
+                            color: COLORS.grey,
                           }}
                         >
                           Ano de Criação
@@ -1244,6 +1255,7 @@ const ConfirmData = ({
                           style={{
                             fontFamily: "JosefinSans-Regular",
                             paddingTop: 2,
+                            color: COLORS.grey,
                           }}
                         >
                           {newDataObject?.creationYear
@@ -1258,6 +1270,7 @@ const ConfirmData = ({
                           style={{
                             fontFamily: "JosefinSans-Bold",
                             paddingTop: 2,
+                            color: COLORS.grey,
                           }}
                         >
                           Ano de Legalização
@@ -1268,6 +1281,7 @@ const ConfirmData = ({
                           style={{
                             fontFamily: "JosefinSans-Regular",
                             paddingTop: 2,
+                            color: COLORS.grey,
                           }}
                         >
                           {newDataObject?.affiliationYear
@@ -1283,6 +1297,7 @@ const ConfirmData = ({
                           style={{
                             fontFamily: "JosefinSans-Bold",
                             paddingTop: 2,
+                            color: COLORS.grey,
                           }}
                         >
                           NUIT
@@ -1293,6 +1308,7 @@ const ConfirmData = ({
                           style={{
                             fontFamily: "JosefinSans-Regular",
                             paddingTop: 2,
+                            color: COLORS.grey,
                           }}
                         >
                           {newDataObject?.nuit ? newDataObject.nuit : "Nenhum"}
@@ -1306,6 +1322,7 @@ const ConfirmData = ({
                           style={{
                             fontFamily: "JosefinSans-Bold",
                             paddingTop: 2,
+                            color: COLORS.grey,
                           }}
                         >
                           NUEL
@@ -1316,6 +1333,7 @@ const ConfirmData = ({
                           style={{
                             fontFamily: "JosefinSans-Regular",
                             paddingTop: 2,
+                            color: COLORS.grey,
                           }}
                         >
                           {newDataObject?.nuel ? newDataObject.nuel : "Nenhum"}
@@ -1329,6 +1347,7 @@ const ConfirmData = ({
                           style={{
                             fontFamily: "JosefinSans-Bold",
                             paddingTop: 2,
+                            color: COLORS.grey,
                           }}
                         >
                           Alvará
@@ -1339,6 +1358,7 @@ const ConfirmData = ({
                           style={{
                             fontFamily: "JosefinSans-Regular",
                             paddingTop: 2,
+                            color: COLORS.grey,
                           }}
                         >
                           {newDataObject?.licence
@@ -1376,6 +1396,7 @@ const ConfirmData = ({
                           style={{
                             fontFamily: "JosefinSans-Bold",
                             paddingTop: 2,
+                            color: COLORS.grey,
                           }}
                         >
                           Modo de Funcionamento
@@ -1386,6 +1407,7 @@ const ConfirmData = ({
                           style={{
                             fontFamily: "JosefinSans-Regular",
                             paddingTop: 2,
+                            color: COLORS.grey,
                           }}
                         >
                           {oldDataObject?.operationalStatus
@@ -1400,6 +1422,7 @@ const ConfirmData = ({
                           style={{
                             fontFamily: "JosefinSans-Bold",
                             paddingTop: 2,
+                            color: COLORS.grey,
                           }}
                         >
                           Total de Membros
@@ -1410,6 +1433,7 @@ const ConfirmData = ({
                           style={{
                             fontFamily: "JosefinSans-Regular",
                             paddingTop: 2,
+                            color: COLORS.grey,
                           }}
                         >
                           {oldDataObject?.total ? oldDataObject?.total : 0}
@@ -1422,6 +1446,7 @@ const ConfirmData = ({
                           style={{
                             fontFamily: "JosefinSans-Bold",
                             paddingTop: 2,
+                            color: COLORS.grey,
                           }}
                         >
                           Total de Mulheres{" "}
@@ -1432,6 +1457,7 @@ const ConfirmData = ({
                           style={{
                             fontFamily: "JosefinSans-Regular",
                             paddingTop: 2,
+                            color: COLORS.grey,
                           }}
                         >
                           {oldDataObject?.women ? oldDataObject?.women : 0}
@@ -1461,6 +1487,7 @@ const ConfirmData = ({
                           style={{
                             fontFamily: "JosefinSans-Bold",
                             paddingTop: 2,
+                            color: COLORS.grey,
                           }}
                         >
                           Modo de Funcionamento
@@ -1471,6 +1498,7 @@ const ConfirmData = ({
                           style={{
                             fontFamily: "JosefinSans-Regular",
                             paddingTop: 2,
+                            color: COLORS.grey,
                           }}
                         >
                           {newDataObject?.operationalStatus
@@ -1485,6 +1513,7 @@ const ConfirmData = ({
                           style={{
                             fontFamily: "JosefinSans-Bold",
                             paddingTop: 2,
+                            color: COLORS.grey,
                           }}
                         >
                           Total de Membros
@@ -1495,6 +1524,7 @@ const ConfirmData = ({
                           style={{
                             fontFamily: "JosefinSans-Regular",
                             paddingTop: 2,
+                            color: COLORS.grey,
                           }}
                         >
                           {newDataObject?.total ? newDataObject?.total : 0}
@@ -1507,6 +1537,7 @@ const ConfirmData = ({
                           style={{
                             fontFamily: "JosefinSans-Bold",
                             paddingTop: 2,
+                            color: COLORS.grey,
                           }}
                         >
                           Total de Mulheres
@@ -1517,6 +1548,7 @@ const ConfirmData = ({
                           style={{
                             fontFamily: "JosefinSans-Regular",
                             paddingTop: 2,
+                            color: COLORS.grey,
                           }}
                         >
                           {newDataObject?.women ? newDataObject?.women : 0}
@@ -1552,6 +1584,7 @@ const ConfirmData = ({
                           style={{
                             fontFamily: "JosefinSans-Bold",
                             paddingTop: 2,
+                            color: COLORS.grey,
                           }}
                         >
                           Nome do Presidente
@@ -1562,6 +1595,7 @@ const ConfirmData = ({
                           style={{
                             fontFamily: "JosefinSans-Regular",
                             paddingTop: 2,
+                            color: COLORS.grey,
                           }}
                         >
                           {oldDataObject?.fullname
@@ -1576,6 +1610,7 @@ const ConfirmData = ({
                           style={{
                             fontFamily: "JosefinSans-Bold",
                             paddingTop: 2,
+                            color: COLORS.grey,
                           }}
                         >
                           Número de telemóvel
@@ -1586,6 +1621,7 @@ const ConfirmData = ({
                           style={{
                             fontFamily: "JosefinSans-Regular",
                             paddingTop: 2,
+                            color: COLORS.grey,
                           }}
                         >
                           {oldDataObject?.phone
@@ -1617,6 +1653,7 @@ const ConfirmData = ({
                           style={{
                             fontFamily: "JosefinSans-Bold",
                             paddingTop: 2,
+                            color: COLORS.grey,
                           }}
                         >
                           Nome do Presidente
@@ -1627,6 +1664,7 @@ const ConfirmData = ({
                           style={{
                             fontFamily: "JosefinSans-Regular",
                             paddingTop: 2,
+                            color: COLORS.grey,
                           }}
                         >
                           {newDataObject?.fullname
@@ -1641,6 +1679,7 @@ const ConfirmData = ({
                           style={{
                             fontFamily: "JosefinSans-Bold",
                             paddingTop: 2,
+                            color: COLORS.grey,
                           }}
                         >
                           Número de telemóvel
@@ -1651,6 +1690,7 @@ const ConfirmData = ({
                           style={{
                             fontFamily: "JosefinSans-Regular",
                             paddingTop: 2,
+                            color: COLORS.grey,
                           }}
                         >
                           {newDataObject?.phone
@@ -1690,6 +1730,7 @@ const ConfirmData = ({
                           style={{
                             fontFamily: "JosefinSans-Bold",
                             paddingTop: 2,
+                            color: COLORS.grey,
                           }}
                         >
                           Nome do Responsável
@@ -1700,6 +1741,7 @@ const ConfirmData = ({
                           style={{
                             fontFamily: "JosefinSans-Regular",
                             paddingTop: 2,
+                            color: COLORS.grey,
                           }}
                         >
                           {oldDataObject?.fullname
@@ -1714,6 +1756,7 @@ const ConfirmData = ({
                           style={{
                             fontFamily: "JosefinSans-Bold",
                             paddingTop: 2,
+                            color: COLORS.grey,
                           }}
                         >
                           Número de telemóvel
@@ -1724,6 +1767,7 @@ const ConfirmData = ({
                           style={{
                             fontFamily: "JosefinSans-Regular",
                             paddingTop: 2,
+                            color: COLORS.grey,
                           }}
                         >
                           {oldDataObject?.phone
@@ -1754,6 +1798,7 @@ const ConfirmData = ({
                           style={{
                             fontFamily: "JosefinSans-Bold",
                             paddingTop: 2,
+                            color: COLORS.grey,
                           }}
                         >
                           Nome do Responsável
@@ -1764,6 +1809,7 @@ const ConfirmData = ({
                           style={{
                             fontFamily: "JosefinSans-Regular",
                             paddingTop: 2,
+                            color: COLORS.grey,
                           }}
                         >
                           {newDataObject?.fullname
@@ -1778,6 +1824,7 @@ const ConfirmData = ({
                           style={{
                             fontFamily: "JosefinSans-Bold",
                             paddingTop: 2,
+                            color: COLORS.grey,
                           }}
                         >
                           Número de telemóvel
@@ -1788,6 +1835,7 @@ const ConfirmData = ({
                           style={{
                             fontFamily: "JosefinSans-Regular",
                             paddingTop: 2,
+                            color: COLORS.grey,
                           }}
                         >
                           {newDataObject?.phone
@@ -1825,6 +1873,7 @@ const ConfirmData = ({
                           style={{
                             fontFamily: "JosefinSans-Bold",
                             paddingTop: 2,
+                            color: COLORS.grey,
                           }}
                         >
                           NUIT da instituição
@@ -1835,6 +1884,7 @@ const ConfirmData = ({
                           style={{
                             fontFamily: "JosefinSans-Regular",
                             paddingTop: 2,
+                            color: COLORS.grey,
                           }}
                         >
                           {oldDataObject?.nuit ? oldDataObject?.nuit : "Nenhum"}
@@ -1847,6 +1897,7 @@ const ConfirmData = ({
                           style={{
                             fontFamily: "JosefinSans-Bold",
                             paddingTop: 2,
+                            color: COLORS.grey,
                           }}
                         >
                           Número do alvará
@@ -1857,6 +1908,7 @@ const ConfirmData = ({
                           style={{
                             fontFamily: "JosefinSans-Regular",
                             paddingTop: 2,
+                            color: COLORS.grey,
                           }}
                         >
                           {oldDataObject?.licence
@@ -1888,6 +1940,7 @@ const ConfirmData = ({
                           style={{
                             fontFamily: "JosefinSans-Bold",
                             paddingTop: 2,
+                            color: COLORS.grey,
                           }}
                         >
                           NUIT da instituição
@@ -1898,6 +1951,7 @@ const ConfirmData = ({
                           style={{
                             fontFamily: "JosefinSans-Regular",
                             paddingTop: 2,
+                            color: COLORS.grey,
                           }}
                         >
                           {newDataObject?.nuit ? newDataObject?.nuit : "Nenhum"}
@@ -1910,6 +1964,7 @@ const ConfirmData = ({
                           style={{
                             fontFamily: "JosefinSans-Bold",
                             paddingTop: 2,
+                            color: COLORS.grey,
                           }}
                         >
                           Número do alvará
@@ -1920,6 +1975,7 @@ const ConfirmData = ({
                           style={{
                             fontFamily: "JosefinSans-Regular",
                             paddingTop: 2,
+                            color: COLORS.grey,
                           }}
                         >
                           {newDataObject?.licence
@@ -1957,6 +2013,7 @@ const ConfirmData = ({
                           style={{
                             fontFamily: "JosefinSans-Bold",
                             paddingTop: 2,
+                            color: COLORS.grey,
                           }}
                         >
                           Tipo do documento
@@ -1967,6 +2024,7 @@ const ConfirmData = ({
                           style={{
                             fontFamily: "JosefinSans-Regular",
                             paddingTop: 2,
+                            color: COLORS.grey,
                           }}
                         >
                           {oldDataObject?.docType
@@ -1981,6 +2039,7 @@ const ConfirmData = ({
                           style={{
                             fontFamily: "JosefinSans-Bold",
                             paddingTop: 2,
+                            color: COLORS.grey,
                           }}
                         >
                           Número do documento
@@ -1991,6 +2050,7 @@ const ConfirmData = ({
                           style={{
                             fontFamily: "JosefinSans-Regular",
                             paddingTop: 2,
+                            color: COLORS.grey,
                           }}
                         >
                           {oldDataObject?.docNumber
@@ -2005,6 +2065,7 @@ const ConfirmData = ({
                           style={{
                             fontFamily: "JosefinSans-Bold",
                             paddingTop: 2,
+                            color: COLORS.grey,
                           }}
                         >
                           NUIT
@@ -2015,6 +2076,7 @@ const ConfirmData = ({
                           style={{
                             fontFamily: "JosefinSans-Regular",
                             paddingTop: 2,
+                            color: COLORS.grey,
                           }}
                         >
                           {oldDataObject?.nuit ? oldDataObject?.nuit : "Nenhum"}
@@ -2044,6 +2106,7 @@ const ConfirmData = ({
                           style={{
                             fontFamily: "JosefinSans-Bold",
                             paddingTop: 2,
+                            color: COLORS.grey,
                           }}
                         >
                           Tipo do documento
@@ -2054,6 +2117,7 @@ const ConfirmData = ({
                           style={{
                             fontFamily: "JosefinSans-Regular",
                             paddingTop: 2,
+                            color: COLORS.grey,
                           }}
                         >
                           {newDataObject?.docType
@@ -2068,6 +2132,7 @@ const ConfirmData = ({
                           style={{
                             fontFamily: "JosefinSans-Bold",
                             paddingTop: 2,
+                            color: COLORS.grey,
                           }}
                         >
                           Número do documento
@@ -2078,6 +2143,7 @@ const ConfirmData = ({
                           style={{
                             fontFamily: "JosefinSans-Regular",
                             paddingTop: 2,
+                            color: COLORS.grey,
                           }}
                         >
                           {newDataObject?.docNumber
@@ -2092,6 +2158,7 @@ const ConfirmData = ({
                           style={{
                             fontFamily: "JosefinSans-Bold",
                             paddingTop: 2,
+                            color: COLORS.grey,
                           }}
                         >
                           NUIT
@@ -2102,6 +2169,7 @@ const ConfirmData = ({
                           style={{
                             fontFamily: "JosefinSans-Regular",
                             paddingTop: 2,
+                            color: COLORS.grey,
                           }}
                         >
                           {newDataObject?.nuit ? newDataObject?.nuit : "Nenhum"}
@@ -2136,6 +2204,7 @@ const ConfirmData = ({
                         style={{
                           fontFamily: "JosefinSans-Bold",
                           paddingTop: 2,
+                          color: COLORS.grey,
                         }}
                       >
                         Telemóvel principal
@@ -2146,6 +2215,7 @@ const ConfirmData = ({
                         style={{
                           fontFamily: "JosefinSans-Regular",
                           paddingTop: 2,
+                          color: COLORS.grey,
                         }}
                       >
                         {oldDataObject?.primaryPhone
@@ -2160,6 +2230,7 @@ const ConfirmData = ({
                         style={{
                           fontFamily: "JosefinSans-Bold",
                           paddingTop: 2,
+                          color: COLORS.grey,
                         }}
                       >
                         Telemóvel alternativo
@@ -2170,6 +2241,7 @@ const ConfirmData = ({
                         style={{
                           fontFamily: "JosefinSans-Regular",
                           paddingTop: 2,
+                          color: COLORS.grey,
                         }}
                       >
                         {oldDataObject?.secondaryPhone
@@ -2201,6 +2273,7 @@ const ConfirmData = ({
                         style={{
                           fontFamily: "JosefinSans-Bold",
                           paddingTop: 2,
+                          color: COLORS.grey,
                         }}
                       >
                         Telemóvel principal
@@ -2211,6 +2284,7 @@ const ConfirmData = ({
                         style={{
                           fontFamily: "JosefinSans-Regular",
                           paddingTop: 2,
+                          color: COLORS.grey,
                         }}
                       >
                         {newDataObject?.primaryPhone
@@ -2225,6 +2299,7 @@ const ConfirmData = ({
                         style={{
                           fontFamily: "JosefinSans-Bold",
                           paddingTop: 2,
+                          color: COLORS.grey,
                         }}
                       >
                         Telemóvel alternativo
@@ -2235,6 +2310,7 @@ const ConfirmData = ({
                         style={{
                           fontFamily: "JosefinSans-Regular",
                           paddingTop: 2,
+                          color: COLORS.grey,
                         }}
                       >
                         {newDataObject?.secondaryPhone
@@ -2271,6 +2347,7 @@ const ConfirmData = ({
                         style={{
                           fontFamily: "JosefinSans-Bold",
                           paddingTop: 2,
+                          color: COLORS.grey,
                         }}
                       >
                         Posto Admin.
@@ -2281,6 +2358,7 @@ const ConfirmData = ({
                         style={{
                           fontFamily: "JosefinSans-Regular",
                           paddingTop: 2,
+                          color: COLORS.grey,
                         }}
                       >
                         {oldDataObject?.adminPost}
@@ -2293,6 +2371,7 @@ const ConfirmData = ({
                         style={{
                           fontFamily: "JosefinSans-Bold",
                           paddingTop: 2,
+                          color: COLORS.grey,
                         }}
                       >
                         Localidade
@@ -2303,6 +2382,7 @@ const ConfirmData = ({
                         style={{
                           fontFamily: "JosefinSans-Regular",
                           paddingTop: 2,
+                          color: COLORS.grey,
                         }}
                       >
                         {oldDataObject?.village}
@@ -2332,6 +2412,7 @@ const ConfirmData = ({
                         style={{
                           fontFamily: "JosefinSans-Bold",
                           paddingTop: 2,
+                          color: COLORS.grey,
                         }}
                       >
                         Posto Admin.
@@ -2342,6 +2423,7 @@ const ConfirmData = ({
                         style={{
                           fontFamily: "JosefinSans-Regular",
                           paddingTop: 2,
+                          color: COLORS.grey,
                         }}
                       >
                         {newDataObject?.adminPost}
@@ -2354,6 +2436,7 @@ const ConfirmData = ({
                         style={{
                           fontFamily: "JosefinSans-Bold",
                           paddingTop: 2,
+                          color: COLORS.grey,
                         }}
                       >
                         Localidade
@@ -2364,6 +2447,7 @@ const ConfirmData = ({
                         style={{
                           fontFamily: "JosefinSans-Regular",
                           paddingTop: 2,
+                          color: COLORS.grey,
                         }}
                       >
                         {newDataObject?.village

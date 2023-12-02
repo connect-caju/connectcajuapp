@@ -1,6 +1,6 @@
 /* eslint-disable linebreak-style */
 /* eslint-disable prettier/prettier */
-import React, { useState } from "react";
+import React, { useState, useTransition } from "react";
 import COLORS from "../../consts/colors";
 import { farmerTypes } from "../../consts/farmerTypes";
 import { View } from "react-native";
@@ -18,13 +18,13 @@ const farmerTypeOptions = [
     focusedOption: 1,
   },
   {
-    farmerDisplayName: "Institucional",
+    farmerDisplayName: "Instituição",
     farmerType: farmerTypes.institution,
     iconName: faInstitution,
     focusedOption: 2,
   },
   {
-    farmerDisplayName: "Agrupado",
+    farmerDisplayName: "Organização",
     farmerType: farmerTypes.group,
     iconName: faPeopleGroup,
     focusedOption: 3,
@@ -33,11 +33,13 @@ const farmerTypeOptions = [
 
 const FarmerTypeRadioButtons = ({ farmerType, setFarmerType }) => {
   const [focusedOption, setFocusedOption] = useState(farmerType);
+  const [isPending, startTransition] = useTransition();
 
   const handleFocusedOption = (option, farmerType) => {
-    setFocusedOption(option);
-    setFarmerType(farmerType);
-
+    startTransition(() => {
+      setFocusedOption(option);
+      setFarmerType(farmerType);
+    });
   };
 
   const keyExtractor = (item, index) => index.toString();
@@ -81,19 +83,15 @@ const FarmerTypeRadioButtons = ({ farmerType, setFarmerType }) => {
               }}
               onPress={() => handleFocusedOption(item.focusedOption, item.farmerType)}
             >
-
-                <FontAwesomeIcon
-                  icon={item.iconName} size={20} color={((focusedOption === item.focusedOption) || (farmerType === item.farmerType))
-                    ? COLORS.ghostwhite
-                    : COLORS.grey} />
-
-                <View style={{
-                  width: 4,
-                }} />
-
+              <FontAwesomeIcon
+                icon={item.iconName} size={20} color={((focusedOption === item.focusedOption) || (farmerType === item.farmerType))
+                  ? COLORS.ghostwhite
+                  : COLORS.grey}
+              />
               <Text
                 style={{
                   fontSize: 14,
+                  marginLeft: 3,
                   color:
                     ((focusedOption === item.focusedOption) || (farmerType === item.farmerType))
                       ? COLORS.ghostwhite
@@ -109,119 +107,7 @@ const FarmerTypeRadioButtons = ({ farmerType, setFarmerType }) => {
         }}
       />
     </View>
-    // <Box my="3" alignItems={"center"}>
-    //   <Radio.Group
-    //     name="myRadioGroup"
-    //     value={farmerType}
-    //     defaultValue={farmerTypes.farmer}
-    //     onChange={(nextValue) => setFarmerType(nextValue)}
-    //   >
-    //     <Stack
-    //       direction={{
-    //         base: "row",
-    //         md: "column",
-    //       }}
-    //       alignItems={{
-    //         base: "center",
-    //         md: "center",
-    //       }}
-    //       space={2}
-    //       w="100%"
-    //     >
-    //       <View
-    //         style={{
-    //           backgroundColor:
-    //             farmerType === farmerTypes.farmer
-    //               ? COLORS.fourth
-    //               : COLORS.ghostwhite,
-    //           borderRadius: 8,
-    //           paddingRight: 2,
-    //           elevation: 3,
-    //           borderWidth: 1,
-    //           borderColor: COLORS.lightgrey,
-    //         }}
-    //       >
-    //         <Radio
-    //           _text={{
-    //             fontFamily: "JosefinSans-Bold",
-    //             color:
-    //               farmerType === farmerTypes.farmer ? COLORS.main : COLORS.grey,
-    //             fontSize: 20,
-    //             letterSpacing: -1.5,
-    //           }}
-    //           value={farmerTypes.farmer}
-    //           my="0"
-    //           colorScheme="emerald"
-    //           size="sm"
-    //         >
-    //           Singular
-    //         </Radio>
-    //       </View>
-    //       <View
-    //         style={{
-    //           backgroundColor:
-    //             farmerType === farmerTypes.institution
-    //               ? COLORS.fourth
-    //               : COLORS.ghostwhite,
-    //           borderRadius: 8,
-    //           paddingRight: 2,
-    //           elevation: 3,
-    //           borderWidth: 1,
-    //           borderColor: COLORS.lightgrey,
-    //         }}
-    //       >
-    //         <Radio
-    //           _text={{
-    //             fontFamily: "JosefinSans-Bold",
-    //             color:
-    //               farmerType === farmerTypes.institution
-    //                 ? COLORS.main
-    //                 : COLORS.grey,
-    //             fontSize: 20,
-    //             letterSpacing: -1.5,
-    //           }}
-    //           value={farmerTypes.institution}
-    //           my="0"
-    //           mx="0"
-    //           colorScheme="emerald"
-    //           size="sm"
-    //         >
-    //           Institucional
-    //         </Radio>
-    //       </View>
-    //       <View
-    //         style={{
-    //           backgroundColor:
-    //             farmerType === farmerTypes.group
-    //               ? COLORS.fourth
-    //               : COLORS.ghostwhite,
-    //           borderRadius: 8,
-    //           paddingRight: 2,
-    //           elevation: 3,
-    //           borderWidth: 1,
-    //           borderColor: COLORS.lightgrey,
-    //         }}
-    //       >
-    //         <Radio
-    //           _text={{
-    //             fontFamily: "JosefinSans-Bold",
-    //             color:
-    //               farmerType === farmerTypes.group ? COLORS.main : COLORS.grey,
-    //             fontSize: 20,
-    //             letterSpacing: -1.5,
-    //           }}
-    //           value={farmerTypes.group}
-    //           my="0"
-    //           mx="0"
-    //           colorScheme="emerald"
-    //           size="sm"
-    //         >
-    //           Agrupado
-    //         </Radio>
-    //       </View>
-    //     </Stack>
-    //   </Radio.Group>
-    // </Box>
+
   );
 };
 

@@ -8,11 +8,12 @@ import { Icon } from "@rneui/themed";
 import { View, Text, TouchableOpacity } from "react-native";
 import COLORS from "../../consts/colors";
 
-export function FarmerTypeCard({ route, item }) {
+export function FarmerTypeCard({ route, item, pop }) {
   const navigation = useNavigation();
 
   return (
     <TouchableOpacity
+      disabled={pop}
       onPress={() => {
         navigation.navigate("FarmersListLayout", {
           farmerType: item?.farmerType,
@@ -24,99 +25,103 @@ export function FarmerTypeCard({ route, item }) {
         width: "100%",
       }}
     >
+      <View
+        style={{
+          marginVertical: 20,
+          paddingHorizontal: 5,
+          flexDirection: "row",
+          paddingVertical: 5,
+          width: "100%",
+        }}
+      >
         <View
           style={{
-            marginVertical: 20,
-            paddingHorizontal: 5,
-            flexDirection: "row",
-            paddingVertical: 5,
-            width: "100%",
+            justifyContent: "center",
+            alignItems: "center",
+            width: "25%",
           }}
         >
           <View
             style={{
-              justifyContent: "center",
-              alignItems: "center",
-              width: "25%",
+              borderRadius: 100,
+              // borderWidth: 1,
+              borderColor: item?.iconColor,
+              backgroundColor: COLORS.fourth,
+              padding: 10,
+              elevation: 8,
+              display: pop ? "none" : "flex",
             }}
           >
-            <View
-              style={{
-                borderRadius: 100,
-                // borderWidth: 1,
-                borderColor: item?.iconColor,
-                backgroundColor: COLORS.fourth,
-                padding: 10,
-                elevation: 8,
-              }}
-            >
-              <FontAwesomeIcon
-                icon={item?.icon}
-                size={40}
-                color={item?.iconColor}
-              />
-            </View>
+            <FontAwesomeIcon
+              icon={item?.icon}
+              size={40}
+              color={item?.iconColor}
+            />
           </View>
+        </View>
 
+        <View
+          style={{
+            padding: 5,
+            width: "75%",
+            flexDirection: "column",
+          }}
+        >
           <View
             style={{
-              padding: 5,
-              width: "75%",
-              flexDirection: "column",
+              width: "100%",
+              flexDirection: "row",
+              paddingRight: 5,
             }}
           >
             <View
               style={{
-                width: "100%",
-                flexDirection: "row",
-                paddingRight: 5,
+                width: "85%",
               }}
             >
-              <View
+              <Text
                 style={{
-                  width: "85%",
+                  fontSize: 22,
+                  fontFamily: "JosefinSans-Bold",
+                  textAlign: "right",
+                  color: !pop ? item?.color : COLORS.lightgrey,
                 }}
+                numberOfLines={2}
+                ellipsizeMode={"tail"}
               >
-                <Text
-                  style={{
-                    fontSize: 22,
-                    fontFamily: "JosefinSans-Bold",
-                    textAlign: "right",
-                    color: item?.color,
-                  }}
-                  numberOfLines={2}
-                  ellipsizeMode={"tail"}
-                >
-                  {item.title}
-                </Text>
+                {!pop && item.title}
+              </Text>
 
-                <Text
-                  style={{
-                    fontSize: 14,
-                    fontFamily: "JosefinSans-Italic",
-                    textAlign: "left",
-                    color: COLORS.grey,
-                  }}
-                  numberOfLines={2}
-                  ellipsizeMode={"tail"}
-                >
+              <Text
+                style={{
+                  fontSize: 14,
+                  fontFamily: "JosefinSans-Italic",
+                  textAlign: "left",
+                  color: COLORS.grey,
+                }}
+                numberOfLines={2}
+                ellipsizeMode={"tail"}
+              >
+                {!pop && <>
                   ({Intl.NumberFormat().format(item?.total)}){" "}
                   {item?.description}
-                </Text>
-              </View>
+                </>
+                }
+              </Text>
+            </View>
 
-              <View
-                style={{
-                  width: "15%",
-                  justifyContent: "center",
-                  alignItems: "flex-end",
-                }}
-              >
-                <Icon name="arrow-forward-ios" size={25} color={COLORS.grey} />
-              </View>
+            <View
+              style={{
+                width: "15%",
+                justifyContent: "center",
+                alignItems: "flex-end",
+              }}
+            >
+              {!pop && <Icon name="arrow-forward-ios" size={25} color={COLORS.grey} />}
             </View>
           </View>
         </View>
+      </View>
     </TouchableOpacity>
   );
 }

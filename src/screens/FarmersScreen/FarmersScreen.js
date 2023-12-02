@@ -9,11 +9,10 @@ import {
   Text,
   View,
   TouchableOpacity,
-  SectionList,
 } from "react-native";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Icon } from "@rneui/themed";
-import { Box, Center, Pressable, Stack } from "native-base";
+import { Box, Pressable } from "native-base";
 import { useFocusEffect } from "@react-navigation/native";
 import {
   faPeopleGroup,
@@ -23,17 +22,11 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 import {
-  widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 
-import {
-  responsiveFontSize,
-} from "react-native-responsive-dimensions";
 
 import CustomActivityIndicator from "../../components/ActivityIndicator/CustomActivityIndicator";
-// import LottieAddButton from '../../components/Buttons/LottieAddButton';
-import TickComponent from "../../components/LottieComponents/TickComponent";
 import { customizeItem } from "../../helpers/customizeItem";
 
 import COLORS from "../../consts/colors";
@@ -41,11 +34,9 @@ import COLORS from "../../consts/colors";
 import { realmContext } from "../../models/realmContext";
 import { useUser } from "@realm/react";
 import { roles } from "../../consts/roles";
-import StatItem from "../../components/StatItem/StatItem";
 import FarmerTypeCard from "../../components/FarmerTypeCard/FarmerTypeCard";
 import CustomDivider from "../../components/Divider/CustomDivider";
 import RegistrationButton from "../../components/RegistrationButton/RegistrationButton";
-import { Divider } from "react-native-paper";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 const { useRealm, useQuery } = realmContext;
 
@@ -87,6 +78,10 @@ export default function FarmersScreen({ route, navigation }) {
   const realm = useRealm();
   const user = useUser();
   let customUserData = user.customData;
+
+  // controlling farmers regristration button animations
+  const [pop, setPop] = useState(false);
+
 
   const farmers = realm
     .objects("Actor")
@@ -245,149 +240,25 @@ export default function FarmersScreen({ route, navigation }) {
   }
 
 
-
-
   return (
     <SafeAreaView
       style={{
         flex: 1,
         paddingBottom: 100,
         backgroundColor: "ghostwhite",
+
       }}
     >
       {/*
-    Show this if the user is a provincial manager
-*/}
-
-      {/* {roles.haveReadAndValidatePermissions.some(role => role === customUserData?.role) && (
-        <View>
-          <View
-            style={{
-              width: "100%",
-              paddingHorizontal: wp("3%"),
-              backgroundColor: "#EBEBE4",
-              borderTopWidth: 0,
-              borderColor: "#EBEBE4",
-              borderBottomWidth: 3,
-              borderLeftWidth: 3,
-              borderRightWidth: 3,
-            }}
-          >
-            <Stack direction="row" w="100%">
-              <Center w="15%"></Center>
-
-              <Box w="70%">
-                <Center>
-                  <Text
-                    style={{
-                      fontFamily: "JosefinSans-Bold",
-                      fontSize: 18,
-                      color: COLORS.black,
-                    }}
-                  >
-                    {customUserData?.userProvince}
-                  </Text>
-
-                  <Stack direction="row" space={2} my="1">
-                    <Center>
-                      <Text
-                        style={{
-                          fontFamily: "JosefinSans-Regular",
-                          fonSize: responsiveFontSize(1.5),
-                        }}
-                      >
-                        [{"Usuários:"} {filteredStats.length}]
-                      </Text>
-                    </Center>
-                    <Center>
-                      <Text
-                        style={{
-                          fontFamily: "JosefinSans-Regular",
-                          fonSize: responsiveFontSize(1.5),
-                        }}
-                      >
-                        [{"Distritos:"} {districts.length}]
-                      </Text>
-                    </Center>
-                  </Stack>
-                </Center>
-              </Box>
-              <Box w="15%"></Box>
-            </Stack>
-          </View>
-
-          {stats?.length === 0 ? (
-            <Box>
-              <Center
-                style={{
-                  margin: 20,
-                }}
-              >
-                <Text
-                  style={{
-                    fontFamily: "JosefinSans-Regular",
-                    fontSize: responsiveFontSize(2.5),
-                    textAlign: "center",
-                    lineHeight: 30,
-                    color: COLORS.red,
-                  }}
-                >
-                  A província de {customUserData?.userProvince} ainda não possui
-                  usuários activos!
-                </Text>
-                <TickComponent />
-              </Center>
-            </Box>
-          ) : (
-            <Box
-              alignItems="stretch"
-              w="100%"
-              style={{
-                marginBottom: 140,
-              }}
-            >
-              <SectionList
-                sections={statsByDistrict}
-                keyExtractor={(item, index) => {
-                  return item.userId;
-                }}
-                renderItem={({ item }) => (
-                  <StatItem route={route} navigation={navigation} item={item} />
-                )}
-                stickySectionHeadersEnabled
-                renderSectionHeader={({ section: { title } }) => (
-                  <View
-                    style={{
-                      backgroundColor: COLORS.main,
-                    }}
-                  >
-                    <Text
-                      style={{
-                        paddingLeft: 20,
-                        paddingVertical: 5,
-                        color: COLORS.white,
-                        fontSize: 16,
-                        fontFamily: "JosefinSans-Bold",
-                      }}
-                    >
-                      {title}
-                    </Text>
-                  </View>
-                )}
-              />
-            </Box>
-          )}
-        </View>
-      )} */}
-
-      {/*
-   Show this if the user is a field agent only
-*/}
+      Show this if the user is a field agent only
+    */}
 
       {customUserData?.role !== roles.provincialManager &&
         customUserData?.role !== roles.ampcmSupervisor && (
           <View
             style={{
+              opacity: pop ? 0.2 : 1,
+
             }}
           >
             <View
@@ -432,37 +303,40 @@ export default function FarmersScreen({ route, navigation }) {
                   top: 20,
                 }}
               >
-                <View
-                  style={{
-                    justifyContent: "center",
-                    borderRadius: 100,
-                    borderColor: COLORS.grey,
-                    backgroundColor: COLORS.lightestgrey,
-                    padding: 6,
-                  }}
-                >
-                  <TouchableOpacity onPress={()=>{}}>
-                    <View 
-                      style={{
-                        width: 10,
-                        height: 10,
-                        backgroundColor: COLORS.danger,
-                        borderRadius: 50,
-                        position: "absolute",
-                        right: 4,
-                        top: 0,
-                        zIndex: 1,
-                      }}
-                    />
-                    <FontAwesomeIcon icon={faBell} size={25} color={COLORS.main} />
-                  </TouchableOpacity>
-                </View>
+                {!pop &&
+                  <View
+                    style={{
+                      justifyContent: "center",
+                      borderRadius: 100,
+                      borderColor: COLORS.grey,
+                      backgroundColor: COLORS.lightestgrey,
+                      padding: 6,
+                    }}
+                  >
+                    <TouchableOpacity disabled={pop} onPress={() => { }}>
+                      <View
+                        style={{
+                          width: 10,
+                          height: 10,
+                          backgroundColor: COLORS.danger,
+                          borderRadius: 50,
+                          position: "absolute",
+                          right: 4,
+                          top: 0,
+                          zIndex: 1,
+                        }}
+                      />
+                      <FontAwesomeIcon icon={faBell} size={25} color={COLORS.main} />
+                    </TouchableOpacity>
+                  </View>
+                }
               </View>
             </View>
 
             {
               <Box
                 style={{
+                  // display: pop ? "none" : "flex",
                   justifyContent: "center",
                   alignItems: "center",
                   height: "100%",
@@ -494,7 +368,7 @@ export default function FarmersScreen({ route, navigation }) {
                     } else if (item?.farmerType === "Instituição") {
                       item["total"] = institutions?.length;
                     }
-                    return <FarmerTypeCard route={route} item={item} />;
+                    return <FarmerTypeCard route={route} item={item} pop={pop} />;
                   }}
                   ListFooterComponent={() => {
                     return (
@@ -517,7 +391,13 @@ export default function FarmersScreen({ route, navigation }) {
         customUserData?.role !== roles.provincialManager &&
         customUserData?.role !== roles.ampcmSupervisor &&
         (
-          <RegistrationButton customUserData={customUserData} navigation={navigation} route={route} />
+
+          <RegistrationButton
+            customUserData={customUserData}
+            pop={pop}
+            setPop={setPop}
+            navigation={navigation} route={route} />
+
         )
       }
 

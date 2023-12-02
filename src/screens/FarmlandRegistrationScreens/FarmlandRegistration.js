@@ -765,13 +765,16 @@ export default function FarmlandRegistration({ route, navigation }) {
           fadingEdgeLength={2}
           keyboardDismissMode="on-drag"
           keyboardShouldPersistTaps="handled"
+          contentContainerStyle={{
+            paddingBottom: 60,
+          }}
         >
           <Stack style={{
-                        elevation: 2,
-                        borderWidth: 1,
-                        borderColor: COLORS.lightgrey,
-                        backgroundColor: COLORS.ghostwhite,
-            
+            elevation: 2,
+            borderWidth: 1,
+            borderColor: COLORS.lightgrey,
+            backgroundColor: COLORS.ghostwhite,
+
           }} direction="row" pb="1">
             <Box w="3%"></Box>
             <Box
@@ -1295,84 +1298,86 @@ export default function FarmlandRegistration({ route, navigation }) {
                         margin: 10,
                       }}
                     >
-                          <Box
-                            w="100%"
+                      <Box
+                        w="100%"
+                        style={{
+                          backgroundColor: COLORS.dark,
+                          borderWidth: 1,
+                          borderColor: COLORS.dark,
+                          borderTopEndRadius: 8,
+                          borderTopStartRadius: 8,
+                          paddingVertical: 3,
+                          // paddingHorizontal: 6,
+                          flexDirection: "row",
+
+                        }}
+                      >
+                        <Box
+                          w="85%"
+                          style={{
+                            paddingLeft: 10,
+                            justifyContent: "center",
+                          }}
+                        >
+                          <Text
                             style={{
-                              backgroundColor: COLORS.main,
-                              borderTopEndRadius: 8,
-                              borderTopStartRadius: 8,
-                              paddingVertical: 3,
-                              paddingHorizontal: 6,
-                              flexDirection: "row",
-  
+                              color: COLORS.ghostwhite,
+                              fontFamily: "JosefinSans-Bold",
+                              fontSize: 15,
+                            }}
+                            numberOfLines={1}
+                            ellipsizeMode="head"
+                          >
+                            Parcela {index + 1} ({block?.plantingYear})
+                          </Text>
+                        </Box>
+
+                        <Box w="15%">
+                          <TouchableOpacity
+                            disabled={
+                              block?.position === farmland?.blocks?.length - 1
+                                ? false
+                                : true
+                            }
+                            onPress={() => {
+                              setAreaFlag(
+                                (prev) => prev - parseFloat(block?.usedArea),
+                              );
+                              setTreesFlag(
+                                (prev) => prev - parseInt(block?.trees),
+                              );
+
+                              setIsDeleteBlockOn(true);
                             }}
                           >
-                            <Box
-                              w="85%"
-                              style={{
-                                paddingLeft: 10,
-                                justifyContent: "center",
-                              }}
-                            >
-                              <Text
-                                style={{
-                                  color: COLORS.ghostwhite,
-                                  fontFamily: "JosefinSans-Bold",
-                                  fontSize: 15,
-                                }}
-                                numberOfLines={1}
-                                ellipsizeMode="head"
-                              >
-                                Parcela {index + 1} ({block?.plantingYear})
-                              </Text>
-                            </Box>
-  
-                            <Box w="15%">
-                              <TouchableOpacity
-                                disabled={
-                                  block?.position === farmland?.blocks?.length - 1
-                                    ? false
-                                    : true
-                                }
-                                onPress={() => {
-                                  setAreaFlag(
-                                    (prev) => prev - parseFloat(block?.usedArea),
-                                  );
-                                  setTreesFlag(
-                                    (prev) => prev - parseInt(block?.trees),
-                                  );
-  
-                                  setIsDeleteBlockOn(true);
-                                }}
-                              >
-                                <Icon
-                                  name={
-                                    block?.position ===
-                                      farmland?.blocks?.length - 1
-                                      ? "delete-forever"
-                                      : "check-circle"
-                                  }
-                                  size={25}
-                                  color={
-                                    block?.position ===
-                                      farmland?.blocks?.length - 1
-                                      ? COLORS.ghostwhite
-                                      : COLORS.ghostwhite
-                                  }
-                                />
-                              </TouchableOpacity>
-                            </Box>
-                            <Box w="5%"></Box>
-                          </Box>
+                            <Icon
+                              name={
+                                block?.position ===
+                                  farmland?.blocks?.length - 1
+                                  ? "delete-forever"
+                                  : "check-circle"
+                              }
+                              size={25}
+                              color={
+                                block?.position ===
+                                  farmland?.blocks?.length - 1
+                                  ? COLORS.ghostwhite
+                                  : COLORS.ghostwhite
+                              }
+                            />
+                          </TouchableOpacity>
+                        </Box>
+                        <Box w="5%"></Box>
+                      </Box>
                       <Box
                         style={{
-                          borderWidth: 2,
-                          borderColor: COLORS.main,
+                          borderWidth: 1,
+                          borderColor: COLORS.dark,
                         }}
                       >
 
                         <Box w="100%" style={{
-                          backgroundColor: COLORS.lightestgrey,
+                          // backgroundColor: COLORS.lightestgrey,
                         }}>
                           <Stack direction="row" w="100%" space={1} my="3">
                             <Box w="50%" alignItems={"center"}>
@@ -1385,7 +1390,7 @@ export default function FarmlandRegistration({ route, navigation }) {
                               >
                                 Área (hectares)
                               </Text>
-                              <Text>
+                              <Text style={{ textAlign: "center", color: COLORS.grey, }}>
                                 ({Number(block?.usedArea.toFixed(1))})
                               </Text>
                             </Box>
@@ -1399,13 +1404,15 @@ export default function FarmlandRegistration({ route, navigation }) {
                               >
                                 Cajueiros (árvores)
                               </Text>
-                              <Text>({block?.trees})</Text>
+                              <Text style={{ textAlign: "center", color: COLORS.grey, }}>
+                                ({block?.trees})
+                              </Text>
                             </Box>
                           </Stack>
                         </Box>
 
                         <Box w="100%" style={{
-                           backgroundColor: COLORS.lightestgrey,
+                          //  backgroundColor: COLORS.lightestgrey,
                         }}>
                           <Stack direction="row" w="100%" space={1} my="3">
                             <Box w="50%" alignItems={"center"}>
@@ -1418,7 +1425,11 @@ export default function FarmlandRegistration({ route, navigation }) {
                               >
                                 Compasso (metros)
                               </Text>
-                              <Text>
+                              <Text
+                                style={{
+                                  textAlign: "center", color: COLORS.grey,
+                                }}
+                              >
                                 {block?.density?.mode === "Regular"
                                   ? `(${block?.density?.mode}: ${block?.density?.length}x${block?.density?.width})`
                                   : `(${block?.density?.mode})`}
@@ -1434,10 +1445,10 @@ export default function FarmlandRegistration({ route, navigation }) {
                               >
                                 Tipo de plantas
                               </Text>
-                              <Text style={{ textAlign: "center" }}>
+                              <Text style={{ textAlign: "center", color: COLORS.grey, }}>
                                 ({block?.plantTypes?.plantType?.join("; ")})
                               </Text>
-                              <Text style={{ textAlign: "center" }}>
+                              <Text style={{ textAlign: "center", color: COLORS.grey, }}>
                                 {block?.plantTypes?.plantType?.some((plant) =>
                                   plant?.includes("enxert"),
                                 )
@@ -1456,117 +1467,148 @@ export default function FarmlandRegistration({ route, navigation }) {
             </>
           )}
 
-          {farmland && (
-            <Box w="100%" p="4">
-              <Text
+          {farmland?.blocks?.length > 0 ? (
+            <>
+              {(farmland && farmland?.blocks) && (
+                <Text
+                  style={{
+                    fontSize: 12,
+                    fontFamily: "Roboto-Regular",
+                    color: COLORS.dark,
+                    textAlign: "right",
+                    marginHorizontal: 10,
+                    marginVertical: 5,
+                  }}
+                >
+                  {ordinalNumberings[farmland?.blocks?.length + 1]} parcela.
+                </Text>
+              )}
+
+              <View
                 style={{
-                  fontSize: 15,
-                  fontFamily: "JosefinSans-Regular",
-                  color: COLORS.main,
-                  textAlign: "right",
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  margin: 10,
+
                 }}
               >
-                A {ordinalNumberings[farmland?.blocks?.length + 1]} parcela!
-              </Text>
-            </Box>
-          )}
+                <TouchableOpacity
+                  onPress={() => {
+                    if (checkBlockConformity(farmlandId, realm)) {
+                      setIsCoordinatesModalVisible(true);
+                    }
+                  }}
+                  style={{
+                    backgroundColor: COLORS.main,
+                    borderRadius: 10,
+                    justifyContent: "center",
+                    alignItems: "center",
+                    padding: 4,
+                    height: 45,
+                  }}
+                >
 
-          <Stack w="100%" direction="row" pb="10">
-            <Box
-              w="50%"
-              style={{
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              {farmland?.blocks?.length > 0 && (
-                <Box w="70%">
-                  <TouchableOpacity
-                    onPress={() => {
-                      if (checkBlockConformity(farmlandId, realm)) {
-                        setIsCoordinatesModalVisible(true);
-                      }
+                  <Text
+                    style={{
+                      fontSize: 13,
+                      color: COLORS.ghostwhite,
+                      fontFamily: "Roboto-Regular",
+                      textAlign: "center",
+                      padding: 4,
                     }}
                   >
-                    <Box
-                      style={{
-                        borderWidth: 2,
-                        borderColor: COLORS.red,
-                        backgroundColor: COLORS.danger,
-                        borderRadius: 100,
-                        justifyContent: "center",
-                        alignItems: "center",
-                        padding: 4,
-                      }}
-                    >
-                      <Text
-                        style={{
-                          fontSize: 13,
-                          color: COLORS.ghostwhite,
-                          fontFamily: "JosefinSans-Bold",
-                          textAlign: "center",
-                          padding: 4,
-                        }}
-                      >
-                        Concluir Registo
-                      </Text>
-                    </Box>
-                  </TouchableOpacity>
-                </Box>
+                    Concluir Registo
+                  </Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity
+                  onPress={() => {
+                    if (farmland) {
+                      // make the block data form visible
+                      resizeBlockBox(1);
+                    } else {
+                      setLoadingButton(true);
+
+                      // visualize and save the farmland main data
+                      visualizeFarmlandMainData();
+                    }
+                  }}
+                  style={{
+                    backgroundColor: COLORS.dark,
+                    borderRadius: 10,
+                    justifyContent: "center",
+                    alignItems: "center",
+                    padding: 4,
+                    height: 45,
+                  }}
+                >
+                  <Text
+                    style={{
+                      color: COLORS.ghostwhite,
+                      fontSize: 13,
+                      fontFamily: "Roboto-Regular",
+                      textAlign: "center",
+                      padding: 4,
+                    }}
+                  >
+                    Adicionar Parcela
+                  </Text>
+                </TouchableOpacity>
+
+              </View>
+            </>
+          )
+            :
+            <>
+              {(farmland && farmland?.blocks) && (
+                <Text
+                  style={{
+                    fontSize: 12,
+                    fontFamily: "Roboto-Regular",
+                    color: COLORS.dark,
+                    textAlign: "right",
+                    marginHorizontal: 10,
+                    marginVertical: 5,
+                  }}
+                >
+                  {ordinalNumberings[farmland?.blocks?.length + 1]} parcela.
+                </Text>
               )}
-            </Box>
+              <TouchableOpacity
+                onPress={() => {
+                  if (farmland) {
+                    // make the block data form visible
+                    resizeBlockBox(1);
+                  } else {
+                    setLoadingButton(true);
+                    // visualize and save the farmland main data
+                    visualizeFarmlandMainData();
+                  }
+                }}
+                style={{
+                  justifyContent: "center",
+                  alignItems: "center",
+                  borderRadius: 10,
+                  marginHorizontal: 10,
+                  backgroundColor: !farmland ? COLORS.main : COLORS.dark,
+                  height: 45,
+                }}
+              >
+                <Text
+                  style={{
+                    color: COLORS.ghostwhite,
+                    fontSize: 16,
+                    fontFamily: "Roboto-Regular",
+                    textAlign: "center",
+                  }}
+                >
+                  {!farmland ? "Adicionar Pomar" : "Adicionar Parcela"}
+                </Text>
+              </TouchableOpacity>
+            </>
 
-            <Box
-              w="50%"
-              style={{
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              {
-                <Box w="70%">
-                  <TouchableOpacity
-                    onPress={() => {
-                      if (farmland) {
-                        // make the block data form visible
-                        resizeBlockBox(1);
-                      } else {
-                        setLoadingButton(true);
-
-                        // visualize and save the farmland main data
-                        visualizeFarmlandMainData();
-                      }
-                    }}
-                  >
-                    <Box
-                      style={{
-                        flexDirection: "row",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        borderRadius: 100,
-                        borderWidth: 2,
-                        borderColor: COLORS.main,
-                        backgroundColor: COLORS.main,
-                        padding: 4,
-                      }}
-                    >
-                      <Text
-                        style={{
-                          color: COLORS.ghostwhite,
-                          fontSize: 13,
-                          fontFamily: "JosefinSans-Bold",
-                          textAlign: "center",
-                          padding: 4,
-                        }}
-                      >
-                        {!farmland ? "Adicionar Pomar" : "Adicionar Parcela"}
-                      </Text>
-                    </Box>
-                  </TouchableOpacity>
-                </Box>
-              }
-            </Box>
-          </Stack>
+          }
 
           <FarmlandBlockRegistration
             isOverlayVisible={isOverlayVisible}
