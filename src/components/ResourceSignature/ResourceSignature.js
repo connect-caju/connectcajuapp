@@ -12,8 +12,9 @@ const ResourceSignature = ({ resource, customUserData }) => {
         <Box
         style={{
           marginTop: -10,
-          backgroundColor: COLORS.verylightgrey,
+          // backgroundColor: COLORS.verylightgrey,
         }}
+        className="px-2 self-end w-full"
       >
         <Stack direction="column" w="100%" style={{ paddingTop: 5 }}>
           <Box w="100%">

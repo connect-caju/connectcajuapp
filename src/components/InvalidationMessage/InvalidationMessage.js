@@ -98,18 +98,20 @@ const InvalidationMessage = ({ resource, resourceType, }) => {
 
 
     return (
-        <View style={{
-        }}>
+        <View
+            className="px-2 self-end w-full"
+        >
             {resource?.status === resourceValidation.status.invalidated && (
                 <>
                     {roles.haveReadAndWritePermissions.some(role => role === customUserData?.role) && (
                         <Text
                             style={{
-                                textAlign: "left",
-                                color: COLORS.danger,
-                                fontSize: 14,
-                                fontFamily: "JosefinSans-Bold",
+                                // textAlign: "left",
+                                // color: COLORS.danger,
+                                // fontSize: 14,
+                                // fontFamily: "JosefinSans-Bold",
                             }}
+                            className="text-left text-gray-400 text-sm font-bold"
                         >
                             Motivo de indeferimento
                         </Text>
@@ -128,19 +130,20 @@ const InvalidationMessage = ({ resource, resourceType, }) => {
                             >
 
                                 <Text
-                                    style={{
-                                        textAlign: "left",
-                                        fontSize: 12,
-                                        color: COLORS.grey,
-                                        marginBottom: -5,
-                                        paddingLeft: 15,
-                                    }}
+                                    // style={{
+                                    //     textAlign: "left",
+                                    //     fontSize: 12,
+                                    //     color: COLORS.grey,
+                                    //     marginBottom: -5,
+                                    //     paddingLeft: 15,
+                                    // }}
+                                    className="text-lef text-sm text-gray-400 -mb-2 pl-4"
                                 >
                                     {motive?.ownerName.split(" ")[0]}
                                 </Text>
                                 <Box
                                     style={{
-                                        backgroundColor: COLORS.main,
+                                        // backgroundColor: COLORS.main,
                                         borderRadius: 30,
                                         borderBottomRightRadius: roles.haveReadAndWritePermissions.some(role => role === customUserData.role) ? 30 : 0,
                                         borderBottomLeftRadius: roles.haveReadAndWritePermissions.some(role => role === customUserData.role) ? 0 : 30,
@@ -151,16 +154,18 @@ const InvalidationMessage = ({ resource, resourceType, }) => {
                                         minWidth: "20%",
                                         alignSelf: "flex-end",
                                     }}
+                                    className="bg-gray-100"
                                 >
                                     <Text
-                                        style={{
-                                            fontSize: 16,
-                                            fontFamily: "JosefinSans-Regular",
-                                            color: COLORS.white,
-                                            textAlign: "left",
-                                            lineHeight: 18,
-                                        }}
-                                    >
+                                        // style={{
+                                        //     fontSize: 16,
+                                        //     fontFamily: "JosefinSans-Regular",
+                                        //     color: COLORS.white,
+                                        //     textAlign: "left",
+                                        //     lineHeight: 18,
+                                        // }}
+                                        className="text-sm font-normal text-gray-500 text-left"
+                                        >
                                         {motive.message
                                             ? motive.message
                                             : "Dados incompletos."}
@@ -191,19 +196,13 @@ const InvalidationMessage = ({ resource, resourceType, }) => {
                             }}
                         >
                             <Text
-                                style={{
-                                    textAlign: "left",
-                                    fontSize: 12,
-                                    color: COLORS.grey,
-                                    marginBottom: -5,
-                                    paddingLeft: 15,
-                                }}
+                                className="text-lef text-xs text-gray-400 -mb-1 pl-2"
                             >
-                                Gerado pelo Sistema Connect Caju
+                                Connect Caju
                             </Text>
                             <Box
                                 style={{
-                                    backgroundColor: COLORS.main,
+                                    // backgroundColor: COLORS.main,
                                     borderRadius: 30,
                                     borderBottomRightRadius: roles.haveReadAndWritePermissions.some(role => role === customUserData.role) ? 30 : 0,
                                     borderBottomLeftRadius: roles.haveReadAndWritePermissions.some(role => role === customUserData.role) ? 0 : 30,
@@ -214,17 +213,19 @@ const InvalidationMessage = ({ resource, resourceType, }) => {
                                     minWidth: "10%",
                                     // alignSelf: roles.haveReadAndWritePermissions.some(role => role === customUserData.role) ? "flex-end" : "flex-start",
                                 }}
+                                className="bg-gray-100"
                             >
                                 <Text
                                     style={{
-                                        fontSize: 16,
-                                        fontFamily: "JosefinSans-Regular",
-                                        color: COLORS.white,
-                                        textAlign: "left",
-                                        lineHeight: 18,
+                                        // fontSize: 16,
+                                        // fontFamily: "JosefinSans-Regular",
+                                        // color: COLORS.white,
+                                        // textAlign: "left",
+                                        // lineHeight: 18,
                                     }}
+                                    className="text-sm font-normal text-gray-500 text-left"
                                 >
-                                {errorMessages.automaticInvalidationMessage.invalidationMessage}    
+                                    {errorMessages.automaticInvalidationMessage.invalidationMessage}
                                 </Text>
                             </Box>
                             <Text

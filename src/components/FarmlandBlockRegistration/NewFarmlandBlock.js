@@ -236,17 +236,14 @@ export default function NewFarmlandBlock({
           <Overlay
             overlayStyle={{
               backgroundColor: COLORS.ghostwhite,
-              // width: '70%',
-              //   maxHeight: '95%',
               borderTopLeftRadius: 7,
               borderTopRightRadius: 7,
               borderBottomLeftRadius: 7,
               borderBottomRightRadius: 7,
             }}
-            
+
             isVisible={isNewBlockVisible}
             onBackdropPress={() => {
-              // setIsNewBlockVisible(false);
               resizeBlockBox(0);
             }}
           >
@@ -326,20 +323,13 @@ export default function NewFarmlandBlock({
                 </Text>
               </TouchableOpacity>
             </Animated.View>
-            {/* </SafeAreaView> */}
-            {/* </Modal> */}
           </Overlay>
         ) : (
-          <Modal visible={isNewBlockVisible} transparent>
+          <Modal visible={isNewBlockVisible}
+          >
             <SafeAreaView
-              style={{
-                flex: 1,
-              }}
-              onTouchCancel={
-                () => { }
-                // resizeBlockBox(0)
-                // setIsOverlayVisible(false)
-              }
+              onTouchCancel={() => { }}
+              className={"flex flex-1 bg-neutral-100 min-h-full px-2"}
             >
               <Animated.View
                 style={{
@@ -349,7 +339,6 @@ export default function NewFarmlandBlock({
                   }),
                   transform: [{ scale: scaleBlockBox }],
                 }}
-                className={`${backgroundStyle} min-h-full px-2`}
               >
                 {/* Display this if there enough area size for a new cashew block plot to be added  */}
                 {remainingArea > 0.1 && (

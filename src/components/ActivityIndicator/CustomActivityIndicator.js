@@ -1,7 +1,8 @@
-import { View, Text, ActivityIndicator } from "react-native"
-import React from "react"
-import styles from "./style"
-import COLORS from "../../consts/colors"
+import { View, Text, ActivityIndicator } from "react-native";
+import React from "react";
+import styles from "./style";
+import COLORS from "../../consts/colors";
+import { backgroundStyle } from "../../styles/globals";
 
 const CustomActivityIndicator = ({
   loadingActivitiyIndicator,
@@ -16,27 +17,17 @@ const CustomActivityIndicator = ({
   if (loadingActivitiyIndicator) {
     // startLoading();
     setTimeout(() => {
-      setLoadingActivityIndicator(false)
-    }, 0)
+      setLoadingActivityIndicator(false);
+    }, 0);
   }
 
   return (
     <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        textAlign: "center",
-        // paddingTop: 5,
-        backgroundColor: backgroundColor ? backgroundColor : "ghostwhite",
-        padding: 8,
-      }}
+      className={`flex flex-1 justify-center items-center ${backgroundStyle}`}
     >
       <ActivityIndicator
-        //visibility of Overlay Loading Spinner
         visible={loadingActivitiyIndicator}
-        //Text with the Spinner
         // textContent={'Connect Caju...'}
-        //Text style of the Spinner Text
         textStyle={{
           color: indicatorColor ? indicatorColor : COLORS.main,
         }}
@@ -54,7 +45,7 @@ const CustomActivityIndicator = ({
         Connect Caju...
       </Text>
     </View>
-  )
-}
+  );
+};
 
-export default CustomActivityIndicator
+export default CustomActivityIndicator;

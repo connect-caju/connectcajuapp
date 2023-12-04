@@ -217,7 +217,6 @@ const FarmlandData = ({
         onToggle={(isExpanded) => {
           setIsCallapseOn(isExpanded);
           setRefresh(!isExpanded);
-          console.log("isExpanded:", isCollapseOn);
         }}
         isExpanded={isCollapseOn}
       >
@@ -348,7 +347,7 @@ const FarmlandData = ({
                 farmland?.consociatedCrops?.map((crop) => (
                   <View
                     key={crop}
-                    className="p-1 mb-2 -mt-2 mr-2 bg-slate-200 rounded-full shadow-md"
+                    className="p-2 mb-2 -mt-2 mr-2 bg-gray-200 rounded-full shadow-md"
                   >
                     <Text
                       className="text-sm text-gray-600 font-[400]"
@@ -463,22 +462,22 @@ const FarmlandData = ({
                     className="justify-center items-center w-1/3"
                   >
                     <Text
-                      className="text-xs text-gray-400 font-normal"
-                    >❌</Text>
+                      className="text-lg text-red-600 font-normal"
+                    >?</Text>
                   </View>
                   <View
                     className="justify-center items-center w-1/3"
                   >
                     <Text
-                      className="text-xs text-gray-400 font-normal"
-                    >❌</Text>
+                      className="text-lg text-red-600 font-normal"
+                    >?</Text>
                   </View>
                   <View
                     className="justify-center items-center w-1/3"
                   >
                     <Text
-                      className="text-xs text-gray-400 font-normal"
-                    >❌</Text>
+                      className="text-lg text-red-600 font-normal"
+                    >?</Text>
                   </View>
                 </View>
               )}
@@ -580,14 +579,14 @@ const FarmlandData = ({
                     >
                       <Text
                         className="text-sm text-gray-400 font-normal"
-                      >{farmland?.geolocation?.latitude ? "✅" : "❌"}</Text>
+                      >{farmland?.geolocation?.latitude ? "✅" : "?"}</Text>
                     </View>
                     <View
                       className="justify-center items-center w-1/3"
                     >
                       <Text
                         className="text-sm text-gray-400 font-normal"
-                      >{farmland?.geolocation?.longitude ? "✅" : "❌"}</Text>
+                      >{farmland?.geolocation?.longitude ? "✅" : "?"}</Text>
                     </View>
                   </View>
 
@@ -607,15 +606,15 @@ const FarmlandData = ({
                     className="justify-center items-center w-1/3"
                   >
                     <Text
-                      className="text-xs text-gray-400 font-normal"
-                    >❌</Text>
+                      className="text-lg text-red-600 font-normal"
+                    >?</Text>
                   </View>
                   <View
                     className="justify-center items-center w-1/3"
                   >
                     <Text
-                      className="text-xs text-gray-400 font-normal"
-                    >❌</Text>
+                      className="text-lg text-red-600 font-normal"
+                    >?</Text>
                   </View>
                 </View>
               )}
@@ -632,22 +631,23 @@ const FarmlandData = ({
                 Parcelas com Cajueiros
               </Text>
               {customUserData?.role !== roles.provincialManager && (
-                   <TouchableOpacity
-                   disabled={farmland?.status === resourceValidation.status.validated}
-                   onPress={() => {
-                     if (farmland) {
-                       resizeBlockBox(1);
-                     }
-                   }}
-                 >
-                   <FontAwesomeIcon icon={faAdd} size={20} color={farmland?.status ===
-                     resourceValidation.status.validated
-                     ? COLORS.grey
-                     : farmland?.status ===
-                       resourceValidation.status.invalidated
-                       ? COLORS.danger
-                       : COLORS.grey} />
-                 </TouchableOpacity>
+                <TouchableOpacity
+                  disabled={farmland?.status === resourceValidation.status.validated}
+                  onPress={() => {
+                    if (farmland) {
+                      resizeBlockBox(1);
+                    }
+                  }}
+                  className="p-2 rounded-full bg-green-600"
+                >
+                  <FontAwesomeIcon icon={faAdd} size={20} color={farmland?.status ===
+                    resourceValidation.status.validated
+                    ? COLORS.grey
+                    : farmland?.status ===
+                      resourceValidation.status.invalidated
+                      ? COLORS.white
+                      : COLORS.white} />
+                </TouchableOpacity>
               )}
             </View>
 
@@ -658,272 +658,198 @@ const FarmlandData = ({
               >
                 <InfoIcon width={60} height={60} />
                 <Text
-                  className="text-gray-400 font-normal text-sm text-center bg-neutral-200 p-2 w-[220]"
+                  className="text-gray-400 font-normal text-sm text-center px-2 w-[220]"
                 >
-                  Nenhuma percela de cajueiros associada a esta área
+                  Sem parcelas de cajueiros.
                 </Text>
               </View>
             )}
 
             {normalizeBlockList(farmland?.blocks)?.map((block, index) => (
-              <Box
+              <View
                 key={index}
-                mt="3"
-                style={{
-                  marginBottom: 15,
-                  marginRight: 10,
-                }}
+                className="my-3 pr-1 border-l-8 border-l-slate-300 shadow-sm shadow-slate-300"
               >
-                <Box
-                  style={{
-                    paddingVertical: 20,
-                  }}
+                <View
+                  className="flex flex-row gap-4"
                 >
-                  <Stack w="100%" direction="row" space={2}>
-                    <Box
-                      w="10%"
-                      style={{
-                        alignItems: "center",
-                      }}
+                  <View
+                    className="border-2 border-slate-400 rounded-full p-2"
+                  >
+
+                    <Text
+                      className="text-sm text-gray-500 font-normal"
                     >
-                      <Box
-                        style={{
-                          backgroundColor: COLORS.dark,
-                          borderRadius: 100,
-                          width: wp("6%"),
-                        }}
-                      >
-                        <Text
-                          style={{
-                            color: COLORS.ghostwhite,
-                            fontSize: responsiveFontSize(2),
-                            fontFamily: "JosefinSans-Regular",
-                            textAlign: "center",
-                          }}
-                        >
-                          {block?.position + 1}
-                        </Text>
-                      </Box>
-                    </Box>
-                    <Box w="80%">
-                      <Text
-                        style={{
-                          color: COLORS.dark,
-                          fontSize: responsiveFontSize(2),
-                          fontFamily: "JosefinSans-Bold",
-                        }}
-                      >
-                        Ano de Plantio: {block.plantingYear}
-                      </Text>
-                    </Box>
-                    <Box w="10%">
-                      {customUserData?.role !== roles.provincialManager && (
-                        <TouchableOpacity
-                          disabled={
-                            farmland?.status === resourceValidation.status.validated}
-                          style={{
-                            borderRadius: 50,
-                            backgroundColor: COLORS.lightgrey,
-                            padding: 6,
-                            justifyContent: "center",
-                            alignItems: "center",
-                          }}
-                          onPress={() => {
-                            // setIsOverlayVisible(!isOverlayVisible);
-                            setPresentEditFarmland(true);
-                            // resizeBox(1)
-                            setDataToBeUpdated("blockData");
-                            setBlockId(block._id);
-                            setIsEditBlockVisible(true);
-                          }}
-                        >
-                          <Icon
-                            // name="home"
-                            name="edit"
-                            size={20}
-                            color={
-                              farmland?.status ===
-                                resourceValidation.status.validated
-                                ? COLORS.grey
-                                : farmland?.status ===
-                                  resourceValidation.status.invalidated
-                                  ? COLORS.red
-                                  : COLORS.black
-                            }
-                          />
-                        </TouchableOpacity>
-                      )}
-                    </Box>
-                  </Stack>
-
-                  <Stack w="100%" direction="row">
-                    <Box w="35%" style={{}}>
-                      <Text
-                        style={{
-                          color: COLORS.grey,
-                          fontSize: responsiveFontSize(1.8),
-                          fontFamily: "JosefinSans-Regular",
-                        }}
-                      >
-                        Compasso:
-                      </Text>
-                    </Box>
-                    <Box w="65%">
-                      <Text
-                        style={{
-                          color: COLORS.grey,
-                          fontSize: responsiveFontSize(1.8),
-                          fontFamily: "JosefinSans-Regular",
-                        }}
-                      >
-                        {block?.density?.mode === "Irregular"
-                          ? block?.density?.mode
-                          : block?.density?.mode === "Regular"
-                            ? `${block?.density?.mode} (${block?.density.length} por ${block?.density?.width} metros)`
-                            : ""}{" "}
-                      </Text>
-                    </Box>
-                  </Stack>
-
-                  <Stack w="100%" direction="row">
-                    <Box w="35%" style={{}}>
-                      <Text
-                        style={{
-                          color: COLORS.grey,
-                          fontSize: responsiveFontSize(1.8),
-                          fontFamily: "JosefinSans-Regular",
-                        }}
-                      >
-                        Área:
-                      </Text>
-                    </Box>
-                    <Box w="65%">
-                      <Text
-                        style={{
-                          color: COLORS.grey,
-                          fontSize: responsiveFontSize(1.8),
-                          fontFamily: "JosefinSans-Regular",
-                        }}
-                      >
-                        {block?.usedArea?.toFixed(2)} hectares
-                      </Text>
-                    </Box>
-                  </Stack>
-
-                  <Stack w="100%" direction="row">
-                    <Box w="35%" style={{}}>
-                      <Text
-                        style={{
-                          color: COLORS.grey,
-                          fontSize: responsiveFontSize(1.8),
-                          fontFamily: "JosefinSans-Regular",
-                        }}
-                      >
-                        Cajueiros:
-                      </Text>
-                    </Box>
-                    <Box w="65%">
-                      <Text
-                        style={{
-                          color: COLORS.grey,
-                          fontSize: responsiveFontSize(1.8),
-                          fontFamily: "JosefinSans-Regular",
-                        }}
-                      >
-                        {block?.trees} árvores
-                      </Text>
-                    </Box>
-                  </Stack>
-                </Box>
-
-                <Stack w="100%" direction="row" space={3}>
-                  <Box w="90%">
+                      {block?.position + 1}
+                    </Text>
+                  </View>
+                  <View
+                    className="justify-center items-center"
+                  >
                     <Text
                       style={{
-                        color: COLORS.grey,
+                        color: COLORS.dark,
                         fontSize: responsiveFontSize(2),
                         fontFamily: "JosefinSans-Bold",
                       }}
+                      className="text-gray-500 text-sm font-bold text-left"
                     >
-                      Tipos de planta
+                      Ano de Plantio: {block.plantingYear}
                     </Text>
-                  </Box>
-                  <Box w="10%">
-                    {customUserData?.role !== roles.provincialManager && (
-                      <TouchableOpacity
-                        disabled={
+                  </View>
+                </View>
+                {customUserData?.role !== roles.provincialManager && (
+                  <TouchableOpacity
+                    disabled={
+                      farmland?.status === resourceValidation.status.validated}
+                    className="self-end"
+                    onPress={() => {
+                      setPresentEditFarmland(true);
+                      setDataToBeUpdated("blockData");
+                      setBlockId(block._id);
+                      setIsEditBlockVisible(true);
+                    }}
+                  >
+                    <Icon
+                      name="edit"
+                      size={20}
+                      color={
+                        farmland?.status ===
+                          resourceValidation.status.validated
+                          ? COLORS.grey
+                          : farmland?.status ===
+                            resourceValidation.status.invalidated
+                            ? COLORS.danger
+                            : COLORS.grey
+                      }
+                    />
+                  </TouchableOpacity>
+                )}
+
+                <View
+                  className="flex flex-row gap-2 justify-center items-center mx-0"
+                >
+                  <View className="w-1/3 justify-center items-center">
+                    <View
+                      className="bg-gray-200 rounded-full px-4 py-2"
+                    >
+                      <Text>{block?.usedArea?.toFixed(2)}</Text>
+                    </View>
+                    <Text
+                      className="text-center text-xs font-normal"
+                    >hectares</Text>
+                  </View>
+                  <View className="w-1/3 justify-center items-center">
+                    <View
+                      className="bg-gray-200 rounded-full px-4 py-2"
+                    >
+                      <Text>
+                        {block?.density?.mode === "Irregular"
+                          ? block?.density?.mode
+                          : block?.density?.mode === "Regular"
+                            ? `${block?.density.length} por ${block?.density?.width}`
+                            : ""}
+                      </Text>
+                    </View>
+                    <Text
+                      className="text-center text-xs font-normal"
+                    >compasso</Text>
+                  </View>
+                  <View className="w-1/3 justify-center items-center">
+                    <View
+                      className="bg-gray-200 rounded-full px-4 py-2"
+                    >
+                      <Text>{block?.trees}</Text>
+                    </View>
+                    <Text
+                      className="text-center text-xs font-normal"
+                    >árvores</Text>
+                  </View>
+                </View>
+
+                <View
+                  className="flex flex-row justify-between mt-2 ml-4"
+                >
+                  <Text
+                    className="text-sm font-bold text-gray-500"
+                  >
+                    Tipos de planta
+                  </Text>
+                  {customUserData?.role !== roles.provincialManager && (
+                    <TouchableOpacity
+                      disabled={
+                        farmland?.status ===
+                        resourceValidation.status.validated}
+                      onPress={() => {
+                        setPlantTypes([]);
+                        setClones([]);
+                        setPresentEditFarmland(true);
+                        setDataToBeUpdated("plantType");
+                        setBlockTrees(block?.trees);
+                        setBlockId(block._id);
+                        setIsEditBlockVisible(true);
+                      }}
+                    >
+                      <Icon
+                        name="edit"
+                        size={20}
+                        color={
                           farmland?.status ===
-                          resourceValidation.status.validated}
-                        style={{
-                          borderRadius: 50,
-                          backgroundColor: COLORS.lightgrey,
-                          padding: 6,
-                          justifyContent: "center",
-                          alignItems: "center",
-                        }}
-                        onPress={() => {
-                          setPlantTypes([]);
-                          setClones([]);
-                          setPresentEditFarmland(true);
-                          setDataToBeUpdated("plantType");
-                          setBlockTrees(block?.trees);
-                          setBlockId(block._id);
-                          setIsEditBlockVisible(true);
-                        }}
-                      >
-                        <Icon
-                          name="edit"
-                          size={20}
-                          color={
-                            farmland?.status ===
-                              resourceValidation.status.validated
-                              ? COLORS.grey
-                              : farmland?.status ===
-                                resourceValidation.status.invalidated
-                                ? COLORS.red
-                                : COLORS.black
-                          }
-                        />
-                      </TouchableOpacity>
-                    )}
-                  </Box>
-                </Stack>
+                            resourceValidation.status.validated
+                            ? COLORS.grey
+                            : farmland?.status ===
+                              resourceValidation.status.invalidated
+                              ? COLORS.danger
+                              : COLORS.grey
+                        }
+                      />
+                    </TouchableOpacity>
+                  )}
+                </View>
+
+                <View
+                  key={index}
+                  className="flex flex-row justify-between mb-1 mt-2 gap-6"
+                >
+                  <View
+                    className="justify-center items-end w-2/3"
+                  >
+                    <Text
+                      className="text-sm text-gray-400 font-bold"
+                    >Tipo</Text>
+                  </View>
+                  <View
+                    className="justify-center items-start w-1/3"
+                  >
+                    <Text
+                      className="text-sm text-gray-400 font-bold"
+                    >Árvores</Text>
+                  </View>
+                </View>
+
+
                 {block?.sameTypeTrees?.length > 0 ? (
                   block?.sameTypeTrees?.map((sameType, index) => (
-                    <Box key={index}>
-                      <Stack
-                        w="100%"
-                        direction="row"
+
+                    <View
+                      key={index}
+                      className="flex flex-row justify-between mb-1 mt-0 gap-6"
+                    >
+                      <View
+                        className="justify-center items-end w-2/3"
                       >
-                        <Box w="60%" style={{}}>
-                          <Text
-                            style={{
-                              color: COLORS.grey,
-                              fontSize: responsiveFontSize(1.8),
-                              fontFamily: "JosefinSans-Regular",
-                            }}
-                          >
-                            <Icon
-                              name="arrow-forward"
-                              color={COLORS.grey}
-                              size={10}
-                            />{" "}
-                            {sameType?.treeType}
-                          </Text>
-                        </Box>
-                        <Box w="40%">
-                          <Text
-                            style={{
-                              color: COLORS.grey,
-                              fontSize: responsiveFontSize(1.8),
-                              fontFamily: "JosefinSans-Regular",
-                            }}
-                          >
-                            {sameType?.trees} árvores
-                          </Text>
-                        </Box>
-                      </Stack>
-                    </Box>
+                        <Text
+                          className="text-sm text-gray-400 font-normal"
+                        >{sameType?.treeType}</Text>
+                      </View>
+                      <View
+                        className="justify-center items-start w-1/3"
+                      >
+                        <Text
+                          className="text-sm text-gray-400 font-normal"
+                        >{sameType?.trees}</Text>
+                      </View>
+                    </View>
                   ))
                 ) : (
                   <Text
@@ -946,36 +872,35 @@ const FarmlandData = ({
                 >
                   <CustomDivider />
                 </Box>
-              </Box>
+              </View>
             ))}
 
-            {/* Resource signature (registered by, approved by, rejected by, modified by) */}
-            <ResourceSignature
-              resource={farmland}
-              customUserData={customUserData}
-            />
+
 
             {/* type and send messages (motives) of invalidation */}
             {farmland?.status === resourceValidation.status.invalidated &&
               (
-                <InvalidationMessage
-                  resource={farmland}
-                  resourceType={resourceTypes.farmland}
-                />
+                <View
+                  className="w-full self-center"
+                >
+                  <InvalidationMessage
+                    resource={farmland}
+                    resourceType={resourceTypes.farmland}
+                  />
+                </View>
               )}
 
-            {/* Validation options: to validate or invalidate resource  */}
-            {/* {roles.haveReadAndValidatePermissions.some(role => role === customUserData?.role) &&
-              farmland?.status === resourceValidation.status.pending && (
-                <ValidationOptions
-                  resource={farmland}
-                  resourceType={resourceTypes.farmland}
-                  customUserData={customUserData}
-                  realm={realm}
-                  alert={alert}
-                  setAlert={setAlert}
-                />
-              )} */}
+            {/* Resource signature (registered by, approved by, rejected by, modified by) */}
+            <View
+              className="w-full self-center"
+            >
+              <ResourceSignature
+                resource={farmland}
+                customUserData={customUserData}
+              />
+            </View>
+
+
 
           </View>
           <EditFarmlandData
