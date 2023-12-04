@@ -40,6 +40,7 @@ import AwesomeAlert from "react-native-awesome-alerts";
 import { errorMessages } from "../../consts/errorMessages";
 import { KeyboardAwareScrollView } from "react-native-keyboard-tools";
 import PrimaryButton from "../Buttons/PrimaryButton";
+import { backgroundStyle } from "../../styles/globals";
 const { useRealm, useQuery, useObject } = realmContext;
 
 export default function FarmlandBlockRegistration({
@@ -183,7 +184,6 @@ export default function FarmlandBlockRegistration({
   return (
     <Modal
       visible={isOverlayVisible}
-      // transparent
       onDismiss={() => {
         turnOffOverlay();
         if (treeRedFlag || areaRedFlag) {
@@ -207,13 +207,13 @@ export default function FarmlandBlockRegistration({
           style={{
             paddingHorizontal: 10,
             minHeight: "100%",
-            backgroundColor: COLORS.ghostwhite,
             opacity: scale?.interpolate({
               inputRange: [0, 1],
               outputRange: [0, 1],
             }),
             transform: [{ scale }],
           }}
+          className={`${backgroundStyle}`}
         >
           <AwesomeAlert
             show={alert}
@@ -628,7 +628,7 @@ export default function FarmlandBlockRegistration({
                         center
                         fontFamily="JosefinSans-Bold"
                         containerStyle={{
-                          backgroundColor: COLORS.ghostwhite,
+                          backgroundColor: "transparent",
                         }}
                         textStyle={{
                           fontWeight: "120",
@@ -669,7 +669,7 @@ export default function FarmlandBlockRegistration({
                         center
                         fontFamily="JosefinSans-Bold"
                         containerStyle={{
-                          backgroundColor: COLORS.ghostwhite,
+                          backgroundColor: "transparent",
                         }}
                         textStyle={{
                           fontWeight: "120",

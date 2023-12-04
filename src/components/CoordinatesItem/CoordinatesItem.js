@@ -40,135 +40,115 @@ const CoordinatesItem = ({ item, farmland }) => {
   }
 
   return (
-    <Center>
-      <View
-        style={{
-          padding: 10,
-          marginVertical: 10,
-          marginHorizontal: 10,
-          borderColor: "#005000",
-          width: "98%",
-          flex: 1,
-          shadowColor: "#005000",
-          shadowOffset: {
-            width: 0,
-            height: 3,
-          },
-          shadowOpacity: 0.27,
-          shadowRadius: 4.65,
-          elevation: 3,
-          opacity: 1,
+    <View className="bg-white m-2 p-2 self-center rounded-md">
+      <AwesomeAlert
+        show={deleteAlert}
+        showProgress={false}
+        title={"Coordenadas do Ponto"}
+        message={"Apagar as coordenados deste ponto!"}
+        closeOnTouchOutside={true}
+        closeOnHardwareBackPress={true}
+        showCancelButton={true}
+        showConfirmButton={true}
+        cancelText="Não Apagar"
+        confirmText="   Apagar   "
+        cancelButtonColor={COLORS.main}
+        confirmButtonColor={COLORS.danger}
+        onCancelPressed={() => {
+          setDeleteAlert(false);
         }}
-      >
-        <AwesomeAlert
-          show={deleteAlert}
-          showProgress={false}
-          title={"Coordenadas do Ponto"}
-          message={"Apagar as coordenados deste ponto!"}
-          closeOnTouchOutside={true}
-          closeOnHardwareBackPress={true}
-          showCancelButton={true}
-          showConfirmButton={true}
-          cancelText="Não Apagar"
-          confirmText="   Apagar   "
-          cancelButtonColor={COLORS.main}
-          confirmButtonColor={COLORS.danger}
-          onCancelPressed={() => {
-            setDeleteAlert(false);
-          }}
-          onConfirmPressed={() => {
-            setDeleteAlert(false);
-            FLAG = true;
-          }}
-        />
+        onConfirmPressed={() => {
+          setDeleteAlert(false);
+          FLAG = true;
+        }}
+      />
 
-        <Stack direction="row" w="100%">
+      <Stack direction="row" w="100%">
+        <Box
+          w="20%"
+          style={{
+            flex: 1,
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Text
+            style={{
+              color: "#000",
+              fontFamily: "JosefinSans-Bold",
+              fontSize: 20,
+            }}
+          >
+            P{item?.position}
+          </Text>
+        </Box>
+        <Box w="60%">
+          <Stack direction="row">
+            <Box>
+              <Text
+                style={{
+                  color: "#000",
+                  fontFamily: "JosefinSans-Regular",
+                }}
+              >
+                Latitude:{"  "}
+              </Text>
+              <Text
+                style={{
+                  color: "#000",
+                  fontFamily: "JosefinSans-Regular",
+                }}
+              >
+                Longitude:{"  "}
+              </Text>
+            </Box>
+            <Box>
+              <Text
+                style={{
+                  color: "#000",
+                  fontFamily: "JosefinSans-Regular",
+                }}
+              >
+                {item?.latitude}
+              </Text>
+              <Text
+                style={{
+                  color: "#000",
+                  fontFamily: "JosefinSans-Regular",
+                }}
+              >
+                {item?.longitude}
+              </Text>
+            </Box>
+          </Stack>
+        </Box>
+        <Box w="20%" alignItems={"center"}>
           <Box
-            w="20%"
+            w="50%"
             style={{
               flex: 1,
               justifyContent: "center",
               alignItems: "center",
             }}
           >
-            <Text
-              style={{
-                color: "#000",
-                fontFamily: "JosefinSans-Bold",
-                fontSize: 20,
+            <TouchableOpacity
+              disabled={item?.icon === "check-circle" ? true : false}
+              onPress={() => {
+                if (item.icon === "delete-forever") {
+                  setDeleteAlert(true);
+                }
               }}
             >
-              P{item?.position}
-            </Text>
+              <Icon
+                name={item.icon}
+                size={25}
+                color={item.icon === "check-circle" ? COLORS.main : "red"}
+              />
+            </TouchableOpacity>
           </Box>
-          <Box w="60%">
-            <Stack direction="row">
-              <Box>
-                <Text
-                  style={{
-                    color: "#000",
-                    fontFamily: "JosefinSans-Regular",
-                  }}
-                >
-                  Latitude:{"  "}
-                </Text>
-                <Text
-                  style={{
-                    color: "#000",
-                    fontFamily: "JosefinSans-Regular",
-                  }}
-                >
-                  Longitude:{"  "}
-                </Text>
-              </Box>
-              <Box>
-                <Text
-                  style={{
-                    color: "#000",
-                    fontFamily: "JosefinSans-Regular",
-                  }}
-                >
-                  {item?.latitude}
-                </Text>
-                <Text
-                  style={{
-                    color: "#000",
-                    fontFamily: "JosefinSans-Regular",
-                  }}
-                >
-                  {item?.longitude}
-                </Text>
-              </Box>
-            </Stack>
-          </Box>
-          <Box w="20%" alignItems={"center"}>
-            <Box
-              w="50%"
-              style={{
-                flex: 1,
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              <TouchableOpacity
-                disabled={item?.icon === "check-circle" ? true : false}
-                onPress={() => {
-                  if (item.icon === "delete-forever") {
-                    setDeleteAlert(true);
-                  }
-                }}
-              >
-                <Icon
-                  name={item.icon}
-                  size={25}
-                  color={item.icon === "check-circle" ? COLORS.main : "red"}
-                />
-              </TouchableOpacity>
-            </Box>
-          </Box>
-        </Stack>
-      </View>
-    </Center>
+        </Box>
+      </Stack>
+    </View>
   );
 };
 

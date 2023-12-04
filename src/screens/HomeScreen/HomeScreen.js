@@ -34,21 +34,13 @@ import { getPercentage, getPercentage2 } from "../../helpers/getPercentage";
 import { useUser } from "@realm/react";
 import { realmContext } from "../../models/realmContext";
 import ProvincialManager from "./ProvincialManager";
-import { Badge } from "../../components/ui/Badge";
 import UserPerformanceItem from "../../components/UserPerformanceItem/UserPerformanceItem";
 import { backgroundStyle } from "../../styles/globals";
-// import InternetInfo from "../../components/InternetInfo/InternetInfo";
+
 const { useRealm, useQuery } = realmContext;
 
 // sync subscription by this name
 const userStats = "userStats";
-
-const districtSingleFarmers = "districtSingleFarmers";
-const districtGroupFarmers = "districtGroupFarmers";
-const districtInstitutionFarmers = "districtInstitutionFarmers";
-const districtFarmlands = "districtFarmlands";
-const serviceProviderSubs = "serviceProviderSubs";
-const actorMembershipSubs = "actorMembershipSubs";
 
 // realm variable used for manual client reset in the syncConfig
 export let realm;

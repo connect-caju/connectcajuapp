@@ -55,8 +55,6 @@ export default function GroupFarmerForm({
   setGroupAdminPost,
   groupVillage,
   setGroupVillage,
-  // groupManagerName, setGroupManagerName,
-  // groupManagerPhone, setGroupManagerPhone,
   groupOperatingLicence,
   setGroupOperatingLicence,
   groupNuel,
@@ -106,7 +104,7 @@ export default function GroupFarmerForm({
                   center
                   fontFamily="JosefinSans-Regular"
                   containerStyle={{
-                    backgroundColor: COLORS.ghostwhite,
+                    backgroundColor: "transparent",
                   }}
                   textStyle={{
                     fontWeight: "120",
@@ -149,7 +147,7 @@ export default function GroupFarmerForm({
                   center
                   fontFamily="JosefinSans-Regular"
                   containerStyle={{
-                    backgroundColor: COLORS.ghostwhite,
+                    backgroundColor: "transparent",
                   }}
                   textStyle={{
                     fontWeight: "120",

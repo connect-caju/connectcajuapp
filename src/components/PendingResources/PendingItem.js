@@ -62,11 +62,7 @@ const PendingItem = ({ item, refresh, setRefresh }) => {
 
     return (
         <View
-            style={{
-                paddingHorizontal: 2,
-                marginVertical: 5,
-                shadowColor: COLORS.main,
-            }}
+            className="bg-white mx-2 my-1 rounded-md "
         >
             {
                 (item.flag === resourceTypes.farmland) &&

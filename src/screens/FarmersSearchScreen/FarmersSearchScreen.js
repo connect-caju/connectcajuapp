@@ -20,6 +20,7 @@ import SearchNotFound from "../../components/LottieComponents/SearchNotFound";
 import LoadingIndicator from "../../components/LottieComponents/LoadingIndicator";
 import { useCallback } from "react";
 import getFarmerCategory from "../../helpers/getFarmerCategory";
+import { backgroundStyle } from "../../styles/globals";
 const { useRealm } = realmContext;
 
 
@@ -112,18 +113,13 @@ const CriteriaItem = ({ item, handleFocusedOption, focusedOption, selectedCriter
 const FoundFarmerItem = ({ item, navigation, farmerType }) => {
     return (
         <TouchableOpacity
-            style={{
-                flexDirection: "row",
-                marginHorizontal: 10,
-                marginVertical: 5,
-                elevation: 1,
-            }}
             onPress={() => {
                 navigation.navigate("Profile", {
                     ownerId: item._id,
                     farmerType,
                 });
             }}
+            className="bg-white flex flex-row mx-2 my-1 rounded-md py-2"
         >
             <Avatar
                 size={50}
@@ -363,16 +359,14 @@ const FarmersSearchScreen = ({ navigation, route }) => {
 
     return (
         <SafeAreaView
-            style={{
-                flex: 1,
-            }}
+            className={`flex flex-1 ${backgroundStyle}`}
         >
             <Animated.View
                 entering={SlideInRight}
                 style={{
                     height: "100%",
                     width: "100%",
-                    backgroundColor: COLORS.white,
+                    // backgroundColor: COLORS.white,
                 }}
             >
                 <View
@@ -617,9 +611,9 @@ const FarmersSearchScreen = ({ navigation, route }) => {
                                     data={searchResults}
                                     keyExtractor={keyExtractor}
                                     showsVerticalScrollIndicator={false}
-                                    ItemSeparatorComponent={
-                                        <CustomDivider />
-                                    }
+                                    // ItemSeparatorComponent={
+                                    //     <CustomDivider />
+                                    // }
                                     // ListHeaderComponent={<View style={{ width: 6, }} />}
                                     snapToInterval={86}
                                     decelerationRate="fast"

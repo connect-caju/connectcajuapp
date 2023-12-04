@@ -8,6 +8,7 @@ import COLORS from "../../consts/colors";
 import { Dimensions } from "react-native";
 import { ScrollView } from "react-native";
 import { Icon } from "@rneui/base";
+import tw from "twrnc";
 
 import ValidationOptions from "../ValidationOptions/ValidationOptions";
 import { resourceTypes } from "../../consts/resourceTypes";
@@ -22,6 +23,7 @@ import GroupDetails from "./GroupDetails";
 import { useEffect } from "react";
 import FarmlandDetails from "./FarmlandDetails";
 import { farmlandOwners } from "../../consts/farmlandOwners";
+import { backgroundStyle } from "../../styles/globals";
 const { useRealm } = realmContext;
 
 const ValidationCard = ({ modalVisible, setModalVisible, handleModalVisible, resourceId, resourceType, }) => {
@@ -90,10 +92,7 @@ const ValidationCard = ({ modalVisible, setModalVisible, handleModalVisible, res
                 deviceHeight={height}
                 deviceWidth={width}
                 onBackdropPress={handleModalVisible}
-                style={{
-                    margin: 0,
-                    backgroundColor: COLORS.white,
-                }}
+                style={tw`m-0 ${backgroundStyle}`}
             >
                 <View
                     style={{
@@ -101,6 +100,7 @@ const ValidationCard = ({ modalVisible, setModalVisible, handleModalVisible, res
                         height: 40,
                         padding: 6,
                     }}
+                    // className="bg-emerald-900"
                 >
                     <Text
                         style={{
@@ -129,7 +129,7 @@ const ValidationCard = ({ modalVisible, setModalVisible, handleModalVisible, res
                 <ScrollView
                     keyboardShouldPersistTaps="always"
                     contentContainerStyle={{
-                        backgroundColor: COLORS.ghostwhite,
+                        // backgroundColor: COLORS.ghostwhite,
                     }}
                 >
                     {

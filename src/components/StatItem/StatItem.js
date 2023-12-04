@@ -22,17 +22,7 @@ export default function StatItem({ item, route }) {
           userName: item?.userName,
         });
       }}
-      style={{
-        padding: 6,
-        alignSelf: "center",
-        margin: 10,
-        elevation: 1,
-        width: "100%",
-        flex: 1,
-        borderWidth: 1,
-        borderColor: COLORS.lightestgrey,
-        shadowColor: COLORS.main,
-      }}
+      className="flex flex-1 bg-white mx-2 my-1 py-2 rounded-md "
     >
       <Stack direction="row" w="100%">
         <Center w="20%">

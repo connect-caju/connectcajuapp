@@ -12,6 +12,7 @@ import RegisteredByCurrentUser from "../../components/RegisteredByCurrentUser/Re
 import InvalidatedFarmers from "../../components/InvalidatedFarmers/InvalidatedFarmers";
 import RegisteredByAllUsers from "../../components/RegisteredByAllUsers/RegisteredByAllUsers";
 import { farmerTypes } from "../../consts/farmerTypes";
+import { backgroundStyle } from "../../styles/globals";
 
 
 const filterByCriteria = [
@@ -58,10 +59,7 @@ const FarmersListLayout = ({ route, navigation }) => {
 
     return (
         <SafeAreaView
-            style={{
-                backgroundColor: COLORS.ghostwhite,
-                flex: 1,
-            }}
+            className={`flex flex-1 ${backgroundStyle}`}
         >
             <View
                 style={{

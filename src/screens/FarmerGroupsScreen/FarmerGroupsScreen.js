@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 /* eslint-disable prettier/prettier */
 /* eslint-disable react/prop-types */
 import React, { useState, useEffect } from "react";

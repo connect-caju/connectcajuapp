@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 /* eslint-disable react/prop-types */
 /* eslint-disable prettier/prettier */
 /* eslint-disable react-native/no-inline-styles */
@@ -74,18 +75,8 @@ export default function GroupRepresentativeItem({
 
   return (
     <View
-      // exiting={LightSpeedOutRight}
-      style={{
-        paddingHorizontal: 2,
-        marginVertical: 10,
-        minHeight: 60,
-        width: "95%",
-        alignSelf: "center",
-        flex: 1,
-        backgroundColor: COLORS.lightestgrey,
-        elevation: 1,
-        // opacity: 1,
-      }}
+      exiting={LightSpeedOutRight}
+      className="flex flex-1 bg-white mx-2 py-2 my-1 rounded-md"
     >
       <Stack direction="row" w="100%">
         <Box

@@ -9,17 +9,12 @@ import FarmersScreen from "../../screens/FarmersScreen/FarmersScreen";
 import FarmerRegistration from "../../screens/FarmerRegistrationScreens/FarmerRegistration";
 import FarmlandRegistration from "../../screens/FarmlandRegistrationScreens/FarmlandRegistration";
 import FarmlandAreaAuditScreen from "../../screens/FarmlandAreaAuditScreen/FarmlandAreaAuditScreen";
-// import FarmerScreen from "../../screens/FarmerScreen/FarmerScreen.DEPRECTATED"
-// import InstitutionScreen from "../../screens/InstitutionScreen/InstitutionScreen.DEPRECATED"
-// import GroupScreen from "../../screens/GroupScreen/GroupScreen.DEPRECATED"
 import UserStat from "../../screens/UserStatScreen/UserStat";
 import GeolocationScreen from "../../screens/GeolocationScreen/GeolocationScreen";
 import MembershipScreen from "../../screens/MembershipScreen/MembershipScreen";
 import GroupRepresentativeScreen from "../../screens/GroupRepresentantiveScreen/GroupRepresentativeScreen";
 import GroupMembersScreen from "../../screens/GroupMembersScreen/GroupMembersScreen";
 import FarmerGroupsScreen from "../../screens/FarmerGroupsScreen/FarmerGroupsScreen";
-// import FarmersListScreen from "../../screens/FarmersListScreen/FarmersListScreen"
-// import DuplicatesAlert from "../../components/Alerts/DuplicatesAlert"
 import CameraScreen from "../../screens/CameraScreen/CameraScreen";
 import ProfileScreen from "../../screens/ActorScreen/ProfileScreen";
 import FarmersListLayout from "../../screens/FarmersListLayout/FarmersListLayout";

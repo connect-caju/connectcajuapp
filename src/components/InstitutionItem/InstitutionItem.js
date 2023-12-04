@@ -49,11 +49,7 @@ const InstitutionItem = ({ item, route }) => {
 
   return (
     <View
-      style={{
-        paddingHorizontal: 8,
-        marginVertical: 5,
-        shadowColor: COLORS.main,
-      }}
+    className="bg-white mx-2 my-1 py-1 rounded-md"
     >
       <Box
         style={{

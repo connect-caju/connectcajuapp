@@ -10011,7 +10011,7 @@ table@^6.0.9:
     string-width "^4.2.3"
     strip-ansi "^6.0.1"
 
-tailwindcss@^3.3.2:
+tailwindcss@^3.3.2, tailwindcss@>=2.0.0:
   version "3.3.2"
   resolved "https://registry.npmjs.org/tailwindcss/-/tailwindcss-3.3.2.tgz"
   integrity sha512-9jPkMiIBXvPc2KywkraqsUfbfj+dHDb+JPWtSJa9MLFdrPyazI7q6WX2sUrm7R9eVR7qqv3Pas7EvQFzxKnI6w==
@@ -10244,6 +10244,13 @@ tweetnacl@^0.14.3, tweetnacl@~0.14.0:
   version "0.14.5"
   resolved "https://registry.npmjs.org/tweetnacl/-/tweetnacl-0.14.5.tgz"
   integrity sha512-KXXFFdAbFXY4geFIwoyNK+f5Z1b7swfXABfL7HXCmoIWMKU3dmS26672A4EeQtDzLKy7SXmfBu51JolvEKwtGA==
+
+twrnc@^3.6.5:
+  version "3.6.5"
+  resolved "https://registry.npmjs.org/twrnc/-/twrnc-3.6.5.tgz"
+  integrity sha512-j/bNO20jroz8jXCbVooqTF67QyP7QGFMJQI7dTwm7RcMEreVON2K0FnRR/c7kroXtJUZTrz4Ukel+JXT0a1Oqw==
+  dependencies:
+    tailwindcss ">=2.0.0"
 
 type-check@^0.4.0:
   version "0.4.0"

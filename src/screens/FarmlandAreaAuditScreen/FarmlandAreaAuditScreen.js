@@ -35,6 +35,7 @@ import { calculatePolygonArea } from "../../helpers/calculatePolygonArea";
 import { SuccessLottie } from "../../components/LottieComponents/SuccessLottie";
 import { farmerTypes } from "../../consts/farmerTypes";
 import { resourceValidation } from "../../consts/resourceValidation";
+import { backgroundStyle } from "../../styles/globals";
 const { useRealm, useObject, useQuery } = realmContext;
 
 const FarmlandAreaAuditScreen = ({ route, navigation }) => {
@@ -252,10 +253,7 @@ const FarmlandAreaAuditScreen = ({ route, navigation }) => {
 
   return (
     <SafeAreaView
-      style={{
-        flex: 1,
-        backgroundColor: COLORS.ghostwhite,
-      }}
+      className={`flex flex-1 ${backgroundStyle}`}
     >
       <AwesomeAlert
         show={failedGeoLocationRequest}
@@ -344,119 +342,71 @@ const FarmlandAreaAuditScreen = ({ route, navigation }) => {
         />
       )}
 
-      <Box
+      <View
         style={{
-          backgroundColor: COLORS.fourth,
-          paddingTop: 20,
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "space-between",
           paddingBottom: 10,
+          backgroundColor: COLORS.fourth,
         }}
       >
-        <Stack
-          direction="row"
-          w="100%"
-          // pt="3"
-          bg={COLORS.fourth}
+        <View
+          style={{
+
+            width: "10%",
+            marginLeft: 5,
+          }}
         >
-          <Box>
-            <Pressable
-              onPress={() => {
-                navigateBack();
-              }}
-              style={{
-                position: "absolute",
-                left: 4,
-                top: 4,
-                flexDirection: "row",
-                alignItems: "center",
-              }}
-            >
-              <Icon name="arrow-back" color={COLORS.black} size={30} />
-            </Pressable>
-          </Box>
-          <Center w="100%">
-            <Text
-              style={{
-                textAlign: "center",
-                fontFamily: "JosefinSans-Bold",
-                fontSize: 18,
-                color: COLORS.black,
-              }}
-            >
-              Pontos Extremos
-            </Text>
-          </Center>
-        </Stack>
-        <View>
-          {farmland?.extremeCoordinates.length > 0 && (
-            <View
-              style={{
-                flexDirection: "row",
-                justifyContent: "space-around",
-                marginHorizontal: 10,
-                marginTop: 10,
-              }}
-              >
-              <View
-                style={{
-                  // marginRight: 10,
-                  width: "65%",
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
-                <Text
-                  style={{
-                    color: COLORS.grey,
-                    fontFamily: "Roboto-Regular",
-                    fontSize: 14,
-                    textAlign: "center",
-                  }}
-                >
-                  Pontos extremos da área do pomar.
-                </Text>
-              </View>
-              <TouchableOpacity
-                style={{
-                  alignItems: "flex-end",
-                  marginLeft: 10,
-                  width: "35%",
-                }}
-                onPress={async () => await getGeolocation()}
-              >
-                <GeoPin />
-              </TouchableOpacity>
-            </View>
-          )}
-
+          <Pressable
+            onPress={() => {
+              navigateBack();
+            }}
+            style={{
+              position: "absolute",
+              left: 4,
+              top: 4,
+              alignItems: "center",
+            }}
+          >
+            <Icon name="arrow-back" color={COLORS.black} size={30} />
+          </Pressable>
         </View>
-      </Box>
-
+        <View
+          style={{
+            paddingTop: 5,
+            alignItems: "center",
+          }}
+        >
+          <Text
+            style={{
+              textAlign: "center",
+              fontFamily: "JosefinSans-Bold",
+              fontSize: 18,
+              color: COLORS.black,
+            }}
+          >
+            Pontos Extremos
+          </Text>
+        </View>
+        <View >
+          {farmland?.extremeCoordinates.length > 0 && (
+            <TouchableOpacity
+              onPress={async () => await getGeolocation()}
+            >
+              <GeoPin />
+            </TouchableOpacity>
+          )}
+        </View>
+      </View>
 
 
 
       {farmland?.extremeCoordinates.length === 0 && (
         <Center style={{ minHeight: "100%" }}>
-          <Box
-            style={{
-              justifyContent: "center",
-              alignItems: "center",
-              borderRadius: 100,
-              borderWidth: 10,
-              borderColor: COLORS.main,
-              shadowColor: COLORS.main,
-              shadowOffset: {
-                width: 0,
-                height: 3,
-              },
-              shadowOpacity: 0.5,
-              shadowRadius: 1.65,
-              elevation: 3,
-            }}
-          >
-            <TouchableOpacity onPress={async () => await getGeolocation()}>
-              <Icon name="location-pin" size={60} color={COLORS.main} />
-            </TouchableOpacity>
-          </Box>
+          <TouchableOpacity onPress={async () => await getGeolocation()}>
+            <GeoPin />
+          </TouchableOpacity>
           <Box
             style={{
               backgroundColor: COLORS.lightestgrey,
@@ -497,12 +447,12 @@ const FarmlandAreaAuditScreen = ({ route, navigation }) => {
           style={{
             backgroundColor: COLORS.main,
             borderRadius: 10,
-            paddingHorizontal: 10,
-            paddingVertical: 10,
+            padding: 10,
             margin: 10,
+            height: 50,
+            justifyContent: "center",
           }}
         >
-
           <Text
             style={{
               fontSize: 15,

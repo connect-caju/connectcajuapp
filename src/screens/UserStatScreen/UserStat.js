@@ -23,6 +23,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import PendingResources from "../../components/PendingResources/PendingResources";
 import { resourceTypes } from "../../consts/resourceTypes";
+import { backgroundStyle } from "../../styles/globals";
 
 const { useRealm } = realmContext;
 
@@ -134,10 +135,7 @@ export default function UserStat({ route, navigation }) {
 
   return (
     <SafeAreaView
-      style={{
-        flex: 1,
-        backgroundColor: "ghostwhite",
-      }}
+      className={`flex flex-1 ${backgroundStyle}`}
     >
       <View
         style={{
@@ -164,10 +162,6 @@ export default function UserStat({ route, navigation }) {
               }}
               onPress={() => {
                 setRefresh(!refresh);
-                // setPendingFarmers(false);
-                // setPendingFarmlands(false);
-                // setInvalidatedFarmers(false);
-                // setInvalidatedFarmlands(false);
               }}
             >
               <Center>

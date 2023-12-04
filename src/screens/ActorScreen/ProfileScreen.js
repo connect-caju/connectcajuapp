@@ -51,6 +51,7 @@ import GroupMembersCard from "../../components/GroupMembersCard/GroupMembersCard
 import { groupTypes } from "../../consts/groupTypes";
 import FarmlandData from "../../components/FarmlandData/FarmlandData";
 import { roles } from "../../consts/roles";
+import { backgroundStyle } from "../../styles/globals";
 const { useRealm, useQuery, useObject } = realmContext;
 
 const singleFarmer = "singleFarmer";
@@ -189,13 +190,14 @@ const ProfileScreen = ({ route, navigation }) => {
     <BottomSheetModalProvider>
       <Animated.ScrollView
         exiting={FlipOutYLeft}
-        style={styles.container}
+        className={`flex flex-1 ${backgroundStyle}`}
       >
         <View
           style={[
             styles.profileContainer,
-            { backgroundColor: farmer?.image ? COLORS.dark : COLORS.dark },
+            // { backgroundColor: farmer?.image ? COLORS.dark : COLORS.dark },
           ]}
+          className="bg-emerald-900"
         >
           <View
             style={{

@@ -129,7 +129,7 @@ export default function IndividualFarmerForm({
                 center
                 fontFamily="JosefinSans-Regular"
                 containerStyle={{
-                  backgroundColor: COLORS.ghostwhite,
+                  backgroundColor: "transparent",
                 }}
                 textStyle={{
                   fontWeight: "100",
@@ -172,7 +172,7 @@ export default function IndividualFarmerForm({
                 center
                 fontFamily="JosefinSans-Regular"
                 containerStyle={{
-                  backgroundColor: COLORS.ghostwhite,
+                  backgroundColor: "transparent",
                 }}
                 textStyle={{
                   fontWeight: "100",
@@ -1019,7 +1019,7 @@ export default function IndividualFarmerForm({
                 center
                 fontFamily="JosefinSans-Regular"
                 containerStyle={{
-                  backgroundColor: COLORS.ghostwhite,
+                  backgroundColor: "transparent",
                 }}
                 textStyle={{
                   fontWeight: "100",
@@ -1062,7 +1062,7 @@ export default function IndividualFarmerForm({
                 center
                 fontFamily="JosefinSans-Regular"
                 containerStyle={{
-                  backgroundColor: COLORS.ghostwhite,
+                  backgroundColor: "transparent",
                 }}
                 textStyle={{
                   fontWeight: "100",

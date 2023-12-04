@@ -26,6 +26,7 @@ import { SuccessLottie } from "../../components/LottieComponents/SuccessLottie";
 import { farmerTypes } from "../../consts/farmerTypes";
 import { resourceTypes } from "../../consts/resourceTypes";
 import { resourceValidation } from "../../consts/resourceValidation";
+import { backgroundStyle } from "../../styles/globals";
 const { useRealm, useObject, useQuery } = realmContext;
 
 const GeolocationScreen = ({ route, navigation }) => {
@@ -261,10 +262,7 @@ const GeolocationScreen = ({ route, navigation }) => {
 
   return (
     <SafeAreaView
-      style={{
-        flex: 1,
-        backgroundColor: COLORS.ghostwhite,
-      }}
+      className={`flex flex-1 ${backgroundStyle}`}
     >
       <AwesomeAlert
         show={failedGeoLocationRequest}

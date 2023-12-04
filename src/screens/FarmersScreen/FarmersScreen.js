@@ -38,6 +38,7 @@ import FarmerTypeCard from "../../components/FarmerTypeCard/FarmerTypeCard";
 import CustomDivider from "../../components/Divider/CustomDivider";
 import RegistrationButton from "../../components/RegistrationButton/RegistrationButton";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import { backgroundStyle } from "../../styles/globals";
 const { useRealm, useQuery } = realmContext;
 
 const provincialStats = "provincialStats";
@@ -242,12 +243,7 @@ export default function FarmersScreen({ route, navigation }) {
 
   return (
     <SafeAreaView
-      style={{
-        flex: 1,
-        paddingBottom: 100,
-        backgroundColor: "ghostwhite",
-
-      }}
+      className={`flex flex-1 pb-40 ${backgroundStyle}`}
     >
       {/*
       Show this if the user is a field agent only

@@ -35,8 +35,13 @@ import { syncConfig } from "./syncConfig";
 import { useState } from "react";
 import ClientResetModal from "./components/Modals/ClientResetModal";
 import { setCustomText } from "react-native-global-props";
+// import { useDeviceContext } from "twrnc";
 
 export default function App() {
+
+  // allowing prefixes to twrnc (dark, focus, screen breakpoints, etc)
+  // useDeviceContext(); 
+
   const [isManualResetConfirmed, setIsManualResetConfirmed] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
 

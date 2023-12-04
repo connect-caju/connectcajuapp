@@ -57,6 +57,7 @@ import { SuccessLottie } from "../../components/LottieComponents/SuccessLottie";
 import { farmerTypes } from "../../consts/farmerTypes";
 import { resourceTypes } from "../../consts/resourceTypes";
 import { farmlandOwners } from "../../consts/farmlandOwners";
+import { backgroundStyle } from "../../styles/globals";
 const { useRealm, useQuery, } = realmContext;
 
 const farmlandResourceMessage = "farmlandResourceMessage";
@@ -623,7 +624,9 @@ export default function FarmlandRegistration({ route, navigation }) {
   };
 
   return (
-    <SafeAreaView style={[styles.container, {}]}>
+    <SafeAreaView
+      className={`flex flex-1 mb-10 ${backgroundStyle}`}
+    >
       <Animated.View
         entering={SlideInLeft.duration(600)}
       >
@@ -770,10 +773,11 @@ export default function FarmlandRegistration({ route, navigation }) {
           }}
         >
           <Stack style={{
-            elevation: 2,
+            elevation: 1,
             borderWidth: 1,
+            paddingVertical: 5,
             borderColor: COLORS.lightgrey,
-            backgroundColor: COLORS.ghostwhite,
+            backgroundColor: "transparent",
 
           }} direction="row" pb="1">
             <Box w="3%"></Box>
@@ -871,7 +875,7 @@ export default function FarmlandRegistration({ route, navigation }) {
                 padding: 5,
               }}
             >
-              <FontAwesomeIcon icon={faTree} size={30} color={COLORS.white} />
+              <FontAwesomeIcon icon={faTree} size={30} color={COLORS.lightestgrey} />
             </Center>
           </Box>
 

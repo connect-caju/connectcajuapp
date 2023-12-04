@@ -34,6 +34,7 @@ import { generateUniqueNumber } from "../../helpers/generateUniqueNumber";
 import { dateLimits } from "../../helpers/dates";
 import { farmerTypes } from "../../consts/farmerTypes";
 import PrimaryButton from "../../components/Buttons/PrimaryButton";
+import { backgroundStyle } from "../../styles/globals";
 const { useRealm } = realmContext;
 
 export default function FarmerRegistration({ route, navigation }) {
@@ -339,15 +340,14 @@ export default function FarmerRegistration({ route, navigation }) {
 
 
   return (
-    <SafeAreaView style={styles.container}>
-
+    <SafeAreaView
+      className={`flex flex-1 flex-col justify-center mb-10 ${backgroundStyle}`}
+    >
       <Box
         bg={COLORS.fourth}
         w="100%"
         px="3"
         style={{
-          // borderBottomRightRadius: 50,
-          // borderBottomLeftRadius: 50,
           borderBottomWidth: 2,
           borderLeftWidth: 2,
           borderRightWidth: 2,
@@ -422,10 +422,10 @@ export default function FarmerRegistration({ route, navigation }) {
         {/* Data collecting form description */}
         <View
           style={{
-            elevation: 2,
+            elevation: 1,
             borderWidth: 1,
             borderColor: COLORS.lightgrey,
-            backgroundColor: COLORS.ghostwhite,
+            backgroundColor: "transparent",
 
           }}
         >
@@ -576,7 +576,7 @@ export default function FarmerRegistration({ route, navigation }) {
             w="94%"
           >
             {farmerType !== "" ? (
-              <PrimaryButton 
+              <PrimaryButton
                 onPress={() => addFarmer(farmerType, realm)}
                 title="Pré-visualizar dados"
               />

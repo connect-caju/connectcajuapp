@@ -49,11 +49,7 @@ const GroupItem = ({ item, route }) => {
 
   return (
     <View
-      style={{
-        paddingHorizontal: 8,
-        marginVertical: 5,
-        shadowColor: COLORS.main,
-      }}
+      className="bg-white mx-2 my-1 py-1 rounded-md"
     >
       <Box
         style={{
@@ -116,7 +112,7 @@ const GroupItem = ({ item, route }) => {
                 style={{
                   fontSize: 14,
                   fontFamily: "JosefinSans-Italic",
-                  color: COLORS.black,               
+                  color: COLORS.black,
                 }}
                 numberOfLines={1}
                 ellipsizeMode={"tail"}
@@ -223,7 +219,7 @@ const GroupItem = ({ item, route }) => {
           }
         }
       > */}
-        {/* <Box w="100%">
+      {/* <Box w="100%">
           <Text
             style={{
               textAlign: "right",

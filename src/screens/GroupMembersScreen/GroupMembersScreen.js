@@ -1,3 +1,5 @@
+/* eslint-disable prettier/prettier */
+/* eslint-disable linebreak-style */
 /* eslint-disable react/prop-types */
 import React, { useState, useEffect } from "react";
 import {
@@ -52,6 +54,7 @@ import { useUser } from "@realm/react";
 import CustomDivider from "../../components/Divider/CustomDivider";
 import { getInitials } from "../../helpers/getInitials";
 import { farmerTypes } from "../../consts/farmerTypes";
+import { backgroundStyle } from "../../styles/globals";
 // import { TextInput } from 'react-native-paper';
 const { useRealm, useQuery } = realmContext;
 
@@ -188,11 +191,7 @@ export default function GroupMembersScreen({ navigation, route }) {
 
   return (
     <SafeAreaView
-      style={{
-        minHeight: "100%",
-        backgroundColor: COLORS.ghostwhite,
-        // margin: 20,
-      }}
+      className={`min-h-full ${backgroundStyle}`}
     >
       <View
         style={{

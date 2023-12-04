@@ -58,7 +58,6 @@ const FarmerTypeRadioButtons = ({ farmerType, setFarmerType }) => {
         keyExtractor={keyExtractor}
         horizontal
         showsHorizontalScrollIndicator={false}
-        // ListHeaderComponent={<View style={{ width: 6, }} />}
         snapToInterval={86}
         decelerationRate="fast"
         renderItem={({ item }) => {
@@ -69,7 +68,7 @@ const FarmerTypeRadioButtons = ({ farmerType, setFarmerType }) => {
                 backgroundColor:
                   ((focusedOption === item.focusedOption) || (farmerType === item.farmerType))
                     ? COLORS.main
-                    : COLORS.ghostwhite,
+                    : "transparent",
                 borderColor:
                   ((focusedOption === item.focusedOption) || (farmerType === item.farmerType))
                     ? COLORS.main

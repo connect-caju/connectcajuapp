@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 /* eslint-disable react/prop-types */
 /* eslint-disable prettier/prettier */
 /* eslint-disable prettier/prettier */
@@ -33,6 +34,7 @@ import { useUser } from "@realm/react";
 import GroupRepresentativeItem from "../../components/GroupRepresentativeItem/GroupRepresentativeItem";
 import { farmerTypes } from "../../consts/farmerTypes";
 import CustomDivider from "../../components/Divider/CustomDivider";
+import { backgroundStyle } from "../../styles/globals";
 const { useRealm, useQuery } = realmContext;
 
 export default function GroupRepresentativeScreen({ route, navigation }) {
@@ -171,11 +173,7 @@ export default function GroupRepresentativeScreen({ route, navigation }) {
 
   return (
     <SafeAreaView
-      style={{
-        flex: 1,
-        //  paddingBottom: 0,
-        backgroundColor: COLORS.white,
-      }}
+      className={`flex flex-1 ${backgroundStyle}`}
     >
       <View>
         <View

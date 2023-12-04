@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 /* eslint-disable react/prop-types */
 /* eslint-disable prettier/prettier */
 /* eslint-disable react-native/no-inline-styles */
@@ -46,6 +47,7 @@ import { useCallback } from "react";
 import CustomDivider from "../../components/Divider/CustomDivider";
 import { getInitials } from "../../helpers/getInitials";
 import { farmerTypes } from "../../consts/farmerTypes";
+import { backgroundStyle } from "../../styles/globals";
 // import { TextInput } from 'react-native-paper';
 const { useRealm, useQuery } = realmContext;
 
@@ -98,9 +100,6 @@ function MemberGroupItem({
   const removeFarmerFromGroup = (realm, farmerId, currentGroup) => {
     try {
       realm.write(() => {
-        // add the unsubscription year
-        // let foundMembership = membership[0]?.membership?.find(memb=>memb?.organizationId === currentGroup?._id);
-        // foundMembership.unsubscriptionYear = new Date().getFullYear();
 
         // remove the farmer id from the group
         const updatedFarmerIds = currentGroup.members?.filter(
@@ -200,17 +199,7 @@ function MemberGroupItem({
 
   return (
     <View
-      style={{
-        paddingHorizontal: 10,
-        marginVertical: 10,
-        minHeight: 60,
-        width: "95%",
-        flex: 1,
-        alignSelf: "center",
-        backgroundColor: COLORS.lightestgrey,
-        elevation: 1,
-        // opacity: 1,
-      }}
+      className="flex flex-1 bg-white mx-2 my-1 py-2 rounded-md "
     >
       <Stack direction="row" w="100%">
         <Box
@@ -330,6 +319,7 @@ function MemberGroupItem({
           </TouchableOpacity>
         </Box>
       </Stack>
+      
     </View>
   );
 }
@@ -403,11 +393,13 @@ export default function MembershipScreen({ route, navigation }) {
 
   return (
     <SafeAreaView
-      style={{
-        flex: 1,
-        paddingBottom: 100,
-        backgroundColor: COLORS.ghostwhite,
-      }}
+      // style={{
+      //   flex: 1,
+      //   paddingBottom: 100,
+      //   backgroundColor: "COLORS.ghostwhite",
+      // }}
+      className={`flex flex-1 pb-10 ${backgroundStyle}`}
+
     >
       <View>
         <View
@@ -567,7 +559,7 @@ export default function MembershipScreen({ route, navigation }) {
             )}
           </Stack>
         </View>
-        <View 
+        <View
           style={{
             backgroundColor: COLORS.main,
             height: 10,

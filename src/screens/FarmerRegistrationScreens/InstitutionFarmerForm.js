@@ -2,8 +2,8 @@
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable prettier/prettier */
 /* eslint-disable prettier/prettier */
-import { Text, SafeAreaView, ScrollView, TextInput, View } from "react-native"
-import React, { useState, useEffect } from "react"
+import { Text, SafeAreaView, ScrollView, TextInput, View } from "react-native";
+import React, { useState, useEffect } from "react";
 import {
   Box,
   FormControl,
@@ -12,24 +12,24 @@ import {
   CheckIcon,
   Center,
   Radio,
-} from "native-base"
-import { Icon, Button, CheckBox } from "@rneui/themed"
-import { Datepicker } from "@ui-kitten/components"
-import AwesomeAlert from "react-native-awesome-alerts"
+} from "native-base";
+import { Icon, Button, CheckBox } from "@rneui/themed";
+import { Datepicker } from "@ui-kitten/components";
+import AwesomeAlert from "react-native-awesome-alerts";
 
-import { CustomInput } from "../../components/Inputs/CustomInput"
-import villages from "../../consts/villages"
-import CustomActivityIndicator from "../../components/ActivityIndicator/CustomActivityIndicator"
+import { CustomInput } from "../../components/Inputs/CustomInput";
+import villages from "../../consts/villages";
+import CustomActivityIndicator from "../../components/ActivityIndicator/CustomActivityIndicator";
 import {
   groups,
   institutions,
   privateInstitutions,
   publicInstitutions,
-} from "../../consts/farmerTypes"
+} from "../../consts/farmerTypes";
 
-import { realmContext } from "../../models/realmContext"
-import COLORS from "../../consts/colors"
-const { useRealm } = realmContext
+import { realmContext } from "../../models/realmContext";
+import COLORS from "../../consts/colors";
+const { useRealm } = realmContext;
 
 export default function InstitutionFarmerForm({
   route,
@@ -63,9 +63,9 @@ export default function InstitutionFarmerForm({
 }) {
   useEffect(() => {
     if (institutionType === "") {
-      setInstitutionName("")
+      setInstitutionName("");
     }
-  }, [institutionType])
+  }, [institutionType]);
 
   return (
     <Box px="3" my="6">
@@ -96,15 +96,15 @@ export default function InstitutionFarmerForm({
                   center
                   fontFamily="JosefinSans-Italic"
                   containerStyle={{
-                    backgroundColor: COLORS.ghostwhite,
+                    backgroundColor: "transparent",
                   }}
                   textStyle={{
                     fontWeight: "120",
                     color: isInstitutionPrivate
                       ? COLORS.main
                       : errors?.isPrivateInstitution
-                      ? COLORS.red
-                      : COLORS.grey,
+                        ? COLORS.red
+                        : COLORS.grey,
                   }}
                   title="Privada"
                   checked={isInstitutionPrivate}
@@ -127,14 +127,14 @@ export default function InstitutionFarmerForm({
                     />
                   }
                   onPress={() => {
-                    setIsInstitutionPrivate(true)
-                    setIsInstitutionPublic(false)
-                    setIsPrivateInstitution(true)
-                    setInstitutionType("")
+                    setIsInstitutionPrivate(true);
+                    setIsInstitutionPublic(false);
+                    setIsPrivateInstitution(true);
+                    setInstitutionType("");
                     setErrors({
                       ...errors,
                       isPrivateInstitution: "",
-                    })
+                    });
                   }}
                 />
               </Box>
@@ -143,15 +143,15 @@ export default function InstitutionFarmerForm({
                   center
                   fontFamily="JosefinSans-Italic"
                   containerStyle={{
-                    backgroundColor: COLORS.ghostwhite,
+                    backgroundColor: "transparent",
                   }}
                   textStyle={{
                     fontWeight: "120",
                     color: isInstitutionPublic
                       ? COLORS.main
                       : errors?.isPrivateInstitution
-                      ? COLORS.red
-                      : COLORS.grey,
+                        ? COLORS.red
+                        : COLORS.grey,
                   }}
                   title="Pública"
                   checked={isInstitutionPublic}
@@ -174,15 +174,15 @@ export default function InstitutionFarmerForm({
                     />
                   }
                   onPress={() => {
-                    setIsInstitutionPrivate(false)
-                    setIsInstitutionPublic(true)
-                    setIsPrivateInstitution(false)
-                    setInstitutionType("")
-                    setInstitutionLicence("")
+                    setIsInstitutionPrivate(false);
+                    setIsInstitutionPublic(true);
+                    setIsPrivateInstitution(false);
+                    setInstitutionType("");
+                    setInstitutionLicence("");
                     setErrors({
                       ...errors,
                       isPrivateInstitution: "",
-                    })
+                    });
                   }}
                 />
               </Box>
@@ -192,7 +192,7 @@ export default function InstitutionFarmerForm({
                 leftIcon={<Icon name="error-outline" size={16} color="red" />}
                 _text={{ fontSize: "xs" }}
               >
-                {}
+                { }
               </FormControl.ErrorMessage>
             ) : (
               <FormControl.HelperText></FormControl.HelperText>
@@ -239,8 +239,8 @@ export default function InstitutionFarmerForm({
                 }}
                 mt={1}
                 onValueChange={(newInstitutionType) => {
-                  setErrors((prev) => ({ ...prev, institutionType: "" }))
-                  setInstitutionType(newInstitutionType)
+                  setErrors((prev) => ({ ...prev, institutionType: "" }));
+                  setInstitutionType(newInstitutionType);
                 }}
               >
                 {isPrivateInstitution &&
@@ -286,8 +286,8 @@ export default function InstitutionFarmerForm({
                 placeholder="Nome da Instituição"
                 value={institutionName}
                 onChangeText={(newInstitutionName) => {
-                  setErrors((prev) => ({ ...prev, institutionName: "" }))
-                  setInstitutionName(newInstitutionName)
+                  setErrors((prev) => ({ ...prev, institutionName: "" }));
+                  setInstitutionName(newInstitutionName);
                 }}
               />
               {"institutionName" in errors ? (
@@ -340,8 +340,8 @@ export default function InstitutionFarmerForm({
                 }
                 mt={1}
                 onValueChange={(newAdminPost) => {
-                  setErrors((prev) => ({ ...prev, institutionAdminPost: "" }))
-                  setInstitutionAdminPost(newAdminPost)
+                  setErrors((prev) => ({ ...prev, institutionAdminPost: "" }));
+                  setInstitutionAdminPost(newAdminPost);
                 }}
               >
                 {selectedAddressAdminPosts?.map((adminPost, index) => (
@@ -420,8 +420,8 @@ export default function InstitutionFarmerForm({
             placeholder="Nome completo do representante"
             value={institutionManagerName}
             onChangeText={(newManagerName) => {
-              setErrors((prev) => ({ ...prev, institutionManagerName: "" }))
-              setInstitutionManagerName(newManagerName)
+              setErrors((prev) => ({ ...prev, institutionManagerName: "" }));
+              setInstitutionManagerName(newManagerName);
             }}
           />
           {"institutionManagerName" in errors ? (
@@ -450,8 +450,8 @@ export default function InstitutionFarmerForm({
                   setErrors((prev) => ({
                     ...prev,
                     institutionManagerPhone: "",
-                  }))
-                  setInstitutionManagerPhone(newManagerPhone)
+                  }));
+                  setInstitutionManagerPhone(newManagerPhone);
                 }}
                 InputLeftElement={
                   <Icon name="phone" color="grey" size={25} type="material" />
@@ -479,8 +479,8 @@ export default function InstitutionFarmerForm({
                 value={institutionNuit}
                 keyboardType="numeric"
                 onChangeText={(newNuit) => {
-                  setErrors((prev) => ({ ...prev, institutionNuit: "" }))
-                  setInstitutionNuit(newNuit)
+                  setErrors((prev) => ({ ...prev, institutionNuit: "" }));
+                  setInstitutionNuit(newNuit);
                 }}
               />
               {"institutionNuit" in errors ? (
@@ -499,39 +499,39 @@ export default function InstitutionFarmerForm({
         {(institutionType.includes("Empresa") ||
           institutionType?.includes("Outr") ||
           institutionType?.includes("ONG")) && (
-          <Stack direction="row" mx="3" w="100%">
-            <Box w="50%" px="1" my="2">
-              <FormControl isInvalid={"institutionManagerPhone" in errors}>
-                <FormControl.Label>N°. de Alvará</FormControl.Label>
-                <CustomInput
-                  width="100%"
-                  type="text"
-                  placeholder="Alvará"
-                  // keyboardType="numeric"
-                  value={institutionLicence}
-                  onChangeText={(newLicence) => {
-                    setErrors((prev) => ({ ...prev, institutionLicence: "" }))
-                    setInstitutionLicence(newLicence)
-                  }}
-                />
-                {"institutionLicence" in errors ? (
-                  <FormControl.ErrorMessage
-                    leftIcon={
-                      <Icon name="error-outline" size={16} color="red" />
-                    }
-                    _text={{ fontSize: "xs" }}
-                  >
-                    {errors?.institutionLicence}
-                  </FormControl.ErrorMessage>
-                ) : (
-                  <FormControl.HelperText></FormControl.HelperText>
-                )}
-              </FormControl>
-            </Box>
-            <Box w="50%" px="1" my="2"></Box>
-          </Stack>
-        )}
+            <Stack direction="row" mx="3" w="100%">
+              <Box w="50%" px="1" my="2">
+                <FormControl isInvalid={"institutionManagerPhone" in errors}>
+                  <FormControl.Label>N°. de Alvará</FormControl.Label>
+                  <CustomInput
+                    width="100%"
+                    type="text"
+                    placeholder="Alvará"
+                    // keyboardType="numeric"
+                    value={institutionLicence}
+                    onChangeText={(newLicence) => {
+                      setErrors((prev) => ({ ...prev, institutionLicence: "" }));
+                      setInstitutionLicence(newLicence);
+                    }}
+                  />
+                  {"institutionLicence" in errors ? (
+                    <FormControl.ErrorMessage
+                      leftIcon={
+                        <Icon name="error-outline" size={16} color="red" />
+                      }
+                      _text={{ fontSize: "xs" }}
+                    >
+                      {errors?.institutionLicence}
+                    </FormControl.ErrorMessage>
+                  ) : (
+                    <FormControl.HelperText></FormControl.HelperText>
+                  )}
+                </FormControl>
+              </Box>
+              <Box w="50%" px="1" my="2"></Box>
+            </Stack>
+          )}
       </Box>
     </Box>
-  )
+  );
 }
