@@ -42,6 +42,7 @@ import { realmContext } from "../../models/realmContext";
 import { resourceValidation } from "../../consts/resourceValidation";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import PrimaryButton from "../Buttons/PrimaryButton";
+import { backgroundStyle } from "../../styles/globals";
 // import { KeyboardAwareScrollView } from "react-native-keyboard-tools";
 const { useRealm, useQuery, useObject } = realmContext;
 
@@ -242,6 +243,7 @@ export default function NewFarmlandBlock({
               borderBottomLeftRadius: 7,
               borderBottomRightRadius: 7,
             }}
+            
             isVisible={isNewBlockVisible}
             onBackdropPress={() => {
               // setIsNewBlockVisible(false);
@@ -341,15 +343,13 @@ export default function NewFarmlandBlock({
             >
               <Animated.View
                 style={{
-                  paddingHorizontal: 10,
-                  minHeight: "100%",
-                  backgroundColor: COLORS.ghostwhite,
                   opacity: scaleBlockBox?.interpolate({
                     inputRange: [0, 1],
                     outputRange: [0, 1],
                   }),
                   transform: [{ scale: scaleBlockBox }],
                 }}
+                className={`${backgroundStyle} min-h-full px-2`}
               >
                 {/* Display this if there enough area size for a new cashew block plot to be added  */}
                 {remainingArea > 0.1 && (
@@ -825,7 +825,7 @@ export default function NewFarmlandBlock({
                                     center
                                     fontFamily="JosefinSans-Bold"
                                     containerStyle={{
-                                      backgroundColor: COLORS.ghostwhite,
+                                      backgroundColor: "transparent",
                                     }}
                                     textStyle={{
                                       fontWeight: "120",
@@ -866,7 +866,7 @@ export default function NewFarmlandBlock({
                                     center
                                     fontFamily="JosefinSans-Bold"
                                     containerStyle={{
-                                      backgroundColor: COLORS.ghostwhite,
+                                      backgroundColor: "transparent",
                                     }}
                                     textStyle={{
                                       fontWeight: "120",

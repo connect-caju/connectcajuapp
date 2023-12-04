@@ -46,9 +46,15 @@ import { getPlantingYears } from "../../helpers/getPlantingYears";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import {
   faAdd,
+  faArrowDown,
+  faArrowTurnDown,
+  faChevronDown,
+  faChevronUp,
   faCrop,
   faTree,
 } from "@fortawesome/free-solid-svg-icons";
+import tw from "twrnc";
+
 import { SuccessLottie } from "../LottieComponents/SuccessLottie";
 import ValidationOptions from "../ValidationOptions/ValidationOptions";
 import InvalidationMessage from "../InvalidationMessage/InvalidationMessage";
@@ -56,6 +62,8 @@ import ResourceSignature from "../ResourceSignature/ResourceSignature";
 import ResourceStatusIcon from "../ResourceStatusIcon/ResourceStatusIcon";
 import LinearGradient from "react-native-linear-gradient";
 import InfoIcon from "../LottieComponents/InfoIcon";
+import { backgroundStyle } from "../../styles/globals";
+
 const { useRealm, useQuery, useObject } = realmContext;
 
 const farmlandResourceMessage = "farmlandResourceMessage";
@@ -196,7 +204,6 @@ const FarmlandData = ({
     }).start(() => to === 0 && setIsNewBlockVisible(false));
   };
 
-
   return (
     <View
       style={{
@@ -207,539 +214,451 @@ const FarmlandData = ({
         style={{
           flex: 1,
         }}
+        onToggle={(isExpanded) => {
+          setIsCallapseOn(isExpanded);
+          setRefresh(!isExpanded);
+          console.log("isExpanded:", isCollapseOn);
+        }}
+        isExpanded={isCollapseOn}
       >
         <CollapseHeader
-          style={{
-            minHeight: 80,
-            padding: 8,
-            // borderRadius: 8,
-            backgroundColor: COLORS.main,
-            // paddingHorizontal: 10,
-            justifyContent: "space-between",
-          }}
-          onToggle={(isOn) => {
-            setIsCallapseOn(isOn);
-            setRefresh(!isOn);
-          }}
+          style={tw`bg-white shadow-sm min-h-25 mx-2 rounded-t-md justify-between`}
         >
-          <LinearGradient
-            colors={["#009900", "#004000", "#009900",]} style={{
-              flex: 1,
-              paddingLeft: 15,
-              paddingRight: 15,
-              borderRadius: 15,
-              minHeight: 60,
-              borderColor: COLORS.white,
-              borderWidth: 2,
-            }}
+
+          <Text
+            className="text-lg text-gray-600 font-bold text-center m-1"
+          >
+            Anos de Plantio : [{getPlantingYears(farmland?.blocks)}]
+          </Text>
+          {/* Resource Status Icon (Validated, Invalidated, Pendind) */}
+
+          <View
+            className="flex flex-row justify-between m-2"
           >
             <View
-              style={{
-                flexDirection: "row",
-              }}
+              className="flex flex-col items-center justify-center"
             >
-              <Text
-                style={{
-                  fontSize: 16,
-                  color: COLORS.white,
-                  fontFamily: "JosefinSans-Regular",
-                }}
+              <View
+                className="rounded-full shadow-md bg-gray-200 p-4"
               >
-                Anos de Plantio : [{getPlantingYears(farmland?.blocks)}]
+                <Text
+                  className="text-sm text-gray-500 font-normal"
+                >
+                  {farmland?.trees}
+                </Text>
+
+              </View>
+              <Text
+                className="text-xs text-gray-500 font-normal"
+              >
+                árvores
               </Text>
             </View>
 
             <View
-              style={{
-                flexDirection: "row",
-              }}
+              className="flex flex-col items-center justify-center"
             >
               <View
-                style={{
-                  flexDirection: "row",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  width: "50%",
-                }}
-              >
-                <FontAwesomeIcon
-                  icon={faTree}
-                  size={20}
-                  color={COLORS.ghostwhite}
-                />
-                <Text
-                  style={{
-                    fontSize: 14,
-                    color: COLORS.ghostwhite,
-                    fontFamily: "JosefinSans-Bold",
-                  }}
-                >
-                  {"   "}
-                  {farmland?.trees} árvores
-                </Text>
-              </View>
-              <View
-                style={{
-                  flexDirection: "row",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  width: "50%",
-                }}
-              >
-                <FontAwesomeIcon
-                  icon={faCrop}
-                  size={20}
-                  color={COLORS.ghostwhite}
-                />
-                <Text
-                  style={{
-                    fontSize: 14,
-                    color: COLORS.ghostwhite,
-                    fontFamily: "JosefinSans-Bold",
-                  }}
-                >
-                  {"   "}
-                  {farmland?.totalArea.toFixed(1)} hectares
-                </Text>
-              </View>
-            </View>
 
-          </LinearGradient>
-        </CollapseHeader>
-        <CollapseBody>
+                className="rounded-full shadow-md bg-gray-200 p-4"
+              >
+                <Text
+                  className="text-sm text-gray-500 font-normal"
+                >
+                  {farmland?.totalArea.toFixed(1)}
+                </Text>
+
+              </View>
+              <Text
+                className="text-xs text-gray-500 font-normal"
+              >
+                hectares
+              </Text>
+            </View>
+          </View>
           <View
-            style={{
-              marginBottom: 40,
-              padding: 10,
-              borderColor: COLORS.pantone,
-              shadowColor: COLORS.pantone,
-              backgroundColor: COLORS.ghostwhite,
-              shadowOffset: {
-                width: 0,
-                height: 3,
-              },
-              shadowOpacity: 0.27,
-              shadowRadius: 4.65,
-              elevation: 3,
-              paddingLeft: 20,
-            }}
+            className="flex flex-row justify-between"
           >
-            {/* Resource Status Icon (Validated, Invalidated, Pendind) */}
             <View
-              style={{
-                width: 80,
-                alignSelf: "flex-end",
-              }}
+              className="w-20"
             >
               <ResourceStatusIcon
                 resource={farmland}
               />
             </View>
 
-            <Stack w="100%" direction="column" py="4">
-              <Stack direction="row" mt="5">
-                <Box w="90%">
-                </Box>
-                <Box w="10%">
-                  {customUserData?.role !== roles.provincialManager && (
-                    <TouchableOpacity
-                      disabled={farmland?.status === resourceValidation.status.validated}
-                      style={{
-                        borderRadius: 50,
-                        backgroundColor: COLORS.lightgrey,
-                        padding: 6,
-                        justifyContent: "center",
-                        alignItems: "center",
-                      }}
-                      onPress={() => {
-                        setPresentEditFarmland(true);
-                        // resizeBox(1);
-                        setDataToBeUpdated("farmlandMainData");
-                        setBlockId(""); // remove the blockId to avoid confusion in the overlay component
-                      }}
-                    >
-                      <Icon
-                        // name="home"
-                        name="edit"
-                        size={20}
-                        color={
-                          farmland?.status ===
-                            resourceValidation.status.validated
-                            ? COLORS.grey
-                            : farmland?.status ===
-                              resourceValidation.status.invalidated
-                              ? COLORS.red
-                              : COLORS.black
-                        }
-                      />
-                    </TouchableOpacity>
-                  )}
-                </Box>
-              </Stack>
+            <View
+              className="mr-2 justify-center"
+            >
+              {!isCollapseOn && <FontAwesomeIcon icon={faChevronDown} size={20} color={COLORS.grey} />}
+              {isCollapseOn && <FontAwesomeIcon icon={faChevronUp} size={20} color={COLORS.grey} />}
+            </View>
+          </View>
 
-              <Stack w="100%" direction="row">
-              </Stack>
-              <Stack w="100%" direction="row">
-                <Box w="40%">
-                  <Text
-                    style={{
-                      color: COLORS.grey,
-                      fontSize: responsiveFontSize(1.8),
-                      fontFamily: "JosefinSans-Regular",
-                    }}
-                  >
-                    Consociação:
-                  </Text>
-                </Box>
-                <Box w="60%">
-                  <Text
-                    style={{
-                      color: COLORS.grey,
-                      fontSize: responsiveFontSize(1.8),
-                      fontFamily: "JosefinSans-Regular",
-                    }}
-                  >
-                    [ {farmland?.consociatedCrops.join("; ")} ]
-                  </Text>
-                </Box>
-              </Stack>
-
-              <Stack w="100%" direction="row">
-              </Stack>
-
-              <Stack w="100%" direction="row">
-              </Stack>
-            </Stack>
+        </CollapseHeader>
+        <CollapseBody>
+          <View
+            className="p-2 bg-white"
+          >
             <CustomDivider />
+          </View>
 
-            <Stack w="100%" direction="column" py="4">
-              <Stack w="100%" direction="row">
-                <Box w="90%">
-                  <Text
-                    style={{
-                      color: COLORS.black,
-                      fontSize: responsiveFontSize(2),
-                      fontFamily: "JosefinSans-Bold",
-                    }}
-                  >
-                    Pontos Extremos do Pomar
-                  </Text>
-                </Box>
-                <Box w="10%">
-                  {customUserData?.role !== roles.provincialManager && (
-                    <TouchableOpacity
-                      disabled={
-                        farmland?.status === resourceValidation.status.validated}
-                      style={{
-                        borderRadius: 50,
-                        backgroundColor: COLORS.lightgrey,
-                        padding: 6,
-                        justifyContent: "center",
-                        alignItems: "center",
-                      }}
-                      onPress={() =>
-                        navigation.navigate("FarmlandAreaAudit", {
-                          farmlandId: farmland._id,
-                        })
-                      }
-                    >
-                      <Icon
-                        name="add-location-alt"
-                        size={20}
-                        color={
-                          farmland?.status ===
-                            resourceValidation.status.validated
-                            ? COLORS.grey
-                            : farmland?.status ===
-                              resourceValidation.status.invalidated
-                              ? COLORS.red
-                              : COLORS.black
-                        }
-                      // color={farmland?.validated === resourceValidation.status.validated ? COLORS.lightgrey : farmland?.validated === resourceValidation.status.invalidated ? COLORS.red : COLORS.main }
-                      />
-                    </TouchableOpacity>
-                  )}
-                </Box>
-              </Stack>
-              {farmland?.extremeCoordinates.length > 0 &&
-                farmland?.extremeCoordinates?.map((coords) => {
-                  return (
-                    <Stack
-                      key={coords?.position}
-                      w="100%"
-                      direction="row"
-                      style={{
-                        marginVertical: 5,
-                      }}
-                    >
-                      <Box
-                        w="25%"
-                        style={{
-                          justifyContent: "center",
-                        }}
-                      >
-                        <Text
-                          style={{
-                            color: COLORS.grey,
-                            fontSize: 15,
-                            fontFamily: "JosefinSans-Regular",
-                          }}
-                        >
-                          Ponto {coords?.position}:
-                        </Text>
-                      </Box>
-                      <Box 
-                        w="70%"
-                        style={{
-                          flexDirection: "row",
-                          justifyContent: "space-evenly",
-                        }}
-                      >
-                        <Text
-                          style={{
-                            color: COLORS.grey,
-                            fontSize: 15,
-                            fontFamily: "JosefinSans-Regular",
-                          }}
-                        >
-                          Lat.{coords?.latitude}
-                        </Text>
-                        <Text
-                          style={{
-                            color: COLORS.grey,
-                            fontSize: responsiveFontSize(1.8),
-                            fontFamily: "JosefinSans-Regular",
-                          }}
-                        >
-                          Long.{coords?.longitude}
-                        </Text>
-                      </Box>
-                    </Stack>
-                  );
-                })}
-              {farmland?.extremeCoordinates.length === 0 && (
-                <Stack w="100%" direction="row">
-                  <Box w="40%">
-                    <Text
-                      style={{
-                        color: COLORS.grey,
-                        fontSize: 14,
-                        fontFamily: "JosefinSans-Regular",
-                      }}
-                    >
-                      {/*  */}
-                    </Text>
-                  </Box>
-                  <Box w="60%">
-                    <Text
-                      style={{
-                        color: COLORS.grey,
-                        fontSize: 14,
-                        fontFamily: "JosefinSans-Regular",
-                      }}
-                    >
-                      (Nenhumas)
-                    </Text>
-                  </Box>
-                </Stack>
-              )}
-            </Stack>
+          <View
+            className="bg-white mx-2 shadow-sm p-2 mb-3 rounded-b-md flex flex-col gap-4"
+          >
+            <View
+              className="flex flex-row justify-between"
+            >
+              <Text
+                className="text-sm font-bold text-gray-500"
+              >
+                Culturas consociadas
+              </Text>
 
-            <CustomDivider />
-
-            <Stack w="100%" direction="column" py="4">
-              <Stack w="100%" direction="row">
-                <Box w="90%">
-                  <Text
-                    style={{
-                      color: COLORS.black,
-                      fontSize: responsiveFontSize(2),
-                      fontFamily: "JosefinSans-Bold",
-                    }}
-                  >
-                    Geolocalização
-                  </Text>
-                </Box>
-                <Box w="10%">
-                  {customUserData?.role !== roles.provincialManager && (
-                    <TouchableOpacity
-                      disabled={
-                        farmland?.status === resourceValidation.status.validated}
-                      style={{
-                        borderRadius: 50,
-                        backgroundColor: COLORS.lightgrey,
-                        padding: 6,
-                        justifyContent: "center",
-                        alignItems: "center",
-                      }}
-                      onPress={() => {
-                        navigation.navigate("Geolocation", {
-                          resourceName: "Farmland",
-                          resourceId: farmland._id,
-                          ownerType: farmland.ownerType,
-                          //     navigation.navigate('FarmlandAreaAudit', {
-                          //     farmlandId: farmland._id,
-                        });
-                      }}
-                    >
-                      <Icon
-                        name="add-location-alt"
-                        size={20}
-                        color={
-                          farmland?.status ===
-                            resourceValidation.status.validated
-                            ? COLORS.grey
-                            : farmland?.status ===
-                              resourceValidation.status.invalidated
-                              ? COLORS.red
-                              : COLORS.black
-                        }
-                      />
-                    </TouchableOpacity>
-                  )}
-                </Box>
-              </Stack>
-              {farmland?.geolocation?.latitude &&
-                farmland?.geolocation?.longitude && (
-                    <Stack w="100%" direction="row">
-                      <Box w="40%">
-                        <Text
-                          style={{
-                            color: COLORS.grey,
-                            fontSize: responsiveFontSize(1.8),
-                            fontFamily: "JosefinSans-Regular",
-                          }}
-                        >
-                          Lat.{farmland?.geolocation?.latitude}
-                        </Text>
-                      </Box>
-                      <Box>
-                        <Text
-                          style={{
-                            color: COLORS.grey,
-                            fontSize: responsiveFontSize(1.8),
-                            fontFamily: "JosefinSans-Regular",
-                          }}
-                        >
-                          Long.{farmland?.geolocation?.longitude}
-                        </Text>
-                      </Box>
-                    </Stack>
-                )}
-              {!farmland?.geolocation && (
-                <Stack w="100%" direction="row">
-                  <Box w="40%">
-                    <Text
-                      style={{
-                        color: COLORS.grey,
-                        fontSize: 14,
-                        fontFamily: "JosefinSans-Regular",
-                      }}
-                    >
-                      {/*  */}
-                    </Text>
-                  </Box>
-                  <Box w="60%">
-                    <Text
-                      style={{
-                        color: COLORS.grey,
-                        fontSize: 14,
-                        fontFamily: "JosefinSans-Regular",
-                      }}
-                    >
-                      (Nenhuma)
-                    </Text>
-                  </Box>
-                </Stack>
-              )}
-            </Stack>
-
-            <CustomDivider />
-
-            {
-              // !isAreaNotEnough &&
-              customUserData?.role !== roles.provincialManager && (
-                <Stack w="100%" direction="row" py="4">
-                  <Box w="90%">
-                    <Text
-                      style={{
-                        color: COLORS.black,
-                        fontSize: responsiveFontSize(2),
-                        fontFamily: "JosefinSans-Bold",
-                      }}
-                    >
-                      Parcela de Cajueiros
-                    </Text>
-                  </Box>
-                  <Box w="10%">
-                    <TouchableOpacity
-                      disabled={farmland?.status === resourceValidation.status.validated}
-                      style={{
-                        borderRadius: 50,
-                        backgroundColor: COLORS.lightgrey,
-                        padding: 6,
-                        justifyContent: "center",
-                        alignItems: "center",
-                      }}
-                      onPress={() => {
-                        if (farmland) {
-                          resizeBlockBox(1);
-                        }
-                      }}
-                    >
-                      <FontAwesomeIcon icon={faAdd} size={20} color={farmland?.status ===
+              {customUserData?.role !== roles.provincialManager && (
+                <TouchableOpacity
+                  disabled={farmland?.status === resourceValidation.status.validated}
+                  className=""
+                  onPress={() => {
+                    setPresentEditFarmland(true);
+                    setDataToBeUpdated("farmlandMainData");
+                    setBlockId(""); // remove the blockId to avoid confusion in the overlay component
+                  }}
+                >
+                  <Icon
+                    name="edit"
+                    size={20}
+                    color={
+                      farmland?.status ===
                         resourceValidation.status.validated
                         ? COLORS.grey
                         : farmland?.status ===
                           resourceValidation.status.invalidated
-                          ? COLORS.red
-                          : COLORS.black} />
-                    </TouchableOpacity>
-                  </Box>
-                </Stack>
-              )
-            }
+                          ? COLORS.danger
+                          : COLORS.grey
+                    }
+                  />
+                </TouchableOpacity>
+              )}
+            </View>
+            <View
+              className="flex flex-row"
+            >
+              {
+                farmland?.consociatedCrops?.map((crop) => (
+                  <View
+                    key={crop}
+                    className="p-1 mb-2 -mt-2 mr-2 bg-slate-200 rounded-full shadow-md"
+                  >
+                    <Text
+                      className="text-sm text-gray-600 font-[400]"
+                    >{crop}</Text>
+                  </View>
+                ))
+              }
+            </View>
 
-            {/* blocks start here */}
-            <Box
-              w="100%"
-              style={{
-                backgroundColor: COLORS.dark,
-                paddingVertical: 10,
-                paddingHorizontal: 5,
-              }}
+            <View
+              className=""
+            >
+              <CustomDivider />
+              <View
+                className="flex flex-row justify-between mt-3"
+              >
+                <Text
+                  className="text-sm font-bold text-gray-500"
+                >
+                  Pontos Extremos do Pomar
+                </Text>
+                {customUserData?.role !== roles.provincialManager && (
+                  <TouchableOpacity
+                    disabled={
+                      farmland?.status === resourceValidation.status.validated}
+                    className=""
+                    onPress={() =>
+                      navigation.navigate("FarmlandAreaAudit", {
+                        farmlandId: farmland._id,
+                      })
+                    }
+                  >
+                    <Icon
+                      name="add-location-alt"
+                      size={20}
+                      color={
+                        farmland?.status ===
+                          resourceValidation.status.validated
+                          ? COLORS.grey
+                          : farmland?.status ===
+                            resourceValidation.status.invalidated
+                            ? COLORS.danger
+                            : COLORS.grey
+                      }
+                    />
+                  </TouchableOpacity>
+                )}
+
+              </View>
+
+              <View
+                className="flex flex-row justify-between mb-1 mt-1"
+              >
+                <View
+                  className="justify-center items-center w-1/3"
+                >
+                  <Text
+                    className="text-sm text-gray-400 font-normal"
+                  >Ponto</Text>
+                </View>
+                <View
+                  className="justify-center items-center w-1/3"
+                >
+                  <Text
+                    className="text-sm text-gray-400 font-normal"
+                  >Latitude</Text>
+                </View>
+                <View
+                  className="justify-center items-center w-1/3"
+                >
+                  <Text
+                    className="text-sm text-gray-400 font-normal"
+                  >Longitude</Text>
+                </View>
+              </View>
+
+              {farmland?.extremeCoordinates.length > 0 &&
+                farmland?.extremeCoordinates?.map((coords) => {
+                  return (
+                    <View
+                      key={coords?.position}
+                      className="flex flex-row justify-between mb-1 mt-2"
+                    >
+                      <View
+                        className="justify-center items-center w-1/3"
+                      >
+                        <Text
+                          className="text-sm text-gray-400 font-normal"
+                        >{coords?.position}</Text>
+                      </View>
+                      <View
+                        className="justify-center items-center w-1/3"
+                      >
+                        <Text
+                          className="text-sm text-gray-400 font-normal"
+                        >{coords?.latitude ? "✅" : "❌"}</Text>
+                      </View>
+                      <View
+                        className="justify-center items-center w-1/3"
+                      >
+                        <Text
+                          className="text-sm text-gray-400 font-normal"
+                        >{coords?.longitude ? "✅" : "❌"}</Text>
+                      </View>
+                    </View>);
+                })}
+              {farmland?.extremeCoordinates.length === 0 && (
+                <View
+                  className="flex flex-row justify-between mb-1 mt-0"
+                >
+                  <View
+                    className="justify-center items-center w-1/3"
+                  >
+                    <Text
+                      className="text-xs text-gray-400 font-normal"
+                    >❌</Text>
+                  </View>
+                  <View
+                    className="justify-center items-center w-1/3"
+                  >
+                    <Text
+                      className="text-xs text-gray-400 font-normal"
+                    >❌</Text>
+                  </View>
+                  <View
+                    className="justify-center items-center w-1/3"
+                  >
+                    <Text
+                      className="text-xs text-gray-400 font-normal"
+                    >❌</Text>
+                  </View>
+                </View>
+              )}
+            </View>
+            <View>
+              <View
+                className="flex flex-row justify-between mb-2"
+              >
+                <Text
+                  className="text-sm font-normal text-gray-500"
+                >Auditoria da Área</Text>
+                <Text
+                  className="text-sm text-gray-400 font-normal"
+                >{farmland?.auditedArea ? `${new Intl.NumberFormat().format(farmland?.auditedArea?.toFixed(2))} hectares` : "Não realizada"}</Text>
+              </View>
+              <CustomDivider />
+            </View>
+
+            <View
+              className="flex flex-row justify-between"
             >
               <Text
-                style={{
-                  fontSize: responsiveFontSize(2),
-                  color: COLORS.ghostwhite,
-                  fontFamily: "JosefinSans-Bold",
-                }}
+                className="text-sm font-bold text-gray-500"
               >
-                Parcelas com cajueiros
+                Geolocalização
               </Text>
-            </Box>
+              {customUserData?.role !== roles.provincialManager && (
+                <TouchableOpacity
+                  disabled={
+                    farmland?.status === resourceValidation.status.validated}
+                  onPress={() => {
+                    navigation.navigate("Geolocation", {
+                      resourceName: "Farmland",
+                      resourceId: farmland._id,
+                      ownerType: farmland.ownerType,
+                    });
+                  }}
+                >
+                  <Icon
+                    name="add-location-alt"
+                    size={20}
+                    color={
+                      farmland?.status ===
+                        resourceValidation.status.validated
+                        ? COLORS.grey
+                        : farmland?.status ===
+                          resourceValidation.status.invalidated
+                          ? COLORS.danger
+                          : COLORS.grey
+                    }
+                  />
+                </TouchableOpacity>
+              )}
+            </View>
+
+            <View
+              className="flex flex-row justify-between mb-1"
+            >
+              <View
+                className="justify-center items-center w-1/3"
+              >
+                <Text
+                  className="text-sm text-gray-400 font-normal"
+                ></Text>
+              </View>
+              <View
+                className="justify-center items-center w-1/3"
+              >
+                <Text
+                  className="text-sm text-gray-400 font-normal"
+                >Latitude</Text>
+              </View>
+              <View
+                className="justify-center items-center w-1/3"
+              >
+                <Text
+                  className="text-sm text-gray-400 font-normal"
+                >Longitude</Text>
+              </View>
+            </View>
+
+            <View
+              className="mb-2"
+            >
+              {farmland?.geolocation?.latitude &&
+                farmland?.geolocation?.longitude && (
+                  <View
+                    className="flex flex-row justify-between mb-1 -mt-2"
+                  >
+                    <View
+                      className="justify-center items-center w-1/3"
+                    >
+                      <Text
+                        className="text-sm text-gray-400 font-normal"
+                      ></Text>
+                    </View>
+                    <View
+                      className="justify-center items-center w-1/3"
+                    >
+                      <Text
+                        className="text-sm text-gray-400 font-normal"
+                      >{farmland?.geolocation?.latitude ? "✅" : "❌"}</Text>
+                    </View>
+                    <View
+                      className="justify-center items-center w-1/3"
+                    >
+                      <Text
+                        className="text-sm text-gray-400 font-normal"
+                      >{farmland?.geolocation?.longitude ? "✅" : "❌"}</Text>
+                    </View>
+                  </View>
+
+                )}
+              {!farmland?.geolocation && (
+                <View
+                  className="flex flex-row justify-between mb-1 -mt-2"
+                >
+                  <View
+                    className="justify-center items-center w-1/3"
+                  >
+                    <Text
+                      className="text-xs text-gray-400 font-normal"
+                    ></Text>
+                  </View>
+                  <View
+                    className="justify-center items-center w-1/3"
+                  >
+                    <Text
+                      className="text-xs text-gray-400 font-normal"
+                    >❌</Text>
+                  </View>
+                  <View
+                    className="justify-center items-center w-1/3"
+                  >
+                    <Text
+                      className="text-xs text-gray-400 font-normal"
+                    >❌</Text>
+                  </View>
+                </View>
+              )}
+            </View>
+            <CustomDivider />
+
+
+            <View
+              className="flex flex-row justify-between"
+            >
+              <Text
+                className="text-sm font-bold text-gray-500"
+              >
+                Parcelas com Cajueiros
+              </Text>
+              {customUserData?.role !== roles.provincialManager && (
+                   <TouchableOpacity
+                   disabled={farmland?.status === resourceValidation.status.validated}
+                   onPress={() => {
+                     if (farmland) {
+                       resizeBlockBox(1);
+                     }
+                   }}
+                 >
+                   <FontAwesomeIcon icon={faAdd} size={20} color={farmland?.status ===
+                     resourceValidation.status.validated
+                     ? COLORS.grey
+                     : farmland?.status ===
+                       resourceValidation.status.invalidated
+                       ? COLORS.danger
+                       : COLORS.grey} />
+                 </TouchableOpacity>
+              )}
+            </View>
+
             {normalizeBlockList(farmland?.blocks)?.length === 0 && (
 
               <View
-                style={{
-                  marginBottom: 40,
-                  alignSelf: "center",
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
+                className="justify-center items-center self-center mb-5"
               >
                 <InfoIcon width={60} height={60} />
                 <Text
-                  style={{
-                    color: COLORS.grey,
-                    fontSize: 14,
-                    fontFamily: "JosefinSans-Regular",
-                    textAlign: "center",
-                    backgroundColor: COLORS.lightestgrey,
-                    width: 220,
-                    padding: 6,
-                  }}
+                  className="text-gray-400 font-normal text-sm text-center bg-neutral-200 p-2 w-[220]"
                 >
                   Nenhuma percela de cajueiros associada a esta área
                 </Text>
