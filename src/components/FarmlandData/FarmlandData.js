@@ -219,10 +219,10 @@ const FarmlandData = ({
       >
 
         <View
-          className="bg-slate-200 -mx-2"
+          className="bg-slate-400 -mx-2"
         >
           <Text
-            className="text-lg text-gray-500 font-bold text-center m-1"
+            className="text-sm text-white font-bold text-center m-1"
           >
             Anos de Plantio : [{getPlantingYears(farmland?.blocks)}]
           </Text>

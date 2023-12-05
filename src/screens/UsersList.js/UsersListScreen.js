@@ -273,11 +273,7 @@ export default function UsersListScreen({ route, navigation }) {
             <Box w="70%">
               <Center>
                 <Text
-                  style={{
-                    fontFamily: "JosefinSans-Bold",
-                    fontSize: 18,
-                    color: COLORS.black,
-                  }}
+                  className="text-gray-600 font-bold text-lg"
                 >
                   {customUserData?.userProvince}
                 </Text>
@@ -285,20 +281,14 @@ export default function UsersListScreen({ route, navigation }) {
                 <Stack direction="row" space={2} my="1">
                   <Center>
                     <Text
-                      style={{
-                        fontFamily: "JosefinSans-Regular",
-                        fonSize: responsiveFontSize(1.5),
-                      }}
+                      className="text-gray-600 font-normal text-xs"
                     >
                       [{"Usuários:"} {filteredStats.length}]
                     </Text>
                   </Center>
                   <Center>
                     <Text
-                      style={{
-                        fontFamily: "JosefinSans-Regular",
-                        fonSize: responsiveFontSize(1.5),
-                      }}
+                      className="text-gray-600 font-normal text-xs"
                     >
                       [{"Distritos:"} {districts.length}]
                     </Text>
@@ -326,7 +316,7 @@ export default function UsersListScreen({ route, navigation }) {
                   color: COLORS.red,
                 }}
               >
-                A província de {customUserData?.userProvince} ainda não possui
+                {customUserData?.userProvince} ainda não tem
                 usuários activos!
               </Text>
               <TickComponent />
@@ -352,10 +342,10 @@ export default function UsersListScreen({ route, navigation }) {
               stickySectionHeadersEnabled
               renderSectionHeader={({ section: { title } }) => (
                 <View
-                  className="bg-green-600 mx-2 mt-4 rounded-t-md shadow-md"
+                  className="bg-slate-400 mx-2 mt-4 rounded-t-md shadow-md"
                 >
                   <Text
-                    className="pl-5 py-2 text-white font-bold text-lg"
+                    className="pl-5 py-2 text-white font-bold text-sm"
                   >
                     {title}
                   </Text>

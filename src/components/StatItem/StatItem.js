@@ -36,11 +36,7 @@ export default function StatItem({ item, route }) {
         </Center>
         <Box w="80%">
           <Text
-            style={{
-              fontSize: 16,
-              fontFamily: "JosefinSans-Bold",
-              color: COLORS.black,
-            }}
+            className="text-gray-600 text-sm font-normal"
           >
             {item?.userName}
           </Text>
@@ -53,22 +49,14 @@ export default function StatItem({ item, route }) {
           >
             <View>
               <Text
-                style={{
-                  color: COLORS.grey,
-                  fontFamily: "JosefinSand-Bold",
-                  fontSize: 12,
-                }}
+                className="text-xs text-gray-400 font-normal"
               >
                 Produtores ({getPercentage(item?.registeredFarmers, item?.targetFarmers)})
               </Text>
             </View>
             <View>
               <Text
-                style={{
-                  color: COLORS.grey,
-                  fontFamily: "JosefinSand-Bold",
-                  fontSize: 12,
-                }}
+                className="text-xs text-gray-400 font-normal"
               >
                 Pomares ({getPercentage(
                   item?.registeredFarmlands,
