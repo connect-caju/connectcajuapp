@@ -23,12 +23,7 @@ export default function FarmlandDetailsCard({
 
   return (
     <Animated.View
-      style={{
-        width: "100%",
-        backgroundColor: COLORS.ghostwhite,
-        elevation: 3,
-        opacity: 1,
-      }}
+      className="bg-white p-2 my-2 shadow-sm shadow-slate-100"
     >
       <View
         style={{
@@ -63,7 +58,7 @@ export default function FarmlandDetailsCard({
                     setRefresh(!refresh);
                   }}
                 >
-                  <Icon name="add-circle" size={60} color={COLORS.main} />
+                  <Icon name="add-circle" size={45} color={COLORS.main} />
                 </TouchableOpacity>
               )}
           </View>

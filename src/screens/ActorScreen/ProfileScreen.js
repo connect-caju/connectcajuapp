@@ -52,6 +52,7 @@ import { groupTypes } from "../../consts/groupTypes";
 import FarmlandData from "../../components/FarmlandData/FarmlandData";
 import { roles } from "../../consts/roles";
 import { backgroundStyle } from "../../styles/globals";
+import { calculateAge } from "../../helpers/dates";
 const { useRealm, useQuery, useObject } = realmContext;
 
 const singleFarmer = "singleFarmer";
@@ -234,8 +235,13 @@ const ProfileScreen = ({ route, navigation }) => {
               style={{
                 width: "80%",
               }}
+
             >
-              <Text style={styles.profileTypeText}>{profileType}</Text>
+              <Text
+                className="text-center text-white font-bold text-[16px] pt-2"
+              >
+                {profileType}
+              </Text>
             </View>
 
             <View
@@ -279,18 +285,21 @@ const ProfileScreen = ({ route, navigation }) => {
                 </View>
               )}
 
-              <Text
-                style={{
-                  color: COLORS.ghostwhite,
-                  fontSize: 18,
-                  fontFamily: "JosefinSans-Bold",
-                  textAlign: "center",
-                }}
+              <View
+                className="flex flex-row items-center justify-center gap-2 "
               >
-                {farmerType === farmerTypes.farmer
-                  ? `${farmer?.names?.otherNames} ${farmer?.names?.surname}`
-                  : `${farmer?.name}`}
-              </Text>
+                <Text
+                  className="text-white font-bold text-lg"
+                >
+                  {farmerType === farmerTypes.farmer
+                    ? `${farmer?.names?.otherNames} ${farmer?.names?.surname}`
+                    : `${farmer?.name}`}
+                </Text>
+                {farmerType === farmerTypes.farmer && <Text className="text-white font-normal text-xs">
+                  ({calculateAge(farmer?.birthDate)}, {farmer?.gender === "Masculino" ? "H" : farmer?.gender === "Feminino" ? "M" : "NA"})
+                </Text>}
+              </View>
+
               {farmerType === farmerTypes.farmer && (
                 <>
                   {farmer?.assets?.map((asset, index) => (
@@ -299,7 +308,7 @@ const ProfileScreen = ({ route, navigation }) => {
                       style={{
                         color: COLORS.ghostwhite,
                         fontSize: 12,
-                        fontFamily: "JosefinSans-Bold",
+                        fontFamily: "Roboto-Regular",
                         textAlign: "center",
                       }}
                     >
@@ -401,17 +410,11 @@ const ProfileScreen = ({ route, navigation }) => {
                     paddingHorizontal: 10,
                   }}
                 >
-                  <View
-                    style={{
-                      padding: 6,
-                      borderRadius: 100,
-                      backgroundColor: COLORS.lightgrey,
-                    }}
-                  >
+                  <View>
                     <FontAwesomeIcon
                       icon={faEllipsisVertical}
                       size={20}
-                      color={COLORS.black}
+                      color={COLORS.grey}
                     />
                   </View>
                 </TouchableOpacity>}

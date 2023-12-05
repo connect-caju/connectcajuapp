@@ -205,105 +205,107 @@ const FarmlandData = ({
   };
 
   return (
-    <View
-      style={{
-        paddingVertical: hp("1%"),
-      }}
-    >
-      <Collapse
-        style={{
-          flex: 1,
-        }}
-        onToggle={(isExpanded) => {
-          setIsCallapseOn(isExpanded);
-          setRefresh(!isExpanded);
-        }}
-        isExpanded={isCollapseOn}
-      >
-        <CollapseHeader
-          style={tw`bg-white shadow-sm min-h-25 mx-2 rounded-t-md justify-between`}
-        >
+    <Collapse
+      style={tw`my-2 py-2`}
 
+      onToggle={(isExpanded) => {
+        setIsCallapseOn(isExpanded);
+        setRefresh(!isExpanded);
+      }}
+      isExpanded={isCollapseOn}
+    >
+      <CollapseHeader
+        style={tw`bg-white shadow-sm px-2 min-h-25 rounded-t-md justify-between`}
+      >
+
+        <View
+          className="bg-slate-200 -mx-2"
+        >
           <Text
-            className="text-lg text-gray-600 font-bold text-center m-1"
+            className="text-lg text-gray-500 font-bold text-center m-1"
           >
             Anos de Plantio : [{getPlantingYears(farmland?.blocks)}]
           </Text>
-          {/* Resource Status Icon (Validated, Invalidated, Pendind) */}
+        </View>
 
+
+        {/* Resource Status Icon (Validated, Invalidated, Pendind) */}
+
+        <View
+          className="flex flex-row justify-between m-2"
+        >
           <View
-            className="flex flex-row justify-between m-2"
+            className="flex flex-col items-center justify-center"
           >
             <View
-              className="flex flex-col items-center justify-center"
+              className="rounded-full shadow-md bg-gray-200 p-4"
             >
-              <View
-                className="rounded-full shadow-md bg-gray-200 p-4"
-              >
-                <Text
-                  className="text-sm text-gray-500 font-normal"
-                >
-                  {farmland?.trees}
-                </Text>
-
-              </View>
               <Text
-                className="text-xs text-gray-500 font-normal"
+                className="text-sm text-gray-500 font-normal"
               >
-                árvores
+                {farmland?.trees}
               </Text>
+
             </View>
-
-            <View
-              className="flex flex-col items-center justify-center"
+            <Text
+              className="text-xs text-gray-500 font-normal"
             >
-              <View
+              árvores
+            </Text>
+          </View>
 
-                className="rounded-full shadow-md bg-gray-200 p-4"
-              >
-                <Text
-                  className="text-sm text-gray-500 font-normal"
-                >
-                  {farmland?.totalArea.toFixed(1)}
-                </Text>
+          <View
+            className="flex flex-col items-center justify-center"
+          >
+            <View
 
-              </View>
+              className="rounded-full shadow-md bg-gray-200 p-4"
+            >
               <Text
-                className="text-xs text-gray-500 font-normal"
+                className="text-sm text-gray-500 font-normal"
               >
-                hectares
+                {farmland?.totalArea.toFixed(1)}
               </Text>
+
             </View>
-          </View>
-          <View
-            className="flex flex-row justify-between"
-          >
-            <View
-              className="w-20"
+            <Text
+              className="text-xs text-gray-500 font-normal"
             >
-              <ResourceStatusIcon
-                resource={farmland}
-              />
-            </View>
-
-            <View
-              className="mr-2 justify-center"
-            >
-              {!isCollapseOn && <FontAwesomeIcon icon={faChevronDown} size={20} color={COLORS.grey} />}
-              {isCollapseOn && <FontAwesomeIcon icon={faChevronUp} size={20} color={COLORS.grey} />}
-            </View>
+              hectares
+            </Text>
           </View>
-
-        </CollapseHeader>
-        <CollapseBody>
+        </View>
+        <View
+          className="flex flex-row justify-between"
+        >
           <View
-            className="p-2 bg-white"
+            className="w-20"
           >
-            <CustomDivider />
+            <ResourceStatusIcon
+              resource={farmland}
+            />
           </View>
 
           <View
-            className="bg-white mx-2 shadow-sm p-2 mb-3 rounded-b-md flex flex-col gap-4"
+            className="mr-2 justify-center"
+          >
+            {!isCollapseOn && <FontAwesomeIcon icon={faChevronDown} size={20} color={COLORS.main} />}
+            {isCollapseOn && <FontAwesomeIcon icon={faChevronUp} size={20} color={COLORS.main} />}
+          </View>
+        </View>
+
+      </CollapseHeader>
+
+
+      <CollapseBody
+        style={tw`self-stretch pt-4`}
+      >
+
+        <View
+          className="w-full self-center"
+        >
+          <View
+            className="bg-white shadow-sm p-2 mb-3 rounded-b-md flex flex-col gap-4"
           >
             <View
               className="flex flex-row justify-between"
@@ -432,25 +434,25 @@ const FarmlandData = ({
                       className="flex flex-row justify-between mb-1 mt-2"
                     >
                       <View
-                        className="justify-center items-center w-1/3"
+                        className="justify-center items-center w-1/3 -mt-2"
                       >
                         <Text
                           className="text-sm text-gray-400 font-normal"
                         >{coords?.position}</Text>
                       </View>
                       <View
-                        className="justify-center items-center w-1/3"
+                        className="justify-center items-center w-1/3 -mt-2"
                       >
                         <Text
-                          className="text-sm text-gray-400 font-normal"
-                        >{coords?.latitude ? "✅" : "❌"}</Text>
+                          className="text-lg text-gray-400 font-normal"
+                        >{coords?.latitude ? "☑" : "?"}</Text>
                       </View>
                       <View
-                        className="justify-center items-center w-1/3"
+                        className="justify-center items-center w-1/3 -mt-2"
                       >
                         <Text
-                          className="text-sm text-gray-400 font-normal"
-                        >{coords?.longitude ? "✅" : "❌"}</Text>
+                          className="text-lg text-gray-400 font-normal"
+                        >{coords?.longitude ? "☑" : "?"}</Text>
                       </View>
                     </View>);
                 })}
@@ -462,21 +464,21 @@ const FarmlandData = ({
                     className="justify-center items-center w-1/3"
                   >
                     <Text
-                      className="text-lg text-red-600 font-normal"
+                      className="text-lg text-gray-400 font-normal"
                     >?</Text>
                   </View>
                   <View
                     className="justify-center items-center w-1/3"
                   >
                     <Text
-                      className="text-lg text-red-600 font-normal"
+                      className="text-lg text-gray-400 font-normal"
                     >?</Text>
                   </View>
                   <View
                     className="justify-center items-center w-1/3"
                   >
                     <Text
-                      className="text-lg text-red-600 font-normal"
+                      className="text-lg text-gray-400 font-normal"
                     >?</Text>
                   </View>
                 </View>
@@ -568,25 +570,25 @@ const FarmlandData = ({
                     className="flex flex-row justify-between mb-1 -mt-2"
                   >
                     <View
-                      className="justify-center items-center w-1/3"
+                      className="justify-center items-center w-1/3 -mt-9"
                     >
                       <Text
                         className="text-sm text-gray-400 font-normal"
                       ></Text>
                     </View>
                     <View
-                      className="justify-center items-center w-1/3"
+                      className="justify-center items-center w-1/3 -mt-2"
                     >
                       <Text
-                        className="text-sm text-gray-400 font-normal"
-                      >{farmland?.geolocation?.latitude ? "✅" : "?"}</Text>
+                        className="text-lg text-gray-400 font-normal"
+                      >{farmland?.geolocation?.latitude ? "☑" : "?"}</Text>
                     </View>
                     <View
-                      className="justify-center items-center w-1/3"
+                      className="justify-center items-center w-1/3 -mt-2"
                     >
                       <Text
-                        className="text-sm text-gray-400 font-normal"
-                      >{farmland?.geolocation?.longitude ? "✅" : "?"}</Text>
+                        className="text-lg text-gray-400 font-normal"
+                      >{farmland?.geolocation?.longitude ? "☑" : "?"}</Text>
                     </View>
                   </View>
 
@@ -596,24 +598,24 @@ const FarmlandData = ({
                   className="flex flex-row justify-between mb-1 -mt-2"
                 >
                   <View
-                    className="justify-center items-center w-1/3"
+                    className="justify-center items-center w-1/3 -mt-2"
                   >
                     <Text
                       className="text-xs text-gray-400 font-normal"
                     ></Text>
                   </View>
                   <View
-                    className="justify-center items-center w-1/3"
+                    className="justify-center items-center w-1/3 -mt-2"
                   >
                     <Text
-                      className="text-lg text-red-600 font-normal"
+                      className="text-lg text-gray-400 font-normal"
                     >?</Text>
                   </View>
                   <View
-                    className="justify-center items-center w-1/3"
+                    className="justify-center items-center w-1/3 -mt-2"
                   >
                     <Text
-                      className="text-lg text-red-600 font-normal"
+                      className="text-lg text-gray-400 font-normal"
                     >?</Text>
                   </View>
                 </View>
@@ -852,18 +854,16 @@ const FarmlandData = ({
                     </View>
                   ))
                 ) : (
-                  <Text
-                    style={{
-                      color: COLORS.red,
-                      fontSize: 16,
-                      fontFamily: "JosefinSans-Regular",
-                      textAlign: "center",
-                      padding: 20,
-                    }}
+
+                  <View
+                    className="self-center justify-center items-center w-2/3 py-3"
                   >
-                    Actualizar os tipos de plantas para esta parcela de
-                    cajueiros
-                  </Text>
+                    <Text
+                      className="text-red-500 text-center text-sm font-normal"
+                    >
+                      Tipos de plantas nao actualizados.
+                    </Text>
+                  </View>
                 )}
                 <Box
                   style={{
@@ -1030,9 +1030,10 @@ const FarmlandData = ({
               setSuccessLottieVisible={setSuccessLottieVisible}
             />
           )}
-        </CollapseBody>
-      </Collapse>
-    </View>
+        </View>
+
+      </CollapseBody>
+    </Collapse>
   );
 };
 

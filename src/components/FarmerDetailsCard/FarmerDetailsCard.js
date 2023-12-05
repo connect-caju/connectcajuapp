@@ -6,6 +6,8 @@ import {
   faEllipsisVertical,
   faHome,
   faIdCard,
+  faLocation,
+  faPhone,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { Icon } from "@rneui/base";
@@ -36,18 +38,7 @@ export default function FarmerDetailsCard({
 
   return (
     <Animated.View
-      // entering={BounceIn.duration(1000)}
-      style={{
-        width: "100%",
-        // eslint-disable-next-line prettier/prettier
-        borderRadius: 15,
-        padding: 8,
-        borderColor: COLORS.dark,
-        backgroundColor: COLORS.ghostwhite,
-        marginVertical: 10,
-        elevation: 3,
-        opacity: 1,
-      }}
+      className="bg-white p-2 my-2 shadow-sm shadow-slate-100"
     >
       {/* Resource Status Icon (Validated, Invalidated, Pendind) */}
       <View
@@ -72,189 +63,122 @@ export default function FarmerDetailsCard({
           }}
           onPress={handlePresentModalPress}
         >
-          <View
-            style={{
-              padding: 6,
-              borderRadius: 100,
-              backgroundColor: COLORS.lightgrey,
-            }}
-          >
+          <View>
             <FontAwesomeIcon
               icon={faEllipsisVertical}
               size={20}
-              color={farmer?.status === resourceValidation.status.validated ? COLORS.grey : COLORS.black}
+              color={farmer?.status === resourceValidation.status.validated ? COLORS.grey : COLORS.grey}
             />
           </View>
         </TouchableOpacity>}
 
       <View
-        style={{
-          padding: 8,
-          width: "100%",
-        }}
+        className="flex flex-row gap-2 justify-between items-center mb-4"
       >
         <View
-          style={{
-            flexDirection: "row",
-            width: "100%",
-          }}
+          className="flex flex-col items-center justify-center gap-1"
+        >
+          <FontAwesomeIcon
+            icon={faHome}
+            size={20}
+            color={COLORS.grey}
+          />
+          <Text
+            className="text-sm text-gray-400 font-normal"
+          >
+            {farmer?.address?.district
+              ? farmer?.address?.adminPost
+              : "NA"}{"; "}
+            {farmer?.address?.adminPost
+              ? farmer?.address?.village
+              : "NA"}
+          </Text>
+        </View>
+        <View
+          className="flex flex-col items-center justify-center gap-1"
+        >
+          <FontAwesomeIcon
+            style={
+              {
+                // alignSelf: 'center',
+              }
+            }
+            icon={faPhone}
+            size={20}
+            color={COLORS.grey}
+          />
+          <View>
+            {farmer?.contact?.primaryPhone !== 0 &&
+              farmer?.contact?.secondaryPhone !== 0 && (
+                <>
+                  <Text
+                    className="text-sm text-gray-400 font-normal"
+                  >
+                    {farmer?.contact?.primaryPhone}
+                  </Text>
+                  <Text
+                    className="text-sm text-gray-400 font-normal"
+                  >
+                    {farmer?.contact?.secondaryPhone}
+                  </Text>
+                </>
+              )}
+            {farmer?.contact?.primaryPhone !== 0 &&
+              farmer?.contact?.secondaryPhone === 0 && (
+                <Text
+                  className="text-sm text-gray-400 font-normal"
+                >
+                  {farmer?.contact?.primaryPhone}
+                </Text>
+              )}
+
+            {farmer?.contact?.primaryPhone === 0 &&
+              farmer?.contact?.secondaryPhone !== 0 && (
+                <Text
+                  className="text-sm text-gray-400 font-normal"
+                >
+                  {farmer?.contact?.secondaryPhone}
+                </Text>
+              )}
+
+            {farmer?.contact?.primaryPhone === 0 &&
+              farmer?.contact?.secondaryPhone === 0 && (
+                <Text
+                  className="text-lg text-gray-400 font-normal"
+                >
+                  ?
+                </Text>
+              )}
+          </View>
+        </View>
+        <View
+          className="flex flex-col items-center justify-center gap-1"
         >
           <View
             style={{
-              width: "50%",
-              justifyContent: "center",
+              // width: "30%",
             }}
           >
-            <View
-              style={{
-                width: "100%",
-                flexDirection: "row",
-                alignItems: "center",
-              }}
-            >
-              <View
-                style={{
-                  width: "30%",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
-                <FontAwesomeIcon
-                  style={
-                    {
-                      // alignSelf: 'center',
-                    }
-                  }
-                  icon={faHome}
-                  size={20}
-                  color={COLORS.grey}
-                />
-              </View>
-
-              <View
-                style={{
-                  width: "70%",
-                }}
-              >
-                <Text
-                  style={{
-                    color: "grey",
-                    fontSize: 13,
-                    fontFamily: "JosefinSans-Regular",
-                  }}
-                >
-                  {farmer?.address?.district
-                    ? farmer?.address?.adminPost
-                    : "Não Aplicável"}
-                </Text>
-                <Text
-                  style={{
-                    color: "grey",
-                    fontSize: 13,
-                    fontFamily: "JosefinSans-Regular",
-                  }}
-                >
-                  {farmer?.address?.adminPost
-                    ? farmer?.address?.village
-                    : "Não Aplicável"}
-                </Text>
-              </View>
-            </View>
+            <Icon name="location-pin" size={25} color={COLORS.grey} />
           </View>
-
-          <View
-            style={{
-              width: "50%",
-            }}
+          <Text
+            className="text-sm text-gray-400 font-normal"
           >
-            <View
-              style={{
-                width: "100%",
-                flexDirection: "row",
-                alignItems: "center",
-              }}
-            >
-              <View
-                style={{
-                  width: "30%",
-                }}
-              >
-                <Icon name="phone-in-talk" size={25} color={COLORS.grey} />
-              </View>
-
-              <View
-                style={{
-                  width: "70%",
-                }}
-              >
-                {farmer?.contact?.primaryPhone !== 0 &&
-                  farmer?.contact?.secondaryPhone !== 0 && (
-                    <>
-                      <Text
-                        style={{
-                          color: "grey",
-                          fontSize: 13,
-                          fontFamily: "JosefinSans-Regular",
-                        }}
-                      >
-                        {farmer?.contact?.primaryPhone}
-                      </Text>
-                      <Text
-                        style={{
-                          color: "grey",
-                          fontSize: 13,
-                          fontFamily: "JosefinSans-Regular",
-                        }}
-                      >
-                        {farmer?.contact?.secondaryPhone}
-                      </Text>
-                    </>
-                  )}
-                {farmer?.contact?.primaryPhone !== 0 &&
-                  farmer?.contact?.secondaryPhone === 0 && (
-                    <Text
-                      style={{
-                        color: "grey",
-                        fontSize: 13,
-                        fontFamily: "JosefinSans-Regular",
-                      }}
-                    >
-                      {farmer?.contact?.primaryPhone}
-                    </Text>
-                  )}
-
-                {farmer?.contact?.primaryPhone === 0 &&
-                  farmer?.contact?.secondaryPhone !== 0 && (
-                    <Text
-                      style={{
-                        color: "grey",
-                        fontSize: 13,
-                        fontFamily: "JosefinSans-Regular",
-                      }}
-                    >
-                      {farmer?.contact?.secondaryPhone}
-                    </Text>
-                  )}
-
-                {farmer?.contact?.primaryPhone === 0 &&
-                  farmer?.contact?.secondaryPhone === 0 && (
-                    <Text
-                      style={{
-                        color: "grey",
-                        fontSize: 13,
-                        fontFamily: "JosefinSans-Regular",
-                      }}
-                    >
-                      Nenhum
-                    </Text>
-                  )}
-              </View>
-            </View>
-          </View>
+            Long:
+            {farmer?.geolocation?.longitude
+              ? " ☑ "
+              : "?"}{" | "}
+            Lat:
+            {farmer?.geolocation?.latitude
+              ? " ☑ "
+              : "?"}
+          </Text>
         </View>
       </View>
 
-      <CustomDivider thickness={2} color={COLORS.lightgrey} />
+
+
+      {/* <CustomDivider thickness={2} color={COLORS.lightgrey} />
 
       <View
         style={{
@@ -289,7 +213,7 @@ export default function FarmerDetailsCard({
                 }}
               >
                 <FontAwesomeIcon
-                  style={{  }}
+                  style={{}}
                   icon={faIdCard}
                   size={20}
                   color={COLORS.grey}
@@ -330,139 +254,14 @@ export default function FarmerDetailsCard({
               </View>
             </View>
           </View>
-
-          <View
-            style={{
-              width: "50%",
-              justifyContent: "center",
-            }}
-          >
-            <View
-              style={{
-                width: "100%",
-                flexDirection: "row",
-                alignItems: "center",
-              }}
-            >
-              <View
-                style={{
-                  width: "30%",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
-                <FontAwesomeIcon
-                  icon={faBirthdayCake}
-                  size={20}
-                  color={COLORS.grey}
-                />
-              </View>
-
-              <View
-                style={{
-                  width: "70%",
-                }}
-              >
-                <Text
-                  style={{
-                    color: "grey",
-                    fontSize: 13,
-                    fontFamily: "JosefinSans-Regular",
-                  }}
-                >
-                  {`${new Date(farmer?.birthDate).getDate()}/${new Date(farmer?.birthDate).getMonth() + 1
-                    }/${new Date(farmer?.birthDate).getFullYear()}`}{" "}
-                  ({calculateAge(farmer?.birthDate)} anos)
-                </Text>
-                <Text
-                  style={{
-                    color: "grey",
-                    fontSize: 13,
-                    fontFamily: "JosefinSans-Regular",
-                  }}
-                >
-                  {farmer?.birthPlace?.district
-                    ? farmer?.birthPlace?.district
-                    : "(Não Aplicável)"}
-                </Text>
-              </View>
-            </View>
-          </View>
         </View>
-      </View>
+      </View> */}
 
-      <CustomDivider thickness={2} color={COLORS.lightgrey} />
 
-      <View
-        style={{
-          padding: 8,
-          width: "100%",
-        }}
-      >
-        <View
-          style={{
-            flexDirection: "row",
-            width: "100%",
-            // justifyContent: 'center',
-          }}
-        >
-          <View
-            style={{
-              width: "50%",
-              justifyContent: "center",
-            }}
-          >
-            <View
-              style={{
-                width: "100%",
-                flexDirection: "row",
-                justifyContent: "center",
-              }}
-            >
-              <View
-                style={{
-                  width: "30%",
-                }}
-              >
-                <Icon name="location-pin" size={25} color={COLORS.grey} />
-              </View>
 
-              <View
-                style={{
-                  width: "70%",
-                }}
-              >
-                <Text
-                  style={{
-                    color: "grey",
-                    fontSize: 13,
-                    fontFamily: "JosefinSans-Regular",
-                  }}
-                >
-                  Long:{" "}
-                  {farmer?.geolocation?.longitude
-                    ? farmer?.geolocation?.longitude
-                    : "Nenhuma"}
-                </Text>
-                <Text
-                  style={{
-                    color: "grey",
-                    fontSize: 13,
-                    fontFamily: "JosefinSans-Regular",
-                  }}
-                >
-                  Lat:{" "}
-                  {farmer?.geolocation?.latitude
-                    ? farmer?.geolocation?.latitude
-                    : "Nenhuma"}
-                </Text>
-              </View>
-            </View>
-          </View>
-        </View>
-      </View>
 
-      <CustomDivider thickness={2} color={COLORS.lightgrey} />
+
+      {/* <CustomDivider thickness={2} color={COLORS.lightgrey} /> */}
 
       {/* Resource signature (registered by, approved by, rejected by, modified by) */}
       <ResourceSignature
