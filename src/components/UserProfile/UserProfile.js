@@ -155,192 +155,163 @@ export default function UserProfile({
           </Box>
         </Stack>
 
-        <ScrollView>
-          {/* <Center> */}
-          {/* <Box
-              w="100%"
-              style={{
-                marginTop: 5,
-              }}
-            > */}
-          {/* <Box
-                style={{
-                  flex: 1,
-                  width: "100%",
-                  height: "100%",
-                  paddingHorizontal: 15,
-                  paddingBottom: 20,
-                  marginVertical: 10,
-                  borderRadius: 20,
-                  backgroundColor: COLORS.white,
-                }}
-              > */}
-          <TouchableOpacity
-            disabled={true}
-            onPress={() => {
-              setIsAddPhoto(true);
-              setTitleAlert(errorMessages.addPhoto.title);
-              setMessageAlert(errorMessages.addPhoto.message);
-              setShowCancelButton(errorMessages.addPhoto.showCancelButton);
-              setShowConfirmButtom(
-                errorMessages.addPhoto.showConfirmButton,
-              );
-              setCancelText(errorMessages.addPhoto.cancelText);
-              setConfirmText(errorMessages.addPhoto.confirmText);
-              setAlert(true);
-            }}
+        <TouchableOpacity
+          disabled={true}
+          onPress={() => {
+            setIsAddPhoto(true);
+            setTitleAlert(errorMessages.addPhoto.title);
+            setMessageAlert(errorMessages.addPhoto.message);
+            setShowCancelButton(errorMessages.addPhoto.showCancelButton);
+            setShowConfirmButtom(
+              errorMessages.addPhoto.showConfirmButton,
+            );
+            setCancelText(errorMessages.addPhoto.cancelText);
+            setConfirmText(errorMessages.addPhoto.confirmText);
+            setAlert(true);
+          }}
+        >
+          {customUserData?.image && (
+            <Box>
+              <Image
+                source={{ uri: customUserData?.image }}
+                style={styles.images}
+              />
+            </Box>
+          )}
+
+          {!customUserData?.image && (
+            <Box>
+              <Icon
+                name="account-circle"
+                size={200}
+                color={COLORS.lightgrey}
+              />
+            </Box>
+          )}
+        </TouchableOpacity>
+
+        <Box
+          style={{
+            paddingBottom: 20,
+          }}
+        >
+          <Text
+            className="text-xl font-semibold text-gray-600 text-center"
           >
-            {customUserData?.image && (
-              <Box>
-                <Image
-                  source={{ uri: customUserData?.image }}
-                  style={styles.images}
-                />
-              </Box>
+            {customUserData?.name}
+          </Text>
+          <Text
+            className="text-md font-normal text-center text-gray-400"
+          >
+            (
+            {customUserData?.role?.includes(roles.coopManager)
+              ? roles.coopManager
+              : customUserData?.role}
+            )
+          </Text>
+        </Box>
+
+        <View
+          className="mx-2 py-4 flex flex-row justify-between flex-wrap gap-4"
+        >
+          <View
+            className="flex flex-col justify-between my-1"
+          >
+            <Icon
+              name="home"
+              size={20}
+              color={COLORS.grey}
+            />
+
+            <Text
+              className="text-xs font-normal text-gray-400"
+            >{customUserData?.userProvince}
+              {customUserData?.userDistrict?.includes("NA")
+                ? ""
+                : `; ${customUserData?.userDistrict}`}
+            </Text>
+          </View>
+          <View
+            className="flex flex-col justify-between my-1"
+          >
+            <Icon
+              name="phone"
+              size={20}
+              color={COLORS.grey}
+            />
+
+            <Text
+              className="text-xs font-normal text-gray-400"
+            >{customUserData?.phone}</Text>
+          </View>
+          <View
+            className="flex flex-col justify-between my-1"
+          >
+            <Icon
+              name="email"
+              size={20}
+              color={COLORS.grey}
+            />
+            <Text
+              className="text-xs font-normal text-gray-400"
+            >{customUserData?.email}</Text>
+          </View>
+        </View>
+
+        <CustomDivider />
+        <Box
+          className="w-full m-2  items-center justify-center flex flex-col gap-1"
+        >
+
+          {(customUserData?.role.includes(roles.provincialManager) ||
+            customUserData?.email.includes("connectcaju2023")) && (
+              <TouchableOpacity
+                onPress={() => {
+                  setIsGoalUpdateVisible(true);
+                }}
+                className=" rounded-md flex flex-row self-start gap-4"
+              >
+                <Icon name="update" size={25} color={COLORS.grey} />
+                <Text
+                  className="text-slate-700 text-md font-semibold"
+                >
+                  Actualizar metas
+                </Text>
+              </TouchableOpacity>
             )}
 
-            {!customUserData?.image && (
-              <Box>
-                <Icon
-                  name="account-circle"
-                  size={200}
-                  color={COLORS.lightgrey}
-                />
-              </Box>
-            )}
+          <TouchableOpacity disabled style={{}} onPress={() => { }}
+            className=" rounded-md mt-4 flex flex-row self-start gap-4"
+
+          >
+
+            <Icon
+              name="integration-instructions"
+              size={25}
+              color={COLORS.grey}
+            />
+            <Text
+              className="text-slate-700 text-md font-semibold"
+            >
+              Manual de usuários
+            </Text>
           </TouchableOpacity>
 
-          <Box
-            style={{
-              paddingBottom: 20,
-            }}
+        </Box>
+        <TouchableOpacity
+          onPress={() => {
+            user?.logOut();
+          }}
+          className="absolute bottom-3 left-3 rounded-md mt-4 flex flex-row self-start gap-4"
+        >
+
+          <Icon name="logout" size={25} color={COLORS.grey} />
+          <Text
+            className="text-slate-700 text-md font-semibold"
           >
-            <Text
-              className="text-xl font-semibold text-black text-center"
-            >
-              {customUserData?.name}
-            </Text>
-            <Text
-              className="text-md font-normal text-center text-gray-400"
-            >
-              (
-              {customUserData?.role?.includes(roles.coopManager)
-                ? roles.coopManager
-                : customUserData?.role}
-              )
-            </Text>
-          </Box>
-
-          <CustomDivider thickness={2} my={2} bg={COLORS.second} />
-
-          <Box
-            className="mx-2 py-4"
-          >
-            <View
-              className="flex flex-row justify-between my-1"
-            >
-              <Icon
-                name="home"
-                size={25}
-                color={COLORS.grey}
-              />
-
-              <Text
-                className="text-md font-normal text-gray-400"
-              >{customUserData?.userProvince}
-                {customUserData?.userDistrict?.includes("NA")
-                  ? ""
-                  : `(${customUserData?.userDistrict})`}
-              </Text>
-            </View>
-            <View
-              className="flex flex-row justify-between my-1"
-            >
-              <Icon
-                name="phone"
-                size={25}
-                color={COLORS.grey}
-              />
-
-              <Text
-                className="text-md font-normal text-gray-400"
-              >{customUserData?.phone}</Text>
-            </View>
-            <View
-              className="flex flex-row justify-between my-1"
-            >
-              <Icon
-                name="email"
-                size={25}
-                color={COLORS.grey}
-              />
-              <Text
-                className="text-md font-normal text-gray-400"
-              >{customUserData?.email}</Text>
-            </View>
-          </Box>
-
-          <CustomDivider thickness={2} my={2} bg={COLORS.second} />
-          <Box
-            // style={{
-            //   marginTop: 20,
-            // }}
-            className="w-full mx-2 my-7 items-center justify-center flex flex-col gap-1"
-          >
-
-            {(customUserData?.role.includes(roles.provincialManager) ||
-              customUserData?.email.includes("connectcaju2023")) && (
-                <TouchableOpacity
-                  onPress={() => {
-                    setIsGoalUpdateVisible(true);
-                  }}
-                  className="rounded-md flex flex-row w-full gap-4"
-                >
-                  <Icon name="update" size={25} color={COLORS.grey} />
-                  <Text
-                    className="text-slate-700 text-md font-normal"
-                  >
-                    Actualizar metas
-                  </Text>
-                </TouchableOpacity>
-              )}
-
-            <TouchableOpacity disabled style={{}} onPress={() => { }}
-              className=" rounded-md flex flex-row w-full gap-4"
-
-            >
-
-              <Icon
-                name="integration-instructions"
-                size={25}
-                color={COLORS.grey}
-              />
-              <Text
-                className="text-slate-700 text-md font-normal"
-              >
-                Manual de usuários
-              </Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity
-              onPress={() => {
-                user?.logOut();
-              }}
-              className=" rounded-md flex flex-row w-full gap-4"
-            >
-
-              <Icon name="logout" size={25} color={COLORS.danger} />
-              <Text
-                className={`text-[${COLORS.danger}] text-md font-normal`}
-              >
-                Terminar sessão
-              </Text>
-            </TouchableOpacity>
-            {/* </Box> */}
-          </Box>
-          {/* </Box> */}
-          {/* </Center> */}
-        </ScrollView>
+            Terminar sessão
+          </Text>
+        </TouchableOpacity>
       </Box>
       <PhotoModal
         realm={realm}

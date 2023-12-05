@@ -73,7 +73,7 @@ export default function FarmerDetailsCard({
         </TouchableOpacity>}
 
       <View
-        className="flex flex-row gap-2 justify-between items-center mb-4"
+        className="flex flex-row gap-2 justify-between items-center mb-4 flex-wrap"
       >
         <View
           className="flex flex-col items-center justify-center gap-1"

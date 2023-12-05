@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 /* eslint-disable prettier/prettier */
 import React, { useState, useEffect, useCallback } from "react";
 import { View, Text, StyleSheet, ScrollView, Pressable } from "react-native";
@@ -27,6 +28,8 @@ import { useFocusEffect } from "@react-navigation/native";
 import { InteractionManager } from "react-native";
 import { errorMessages } from "../../consts/errorMessages";
 import GoalSetting from "../LottieComponents/GoalSetting";
+import tailwind from "twrnc";
+import { backgroundStyle } from "../../styles/globals";
 
 export default function UserGoalEdit({
   isGoalUpdateVisible,
@@ -109,13 +112,9 @@ export default function UserGoalEdit({
   return (
     <>
       <Overlay
-        overlayStyle={{
-          backgroundColor: "ghostwhite",
-          width: "100%",
-          minHeight: "100%",
-        }}
         isVisible={isGoalUpdateVisible}
         onBackdropPress={toggleOverlay}
+        overlayStyle={tailwind`${backgroundStyle} w-full min-h-full`}
       >
         <View
           style={{
@@ -129,53 +128,21 @@ export default function UserGoalEdit({
                 onPress={() => {
                   setIsGoalUpdateVisible(false);
                 }}
-                style={{
-                  position: "absolute",
-                  left: 0,
-                  top: 4,
-                  flexDirection: "row",
-                }}
+                className="absolute left-0 top-0 flex-row"
               >
                 <Icon
                   name="arrow-back"
-                  color={COLORS.black}
+                  color={COLORS.grey}
                   size={wp("8%")}
                 />
               </Pressable>
 
-              {/* <Icon 
-                    name='arrow-back-ios' 
-                    color={COLORS.main} 
-                    size={35}  
-                    onPress={()=>{
-                        setIsGoalUpdateVisible(false);
-                    }}
-                />            */}
             </Box>
             <Box
-              w="100%"
-              style={{
-                justifyContent: "center",
-                alignItems: "center",
-              }}
+              className="w-full justify-center items-center"
             >
-              {/* <Text
-                style={{
-                  textAlign: "center",
-                  color: COLORS.main,
-                  fontSize: 15,
-                  fontFamily: "JosefinSans-Bold",
-                }}
-              >
-                Actualização de Meta
-              </Text> */}
               <Text
-                style={{
-                  textAlign: "center",
-                  color: COLORS.black,
-                  fontSize: 18,
-                  fontFamily: "JosefinSans-Bold",
-                }}
+                className="text-center text-gray-600 font-bold text-lg"
               >
                 {customUserData?.userProvince}
               </Text>
@@ -301,49 +268,19 @@ export default function UserGoalEdit({
               <GoalSetting />
             )}
             {!district && (
-              <View
-                style={{
-                  textAlign: "center",
-                  fontFamily: "JosefinSans-Regular",
-                  fontSize: 15,
-                  backgroundColor: COLORS.lightestgrey,
-                  width: 250,
-                  paddingHorizontal: 10,
-                }}
+              <Text
+                className="text-center font-normal text-sm text-gray-400"
               >
-                <Text
-                  style={{
-                    textAlign: "center",
-                    fontFamily: "JosefinSans-Regular",
-                    fontSize: 15,
-                    color: COLORS.grey,
-                  }}
-                >
-                  Selecciona distrito para atribuir metas aos usuários.
-                </Text>
-
-              </View>
+                Seleccionar distrito do usuário.
+              </Text>
             )}
 
             {district && districtalUsers.length === 0 && (
               <View
-                style={{
-                  textAlign: "center",
-                  fontFamily: "JosefinSans-Regular",
-                  fontSize: 15,
-                  backgroundColor: COLORS.lightestgrey,
-                  width: 250,
-                  paddingHorizontal: 10,
-                }}
+                className="w-60"
               >
                 <Text
-                  style={{
-                    textAlign: "center",
-                    // lineHeight: 30,
-                    fontFamily: "JosefinSans-Regular",
-                    fontSize: 15,
-                    color: COLORS.danger,
-                  }}
+                  className="text-center font-normal text-sm text-red-400"
                 >
                   O distrito de {district} não tem usuários registados.
                 </Text>
@@ -354,77 +291,46 @@ export default function UserGoalEdit({
 
           {district && districtalUsers.length > 0 && (
             <Box
-              style={{
-                flex: 1,
-                width: "100%",
-              }}
+              // style={{
+              //   flex: 1,
+              //   width: "100%",
+              // }}
+              className="flex flex-1 w-full"
             >
               <Stack
-                w="100%"
-                direction="row"
-                mb="2"
-                space={1}
-                style={{
-                  backgroundColor: COLORS.main,
-                  padding: 10,
-                }}
+
+                className="w-full flex flex-row mb-2 bg-slate-400 rounded-t-md p-2 gap-1"
               >
                 <Box
                   w="40%"
-                  style={{
-                    justifyContent: "center",
-                  }}
+                  className="justify-center"
                 >
                   <Text
-                    style={{
-                      fontFamily: "JosefinSans-Regular",
-                      fontSize: 16,
-                      color: COLORS.ghostwhite,
-                    }}
+                    className="font-normal text-sm text-white"
                   >
                     Usuário
                   </Text>
                 </Box>
                 <Box w="20%">
                   <Text
-                    style={{
-                      textAlign: "center",
-                      fontFamily: "JosefinSans-Bold",
-                      fontSize: 12,
-                      color: COLORS.ghostwhite,
-                    }}
+                    className="font-normal text-sm text-white text-center"
                   >
                     Meta
                   </Text>
                   <Text
-                    style={{
-                      textAlign: "center",
-                      fontFamily: "JosefinSans-Bold",
-                      fontSize: 10,
-                      color: COLORS.ghostwhite,
-                    }}
+                    className="font-normal text-xs text-white text-center"
                   >
                     Produtores
                   </Text>
                 </Box>
                 <Box w="20%">
                   <Text
-                    style={{
-                      textAlign: "center",
-                      fontFamily: "JosefinSans-Bold",
-                      fontSize: 12,
-                      color: COLORS.ghostwhite,
-                    }}
+                    className="font-normal text-sm text-white text-center"
                   >
                     Meta
                   </Text>
                   <Text
-                    style={{
-                      textAlign: "center",
-                      fontFamily: "JosefinSans-Bold",
-                      fontSize: 10,
-                      color: COLORS.ghostwhite,
-                    }}
+                    className="font-normal text-xs text-white text-center"
                   >
                     Parcelas
                   </Text>
@@ -437,12 +343,7 @@ export default function UserGoalEdit({
                   }}
                 >
                   <Text
-                    style={{
-                      textAlign: "center",
-                      fontFamily: "JosefinSans-Bold",
-                      fontSize: 12,
-                      color: COLORS.ghostwhite,
-                    }}
+                    className="font-normal text-sm text-white text-center"
                   >
                     Acção
                   </Text>

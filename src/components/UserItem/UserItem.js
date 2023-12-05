@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 /* eslint-disable react/prop-types */
 /* eslint-disable prettier/prettier */
 import React, { useState, useEffect, useCallback } from "react";
@@ -99,47 +100,22 @@ export default function UserItem({ userItem }) {
 
   return (
     <Box
-      style={{
-        flex: 1,
-        backgroundColor: COLORS.ghostwhite,
-        marginVertical: 10,
-        paddingVertical: 4,
-        paddingHorizontal: 5,
-        borderColor: "#005000",
-        shadowColor: "#005000",
-        shadowOffset: {
-          width: 2,
-          height: 3,
-        },
-        shadowOpacity: 0.27,
-        shadowRadius: 4.65,
-        elevation: 3,
-        opacity: 1,
-      }}
+      className="flex flex-1 bg-white shadow-md shadow-slate-200 my-1 h-16 items-center justify-center"
     >
-      <Stack key={userItem?.userId} w="100%" direction="row" space={1}>
+      <Stack w="100%" direction="row" space={1} >
         <Box
           w="40%"
-          style={{
-            justifyContent: "center",
-          }}
+          className="justify-center "
         >
           <Text
-            style={{
-              fontFamily: "JosefinSans-Bold",
-              fontSize: 14,
-              color: COLORS.black,
-            }}
+            className="font-normal text-sm text-gray-600 pl-1"
           >
             {userItem?.name}
           </Text>
         </Box>
         <Box
           w="20%"
-          style={{
-            alignItems: "center",
-            justifyContent: "center",
-          }}
+          className="justify-center items-center"
         >
           <FormControl isRequired my="1" isInvalid={"errorMessage" in errors}>
             <CustomInput
@@ -164,10 +140,7 @@ export default function UserItem({ userItem }) {
 
         <Box
           w="20%"
-          style={{
-            alignItems: "center",
-            justifyContent: "center",
-          }}
+          className="justify-center items-center"
         >
           <FormControl isRequired my="1" isInvalid={"errorMessage" in errors}>
             <CustomInput
@@ -192,9 +165,7 @@ export default function UserItem({ userItem }) {
 
         <Box
           w="20%"
-          style={{
-            justifyContent: "center",
-          }}
+          className="justify-center"
         >
           <TouchableOpacity
             onPress={() => {
@@ -230,11 +201,7 @@ export default function UserItem({ userItem }) {
       </Stack>
       {errors.errorMessage && (
         <Text
-          style={{
-            color: COLORS.red,
-            fontSize: 12,
-            textAlign: "center",
-          }}
+          className="text-red-400 text-center text-xs"
         >
           {errors.errorMessage}
         </Text>
