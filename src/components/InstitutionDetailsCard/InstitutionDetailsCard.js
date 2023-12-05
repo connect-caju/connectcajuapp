@@ -35,17 +35,6 @@ export default function InstitutionDetailsCard({
 
   return (
     <Animated.View
-      // entering={BounceIn.duration(1000)}
-      // style={{
-      //   width: "100%",
-      //   borderRadius: 15,
-      //   padding: 8,
-      //   borderColor: COLORS.dark,
-      //   backgroundColor: COLORS.ghostwhite,
-      //   marginVertical: 10,
-      //   elevation: 3,
-      //   opacity: 1,
-      // }}
       className="bg-white p-2 my-2 shadow-sm shadow-slate-100"
     >
       {/* Resource Status Icon (Validated, Invalidated, Pendind) */}
@@ -112,21 +101,15 @@ export default function InstitutionDetailsCard({
         >
           {roles.haveReadAndWritePermissions.some(role => role === customUserData?.role)
             && <TouchableOpacity
-                disabled={farmer?.status === resourceValidation.status.validated}
-                style={{}}
-                onPress={handlePresentModalPress}
-              >
-              <View
-                style={{
-                  padding: 6,
-                  borderRadius: 100,
-                  backgroundColor: COLORS.lightgrey,
-                }}
-              >
+              disabled={farmer?.status === resourceValidation.status.validated}
+              style={{}}
+              onPress={handlePresentModalPress}
+            >
+              <View>
                 <FontAwesomeIcon
                   icon={faEllipsisVertical}
                   size={20}
-                  color={farmer?.status === resourceValidation.status.validated ? COLORS.grey : COLORS.black}
+                  color={farmer?.status === resourceValidation.status.validated ? COLORS.grey : COLORS.grey}
                 />
               </View>
             </TouchableOpacity>}

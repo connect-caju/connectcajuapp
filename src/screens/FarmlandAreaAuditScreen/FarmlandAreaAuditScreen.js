@@ -31,7 +31,7 @@ import { useFocusEffect } from "@react-navigation/native";
 import { InteractionManager } from "react-native";
 import CustomActivityIndicator from "../../components/ActivityIndicator/CustomActivityIndicator";
 import { Pressable } from "react-native";
-import { calculatePolygonArea } from "../../helpers/calculatePolygonArea";
+import { calculateArea, calculatePolygonArea } from "../../helpers/calculatePolygonArea";
 import { SuccessLottie } from "../../components/LottieComponents/SuccessLottie";
 import { farmerTypes } from "../../consts/farmerTypes";
 import { resourceValidation } from "../../consts/resourceValidation";
@@ -211,8 +211,10 @@ const FarmlandAreaAuditScreen = ({ route, navigation }) => {
         lng: parseFloat(point?.longitude),
       };
     });
-    const area = calculatePolygonArea(points);
+    points.push(points[0]);
+    const area = calculateArea(points);
     setArea(Number(area));
+    console.log("area:", area);
     return area;
   };
 

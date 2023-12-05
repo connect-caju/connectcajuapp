@@ -53,6 +53,7 @@ import FarmlandData from "../../components/FarmlandData/FarmlandData";
 import { roles } from "../../consts/roles";
 import { backgroundStyle } from "../../styles/globals";
 import { calculateAge } from "../../helpers/dates";
+import tailwind from "twrnc";
 const { useRealm, useQuery, useObject } = realmContext;
 
 const singleFarmer = "singleFarmer";
@@ -489,16 +490,14 @@ const ProfileScreen = ({ route, navigation }) => {
         index={1}
         snapPoints={snapPoints}
         onChange={() => { }}
-        backgroundStyle={{
-          backgroundColor: COLORS.ghostwhite,
-        }}
+        backgroundStyle={tailwind`bg-neutral-100`}
         style={{
-          borderTopColor: COLORS.lightgrey,
-          borderTopWidth: 2,
-          borderTopLeftRadius: 18,
-          borderTopRightRadius: 18,
-          elevation: 5,
-          opacity: 1,
+          // borderTopColor: COLORS.lightgrey,
+          // borderTopWidth: 2,
+          // borderTopLeftRadius: 18,
+          // borderTopRightRadius: 18,
+          // elevation: 5,
+          // opacity: 1,
         }}
       >
         <Pressable
