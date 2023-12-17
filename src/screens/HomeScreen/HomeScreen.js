@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable linebreak-style */
 /* eslint-disable prettier/prettier */
 
@@ -31,12 +32,12 @@ import { roles } from "../../consts/roles";
 import UserProfile from "../../components/UserProfile/UserProfile";
 import { getPercentage, getPercentage2 } from "../../helpers/getPercentage";
 
-import { useUser } from "@realm/react";
-import { realmContext } from "../../models/realmContext";
 import ProvincialManager from "./ProvincialManager";
 import UserPerformanceItem from "../../components/UserPerformanceItem/UserPerformanceItem";
 import { backgroundStyle } from "../../styles/globals";
 
+import { useUser } from "@realm/react";
+import { realmContext } from "../../models/realmContext";
 const { useRealm, useQuery } = realmContext;
 
 // sync subscription by this name
@@ -307,6 +308,12 @@ export default function HomeScreen({ route, navigation }) {
   }
 
 
+  const handleUserProfileNavigation = () => {
+    navigation.navigate("UserProfile", {
+      customUserData: JSON.stringify(customUserData),
+    });
+  };
+
 
 
   return (
@@ -314,7 +321,7 @@ export default function HomeScreen({ route, navigation }) {
       className={`${backgroundStyle} flex-1`}
     >
       <View
-        className={"w-full bg-[#EBEBE4]"}
+        className={"w-full bg-[#EBEBE4] dark:bg-gray-800"}
       >
         <Box
           style={{
@@ -325,7 +332,7 @@ export default function HomeScreen({ route, navigation }) {
           <Stack
             direction="row"
             w="100%"
-             >
+          >
             <Box w="40%" alignItems={"center"}>
               <Image
                 style={{ width: 55, height: 55, borderRadius: 100 }}
@@ -341,7 +348,8 @@ export default function HomeScreen({ route, navigation }) {
             <Box w="40%" alignItems={"center"}>
               <TouchableOpacity
                 onPress={() => {
-                  setIsUserProfileVisible((prev) => !prev);
+                  // setIsUserProfileVisible((prev) => !prev);
+                   handleUserProfileNavigation();
                 }}
                 className="-mt-1"
               >
@@ -569,10 +577,10 @@ export default function HomeScreen({ route, navigation }) {
         isUserProfileVisible={isUserProfileVisible}
         setIsUserProfileVisible={setIsUserProfileVisible}
       />
-      <UserGoalEdit
+      {/* <UserGoalEdit
         isGoalUpdateVisible={isGoalUpdateVisible}
         setIsGoalUpdateVisible={setIsGoalUpdateVisible}
-      />
+      /> */}
     </SafeAreaView>
   );
 }

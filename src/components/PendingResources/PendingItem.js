@@ -62,53 +62,62 @@ const PendingItem = ({ item, refresh, setRefresh }) => {
 
     return (
         <View
-            className="bg-white mx-2 my-1 rounded-md "
+            className="bg-white dark:bg-gray-800 mx-2 my-1 rounded-md "
         >
             {
                 (item.flag === resourceTypes.farmland) &&
                 <Stack direction="row" w="100%">
 
-                        <TouchableOpacity
-                            onLongPress={handleModalVisible}
-                            onPress={() => {
-                                // take action
-                            }}
+                    <TouchableOpacity
+                        onLongPress={handleModalVisible}
+                        onPress={() => {
+                            // take action
+                        }}
+                        style={{
+                            width: "85%",
+                            marginVertical: 5,
+                        }}
+                    >
+                        <View
                             style={{
-                                width: "85%",
-                                marginVertical: 5,
+                                flexDirection: "row",
+                                justifyContent: "space-evenly",
                             }}
                         >
-                            <View
-                                style={{
-                                    flexDirection: "row",
-                                    justifyContent: "space-evenly",
-                                }}
-                            >
-                                <View>
-                                    <Text>Cajueiros:</Text>
-                                    <Text>{item?.trees} árvores</Text>
-                                </View>
-                                <View>
-                                    <Text>Área:</Text>
-                                    <Text>{item?.totalArea} hectares</Text>
-                                </View>
-                                <View>
-                                    <Text>Parcelas:</Text>
-                                    <Text>{item?.blocks ? item?.blocks?.length : 0}</Text>
-                                </View>
+                            <View>
+                                <Text
+                                    className="text-gray-500 font-semibold text-sm"
+                                >Cajueiros:</Text>
+                                <Text
+                                    className="text-gray-500 font-normal text-xs"
+                                >{item?.trees} árvores</Text>
                             </View>
-                            <Text
-                                style={{
-                                    textAlign: "right",
-                                    color: COLORS.grey,
-                                    fontFamily: "JosefinSans-Italic",
-                                    fontSize: 12,
-                                }}
-                            >
-                                Registo: {item?.createdAt} por {item?.user}
-                            </Text>
-                        </TouchableOpacity>
-     
+                            <View>
+                                <Text
+                                    className="text-gray-500 font-semibold text-sm"
+                                >
+                                    Área:
+                                </Text>
+                                <Text
+                                    className="text-gray-500 font-normal text-xs"
+                                >{item?.totalArea} hectares</Text>
+                            </View>
+                            <View>
+                                <Text
+                                    className="text-gray-500 font-semibold text-sm"
+                                >Parcelas:</Text>
+                                <Text
+                                    className="text-gray-500 font-normal text-xs"
+                                >{item?.blocks ? item?.blocks?.length : 0}</Text>
+                            </View>
+                        </View>
+                        <Text
+                            className="text-gray-500 font-normal text-xs text-right pt-1"
+                        >
+                            Registo: {item?.createdAt} por {item?.user}
+                        </Text>
+                    </TouchableOpacity>
+
                     <Center w="15%">
                         <TouchableOpacity
                             onPress={() => {
@@ -153,23 +162,14 @@ const PendingItem = ({ item, refresh, setRefresh }) => {
                             }}
                         >
                             <Text
-                                style={{
-                                    fontSize: 16,
-                                    fontFamily: "JosefinSans-Bold",
-                                    color: COLORS.black,
-                                }}
+                                className="text-gray-500 ml-2 font-semibold text-lg"
                                 numberOfLines={1}
                                 ellipsizeMode={"tail"}
                             >
                                 {item?.name}
                             </Text>
                             <Text
-                                style={{
-                                    textAlign: "right",
-                                    color: COLORS.grey,
-                                    fontFamily: "JosefinSans-Italic",
-                                    fontSize: 12,
-                                }}
+                                className="text-gray-500 font-normal text-xs text-right pt-1"
                             >
                                 Registo: {item?.createdAt} por {item?.user}
                             </Text>

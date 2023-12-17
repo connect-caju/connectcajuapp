@@ -1,12 +1,16 @@
 /* eslint-disable prettier/prettier */
-import React from "react"
-import { createNativeStackNavigator } from "@react-navigation/native-stack"
+import React from "react";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-import HomeScreen from "../../screens/HomeScreen/HomeScreen"
+import HomeScreen from "../../screens/HomeScreen/HomeScreen";
+import UserProfileScreen from "../../screens/UserProfileScreen/UserProfileScreen";
+// import { THEME_COLORS } from "../../util/styles";
+// import { useColorScheme } from "react-native";
 
-const HomeStack = createNativeStackNavigator()
+const HomeStack = createNativeStackNavigator();
 
 export default function HomeStackScreen() {
+
   return (
     <HomeStack.Navigator
       screenOptions={{
@@ -29,11 +33,11 @@ export default function HomeStackScreen() {
         name="Home"
         component={HomeScreen}
       />
-      {/* <HomeStack.Screen
-          options={{ title: 'Registo de Pomar'}}
-          name="FarmlandForm1"
-          component={FarmlandForm1Screen}
-        /> */}
+      <HomeStack.Screen
+          // options={{ title: 'Registo de Pomar'}}
+          name="UserProfile"
+          component={UserProfileScreen}
+        />
     </HomeStack.Navigator>
-  )
+  );
 }

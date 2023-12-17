@@ -10,8 +10,9 @@ const PrimaryButton = ({ onPress, title, disabled = false }) => {
         <TouchableOpacity
             disabled={disabled}
             onPress={onPress}
+            className="bg-green-700 disabled:bg-gray-300"
             style={{
-                backgroundColor: COLORS.main,
+                // backgroundColor: COLORS.main,
                 width: "100%",
                 height: 50,
                 justifyContent: "center",

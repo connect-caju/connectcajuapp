@@ -861,7 +861,7 @@ const FarmlandData = ({
                     <Text
                       className="text-red-500 text-center text-sm font-normal"
                     >
-                      Tipos de plantas nao actualizados.
+                      Tipos de plantas não actualizados.
                     </Text>
                   </View>
                 )}

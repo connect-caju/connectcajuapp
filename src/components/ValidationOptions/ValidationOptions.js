@@ -109,13 +109,7 @@ const ValidationOptions = ({ resource, resourceType, customUserData, realm, aler
 
     return (
         <View
-            style={{ 
-                paddingVertical: 5, 
-                justifyContent: "center", 
-                flexDirection: "row", 
-                backgroundColor: COLORS.fourth, 
-            }}
-            space={3}
+            className="bg-white dark:bg-gray-900 flex flex-row justify-center py-2"
         >
             <AwesomeAlert
                 show={alert}
@@ -175,11 +169,7 @@ const ValidationOptions = ({ resource, resourceType, customUserData, realm, aler
             />
 
             <Center
-                w="50%"
-                style={{
-                    // alignItems: "center",
-                    padding: 5,
-                }}
+                className="w-1/2"
             >
                 <TouchableOpacity
                     disabled={
@@ -189,35 +179,17 @@ const ValidationOptions = ({ resource, resourceType, customUserData, realm, aler
                             : true
                     }
                     onPress={() => handleResourceValidationAlert("invalidate")}
-                    style={{
-                        // borderWidth: 1,
-                        backgroundColor: COLORS.danger,
-                        padding: 8,
-                        minWidth: 135,
-                        borderRadius: 8,
-                    }}
+                // className="dark:bg-gray-800 p-2 rounded-lg"
                 >
                     <Text
-                        style={{
-                            color:
-                                resource?.status ===
-                                    resourceValidation.status.validated
-                                    ? COLORS.lightgrey
-                                    : COLORS.white,
-                            fontSize: 14,
-                            fontFamily: "JosefinSans-Bold",
-                            textAlign: "center",
-                        }}
+                        className="underline text-red-400 text-center text-normal text-semibold text-sm"
                     >
                         Indeferir Registo
                     </Text>
                 </TouchableOpacity>
             </Center>
             <Center
-                w="50%"
-                style={{
-                    padding: 5,
-                }}
+                className="w-1/2"
             >
                 <TouchableOpacity
                     disabled={
@@ -229,25 +201,10 @@ const ValidationOptions = ({ resource, resourceType, customUserData, realm, aler
                     onPress={() => {
                         handleResourceValidationAlert("validate");
                     }}
-                    style={{
-                        // borderWidth: 1,
-                        backgroundColor: COLORS.main,
-                        padding: 8,
-                        minWidth: 135,
-                        borderRadius: 8,
-                    }}
+                    className="bg-green-700 dark:bg-green-800 p-2 rounded-md"
                 >
                     <Text
-                        style={{
-                            color:
-                                resource.status ===
-                                    resourceValidation.status.validated
-                                    ? COLORS.lightgrey
-                                    : COLORS.white,
-                            fontSize: 14,
-                            fontFamily: "JosefinSans-Bold",
-                            textAlign: "center",
-                        }}
+                        className="text-gray-400 text-semibold font-normal text-center text-sm"
                     >
                         Deferir Registo
                     </Text>

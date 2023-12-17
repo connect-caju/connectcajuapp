@@ -190,11 +190,7 @@ export default function UserProfile({
           )}
         </TouchableOpacity>
 
-        <Box
-          style={{
-            paddingBottom: 20,
-          }}
-        >
+        <Box>
           <Text
             className="text-xl font-semibold text-gray-600 text-center"
           >
@@ -224,12 +220,17 @@ export default function UserProfile({
             />
 
             <Text
-              className="text-xs font-normal text-gray-400"
-            >{customUserData?.userProvince}
-              {customUserData?.userDistrict?.includes("NA")
-                ? ""
-                : `; ${customUserData?.userDistrict}`}
+              className="text-xs font-normal text-gray-400 text-center"
+            >
+              {customUserData?.userProvince}
             </Text>
+            {roles.haveReadAndWritePermissions.some(role => role.includes(customUserData?.role)) &&
+              <Text
+                className="text-xs font-normal text-gray-400 text-center -mb-3"
+              >
+                {customUserData?.userDistrict}
+              </Text>
+            }
           </View>
           <View
             className="flex flex-col justify-between my-1"
@@ -259,8 +260,8 @@ export default function UserProfile({
         </View>
 
         <CustomDivider />
-        <Box
-          className="w-full m-2  items-center justify-center flex flex-col gap-1"
+        <View
+          className="w-full mx-2 flex flex-col gap-4 mt-2 "
         >
 
           {(customUserData?.role.includes(roles.provincialManager) ||
@@ -269,50 +270,68 @@ export default function UserProfile({
                 onPress={() => {
                   setIsGoalUpdateVisible(true);
                 }}
-                className=" rounded-md flex flex-row self-start gap-4"
+                className="rounded-md flex flex-row gap-4 border-gray-400"
               >
-                <Icon name="update" size={25} color={COLORS.grey} />
+                <Icon name="update" size={25} color={COLORS.main} />
                 <Text
-                  className="text-slate-700 text-md font-semibold"
+                  className="text-green-700 text-md font-normal"
                 >
                   Actualizar metas
                 </Text>
               </TouchableOpacity>
             )}
 
-          <TouchableOpacity disabled style={{}} onPress={() => { }}
-            className=" rounded-md mt-4 flex flex-row self-start gap-4"
 
+          <TouchableOpacity disabled onPress={() => { }}
+            className="rounded-md flex flex-row gap-4 border-gray-400"
           >
-
             <Icon
               name="integration-instructions"
               size={25}
-              color={COLORS.grey}
+              color={COLORS.main}
             />
             <Text
-              className="text-slate-700 text-md font-semibold"
+              className="text-green-700 text-md font-normal"
             >
               Manual de usuários
             </Text>
           </TouchableOpacity>
+        </View>
+      </Box>
 
-        </Box>
+      <View className="flex flex-col gap-1 mb-4 ml-1">
+        <TouchableOpacity
+          onPress={() => {
+            // user?.logOut();
+          }}
+          className="rounded-md flex flex-row self-start gap-2"
+        >
+
+          <Icon name="settings" size={25} color={COLORS.grey} />
+          <Text
+            className="text-slate-400 text-md font-normal"
+          >
+            Configurações
+          </Text>
+        </TouchableOpacity>
+
         <TouchableOpacity
           onPress={() => {
             user?.logOut();
           }}
-          className="absolute bottom-3 left-3 rounded-md mt-4 flex flex-row self-start gap-4"
+          className="rounded-md flex flex-row self-start gap-2"
         >
 
           <Icon name="logout" size={25} color={COLORS.grey} />
           <Text
-            className="text-slate-700 text-md font-semibold"
+            className="text-slate-400 text-md font-normal"
           >
             Terminar sessão
           </Text>
         </TouchableOpacity>
-      </Box>
+      </View>
+
+
       <PhotoModal
         realm={realm}
         photoOwner={customUserData}

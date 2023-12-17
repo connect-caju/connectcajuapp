@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /* eslint-disable prettier/prettier */
 /* eslint-disable linebreak-style */
 import React, { useEffect } from "react";
@@ -35,12 +36,17 @@ import { syncConfig } from "./syncConfig";
 import { useState } from "react";
 import ClientResetModal from "./components/Modals/ClientResetModal";
 import { setCustomText } from "react-native-global-props";
-// import { useDeviceContext } from "twrnc";
+import { useDeviceContext } from "twrnc";
+import tw from "./lib/tailwind";
+
+if (__DEV__) {
+  import("../ReactotronConfig").then(() => console.log("Reactotron Configured"));
+}
 
 export default function App() {
 
   // allowing prefixes to twrnc (dark, focus, screen breakpoints, etc)
-  // useDeviceContext(); 
+  useDeviceContext(tw); 
 
   const [isManualResetConfirmed, setIsManualResetConfirmed] = useState(false);
   const [isVisible, setIsVisible] = useState(false);

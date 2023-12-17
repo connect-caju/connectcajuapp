@@ -15,6 +15,7 @@ import { realmContext } from "../../models/realmContext";
 import { useState } from "react";
 import { resourceTypes } from "../../consts/resourceTypes";
 import PendingItem from "./PendingItem";
+import Info from "../Info/Info";
 const { useRealm } = realmContext;
 
 const PendingResources = ({ route, navigation, userId, resourceType, }) => {
@@ -34,7 +35,7 @@ const PendingResources = ({ route, navigation, userId, resourceType, }) => {
         resources = realm.objects(resourceTypes.institution).filtered("status == $0 && userId == $1", resourceValidation.status.pending, userId);
         resources = customizeItem(resources, [], [], {}, farmerTypes.institution);
     }
-    else if (resourceType === resourceTypes.farmland){
+    else if (resourceType === resourceTypes.farmland) {
         resources = realm.objects(resourceTypes.farmland).filtered("status == $0 && userId == $1", resourceValidation.status.pending, userId);
         resources = customizeItem(resources, [], [], {}, resourceTypes.farmland);
     }
@@ -72,7 +73,7 @@ const PendingResources = ({ route, navigation, userId, resourceType, }) => {
                                 return (<PendingItem item={item} refresh={refresh} setRefresh={setRefresh} />);
                             } else if (resourceType === resourceTypes.farmland) {
                                 return (<PendingItem item={item} refresh={refresh} setRefresh={setRefresh} />);
-                            } 
+                            }
 
                         }}
                         ListFooterComponent={() => {
@@ -95,25 +96,7 @@ const PendingResources = ({ route, navigation, userId, resourceType, }) => {
                     }}
                 >
                     <InfoIcon />
-                    <View
-                        style={{
-                            backgroundColor: COLORS.lightestgrey,
-                            padding: 10,
-                            borderRadius: 6,
-                            width: 220,
-                        }}
-                    >
-                        <Text
-                            style={{
-                                color: COLORS.grey,
-                                fontSize: 15,
-                                fontFamily: "JosefinSans-Regular",
-                                textAlign: "center",
-                            }}
-                        >
-                            Nenhum registo de produtores aguarda deferimento
-                        </Text>
-                    </View>
+                    <Info info={"Nenhum registo aguarda deferimento"} />
                 </View>
             }
         </View>

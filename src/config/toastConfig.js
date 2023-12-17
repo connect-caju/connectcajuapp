@@ -105,14 +105,15 @@ export const toastConfig = {
   removedFarmerFromGroup: ({ text1, props }) => (
     <View
       style={{
-        minHeight: 60,
-        width: "100%",
+        // minHeight: 60,
+        // width: "100%",
         backgroundColor: COLORS.white,
         paddingHorizontal: 10,
         flexDirection: "row",
         borderRadius: 10,
         justifyContent: "space-between",
       }}
+      className="w-full h-40"
     >
       <View>
         <Text

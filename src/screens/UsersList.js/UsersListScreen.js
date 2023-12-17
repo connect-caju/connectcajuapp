@@ -256,16 +256,7 @@ export default function UsersListScreen({ route, navigation }) {
 
       <View>
         <View
-          style={{
-            width: "100%",
-            paddingHorizontal: wp("3%"),
-            backgroundColor: "#EBEBE4",
-            borderTopWidth: 0,
-            borderColor: "#EBEBE4",
-            borderBottomWidth: 3,
-            borderLeftWidth: 3,
-            borderRightWidth: 3,
-          }}
+          className="bg-[#EBEBE4] dark:bg-gray-800 py-2"
         >
           <Stack direction="row" w="100%">
             <Center w="15%"></Center>
@@ -273,7 +264,7 @@ export default function UsersListScreen({ route, navigation }) {
             <Box w="70%">
               <Center>
                 <Text
-                  className="text-gray-600 font-bold text-lg"
+                  className="text-gray-500 font-bold text-lg"
                 >
                   {customUserData?.userProvince}
                 </Text>
@@ -342,7 +333,7 @@ export default function UsersListScreen({ route, navigation }) {
               stickySectionHeadersEnabled
               renderSectionHeader={({ section: { title } }) => (
                 <View
-                  className="bg-slate-400 mx-2 mt-4 rounded-t-md shadow-md"
+                  className="bg-slate-600 mx-2 mt-4 rounded-t-md shadow-md"
                 >
                   <Text
                     className="pl-5 py-2 text-white font-bold text-sm"

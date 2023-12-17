@@ -10,7 +10,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import React, { useEffect, useState } from "react";
-import {  Icon } from "@rneui/themed";
+import { Icon } from "@rneui/themed";
 import { Box, Center, Stack } from "native-base";
 import { useFocusEffect } from "@react-navigation/native";
 
@@ -19,6 +19,8 @@ import CustomActivityIndicator from "../../components/ActivityIndicator/CustomAc
 import COLORS from "../../consts/colors";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import {
+  faArrowLeft,
+  faClose,
   faEllipsisVertical,
 } from "@fortawesome/free-solid-svg-icons";
 import PendingResources from "../../components/PendingResources/PendingResources";
@@ -59,7 +61,7 @@ export default function UserStat({ route, navigation }) {
   const [loadingActivitiyIndicator, setLoadingActivityIndicator] = useState(false);
 
   const [refresh, setRefresh] = useState(false);
- 
+
   const [isLoading, setIsLoading] = useState(false);
   const [isEndReached, setIsEndReached] = useState(false);
 
@@ -138,23 +140,29 @@ export default function UserStat({ route, navigation }) {
       className={`flex flex-1 ${backgroundStyle}`}
     >
       <View
-        style={{
-          width: "100%",
-          paddingHorizontal: 15,
-          backgroundColor: "#EBEBE4",
-          borderTopWidth: 0,
-          borderColor: "#EBEBE4",
-          borderBottomWidth: 3,
-          borderLeftWidth: 3,
-          borderRightWidth: 3,
-        }}
+        // style={{
+        //   width: "100%",
+        //   paddingHorizontal: 15,
+        //   backgroundColor: "#EBEBE4",
+        //   borderTopWidth: 0,
+        //   borderColor: "#EBEBE4",
+        //   borderBottomWidth: 3,
+        //   borderLeftWidth: 3,
+        //   borderRightWidth: 3,
+        // }}
+        className="bg-[#EBEBE4] dark:bg-gray-800 p-2"
+
       >
         <Stack direction="row" w="100%">
-          <Box>
-            <TouchableOpacity onPress={() => navigation.goBack()}>
-              <Icon name="arrow-back" size={35} color={COLORS.black} />
+          {/* <Box className=""> */}
+            <TouchableOpacity 
+            className="p-2"
+              onPress={() => navigation.goBack()}
+            >
+              <FontAwesomeIcon icon={faArrowLeft} size={20} color={COLORS.grey} />
+              {/* <Icon name="arrow-back" size={35} color={COLORS.grey} /> */}
             </TouchableOpacity>
-          </Box>
+          {/* </Box> */}
           <Box w="80%">
             <TouchableOpacity
               style={{
@@ -169,8 +177,9 @@ export default function UserStat({ route, navigation }) {
                   style={{
                     fontFamily: "JosefinSans-Bold",
                     fontSize: 18,
-                    color: COLORS.black,
+                    // color: COLORS.grey,
                   }}
+                  className="text-gray-600"
                   numberOfLines={1}
                   ellipsizeMode="tail"
                 >
@@ -182,7 +191,7 @@ export default function UserStat({ route, navigation }) {
 
           <Center w="15%">
             <TouchableOpacity
-              onPress={() => {  }}
+              onPress={() => { }}
               style={{
                 borderRadius: 50,
                 backgroundColor: COLORS.lightgrey,
@@ -196,7 +205,7 @@ export default function UserStat({ route, navigation }) {
 
         <View
           style={{
-            marginTop: 5,
+            marginTop: 15,
             flexDirection: "row",
             justifyContent: "space-around",
           }}
@@ -214,15 +223,15 @@ export default function UserStat({ route, navigation }) {
                 <TouchableOpacity
                   style={{
                     marginRight: 10,
-                    backgroundColor:
-                      focusedOption === item.focusedOption
-                        ? COLORS.main
-                        : COLORS.fourth,
-                    borderColor:
-                      focusedOption === item.focusedOption
-                        ? COLORS.main
-                        : COLORS.lightgrey,
-                    borderWidth: 1,
+                    // backgroundColor:
+                    //   focusedOption === item.focusedOption
+                    //     ? COLORS.main
+                    //     : COLORS.fourth,
+                    // borderColor:
+                    //   focusedOption === item.focusedOption
+                    //     ? COLORS.main
+                    //     : COLORS.lightgrey,
+                    // borderWidth: 1,
                     alignItems: "center",
                     justifyContent: "center",
                     paddingHorizontal: 10,
@@ -230,6 +239,7 @@ export default function UserStat({ route, navigation }) {
                     borderRadius: 100,
                     elevation: 1,
                   }}
+                  className={`${focusedOption === item.focusedOption ? "bg-green-700 dark:bg-green-500" : "bg-gray-200 dark:bg-gray-800 dark:border dark:border-gray-900"}`}
                   onPress={() => handleFocusedOption(item.focusedOption)}
                 >
                   <Text
@@ -253,9 +263,10 @@ export default function UserStat({ route, navigation }) {
       </View>
       <View
         style={{
-          height: 10,
-          backgroundColor: COLORS.main,
+          // height: 10,
+          // backgroundColor: COLORS.main,
         }}
+        className="bg-green-700 dark:bg-gray-800 h-4"
       />
       {
         loadingActivitiyIndicator ?

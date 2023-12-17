@@ -22,7 +22,7 @@ export default function StatItem({ item, route }) {
           userName: item?.userName,
         });
       }}
-      className="flex flex-1 bg-white mx-2 my-1 py-2 rounded-md "
+      className="flex flex-1 bg-white dark:bg-gray-800 mx-2 my-1 py-2 rounded-md "
     >
       <Stack direction="row" w="100%">
         <Center w="20%">

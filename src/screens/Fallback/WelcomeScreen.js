@@ -78,6 +78,8 @@ export default function WelcomeScreen() {
   // ----------------------------------------------------
   const [bottomSheetVisible, setBottomSheetVisible] = useState(false);
 
+  const [signingInInProgress, setSigningInInProgress] = useState(false);
+
   const toggleBottomSheet = () => {
     setBottomSheetVisible(!bottomSheetVisible);
   };
@@ -97,6 +99,7 @@ export default function WelcomeScreen() {
     // } catch (error) {
     //   console.log("Could not encrypt password:", { cause: error })
     // }
+    // setSigningInInProgress(true);
     try {
       let hashedPassword = password;
       if (!app?.currentUser) {
@@ -116,6 +119,7 @@ export default function WelcomeScreen() {
       setErrorFlag(error);
       return;
     }
+    // setSigningInInProgress(false);
   }, [app, email, password]);
 
   // on user registration
@@ -161,6 +165,7 @@ export default function WelcomeScreen() {
         coop,
       } = await validateUserData(userData, errors, setErrors);
 
+      // setSigningInInProgress(true)
       // try to register new user
       try {
         // remove any current user
@@ -203,6 +208,7 @@ export default function WelcomeScreen() {
         setErrorFlag(error);
         return;
       }
+      // setSigningInInProgress(false);
     },
     [app, email, password],
   );
@@ -943,6 +949,7 @@ export default function WelcomeScreen() {
               <Center w="100%" py="8">
                 <PrimaryButton  
                   onPress={async () => {
+                    setSigningInInProgress(true);
                     if (isLoggingIn) {
                       await onLogin(email, password);
                     } else {
@@ -958,8 +965,9 @@ export default function WelcomeScreen() {
                         coop,
                       );
                     }
+                    setSigningInInProgress(false);
                   }}
-                  disabled={(!email || !password) ? true : false}
+                  disabled={(!email || !password || signingInInProgress) ? true : false}
                   title={isLoggingIn ? "Entrar" : "Registar-se"}
                 />
                 {/* <TouchableOpacity

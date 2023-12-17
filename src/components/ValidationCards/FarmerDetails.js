@@ -6,7 +6,7 @@ import React from "react";
 import CustomDivider from "../Divider/CustomDivider";
 import COLORS from "../../consts/colors";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { faCake, faHome, faIdCard, faImage, faPhone } from "@fortawesome/free-solid-svg-icons";
+import { faCake, faHome, faIdCard, faImage, faPhone, faUser, faUserCircle } from "@fortawesome/free-solid-svg-icons";
 import { Box, } from "native-base";
 import { generateFormattedDate } from "../../helpers/generateFormattedDate";
 import { Icon } from "@rneui/base";
@@ -20,8 +20,9 @@ const FarmerDetails = ({ resource }) => {
                     alignItems: "center",
                     paddingTop: 10,
                     paddingHorizontal: 10,
-                    backgroundColor: COLORS.fourth,
+                    // backgroundColor: COLORS.fourth,
                 }}
+                className="bg-[#EBEBE4] dark:bg-gray-800"
                 flex={1}
                 onStartShouldSetResponder={() => true}
             >{
@@ -39,320 +40,297 @@ const FarmerDetails = ({ resource }) => {
                     )
                         :
                         (
-                            <FontAwesomeIcon icon={faImage} size={200} color={COLORS.grey} />
+                            <FontAwesomeIcon icon={faUserCircle} size={120} color={COLORS.grey} />
                         )
                 }
                 <View
-                    style={{
-                        alignSelf: "center",
-                        paddingBottom: 10,
-                    }}
+                    className="flex justify-center items-center h-16"
                 >
                     <Text
-                        style={{
-                            color: COLORS.black,
-                            fontFamily: "JosefinSans-Bold",
-                            fontSize: 18,
-                        }}
+                        className="text-gray-500 text-lg font-bold"
                     >{resource?.names.otherNames} {resource?.names.surname}</Text>
                 </View>
             </View>
 
-            <View
-                style={{
-                    flexDirection: "row",
-                    justifyContent: "space-around",
-                    alignItems: "center",
-                    width: "100%",
-                    paddingVertical: 10,
-                }}
-            >
-                <Box w="10%" alignItems={"center"}>
-                    <FontAwesomeIcon icon={faHome} size={20} color={COLORS.grey} />
-                </Box>
-                <Box
-                    w="90%"
-                    alignItems={"center"}
-                    // spce={3}
+            <View className="bg-white dark:bg-gray-800">
+
+                <View
                     style={{
                         flexDirection: "row",
                         justifyContent: "space-around",
+                        alignItems: "center",
+                        width: "100%",
+                        paddingVertical: 10,
                     }}
+
                 >
+                    <Box w="10%" alignItems={"center"}>
+                        <FontAwesomeIcon icon={faHome} size={20} color={COLORS.grey} />
+                    </Box>
                     <Box
-                        w="45%"
+                        w="90%"
+                        alignItems={"center"}
+                        // spce={3}
                         style={{
-                            justifyContent: "flex-start",
+                            flexDirection: "row",
+                            justifyContent: "space-around",
                         }}
                     >
-                        <Text
+                        <Box
+                            w="45%"
                             style={{
-                                fontFamily: "JosefinSans-Bold",
-                                color: COLORS.black,
+                                justifyContent: "flex-start",
                             }}
-                        >Distrito:</Text>
-                        <Text>{resource?.address?.district}</Text>
-                    </Box>
-                    <View style={{ width: 10, }} />
-                    <Box
-                        w="45%"
-                        style={{
-                            justifyContent: "flex-start",
-                        }}
-                    >
-                        <Text
+                        >
+                            <Text
+                                className="text-gray-500 font-semibold text-sm"
+                            >
+                                Distrito:
+                            </Text>
+                            <Text
+                                className="text-gray-500 font-normal text-sm"
+                            >{resource?.address?.district}</Text>
+                        </Box>
+                        <View style={{ width: 10, }} />
+                        <Box
+                            w="45%"
                             style={{
-                                fontFamily: "JosefinSans-Bold",
-                                color: COLORS.black,
+                                justifyContent: "flex-start",
                             }}
-                        >Posto Administrativo:</Text>
-                        <Text>{resource?.address?.adminPost}</Text>
+                        >
+                            <Text
+                                className="text-gray-500 font-semibold text-sm"
+                            >Posto Administrativo:</Text>
+                            <Text
+                                className="text-gray-500 font-normal text-sm"
+                            >{resource?.address?.adminPost}</Text>
+                        </Box>
                     </Box>
-                </Box>
-            </View>
+                </View>
 
-            <CustomDivider />
+                <CustomDivider />
 
-            <View
-                style={{
-                    flexDirection: "row",
-                    justifyContent: "space-around",
-                    alignItems: "center",
-                    width: "100%",
-                    paddingVertical: 10,
-                }}
-            >
-                <Box w="10%" alignItems={"center"}>
-                    <FontAwesomeIcon icon={faCake} size={20} color={COLORS.grey} />
-                </Box>
-                <Box
-                    w="90%"
-                    alignItems={"center"}
-                    // spce={3}
+                <View
                     style={{
                         flexDirection: "row",
                         justifyContent: "space-around",
+                        alignItems: "center",
+                        width: "100%",
+                        paddingVertical: 10,
                     }}
                 >
+                    <Box w="10%" alignItems={"center"}>
+                        <FontAwesomeIcon icon={faCake} size={20} color={COLORS.grey} />
+                    </Box>
                     <Box
-                        w="45%"
+                        w="90%"
+                        alignItems={"center"}
+                        // spce={3}
                         style={{
-                            justifyContent: "flex-start",
+                            flexDirection: "row",
+                            justifyContent: "space-around",
                         }}
                     >
-                        <Text
+                        <Box
+                            w="45%"
                             style={{
-                                fontFamily: "JosefinSans-Bold",
-                                color: COLORS.black,
+                                justifyContent: "flex-start",
                             }}
-                        >Data:</Text>
-                        <Text>{generateFormattedDate(resource?.birthDate)}</Text>
-                    </Box>
-                    <View style={{ width: 10, }} />
-                    <Box
-                        w="45%"
-                        style={{
-                            justifyContent: "flex-start",
-                        }}
-                    >
-                        <Text
+                        >
+                            <Text
+                                className="text-gray-500 font-semibold text-sm"
+                            >Data:</Text>
+                            <Text
+                                className="text-gray-500 font-normal text-sm"
+                            >{generateFormattedDate(resource?.birthDate)}</Text>
+                        </Box>
+                        <View style={{ width: 10, }} />
+                        <Box
+                            w="45%"
                             style={{
-                                fontFamily: "JosefinSans-Bold",
-                                color: COLORS.black,
+                                justifyContent: "flex-start",
                             }}
-                        >Lugar:</Text>
-                        <Text>{resource?.birthPlace?.adminPost ? resource?.birthPlace?.adminPost : resource?.birthPlace?.district ? resource?.birthPlace?.district : resource?.birthPlace?.province}</Text>
+                        >
+                            <Text
+                                className="text-gray-500 font-semibold text-sm"
+                            >Lugar:</Text>
+                            <Text
+                                className="text-gray-500 font-normal text-sm"
+                            >{resource?.birthPlace?.adminPost ? resource?.birthPlace?.adminPost : resource?.birthPlace?.district ? resource?.birthPlace?.district : resource?.birthPlace?.province}</Text>
+                        </Box>
                     </Box>
-                </Box>
-            </View>
-            <CustomDivider />
+                </View>
+                <CustomDivider />
 
-            <View
-                style={{
-                    flexDirection: "row",
-                    justifyContent: "space-around",
-                    alignItems: "center",
-                    width: "100%",
-                    paddingVertical: 10,
-                }}
-            >
-                <Box w="10%" alignItems={"center"}>
-                    <FontAwesomeIcon icon={faPhone} size={20} color={COLORS.grey} />
-                </Box>
-                <Box
-                    w="90%"
-                    alignItems={"center"}
-                    // spce={3}
+                <View
                     style={{
                         flexDirection: "row",
                         justifyContent: "space-around",
+                        alignItems: "center",
+                        width: "100%",
+                        paddingVertical: 10,
                     }}
                 >
-                    <Box
-                        w="45%"
-                        style={{
-                            justifyContent: "flex-start",
-                        }}
-                    >
-                        <Text
-                            style={{
-                                fontFamily: "JosefinSans-Bold",
-                                color: COLORS.black,
-                            }}
-                        >Principal:</Text>
-                        <Text
-                            style={{
-                                color: resource?.contact?.primaryPhone ? COLORS.grey : COLORS.danger,
-                            }}
-                        >{resource?.contact?.primaryPhone ? resource?.contact?.primaryPhone : "Nenhum"}</Text>
+                    <Box w="10%" alignItems={"center"}>
+                        <FontAwesomeIcon icon={faPhone} size={20} color={COLORS.grey} />
                     </Box>
-                    <View style={{ width: 10, }} />
                     <Box
-                        w="45%"
+                        w="90%"
+                        alignItems={"center"}
+                        // spce={3}
                         style={{
-                            justifyContent: "flex-start",
-                        }}
-                    >
-                        <Text
+                            flexDirection: "row",
+                            justifyContent: "space-around",
+                        }}                    >
+                        <Box
+                            w="45%"
                             style={{
-                                fontFamily: "JosefinSans-Bold",
-                                color: COLORS.black,
+                                justifyContent: "flex-start",
                             }}
-                        >Alternativo:</Text>
-                        <Text
+                        >
+                            <Text
+                                className="text-gray-500 font-semibold text-sm"
+                            >Principal:</Text>
+                            <Text
+                                style={{
+                                    color: resource?.contact?.primaryPhone ? COLORS.grey : COLORS.danger,
+                                }}
+                            >{resource?.contact?.primaryPhone ? resource?.contact?.primaryPhone : "Nenhum"}</Text>
+                        </Box>
+                        <View style={{ width: 10, }} />
+                        <Box
+                            w="45%"
                             style={{
-                                color: resource?.contact?.secondaryPhone ? COLORS.grey : COLORS.danger,
+                                justifyContent: "flex-start",
                             }}
-                        >{resource?.contact?.secondaryPhone ? resource?.contact?.secondaryPhone : "Nenhum"}</Text>
+                        >
+                            <Text
+                                className="text-gray-500 font-semibold text-sm"
+                            >Alternativo:</Text>
+                            <Text
+                                style={{
+                                    color: resource?.contact?.secondaryPhone ? COLORS.grey : COLORS.danger,
+                                }}
+                            >{resource?.contact?.secondaryPhone ? resource?.contact?.secondaryPhone : "Nenhum"}</Text>
+                        </Box>
                     </Box>
-                </Box>
-            </View>
-            <CustomDivider />
+                </View>
+                <CustomDivider />
 
 
-            <View
-                style={{
-                    flexDirection: "row",
-                    justifyContent: "space-around",
-                    alignItems: "center",
-                    width: "100%",
-                    paddingVertical: 10,
-                }}
-            >
-                <Box w="10%" alignItems={"center"}>
-                    <FontAwesomeIcon icon={faIdCard} size={20} color={COLORS.grey} />
-                </Box>
-                <Box
-                    w="90%"
-                    alignItems={"center"}
-                    // spce={3}
+                <View
                     style={{
                         flexDirection: "row",
                         justifyContent: "space-around",
+                        alignItems: "center",
+                        width: "100%",
+                        paddingVertical: 10,
                     }}
                 >
+                    <Box w="10%" alignItems={"center"}>
+                        <FontAwesomeIcon icon={faIdCard} size={20} color={COLORS.grey} />
+                    </Box>
                     <Box
-                        w="45%"
+                        w="90%"
+                        alignItems={"center"}
+                        // spce={3}
                         style={{
-                            justifyContent: "flex-start",
+                            flexDirection: "row",
+                            justifyContent: "space-around",
                         }}
                     >
-                        <Text
+                        <Box
+                            w="45%"
                             style={{
-                                fontFamily: "JosefinSans-Bold",
-                                color: COLORS.black,
+                                justifyContent: "flex-start",
                             }}
-                        >Documentação:</Text>
-                        <Text
+                        >
+                            <Text
+                                className="text-gray-500 font-semibold text-sm"
+                            >Documentação:</Text>
+                            <Text
+                                style={{
+                                    color: resource?.idDocument?.docNumber !== "Nenhum" ? COLORS.grey : COLORS.danger,
+                                }}
+                            >{resource?.idDocument?.docNumber !== "Nenhum" ? `${resource?.idDocument?.docNumber} (${resource?.idDocument?.docType}) ` : "Nenhum"}</Text>
+                        </Box>
+                        <View style={{ width: 10, }} />
+                        <Box
+                            w="45%"
                             style={{
-                                color: resource?.idDocument?.docNumber !== "Nenhum" ? COLORS.grey : COLORS.danger,
+                                justifyContent: "flex-start",
                             }}
-                        >{resource?.idDocument?.docNumber !== "Nenhum" ? `${resource?.idDocument?.docNumber} (${resource?.idDocument?.docType}) ` : "Nenhum"}</Text>
+                        >
+                            <Text
+                                className="text-gray-500 font-semibold text-sm"
+                            >NUIT:</Text>
+                            <Text
+                                style={{
+                                    color: resource?.idDocument?.nuit ? COLORS.grey : COLORS.danger,
+                                }}
+                            >{resource?.idDocument?.nuit ? resource?.idDocument?.nuit : "Nenhum"}</Text>
+                        </Box>
                     </Box>
-                    <View style={{ width: 10, }} />
-                    <Box
-                        w="45%"
-                        style={{
-                            justifyContent: "flex-start",
-                        }}
-                    >
-                        <Text
-                            style={{
-                                fontFamily: "JosefinSans-Bold",
-                                color: COLORS.black,
-                            }}
-                        >NUIT:</Text>
-                        <Text
-                            style={{
-                                color: resource?.idDocument?.nuit ? COLORS.grey : COLORS.danger,
-                            }}
-                        >{resource?.idDocument?.nuit ? resource?.idDocument?.nuit : "Nenhum"}</Text>
-                    </Box>
-                </Box>
-            </View>
-            <CustomDivider />
+                </View>
+                <CustomDivider />
 
-            <View
-                style={{
-                    flexDirection: "row",
-                    justifyContent: "space-around",
-                    alignItems: "center",
-                    width: "100%",
-                    paddingVertical: 10,
-                }}
-            >
-                <Box w="10%" alignItems={"center"}>
-                    <Icon name={"location-pin"} size={25} color={COLORS.grey} />
-                </Box>
-                <Box
-                    w="90%"
-                    alignItems={"center"}
-                    // spce={3}
+                <View
                     style={{
                         flexDirection: "row",
                         justifyContent: "space-around",
+                        alignItems: "center",
+                        width: "100%",
+                        paddingVertical: 10,
                     }}
                 >
+                    <Box w="10%" alignItems={"center"}>
+                        <Icon name={"location-pin"} size={25} color={COLORS.grey} />
+                    </Box>
                     <Box
-                        w="45%"
+                        w="90%"
+                        alignItems={"center"}
+                        // spce={3}
                         style={{
-                            justifyContent: "flex-start",
+                            flexDirection: "row",
+                            justifyContent: "space-around",
                         }}
                     >
-                        <Text
+                        <Box
+                            w="45%"
                             style={{
-                                fontFamily: "JosefinSans-Bold",
-                                color: COLORS.black,
+                                justifyContent: "flex-start",
                             }}
-                        >Latitude:</Text>
-                        <Text
+                        >
+                            <Text
+                                className="text-gray-500 font-semibold text-sm"
+                            >Latitude:</Text>
+                            <Text
+                                style={{
+                                    color: resource?.geolocation?.latitude ? COLORS.grey : COLORS.danger,
+                                }}
+                            >{resource?.geolocation?.latitude ? resource?.geolocation?.latitude : "Nenhum"}</Text>
+                        </Box>
+                        <View style={{ width: 10, }} />
+                        <Box
+                            w="45%"
                             style={{
-                                color: resource?.geolocation?.latitude ? COLORS.grey : COLORS.danger,
+                                justifyContent: "flex-start",
                             }}
-                        >{resource?.geolocation?.latitude ? resource?.geolocation?.latitude : "Nenhum"}</Text>
+                        >
+                            <Text
+                                className="text-gray-500 font-semibold text-sm"
+                            >Longitude:</Text>
+                            <Text
+                                style={{
+                                    color: resource?.geolocation?.longitude ? COLORS.grey : COLORS.danger,
+                                }}
+                            >{resource?.geolocation?.longitude ? resource?.geolocation?.longitude : "Nenhum"}</Text>
+                        </Box>
                     </Box>
-                    <View style={{ width: 10, }} />
-                    <Box
-                        w="45%"
-                        style={{
-                            justifyContent: "flex-start",
-                        }}
-                    >
-                        <Text
-                            style={{
-                                fontFamily: "JosefinSans-Bold",
-                                color: COLORS.black,
-                            }}
-                        >Longitude:</Text>
-                        <Text
-                            style={{
-                                color: resource?.geolocation?.longitude ? COLORS.grey : COLORS.danger,
-                            }}
-                        >{resource?.geolocation?.longitude ? resource?.geolocation?.longitude : "Nenhum"}</Text>
-                    </Box>
-                </Box>
+                </View>
+                <CustomDivider />
             </View>
-            <CustomDivider />
+
 
         </View>
     );

@@ -77,7 +77,9 @@ const ValidationCard = ({ modalVisible, setModalVisible, handleModalVisible, res
 
 
     return (
-        <View>
+        <View 
+            // className="mx-auto"
+        >
             <Modal
                 isVisible={modalVisible}
                 supportedOrientations={["portrait", "landscape"]}
@@ -96,18 +98,19 @@ const ValidationCard = ({ modalVisible, setModalVisible, handleModalVisible, res
             >
                 <View
                     style={{
-                        backgroundColor: COLORS.fourth,
+                        // backgroundColor: COLORS.fourth,
                         height: 40,
                         padding: 6,
                     }}
-                    // className="bg-emerald-900"
+                    className="h-20 p-2 bg-[#EBEBE4] dark:bg-gray-800"
                 >
                     <Text
                         style={{
-                            fontSize: 18,
-                            color: COLORS.black,
-                            fontFamily: "JosefinSans-Bold",
+                            // fontSize: 18,
+                            // color: COLORS.black,
+                            // fontFamily: "JosefinSans-Bold",
                         }}
+                        className="font-semibold text-gray-500 text-lg"
                     >
                         Conferir Registo
                     </Text>
@@ -131,6 +134,7 @@ const ValidationCard = ({ modalVisible, setModalVisible, handleModalVisible, res
                     contentContainerStyle={{
                         // backgroundColor: COLORS.ghostwhite,
                     }}
+                    className="bg-white dark:bg-gray-900"
                 >
                     {
                         (resourceType === resourceTypes.actor) &&

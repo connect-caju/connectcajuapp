@@ -68,7 +68,7 @@ const ProvincialManager = ({ tpFarmers, tpFarmlands, provincialUserStats, pFarml
                     paddingVertical: 10,
                 }}
             >
-                <LinearGradient colors={["#009900", "#3ABBDF"]} style={{
+                <LinearGradient colors={["#909A90", "#398093"]} style={{
                     flex: 1,
                     paddingLeft: 15,
                     paddingRight: 15,
@@ -82,7 +82,7 @@ const ProvincialManager = ({ tpFarmers, tpFarmlands, provincialUserStats, pFarml
                     >Produtores</Text>
                     <Text
                         className="font-normal text-xl text-white text-center"
-                    >{pFarmersPercentage}</Text>
+                    v>{pFarmersPercentage}</Text>
                 </LinearGradient>
                 <View
                     style={{
@@ -90,7 +90,7 @@ const ProvincialManager = ({ tpFarmers, tpFarmlands, provincialUserStats, pFarml
                     }}
                 />
 
-                <LinearGradient colors={["#57A1BE", "#00aa00"]} style={{
+                <LinearGradient colors={["#909A90", "#398093"]} style={{
                     flex: 1,
                     paddingLeft: 15,
                     paddingRight: 15,
@@ -118,7 +118,7 @@ const ProvincialManager = ({ tpFarmers, tpFarmlands, provincialUserStats, pFarml
                     paddingVertical: 10,
                 }}
             >
-                <LinearGradient colors={["#009900", "#3ABBDF"]} style={{
+                <LinearGradient colors={["#4D5F4D", "#799AA3"]} style={{
                     flex: 1,
                     paddingLeft: 15,
                     paddingRight: 15,
@@ -140,7 +140,7 @@ const ProvincialManager = ({ tpFarmers, tpFarmlands, provincialUserStats, pFarml
                     }}
                 />
 
-                <LinearGradient colors={["#57A1BE", "#00aa00"]} style={{
+                <LinearGradient colors={["#4D5F4D", "#799AA3"]} style={{
                     flex: 1,
                     paddingLeft: 15,
                     paddingRight: 15,

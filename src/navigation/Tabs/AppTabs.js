@@ -1,8 +1,8 @@
 /* eslint-disable linebreak-style */
 /* eslint-disable prettier/prettier */
 import React from "react";
-import { StatusBar } from "react-native";
-import { NavigationContainer, getFocusedRouteNameFromRoute } from "@react-navigation/native";
+import { StatusBar, useColorScheme } from "react-native";
+import { DarkTheme, DefaultTheme, NavigationContainer, getFocusedRouteNameFromRoute } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Icon } from "@rneui/themed";
 import {
@@ -27,11 +27,16 @@ const Tab = createBottomTabNavigator();
 export default function AppTabs() {
   const user = useUser();
   const customUserData = user?.customData;
+  const colorScheme = useColorScheme();
 
   return (
     <>
-      <StatusBar barStyle="dark-content" backgroundColor="#EBEBE4" />
-      <NavigationContainer>
+      <StatusBar barStyle="dark-content" backgroundColor="#EBEBE4" className="bg-[#EBEBE4] dark:bg-gray-900" />
+      <NavigationContainer
+        // theme={colorScheme === "dark" ? DarkTheme : DefaultTheme}
+       
+
+      >
         <Tab.Navigator
           initialRouteName="HomeStack"
           shifting={true}
@@ -53,6 +58,7 @@ export default function AppTabs() {
               fontFamily: "JosefinSans-Bold",
             },
           })}
+          // className="bg-[#EBEBE4] dark:bg-slate-900"
         >
           <Tab.Screen
             options={{
@@ -69,56 +75,56 @@ export default function AppTabs() {
             component={HomeStackScreen}
           />
           {
-            !roles.haveReadAndValidatePermissions.some((role)=>role === customUserData?.role) ?
-            <Tab.Screen
-            options={({ route }) => ({
-              tabBarIcon: (tabInfo) => (
-                <Icon
-                  name="app-registration"
-                  color={tabInfo.focused ? COLORS.main : COLORS.grey}
-                  size={wp("10%")}
-                />
-              ),
-              tabBarLabel: "Produtores",
+            !roles.haveReadAndValidatePermissions.some((role) => role === customUserData?.role) ?
+              <Tab.Screen
+                options={({ route }) => ({
+                  tabBarIcon: (tabInfo) => (
+                    <Icon
+                      name="app-registration"
+                      color={tabInfo.focused ? COLORS.main : COLORS.grey}
+                      size={wp("10%")}
+                    />
+                  ),
+                  tabBarLabel: "Produtores",
 
-              tabBarStyle: ((route) => {
-                const routeName = getFocusedRouteNameFromRoute(route) ?? "";
+                  tabBarStyle: ((route) => {
+                    const routeName = getFocusedRouteNameFromRoute(route) ?? "";
 
-                if (routeName === "FarmersSearch") {
-                  return { display: "none" };
-                }
-                return;
-              })(route),
+                    if (routeName === "FarmersSearch") {
+                      return { display: "none" };
+                    }
+                    return;
+                  })(route),
 
-            })}
-            name="FarmersStack"
-            component={FarmersStackScreen}
-          />
-            :
-            <Tab.Screen
-            options={({ route }) => ({
-              tabBarIcon: (tabInfo) => (
-                <Icon
-                  name="app-registration"
-                  color={tabInfo.focused ? COLORS.main : COLORS.grey}
-                  size={wp("10%")}
-                />
-              ),
-              tabBarLabel: "Usuários",
+                })}
+                name="FarmersStack"
+                component={FarmersStackScreen}
+              />
+              :
+              <Tab.Screen
+                options={({ route }) => ({
+                  tabBarIcon: (tabInfo) => (
+                    <Icon
+                      name="app-registration"
+                      color={tabInfo.focused ? COLORS.main : COLORS.grey}
+                      size={wp("10%")}
+                    />
+                  ),
+                  tabBarLabel: "Usuários",
 
-              tabBarStyle: ((route) => {
-                const routeName = getFocusedRouteNameFromRoute(route) ?? "";
+                  tabBarStyle: ((route) => {
+                    const routeName = getFocusedRouteNameFromRoute(route) ?? "";
 
-                if (routeName === "FarmersSearch") {
-                  return { display: "none" };
-                }
-                return;
-              })(route),
+                    if (routeName === "FarmersSearch") {
+                      return { display: "none" };
+                    }
+                    return;
+                  })(route),
 
-            })}
-            name="UsersStack"
-            component={UsersStackScreen}
-          />
+                })}
+                name="UsersStack"
+                component={UsersStackScreen}
+              />
           }
           {/* <Tab.Screen
             options={{
