@@ -9,30 +9,28 @@ import COLORS from "../../consts/colors";
 const UserPerformanceItem = ({ achieved, target, bgColor, label }) => {
   return (
     <>
-      <Text
-        className={`font-bold pt-6 text-md text-center text-[${bgColor}]`}
-      >
+      <Text className={"font-normal pt-6 text-xs text-center text-gray-600"}>
         {label}
       </Text>
       <View className="flex flex-row items-center justify-around gap-4">
         <View
-          style={{
-            backgroundColor: bgColor,
-          }}
-          className={"h-10 w-24 items-center justify-center rounded-t-md"}
+          // style={{
+          //   backgroundColor: bgColor,
+          // }}
+          className={"h-10 w-24 items-center justify-center rounded-t-md border-2 border-green-600 dark:border-gray-600"}
         >
-          <Text className="text-xl font-normal text-white">
+          <Text className="text-sm font-normal text-gray-600">
             {getPercentage(achieved, target)}
           </Text>
         </View>
 
         <View
-          style={{
-            backgroundColor: bgColor,
-          }}
-          className={"h-10 w-24 items-center justify-center rounded-t-md"}
+          // style={{
+          //   backgroundColor: bgColor,
+          // }}
+          className={"h-10 w-24 items-center justify-center rounded-t-md border-2 border-green-600 dark:border-gray-600"}
         >
-          <Text className="text-xl font-normal text-white">{target}</Text>
+          <Text className="text-sm font-normal text-gray-600">{target}</Text>
         </View>
       </View>
     </>

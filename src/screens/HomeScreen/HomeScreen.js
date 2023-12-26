@@ -52,7 +52,7 @@ export default function HomeScreen({ route, navigation }) {
   const customUserData = user?.customData;
 
   const [isPerformanceButtonActive, setIsPerformanceButtonActive] =
-    useState(true);
+    useState(false);
   const [isUserProfileVisible, setIsUserProfileVisible] = useState(false);
   const [isGoalUpdateVisible, setIsGoalUpdateVisible] = useState(false);
   const [isFieldAgent, setIsFieldAgent] = useState(true);
@@ -349,7 +349,7 @@ export default function HomeScreen({ route, navigation }) {
               <TouchableOpacity
                 onPress={() => {
                   // setIsUserProfileVisible((prev) => !prev);
-                   handleUserProfileNavigation();
+                  handleUserProfileNavigation();
                 }}
                 className="-mt-1"
               >
@@ -400,7 +400,7 @@ export default function HomeScreen({ route, navigation }) {
               className="bg-green-600 dark:bg-gray-800 w-full items-center  rounded-t-2xl"
             >
               <Text
-                className="text-white dark:text-gray-600 text-xl py-4 font-normal"
+                className="text-gray-600 text-xl py-4 font-bold"
               >
                 Desempenho
               </Text>
@@ -408,45 +408,45 @@ export default function HomeScreen({ route, navigation }) {
                 className="w-full flex-row justify-between self-center"
               >
                 <TouchableOpacity
-                  className={`w-1/2 sm:w-1/3 rounded-t-2xl border-t-2 border-r-2 border-l-2 border-white dark:border-gray-600 py-2 ${isPerformanceButtonActive ? "dark:bg-gray-900" : "dark:bg-gray-800"}`}
+                  className={`w-1/2 sm:w-1/3 rounded-t-2xl border-t-2 border-r-2 border-l-2 border-gray-300 dark:border-gray-600 py-2 ${isPerformanceButtonActive ? "dark:bg-gray-900" : "bg-white dark:bg-gray-800"}`}
                   onPress={() => {
                     setIsPerformanceButtonActive((prev) => !prev);
                   }}
-                  // style={{
-                  //   backgroundColor: isPerformanceButtonActive
-                  //     ? COLORS.second
-                  //     : COLORS.white,
-                  // }}
+                // style={{
+                //   backgroundColor: isPerformanceButtonActive
+                //     ? COLORS.second
+                //     : COLORS.white,
+                // }}
                 >
                   <Text
-                    style={{
-                      color: isPerformanceButtonActive
-                        ? COLORS.white
-                        : COLORS.lightdanger,
-                    }}
-                    className="text-center font-bold text-sm"
+                    // style={{
+                    //   color: isPerformanceButtonActive
+                    //     ? COLORS.white
+                    //     : COLORS.lightdanger,
+                    // }}
+                    className={`text-center font-bold text-sm ${isPerformanceButtonActive ? "text-gray-600" : "text-gray-600"}`}
                   >
                     Produtores
                   </Text>
                 </TouchableOpacity>
                 <TouchableOpacity
-                  className={`w-1/2 sm:w-1/3 rounded-t-2xl border-t-2 border-r-2 border-l-2 border-white dark:border-gray-600 py-2 ${isPerformanceButtonActive ?  "dark:bg-gray-800" : "dark:bg-gray-900"}`}
+                  className={`w-1/2 sm:w-1/3 rounded-t-2xl border-t-2 border-r-2 border-l-2 border-gray-300 dark:border-gray-600 py-2 ${isPerformanceButtonActive ? "bg-white dark:bg-gray-800" : "dark:bg-gray-900"}`}
                   onPress={() => {
                     setIsPerformanceButtonActive((prev) => !prev);
                   }}
-                  // style={{
-                  //   backgroundColor: isPerformanceButtonActive
-                  //     ? COLORS.white
-                  //     : COLORS.second,
-                  // }}
+                // style={{
+                //   backgroundColor: isPerformanceButtonActive
+                //     ? COLORS.white
+                //     : COLORS.second,
+                // }}
                 >
                   <Text
-                    style={{
-                      color: isPerformanceButtonActive
-                        ? COLORS.danger
-                        : COLORS.white,
-                    }}
-                    className="text-center font-bold text-sm"
+                    // style={{
+                    //   color: isPerformanceButtonActive
+                    //     ? COLORS.danger
+                    //     : COLORS.white,
+                    // }}
+                    className={`text-center font-bold text-sm ${isPerformanceButtonActive ? "text-gray-600" : "text-gray-600"}`}
                   >
                     Pomares
                   </Text>
@@ -454,16 +454,16 @@ export default function HomeScreen({ route, navigation }) {
               </View>
             </Box>
             {!isPerformanceButtonActive && (
-              <Stack direction="column" w="100%" pt="4" className="dark:bg-gray-900 dark:border-x-2 dark:border-x-gray-600 dark:border-b-2 dark:border-b-gray-600 pb-2">
+              <Stack direction="column" w="100%" pt="4" className="border-gray-300 border-x-2 border-b-2 bg-white dark:bg-gray-900 dark:border-x-2 dark:border-x-gray-600 dark:border-b-2 dark:border-b-gray-600 pb-2 rounded-b-lg">
                 <Stack direction="row">
                   <Box w="50%">
                     <Text
-                      className={`font-bold text-sm text-center text-[${COLORS.lightdanger}]`}
+                      className={"font-bold text-sm text-center text-gray-600"}
                     >
                       Realização
                     </Text>
                     <Text
-                      className="font-normal text-xs text-center text-slate-500"
+                      className="font-normal text-xs text-center text-slate-600"
                     >
                       Até {months[new Date().getMonth()]}{" "}
                       {new Date().getFullYear()}
@@ -471,25 +471,25 @@ export default function HomeScreen({ route, navigation }) {
                   </Box>
                   <Box w="50%">
                     <Text
-                      className={`font-bold text-sm text-center text-[${COLORS.lightdanger}]`}
+                      className={"font-bold text-sm text-center text-gray-600"}
                     >
                       Meta
                     </Text>
                     <Text
-                      className="font-normal text-xs text-center text-slate-500"
+                      className="font-normal text-xs text-center text-gray-600"
                     >
                       Até Dezembro {new Date().getFullYear()}
                     </Text>
                   </Box>
                 </Stack>
-                <CustomDivider />
+                {/* <CustomDivider bg={COLORS.lightestgrey} /> */}
                 <UserPerformanceItem
                   achieved={rpFarmers}
                   target={tpFarmers}
                   bgColor={COLORS.lightdanger}
                   label={`Provincial (${customUserData?.userProvince})`}
                 />
-                <CustomDivider />
+                {/* <CustomDivider bg={COLORS.lightestgrey} /> */}
                 <UserPerformanceItem
                   achieved={rdFarmers}
                   target={tdFarmers}
@@ -498,7 +498,7 @@ export default function HomeScreen({ route, navigation }) {
 
                 />
 
-                <CustomDivider />
+                {/* <CustomDivider bg={COLORS.lightestgrey} /> */}
                 <UserPerformanceItem
                   achieved={ruFarmers}
                   target={tuFarmers}
@@ -509,17 +509,17 @@ export default function HomeScreen({ route, navigation }) {
             )}
 
             {isPerformanceButtonActive && (
-              <Stack direction="column" w="100%" pt="4" className="dark:bg-gray-900 dark:border-x-2 dark:border-x-gray-600 dark:border-b-2 dark:border-b-gray-600 pb-2">
+              <Stack direction="column" w="100%" pt="4" className="border-gray-300 border-x-2 border-b-2 bg-white dark:bg-gray-900 dark:border-x-2 dark:border-x-gray-600 dark:border-b-2 dark:border-b-gray-600 pb-2 rounded-b-lg">
                 <Stack direction="row">
                   <Box w="50%">
                     <Text
-                      className={`font-bold text-sm text-center text-[${COLORS.danger}]`}
+                      className={"font-bold text-sm text-center text-gray-600"}
 
                     >
                       Realização
                     </Text>
                     <Text
-                      className="font-normal text-xs text-center text-slate-500"
+                      className="font-normal text-xs text-center text-slate-600"
                     >
                       Até {months[new Date().getMonth()]}{" "}
                       {new Date().getFullYear()}
@@ -527,20 +527,20 @@ export default function HomeScreen({ route, navigation }) {
                   </Box>
                   <Box w="50%">
                     <Text
-                      className={`font-bold text-sm text-center text-[${COLORS.danger}]`}
+                      className={"font-bold text-sm text-center text-gray-600"}
 
                     >
                       Meta
                     </Text>
                     <Text
-                      className="font-normal text-xs text-center text-slate-500"
+                      className="font-normal text-xs text-center text-gray-600"
 
                     >
                       Até Dezembro {new Date().getFullYear()}
                     </Text>
                   </Box>
                 </Stack>
-                <CustomDivider />
+                {/* <CustomDivider bg={COLORS.lightestgrey} /> */}
                 <UserPerformanceItem
                   achieved={rpFarmlands}
                   target={tpFarmlands}
@@ -548,7 +548,7 @@ export default function HomeScreen({ route, navigation }) {
                   label={`Provincial (${customUserData?.userProvince})`}
                 />
 
-                <CustomDivider />
+                {/* <CustomDivider bg={COLORS.lightestgrey} /> */}
 
                 <UserPerformanceItem
                   achieved={rdFarmlands}
@@ -557,7 +557,7 @@ export default function HomeScreen({ route, navigation }) {
                   label={`Distrital (${customUserData?.userDistrict})`}
                 />
 
-                <CustomDivider />
+                {/* <CustomDivider bg={COLORS.lightestgrey} /> */}
                 <UserPerformanceItem
                   achieved={ruFarmlands}
                   target={tuFarmlands}
