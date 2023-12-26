@@ -220,7 +220,7 @@ const UserProfileScreen = ({ route, navigation }) => {
               {customUserData?.name}
             </Text>
             <Text
-              className="text-xs font-normal text-center text-gray-400"
+              className="text-xs font-normal text-center text-gray-500"
             >
               (
               {customUserData?.role?.includes(roles.coopManager)
@@ -243,14 +243,14 @@ const UserProfileScreen = ({ route, navigation }) => {
               />
               {roles.haveReadAndWritePermissions.some(role => role.includes(customUserData?.role)) &&
                 <Text
-                  className="text-xs font-normal text-gray-400 text-center"
+                  className="text-xs font-normal text-gray-500 text-center"
                 >
                   {customUserData?.userDistrict}
                 </Text>
               }
               {!roles.haveReadAndWritePermissions.some(role => role.includes(customUserData?.role)) &&
                 <Text
-                  className="text-xs font-normal text-gray-400 text-center"
+                  className="text-xs font-normal text-gray-500 text-center"
                 >
                   {customUserData?.userProvince}
                 </Text>
@@ -267,7 +267,7 @@ const UserProfileScreen = ({ route, navigation }) => {
               />
 
               <Text
-                className="text-xs font-normal text-gray-400"
+                className="text-xs font-normal text-gray-500"
               >{customUserData?.phone}</Text>
             </View>
 
@@ -280,7 +280,7 @@ const UserProfileScreen = ({ route, navigation }) => {
                 color={COLORS.grey}
               />
               <Text
-                className="text-xs font-normal text-gray-400"
+                className="text-xs font-normal text-gray-500"
               >{customUserData?.email}</Text>
             </View>
           </View>
@@ -296,7 +296,7 @@ const UserProfileScreen = ({ route, navigation }) => {
             >
               <FontAwesomeIcon icon={faBook} size={20} color={COLORS.lightestgrey} />
               <Text
-                className="text-gray-300 text-sm font-normal"
+                className="text-gray-500 text-sm font-normal"
               >
                 Manual de usuários
               </Text>
@@ -308,7 +308,7 @@ const UserProfileScreen = ({ route, navigation }) => {
                   onPress={() => {
                     setIsGoalUpdateVisible(true);
                   }}
-                  className="rounded-md flex flex-row gap-2 border-gray-400"
+                  className="rounded-md flex flex-row gap-2 border-gray-500"
                 >
                   <FontAwesomeIcon icon={faFileEdit} size={20} color={COLORS.main} />
                   <Text
@@ -332,7 +332,7 @@ const UserProfileScreen = ({ route, navigation }) => {
             >
               <FontAwesomeIcon icon={faCog} size={20} color={COLORS.grey} />
               <Text
-                className="text-slate-400 text-md font-normal"
+                className="text-slate-500 text-md font-normal"
               >
                 Definições
               </Text>
@@ -347,7 +347,7 @@ const UserProfileScreen = ({ route, navigation }) => {
 
               <FontAwesomeIcon icon={faSignOut} size={20} color={COLORS.grey} />
               <Text
-                className="text-slate-400 text-md font-normal rounded-"
+                className="text-slate-500 text-md font-normal rounded-"
               >
                 Terminar sessão
               </Text>
@@ -375,7 +375,7 @@ const UserProfileScreen = ({ route, navigation }) => {
             </Pressable>
 
             <View className="p-4">
-              <Text className="text-gray-700 text-base font-semibold mb-3">Exibição</Text>
+              <Text className="text-gray-600 text-base font-semibold mb-3">Exibição</Text>
 
               <TouchableOpacity
                 onPress={() => {
@@ -385,8 +385,8 @@ const UserProfileScreen = ({ route, navigation }) => {
                 className="flex flex-col"
               >
                 <View className="flex flex-row items-center">
-                  <Text className="text-gray-700 text-lg w-12">☀</Text>
-                  <Text className="text-gray-800 text-sm font-normal w-20">Fundo</Text>
+                  <Text className="text-gray-500 text-lg w-12">☀</Text>
+                  <Text className="text-gray-600 text-sm font-normal w-20">Fundo</Text>
                 </View>
                 <Text className="pl-12 text-xs -mt-1 text-gray-500">Branco (por padrão)</Text>
               </TouchableOpacity>

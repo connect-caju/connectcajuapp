@@ -52,7 +52,7 @@ export default function HomeScreen({ route, navigation }) {
   const customUserData = user?.customData;
 
   const [isPerformanceButtonActive, setIsPerformanceButtonActive] =
-    useState(false);
+    useState(true);
   const [isUserProfileVisible, setIsUserProfileVisible] = useState(false);
   const [isGoalUpdateVisible, setIsGoalUpdateVisible] = useState(false);
   const [isFieldAgent, setIsFieldAgent] = useState(true);
@@ -321,7 +321,7 @@ export default function HomeScreen({ route, navigation }) {
       className={`${backgroundStyle} flex-1`}
     >
       <View
-        className={"w-full bg-[#EBEBE4] dark:bg-gray-800"}
+        className={"w-full light:bg-[#EBEBE4]"}
       >
         <Box
           style={{
@@ -339,7 +339,7 @@ export default function HomeScreen({ route, navigation }) {
                 source={require("../../../assets/images/iamLogo2.png")}
               />
               <Text
-                className="text-center text-green-600 font-bold text-lg"
+                className="text-center text-green-600 font-bold text-sm dark:text-gray-600"
               >
                 IAM, IP
               </Text>
@@ -359,7 +359,7 @@ export default function HomeScreen({ route, navigation }) {
                   size={60}
                 />
                 <Text
-                  className="text-center text-gray-500 font-normal text-lg -mt-1"
+                  className="text-center text-gray-600 font-normal text-sm -mt-1"
                 >
                   {customUserData?.name?.split(" ")[0]}
                 </Text>
@@ -394,13 +394,13 @@ export default function HomeScreen({ route, navigation }) {
       {isFieldAgent && (
         <>
           <View
-            className="w-full rounded-t-2xl shadow-md bg-white px-2 my-6 mx-2 self-center overflow-y-scroll"
+            className="w-full rounded-t-2xl shadow-md light:bg-neutral-100 px-2 my-6 mx-2 self-center overflow-y-scroll"
           >
             <Box
-              className="bg-green-600 w-full items-center  rounded-t-2xl"
+              className="bg-green-600 dark:bg-gray-800 w-full items-center  rounded-t-2xl"
             >
               <Text
-                className="text-white text-xl py-4 font-normal"
+                className="text-white dark:text-gray-600 text-xl py-4 font-normal"
               >
                 Desempenho
               </Text>
@@ -408,15 +408,15 @@ export default function HomeScreen({ route, navigation }) {
                 className="w-full flex-row justify-between self-center"
               >
                 <TouchableOpacity
-                  className="w-1/2 sm:w-1/3 rounded-t-2xl border-t-2 border-r-2 border-l-2 border-white py-2"
+                  className={`w-1/2 sm:w-1/3 rounded-t-2xl border-t-2 border-r-2 border-l-2 border-white dark:border-gray-600 py-2 ${isPerformanceButtonActive ? "dark:bg-gray-900" : "dark:bg-gray-800"}`}
                   onPress={() => {
                     setIsPerformanceButtonActive((prev) => !prev);
                   }}
-                  style={{
-                    backgroundColor: isPerformanceButtonActive
-                      ? COLORS.second
-                      : COLORS.white,
-                  }}
+                  // style={{
+                  //   backgroundColor: isPerformanceButtonActive
+                  //     ? COLORS.second
+                  //     : COLORS.white,
+                  // }}
                 >
                   <Text
                     style={{
@@ -430,15 +430,15 @@ export default function HomeScreen({ route, navigation }) {
                   </Text>
                 </TouchableOpacity>
                 <TouchableOpacity
-                  className="w-1/2 sm:w-1/3 rounded-t-2xl border-t-2 border-r-2 border-l-2 border-white py-2"
+                  className={`w-1/2 sm:w-1/3 rounded-t-2xl border-t-2 border-r-2 border-l-2 border-white dark:border-gray-600 py-2 ${isPerformanceButtonActive ?  "dark:bg-gray-800" : "dark:bg-gray-900"}`}
                   onPress={() => {
                     setIsPerformanceButtonActive((prev) => !prev);
                   }}
-                  style={{
-                    backgroundColor: isPerformanceButtonActive
-                      ? COLORS.white
-                      : COLORS.second,
-                  }}
+                  // style={{
+                  //   backgroundColor: isPerformanceButtonActive
+                  //     ? COLORS.white
+                  //     : COLORS.second,
+                  // }}
                 >
                   <Text
                     style={{
@@ -454,7 +454,7 @@ export default function HomeScreen({ route, navigation }) {
               </View>
             </Box>
             {!isPerformanceButtonActive && (
-              <Stack direction="column" w="100%" pt="4">
+              <Stack direction="column" w="100%" pt="4" className="dark:bg-gray-900 dark:border-x-2 dark:border-x-gray-600 dark:border-b-2 dark:border-b-gray-600 pb-2">
                 <Stack direction="row">
                   <Box w="50%">
                     <Text
@@ -509,7 +509,7 @@ export default function HomeScreen({ route, navigation }) {
             )}
 
             {isPerformanceButtonActive && (
-              <Stack direction="column" w="100%" pt="4">
+              <Stack direction="column" w="100%" pt="4" className="dark:bg-gray-900 dark:border-x-2 dark:border-x-gray-600 dark:border-b-2 dark:border-b-gray-600 pb-2">
                 <Stack direction="row">
                   <Box w="50%">
                     <Text

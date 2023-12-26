@@ -24,7 +24,7 @@ const AppearanceMode = ({
             visible={isAppearanceModeModalVisible}
             contentContainerStyle={tailwind`flex-1 justify-center items-center`}
         >
-            <View className="max-w-100 w-64 h-64 p-5 rounded-xl justify-center bg-white dark:bg-gray-900">
+            <View className="max-w-100 w-64 h-64 p-5 rounded-xl justify-center bg-white dark:bg-gray-800">
                 <Text className="text-left text-gray-600 font-bold text-lg">Escolha Fundo</Text>
 
                 <View className="flex flex-col gap-3 mt-2">
