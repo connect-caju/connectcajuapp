@@ -23,7 +23,7 @@ export default function FarmlandDetailsCard({
 
   return (
     <Animated.View
-      className="bg-white p-2 my-2 shadow-sm shadow-slate-100"
+      className="bg-neutral-50 dark:bg-gray-800 p-2 my-2 shadow-sm "
     >
       <View
         style={{

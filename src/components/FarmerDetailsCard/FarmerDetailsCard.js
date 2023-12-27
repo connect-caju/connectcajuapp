@@ -38,7 +38,7 @@ export default function FarmerDetailsCard({
 
   return (
     <Animated.View
-      className="bg-white p-2 my-2 shadow-sm shadow-slate-100"
+      className="bg-neutral-50 dark:bg-gray-800 p-2 my-2 shadow-sm"
     >
       {/* Resource Status Icon (Validated, Invalidated, Pendind) */}
       <View
@@ -73,7 +73,7 @@ export default function FarmerDetailsCard({
         </TouchableOpacity>}
 
       <View
-        className="flex flex-row gap-2 justify-between items-center mb-4 flex-wrap"
+        className="flex flex-row gap-2 justify-between items-center flex-wrap"
       >
         <View
           className="flex flex-col items-center justify-center gap-1"
@@ -84,7 +84,7 @@ export default function FarmerDetailsCard({
             color={COLORS.grey}
           />
           <Text
-            className="text-sm text-gray-400 font-normal"
+            className="text-sm text-gray-500 font-light"
           >
             {farmer?.address?.district
               ? farmer?.address?.adminPost
@@ -112,12 +112,12 @@ export default function FarmerDetailsCard({
               farmer?.contact?.secondaryPhone !== 0 && (
                 <>
                   <Text
-                    className="text-sm text-gray-400 font-normal"
+                    className="text-sm text-gray-500 font-light"
                   >
                     {farmer?.contact?.primaryPhone}
                   </Text>
                   <Text
-                    className="text-sm text-gray-400 font-normal"
+                    className="text-sm text-gray-500 font-light"
                   >
                     {farmer?.contact?.secondaryPhone}
                   </Text>
@@ -126,7 +126,7 @@ export default function FarmerDetailsCard({
             {farmer?.contact?.primaryPhone !== 0 &&
               farmer?.contact?.secondaryPhone === 0 && (
                 <Text
-                  className="text-sm text-gray-400 font-normal"
+                  className="text-sm text-gray-500 font-light"
                 >
                   {farmer?.contact?.primaryPhone}
                 </Text>
@@ -135,7 +135,7 @@ export default function FarmerDetailsCard({
             {farmer?.contact?.primaryPhone === 0 &&
               farmer?.contact?.secondaryPhone !== 0 && (
                 <Text
-                  className="text-sm text-gray-400 font-normal"
+                  className="text-sm text-gray-500 font-light"
                 >
                   {farmer?.contact?.secondaryPhone}
                 </Text>
@@ -144,7 +144,7 @@ export default function FarmerDetailsCard({
             {farmer?.contact?.primaryPhone === 0 &&
               farmer?.contact?.secondaryPhone === 0 && (
                 <Text
-                  className="text-lg text-gray-400 font-normal"
+                  className="text-lg text-gray-500 font-light"
                 >
                   ?
                 </Text>
@@ -162,7 +162,7 @@ export default function FarmerDetailsCard({
             <Icon name="location-pin" size={25} color={COLORS.grey} />
           </View>
           <Text
-            className="text-sm text-gray-400 font-normal"
+            className="text-sm text-gray-500 font-light"
           >
             Long:
             {farmer?.geolocation?.longitude
@@ -176,92 +176,6 @@ export default function FarmerDetailsCard({
         </View>
       </View>
 
-
-
-      {/* <CustomDivider thickness={2} color={COLORS.lightgrey} />
-
-      <View
-        style={{
-          padding: 8,
-          width: "100%",
-        }}
-      >
-        <View
-          style={{
-            flexDirection: "row",
-            width: "100%",
-          }}
-        >
-          <View
-            style={{
-              width: "50%",
-              justifyContent: "center",
-            }}
-          >
-            <View
-              style={{
-                width: "100%",
-                flexDirection: "row",
-                alignItems: "center",
-              }}
-            >
-              <View
-                style={{
-                  width: "30%",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
-                <FontAwesomeIcon
-                  style={{}}
-                  icon={faIdCard}
-                  size={20}
-                  color={COLORS.grey}
-                />
-              </View>
-
-              <View
-                style={{
-                  width: "70%",
-                }}
-              >
-                <Text
-                  style={{
-                    color: "grey",
-                    fontSize: 13,
-                    fontFamily: "JosefinSans-Regular",
-                  }}
-                >
-                  BI:{" "}
-                  {farmer?.idDocument?.docNumber !== "Nenhum"
-                    ? farmer?.idDocument?.docNumber
-                    : "Nenhum"}{" "}
-                  {farmer?.idDocument?.docType !== "Não tem" &&
-                    `(${farmer?.idDocument?.docType})`}
-                </Text>
-                <Text
-                  style={{
-                    color: "grey",
-                    fontSize: 13,
-                    fontFamily: "JosefinSans-Regular",
-                  }}
-                >
-                  NUIT:{" "}
-                  {farmer?.idDocument?.nuit !== 0
-                    ? farmer?.idDocument?.nuit
-                    : "Nenhum"}
-                </Text>
-              </View>
-            </View>
-          </View>
-        </View>
-      </View> */}
-
-
-
-
-
-      {/* <CustomDivider thickness={2} color={COLORS.lightgrey} /> */}
 
       {/* Resource signature (registered by, approved by, rejected by, modified by) */}
       <ResourceSignature

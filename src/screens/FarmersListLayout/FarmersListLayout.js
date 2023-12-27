@@ -136,7 +136,7 @@ const FarmersListLayout = ({ route, navigation }) => {
                                     borderRadius: 100,
                                     elevation: 1,
                                 }}
-                                className={`${focusedOption === item.focusedOption ? "dark:bg-green-700" : "dark:bg-gray-700"}`}
+                                className={`${focusedOption === item.focusedOption ? "bg-green-700" : "bg-gray-100 dark:bg-gray-600 shadow-2xl "}`}
                                 onPress={() => handleFocusedOption(item.focusedOption)}
                             >
                                 <Text

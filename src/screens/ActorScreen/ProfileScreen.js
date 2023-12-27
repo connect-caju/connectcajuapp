@@ -368,14 +368,7 @@ const ProfileScreen = ({ route, navigation }) => {
               }}
             >
               <Text
-                style={{
-                  color: COLORS.black,
-                  fontSize: 16,
-                  fontFamily: "JosefinSans-Bold",
-                  paddingLeft: 10,
-                  paddingVertical: 10,
-                  alignSelf: "flex-start",
-                }}
+                className="text-gray-500 text-lg font-normal pl-2 pt-2"
               >
                 Pomares{" "}
                 <Text style={{ fontSize: 12, color: COLORS.grey }}>
