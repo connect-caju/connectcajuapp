@@ -199,7 +199,7 @@ const ProfileScreen = ({ route, navigation }) => {
             styles.profileContainer,
             // { backgroundColor: farmer?.image ? COLORS.dark : COLORS.dark },
           ]}
-          className="bg-emerald-900"
+          className="bg-neutral-50 dark:bg-gray-800"
         >
           <View
             style={{
@@ -228,7 +228,7 @@ const ProfileScreen = ({ route, navigation }) => {
                   }
                 }}
               >
-                <Icon name="arrow-back" color={COLORS.ghostwhite} size={30} />
+                <Icon name="arrow-back" color={COLORS.grey} size={30} />
               </Pressable>
             </View>
 
@@ -239,7 +239,7 @@ const ProfileScreen = ({ route, navigation }) => {
 
             >
               <Text
-                className="text-center text-white font-bold text-[16px] pt-2"
+                className="text-center text-gray-600 font-bold text-[16px] pt-2"
               >
                 {profileType}
               </Text>
@@ -290,13 +290,13 @@ const ProfileScreen = ({ route, navigation }) => {
                 className="flex flex-row items-center justify-center gap-2 "
               >
                 <Text
-                  className="text-white font-bold text-lg"
+                  className="text-gray-500 font-bold text-lg"
                 >
                   {farmerType === farmerTypes.farmer
                     ? `${farmer?.names?.otherNames} ${farmer?.names?.surname}`
                     : `${farmer?.name}`}
                 </Text>
-                {farmerType === farmerTypes.farmer && <Text className="text-white font-normal text-xs">
+                {farmerType === farmerTypes.farmer && <Text className="text-gray-500 font-light text-xs">
                   ({calculateAge(farmer?.birthDate)}, {farmer?.gender === "Masculino" ? "H" : farmer?.gender === "Feminino" ? "M" : "NA"})
                 </Text>}
               </View>
@@ -306,12 +306,7 @@ const ProfileScreen = ({ route, navigation }) => {
                   {farmer?.assets?.map((asset, index) => (
                     <Text
                       key={index}
-                      style={{
-                        color: COLORS.ghostwhite,
-                        fontSize: 12,
-                        fontFamily: "Roboto-Regular",
-                        textAlign: "center",
-                      }}
+                      className="text-gray-500 text-xs font-light text-center"
                     >
                       ({asset.category} {asset.subcategory})
                     </Text>
@@ -321,12 +316,7 @@ const ProfileScreen = ({ route, navigation }) => {
 
               {farmerType === farmerTypes.institution && (
                 <Text
-                  style={{
-                    color: COLORS.ghostwhite,
-                    fontSize: 12,
-                    fontFamily: "JosefinSans-Bold",
-                    textAlign: "center",
-                  }}
+                  className="text-gray-500 text-xs font-light text-center"
                 >
                   ({farmer?.private ? "Privada" : "Pública"})
                 </Text>
@@ -336,15 +326,7 @@ const ProfileScreen = ({ route, navigation }) => {
         </View>
 
         <Text
-          style={{
-            color: COLORS.black,
-            fontSize: 16,
-            fontFamily: "JosefinSans-Bold",
-            letterSpacing: 5,
-            paddingLeft: 10,
-            paddingTop: 10,
-            alignSelf: "flex-start",
-          }}
+          className="text-gray-500 text-lg font-normal pl-2 pt-2 tracking-[4px]"
         >
           {farmer?.identifier}
         </Text>

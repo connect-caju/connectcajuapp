@@ -13,12 +13,6 @@ const ResourceSignature = ({ resource, customUserData }) => {
       className="mt-2 flex self-end"
     >
       <Text
-        style={{
-          // textAlign: "right",
-          // color: COLORS.grey,
-          // fontFamily: "JosefinSans-Italic",
-          // fontSize: 12,
-        }}
         className="-mb-1 text-xs text-gray-500 italic text-right font-light"
       >
         Registado por{" "}

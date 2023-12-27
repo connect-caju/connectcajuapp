@@ -412,19 +412,9 @@ export default function HomeScreen({ route, navigation }) {
                   onPress={() => {
                     setIsPerformanceButtonActive((prev) => !prev);
                   }}
-                // style={{
-                //   backgroundColor: isPerformanceButtonActive
-                //     ? COLORS.second
-                //     : COLORS.white,
-                // }}
                 >
                   <Text
-                    // style={{
-                    //   color: isPerformanceButtonActive
-                    //     ? COLORS.white
-                    //     : COLORS.lightdanger,
-                    // }}
-                    className={`text-center font-bold text-sm ${isPerformanceButtonActive ? "text-gray-600" : "text-gray-600"}`}
+                    className={`text-center font-bold text-sm ${isPerformanceButtonActive ? "text-green-700" : "text-gray-600"}`}
                   >
                     Produtores
                   </Text>
@@ -434,19 +424,9 @@ export default function HomeScreen({ route, navigation }) {
                   onPress={() => {
                     setIsPerformanceButtonActive((prev) => !prev);
                   }}
-                // style={{
-                //   backgroundColor: isPerformanceButtonActive
-                //     ? COLORS.white
-                //     : COLORS.second,
-                // }}
                 >
                   <Text
-                    // style={{
-                    //   color: isPerformanceButtonActive
-                    //     ? COLORS.danger
-                    //     : COLORS.white,
-                    // }}
-                    className={`text-center font-bold text-sm ${isPerformanceButtonActive ? "text-gray-600" : "text-gray-600"}`}
+                    className={`text-center font-bold text-sm ${isPerformanceButtonActive ? "text-gray-600" : "text-green-700"}`}
                   >
                     Pomares
                   </Text>
