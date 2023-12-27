@@ -862,7 +862,7 @@ const FarmlandData = ({
                     className="self-center justify-center items-center w-2/3 py-3"
                   >
                     <Text
-                      className="text-red-500 text-center text-sm font-normal"
+                      className="text-red-400 text-center text-sm font-normal"
                     >
                       Tipos de plantas não actualizados.
                     </Text>

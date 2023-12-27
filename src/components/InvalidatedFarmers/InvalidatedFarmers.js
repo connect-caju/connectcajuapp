@@ -14,6 +14,7 @@ import COLORS from "../../consts/colors";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faCheck, faCheckCircle, faInfo, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import InfoIcon from "../LottieComponents/InfoIcon";
+import Info from "../Info/Info";
 const { useRealm } = realmContext;
 
 let status = "invalidated";
@@ -158,25 +159,9 @@ const InvalidatedFarmers = ({ farmerType, route, navigation }) => {
                 >
 
                     <InfoIcon />
-                    <View
-                        style={{
-                            backgroundColor: COLORS.lightestgrey,
-                            padding: 10,
-                            borderRadius: 6,
-                            width: 220,
-                        }}
-                    >
-                        <Text
-                            style={{
-                                color: COLORS.grey,
-                                fontSize: 15,
-                                fontFamily: "JosefinSans-Regular",
-                                textAlign: "center",
-                            }}
-                        >
-                            Nenhum registo
-                        </Text>
-                    </View>
+                    <Info 
+                    info={"Nenhum registo"}
+                   />
                 </View>
             }
         </>

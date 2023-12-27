@@ -5,6 +5,7 @@ import {
   faEllipsisVertical,
   faHome,
   faIdCard,
+  faPhone,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { Icon } from "@rneui/base";
@@ -35,7 +36,7 @@ export default function InstitutionDetailsCard({
 
   return (
     <Animated.View
-      className="bg-white p-2 my-2 shadow-sm shadow-slate-100"
+      className="bg-neutral-50 dark:bg-gray-800 p-2 my-2 shadow-sm shadow-slate-100"
     >
       {/* Resource Status Icon (Validated, Invalidated, Pendind) */}
       <View
@@ -71,23 +72,13 @@ export default function InstitutionDetailsCard({
           }}
         >
           <Text
-            style={{
-              color: COLORS.black,
-              fontSize: 16,
-              fontFamily: "JosefinSans-Bold",
-              alignItems: "baseline",
-            }}
+            className="text-gray-600 font-semibold text-lg"
           >
             {farmer?.manager?.fullname}
           </Text>
 
           <Text
-            style={{
-              color: COLORS.grey,
-              fontSize: 12,
-              fontFamily: "JosefinSans-Regular",
-              alignItems: "baseline",
-            }}
+            className="text-xs font-light text-gray-500"
           >
             (Responsável)
           </Text>
@@ -115,7 +106,7 @@ export default function InstitutionDetailsCard({
             </TouchableOpacity>}
         </View>
       </Stack>
-      <CustomDivider thickness={2} color={COLORS.lightgrey} />
+      <CustomDivider thickness={1} color={COLORS.lightgrey} />
       <View
         style={{
           padding: 8,
@@ -157,22 +148,14 @@ export default function InstitutionDetailsCard({
                 }}
               >
                 <Text
-                  style={{
-                    color: "grey",
-                    fontSize: 13,
-                    fontFamily: "JosefinSans-Regular",
-                  }}
+                  className="font-light text-xs text-gray-500 -mb-1"
                 >
                   {farmer?.address?.district
                     ? farmer?.address?.adminPost
                     : "Não Aplicável"}
                 </Text>
                 <Text
-                  style={{
-                    color: "grey",
-                    fontSize: 13,
-                    fontFamily: "JosefinSans-Regular",
-                  }}
+                  className="font-light text-xs text-gray-500"
                 >
                   {farmer?.address?.adminPost
                     ? farmer?.address?.village
@@ -200,7 +183,7 @@ export default function InstitutionDetailsCard({
                   width: "30%",
                 }}
               >
-                <Icon name="phone-in-talk" size={25} color={COLORS.grey} />
+                <FontAwesomeIcon icon={faPhone} size={20} color={COLORS.grey} />
               </View>
 
               <View
@@ -211,23 +194,14 @@ export default function InstitutionDetailsCard({
               >
                 {(!farmer?.manager?.phone || farmer?.manager?.phone === 0) && (
                   <Text
-                    style={{
-                      color: "grey",
-                      fontSize: 13,
-                      fontFamily: "JosefinSans-Regular",
-                    }}
+                    className="font-light text-xs text-gray-500"
                   >
                     Nenhum
                   </Text>
                 )}
                 {(farmer?.manager?.phone || farmer?.manager?.phone !== 0) && (
                   <Text
-                    style={{
-                      color: "grey",
-                      fontSize: 13,
-                      // paddingLeft: 10,
-                      fontFamily: "JosefinSans-Regular",
-                    }}
+                    className="font-light text-xs text-gray-500"
                   >
                     {farmer?.manager?.phone}
                   </Text>
@@ -238,7 +212,7 @@ export default function InstitutionDetailsCard({
         </View>
       </View>
 
-      <CustomDivider thickness={2} color={COLORS.lightgrey} />
+      <CustomDivider thickness={1} color={COLORS.lightgrey} />
 
       <View
         style={{
@@ -292,21 +266,13 @@ export default function InstitutionDetailsCard({
                 }}
               >
                 <Text
-                  style={{
-                    color: "grey",
-                    fontSize: 13,
-                    fontFamily: "JosefinSans-Regular",
-                  }}
+                  className="font-light text-xs text-gray-500"
                 >
                   NUIT:{" "}
                   {farmer?.nuit && farmer?.nuit !== 0 ? farmer?.nuit : "Nenhum"}
                 </Text>
                 <Text
-                  style={{
-                    color: "grey",
-                    fontSize: 13,
-                    fontFamily: "JosefinSans-Regular",
-                  }}
+                  className="font-light text-xs text-gray-500"
                 >
                   Alvará/Licença:{" "}
                   {farmer?.licence && farmer?.licence !== ""
@@ -347,11 +313,7 @@ export default function InstitutionDetailsCard({
                 }}
               >
                 <Text
-                  style={{
-                    color: "grey",
-                    fontSize: 12,
-                    fontFamily: "JosefinSans-Regular",
-                  }}
+                  className="font-light text-xs text-gray-500"
                 >
                   Long:{" "}
                   {farmer?.geolocation?.longitude
@@ -359,11 +321,7 @@ export default function InstitutionDetailsCard({
                     : "Nenhuma"}
                 </Text>
                 <Text
-                  style={{
-                    color: "grey",
-                    fontSize: 12,
-                    fontFamily: "JosefinSans-Regular",
-                  }}
+                  className="font-light text-xs text-gray-500"
                 >
                   Lat:{" "}
                   {farmer?.geolocation?.latitude
@@ -376,7 +334,7 @@ export default function InstitutionDetailsCard({
         </View>
       </View>
 
-      <CustomDivider thickness={2} color={COLORS.lightgrey} />
+      <CustomDivider thickness={1} color={COLORS.lightgrey} />
 
       {/* Resource signature (registered by, approved by, rejected by, modified by) */}
       <ResourceSignature

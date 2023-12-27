@@ -15,6 +15,7 @@ import { faInfo, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import COLORS from "../../consts/colors";
 import InfoIcon from "../LottieComponents/InfoIcon";
 import { FlatList } from "react-native-gesture-handler";
+import Info from "../Info/Info";
 const { useRealm } = realmContext;
 
 const RegisteredByCurrentUser = ({ farmerType, route, navigation }) => {
@@ -163,25 +164,9 @@ const RegisteredByCurrentUser = ({ farmerType, route, navigation }) => {
                     }}
                 >
                     <InfoIcon />
-                    <View
-                        style={{
-                            backgroundColor: COLORS.lightestgrey,
-                            padding: 10,
-                            borderRadius: 6,
-                            width: 220,
-                        }}
-                    >
-                        <Text
-                            style={{
-                                color: COLORS.grey,
-                                fontSize: 15,
-                                fontFamily: "JosefinSans-Regular",
-                                textAlign: "center",
-                            }}
-                        >
-                            Nenhum registo
-                        </Text>
-                    </View>
+                   <Info 
+                    info={"Nenhum registo"}
+                   />
                 </View>
             }
         </>

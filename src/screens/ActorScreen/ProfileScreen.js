@@ -27,6 +27,7 @@ import {
 } from "@gorhom/bottom-sheet";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import {
+  faArrowLeft,
   faCircleUser,
   faEllipsisVertical,
   faHome,
@@ -211,26 +212,25 @@ const ProfileScreen = ({ route, navigation }) => {
               zIndex: 10,
             }}
           >
-            <View
+            {/* <View
               style={{
                 width: "10%",
               }}
-            >
-              <Pressable
-                onPress={() => {
-                  if (customUserData?.role !== roles.provincialManager) {
-                    navigation.navigate("FarmersListLayout", {
-                      farmerType: farmerType,
-                    });
-                  }
-                  else {
-                    navigation.goBack();
-                  }
-                }}
+            > */}
+              <Pressable onPress={() => {
+                if (customUserData?.role !== roles.provincialManager) {
+                  navigation.navigate("FarmersListLayout", {
+                    farmerType: farmerType,
+                  });
+                }
+                else {
+                  navigation.goBack();
+                }
+              }} 
+              className="ml-2 mt-2"
               >
-                <Icon name="arrow-back" color={COLORS.grey} size={30} />
+                <FontAwesomeIcon icon={faArrowLeft} size={20} color={COLORS.grey} />
               </Pressable>
-            </View>
 
             <View
               style={{
