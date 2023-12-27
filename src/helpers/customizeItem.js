@@ -73,6 +73,7 @@ export const customizeItem = (
             }/${new Date(item?.createdAt).getFullYear()}`,
           modifiedAt: `${new Date(item?.modifiedAt).getDate()}/${new Date(item?.modifiedAt).getMonth() + 1
             }/${new Date(item?.modifiedAt).getFullYear()}`,
+          modifiedBy: item?.modifiedBy,
           user:
             item?.userName === customUserData?.name ? "mim" : item?.userName,
           status: item?.status,
@@ -96,11 +97,12 @@ export const customizeItem = (
           members: item?.numberOfMembers.total,
           farmlands: farmlands?.length ? farmlands?.length : 0,
           farmlandsList: farmlands,
-          createdAt: `${new Date(item?.createdAt).getDate()}-${new Date(item?.createdAt).getMonth() + 1
-            }-${new Date(item?.createdAt).getFullYear()}`,
+          createdAt: `${new Date(item?.createdAt).getDate()}/${new Date(item?.createdAt).getMonth() + 1
+            }/${new Date(item?.createdAt).getFullYear()}`,
           sortingKey: item?.modifiedAt,
-          modifiedAt: `${new Date(item?.modifiedAt).getDate()}-${new Date(item?.modifiedAt).getMonth() + 1
-            }-${new Date(item?.modifiedAt).getFullYear()}`,
+          modifiedAt: `${new Date(item?.modifiedAt).getDate()}/${new Date(item?.modifiedAt).getMonth() + 1
+            }/${new Date(item?.modifiedAt).getFullYear()}`,
+          modifiedBy: item?.modifiedBy,
           user:
             item?.userName === customUserData?.name ? "mim" : item?.userName,
           status: item?.status,
@@ -130,6 +132,7 @@ export const customizeItem = (
           sortingKey: item?.modifiedAt,
           modifiedAt: `${new Date(item?.modifiedAt).getDate()}/${new Date(item?.modifiedAt).getMonth() + 1
             }/${new Date(item?.modifiedAt).getFullYear()}`,
+          modifiedBy: item?.modifiedBy,
           user:
             item?.userName === customUserData?.name ? "mim" : item?.userName,
           status: item?.status,
@@ -158,6 +161,7 @@ export const customizeItem = (
           sortingKey: item?.modifiedAt,
           modifiedAt: `${new Date(item?.modifiedAt).getDate()}/${new Date(item?.modifiedAt).getMonth() + 1
             }/${new Date(item?.modifiedAt).getFullYear()}`,
+          modifiedBy: item?.modifiedBy,
           user: item?.userName === customUserData?.name ? "mim" : item?.userName,
           status: item?.status,
           checkedBy: item?.checkedBy,

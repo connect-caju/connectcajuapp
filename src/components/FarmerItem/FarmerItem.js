@@ -18,7 +18,7 @@ import { farmerTypes } from "../../consts/farmerTypes";
 import ResourceSignature from "../ResourceSignature/ResourceSignature";
 
 
-const FarmerItem = ({ item, route, farmerType }) => {
+const FarmerItem = ({ item, customUserData }) => {
   const navigation = useNavigation();
   const [farmlandStatus, setFarmlandStatus] = useState("");
 
@@ -47,7 +47,7 @@ const FarmerItem = ({ item, route, farmerType }) => {
 
   return (
     <View
-      className="bg-white mx-2 my-1 py-1 rounded-md"
+      className="bg-white dark:bg-gray-800 mx-2 my-1 py-1 rounded-md"
     >
       <Box
         style={{
@@ -110,41 +110,22 @@ const FarmerItem = ({ item, route, farmerType }) => {
             }}
           >
             <Text
-              style={{
-                fontSize: 16,
-                fontFamily: "JosefinSans-Bold",
-                color: COLORS.black,
-              }}
               numberOfLines={1}
               ellipsizeMode={"tail"}
+              className="text-gray-600 text-[15px] font-semibold"
             >
               {item?.name}
             </Text>
             {item?.assets?.map((asset, index) => (
               <Text
                 key={index}
-                style={{
-                  fontSize: 14,
-                  fontFamily: "JosefinSans-Italic",
-                  color: item.farmlands === 0 ? COLORS.danger : COLORS.grey,
-
-                }}
                 numberOfLines={1}
                 ellipsizeMode={"tail"}
+                className={`text-gray-500 text-xs font-light ${item.farmlands === 0 ? "text-red-400" : "text-gray-500"}`}
               >
                 {asset?.subcategory} {item?.farmlands > 0 ? `${item?.gender === "Feminino" ? "(Dona" : "(Dono"} de ${item?.farmlands} ${item.farmlands <= 1 ? "pomar" : "pomares"})` : "(Sem pomar ainda)"}
               </Text>
             ))}
-            {/* <Text
-              style={{
-                textAlign: "right",
-                color: COLORS.grey,
-                fontFamily: "JosefinSans-Italic",
-                fontSize: 12,
-              }}
-            >
-              Registo: {item?.createdAt} por {item?.user}
-            </Text> */}
             <ResourceSignature 
               resource={item}
               customUserData={customUserData}

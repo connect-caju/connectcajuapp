@@ -62,190 +62,101 @@ const FarmersListLayout = ({ route, navigation }) => {
             className={`flex flex-1 ${backgroundStyle}`}
         >
             <View
-                style={{
-                    width: "100%",
-                    paddingHorizontal: 10,
-                    paddingBottom: 10,
-                    backgroundColor: COLORS.fourth,
-                    borderTopWidth: 0,
-                    borderColor: COLORS.fourth,
-                    borderBottomWidth: 3,
-                    borderLeftWidth: 3,
-                    borderRightWidth: 3,
-                }}
+                className="bg-[#EBEBE4] dark:bg-gray-800 flex flex-row px-2 pt-2 pb-4 items-center justify-between"
             >
-                <>
-                    <View
-                        style={{
-                            flexDirection: "row",
-                            justifyContent: "space-between",
-                            paddingBottom: 5,
-                            alignItems: "center",
-                        }}
-                    >
-                        <View>
-                            {farmerType === "Grupo" &&
-                                <View
-                                    style={{
-                                        flexDirection: "row",
-                                    }}
-                                >
-                                    <Text
-                                        style={{
-                                            fontFamily: "JosefinSans-Bold",
-                                            color: COLORS.black,
-                                            fontSize: 25,
-                                        }}
-                                    >
-                                        Organizações
-                                        {/* {farmersRegisteredByUser?.length} */}
-                                    </Text>
-                                </View>
-                            }
-                            {farmerType === "Instituição" &&
-                                <View
-                                    style={{
-                                        flexDirection: "row",
-                                    }}
-                                >
-                                    <Text
-                                        style={{
-                                            fontFamily: "JosefinSans-Bold",
-                                            color: COLORS.black,
-                                            fontSize: 25,
-                                        }}
-                                    >
-                                        Instituições
-                                        {/* {farmersRegisteredByUser?.length} */}
-                                    </Text>
-                                </View>
-                            }
-
-                            {farmerType === "Indivíduo" &&
-                                <View
-                                    style={{
-                                        flexDirection: "row",
-                                    }}
-                                >
-                                    <Text
-                                        style={{
-                                            fontFamily: "JosefinSans-Bold",
-                                            color: COLORS.black,
-                                            fontSize: 25,
-                                        }}
-                                    >
-                                        Produtores
-                                        {/* {farmersRegisteredByUser?.length} */}
-                                    </Text>
-                                </View>
-                            }
-                        </View>
-                        <View
-                            style={{
-                                flexDirection: "row",
-                                justifyContent: "space-around",
-                            }}
-                        >
-                            <TouchableOpacity
-                                style={{
-                                    borderRadius: 100,
-                                    backgroundColor: COLORS.lightgrey,
-                                    padding: 6,
-                                }}
-                                onPress={() => handleNavigationToSearchScreen()}
-                            >
-                                <FontAwesomeIcon
-                                    icon={faSearch}
-                                    size={20}
-                                    color={COLORS.black}
-                                />
-                            </TouchableOpacity>
-                            <View style={{ width: 16 }} />
-                            <TouchableOpacity
-                                // disabled
-                                style={{
-                                    borderRadius: 100,
-                                    backgroundColor: COLORS.lightgrey,
-                                    padding: 6,
-                                }}
-                                onPress={() => {
-                                    // pop === false ? popIn() : popOut();
-                                }}
-                            >
-                                <FontAwesomeIcon
-                                    icon={faEllipsisVertical}
-                                    size={20}
-                                    color={COLORS.black}
-                                    fade
-                                />
-                            </TouchableOpacity>
-                        </View>
-                    </View>
-                    <CustomDivider thickness={1} color={COLORS.lightgrey} />
-                </>
+                <Text
+                    className="text-gray-600 text-xl font-bold"
+                >
+                    {
+                        farmerType === "Grupo" ?
+                            "Organizações" :
+                            farmerType === "Instituição" ?
+                                "Instituições" :
+                                "Produtores"
+                    }
+                </Text>
+                {/* </View> */}
                 <View
                     style={{
-                        marginTop: 5,
                         flexDirection: "row",
                         justifyContent: "space-around",
                     }}
                 >
-                    <FlatList
-                        data={filterByCriteria}
-                        keyExtractor={keyExtractor2}
-                        horizontal
-                        showsHorizontalScrollIndicator={false}
-                        // ListHeaderComponent={<View style={{ width: 6, }} />}
-                        snapToInterval={86}
-                        decelerationRate="fast"
-                        renderItem={({ item }) => {
-                            return (
-                                <TouchableOpacity
-                                    style={{
-                                        marginRight: 10,
-                                        backgroundColor:
-                                            focusedOption === item.focusedOption
-                                                ? COLORS.main
-                                                : COLORS.fourth,
-                                        borderColor:
-                                            focusedOption === item.focusedOption
-                                                ? COLORS.main
-                                                : COLORS.lightgrey,
-                                        borderWidth: 1,
-                                        alignItems: "center",
-                                        justifyContent: "center",
-                                        paddingHorizontal: 10,
-                                        paddingBottom: 5,
-                                        borderRadius: 100,
-                                        elevation: 1,
-                                    }}
-                                    onPress={() => handleFocusedOption(item.focusedOption)}
-                                >
-                                    <Text
-                                        style={{
-                                            fontSize: 16,
-                                            color:
-                                                focusedOption === item.focusedOption
-                                                    ? COLORS.white
-                                                    : COLORS.grey,
-                                            fontFamily: "JosefinSans-Regular",
-                                            textAlign: "center",
-                                        }}
-                                    >
-                                        {item.criteriaName}
-                                    </Text>
-                                </TouchableOpacity>
-                            );
+                    <TouchableOpacity
+                        style={{
+                            // borderRadius: 100,
+                            // backgroundColor: COLORS.lightgrey,
+                            // padding: 6,
                         }}
-                    />
+                        className="bg-gray-400 dark:bg-gray-700 rounded-full p-2"
+                        onPress={() => handleNavigationToSearchScreen()}
+                    >
+                        <FontAwesomeIcon
+                            icon={faSearch}
+                            size={20}
+                            color={COLORS.lightestgrey}
+                        />
+                    </TouchableOpacity>
+                    <View style={{ width: 16 }} />
+                    <TouchableOpacity
+                        className="bg-gray-400 dark:bg-gray-700 rounded-full p-2"
+                        onPress={() => {
+                            // pop === false ? popIn() : popOut();
+                        }}
+                    >
+                        <FontAwesomeIcon
+                            icon={faEllipsisVertical}
+                            size={20}
+                            color={COLORS.lightestgrey}
+                            fade
+                        />
+                    </TouchableOpacity>
                 </View>
             </View>
             <View
-                style={{
-                    height: 10,
-                    backgroundColor: COLORS.main,
-                }}
-            />
+                className="flex flex-row items-center h-12 justify-around bg-[#EBEBE4] dark:bg-gray-800 mb-2"
+            >
+                <FlatList
+                    data={filterByCriteria}
+                    keyExtractor={keyExtractor2}
+                    horizontal
+                    showsHorizontalScrollIndicator={false}
+                    // ListHeaderComponent={<View style={{ width: 6, }} />}
+                    snapToInterval={86}
+                    decelerationRate="fast"
+                    renderItem={({ item }) => {
+                        return (
+                            <TouchableOpacity
+                                style={{
+                                    marginRight: 10,
+                                    alignItems: "center",
+                                    justifyContent: "center",
+                                    paddingHorizontal: 10,
+                                    paddingBottom: 5,
+                                    borderRadius: 100,
+                                    elevation: 1,
+                                }}
+                                className={`${focusedOption === item.focusedOption ? "dark:bg-green-700" : "dark:bg-gray-700"}`}
+                                onPress={() => handleFocusedOption(item.focusedOption)}
+                            >
+                                <Text
+                                    style={{
+                                        fontSize: 16,
+                                        color:
+                                            focusedOption === item.focusedOption
+                                                ? COLORS.white
+                                                : COLORS.grey,
+                                        fontFamily: "JosefinSans-Regular",
+                                        textAlign: "center",
+                                    }}
+                                >
+                                    {item.criteriaName}
+                                </Text>
+                            </TouchableOpacity>
+                        );
+                    }}
+                />
+            </View>
             {
                 loadingActivitiyIndicator ?
                     <View

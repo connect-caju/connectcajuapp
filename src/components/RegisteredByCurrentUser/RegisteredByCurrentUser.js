@@ -121,17 +121,26 @@ const RegisteredByCurrentUser = ({ farmerType, route, navigation }) => {
                             // add all the IDs to each item to allow swiping between screens...
                             // when the user open any item from the list
                             if (item.flag === "Grupo") {
-                                return <GroupItem route={route} item={item} />;
+                                return (
+                                    <GroupItem
+                                        item={item}
+                                        customUserData={customUserData}
+                                    />
+                                );
                             } else if (item.flag === "Indivíduo") {
                                 return (
                                     <FarmerItem
-                                        route={route}
-                                        navigation={navigation}
                                         item={item}
+                                        customUserData={customUserData}
                                     />
                                 );
                             } else if (item.flag === "Instituição") {
-                                return <InstitutionItem route={route} item={item} />;
+                                return (
+                                    <InstitutionItem
+                                        item={item}
+                                        customUserData={customUserData}
+                                    />
+                                );
                             }
                         }}
                         ListFooterComponent={() => {

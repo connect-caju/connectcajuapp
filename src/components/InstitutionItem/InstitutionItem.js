@@ -19,8 +19,9 @@ import { useNavigation } from "@react-navigation/native";
 import COLORS from "../../consts/colors";
 import { resourceValidation } from "../../consts/resourceValidation";
 import { farmerTypes } from "../../consts/farmerTypes";
+import ResourceSignature from "../ResourceSignature/ResourceSignature";
 
-const InstitutionItem = ({ item, route }) => {
+const InstitutionItem = ({ item, customUserData }) => {
   const navigation = useNavigation();
   const [farmlandStatus, setFarmlandStatus] = useState("");
 
@@ -49,7 +50,7 @@ const InstitutionItem = ({ item, route }) => {
 
   return (
     <View
-    className="bg-white mx-2 my-1 py-1 rounded-md"
+      className="bg-white dark:bg-gray-800 mx-2 my-1 py-1 rounded-md"
     >
       <Box
         style={{
@@ -98,148 +99,33 @@ const InstitutionItem = ({ item, route }) => {
             }}
           >
             <Text
-              style={{
-                fontSize: 16,
-                fontFamily: "JosefinSans-Bold",
-                color: COLORS.black,
-              }}
+              className="text-gray-600 text-[15px] font-semibold"
+
               numberOfLines={1}
               ellipsizeMode={"tail"}
             >
               {item?.name}
               <Text
-                style={{
-                  fontSize: 14,
-                  fontFamily: "JosefinSans-Italic",
-                  color: COLORS.black,
-                }}
+                className="text-gray-600 text-[12px] font-semibold"
               >
                 {" "}
                 ({item?.type === "Outra" ? farmerTypes.institution : item?.type})
               </Text>
             </Text>
             <Text
-              style={{
-                fontSize: 14,
-                fontFamily: "JosefinSans-Italic",
-                color: item.farmlands === 0 ? COLORS.danger : COLORS.grey,
-
-              }}
+              className={"text-gray-500 text-xs font-light"}
               numberOfLines={1}
               ellipsizeMode={"tail"}
             >
               {item.farmlands === 0 ? "(Sem pomar ainda)" : item.farmlands === 1 ? `(Possui ${item.farmlands} pomar)` : `(Possui ${item.farmlands} pomares)`}
             </Text>
-            <Text
-              style={{
-                textAlign: "right",
-                color: COLORS.grey,
-                fontFamily: "JosefinSans-Italic",
-                fontSize: 12,
-              }}
-            >
-              Registo: {item.createdAt} por {item.user}
-            </Text>
-            {/* <Stack direction="column">
-              <Stack direction="row"> */}
-            {/* <Box w="100%" style={{}}>
-                  <Stack direction="row">
-                    <Text
-                      style={{
-                        fontSize: responsiveFontSize(1.7),
-                        fontFamily: "JosefinSans-Italic",
-                      }}
-                      numberOfLines={1}
-                      ellipsizeMode={"tail"}
-                    >
-                      Responsável: {item.manager}
-                    </Text>
-                  </Stack>
-
-                  <Stack direction="row">
-                    <Box w="50%">
-                      <Text
-                        style={{
-                          fontSize: responsiveFontSize(1.7),
-                          fontFamily: "JosefinSans-Italic",
-                        }}
-                      >
-                        Tel: {item.phone}
-                      </Text>
-                    </Box>
-                    <Box
-                      style={{
-                        flexDirection: "row",
-                        // borderWidth: 1,
-                        borderRadius: 20,
-                        borderColor:
-                          farmlandStatus === resourceValidation.status.pending
-                            ? COLORS.danger
-                            : farmlandStatus ===
-                              resourceValidation.status.validated
-                              ? COLORS.main
-                              : COLORS.red,
-                        justifyContent: "space-between",
-                      }}
-                    >
-                      <Text
-                        style={{
-                          fontSize: responsiveFontSize(1.7),
-                          fontFamily: "JosefinSans-Italic",
-                          marginHorizontal: 2,
-                          paddingHorizontal: 5,
-                        }}
-                      >
-                        Pomares: {item.farmlands}
-                      </Text>
-                      <Icon
-                        name={
-                          farmlandStatus === resourceValidation.status.pending
-                            ? "pending-actions"
-                            : farmlandStatus ===
-                              resourceValidation.status.validated
-                              ? "check-circle"
-                              : item?.farmlands === 0
-                                ? "error-outline"
-                                : "dangerous"
-                        }
-                        size={wp("6%")}
-                        color={
-                          farmlandStatus === resourceValidation.status.pending
-                            ? COLORS.danger
-                            : farmlandStatus ===
-                              resourceValidation.status.validated
-                              ? COLORS.main
-                              : COLORS.red
-                        }
-                      />
-                    </Box>
-                    <Box w="5%"></Box>
-                  </Stack>
-                </Box> */}
-            {/* </Stack>
-            </Stack> */}
+            <ResourceSignature
+              resource={item}
+              customUserData={customUserData}
+            />
           </TouchableOpacity>
         </Box>
       </Stack>
-
-      {/* <Stack
-        direction="row"
-        w="100%"
-      >
-        <Box w="100%">
-          <Text
-            style={{
-              textAlign: "right",
-              color: COLORS.grey,
-              fontFamily: "JosefinSans-Italic",
-              fontSize: responsiveFontSize(1.5),
-            }}
-          >
-            Registo: {item.createdAt} por {item.user}
-          </Text>
-        </Box>
-      </Stack> */}
     </View>
   );
 };

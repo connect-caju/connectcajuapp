@@ -295,14 +295,7 @@ export default function FarmersScreen({ route, navigation }) {
               >
                 {!pop &&
                   <View
-                    style={{
-                      // justifyContent: "center",
-                      // borderRadius: 100,
-                      // borderColor: COLORS.grey,
-                      // backgroundColor: COLORS.lightestgrey,
-                      padding: 6,
-                    }}
-                    className="justify-center rounded-full bg-gray-200 dark:bg-gray-800"
+                    className="justify-center rounded-full bg-gray-400 dark:bg-gray-500 p-2"
                   >
                     <TouchableOpacity disabled={pop} onPress={() => { }}>
                       <View
@@ -317,7 +310,7 @@ export default function FarmersScreen({ route, navigation }) {
                           zIndex: 1,
                         }}
                       />
-                      <FontAwesomeIcon icon={faBell} size={25} color={COLORS.main} />
+                      <FontAwesomeIcon icon={faBell} size={20} color={COLORS.lightestgrey} />
                     </TouchableOpacity>
                   </View>
                 }
