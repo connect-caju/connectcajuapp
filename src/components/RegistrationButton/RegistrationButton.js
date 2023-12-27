@@ -106,9 +106,11 @@ const RegistrationButton = ({ customUserData, pop, setPop, navigation, route, })
                     {pop && <Text style={{
                         fontSize: 16,
                         marginRight: 10,
-                        fontFamily: "Roboto-Bold",
-                        color: COLORS.grey,
-                    }}>Singular</Text>}
+                        // fontFamily: "Roboto-Bold",
+                        // color: COLORS.grey,
+                    }}
+                    className="text-gray-600 font-bold"
+                    >Singular</Text>}
                     <FontAwesomeIcon icon={faPerson} size={30} color={COLORS.main} />
                 </TouchableOpacity>
             </Animated.View>
@@ -139,9 +141,11 @@ const RegistrationButton = ({ customUserData, pop, setPop, navigation, route, })
                     {pop && <Text style={{
                         fontSize: 16,
                         marginRight: 10,
-                        color: COLORS.grey,
-                        fontFamily: "Roboto-Bold",
-                    }}>Organização</Text>}
+                        // color: COLORS.grey,
+                        // fontFamily: "Roboto-Bold",
+                    }}
+                    className="text-gray-600 font-bold"
+                    >Organização</Text>}
                     <FontAwesomeIcon icon={faPeopleGroup} size={30} color={COLORS.main} />
                 </TouchableOpacity>
             </Animated.View>
@@ -172,9 +176,11 @@ const RegistrationButton = ({ customUserData, pop, setPop, navigation, route, })
                     {pop && <Text style={{
                         fontSize: 16,
                         marginRight: 10,
-                        fontFamily: "Roboto-Bold",
-                        color: COLORS.grey,
-                    }}>Instituição</Text>}
+                        // fontFamily: "Roboto-Bold",
+                        // color: COLORS.grey,
+                    }}
+                    className="text-gray-600 font-bold"
+                    >Instituição</Text>}
                     <FontAwesomeIcon icon={faInstitution} size={30} color={COLORS.main} />
                 </TouchableOpacity>
             </Animated.View >
@@ -221,10 +227,11 @@ const RegistrationButton = ({ customUserData, pop, setPop, navigation, route, })
                         position: "absolute",
                         bottom: 10,
                         right: 35,
-                        fontSize: 12,
-                        fontFamily: "JosefinSans-BoldItalic",
-                        color: COLORS.grey,
+                        // fontSize: 12,
+                        // fontFamily: "JosefinSans-BoldItalic",
+                        // color: COLORS.grey,
                     }}
+                    className="font-bold italic text-gray-600 text-sm"
                 >
                     Registar
                 </Text>

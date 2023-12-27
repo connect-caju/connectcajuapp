@@ -8,13 +8,14 @@ import {
   widthPercentageToDP as wp,
 } from "react-native-responsive-screen";
 
-import { responsiveFontSize } from "react-native-responsive-dimensions";
+// import { responsiveFontSize } from "react-native-responsive-dimensions";
 
 import { Box, Center, Stack } from "native-base";
 import { useNavigation } from "@react-navigation/native";
 import COLORS from "../../consts/colors";
 import { resourceValidation } from "../../consts/resourceValidation";
 import { farmerTypes } from "../../consts/farmerTypes";
+import ResourceSignature from "../ResourceSignature/ResourceSignature";
 
 
 const FarmerItem = ({ item, route, farmerType }) => {
@@ -134,7 +135,7 @@ const FarmerItem = ({ item, route, farmerType }) => {
                 {asset?.subcategory} {item?.farmlands > 0 ? `${item?.gender === "Feminino" ? "(Dona" : "(Dono"} de ${item?.farmlands} ${item.farmlands <= 1 ? "pomar" : "pomares"})` : "(Sem pomar ainda)"}
               </Text>
             ))}
-            <Text
+            {/* <Text
               style={{
                 textAlign: "right",
                 color: COLORS.grey,
@@ -143,7 +144,11 @@ const FarmerItem = ({ item, route, farmerType }) => {
               }}
             >
               Registo: {item?.createdAt} por {item?.user}
-            </Text>
+            </Text> */}
+            <ResourceSignature 
+              resource={item}
+              customUserData={customUserData}
+            />
           </TouchableOpacity>
         </Box>
       </Stack>

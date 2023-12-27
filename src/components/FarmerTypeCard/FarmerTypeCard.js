@@ -20,10 +20,11 @@ export function FarmerTypeCard({ route, item, pop }) {
         });
       }}
       style={{
-        alignItems: "center",
-        justifyContent: "center",
-        width: "100%",
+        // alignItems: "center",
+        // justifyContent: "center",
+        // width: "100%",
       }}
+      className="justify-center items-center"
     >
       <View
         style={{
@@ -46,11 +47,12 @@ export function FarmerTypeCard({ route, item, pop }) {
               borderRadius: 100,
               // borderWidth: 1,
               borderColor: item?.iconColor,
-              backgroundColor: COLORS.fourth,
+              // backgroundColor: COLORS.fourth,
               padding: 10,
               elevation: 8,
               display: pop ? "none" : "flex",
             }}
+            className="bg-[#EBEBE4] dark:bg-gray-800"
           >
             <FontAwesomeIcon
               icon={item?.icon}
@@ -94,11 +96,12 @@ export function FarmerTypeCard({ route, item, pop }) {
 
               <Text
                 style={{
-                  fontSize: 14,
-                  fontFamily: "JosefinSans-Italic",
-                  textAlign: "left",
-                  color: COLORS.grey,
+                  // fontSize: 14,
+                  // fontFamily: "JosefinSans-Italic",
+                  // textAlign: "left",
+                  // color: COLORS.grey,
                 }}
+                className="text-gray-600 text-left italic font-normal text-sm"
                 numberOfLines={2}
                 ellipsizeMode={"tail"}
               >

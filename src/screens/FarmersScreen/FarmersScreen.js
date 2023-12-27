@@ -258,14 +258,7 @@ export default function FarmersScreen({ route, navigation }) {
             }}
           >
             <View
-              style={{
-                width: "100%",
-                height: 70,
-                paddingHorizontal: 15,
-                paddingVertical: 10,
-                backgroundColor: COLORS.fourth,
-                borderColor: COLORS.fourth,
-              }}
+              className={"bg-[#EBEBE4] dark:bg-gray-800 p-2 h-20 justify-center"}
             >
               <View
                 style={{
@@ -280,11 +273,12 @@ export default function FarmersScreen({ route, navigation }) {
                   <Text
                     numberOfLines={1}
                     ellipsizeMode={"tail"}
-                    style={{
-                      fontFamily: "JosefinSans-Bold",
-                      fontSize: 24,
-                      color: COLORS.black,
-                    }}
+                    // style={{
+                    //   fontFamily: "JosefinSans-Bold",
+                    //   fontSize: 24,
+                    //   color: COLORS.black,
+                    // }}
+                    className="font-bold text-gray-600 text-xl"
                   >
                     {customUserData?.userDistrict}
                   </Text>
@@ -302,12 +296,13 @@ export default function FarmersScreen({ route, navigation }) {
                 {!pop &&
                   <View
                     style={{
-                      justifyContent: "center",
-                      borderRadius: 100,
-                      borderColor: COLORS.grey,
-                      backgroundColor: COLORS.lightestgrey,
+                      // justifyContent: "center",
+                      // borderRadius: 100,
+                      // borderColor: COLORS.grey,
+                      // backgroundColor: COLORS.lightestgrey,
                       padding: 6,
                     }}
+                    className="justify-center rounded-full bg-gray-200 dark:bg-gray-800"
                   >
                     <TouchableOpacity disabled={pop} onPress={() => { }}>
                       <View
@@ -355,7 +350,7 @@ export default function FarmersScreen({ route, navigation }) {
                   keyExtractor={keyExtractor}
                   // onEndReached={handleEndReached}
                   onEndReachedThreshold={0.1}
-                  ItemSeparatorComponent={() => <CustomDivider thickness={2} />}
+                  ItemSeparatorComponent={() => <CustomDivider thickness={1} bg={COLORS.lightestgrey} />}
                   renderItem={({ item }) => {
                     if (item?.farmerType === "Grupo") {
                       item["total"] = groups?.length;
