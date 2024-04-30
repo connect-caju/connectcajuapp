@@ -30,7 +30,6 @@ import { secrets } from "./secrets";
 import { AppProvider, UserProvider } from "@realm/react";
 import { realmContext } from "./models/realmContext";
 const { RealmProvider } = realmContext;
-import RealmPlugin from "realm-flipper-plugin-device";
 
 import { toastConfig } from "./config/toastConfig";
 import { syncConfig } from "./syncConfig";
