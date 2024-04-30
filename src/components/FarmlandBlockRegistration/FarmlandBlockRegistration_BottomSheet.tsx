@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react"
+
 // @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { View, Text, StyleSheet, ScrollView } from "react-native"
 import {
@@ -38,12 +39,14 @@ import { plantingTypes } from "../../consts/plantingTypes"
 import cloneList from "../../consts/clones"
 import { CustomInput } from "../Inputs/CustomInput"
 
+
 // @ts-expect-error TS(7016): Could not find a declaration file for module 'uuid... Remove this comment to see the full error message
 import { v4 as uuidv4 } from "uuid"
 
 // import { useUser } from '@realm/react';
 
 import { realmContext } from "../../models/realmContext"
+
 // @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { TouchableOpacity } from "react-native"
 import validateBlockData from "../../helpers/validateBlockData"
@@ -305,6 +308,7 @@ export default function FarmlandBlockRegistration({
               }}
             >
               // @ts-expect-error TS(2339): Property 'blocks' does not exist on type 'Object<u... Remove this comment to see the full error message
+              // @ts-expect-error TS(2339): Property 'blocks' does not exist on type 'Object<u... Remove this comment to see the full error message
               Parcela {foundFarmland?.blocks?.length + 1}
             </Text>
           </Box>
@@ -376,6 +380,7 @@ export default function FarmlandBlockRegistration({
                   <FormControl.Label>Ano de plantio</FormControl.Label>
 
                   <SelectList
+
                     // @ts-expect-error TS(2769): No overload matches this call.
                     data={getFullYears2}
                     setSelected={(newYear: any) => {
@@ -470,6 +475,8 @@ export default function FarmlandBlockRegistration({
               <Box w="10%"></Box>
             </Stack>
 
+            // @ts-expect-error TS(2304): Cannot find name 'children'.
+            // @ts-expect-error TS(2322): Type '{ children: any[]; style: {}; }' is not assi... Remove this comment to see the full error message
             // @ts-expect-error TS(2322): Type '{ children: any[]; style: {}; }' is not assi... Remove this comment to see the full error message
             <Box style={{}}>
               <Stack direction="row" w="100%" space={2}>
@@ -508,6 +515,7 @@ export default function FarmlandBlockRegistration({
 
                 <Box
                   w="48%"
+
                   // @ts-expect-error TS(2322): Type '{ children: Element; w: "48%"; style: { just... Remove this comment to see the full error message
                   style={{
                     justifyContent: "flex-end",
@@ -549,6 +557,7 @@ export default function FarmlandBlockRegistration({
 
               {errors?.blockTrees && errors?.usedArea && (
                 <Box
+
                   // @ts-expect-error TS(2322): Type '{ children: Element[]; style: { backgroundCo... Remove this comment to see the full error message
                   style={{
                     backgroundColor: COLORS.danger,
@@ -660,6 +669,7 @@ export default function FarmlandBlockRegistration({
 
             <Box
               w="100%"
+
               // @ts-expect-error TS(2322): Type '{ children: Element; w: "100%"; style: { mar... Remove this comment to see the full error message
               style={{
                 marginTop: errors?.usedArea && errors?.blockTrees ? 0 : 0,
@@ -712,6 +722,7 @@ export default function FarmlandBlockRegistration({
                           iconStyle={{ marginRight: 1 }}
                         />
                       }
+
                       // @ts-expect-error TS(2322): Type '{ center: true; fontFamily: string; containe... Remove this comment to see the full error message
                       onPress={() => {
                         setIsDensityModeRegular(true)
@@ -754,6 +765,7 @@ export default function FarmlandBlockRegistration({
                           iconStyle={{ marginRight: 1 }}
                         />
                       }
+
                       // @ts-expect-error TS(2322): Type '{ center: true; fontFamily: string; containe... Remove this comment to see the full error message
                       onPress={() => {
                         setIsDensityModeIrregular(true)
@@ -826,6 +838,7 @@ export default function FarmlandBlockRegistration({
                 </Box>
                 <Box
                   w="10%"
+
                   // @ts-expect-error TS(2322): Type '{ children: Element; w: "10%"; style: { just... Remove this comment to see the full error message
                   style={{
                     justifyContent: "center",
@@ -1011,6 +1024,7 @@ export default function FarmlandBlockRegistration({
                   <Box
                     w="100%"
                     alignItems={"center"}
+
                     // @ts-expect-error TS(2322): Type '{ children: Element[]; w: "100%"; alignItems... Remove this comment to see the full error message
                     style={{
                       flexDirection: "row",
@@ -1054,6 +1068,7 @@ export default function FarmlandBlockRegistration({
                     </Box>
                     <Box
                       // w="15%"
+
                       // @ts-expect-error TS(2322): Type '{ children: Element; style: { justifyContent... Remove this comment to see the full error message
                       style={{
                         justifyContent: "center",
@@ -1108,6 +1123,7 @@ export default function FarmlandBlockRegistration({
               <Box w="100%" my="5">
                 {errors?.sameTypeTrees && (
                   <Box
+
                     // @ts-expect-error TS(2322): Type '{ children: Element[]; style: { flexDirectio... Remove this comment to see the full error message
                     style={{
                       flexDirection: "row",
@@ -1168,6 +1184,7 @@ export default function FarmlandBlockRegistration({
                       >
                         <Box
                           w="65%"
+
                           // @ts-expect-error TS(2322): Type '{ children: Element; w: "65%"; style: { just... Remove this comment to see the full error message
                           style={{
                             justifyContent: "center",
@@ -1293,6 +1310,7 @@ export default function FarmlandBlockRegistration({
               borderRadius: 10,
             }}
             type="outline"
+
             // @ts-expect-error TS(2322): Type '{ title: string; titleStyle: { color: string... Remove this comment to see the full error message
             onPress={() => {
               // validate data before you update flags

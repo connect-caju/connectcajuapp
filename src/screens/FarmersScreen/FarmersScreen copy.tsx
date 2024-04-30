@@ -102,6 +102,7 @@ export default function FarmersScreen({
   const [fetchedFarmlands, setFetchedFarmlands] = useState([])
 
   const districts = Array.from(
+
     // @ts-expect-error TS(2339): Property 'userDistrict' does not exist on type 'Ob... Remove this comment to see the full error message
     new Set(stats.map((stat) => stat?.userDistrict)),
   ).filter((district) => district !== "NA")
@@ -140,6 +141,7 @@ export default function FarmersScreen({
     "Instituição",
   )
 
+
   // @ts-expect-error TS(2339): Property 'userDistrict' does not exist on type 'Ob... Remove this comment to see the full error message
   const filteredStats = stats?.filter((stat) => stat.userDistrict !== "NA")
   // ------------------------------------------------------
@@ -162,8 +164,10 @@ export default function FarmersScreen({
       const district = districts[i]
       let newObject = {}
       const usersStats = stats.filter((stat: any) => stat.userDistrict === district)
+
       // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       newObject["title"] = `${district}`
+
       // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       newObject["data"] = usersStats
       statsByDistrict.push(newObject)
@@ -198,14 +202,16 @@ export default function FarmersScreen({
   }
   if (farmersList.length > 0) {
     farmersList = farmersList?.sort(
-      // @ts-expect-error TS(7006): Parameter 'a' implicitly has an 'any' type.
-      (a, b) => new Date(b?.createdAt) - new Date(a?.createdAt),
+
+      // @ts-expect-error TS(2362): The left-hand side of an arithmetic operation must... Remove this comment to see the full error message
+      (a: any, b: any) => new Date(b?.createdAt) - new Date(a?.createdAt),
     )
   }
 
   const handleEndReached = () => {
     if (!isEndReached && !isLoading) {
       setIsLoading(true)
+
       // @ts-expect-error TS(2304): Cannot find name 'setTimeout'.
       setTimeout(() => {
         setIsLoading(false)
@@ -217,33 +223,43 @@ export default function FarmersScreen({
     if (customUserData.role !== roles.provincialManager) {
       if (!showAll) {
         // this is a bug! it should: showAll should set to true for it to setAll
+
         // @ts-expect-error TS(2345): Argument of type 'Results<Object<unknown, never>>'... Remove this comment to see the full error message
         setFetchedFarmers(farmers)
+
         // @ts-expect-error TS(2345): Argument of type 'Results<Object<unknown, never>>'... Remove this comment to see the full error message
         setFetchedGroups(groups)
+
         // @ts-expect-error TS(2345): Argument of type 'Results<Object<unknown, never>>'... Remove this comment to see the full error message
         setFetchedInstitutions(institutions)
+
         // @ts-expect-error TS(2345): Argument of type 'Results<Object<unknown, never>>'... Remove this comment to see the full error message
         setFetchedFarmlands(farmlands)
       } else {
         setFetchedFarmers(
+
           // @ts-expect-error TS(2345): Argument of type 'Object<unknown, never>[]' is not... Remove this comment to see the full error message
           farmers.filter((farmer) => farmer?.userId === customUserData.userId),
         )
         setFetchedGroups(
+
           // @ts-expect-error TS(2345): Argument of type 'Object<unknown, never>[]' is not... Remove this comment to see the full error message
           groups.filter((group) => group?.userId === customUserData.userId),
         )
         setFetchedInstitutions(
+
           // @ts-expect-error TS(2345): Argument of type 'Object<unknown, never>[]' is not... Remove this comment to see the full error message
           institutions.filter(
+
             // @ts-expect-error TS(2339): Property 'userId' does not exist on type 'Object<u... Remove this comment to see the full error message
             (institution) => institution?.userId === customUserData.userId,
           ),
         )
         setFetchedFarmlands(
+
           // @ts-expect-error TS(2345): Argument of type 'Object<unknown, never>[]' is not... Remove this comment to see the full error message
           farmlands.filter(
+
             // @ts-expect-error TS(2339): Property 'userId' does not exist on type 'Object<u... Remove this comment to see the full error message
             (farmland) => farmland?.userId === customUserData.userId,
           ),
@@ -506,6 +522,7 @@ export default function FarmersScreen({
           {stats?.length === 0 ? (
             <Box>
               <Center
+
                 // @ts-expect-error TS(2322): Type '{ children: Element[]; style: { margin: numb... Remove this comment to see the full error message
                 style={{
                   margin: 20,
@@ -530,6 +547,7 @@ export default function FarmersScreen({
             <Box
               alignItems="stretch"
               w="100%"
+
               // @ts-expect-error TS(2322): Type '{ children: Element; alignItems: "stretch"; ... Remove this comment to see the full error message
               style={{
                 marginBottom: 140,
@@ -590,6 +608,7 @@ export default function FarmersScreen({
                   trackColor={{ true: COLORS.main, false: COLORS.grey }}
                   thumbColor={showAll ? COLORS.grey : COLORS.main}
                   onValueChange={() => {
+
                     // @ts-expect-error TS(2345): Argument of type 'boolean' is not assignable to pa... Remove this comment to see the full error message
                     setShowAll(!showAll)
                     setLoadingActivityIndicator(true)
@@ -642,6 +661,7 @@ export default function FarmersScreen({
               </Box>
               <Box
                 w="20%"
+
                 // @ts-expect-error TS(2322): Type '{ children: Element; w: "20%"; style: { just... Remove this comment to see the full error message
                 style={{
                   justifyContent: "center",
@@ -654,6 +674,7 @@ export default function FarmersScreen({
                 }}
               >
                 <Box
+
                   // @ts-expect-error TS(2322): Type '{ children: Element; style: { justifyContent... Remove this comment to see the full error message
                   style={{
                     // width: '80%',
@@ -683,6 +704,7 @@ export default function FarmersScreen({
           institutions.length === 0 ? (
             <Box>
               <Center
+
                 // @ts-expect-error TS(2322): Type '{ children: Element[]; style: { margin: numb... Remove this comment to see the full error message
                 style={{
                   margin: 20,
@@ -706,6 +728,7 @@ export default function FarmersScreen({
             <Box
               alignItems="stretch"
               w="100%"
+
               // @ts-expect-error TS(2322): Type '{ children: Element; alignItems: "stretch"; ... Remove this comment to see the full error message
               style={{
                 marginBottom: 15,
@@ -715,6 +738,7 @@ export default function FarmersScreen({
               <FlatList
                 StickyHeaderComponent={() => (
                   <Box
+
                     // @ts-expect-error TS(2322): Type '{ children: never[]; style: { height: number... Remove this comment to see the full error message
                     style={{
                       height: hp("10%"),
@@ -730,6 +754,7 @@ export default function FarmersScreen({
                 keyExtractor={keyExtractor}
                 onEndReached={handleEndReached}
                 onEndReachedThreshold={0.1}
+
                 // @ts-expect-error TS(7030): Not all code paths return a value.
                 renderItem={({
                   item
@@ -752,6 +777,7 @@ export default function FarmersScreen({
                   if (!isEndReached) {
                     return (
                       <Box
+
                         // @ts-expect-error TS(2322): Type '{ children: never[]; style: { backgroundColo... Remove this comment to see the full error message
                         style={{
                           // height: 10,

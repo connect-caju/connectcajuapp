@@ -23,6 +23,7 @@ import {
   AccordionList,
 // @ts-expect-error TS(7016): Could not find a declaration file for module 'acco... Remove this comment to see the full error message
 } from "accordion-collapse-react-native"
+
 // @ts-expect-error TS(7016): Could not find a declaration file for module 'uuid... Remove this comment to see the full error message
 import { v4 as uuidv4 } from "uuid"
 import { useFocusEffect } from "@react-navigation/native"
@@ -55,6 +56,7 @@ import COLORS from "../../consts/colors"
 import EditFarmerData from "../EditData/EditFarmerData"
 import { errorMessages } from "../../consts/errorMessages"
 import { roles } from "../../consts/roles"
+
 // @ts-expect-error TS(2307): Cannot find module '../EditData/ConfirmDataCopy' o... Remove this comment to see the full error message
 import ConfirmData from "../EditData/ConfirmDataCopy"
 import { useNavigation } from "@react-navigation/native"
@@ -72,8 +74,10 @@ import { resourceValidation } from "../../consts/resourceValidation"
 import validateInvalidationMessage from "../../helpers/validateInvalidationMessage"
 import CustomActivityIndicator from "../ActivityIndicator/CustomActivityIndicator"
 import { PopupMenu } from "../PopupMenu/PopupMenu"
+
 // @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { Platform } from "react-native"
+
 // @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { StatusBar } from "react-native"
 import BottomSheet from "../EditData/EditDataBottomSheet"
@@ -258,10 +262,12 @@ const PersonalData = ({
       )
     })
 
+
     // @ts-expect-error TS(2304): Cannot find name 'setInterval'.
     const interval = setInterval(() => {
       setAutoRefresh(!autoRefresh)
     }, 2000)
+
 
     // @ts-expect-error TS(2304): Cannot find name 'clearInterval'.
     clearInterval(interval)
@@ -437,6 +443,7 @@ const PersonalData = ({
           }}
         >
           <Box
+
             // @ts-expect-error TS(2322): Type '{ children: Element[]; style: { justifyConte... Remove this comment to see the full error message
             style={{
               justifyContent: "center",
@@ -1116,6 +1123,7 @@ const PersonalData = ({
                     }
                     style={{}}
                     onPress={() => {
+
                       // @ts-expect-error TS(2345): Argument of type 'string' is not assignable to par... Remove this comment to see the full error message
                       navigation.navigate("Geolocation", {
                         resourceName: "Farmer",
@@ -1222,6 +1230,7 @@ const PersonalData = ({
                   }
                   content={
                     <Box
+
                       // @ts-expect-error TS(2322): Type '{ children: Element[]; style: { flexDirectio... Remove this comment to see the full error message
                       style={{
                         flexDirection: "column",
@@ -1231,6 +1240,7 @@ const PersonalData = ({
                       }}
                     >
                       <Box
+
                         // @ts-expect-error TS(2322): Type '{ children: Element; style: { justifyContent... Remove this comment to see the full error message
                         style={{
                           justifyContent: "center",
@@ -1238,6 +1248,7 @@ const PersonalData = ({
                       >
                         <TouchableOpacity
                           onPress={() => {
+
                             // @ts-expect-error TS(2345): Argument of type 'string' is not assignable to par... Remove this comment to see the full error message
                             navigation.navigate("Membership", {
                               resourceName: "Farmer",
@@ -1247,6 +1258,7 @@ const PersonalData = ({
                           }}
                         >
                           <Box
+
                             // @ts-expect-error TS(2322): Type '{ children: Element[]; style: { flexDirectio... Remove this comment to see the full error message
                             style={{
                               flexDirection: "row",
@@ -1277,6 +1289,7 @@ const PersonalData = ({
                       </Box>
                       <CustomDivider />
                       <Box
+
                         // @ts-expect-error TS(2322): Type '{ children: Element; style: { justifyContent... Remove this comment to see the full error message
                         style={{
                           justifyContent: "center",
@@ -1284,6 +1297,7 @@ const PersonalData = ({
                       >
                         <TouchableOpacity
                           onPress={() => {
+
                             // @ts-expect-error TS(2345): Argument of type 'string' is not assignable to par... Remove this comment to see the full error message
                             navigation.navigate("FarmerGroups", {
                               farmerId: farmer._id,
@@ -1292,6 +1306,7 @@ const PersonalData = ({
                           }}
                         >
                           <Box
+
                             // @ts-expect-error TS(2322): Type '{ children: Element[]; style: { flexDirectio... Remove this comment to see the full error message
                             style={{
                               flexDirection: "row",
@@ -1327,6 +1342,7 @@ const PersonalData = ({
               )}
             </Box>
           </Stack>
+          // @ts-expect-error TS(2339): Property 'membership' does not exist on type 'Obje... Remove this comment to see the full error message
           // @ts-expect-error TS(2339): Property 'membership' does not exist on type 'Obje... Remove this comment to see the full error message
           {member && member?.membership?.length === 0 && (
             <>
@@ -1372,6 +1388,7 @@ const PersonalData = ({
           )}
 
           // @ts-expect-error TS(2339): Property 'membership' does not exist on type 'Obje... Remove this comment to see the full error message
+          // @ts-expect-error TS(2339): Property 'membership' does not exist on type 'Obje... Remove this comment to see the full error message
           {member && member?.membership?.length > 0 && (
             <Box pb="4">
               <Stack w="100%" direction="row">
@@ -1395,7 +1412,9 @@ const PersonalData = ({
                     }}
                   >
                     // @ts-expect-error TS(2339): Property 'membership' does not exist on type 'Obje... Remove this comment to see the full error message
+                    // @ts-expect-error TS(2339): Property 'membership' does not exist on type 'Obje... Remove this comment to see the full error message
                     {member?.membership?.length}{" "}
+                    // @ts-expect-error TS(2339): Property 'membership' does not exist on type 'Obje... Remove this comment to see the full error message
                     // @ts-expect-error TS(2339): Property 'membership' does not exist on type 'Obje... Remove this comment to see the full error message
                     {member?.membership?.length == 1
                       ? "organização"
@@ -1408,6 +1427,8 @@ const PersonalData = ({
 
           <CustomDivider />
 
+          // @ts-expect-error TS(2304): Cannot find name 'children'.
+          // @ts-expect-error TS(2322): Type '{ children: any[]; direction: "column"; w: "... Remove this comment to see the full error message
           // @ts-expect-error TS(2322): Type '{ children: any[]; direction: "column"; w: "... Remove this comment to see the full error message
           <Stack direction="column" w="100%" style={{ paddingTop: 5 }}>
             <Box w="100%">
@@ -1505,12 +1526,15 @@ const PersonalData = ({
   > */}
               {invalidationMotives?.length > 0 ? (
                 invalidationMotives?.length > 0 &&
+
                 // @ts-expect-error TS(2339): Property 'messages' does not exist on type 'Object... Remove this comment to see the full error message
                 invalidationMotives[0]?.messages?.length > 0 &&
+
                 // @ts-expect-error TS(2339): Property 'messages' does not exist on type 'Object... Remove this comment to see the full error message
                 invalidationMotives[0]?.messages?.map((motive: any, index: any) => (
                   <Box
                     key={index}
+
                     // @ts-expect-error TS(2322): Type '{ children: Element[]; key: any; style: { fl... Remove this comment to see the full error message
                     style={{
                       flexGrow: 1,
@@ -1554,6 +1578,7 @@ const PersonalData = ({
               ) : (
                 <Box
                   // key={index}
+
                   // @ts-expect-error TS(2322): Type '{ children: Element[]; style: { flexGrow: nu... Remove this comment to see the full error message
                   style={{
                     flexGrow: 1,
@@ -1641,6 +1666,7 @@ const PersonalData = ({
                           _text={{ fontSize: "xs" }}
                         >
                           // @ts-expect-error TS(2339): Property 'invalidationMessage' does not exist on t... Remove this comment to see the full error message
+                          // @ts-expect-error TS(2339): Property 'invalidationMessage' does not exist on t... Remove this comment to see the full error message
                           {errors?.invalidationMessage}
                         </FormControl.ErrorMessage>
                       ) : (
@@ -1649,6 +1675,7 @@ const PersonalData = ({
                     </FormControl>
                   </Box>
                   <Box
+
                     // @ts-expect-error TS(2322): Type '{ children: "" | Element; style: { width: st... Remove this comment to see the full error message
                     style={{
                       width: "15%",
@@ -1658,6 +1685,7 @@ const PersonalData = ({
                   >
                     {message && (
                       <Box
+
                         // @ts-expect-error TS(2322): Type '{ children: Element; style: { position: stri... Remove this comment to see the full error message
                         style={{
                           position: "absolute",
@@ -1677,6 +1705,7 @@ const PersonalData = ({
                             try {
                               addMessage(realm, farmer?._id, message)
                             } catch (error) {
+
                               // @ts-expect-error TS(2584): Cannot find name 'console'. Do you need to change ... Remove this comment to see the full error message
                               console.log(
                                 "Failed to add invalidation message",
@@ -1709,12 +1738,14 @@ const PersonalData = ({
               <Stack
                 direction="row"
                 w="100%"
+
                 // @ts-expect-error TS(2322): Type '{ children: Element[]; direction: "row"; w: ... Remove this comment to see the full error message
                 style={{ paddingVertical: 5 }}
                 space={3}
               >
                 <Box
                   w="50%"
+
                   // @ts-expect-error TS(2322): Type '{ children: Element; w: "50%"; style: { alig... Remove this comment to see the full error message
                   style={{
                     alignItems: "center",
@@ -1765,6 +1796,7 @@ const PersonalData = ({
                 </Box>
                 <Box
                   w="50%"
+
                   // @ts-expect-error TS(2322): Type '{ children: Element; w: "50%"; style: { alig... Remove this comment to see the full error message
                   style={{
                     alignItems: "center",

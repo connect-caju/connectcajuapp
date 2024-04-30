@@ -122,14 +122,18 @@ const validateIndividualFarmerData = (
     return false;
   }
 
+
   // @ts-expect-error TS(2584): Cannot find name 'console'. Do you need to change ... Remove this comment to see the full error message
   console.log("comparing dates:");
+
   // @ts-expect-error TS(2584): Cannot find name 'console'. Do you need to change ... Remove this comment to see the full error message
   console.log("date1:", retrievedBirthDate);
+
   // @ts-expect-error TS(2584): Cannot find name 'console'. Do you need to change ... Remove this comment to see the full error message
   console.log("date2:", new Date(dateLimits.maximumDate));
 
   if (retrievedBirthDate.toString() === new Date(dateLimits.maximumDate).toString()) {
+
     // @ts-expect-error TS(2584): Cannot find name 'console'. Do you need to change ... Remove this comment to see the full error message
     console.log("they are same");
     setErrors({ ...errors, birthDate: "Data de nascimento." });
@@ -146,12 +150,15 @@ const validateIndividualFarmerData = (
 
   if (
     retrievedPrimaryPhone !== 0 &&
+
     // @ts-expect-error TS(2345): Argument of type 'number' is not assignable to par... Remove this comment to see the full error message
     (!Number.isInteger(parseInt(retrievedPrimaryPhone)) ||
       retrievedPrimaryPhone?.toString().length !== 9 ||
+
       // @ts-expect-error TS(2345): Argument of type 'string | undefined' is not assig... Remove this comment to see the full error message
       parseInt(retrievedPrimaryPhone.toString()[0]) !== 8 ||
       [2, 3, 4, 5, 6, 7].indexOf(
+
         // @ts-expect-error TS(2345): Argument of type 'string | undefined' is not assig... Remove this comment to see the full error message
         parseInt(retrievedPrimaryPhone?.toString()[1]),
       ) < 0)
@@ -162,12 +169,15 @@ const validateIndividualFarmerData = (
 
   if (
     retrievedSecondaryPhone !== 0 &&
+
     // @ts-expect-error TS(2345): Argument of type 'number' is not assignable to par... Remove this comment to see the full error message
     (!Number.isInteger(parseInt(retrievedSecondaryPhone)) ||
       retrievedSecondaryPhone?.toString().length !== 9 ||
+
       // @ts-expect-error TS(2345): Argument of type 'string | undefined' is not assig... Remove this comment to see the full error message
       parseInt(retrievedSecondaryPhone.toString()[0]) !== 8 ||
       [2, 3, 4, 5, 6, 7].indexOf(
+
         // @ts-expect-error TS(2345): Argument of type 'string | undefined' is not assig... Remove this comment to see the full error message
         parseInt(retrievedSecondaryPhone?.toString()[1]),
       ) < 0)
@@ -285,9 +295,11 @@ const validateIndividualFarmerData = (
       village: retrievedAddressVillage,
     },
     contact: {
+
       // @ts-expect-error TS(2345): Argument of type 'number' is not assignable to par... Remove this comment to see the full error message
       primaryPhone: retrievedPrimaryPhone ? parseInt(retrievedPrimaryPhone) : 0,
       secondaryPhone: retrievedSecondaryPhone
+
         // @ts-expect-error TS(2345): Argument of type 'number' is not assignable to par... Remove this comment to see the full error message
         ? parseInt(retrievedSecondaryPhone)
         : 0,

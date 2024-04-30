@@ -1,5 +1,6 @@
 /* eslint-disable prettier/prettier */
 import React, { useEffect } from "react"
+
 // @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { StatusBar, View, Text } from "react-native"
 import { SafeAreaProvider } from "react-native-safe-area-context"

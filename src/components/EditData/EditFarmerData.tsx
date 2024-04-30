@@ -115,14 +115,18 @@ const EditFarmerData = ({
       const currentAddress = {
         addressProvince: customUserData?.userProvince,
         addressDistrict: customUserData?.userDistrict,
+
         // @ts-expect-error TS(2339): Property 'address' does not exist on type 'Object<... Remove this comment to see the full error message
         addressAdminPost: farmer?.address.adminPost,
+
         // @ts-expect-error TS(2339): Property 'address' does not exist on type 'Object<... Remove this comment to see the full error message
         addressVillage: farmer?.address.village,
       };
 
+
       // @ts-expect-error TS(2345): Argument of type '() => { addressProvince: unknown... Remove this comment to see the full error message
       setAddress(() => currentAddress);
+
       // @ts-expect-error TS(2345): Argument of type '() => { addressProvince: unknown... Remove this comment to see the full error message
       setOldAddress(() => currentAddress);
 
@@ -131,11 +135,14 @@ const EditFarmerData = ({
 
     if (dataToBeUpdated === "contact" && resourceName === "Farmer") {
       const currentContact = {
+
         // @ts-expect-error TS(2339): Property 'contact' does not exist on type 'Object<... Remove this comment to see the full error message
         primaryPhone: farmer?.contact.primaryPhone,
+
         // @ts-expect-error TS(2339): Property 'contact' does not exist on type 'Object<... Remove this comment to see the full error message
         secondaryPhone: farmer?.contact.secondaryPhone,
       };
+
 
       // @ts-expect-error TS(2345): Argument of type '() => { primaryPhone: any; secon... Remove this comment to see the full error message
       setContact(() => currentContact);
@@ -146,14 +153,18 @@ const EditFarmerData = ({
 
     if (dataToBeUpdated === "idDocument" && resourceName === "Farmer") {
       const currentIdDocument = {
+
         // @ts-expect-error TS(2339): Property 'idDocument' does not exist on type 'Obje... Remove this comment to see the full error message
         docType: farmer?.idDocument.docType,
+
         // @ts-expect-error TS(2339): Property 'idDocument' does not exist on type 'Obje... Remove this comment to see the full error message
         docNumber: farmer?.idDocument.docNumber,
+
         // @ts-expect-error TS(2339): Property 'idDocument' does not exist on type 'Obje... Remove this comment to see the full error message
         nuit: farmer?.idDocument.nuit,
         // overlayTitle: 'Actualizar Documentos de Identidade',
       };
+
 
       // @ts-expect-error TS(2345): Argument of type '() => { docType: any; docNumber:... Remove this comment to see the full error message
       setIdDocument(() => currentIdDocument);
@@ -184,22 +195,30 @@ const EditFarmerData = ({
 
     if (dataToBeUpdated === "address" && resourceName === "Farmer") {
       //  new incoming data
+
       // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       newData["province"] = address?.addressProvince;
+
       // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       newData["district"] = address?.addressDistrict;
+
       // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       newData["adminPost"] = validatedData?.adminPost;
+
       // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       newData["village"] = validatedData?.village;
 
       // old data
+
       // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       oldData["province"] = oldAddress?.addressProvince;
+
       // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       oldData["district"] = oldAddress?.addressDistrict;
+
       // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       oldData["adminPost"] = oldAddress?.addressAdminPost;
+
       // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       oldData["village"] = oldAddress?.addressVillage;
 
@@ -209,22 +228,28 @@ const EditFarmerData = ({
 
     if (dataToBeUpdated === "contact" && resourceName === "Farmer") {
       // new incoming data
+
       // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       newData["primaryPhone"] = validatedData?.primaryPhone
+
         // @ts-expect-error TS(2339): Property 'primaryPhone' does not exist on type 'fa... Remove this comment to see the full error message
         ? Number(parseInt(validatedData?.primaryPhone))
         : 0;
+
       // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       newData["secondaryPhone"] = validatedData?.secondaryPhone
+
         // @ts-expect-error TS(2339): Property 'secondaryPhone' does not exist on type '... Remove this comment to see the full error message
         ? Number(parseInt(validatedData?.secondaryPhone))
         : 0;
 
       // old data
+
       // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       oldData["primaryPhone"] = oldContact?.primaryPhone
         ? Number(parseInt(oldContact?.primaryPhone))
         : 0;
+
       // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       oldData["secondaryPhone"] = oldContact?.secondaryPhone
         ? Number(parseInt(oldContact?.secondaryPhone))
@@ -236,28 +261,36 @@ const EditFarmerData = ({
 
     if (dataToBeUpdated === "idDocument" && resourceName === "Farmer") {
       // new incoming data
+
       // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       newData["docType"] = validatedData?.docType?.trim();
+
       // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       newData["docNumber"] = validatedData?.docNumber
+
         // @ts-expect-error TS(2339): Property 'docNumber' does not exist on type 'false... Remove this comment to see the full error message
         ? validatedData?.docNumber
         : "";
+
       // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       newData["nuit"] = validatedData?.nuit
+
         // @ts-expect-error TS(2339): Property 'nuit' does not exist on type 'false | { ... Remove this comment to see the full error message
         ? Number(parseInt(validatedData?.nuit))
         : 0;
 
       // old data
+
       // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       oldData["docType"] = oldIdDocument?.docType
         ? oldIdDocument?.docType
         : "Não tem";
+
       // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       oldData["docNumber"] = oldIdDocument?.docNumber
         ? oldIdDocument?.docNumber
         : "";
+
       // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       oldData["nuit"] = oldIdDocument?.nuit ? oldIdDocument?.nuit : 0;
 
@@ -372,6 +405,7 @@ const EditFarmerData = ({
                         <FormControl.Label>Tipo do documento</FormControl.Label>
                         <Select
                           selectedValue={idDocument?.docType}
+
                           // @ts-expect-error TS(2322): Type '{ children: Element[]; selectedValue: string... Remove this comment to see the full error message
                           accessibilityLabel="Tipo de doc."
                           placeholder="Tipo de documento"
@@ -437,6 +471,7 @@ const EditFarmerData = ({
                             _text={{ fontSize: "xs" }}
                           >
                             // @ts-expect-error TS(2339): Property 'docType' does not exist on type '{}'.
+                            // @ts-expect-error TS(2339): Property 'docType' does not exist on type '{}'.
                             {errors?.docType}
                           </FormControl.ErrorMessage>
                         ) : (
@@ -486,6 +521,7 @@ const EditFarmerData = ({
                               _text={{ fontSize: "xs" }}
                             >
                               // @ts-expect-error TS(2339): Property 'docNumber' does not exist on type '{}'.
+                              // @ts-expect-error TS(2339): Property 'docNumber' does not exist on type '{}'.
                               {errors?.docNumber}
                             </FormControl.ErrorMessage>
                           ) : (
@@ -529,6 +565,7 @@ const EditFarmerData = ({
                             _text={{ fontSize: "xs" }}
                           >
                             // @ts-expect-error TS(2339): Property 'nuit' does not exist on type '{}'.
+                            // @ts-expect-error TS(2339): Property 'nuit' does not exist on type '{}'.
                             {errors?.nuit}
                           </FormControl.ErrorMessage>
                         ) : (
@@ -546,6 +583,7 @@ const EditFarmerData = ({
                 <Stack direction="column">
                   <Box
                     w="100%"
+
                     // @ts-expect-error TS(2322): Type '{ children: Element; w: "100%"; style: { ali... Remove this comment to see the full error message
                     style={{
                       alignItems: "center",
@@ -592,6 +630,7 @@ const EditFarmerData = ({
                           _text={{ fontSize: "xs" }}
                         >
                           // @ts-expect-error TS(2339): Property 'primaryPhone' does not exist on type '{}... Remove this comment to see the full error message
+                          // @ts-expect-error TS(2339): Property 'primaryPhone' does not exist on type '{}... Remove this comment to see the full error message
                           {errors?.primaryPhone}
                         </FormControl.ErrorMessage>
                       ) : (
@@ -601,6 +640,7 @@ const EditFarmerData = ({
                   </Box>
                   <Box
                     w="100%"
+
                     // @ts-expect-error TS(2322): Type '{ children: Element; w: "100%"; style: { ali... Remove this comment to see the full error message
                     style={{
                       alignItems: "center",
@@ -652,6 +692,7 @@ const EditFarmerData = ({
                           _text={{ fontSize: "xs" }}
                         >
                           // @ts-expect-error TS(2339): Property 'secondaryPhone' does not exist on type '... Remove this comment to see the full error message
+                          // @ts-expect-error TS(2339): Property 'secondaryPhone' does not exist on type '... Remove this comment to see the full error message
                           {errors?.secondaryPhone}
                         </FormControl.ErrorMessage>
                       ) : (
@@ -681,7 +722,8 @@ const EditFarmerData = ({
                             ? address?.addressAdminPost
                             : ""
                         }
-                        // @ts-expect-error TS(2322): Type '{ children: any; selectedValue: string; acce... Remove this comment to see the full error message
+
+                        // @ts-expect-error TS(2322): Type '{ children: any[]; selectedValue: string; ac... Remove this comment to see the full error message
                         accessibilityLabel="Escolha um posto administrativo"
                         placeholder="Escolha um posto administrativo"
                         minHeight={55}
@@ -730,6 +772,7 @@ const EditFarmerData = ({
                         }}
                       >
                         // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
+                        // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
                         {administrativePosts[address?.addressDistrict]?.map(
                           (adminPost: any, index: any) => (
                             <Select.Item
@@ -748,6 +791,7 @@ const EditFarmerData = ({
                           _text={{ fontSize: "xs" }}
                         >
                           // @ts-expect-error TS(2339): Property 'addressAdminPost' does not exist on type... Remove this comment to see the full error message
+                          // @ts-expect-error TS(2339): Property 'addressAdminPost' does not exist on type... Remove this comment to see the full error message
                           {errors?.addressAdminPost}
                         </FormControl.ErrorMessage>
                       ) : (
@@ -764,7 +808,8 @@ const EditFarmerData = ({
                       <FormControl.Label>Localidade</FormControl.Label>
                       <Select
                         selectedValue={address?.addressVillage}
-                        // @ts-expect-error TS(2322): Type '{ children: any; selectedValue: string; acce... Remove this comment to see the full error message
+
+                        // @ts-expect-error TS(2322): Type '{ children: any[]; selectedValue: string; ac... Remove this comment to see the full error message
                         accessibilityLabel="Escolha uma localidade"
                         placeholder="Escolha uma localidade"
                         minHeight={55}
@@ -812,6 +857,7 @@ const EditFarmerData = ({
                         }}
                       >
                         // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
+                        // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
                         {villages[address?.addressAdminPost]?.map(
                           (village: any, index: any) => (
                             <Select.Item
@@ -829,6 +875,7 @@ const EditFarmerData = ({
                           }
                           _text={{ fontSize: "xs" }}
                         >
+                          // @ts-expect-error TS(2339): Property 'addressVillage' does not exist on type '... Remove this comment to see the full error message
                           // @ts-expect-error TS(2339): Property 'addressVillage' does not exist on type '... Remove this comment to see the full error message
                           {errors?.addressVillage}
                         </FormControl.ErrorMessage>
@@ -855,6 +902,7 @@ const EditFarmerData = ({
                 // color: COLORS.ghostwhite,
               }}
               type="outline"
+
               // @ts-expect-error TS(2322): Type '{ title: string; titleStyle: { color: string... Remove this comment to see the full error message
               onPress={() => {
                 if (

@@ -1,12 +1,14 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable prettier/prettier */
 /* eslint-disable linebreak-style */
+
 // @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { View, Text } from "react-native";
 import React from "react";
 import {
     Center,
 } from "native-base";
+
 // @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { TouchableOpacity } from "react-native";
 import { resourceValidation } from "../../consts/resourceValidation";
@@ -180,6 +182,7 @@ const ValidationOptions = ({
             />
 
             <Center
+
                 // @ts-expect-error TS(2322): Type '{ children: Element; className: string; }' i... Remove this comment to see the full error message
                 className="w-1/2"
             >
@@ -201,6 +204,7 @@ const ValidationOptions = ({
                 </TouchableOpacity>
             </Center>
             <Center
+
                 // @ts-expect-error TS(2322): Type '{ children: Element; className: string; }' i... Remove this comment to see the full error message
                 className="w-1/2"
             >

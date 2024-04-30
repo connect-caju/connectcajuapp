@@ -9,6 +9,7 @@ export function calculateArea(coordinates: any) {
     coordinates.length < 3 ||
     !isEqual(coordinates[0], coordinates[coordinates.length - 1])
   ) {
+
     // @ts-expect-error TS(2584): Cannot find name 'console'. Do you need to change ... Remove this comment to see the full error message
     console.error("Invalid polygon: Ensure the polygon is closed.");
     return null;

@@ -1,6 +1,7 @@
 /* eslint-disable linebreak-style */
 /* eslint-disable react/prop-types */
 /* eslint-disable prettier/prettier */
+
 // @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { TouchableOpacity, View, Text } from "react-native";
 import React from "react";
@@ -21,6 +22,7 @@ export default function StatItem({
   return (
     <TouchableOpacity
       onPress={() => {
+
         // @ts-expect-error TS(2345): Argument of type 'string' is not assignable to par... Remove this comment to see the full error message
         navigation.navigate("UserStat", {
           userId: item?.userId,

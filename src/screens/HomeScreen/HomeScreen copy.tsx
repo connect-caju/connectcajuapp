@@ -49,8 +49,10 @@ export default function HomeScreen() {
   // get extract stats from whole province
   const tWholeProvince = provincialUserStats?.map((stat) => {
     return {
+
       // @ts-expect-error TS(2339): Property 'targetFarmers' does not exist on type 'O... Remove this comment to see the full error message
       tFarmers: stat.targetFarmers,
+
       // @ts-expect-error TS(2339): Property 'targetFarmlands' does not exist on type ... Remove this comment to see the full error message
       tFarmlands: stat.targetFarmlands,
     };
@@ -58,8 +60,10 @@ export default function HomeScreen() {
 
   const rWholeProvince = provincialUserStats?.map((stat) => {
     return {
+
       // @ts-expect-error TS(2339): Property 'registeredFarmers' does not exist on typ... Remove this comment to see the full error message
       rFarmers: stat.registeredFarmers,
+
       // @ts-expect-error TS(2339): Property 'registeredFarmlands' does not exist on t... Remove this comment to see the full error message
       rFarmlands: stat.registeredFarmlands,
     };
@@ -81,24 +85,30 @@ export default function HomeScreen() {
   // ----------------------------------------------------------------
   //  extract stats from whole district
   const tWholeDistrict = provincialUserStats
+
     // @ts-expect-error TS(2339): Property 'userDistrict' does not exist on type 'Ob... Remove this comment to see the full error message
     ?.filter((stat) => stat.userDistrict === customUserData?.userDistrict)
     ?.map((stat) => {
       return {
+
         // @ts-expect-error TS(2339): Property 'targetFarmers' does not exist on type 'O... Remove this comment to see the full error message
         tFarmers: stat.targetFarmers,
+
         // @ts-expect-error TS(2339): Property 'targetFarmlands' does not exist on type ... Remove this comment to see the full error message
         tFarmlands: stat.targetFarmlands,
       };
     });
 
   const rWholeDistrict = provincialUserStats
+
     // @ts-expect-error TS(2339): Property 'userDistrict' does not exist on type 'Ob... Remove this comment to see the full error message
     ?.filter((stat) => stat.userDistrict === customUserData?.userDistrict)
     ?.map((stat) => {
       return {
+
         // @ts-expect-error TS(2339): Property 'registeredFarmers' does not exist on typ... Remove this comment to see the full error message
         rFarmers: stat.registeredFarmers,
+
         // @ts-expect-error TS(2339): Property 'registeredFarmlands' does not exist on t... Remove this comment to see the full error message
         rFarmlands: stat.registeredFarmlands,
       };
@@ -120,24 +130,30 @@ export default function HomeScreen() {
   // extract stats of the current user
 
   const tCurrentUser = provincialUserStats
+
     // @ts-expect-error TS(2339): Property 'userId' does not exist on type 'Object<u... Remove this comment to see the full error message
     ?.filter((stat) => stat.userId === customUserData?.userId)
     ?.map((stat) => {
       return {
+
         // @ts-expect-error TS(2339): Property 'targetFarmers' does not exist on type 'O... Remove this comment to see the full error message
         tFarmers: stat.targetFarmers,
+
         // @ts-expect-error TS(2339): Property 'targetFarmlands' does not exist on type ... Remove this comment to see the full error message
         tFarmlands: stat.targetFarmlands,
       };
     });
 
   const rCurrentUser = provincialUserStats
+
     // @ts-expect-error TS(2339): Property 'userId' does not exist on type 'Object<u... Remove this comment to see the full error message
     ?.filter((stat) => stat.userId === customUserData?.userId)
     ?.map((stat) => {
       return {
+
         // @ts-expect-error TS(2339): Property 'registeredFarmers' does not exist on typ... Remove this comment to see the full error message
         rFarmers: stat.registeredFarmers,
+
         // @ts-expect-error TS(2339): Property 'registeredFarmlands' does not exist on t... Remove this comment to see the full error message
         rFarmlands: stat.registeredFarmlands,
       };
@@ -215,6 +231,7 @@ export default function HomeScreen() {
         }}
       >
         <Box
+
           // @ts-expect-error TS(2322): Type '{ children: Element[]; style: { paddingHoriz... Remove this comment to see the full error message
           style={{
             paddingHorizontal: 15,
@@ -224,6 +241,7 @@ export default function HomeScreen() {
             <Box w="40%" alignItems={"center"}>
               <Image
                 style={{ width: 50, height: 50, borderRadius: 100 }}
+
                 // @ts-expect-error TS(2591): Cannot find name 'require'. Do you need to install... Remove this comment to see the full error message
                 source={require("../../../assets/images/iamLogo2.png")}
               />
@@ -254,6 +272,7 @@ export default function HomeScreen() {
                     fontSize: 18,
                   }}
                 >
+                  // @ts-expect-error TS(2571): Object is of type 'unknown'.
                   // @ts-expect-error TS(2571): Object is of type 'unknown'.
                   {customUserData?.name?.split(" ")[0]}
                 </Text>
@@ -290,6 +309,7 @@ export default function HomeScreen() {
             }}
           >
             <Box
+
               // @ts-expect-error TS(2322): Type '{ children: Element[]; style: { backgroundCo... Remove this comment to see the full error message
               style={{
                 backgroundColor: COLORS.main,
@@ -314,6 +334,8 @@ export default function HomeScreen() {
               </Box>
 
               <Stack direction="row" w="90%" space={4}>
+                // @ts-expect-error TS(2304): Cannot find name 'children'.
+                // @ts-expect-error TS(2322): Type '{ children: Element; w: "50%"; alignItems: "... Remove this comment to see the full error message
                 // @ts-expect-error TS(2322): Type '{ children: Element; w: "50%"; alignItems: "... Remove this comment to see the full error message
                 <Box w="50%" alignItems={"center"} style={{}}>
                   <TouchableOpacity
@@ -411,6 +433,7 @@ export default function HomeScreen() {
                       }}
                     >
                       // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
+                      // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
                       Até {months[new Date().getMonth()]}{" "}
                       {new Date().getFullYear()}
                     </Text>
@@ -455,6 +478,7 @@ export default function HomeScreen() {
                     <Center w="100%">
                       <Center
                         w="50%"
+
                         // @ts-expect-error TS(2322): Type '{ children: Element; w: "50%"; style: { back... Remove this comment to see the full error message
                         style={{
                           backgroundColor: isPerformanceButtonActive
@@ -482,6 +506,7 @@ export default function HomeScreen() {
                     <Center w="100%">
                       <Center
                         w="50%"
+
                         // @ts-expect-error TS(2322): Type '{ children: Element; w: "50%"; style: { back... Remove this comment to see the full error message
                         style={{
                           backgroundColor: isPerformanceButtonActive
@@ -525,6 +550,7 @@ export default function HomeScreen() {
                     <Center w="100%">
                       <Center
                         w="50%"
+
                         // @ts-expect-error TS(2322): Type '{ children: Element; w: "50%"; style: { back... Remove this comment to see the full error message
                         style={{
                           backgroundColor: isPerformanceButtonActive
@@ -552,6 +578,7 @@ export default function HomeScreen() {
                     <Center w="100%">
                       <Center
                         w="50%"
+
                         // @ts-expect-error TS(2322): Type '{ children: Element; w: "50%"; style: { back... Remove this comment to see the full error message
                         style={{
                           backgroundColor: isPerformanceButtonActive
@@ -595,6 +622,7 @@ export default function HomeScreen() {
                     <Center w="100%">
                       <Center
                         w="50%"
+
                         // @ts-expect-error TS(2322): Type '{ children: Element; w: "50%"; style: { back... Remove this comment to see the full error message
                         style={{
                           backgroundColor: isPerformanceButtonActive
@@ -622,6 +650,7 @@ export default function HomeScreen() {
                     <Center w="100%">
                       <Center
                         w="50%"
+
                         // @ts-expect-error TS(2322): Type '{ children: Element; w: "50%"; style: { back... Remove this comment to see the full error message
                         style={{
                           backgroundColor: isPerformanceButtonActive
@@ -673,6 +702,7 @@ export default function HomeScreen() {
                       }}
                     >
                       // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
+                      // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
                       Até {months[new Date().getMonth()]}{" "}
                       {new Date().getFullYear()}
                     </Text>
@@ -717,6 +747,7 @@ export default function HomeScreen() {
                     <Center w="100%">
                       <Center
                         w="50%"
+
                         // @ts-expect-error TS(2322): Type '{ children: Element; w: "50%"; style: { back... Remove this comment to see the full error message
                         style={{
                           backgroundColor: isPerformanceButtonActive
@@ -742,6 +773,7 @@ export default function HomeScreen() {
                     <Center w="100%">
                       <Center
                         w="50%"
+
                         // @ts-expect-error TS(2322): Type '{ children: Element; w: "50%"; style: { back... Remove this comment to see the full error message
                         style={{
                           backgroundColor: isPerformanceButtonActive
@@ -783,6 +815,7 @@ export default function HomeScreen() {
                     <Center w="100%">
                       <Center
                         w="50%"
+
                         // @ts-expect-error TS(2322): Type '{ children: Element; w: "50%"; style: { back... Remove this comment to see the full error message
                         style={{
                           backgroundColor: isPerformanceButtonActive
@@ -808,6 +841,7 @@ export default function HomeScreen() {
                     <Center w="100%">
                       <Center
                         w="50%"
+
                         // @ts-expect-error TS(2322): Type '{ children: Element; w: "50%"; style: { back... Remove this comment to see the full error message
                         style={{
                           backgroundColor: isPerformanceButtonActive
@@ -849,6 +883,7 @@ export default function HomeScreen() {
                     <Center w="100%">
                       <Center
                         w="50%"
+
                         // @ts-expect-error TS(2322): Type '{ children: Element; w: "50%"; style: { back... Remove this comment to see the full error message
                         style={{
                           backgroundColor: isPerformanceButtonActive
@@ -874,6 +909,7 @@ export default function HomeScreen() {
                     <Center w="100%">
                       <Center
                         w="50%"
+
                         // @ts-expect-error TS(2322): Type '{ children: Element; w: "50%"; style: { back... Remove this comment to see the full error message
                         style={{
                           backgroundColor: isPerformanceButtonActive

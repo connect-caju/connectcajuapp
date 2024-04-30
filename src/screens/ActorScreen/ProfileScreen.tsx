@@ -87,6 +87,7 @@ const ProfileScreen = ({
   } else if (farmerType === farmerTypes.group) {
     farmer = realm.objectForPrimaryKey("Group", ownerId);
     if (farmer?.manager) {
+
       // @ts-expect-error TS(2322): Type '(string & Object<unknown, never>) | null' is... Remove this comment to see the full error message
       manager = realm.objectForPrimaryKey("Actor", farmer?.manager);
     }
@@ -129,11 +130,13 @@ const ProfileScreen = ({
   };
 
   const handlePresentModalPress = useCallback(() => {
+
     // @ts-expect-error TS(2339): Property 'present' does not exist on type 'never'.
     bottomSheetRef?.current?.present();
   }, []);
 
   const handleDismissModalPress = useCallback(() => {
+
     // @ts-expect-error TS(2339): Property 'dismiss' does not exist on type 'never'.
     bottomSheetRef?.current?.dismiss();
     setPresentGroupMemberOptions(false);
@@ -141,13 +144,16 @@ const ProfileScreen = ({
   }, []);
 
   const onPressEditData = useCallback((bottomSheetFlag: any) => {
+
     // @ts-expect-error TS(2339): Property 'isActive' does not exist on type 'never'... Remove this comment to see the full error message
     const isActive = ref?.current?.isActive();
     if (isActive) {
+
       // @ts-expect-error TS(2339): Property 'scrollTo' does not exist on type 'never'... Remove this comment to see the full error message
       ref?.current?.scrollTo(0);
       setBottomSheetFlag("");
     } else {
+
       // @ts-expect-error TS(2339): Property 'scrollTo' does not exist on type 'never'... Remove this comment to see the full error message
       ref?.current?.scrollTo(-300);
       setBottomSheetFlag(bottomSheetFlag);
@@ -410,6 +416,7 @@ const ProfileScreen = ({
         {farmlands?.length > 0 &&
           farmlands?.map((farmland) => (
             <FarmlandData
+
               // @ts-expect-error TS(2339): Property '_id' does not exist on type 'Object<unkn... Remove this comment to see the full error message
               key={farmland?._id}
               farmland={farmland}
@@ -456,6 +463,7 @@ const ProfileScreen = ({
                   farmer?.type === groupTypes.farmerGroup
                   ? "deste Grupo"
                   : farmerType === farmerTypes.group &&
+
                     // @ts-expect-error TS(2339): Property 'faBirthdayCake' does not exist on type '... Remove this comment to see the full error message
                     farmer?.type === groupTypes.faBirthdayCake
                     ? "desta Escola"

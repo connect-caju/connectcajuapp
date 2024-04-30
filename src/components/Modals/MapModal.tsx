@@ -259,14 +259,7 @@ export default function MapModal({
   }
 
   useEffect(() => {
-    // if (marker !== undefined) {
-    //     Geocoder.from(marker.latitude, marker.longitude).then(data=>{
-    //         let fetchedAddress = data.results[0].formatted_address
-    //         setAddress(fetchedAddress);
-    //     })
-    // }
-    // else {
-    // }
+
     setMarker(currentCoordinates)
   }, [currentCoordinates])
 
@@ -299,20 +292,18 @@ export default function MapModal({
       isVisible={isMapVisible}
       onBackdropPress={toggleOverlay}
     >
-      <Box
-        h="100%"
-        w="100%"
-        // @ts-expect-error TS(2322): Type '{ children: Element[]; h: "100%"; w: "100%";... Remove this comment to see the full error message
+      <View
         style={{
           flex: 1,
           backgroundColor: COLORS.ghostwhite,
+          height: "100%",
+          width: "100%",
         }}
       >
-        <Stack
-          w="100%"
-          // @ts-expect-error TS(2322): Type '{ children: Element[]; w: "100%"; style: { p... Remove this comment to see the full error message
+        <View
           style={{
             paddingBottom: 20,
+            width: "100%",
           }}
         >
           <Box w="10%">
@@ -326,10 +317,10 @@ export default function MapModal({
             />
           </Box>
           <Box w="90%"></Box>
-        </Stack>
-        // @ts-expect-error TS(2322): Type '{ children: Element[]; style: any; }' is not... Remove this comment to see the full error message
-        <Box style={styles.container}>
+        </View>
+        <View style={styles.container}>
           <MapView
+
             // @ts-expect-error TS(2322): Type 'MutableRefObject<undefined>' is not assignab... Remove this comment to see the full error message
             ref={mapRef}
             zoomControlEnabled={true}
@@ -431,8 +422,8 @@ export default function MapModal({
               </Text>
             </View>
           </TouchableOpacity>
-        </Box>
-      </Box>
+        </View>
+      </View>
     </Overlay>
   );
 }

@@ -4,6 +4,7 @@ export const extractIDs = (farmersList: any) => {
   // current: referring to the current farmer's id
   // next: referring to the next farmer's id
   //
+
   // @ts-expect-error TS(7030): Not all code paths return a value.
   return farmersList?.map((item: any, index: any) => {
     if (farmersList[index - 1] && farmersList[index + 1]) {

@@ -14,6 +14,7 @@ import {
 import React, { useState, useCallback } from "react";
 import { Icon } from "@rneui/base";
 import COLORS from "../../consts/colors";
+
 // @ts-expect-error TS(7016): Could not find a declaration file for module 'uuid... Remove this comment to see the full error message
 import { v4 as uuidv4 } from "uuid";
 import validateInvalidationMessage from "../../helpers/validateInvalidationMessage";
@@ -21,6 +22,7 @@ import validateInvalidationMessage from "../../helpers/validateInvalidationMessa
 import { useUser } from "@realm/react";
 import { realmContext } from "../../models/realmContext";
 import { useEffect } from "react";
+
 // @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { Text } from "react-native";
 import { resourceValidation } from "../../consts/resourceValidation";
@@ -124,8 +126,10 @@ const InvalidationMessage = ({
                     )}
                     {invalidationMotives?.length > 0 ? (
                         invalidationMotives?.length > 0 &&
+
                         // @ts-expect-error TS(2339): Property 'messages' does not exist on type 'Object... Remove this comment to see the full error message
                         invalidationMotives[0]?.messages?.length > 0 &&
+
                         // @ts-expect-error TS(2339): Property 'messages' does not exist on type 'Object... Remove this comment to see the full error message
                         invalidationMotives[0]?.messages?.map((motive: any, index: any) => (
                             <View key={index}
@@ -150,6 +154,7 @@ const InvalidationMessage = ({
                                     {motive?.ownerName.split(" ")[0]}
                                 </Text>
                                 <Box
+
                                     // @ts-expect-error TS(2322): Type '{ children: Element; style: { borderRadius: ... Remove this comment to see the full error message
                                     style={{
                                         // backgroundColor: COLORS.main,
@@ -197,6 +202,7 @@ const InvalidationMessage = ({
                         ))
                     ) : (
                         <Box
+
                             // @ts-expect-error TS(2322): Type '{ children: Element[]; style: { margin: numb... Remove this comment to see the full error message
                             style={{
                                 margin: 5,
@@ -211,6 +217,7 @@ const InvalidationMessage = ({
                                 Connect Caju
                             </Text>
                             <Box
+
                                 // @ts-expect-error TS(2322): Type '{ children: Element; style: { borderRadius: ... Remove this comment to see the full error message
                                 style={{
                                     // backgroundColor: COLORS.main,
@@ -304,6 +311,7 @@ const InvalidationMessage = ({
                                 _text={{ fontSize: "xs" }}
                             >
                                 // @ts-expect-error TS(2339): Property 'invalidationMessage' does not exist on t... Remove this comment to see the full error message
+                                // @ts-expect-error TS(2339): Property 'invalidationMessage' does not exist on t... Remove this comment to see the full error message
                                 {errors?.invalidationMessage}
                             </FormControl.ErrorMessage>
                         )}
@@ -332,6 +340,7 @@ const InvalidationMessage = ({
                                 try {
                                     addMessage(realm, resource?._id, message);
                                 } catch (error) {
+
                                     // @ts-expect-error TS(2584): Cannot find name 'console'. Do you need to change ... Remove this comment to see the full error message
                                     console.log(
                                         "Failed to add invalidation message",

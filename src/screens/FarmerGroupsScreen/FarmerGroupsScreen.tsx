@@ -57,6 +57,7 @@ export function FarmerGroupItem({
           }
         }
         onPress={() => {
+
           // @ts-expect-error TS(2345): Argument of type 'string' is not assignable to par... Remove this comment to see the full error message
           navigation.navigate("Group", { ownerId: item?._id });
         }}
@@ -131,6 +132,7 @@ export function FarmerGroupItem({
 
             <Stack
               direction="row"
+
               // @ts-expect-error TS(2322): Type '{ children: Element[]; direction: "row"; sty... Remove this comment to see the full error message
               style={{
                 // paddingHorizontal: 10,
@@ -185,8 +187,10 @@ export default function FarmerGroupsScreen({
   let groups: any = [];
   let actor = realm.objectForPrimaryKey("Actor", farmerId);
   if (farmerMembership.length > 0) {
+
     // @ts-expect-error TS(2322): Type 'Object<unknown, never> | undefined' is not a... Remove this comment to see the full error message
     farmerMembership = farmerMembership[0];
+
     // @ts-expect-error TS(2339): Property 'membership' does not exist on type 'Resu... Remove this comment to see the full error message
     groups = farmerMembership?.membership.map((membership: any) => {
       return realm.objectForPrimaryKey("Group", membership.organizationId);
@@ -195,13 +199,14 @@ export default function FarmerGroupsScreen({
 
   const handleGroupsList = () => {
     if (groups.length > 0) {
-      // @ts-expect-error TS(7006): Parameter 'group' implicitly has an 'any' type.
-      setGroupsList(groups?.map((group) => group));
+
+      setGroupsList(groups?.map((group: any) => group));
     }
   };
 
   useEffect(() => {
     handleGroupsList();
+
     // @ts-expect-error TS(2339): Property 'names' does not exist on type 'Object<un... Remove this comment to see the full error message
     setActorName(`${actor?.names.otherNames} ${actor?.names.surname}`);
   }, [realm]);
@@ -274,7 +279,9 @@ export default function FarmerGroupsScreen({
               >
                 [
                 // @ts-expect-error TS(2339): Property 'membership' does not exist on type 'Resu... Remove this comment to see the full error message
+                // @ts-expect-error TS(2339): Property 'membership' does not exist on type 'Resu... Remove this comment to see the full error message
                 {`Organizações de Produtores: ${farmerMembership?.membership?.length > 0
+
                     // @ts-expect-error TS(2339): Property 'membership' does not exist on type 'Resu... Remove this comment to see the full error message
                     ? farmerMembership?.membership?.length
                     : 0
@@ -285,6 +292,7 @@ export default function FarmerGroupsScreen({
           </Box>
           <Box
             w="10%"
+
             // @ts-expect-error TS(2322): Type '{ w: "10%"; style: { justifyContent: string;... Remove this comment to see the full error message
             style={{
               justifyContent: "center",
@@ -296,6 +304,7 @@ export default function FarmerGroupsScreen({
 
       {groupsList?.length > 0 ? (
         <FlatList
+
           // @ts-expect-error TS(2322): Type '{ style: {}; }' is not assignable to type 'I... Remove this comment to see the full error message
           StickyHeaderComponent={() => <Box style={{}}></Box>}
           stickyHeaderHiddenOnScroll={true}
@@ -310,6 +319,7 @@ export default function FarmerGroupsScreen({
           ListFooterComponent={() => {
             return (
               <Box
+
                 // @ts-expect-error TS(2322): Type '{ children: Element; style: { paddingBottom:... Remove this comment to see the full error message
                 style={{
                   paddingBottom: 150,

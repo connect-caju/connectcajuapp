@@ -2,6 +2,7 @@
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable prettier/prettier */
 /* eslint-disable prettier/prettier */
+
 // @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { Text, SafeAreaView, ScrollView, TextInput, View } from "react-native";
 import React, { useState, useEffect } from "react";
@@ -127,6 +128,7 @@ export default function InstitutionFarmerForm({
                       iconStyle={{ marginRight: 1 }}
                     />
                   }
+
                   // @ts-expect-error TS(2322): Type '{ center: true; fontFamily: string; containe... Remove this comment to see the full error message
                   onPress={() => {
                     setIsInstitutionPrivate(true);
@@ -175,6 +177,7 @@ export default function InstitutionFarmerForm({
                       iconStyle={{ marginRight: 1 }}
                     />
                   }
+
                   // @ts-expect-error TS(2322): Type '{ center: true; fontFamily: string; containe... Remove this comment to see the full error message
                   onPress={() => {
                     setIsInstitutionPrivate(false);
@@ -216,6 +219,7 @@ export default function InstitutionFarmerForm({
                   !isInstitutionPrivate && !isInstitutionPublic ? true : false
                 }
                 selectedValue={institutionType}
+
                 // @ts-expect-error TS(2322): Type '{ children: any[]; isDisabled: boolean; sele... Remove this comment to see the full error message
                 accessibilityLabel="Tipo de Instituição"
                 placeholder={"Escolha uma instituição"}
@@ -324,6 +328,7 @@ export default function InstitutionFarmerForm({
               <FormControl.Label>Posto Adm.</FormControl.Label>
               <Select
                 selectedValue={institutionAdminPost}
+
                 // @ts-expect-error TS(2322): Type '{ children: any; selectedValue: any; accessi... Remove this comment to see the full error message
                 accessibilityLabel="posto administrativo"
                 placeholder="Escolha posto administrativo"
@@ -383,7 +388,8 @@ export default function InstitutionFarmerForm({
               <FormControl.Label>Localidade</FormControl.Label>
               <Select
                 selectedValue={institutionVillage}
-                // @ts-expect-error TS(2322): Type '{ children: any; selectedValue: any; accessi... Remove this comment to see the full error message
+
+                // @ts-expect-error TS(2322): Type '{ children: any[]; selectedValue: any; acces... Remove this comment to see the full error message
                 accessibilityLabel="Escolha uma localidade"
                 placeholder="Escolha uma localidade"
                 minHeight={55}
@@ -413,6 +419,7 @@ export default function InstitutionFarmerForm({
                   setInstitutionVillage(newVillage)
                 }
               >
+                // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
                 // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
                 {villages[institutionAdminPost]?.map((village: any, index: any) => (
                   <Select.Item key={index} label={village} value={village} />

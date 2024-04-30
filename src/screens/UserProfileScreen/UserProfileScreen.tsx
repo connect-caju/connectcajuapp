@@ -1,8 +1,4 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable prettier/prettier */
-/* eslint-disable linebreak-style */
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
-import { View, Text, SafeAreaView, ScrollView, Image, Pressable } from "react-native";
+import { View, Text, SafeAreaView, ScrollView, Image, Pressable, TouchableOpacity } from "react-native";
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Animated, { Layout, SlideInLeft, SlideInRight, SlideOutLeft, SlideOutRight } from "react-native-reanimated";
 import { backgroundStyle } from "../../styles/globals";
@@ -16,8 +12,7 @@ import {
 
 import { useUser } from "@realm/react";
 import { realmContext } from "../../models/realmContext";
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
-import { TouchableOpacity } from "react-native";
+
 import CustomDivider from "../../components/Divider/CustomDivider";
 import { roles } from "../../consts/roles";
 import { errorMessages } from "../../consts/errorMessages";
@@ -67,11 +62,13 @@ const UserProfileScreen = ({
   const snapPoints = useMemo(() => ["25%", "40%", "60",], []);
 
   const handlePresentModalPress = useCallback(() => {
+
     // @ts-expect-error TS(2339): Property 'present' does not exist on type 'never'.
     bottomSheetRef?.current?.present();
   }, []);
 
   const handleDismissModalPress = useCallback(() => {
+
     // @ts-expect-error TS(2339): Property 'dismiss' does not exist on type 'never'.
     bottomSheetRef?.current?.dismiss();
     // setPresentGroupMemberOptions(false);
@@ -108,6 +105,7 @@ const UserProfileScreen = ({
       const customUserData = await user.refreshCustomData();
     } catch (error) {
       // console.log('Failed to save image: ', { cause: error })
+
       // @ts-expect-error TS(2571): Object is of type 'unknown'.
       if (error.includes(errorMessages.network.logFlag)) {
         // Alert message
@@ -123,6 +121,7 @@ const UserProfileScreen = ({
         setTitleAlert(errorMessages.server.title);
         setMessageAlert(errorMessages.server.message);
         setShowCancelButton(errorMessages.server.showCancelButton);
+
         // @ts-expect-error TS(2339): Property 'service' does not exist on type '{ autom... Remove this comment to see the full error message
         setShowConfirmButtom(errorMessages.service.showConfirmButton);
         setConfirmText(errorMessages.server.confirmText);
@@ -132,6 +131,7 @@ const UserProfileScreen = ({
       return;
     }
   };
+
 
   // @ts-expect-error TS(2584): Cannot find name 'console'. Do you need to change ... Remove this comment to see the full error message
   console.log(colorScheme);
@@ -233,7 +233,6 @@ const UserProfileScreen = ({
               className="text-xs font-normal text-center text-gray-500"
             >
               (
-              // @ts-expect-error TS(2571): Object is of type 'unknown'.
               {customUserData?.role?.includes(roles.coopManager)
                 ? roles.coopManager
                 : customUserData?.role}
@@ -252,7 +251,6 @@ const UserProfileScreen = ({
                 size={20}
                 color={COLORS.grey}
               />
-              // @ts-expect-error TS(2345): Argument of type 'unknown' is not assignable to pa... Remove this comment to see the full error message
               {roles.haveReadAndWritePermissions.some(role => role.includes(customUserData?.role)) &&
                 <Text
                   className="text-xs font-normal text-gray-500 text-center"
@@ -260,7 +258,7 @@ const UserProfileScreen = ({
                   {customUserData?.userDistrict}
                 </Text>
               }
-              // @ts-expect-error TS(2345): Argument of type 'unknown' is not assignable to pa... Remove this comment to see the full error message
+
               {!roles.haveReadAndWritePermissions.some(role => role.includes(customUserData?.role)) &&
                 <Text
                   className="text-xs font-normal text-gray-500 text-center"
@@ -315,8 +313,9 @@ const UserProfileScreen = ({
               </Text>
             </TouchableOpacity>
 
-            // @ts-expect-error TS(2571): Object is of type 'unknown'.
+
             {(customUserData?.role.includes(roles.provincialManager) ||
+
               // @ts-expect-error TS(2571): Object is of type 'unknown'.
               customUserData?.email.includes("connectcaju2023")) && (
                 <TouchableOpacity

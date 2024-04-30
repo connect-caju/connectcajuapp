@@ -12,6 +12,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { Icon } from "@rneui/base";
 import React from "react";
+
 // @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { View, Text, TouchableOpacity } from "react-native";
 import Animated from "react-native-reanimated";

@@ -17,12 +17,15 @@ export const generateUAID = ({
     birthPlace?.province === "Maputo" ||
     birthPlace?.district?.includes("Cidade")
   ) {
+
     // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
     birthPlaceCode = ceps[`${birthPlace?.district}`]
   } else if (birthPlace?.province?.includes("Cidade")) {
+
     // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
     birthPlaceCode = ceps[`${birthPlace?.province}`]
   } else {
+
     // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
     birthPlaceCode = ceps[`${birthPlace?.adminPost}`]
   }

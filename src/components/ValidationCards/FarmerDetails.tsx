@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable prettier/prettier */
 /* eslint-disable linebreak-style */
+
 // @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { View, Text, Image, } from "react-native";
 import React from "react";
@@ -74,6 +75,7 @@ const FarmerDetails = ({
                         w="90%"
                         alignItems={"center"}
                         // spce={3}
+
                         // @ts-expect-error TS(2322): Type '{ children: Element[]; w: "90%"; alignItems:... Remove this comment to see the full error message
                         style={{
                             flexDirection: "row",
@@ -82,6 +84,7 @@ const FarmerDetails = ({
                     >
                         <Box
                             w="45%"
+
                             // @ts-expect-error TS(2322): Type '{ children: Element[]; w: "45%"; style: { ju... Remove this comment to see the full error message
                             style={{
                                 justifyContent: "flex-start",
@@ -99,6 +102,7 @@ const FarmerDetails = ({
                         <View style={{ width: 10, }} />
                         <Box
                             w="45%"
+
                             // @ts-expect-error TS(2322): Type '{ children: Element[]; w: "45%"; style: { ju... Remove this comment to see the full error message
                             style={{
                                 justifyContent: "flex-start",
@@ -132,6 +136,7 @@ const FarmerDetails = ({
                         w="90%"
                         alignItems={"center"}
                         // spce={3}
+
                         // @ts-expect-error TS(2322): Type '{ children: Element[]; w: "90%"; alignItems:... Remove this comment to see the full error message
                         style={{
                             flexDirection: "row",
@@ -140,6 +145,7 @@ const FarmerDetails = ({
                     >
                         <Box
                             w="45%"
+
                             // @ts-expect-error TS(2322): Type '{ children: Element[]; w: "45%"; style: { ju... Remove this comment to see the full error message
                             style={{
                                 justifyContent: "flex-start",
@@ -155,6 +161,7 @@ const FarmerDetails = ({
                         <View style={{ width: 10, }} />
                         <Box
                             w="45%"
+
                             // @ts-expect-error TS(2322): Type '{ children: Element[]; w: "45%"; style: { ju... Remove this comment to see the full error message
                             style={{
                                 justifyContent: "flex-start",
@@ -187,6 +194,7 @@ const FarmerDetails = ({
                         w="90%"
                         alignItems={"center"}
                         // spce={3}
+
                         // @ts-expect-error TS(2322): Type '{ children: Element[]; w: "90%"; alignItems:... Remove this comment to see the full error message
                         style={{
                             flexDirection: "row",
@@ -194,6 +202,7 @@ const FarmerDetails = ({
                         }}                    >
                         <Box
                             w="45%"
+
                             // @ts-expect-error TS(2322): Type '{ children: Element[]; w: "45%"; style: { ju... Remove this comment to see the full error message
                             style={{
                                 justifyContent: "flex-start",
@@ -211,6 +220,7 @@ const FarmerDetails = ({
                         <View style={{ width: 10, }} />
                         <Box
                             w="45%"
+
                             // @ts-expect-error TS(2322): Type '{ children: Element[]; w: "45%"; style: { ju... Remove this comment to see the full error message
                             style={{
                                 justifyContent: "flex-start",
@@ -246,6 +256,7 @@ const FarmerDetails = ({
                         w="90%"
                         alignItems={"center"}
                         // spce={3}
+
                         // @ts-expect-error TS(2322): Type '{ children: Element[]; w: "90%"; alignItems:... Remove this comment to see the full error message
                         style={{
                             flexDirection: "row",
@@ -254,6 +265,7 @@ const FarmerDetails = ({
                     >
                         <Box
                             w="45%"
+
                             // @ts-expect-error TS(2322): Type '{ children: Element[]; w: "45%"; style: { ju... Remove this comment to see the full error message
                             style={{
                                 justifyContent: "flex-start",
@@ -271,6 +283,7 @@ const FarmerDetails = ({
                         <View style={{ width: 10, }} />
                         <Box
                             w="45%"
+
                             // @ts-expect-error TS(2322): Type '{ children: Element[]; w: "45%"; style: { ju... Remove this comment to see the full error message
                             style={{
                                 justifyContent: "flex-start",
@@ -305,6 +318,7 @@ const FarmerDetails = ({
                         w="90%"
                         alignItems={"center"}
                         // spce={3}
+
                         // @ts-expect-error TS(2322): Type '{ children: Element[]; w: "90%"; alignItems:... Remove this comment to see the full error message
                         style={{
                             flexDirection: "row",
@@ -313,6 +327,7 @@ const FarmerDetails = ({
                     >
                         <Box
                             w="45%"
+
                             // @ts-expect-error TS(2322): Type '{ children: Element[]; w: "45%"; style: { ju... Remove this comment to see the full error message
                             style={{
                                 justifyContent: "flex-start",
@@ -330,6 +345,7 @@ const FarmerDetails = ({
                         <View style={{ width: 10, }} />
                         <Box
                             w="45%"
+
                             // @ts-expect-error TS(2322): Type '{ children: Element[]; w: "45%"; style: { ju... Remove this comment to see the full error message
                             style={{
                                 justifyContent: "flex-start",

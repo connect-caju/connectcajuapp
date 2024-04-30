@@ -14,6 +14,7 @@ import { capitalize } from "./capitalize"
  * in the form.
  */
 
+
 // @ts-expect-error TS(7030): Not all code paths return a value.
 const validateEditedFarmlandMainData = (
   {

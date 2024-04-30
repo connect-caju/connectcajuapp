@@ -2,6 +2,7 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable react/prop-types */
 import React, { useState, useEffect, useCallback } from "react";
+
 // @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { View, Text, StyleSheet, ScrollView } from "react-native";
 import Modal from "react-native-modal";
@@ -246,6 +247,7 @@ const ConfirmData = ({
   // SuccesLottie effect
   useEffect(() => {
     if (successLottieVisible) {
+
       // @ts-expect-error TS(2304): Cannot find name 'setTimeout'.
       setTimeout(() => {
         setSuccessLottieVisible(false);
@@ -313,6 +315,7 @@ const ConfirmData = ({
               {dataToBeUpdated === "plantType" &&
                 resourceName === "Farmland" && (
                   <Box
+
                     // @ts-expect-error TS(2322): Type '{ children: Element[]; style: { paddingBotto... Remove this comment to see the full error message
                     style={{
                       paddingBottom: 30,
@@ -369,6 +372,7 @@ const ConfirmData = ({
               {dataToBeUpdated === "blockData" &&
                 resourceName === "Farmland" && (
                   <Box
+
                     // @ts-expect-error TS(2322): Type '{ children: Element[]; style: { paddingBotto... Remove this comment to see the full error message
                     style={{
                       paddingBottom: 30,
@@ -484,6 +488,7 @@ const ConfirmData = ({
                     </Stack>
 
                     <Box
+
                       // @ts-expect-error TS(2322): Type '{ style: { paddingVertical: number; }; }' is... Remove this comment to see the full error message
                       style={{
                         paddingVertical: 20,
@@ -605,6 +610,7 @@ const ConfirmData = ({
               {dataToBeUpdated === "farmlandMainData" &&
                 resourceName === "Farmland" && (
                   <Box
+
                     // @ts-expect-error TS(2322): Type '{ children: Element[]; style: { paddingBotto... Remove this comment to see the full error message
                     style={{
                       paddingBottom: 30,
@@ -719,6 +725,7 @@ const ConfirmData = ({
                     </Stack>
 
                     <Box
+
                       // @ts-expect-error TS(2322): Type '{ style: { paddingBottom: number; }; }' is n... Remove this comment to see the full error message
                       style={{
                         paddingBottom: 20,
@@ -839,6 +846,7 @@ const ConfirmData = ({
             <>
               {dataToBeUpdated === "groupType" && resourceName === "Group" && (
                 <Box
+
                   // @ts-expect-error TS(2322): Type '{ children: Element[]; style: { paddingBotto... Remove this comment to see the full error message
                   style={{
                     paddingBottom: 30,
@@ -931,6 +939,7 @@ const ConfirmData = ({
                   </Stack>
 
                   <Box
+
                     // @ts-expect-error TS(2322): Type '{ style: { paddingVertical: number; }; }' is... Remove this comment to see the full error message
                     style={{
                       paddingVertical: 20,
@@ -1029,6 +1038,7 @@ const ConfirmData = ({
               {dataToBeUpdated === "groupIdentity" &&
                 resourceName === "Group" && (
                   <Box
+
                     // @ts-expect-error TS(2322): Type '{ children: Element[]; style: { paddingBotto... Remove this comment to see the full error message
                     style={{
                       paddingBottom: 30,
@@ -1202,6 +1212,7 @@ const ConfirmData = ({
                     </Stack>
 
                     <Box
+
                       // @ts-expect-error TS(2322): Type '{ style: { paddingVertical: number; }; }' is... Remove this comment to see the full error message
                       style={{
                         paddingVertical: 20,
@@ -1381,6 +1392,7 @@ const ConfirmData = ({
               {dataToBeUpdated === "groupMembers" &&
                 resourceName === "Group" && (
                   <Box
+
                     // @ts-expect-error TS(2322): Type '{ children: Element[]; style: { paddingBotto... Remove this comment to see the full error message
                     style={{
                       paddingBottom: 30,
@@ -1473,6 +1485,7 @@ const ConfirmData = ({
                     </Stack>
 
                     <Box
+
                       // @ts-expect-error TS(2322): Type '{ style: { paddingVertical: number; }; }' is... Remove this comment to see the full error message
                       style={{
                         paddingVertical: 20,
@@ -1571,6 +1584,7 @@ const ConfirmData = ({
               {dataToBeUpdated === "groupManager" &&
                 resourceName === "Group" && (
                   <Box
+
                     // @ts-expect-error TS(2322): Type '{ children: Element[]; style: { paddingBotto... Remove this comment to see the full error message
                     style={{
                       paddingBottom: 30,
@@ -1641,6 +1655,7 @@ const ConfirmData = ({
                     </Stack>
 
                     <Box
+
                       // @ts-expect-error TS(2322): Type '{ style: { paddingVertical: number; }; }' is... Remove this comment to see the full error message
                       style={{
                         paddingVertical: 20,
@@ -1719,6 +1734,7 @@ const ConfirmData = ({
               {dataToBeUpdated === "institutionManager" &&
                 resourceName === "Institution" && (
                   <Box
+
                     // @ts-expect-error TS(2322): Type '{ children: Element[]; style: { paddingBotto... Remove this comment to see the full error message
                     style={{
                       paddingBottom: 30,
@@ -1788,6 +1804,7 @@ const ConfirmData = ({
                       </Box>
                     </Stack>
                     <Box
+
                       // @ts-expect-error TS(2322): Type '{ style: { paddingVertical: number; }; }' is... Remove this comment to see the full error message
                       style={{
                         paddingVertical: 20,
@@ -1864,6 +1881,7 @@ const ConfirmData = ({
               {dataToBeUpdated === "institutionDocument" &&
                 resourceName === "Institution" && (
                   <Box
+
                     // @ts-expect-error TS(2322): Type '{ children: Element[]; style: { paddingBotto... Remove this comment to see the full error message
                     style={{
                       paddingBottom: 30,
@@ -1932,6 +1950,7 @@ const ConfirmData = ({
                     </Stack>
 
                     <Box
+
                       // @ts-expect-error TS(2322): Type '{ style: { paddingVertical: number; }; }' is... Remove this comment to see the full error message
                       style={{
                         paddingVertical: 20,
@@ -2006,6 +2025,7 @@ const ConfirmData = ({
               {dataToBeUpdated === "idDocument" &&
                 resourceName === "Farmer" && (
                   <Box
+
                     // @ts-expect-error TS(2322): Type '{ children: Element[]; style: { paddingBotto... Remove this comment to see the full error message
                     style={{
                       paddingBottom: 30,
@@ -2100,6 +2120,7 @@ const ConfirmData = ({
                     </Stack>
 
                     <Box
+
                       // @ts-expect-error TS(2322): Type '{ style: { paddingVertical: number; }; }' is... Remove this comment to see the full error message
                       style={{
                         paddingVertical: 20,
@@ -2199,6 +2220,7 @@ const ConfirmData = ({
             <>
               {dataToBeUpdated === "contact" && resourceName === "Farmer" && (
                 <Box
+
                   // @ts-expect-error TS(2322): Type '{ children: Element[]; style: { paddingBotto... Remove this comment to see the full error message
                   style={{
                     paddingBottom: 30,
@@ -2269,6 +2291,7 @@ const ConfirmData = ({
                   </Stack>
 
                   <Box
+
                     // @ts-expect-error TS(2322): Type '{ style: { paddingVertical: number; }; }' is... Remove this comment to see the full error message
                     style={{
                       paddingVertical: 20,
@@ -2344,6 +2367,7 @@ const ConfirmData = ({
             <>
               {dataToBeUpdated === "address" && resourceName === "Farmer" && (
                 <Box
+
                   // @ts-expect-error TS(2322): Type '{ children: Element[]; style: { paddingBotto... Remove this comment to see the full error message
                   style={{
                     paddingBottom: 30,
@@ -2410,6 +2434,7 @@ const ConfirmData = ({
                   </Stack>
 
                   <Box
+
                     // @ts-expect-error TS(2322): Type '{ style: { paddingVertical: number; }; }' is... Remove this comment to see the full error message
                     style={{
                       paddingVertical: 20,
@@ -2493,6 +2518,7 @@ const ConfirmData = ({
                 // color: COLORS.ghostwhite,
               }}
               type="outline"
+
               // @ts-expect-error TS(2322): Type '{ title: string; titleStyle: { color: string... Remove this comment to see the full error message
               onPress={() => {
                 try {
@@ -2504,6 +2530,7 @@ const ConfirmData = ({
                     resourceName,
                   );
                 } catch (error) {
+
                   // @ts-expect-error TS(2584): Cannot find name 'console'. Do you need to change ... Remove this comment to see the full error message
                   console.log("Could not update data", { cause: error });
                 } finally {

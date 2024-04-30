@@ -15,6 +15,7 @@ import AwesomeAlert from "react-native-awesome-alerts";
 import CustomDivider from "../Divider/CustomDivider";
 
 import { realmContext } from "../../models/realmContext";
+
 // @ts-expect-error TS(2305): Module '"../../helpers/updateCoordinates"' has no ... Remove this comment to see the full error message
 import { updateCoordinates } from "../../helpers/updateCoordinates";
 import COLORS from "../../consts/colors";
@@ -71,6 +72,7 @@ const CoordinatesItem = ({
       <Stack direction="row" w="100%">
         <Box
           w="20%"
+
           // @ts-expect-error TS(2322): Type '{ children: Element; w: "20%"; style: { flex... Remove this comment to see the full error message
           style={{
             flex: 1,
@@ -131,6 +133,7 @@ const CoordinatesItem = ({
         <Box w="20%" alignItems={"center"}>
           <Box
             w="50%"
+
             // @ts-expect-error TS(2322): Type '{ children: Element; w: "50%"; style: { flex... Remove this comment to see the full error message
             style={{
               flex: 1,

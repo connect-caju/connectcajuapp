@@ -36,6 +36,7 @@ import PhotoModal from "../../components/Modals/PhotoModal";
 import { roles } from "../../consts/roles";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faTree } from "@fortawesome/free-solid-svg-icons";
+
 // @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { Dimensions } from "react-native";
 import CustomActivityIndicator from "../../components/ActivityIndicator/CustomActivityIndicator";
@@ -79,6 +80,7 @@ export default function FarmerScreen({
   const scale = useRef(new NativeAnimated.Value(0)).current;
   const bottomSheetRef = useRef(null);
   const onScrollToBottomSheet = useCallback(() => {
+
     // @ts-expect-error TS(2339): Property 'scrollTo' does not exist on type 'never'... Remove this comment to see the full error message
     bottomSheetRef?.current?.scrollTo(-20000);
   }, []);
@@ -103,6 +105,7 @@ export default function FarmerScreen({
   // SuccesLottie effect
   useEffect(() => {
     if (successLottieVisible) {
+
       // @ts-expect-error TS(2304): Cannot find name 'setTimeout'.
       setTimeout(() => {
         setSuccessLottieVisible(false);
@@ -112,8 +115,10 @@ export default function FarmerScreen({
 
   useEffect(() => {
     if (farmersIDs?.length > 0) {
+
       // @ts-expect-error TS(2304): Cannot find name 'current'.
       current = farmersIDs.find((node: any) => node.current === ownerId);
+
       // @ts-expect-error TS(2304): Cannot find name 'current'.
       setCurrentNode(current);
     }
@@ -145,23 +150,29 @@ export default function FarmerScreen({
         path: "images",
       },
     };
+
     // @ts-expect-error TS(2345): Argument of type '{ includeBase64: boolean; storag... Remove this comment to see the full error message
     launchImageLibrary(options, (response) => {
       if (response.didCancel) {
+
         // @ts-expect-error TS(2584): Cannot find name 'console'. Do you need to change ... Remove this comment to see the full error message
         console.log("User cancelled image picker");
       } else if (response.errorCode) {
+
         // @ts-expect-error TS(2584): Cannot find name 'console'. Do you need to change ... Remove this comment to see the full error message
         console.log("ImagePicker Error: ", response.error);
       } else {
+
         // @ts-expect-error TS(2532): Object is possibly 'undefined'.
         const source = { uri: response.assets.uri };
 
         const imageString =
+
           // @ts-expect-error TS(2532): Object is possibly 'undefined'.
           "data:image/jpeg;base64," + response.assets[0].base64;
 
         realm.write(() => {
+
           // @ts-expect-error TS(2531): Object is possibly 'null'.
           farmer.image = imageString;
           setLoadingActivityIndicator(true);
@@ -262,6 +273,7 @@ export default function FarmerScreen({
       </View>
 
       <Box
+
         // @ts-expect-error TS(2322): Type '{ children: null; style: { position: string;... Remove this comment to see the full error message
         style={{
           position: "absolute",
@@ -301,6 +313,7 @@ export default function FarmerScreen({
       </Box>
 
       <Box
+
         // @ts-expect-error TS(2322): Type '{ children: null; style: { position: string;... Remove this comment to see the full error message
         style={{
           position: "absolute",
@@ -356,6 +369,7 @@ export default function FarmerScreen({
         >
           <Box
             w="100%"
+
             // @ts-expect-error TS(2322): Type '{ children: any[]; w: "100%"; style: { justi... Remove this comment to see the full error message
             style={{
               justifyContent: "center",
@@ -371,6 +385,7 @@ export default function FarmerScreen({
               onPress={() => {
                 navigation.navigate("Camera", {
                   ownerType: "Indivíduo",
+
                   // @ts-expect-error TS(2339): Property '_id' does not exist on type 'Object<unkn... Remove this comment to see the full error message
                   ownerId: farmer?._id,
                   farmersIDs,
@@ -381,10 +396,13 @@ export default function FarmerScreen({
                 top: -50,
               }}
             >
+              // @ts-expect-error TS(2339): Property 'un' does not exist on type 'JSX.Intrinsi... Remove this comment to see the full error message
+              // @ts-expect-error TS(2339): Property 'image' does not exist on type 'Object<un... Remove this comment to see the full error message
               // @ts-expect-error TS(2339): Property 'image' does not exist on type 'Object<un... Remove this comment to see the full error message
               {farmer?.image ? (
                 <Box>
                   <Image
+
                     // @ts-expect-error TS(2339): Property 'image' does not exist on type 'Object<un... Remove this comment to see the full error message
                     source={{ uri: farmer?.image }}
                     style={{
@@ -408,6 +426,7 @@ export default function FarmerScreen({
                     color={COLORS.lightgrey}
                   />
                   <Box
+
                     // @ts-expect-error TS(2322): Type '{ children: Element; style: { position: stri... Remove this comment to see the full error message
                     style={{
                       position: "relative",
@@ -432,9 +451,12 @@ export default function FarmerScreen({
                 top: -50,
               }}
             >
+              // @ts-expect-error TS(2339): Property 'un' does not exist on type 'JSX.Intrinsi... Remove this comment to see the full error message
+              // @ts-expect-error TS(2339): Property 'names' does not exist on type 'Object<un... Remove this comment to see the full error message
               // @ts-expect-error TS(2339): Property 'names' does not exist on type 'Object<un... Remove this comment to see the full error message
               {farmer?.names?.otherNames} {farmer?.names?.surname}
             </Text>
+            // @ts-expect-error TS(2339): Property 'assets' does not exist on type 'Object<u... Remove this comment to see the full error message
             // @ts-expect-error TS(2339): Property 'assets' does not exist on type 'Object<u... Remove this comment to see the full error message
             {farmer?.assets?.map((asset: any, index: any) => (
               <Text
@@ -472,6 +494,7 @@ export default function FarmerScreen({
               }}
             >
               // @ts-expect-error TS(2339): Property 'identifier' does not exist on type 'Obje... Remove this comment to see the full error message
+              // @ts-expect-error TS(2339): Property 'identifier' does not exist on type 'Obje... Remove this comment to see the full error message
               {farmer?.identifier}
             </Text>
             <PersonalData
@@ -490,6 +513,7 @@ export default function FarmerScreen({
           <Box
             alignItems="stretch"
             w="100%"
+
             // @ts-expect-error TS(2322): Type '{ children: (false | Element | Element[])[];... Remove this comment to see the full error message
             style={{
               flex: 1,
@@ -525,6 +549,7 @@ export default function FarmerScreen({
                 <Box w="50%"></Box>
                 <Box
                   w="50%"
+
                   // @ts-expect-error TS(2322): Type '{ children: Element; w: "50%"; style: { alig... Remove this comment to see the full error message
                   style={{
                     alignItems: "flex-end",
@@ -536,12 +561,16 @@ export default function FarmerScreen({
                     }}
                     onPress={() => {
                       navigation.navigate("FarmlandForm1", {
+
                         // @ts-expect-error TS(2531): Object is possibly 'null'.
                         ownerId: farmer._id,
+
                         // @ts-expect-error TS(2339): Property 'names' does not exist on type 'Object<un... Remove this comment to see the full error message
                         ownerName: `${farmer?.names?.otherNames} ${farmer?.names?.surname}`,
+
                         // @ts-expect-error TS(2339): Property 'image' does not exist on type 'Object<un... Remove this comment to see the full error message
                         ownerImage: farmer?.image || "",
+
                         // @ts-expect-error TS(2339): Property 'address' does not exist on type 'Object<... Remove this comment to see the full error message
                         ownerAddress: farmer?.address,
                         flag: "Indivíduo",
@@ -550,6 +579,7 @@ export default function FarmerScreen({
                     }}
                   >
                     <Box
+
                       // @ts-expect-error TS(2322): Type '{ children: Element[]; style: { flexDirectio... Remove this comment to see the full error message
                       style={{
                         flexDirection: "row",
@@ -584,6 +614,7 @@ export default function FarmerScreen({
 
             {farmlands?.map((farmland) => (
               <FarmlandData
+
                 // @ts-expect-error TS(2339): Property '_id' does not exist on type 'Object<unkn... Remove this comment to see the full error message
                 key={farmland?._id}
                 farmland={farmland}
@@ -591,6 +622,7 @@ export default function FarmerScreen({
                 refresh={refresh}
                 successLottieVisible={successLottieVisible}
                 setSuccessLottieVisible={setSuccessLottieVisible}
+
                 // @ts-expect-error TS(2339): Property 'image' does not exist on type 'Object<un... Remove this comment to see the full error message
                 ownerImage={farmer?.image}
                 scale={scale}

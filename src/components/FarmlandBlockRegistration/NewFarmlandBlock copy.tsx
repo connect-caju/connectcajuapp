@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react"
+
 // @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { View, Text, StyleSheet, ScrollView } from "react-native"
 import {
@@ -38,8 +39,10 @@ import { plantingTypes } from "../../consts/plantingTypes"
 import cloneList from "../../consts/clones"
 import { CustomInput } from "../Inputs/CustomInput"
 
+
 // @ts-expect-error TS(7016): Could not find a declaration file for module 'uuid... Remove this comment to see the full error message
 import { v4 as uuidv4 } from "uuid"
+
 
 // @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { TouchableOpacity } from "react-native"
@@ -135,16 +138,22 @@ export default function NewFarmlandBlock({
 
     const block = {
       _id: uuidv4(),
+
       // @ts-expect-error TS(2339): Property 'plantingYear' does not exist on type 'fa... Remove this comment to see the full error message
       plantingYear: retrievedBlockData?.plantingYear,
+
       // @ts-expect-error TS(2339): Property 'density' does not exist on type 'false |... Remove this comment to see the full error message
       density: retrievedBlockData?.density,
+
       // @ts-expect-error TS(2339): Property 'trees' does not exist on type 'false | {... Remove this comment to see the full error message
       trees: retrievedBlockData?.trees,
+
       // @ts-expect-error TS(2339): Property 'usedArea' does not exist on type 'false ... Remove this comment to see the full error message
       usedArea: retrievedBlockData?.usedArea,
+
       // @ts-expect-error TS(2339): Property 'sameTypeTrees' does not exist on type 'f... Remove this comment to see the full error message
       sameTypeTrees: retrievedBlockData?.sameTypeTrees,
+
       // @ts-expect-error TS(2339): Property 'plantTypes' does not exist on type 'fals... Remove this comment to see the full error message
       plantTypes: retrievedBlockData?.plantTypes,
       userName: customUserData?.name,
@@ -202,6 +211,7 @@ export default function NewFarmlandBlock({
         ?.map((block: any) => block?.usedArea)
         ?.reduce((acc: any, el: any) => acc + el, 0)
       const remainingArea = totalArea - blocksAreas
+
       // @ts-expect-error TS(2345): Argument of type 'number' is not assignable to par... Remove this comment to see the full error message
       setRemainingArea(remainingArea)
     }
@@ -211,16 +221,19 @@ export default function NewFarmlandBlock({
     let selectedClones = []
     let mergedSameTypeTrees = []
     const filteredPlantTypes = plantTypes.filter(
+
       // @ts-expect-error TS(2339): Property 'includes' does not exist on type 'never'... Remove this comment to see the full error message
       (plantType) => !plantType.includes("enxer"),
     )
     if (
+
       // @ts-expect-error TS(2339): Property 'includes' does not exist on type 'never'... Remove this comment to see the full error message
       plantTypes.filter((plantType) => plantType.includes("enxer")).length > 0
     ) {
       selectedClones = clones
         ?.filter((clone) => clone !== "Outro")
         ?.map((clone) => `Clone: ${clone}`)
+
       // @ts-expect-error TS(2769): No overload matches this call.
       mergedSameTypeTrees = filteredPlantTypes.concat(selectedClones)
     } else {
@@ -233,6 +246,7 @@ export default function NewFarmlandBlock({
       treeType,
       trees: "",
     }))
+
     // @ts-expect-error TS(2345): Argument of type '{ treeType: never; trees: string... Remove this comment to see the full error message
     setSameTypeTreesList(normalizedSameTypeTrees)
   }, [clones, plantTypes])
@@ -252,6 +266,7 @@ export default function NewFarmlandBlock({
         setIsNewBlockVisible(false)
       }}
     >
+      // @ts-expect-error TS(2532): Object is possibly 'undefined'.
       // @ts-expect-error TS(2532): Object is possibly 'undefined'.
       {remainingArea <= 0.1 && (
         <View
@@ -406,6 +421,7 @@ export default function NewFarmlandBlock({
               }}
             >
               // @ts-expect-error TS(2339): Property 'toFixed' does not exist on type 'never'.
+              // @ts-expect-error TS(2339): Property 'toFixed' does not exist on type 'never'.
               ({remainingArea?.toFixed(1)} hectares disponíveis)
             </Text>
           </View>
@@ -453,6 +469,7 @@ export default function NewFarmlandBlock({
         </View>
       )}
 
+      // @ts-expect-error TS(2532): Object is possibly 'undefined'.
       // @ts-expect-error TS(2532): Object is possibly 'undefined'.
       {remainingArea > 0.1 && (
         <>
@@ -582,6 +599,7 @@ export default function NewFarmlandBlock({
               <Box
                 w="55%"
                 px="1"
+
                 // @ts-expect-error TS(2322): Type '{ children: Element[]; w: "55%"; px: "1"; st... Remove this comment to see the full error message
                 style={{
                   position: "absolute",
@@ -629,6 +647,7 @@ export default function NewFarmlandBlock({
                   }}
                 >
                   // @ts-expect-error TS(2339): Property 'toFixed' does not exist on type 'never'.
+                  // @ts-expect-error TS(2339): Property 'toFixed' does not exist on type 'never'.
                   {remainingArea?.toFixed(1)} hectares disponíveis.
                 </Text>
               </Box>
@@ -667,6 +686,7 @@ export default function NewFarmlandBlock({
                     >
                       <FormControl.Label>Ano de plantio</FormControl.Label>
                       <SelectList
+
                         // @ts-expect-error TS(2769): No overload matches this call.
                         data={getFullYears2}
                         setSelected={(newYear: any) => {
@@ -749,6 +769,7 @@ export default function NewFarmlandBlock({
                           _text={{ fontSize: "xs" }}
                         >
                           // @ts-expect-error TS(2339): Property 'plantingYear' does not exist on type '{}... Remove this comment to see the full error message
+                          // @ts-expect-error TS(2339): Property 'plantingYear' does not exist on type '{}... Remove this comment to see the full error message
                           {errors?.plantingYear}
                         </FormControl.ErrorMessage>
                       ) : (
@@ -759,6 +780,8 @@ export default function NewFarmlandBlock({
                   <Box w="10%"></Box>
                 </Stack>
 
+                // @ts-expect-error TS(2304): Cannot find name 'children'.
+                // @ts-expect-error TS(2322): Type '{ children: any[]; style: {}; }' is not assi... Remove this comment to see the full error message
                 // @ts-expect-error TS(2322): Type '{ children: any[]; style: {}; }' is not assi... Remove this comment to see the full error message
                 <Box style={{}}>
                   <Stack direction="row" w="100%" space={2}>
@@ -798,6 +821,7 @@ export default function NewFarmlandBlock({
 
                     <Box
                       w="48%"
+
                       // @ts-expect-error TS(2322): Type '{ children: Element; w: "48%"; style: { just... Remove this comment to see the full error message
                       style={{
                         justifyContent: "flex-end",
@@ -837,8 +861,10 @@ export default function NewFarmlandBlock({
                     </Box>
                   </Stack>
                   // @ts-expect-error TS(2339): Property 'blockTrees' does not exist on type '{}'.
+                  // @ts-expect-error TS(2339): Property 'blockTrees' does not exist on type '{}'.
                   {errors?.blockTrees && errors?.usedArea && (
                     <Box
+
                       // @ts-expect-error TS(2322): Type '{ children: Element[]; style: { backgroundCo... Remove this comment to see the full error message
                       style={{
                         backgroundColor: COLORS.danger,
@@ -858,6 +884,7 @@ export default function NewFarmlandBlock({
                           color={COLORS.ghostwhite}
                         />{" "}
                         // @ts-expect-error TS(2339): Property 'usedArea' does not exist on type '{}'.
+                        // @ts-expect-error TS(2339): Property 'usedArea' does not exist on type '{}'.
                         {errors?.usedArea}
                       </Text>
                       <Text
@@ -873,6 +900,7 @@ export default function NewFarmlandBlock({
                           size={20}
                           color={COLORS.ghostwhite}
                         />{" "}
+                        // @ts-expect-error TS(2339): Property 'blockTrees' does not exist on type '{}'.
                         // @ts-expect-error TS(2339): Property 'blockTrees' does not exist on type '{}'.
                         {errors?.blockTrees}
                       </Text>
@@ -890,11 +918,13 @@ export default function NewFarmlandBlock({
                           color={COLORS.ghostwhite}
                         />{" "}
                         // @ts-expect-error TS(2339): Property 'treeDensity' does not exist on type '{}'... Remove this comment to see the full error message
+                        // @ts-expect-error TS(2339): Property 'treeDensity' does not exist on type '{}'... Remove this comment to see the full error message
                         {errors?.treeDensity}
                       </Text>
                     </Box>
                   )}
 
+                  // @ts-expect-error TS(2339): Property 'blockTrees' does not exist on type '{}'.
                   // @ts-expect-error TS(2339): Property 'blockTrees' does not exist on type '{}'.
                   {errors?.blockTrees && !errors?.usedArea && (
                     <Box
@@ -914,12 +944,14 @@ export default function NewFarmlandBlock({
                           color={COLORS.red}
                         />{" "}
                         // @ts-expect-error TS(2339): Property 'blockTrees' does not exist on type '{}'.
+                        // @ts-expect-error TS(2339): Property 'blockTrees' does not exist on type '{}'.
                         {errors?.blockTrees}
                       </Text>
                       {/* <Text style={{ fontSize: 14, color: COLORS.ghostwhite, padding: 6, }}> <Icon name="error-outline" size={20} color={COLORS.ghostwhite} /> {errors?.treeDensity}</Text>         */}
                     </Box>
                   )}
 
+                  // @ts-expect-error TS(2339): Property 'blockTrees' does not exist on type '{}'.
                   // @ts-expect-error TS(2339): Property 'blockTrees' does not exist on type '{}'.
                   {!errors?.blockTrees && errors?.usedArea && (
                     <Box
@@ -938,6 +970,7 @@ export default function NewFarmlandBlock({
                           color={COLORS.red}
                         />{" "}
                         // @ts-expect-error TS(2339): Property 'usedArea' does not exist on type '{}'.
+                        // @ts-expect-error TS(2339): Property 'usedArea' does not exist on type '{}'.
                         {errors?.usedArea}
                       </Text>
                       {/* <Text style={{ fontSize: 14, color: COLORS.ghostwhite, padding: 6, }}> <Icon name="error-outline" size={20} color={COLORS.ghostwhite} /> {errors?.blockTrees}</Text>        */}
@@ -948,8 +981,10 @@ export default function NewFarmlandBlock({
 
                 <Box
                   w="100%"
+
                   // @ts-expect-error TS(2322): Type '{ children: Element; w: "100%"; style: { mar... Remove this comment to see the full error message
                   style={{
+
                     // @ts-expect-error TS(2339): Property 'usedArea' does not exist on type '{}'.
                     marginTop: errors?.usedArea && errors?.blockTrees ? 0 : 0,
                   }}
@@ -1003,6 +1038,7 @@ export default function NewFarmlandBlock({
                               iconStyle={{ marginRight: 1 }}
                             />
                           }
+
                           // @ts-expect-error TS(2322): Type '{ center: true; fontFamily: string; containe... Remove this comment to see the full error message
                           onPress={() => {
                             setIsDensityModeRegular(true)
@@ -1045,6 +1081,7 @@ export default function NewFarmlandBlock({
                               iconStyle={{ marginRight: 1 }}
                             />
                           }
+
                           // @ts-expect-error TS(2322): Type '{ center: true; fontFamily: string; containe... Remove this comment to see the full error message
                           onPress={() => {
                             setIsDensityModeIrregular(true)
@@ -1066,6 +1103,7 @@ export default function NewFarmlandBlock({
                         }
                         _text={{ fontSize: "xs" }}
                       >
+                        // @ts-expect-error TS(2339): Property 'densityMode' does not exist on type '{}'... Remove this comment to see the full error message
                         // @ts-expect-error TS(2339): Property 'densityMode' does not exist on type '{}'... Remove this comment to see the full error message
                         {errors?.densityMode}
                       </FormControl.ErrorMessage>
@@ -1114,6 +1152,7 @@ export default function NewFarmlandBlock({
                             _text={{ fontSize: "xs" }}
                           >
                             // @ts-expect-error TS(2339): Property 'density' does not exist on type '{}'.
+                            // @ts-expect-error TS(2339): Property 'density' does not exist on type '{}'.
                             {errors?.density}
                           </FormControl.ErrorMessage>
                         ) : (
@@ -1123,6 +1162,7 @@ export default function NewFarmlandBlock({
                     </Box>
                     <Box
                       w="10%"
+
                       // @ts-expect-error TS(2322): Type '{ children: Element; w: "10%"; style: { just... Remove this comment to see the full error message
                       style={{
                         justifyContent: "center",
@@ -1174,6 +1214,7 @@ export default function NewFarmlandBlock({
                             }
                             _text={{ fontSize: "xs" }}
                           >
+                            // @ts-expect-error TS(2339): Property 'density' does not exist on type '{}'.
                             // @ts-expect-error TS(2339): Property 'density' does not exist on type '{}'.
                             {errors?.density}
                           </FormControl.ErrorMessage>
@@ -1242,6 +1283,7 @@ export default function NewFarmlandBlock({
                       _text={{ fontSize: "xs" }}
                     >
                       // @ts-expect-error TS(2339): Property 'plantTypes' does not exist on type '{}'.
+                      // @ts-expect-error TS(2339): Property 'plantTypes' does not exist on type '{}'.
                       {errors?.plantTypes}
                     </FormControl.ErrorMessage>
                   ) : (
@@ -1249,6 +1291,7 @@ export default function NewFarmlandBlock({
                   )}
                 </FormControl>
 
+                // @ts-expect-error TS(2339): Property 'includes' does not exist on type 'never'... Remove this comment to see the full error message
                 // @ts-expect-error TS(2339): Property 'includes' does not exist on type 'never'... Remove this comment to see the full error message
                 {plantTypes?.some((el) => el?.includes("enxert")) && (
                   <>
@@ -1299,6 +1342,7 @@ export default function NewFarmlandBlock({
                           _text={{ fontSize: "xs" }}
                         >
                           // @ts-expect-error TS(2339): Property 'clones' does not exist on type '{}'.
+                          // @ts-expect-error TS(2339): Property 'clones' does not exist on type '{}'.
                           {errors?.clones}
                         </FormControl.ErrorMessage>
                       ) : (
@@ -1310,6 +1354,7 @@ export default function NewFarmlandBlock({
                       <Box
                         w="100%"
                         alignItems={"center"}
+
                         // @ts-expect-error TS(2322): Type '{ children: Element[]; w: "100%"; alignItems... Remove this comment to see the full error message
                         style={{
                           flexDirection: "row",
@@ -1348,6 +1393,7 @@ export default function NewFarmlandBlock({
                                 _text={{ fontSize: "xs" }}
                               >
                                 // @ts-expect-error TS(2339): Property 'addedClone' does not exist on type '{}'.
+                                // @ts-expect-error TS(2339): Property 'addedClone' does not exist on type '{}'.
                                 {errors?.addedClone}
                               </FormControl.ErrorMessage>
                             ) : (
@@ -1357,6 +1403,7 @@ export default function NewFarmlandBlock({
                         </Box>
                         <Box
                           // w="15%"
+
                           // @ts-expect-error TS(2322): Type '{ children: Element; style: { justifyContent... Remove this comment to see the full error message
                           style={{
                             justifyContent: "center",
@@ -1383,6 +1430,7 @@ export default function NewFarmlandBlock({
                               if (addedClone) {
                                 // let updatedCloneList = [...allClones].unshift(addedClone)
                                 // setAllClones(updatedCloneList);
+
                                 // @ts-expect-error TS(2345): Argument of type '(prev: never[]) => string[]' is ... Remove this comment to see the full error message
                                 setClones((prev) => [...prev, addedClone])
 
@@ -1409,11 +1457,15 @@ export default function NewFarmlandBlock({
                 )}
 
                 {plantTypes.length > 0 && sameTypeTreesList.length > 0 && (
+
                   // @ts-expect-error TS(2322): Type '{ children: any[]; w: "100%"; my: "5"; style... Remove this comment to see the full error message
                   <Box w="100%" my="5" style={{}}>
+                    // @ts-expect-error TS(2609): JSX spread child must be an array type.
+                    // @ts-expect-error TS(2339): Property 'sameTypeTrees' does not exist on type '{... Remove this comment to see the full error message
                     // @ts-expect-error TS(2339): Property 'sameTypeTrees' does not exist on type '{... Remove this comment to see the full error message
                     {errors?.sameTypeTrees && (
                       <Box
+
                         // @ts-expect-error TS(2322): Type '{ children: Element[]; style: { flexDirectio... Remove this comment to see the full error message
                         style={{
                           flexDirection: "row",
@@ -1430,6 +1482,8 @@ export default function NewFarmlandBlock({
                             marginLeft: 5,
                           }}
                         >
+                          // @ts-expect-error TS(2609): JSX spread child must be an array type.
+                          // @ts-expect-error TS(2339): Property 'sameTypeTrees' does not exist on type '{... Remove this comment to see the full error message
                           // @ts-expect-error TS(2339): Property 'sameTypeTrees' does not exist on type '{... Remove this comment to see the full error message
                           {errors?.sameTypeTrees}
                         </Text>
@@ -1438,6 +1492,7 @@ export default function NewFarmlandBlock({
                     <Box
                       w="100%"
                       mb="2"
+
                       // @ts-expect-error TS(2322): Type '{ children: Element; w: "100%"; mb: "2"; sty... Remove this comment to see the full error message
                       style={
                         {
@@ -1481,6 +1536,7 @@ export default function NewFarmlandBlock({
                         key={index}
                         // px="5"
                         mb="1"
+
                         // @ts-expect-error TS(2322): Type '{ children: Element; w: "100%"; key: number;... Remove this comment to see the full error message
                         style={
                           {
@@ -1497,6 +1553,7 @@ export default function NewFarmlandBlock({
                         >
                           <Box
                             w="65%"
+
                             // @ts-expect-error TS(2322): Type '{ children: Element; w: "65%"; style: { just... Remove this comment to see the full error message
                             style={{
                               justifyContent: "center",
@@ -1515,6 +1572,7 @@ export default function NewFarmlandBlock({
                                 size={10}
                               />{" "}
                               // @ts-expect-error TS(2339): Property 'treeType' does not exist on type 'never'... Remove this comment to see the full error message
+                              // @ts-expect-error TS(2339): Property 'treeType' does not exist on type 'never'... Remove this comment to see the full error message
                               {sameTypeTree?.treeType}
                             </Text>
                           </Box>
@@ -1524,6 +1582,7 @@ export default function NewFarmlandBlock({
                               textAlign="center"
                               keyboardType="numeric"
                               placeholder="Cajueiros"
+
                               // @ts-expect-error TS(2339): Property 'trees' does not exist on type 'never'.
                               value={sameTypeTree?.trees}
                               onChangeText={(newTrees: any) => {
@@ -1534,11 +1593,14 @@ export default function NewFarmlandBlock({
                                 setSameTypeTreesList(
                                   sameTypeTreesList.map((object) => {
                                     if (
+
                                       // @ts-expect-error TS(2339): Property 'treeType' does not exist on type 'never'... Remove this comment to see the full error message
                                       object?.treeType ===
+
                                       // @ts-expect-error TS(2339): Property 'treeType' does not exist on type 'never'... Remove this comment to see the full error message
                                       sameTypeTree?.treeType
                                     ) {
+
                                       // @ts-expect-error TS(2339): Property 'trees' does not exist on type 'never'.
                                       object.trees = newTrees
                                     }
@@ -1569,6 +1631,7 @@ export default function NewFarmlandBlock({
                 borderRadius: 10,
               }}
               type="outline"
+
               // @ts-expect-error TS(2322): Type '{ title: string; titleStyle: { color: string... Remove this comment to see the full error message
               onPress={() => {
                 setAddBlockIsOn(true)

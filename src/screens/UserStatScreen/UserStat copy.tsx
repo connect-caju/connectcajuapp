@@ -112,8 +112,9 @@ export default function UserStat({
   }
   if (farmersList.length > 0) {
     farmersList = farmersList?.sort(
-      // @ts-expect-error TS(7006): Parameter 'a' implicitly has an 'any' type.
-      (a, b) => new Date(b?.createdAt) - new Date(a?.createdAt),
+
+      // @ts-expect-error TS(2362): The left-hand side of an arithmetic operation must... Remove this comment to see the full error message
+      (a: any, b: any) => new Date(b?.createdAt) - new Date(a?.createdAt),
     );
   }
 
@@ -189,6 +190,7 @@ export default function UserStat({
   ]);
 
   useEffect(() => {
+
     // @ts-expect-error TS(2345): Argument of type 'Object<unknown, never>[]' is not... Remove this comment to see the full error message
     setFarmlandList(farmlands.map((f) => f));
     setLoadingActivityIndicator(true);
@@ -205,6 +207,7 @@ export default function UserStat({
   const handleEndReached = () => {
     if (!isEndReached && !isLoading) {
       setIsLoading(true);
+
       // @ts-expect-error TS(2304): Cannot find name 'setTimeout'.
       setTimeout(() => {
         setIsLoading(false);
@@ -301,6 +304,7 @@ export default function UserStat({
         <Box
           w="100%"
           alignItems={"center"}
+
           // @ts-expect-error TS(2322): Type '{ children: Element; w: "100%"; alignItems: ... Remove this comment to see the full error message
           style={{
             backgroundColor: COLORS.fourth,
@@ -311,6 +315,7 @@ export default function UserStat({
           <Stack w="100%" direction="row" space={1} pt="1" mb="2.5">
             <Box
               w="50%"
+
               // @ts-expect-error TS(2322): Type '{ children: Element; w: "50%"; style: { alig... Remove this comment to see the full error message
               style={{
                 alignItems: "center",
@@ -318,6 +323,7 @@ export default function UserStat({
             >
               <Box
                 w="100%"
+
                 // @ts-expect-error TS(2322): Type '{ children: Element[]; w: "100%"; style: { a... Remove this comment to see the full error message
                 style={{
                   alignItems: "center",
@@ -345,6 +351,7 @@ export default function UserStat({
                 {/* <Stack w="100%" direction="row"> */}
                   <Box
                     w="50%"
+
                     // @ts-expect-error TS(2322): Type '{ children: Element; w: "50%"; style: { posi... Remove this comment to see the full error message
                     style={{
                       position: "relative",
@@ -430,6 +437,7 @@ export default function UserStat({
 
             <Box
               w="50%"
+
               // @ts-expect-error TS(2322): Type '{ children: Element; w: "50%"; style: { alig... Remove this comment to see the full error message
               style={{
                 alignItems: "center",
@@ -437,6 +445,7 @@ export default function UserStat({
             >
               <Box
                 w="100%"
+
                 // @ts-expect-error TS(2322): Type '{ children: Element[]; w: "100%"; style: { a... Remove this comment to see the full error message
                 style={{
                   alignItems: "center",
@@ -463,6 +472,7 @@ export default function UserStat({
                 {/* <Stack w="100%" direction="row"> */}
                   <Box
                     w="50%"
+
                     // @ts-expect-error TS(2322): Type '{ children: Element; w: "50%"; style: { just... Remove this comment to see the full error message
                     style={{
                       justifyContent: "center",
@@ -559,6 +569,7 @@ export default function UserStat({
         <Box
           alignItems="stretch"
           w="100%"
+
           // @ts-expect-error TS(2322): Type '{ children: Element; alignItems: "stretch"; ... Remove this comment to see the full error message
           style={{
             marginBottom: 40,
@@ -567,6 +578,7 @@ export default function UserStat({
         >
           {loadingActivitiyIndicator ? (
             <Box
+
               // @ts-expect-error TS(2322): Type '{ children: Element; style: { alignItems: st... Remove this comment to see the full error message
               style={{
                 alignItems: "center",
@@ -589,6 +601,7 @@ export default function UserStat({
                   <FlatList
                     StickyHeaderComponent={() => (
                       <Box
+
                         // @ts-expect-error TS(2322): Type '{ children: never[]; style: { height: number... Remove this comment to see the full error message
                         style={{
                           height: 100,
@@ -604,6 +617,7 @@ export default function UserStat({
                     keyExtractor={keyExtractor}
                     onEndReached={handleEndReached}
                     onEndReachedThreshold={0.1}
+
                     // @ts-expect-error TS(7030): Not all code paths return a value.
                     renderItem={({
                       item
@@ -626,6 +640,7 @@ export default function UserStat({
                       if (!isEndReached) {
                         return (
                           <Box
+
                             // @ts-expect-error TS(2322): Type '{ children: Element | null; style: { height:... Remove this comment to see the full error message
                             style={{
                               height: hp("20%"),
@@ -645,6 +660,7 @@ export default function UserStat({
                 <FlatList
                   StickyHeaderComponent={() => (
                     <Box
+
                       // @ts-expect-error TS(2322): Type '{ children: never[]; style: { height: number... Remove this comment to see the full error message
                       style={{
                         height: 100,
@@ -658,6 +674,7 @@ export default function UserStat({
                   stickyHeaderHiddenOnScroll={true}
                   data={filteredResources(farmersList, "pendingFarmers")}
                   keyExtractor={keyExtractor}
+
                   // @ts-expect-error TS(7030): Not all code paths return a value.
                   renderItem={({
                     item
@@ -678,6 +695,7 @@ export default function UserStat({
                   }}
                   ListFooterComponent={() => (
                     <Box
+
                       // @ts-expect-error TS(2322): Type '{ style: { height: number; backgroundColor: ... Remove this comment to see the full error message
                       style={{
                         height: 100,
@@ -692,6 +710,7 @@ export default function UserStat({
                 <FlatList
                   StickyHeaderComponent={() => (
                     <Box
+
                       // @ts-expect-error TS(2322): Type '{ children: never[]; style: { height: number... Remove this comment to see the full error message
                       style={{
                         height: 100,
@@ -705,6 +724,7 @@ export default function UserStat({
                   stickyHeaderHiddenOnScroll={true}
                   data={filteredResources(farmersList, "invalidatedFarmers")}
                   keyExtractor={keyExtractor}
+
                   // @ts-expect-error TS(7030): Not all code paths return a value.
                   renderItem={({
                     item
@@ -725,6 +745,7 @@ export default function UserStat({
                   }}
                   ListFooterComponent={() => (
                     <Box
+
                       // @ts-expect-error TS(2322): Type '{ style: { height: number; backgroundColor: ... Remove this comment to see the full error message
                       style={{
                         height: 100,
@@ -739,6 +760,7 @@ export default function UserStat({
                 <FlatList
                   StickyHeaderComponent={() => (
                     <Box
+
                       // @ts-expect-error TS(2322): Type '{ children: never[]; style: { height: number... Remove this comment to see the full error message
                       style={{
                         height: 100,
@@ -759,6 +781,7 @@ export default function UserStat({
                   }}
                   ListFooterComponent={() => (
                     <Box
+
                       // @ts-expect-error TS(2322): Type '{ style: { height: number; backgroundColor: ... Remove this comment to see the full error message
                       style={{
                         height: 100,
@@ -773,6 +796,7 @@ export default function UserStat({
                 <FlatList
                   StickyHeaderComponent={() => (
                     <Box
+
                       // @ts-expect-error TS(2322): Type '{ children: never[]; style: { height: number... Remove this comment to see the full error message
                       style={{
                         height: 100,
@@ -793,6 +817,7 @@ export default function UserStat({
                   }}
                   ListFooterComponent={() => (
                     <Box
+
                       // @ts-expect-error TS(2322): Type '{ style: { height: number; backgroundColor: ... Remove this comment to see the full error message
                       style={{
                         height: 100,
@@ -807,6 +832,7 @@ export default function UserStat({
                 filteredResources(farmersList, "pendingFarmers").length ===
                 0 && (
                   <Box
+
                     // @ts-expect-error TS(2322): Type '{ children: Element; style: { justifyContent... Remove this comment to see the full error message
                     style={{
                       justifyContent: "center",
@@ -834,6 +860,7 @@ export default function UserStat({
                 filteredResources(farmersList, "invalidatedFarmers").length ===
                 0 && (
                   <Box
+
                     // @ts-expect-error TS(2322): Type '{ children: Element; style: { justifyContent... Remove this comment to see the full error message
                     style={{
                       justifyContent: "center",
@@ -861,6 +888,7 @@ export default function UserStat({
                 filteredResources(farmlandList, "invalidatedFarmlands")
                   .length === 0 && (
                   <Box
+
                     // @ts-expect-error TS(2322): Type '{ children: Element; style: { justifyContent... Remove this comment to see the full error message
                     style={{
                       justifyContent: "center",
@@ -899,6 +927,7 @@ export default function UserStat({
                 filteredResources(farmlandList, "pendingFarmlands").length ===
                 0 && (
                   <Box
+
                     // @ts-expect-error TS(2322): Type '{ children: Element; style: { justifyContent... Remove this comment to see the full error message
                     style={{
                       justifyContent: "center",

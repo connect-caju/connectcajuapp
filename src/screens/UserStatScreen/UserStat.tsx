@@ -119,6 +119,7 @@ export default function UserStat({
   const handleEndReached = () => {
     if (!isEndReached && !isLoading) {
       setIsLoading(true);
+
       // @ts-expect-error TS(2304): Cannot find name 'setTimeout'.
       setTimeout(() => {
         setIsLoading(false);

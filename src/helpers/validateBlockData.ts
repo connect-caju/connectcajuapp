@@ -13,6 +13,7 @@ const getThreshold = (trees: any, area: any, width: any, length: any) => {
   if (
     estimatedTrees - errorCoeffients.trees <= trees &&
     estimatedTrees + errorCoeffients.trees >= trees &&
+
     // @ts-expect-error TS(2362): The left-hand side of an arithmetic operation must... Remove this comment to see the full error message
     estimatedArea - errorCoeffients.area <= area &&
     estimatedArea + errorCoeffients.area >= area &&
@@ -23,16 +24,21 @@ const getThreshold = (trees: any, area: any, width: any, length: any) => {
   ) {
     return { status: true }
   }
+
   // @ts-expect-error TS(2584): Cannot find name 'console'. Do you need to change ... Remove this comment to see the full error message
   console.log("----------------------")
+
   // @ts-expect-error TS(2584): Cannot find name 'console'. Do you need to change ... Remove this comment to see the full error message
   console.log(
     `estimatedDensity: ${estimatedDensity}; length: ${length} & width: ${width}`,
   )
+
   // @ts-expect-error TS(2584): Cannot find name 'console'. Do you need to change ... Remove this comment to see the full error message
   console.log(`estimatedTrees: ${estimatedTrees}; trees: ${trees}`)
+
   // @ts-expect-error TS(2584): Cannot find name 'console'. Do you need to change ... Remove this comment to see the full error message
   console.log(`estimatedArea: ${estimatedArea}; area: ${area}`)
+
   // @ts-expect-error TS(2584): Cannot find name 'console'. Do you need to change ... Remove this comment to see the full error message
   console.log("----------------------")
 
@@ -125,6 +131,7 @@ const validateBlockData = (
 
   if (
     retrievedDensityMode === "Regular" &&
+
     // @ts-expect-error TS(2367): This condition will always return 'false' since th... Remove this comment to see the full error message
     (retrievedDensityLength === "" || retrievedDensityWidth === "")
   ) {

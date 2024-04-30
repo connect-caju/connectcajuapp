@@ -13,11 +13,14 @@ import {
   FormControl,
   Stack,
   Center,
+
   // @ts-expect-error TS(2305): Module '"native-base"' has no exported member 'Sep... Remove this comment to see the full error message
   Separator,
+
   // @ts-expect-error TS(2305): Module '"native-base"' has no exported member 'Thu... Remove this comment to see the full error message
   Thumbnail,
   List,
+
   // @ts-expect-error TS(2305): Module '"native-base"' has no exported member 'Lis... Remove this comment to see the full error message
   ListItem,
 } from "native-base"
@@ -29,6 +32,7 @@ import {
   AccordionList,
 // @ts-expect-error TS(7016): Could not find a declaration file for module 'acco... Remove this comment to see the full error message
 } from "accordion-collapse-react-native"
+
 // @ts-expect-error TS(7016): Could not find a declaration file for module 'uuid... Remove this comment to see the full error message
 import { v4 as uuidv4 } from "uuid"
 import {
@@ -49,6 +53,7 @@ import {
 
 import CustomDivider from "../../components/Divider/CustomDivider"
 import COLORS from "../../consts/colors"
+
 // @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { TouchableOpacity } from "react-native"
 
@@ -56,6 +61,7 @@ import EditInstitutionData from "../EditData/EditInstitutionData"
 
 import AwesomeAlert from "react-native-awesome-alerts"
 import { resourceValidation } from "../../consts/resourceValidation"
+
 // @ts-expect-error TS(2307): Cannot find module '../EditData/ConfirmDataCopy' o... Remove this comment to see the full error message
 import ConfirmData from "../EditData/ConfirmDataCopy"
 
@@ -199,10 +205,12 @@ const InstitutionData = ({
       )
     })
 
+
     // @ts-expect-error TS(2304): Cannot find name 'setInterval'.
     const interval = setInterval(() => {
       setAutoRefresh(!autoRefresh)
     }, 2000)
+
 
     // @ts-expect-error TS(2304): Cannot find name 'clearInterval'.
     clearInterval(interval)
@@ -355,6 +363,7 @@ const InstitutionData = ({
           }}
         >
           <Box
+
             // @ts-expect-error TS(2322): Type '{ children: Element[]; style: { justifyConte... Remove this comment to see the full error message
             style={{
               justifyContent: "center",
@@ -854,6 +863,7 @@ const InstitutionData = ({
                     }
                     style={{}}
                     onPress={() => {
+
                       // @ts-expect-error TS(2345): Argument of type 'string' is not assignable to par... Remove this comment to see the full error message
                       navigation.navigate("Geolocation", {
                         resourceName: "Institution",
@@ -935,6 +945,8 @@ const InstitutionData = ({
 
           <CustomDivider />
 
+          // @ts-expect-error TS(2304): Cannot find name 'children'.
+          // @ts-expect-error TS(2322): Type '{ children: (false | Element)[]; direction: ... Remove this comment to see the full error message
           // @ts-expect-error TS(2322): Type '{ children: (false | Element)[]; direction: ... Remove this comment to see the full error message
           <Stack direction="column" w="100%" style={{ paddingTop: 5 }}>
             <Box w="100%">
@@ -1032,12 +1044,15 @@ const InstitutionData = ({
   > */}
               {invalidationMotives?.length > 0 ? (
                 invalidationMotives?.length > 0 &&
+
                 // @ts-expect-error TS(2339): Property 'messages' does not exist on type 'Object... Remove this comment to see the full error message
                 invalidationMotives[0]?.messages?.length > 0 &&
+
                 // @ts-expect-error TS(2339): Property 'messages' does not exist on type 'Object... Remove this comment to see the full error message
                 invalidationMotives[0]?.messages?.map((motive: any, index: any) => (
                   <Box
                     key={index}
+
                     // @ts-expect-error TS(2322): Type '{ children: Element[]; key: any; style: { fl... Remove this comment to see the full error message
                     style={{
                       flexGrow: 1,
@@ -1081,6 +1096,7 @@ const InstitutionData = ({
               ) : (
                 <Box
                   // key={index}
+
                   // @ts-expect-error TS(2322): Type '{ children: Element[]; style: { flexGrow: nu... Remove this comment to see the full error message
                   style={{
                     flexGrow: 1,
@@ -1168,6 +1184,7 @@ const InstitutionData = ({
                           _text={{ fontSize: "xs" }}
                         >
                           // @ts-expect-error TS(2339): Property 'invalidationMessage' does not exist on t... Remove this comment to see the full error message
+                          // @ts-expect-error TS(2339): Property 'invalidationMessage' does not exist on t... Remove this comment to see the full error message
                           {errors?.invalidationMessage}
                         </FormControl.ErrorMessage>
                       ) : (
@@ -1176,6 +1193,7 @@ const InstitutionData = ({
                     </FormControl>
                   </Box>
                   <Box
+
                     // @ts-expect-error TS(2322): Type '{ children: "" | Element; style: { width: st... Remove this comment to see the full error message
                     style={{
                       width: "15%",
@@ -1185,6 +1203,7 @@ const InstitutionData = ({
                   >
                     {message && (
                       <Box
+
                         // @ts-expect-error TS(2322): Type '{ children: Element; style: { position: stri... Remove this comment to see the full error message
                         style={{
                           position: "absolute",
@@ -1204,6 +1223,7 @@ const InstitutionData = ({
                             try {
                               addMessage(realm, farmer?._id, message)
                             } catch (error) {
+
                               // @ts-expect-error TS(2584): Cannot find name 'console'. Do you need to change ... Remove this comment to see the full error message
                               console.log(
                                 "Failed to add invalidation message",
@@ -1236,12 +1256,14 @@ const InstitutionData = ({
               <Stack
                 direction="row"
                 w="100%"
+
                 // @ts-expect-error TS(2322): Type '{ children: Element[]; direction: "row"; w: ... Remove this comment to see the full error message
                 style={{ paddingVertical: 5 }}
                 space={3}
               >
                 <Box
                   w="50%"
+
                   // @ts-expect-error TS(2322): Type '{ children: Element; w: "50%"; style: { alig... Remove this comment to see the full error message
                   style={{
                     alignItems: "center",
@@ -1292,6 +1314,7 @@ const InstitutionData = ({
                 </Box>
                 <Box
                   w="50%"
+
                   // @ts-expect-error TS(2322): Type '{ children: Element; w: "50%"; style: { alig... Remove this comment to see the full error message
                   style={{
                     alignItems: "center",

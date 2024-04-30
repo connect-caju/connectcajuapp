@@ -3,6 +3,7 @@
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable prettier/prettier */
 /* eslint-disable prettier/prettier */
+
 // @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { Text, SafeAreaView, ScrollView, TextInput, View } from "react-native";
 import React, { useState, useEffect } from "react";
@@ -27,6 +28,7 @@ import CustomDivider from "../../components/Divider/CustomDivider";
 import styles from "./styles";
 
 import {
+
   // @ts-expect-error TS(2305): Module '"../../helpers/dates"' has no exported mem... Remove this comment to see the full error message
   fullYears,
   getFullYears,
@@ -134,6 +136,7 @@ export default function GroupFarmerForm({
                       iconStyle={{ marginRight: 1 }}
                     />
                   }
+
                   // @ts-expect-error TS(2322): Type '{ center: true; fontFamily: string; containe... Remove this comment to see the full error message
                   onPress={() => {
                     setIsGroupInactive(false);
@@ -178,6 +181,7 @@ export default function GroupFarmerForm({
                       iconStyle={{ marginRight: 1 }}
                     />
                   }
+
                   // @ts-expect-error TS(2322): Type '{ center: true; fontFamily: string; containe... Remove this comment to see the full error message
                   onPress={() => {
                     setIsGroupInactive(true);
@@ -209,6 +213,7 @@ export default function GroupFarmerForm({
               <FormControl.Label>Tipo de organiz.</FormControl.Label>
               <Select
                 selectedValue={groupType}
+
                 // @ts-expect-error TS(2322): Type '{ children: Element[]; selectedValue: any; a... Remove this comment to see the full error message
                 accessibilityLabel="Grupo"
                 placeholder="Tipo de grupo "
@@ -780,6 +785,7 @@ export default function GroupFarmerForm({
               <FormControl.Label>Posto Adm.</FormControl.Label>
               <Select
                 selectedValue={groupAdminPost}
+
                 // @ts-expect-error TS(2322): Type '{ children: any; selectedValue: any; accessi... Remove this comment to see the full error message
                 accessibilityLabel="posto administrativo"
                 placeholder="Escolha posto administrativo"
@@ -839,7 +845,8 @@ export default function GroupFarmerForm({
               <FormControl.Label>Localidade</FormControl.Label>
               <Select
                 selectedValue={groupVillage}
-                // @ts-expect-error TS(2322): Type '{ children: any; selectedValue: any; accessi... Remove this comment to see the full error message
+
+                // @ts-expect-error TS(2322): Type '{ children: any[]; selectedValue: any; acces... Remove this comment to see the full error message
                 accessibilityLabel="Escolha uma localidade"
                 placeholder="Escolha uma localidade"
                 minHeight={55}
@@ -867,6 +874,7 @@ export default function GroupFarmerForm({
                 mt={1}
                 onValueChange={(newVillage) => setGroupVillage(newVillage)}
               >
+                // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
                 // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
                 {villages[groupAdminPost]?.map((village: any, index: any) => (
                   <Select.Item key={index} label={village} value={village} />

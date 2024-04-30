@@ -16,11 +16,14 @@ import {
   FormControl,
   Stack,
   Center,
+
   // @ts-expect-error TS(2305): Module '"native-base"' has no exported member 'Sep... Remove this comment to see the full error message
   Separator,
+
   // @ts-expect-error TS(2305): Module '"native-base"' has no exported member 'Thu... Remove this comment to see the full error message
   Thumbnail,
   List,
+
   // @ts-expect-error TS(2305): Module '"native-base"' has no exported member 'Lis... Remove this comment to see the full error message
   ListItem,
 } from "native-base"
@@ -32,6 +35,7 @@ import {
   AccordionList,
 // @ts-expect-error TS(7016): Could not find a declaration file for module 'acco... Remove this comment to see the full error message
 } from "accordion-collapse-react-native"
+
 // @ts-expect-error TS(7016): Could not find a declaration file for module 'uuid... Remove this comment to see the full error message
 import { v4 as uuidv4 } from "uuid"
 import {
@@ -220,10 +224,12 @@ const GroupData = ({
   )
 
   useEffect(() => {
+
     // @ts-expect-error TS(2304): Cannot find name 'setInterval'.
     const interval = setInterval(() => {
       setAutoRefresh(!autoRefresh)
     }, 1000)
+
 
     // @ts-expect-error TS(2304): Cannot find name 'clearInterval'.
     clearInterval(interval)
@@ -240,10 +246,12 @@ const GroupData = ({
       )
     })
 
+
     // @ts-expect-error TS(2304): Cannot find name 'setInterval'.
     const interval = setInterval(() => {
       setAutoRefresh(!autoRefresh)
     }, 2000)
+
 
     // @ts-expect-error TS(2304): Cannot find name 'clearInterval'.
     clearInterval(interval)
@@ -402,6 +410,7 @@ const GroupData = ({
           }}
         >
           <Box
+
             // @ts-expect-error TS(2322): Type '{ children: Element[]; style: { justifyConte... Remove this comment to see the full error message
             style={{
               justifyContent: "center",
@@ -613,6 +622,7 @@ const GroupData = ({
                       tooltipStyle={{}}
                       content={
                         <Box
+
                           // @ts-expect-error TS(2322): Type '{ children: Element[]; style: { flex: number... Remove this comment to see the full error message
                           style={{
                             flex: 1,
@@ -625,6 +635,7 @@ const GroupData = ({
                           <Box>
                             <TouchableOpacity
                               onPress={() => {
+
                                 // @ts-expect-error TS(2345): Argument of type 'string' is not assignable to par... Remove this comment to see the full error message
                                 navigation.navigate("GroupRepresentative", {
                                   groupId: farmer?._id,
@@ -634,6 +645,7 @@ const GroupData = ({
                               }}
                             >
                               <Box
+
                                 // @ts-expect-error TS(2322): Type '{ children: Element[]; style: { flexDirectio... Remove this comment to see the full error message
                                 style={{
                                   flexDirection: "row",
@@ -682,6 +694,7 @@ const GroupData = ({
                               }}
                             >
                               <Box
+
                                 // @ts-expect-error TS(2322): Type '{ children: Element[]; style: { flexDirectio... Remove this comment to see the full error message
                                 style={{
                                   flexDirection: "row",
@@ -740,6 +753,7 @@ const GroupData = ({
                                 ? COLORS.red
                                 : COLORS.pantone
                             }
+
                             // @ts-expect-error TS(2322): Type '{ icon: IconDefinition; size: number; color:... Remove this comment to see the full error message
                             fade
                           />
@@ -933,6 +947,7 @@ const GroupData = ({
                       childContentSpacing={4}
                       content={
                         <Box
+
                           // @ts-expect-error TS(2322): Type '{ children: Element[]; style: { flexDirectio... Remove this comment to see the full error message
                           style={{
                             flexDirection: "column",
@@ -950,6 +965,7 @@ const GroupData = ({
                               }}
                             >
                               <Box
+
                                 // @ts-expect-error TS(2322): Type '{ children: Element[]; style: { flexDirectio... Remove this comment to see the full error message
                                 style={{
                                   flexDirection: "row",
@@ -984,6 +1000,7 @@ const GroupData = ({
                           <Box>
                             <TouchableOpacity
                               onPress={() => {
+
                                 // @ts-expect-error TS(2345): Argument of type 'string' is not assignable to par... Remove this comment to see the full error message
                                 navigation.navigate("GroupMembers", {
                                   groupId: farmer._id,
@@ -992,6 +1009,7 @@ const GroupData = ({
                               }}
                             >
                               <Box
+
                                 // @ts-expect-error TS(2322): Type '{ children: Element[]; style: { flexDirectio... Remove this comment to see the full error message
                                 style={{
                                   flexDirection: "row",
@@ -1043,6 +1061,7 @@ const GroupData = ({
                                 ? COLORS.red
                                 : COLORS.pantone
                             }
+
                             // @ts-expect-error TS(2322): Type '{ icon: IconDefinition; size: number; color:... Remove this comment to see the full error message
                             fade
                           />
@@ -1510,6 +1529,7 @@ const GroupData = ({
                     }
                     style={{}}
                     onPress={() => {
+
                       // @ts-expect-error TS(2345): Argument of type 'string' is not assignable to par... Remove this comment to see the full error message
                       navigation.navigate("Geolocation", {
                         resourceName: "Group",
@@ -1591,6 +1611,8 @@ const GroupData = ({
 
           <CustomDivider />
 
+          // @ts-expect-error TS(2304): Cannot find name 'children'.
+          // @ts-expect-error TS(2322): Type '{ children: (false | Element)[]; direction: ... Remove this comment to see the full error message
           // @ts-expect-error TS(2322): Type '{ children: (false | Element)[]; direction: ... Remove this comment to see the full error message
           <Stack direction="column" w="100%" style={{ paddingTop: 5 }}>
             <Box w="100%">
@@ -1680,12 +1702,15 @@ const GroupData = ({
 
               {invalidationMotives?.length > 0 ? (
                 invalidationMotives?.length > 0 &&
+
                 // @ts-expect-error TS(2339): Property 'messages' does not exist on type 'Object... Remove this comment to see the full error message
                 invalidationMotives[0]?.messages?.length > 0 &&
+
                 // @ts-expect-error TS(2339): Property 'messages' does not exist on type 'Object... Remove this comment to see the full error message
                 invalidationMotives[0]?.messages?.map((motive: any, index: any) => (
                   <Box
                     key={index}
+
                     // @ts-expect-error TS(2322): Type '{ children: Element[]; key: any; style: { fl... Remove this comment to see the full error message
                     style={{
                       flexGrow: 1,
@@ -1729,6 +1754,7 @@ const GroupData = ({
               ) : (
                 <Box
                   // key={index}
+
                   // @ts-expect-error TS(2322): Type '{ children: Element[]; style: { flexGrow: nu... Remove this comment to see the full error message
                   style={{
                     flexGrow: 1,
@@ -1816,6 +1842,7 @@ const GroupData = ({
                           _text={{ fontSize: "xs" }}
                         >
                           // @ts-expect-error TS(2339): Property 'invalidationMessage' does not exist on t... Remove this comment to see the full error message
+                          // @ts-expect-error TS(2339): Property 'invalidationMessage' does not exist on t... Remove this comment to see the full error message
                           {errors?.invalidationMessage}
                         </FormControl.ErrorMessage>
                       ) : (
@@ -1824,6 +1851,7 @@ const GroupData = ({
                     </FormControl>
                   </Box>
                   <Box
+
                     // @ts-expect-error TS(2322): Type '{ children: "" | Element; style: { width: st... Remove this comment to see the full error message
                     style={{
                       width: "15%",
@@ -1833,6 +1861,7 @@ const GroupData = ({
                   >
                     {message && (
                       <Box
+
                         // @ts-expect-error TS(2322): Type '{ children: Element; style: { position: stri... Remove this comment to see the full error message
                         style={{
                           position: "absolute",
@@ -1852,6 +1881,7 @@ const GroupData = ({
                             try {
                               addMessage(realm, farmer?._id, message)
                             } catch (error) {
+
                               // @ts-expect-error TS(2584): Cannot find name 'console'. Do you need to change ... Remove this comment to see the full error message
                               console.log(
                                 "Failed to add invalidation message",
@@ -1884,12 +1914,14 @@ const GroupData = ({
               <Stack
                 direction="row"
                 w="100%"
+
                 // @ts-expect-error TS(2322): Type '{ children: Element[]; direction: "row"; w: ... Remove this comment to see the full error message
                 style={{ paddingVertical: 5 }}
                 space={3}
               >
                 <Box
                   w="50%"
+
                   // @ts-expect-error TS(2322): Type '{ children: Element; w: "50%"; style: { alig... Remove this comment to see the full error message
                   style={{
                     alignItems: "center",
@@ -1940,6 +1972,7 @@ const GroupData = ({
                 </Box>
                 <Box
                   w="50%"
+
                   // @ts-expect-error TS(2322): Type '{ children: Element; w: "50%"; style: { alig... Remove this comment to see the full error message
                   style={{
                     alignItems: "center",

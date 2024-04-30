@@ -21,6 +21,7 @@ import GeoPin from "../../components/LottieComponents/GeoPin";
 import { realmContext } from "../../models/realmContext";
 import COLORS from "../../consts/colors";
 import { useFocusEffect } from "@react-navigation/native";
+
 // @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { InteractionManager } from "react-native";
 import CustomActivityIndicator from "../../components/ActivityIndicator/CustomActivityIndicator";
@@ -108,17 +109,21 @@ const GeolocationScreen = ({
         setPermissionGranted(true);
         // setConfirmGeoAlert(true);
         subscribeLocation();
+
         // @ts-expect-error TS(2584): Cannot find name 'console'. Do you need to change ... Remove this comment to see the full error message
         console.log("You can use the app");
       } else {
         setPermissionGranted(false);
         setRejectGeoAlert(true);
+
         // @ts-expect-error TS(2584): Cannot find name 'console'. Do you need to change ... Remove this comment to see the full error message
         console.log("Location Permission Denied");
       }
     } catch (err) {
+
       // @ts-expect-error TS(2584): Cannot find name 'console'. Do you need to change ... Remove this comment to see the full error message
       console.log("not granted:", granted);
+
       // @ts-expect-error TS(2584): Cannot find name 'console'. Do you need to change ... Remove this comment to see the full error message
       console.warn(err);
       setFailedGeoLocationRequest(true);
@@ -134,6 +139,7 @@ const GeolocationScreen = ({
   };
 
   const subscribeLocation = () => {
+
     // @ts-expect-error TS(2304): Cannot find name 'watchID'.
     watchID = Geolocation.watchPosition(
       (position) => {
@@ -150,6 +156,7 @@ const GeolocationScreen = ({
       },
       {
         enableHighAccuracy: true,
+
         // @ts-expect-error TS(2559): Type 'string' has no properties in common with typ... Remove this comment to see the full error message
         accuracy: "high",
         timeout: 15000,
@@ -191,6 +198,7 @@ const GeolocationScreen = ({
         },
         {
           enableHighAccuracy: true,
+
           // @ts-expect-error TS(2559): Type 'string' has no properties in common with typ... Remove this comment to see the full error message
           accuracy: "high",
           timeout: 15000,
@@ -240,6 +248,7 @@ const GeolocationScreen = ({
     // The SuccessLottie Overlay should show up for 2 seconds
     // And disappear by its own
     if (successLottieVisibile && !areCoordinatesConfirmed) {
+
       // @ts-expect-error TS(2304): Cannot find name 'setTimeout'.
       setTimeout(() => {
         navigateBack();
@@ -251,6 +260,7 @@ const GeolocationScreen = ({
   useEffect(() => {
     requestLocationPermission();
     return () => {
+
       // @ts-expect-error TS(2304): Cannot find name 'watchID'.
       Geolocation.clearWatch(watchID);
     };
@@ -378,6 +388,7 @@ const GeolocationScreen = ({
       )}
 
       <Box
+
         // @ts-expect-error TS(2322): Type '{ children: Element; style: { backgroundColo... Remove this comment to see the full error message
         style={{
           backgroundColor: COLORS.fourth,
@@ -421,6 +432,7 @@ const GeolocationScreen = ({
       </Box>
 
       <Center
+
         // @ts-expect-error TS(2322): Type '{ children: Element[]; style: { flex: number... Remove this comment to see the full error message
         style={{
           // minHeight: 300,

@@ -49,6 +49,7 @@ export default function FarmersStackScreen({
       <FarmersStack.Screen name="FarmerForm1" component={FarmerRegistration} />
       <FarmersStack.Screen
         name="FarmlandForm1"
+
         // @ts-expect-error TS(2322): Type '({ route, navigation }: any) => Element | un... Remove this comment to see the full error message
         component={FarmlandRegistration}
       />

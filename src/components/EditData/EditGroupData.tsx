@@ -101,6 +101,7 @@ const EditGroupData = ({
   // erase dados for affiliationyear, nuit, and licence
   // if legal status is not 'legalizado'
   useEffect(() => {
+
     // @ts-expect-error TS(2339): Property 'affiliated' does not exist on type 'stri... Remove this comment to see the full error message
     if (groupLegalStatus !== groupAffiliationYear.affiliated) {
       setGroupAffiliationYear("");
@@ -112,71 +113,97 @@ const EditGroupData = ({
 
   useEffect(() => {
     if (dataToBeUpdated === "groupType" && resourceName === "Group") {
+
       // @ts-expect-error TS(2576): Property 'name' does not exist on type 'Object<unk... Remove this comment to see the full error message
       setGroupName(farmer?.name);
+
       // @ts-expect-error TS(2339): Property 'type' does not exist on type 'Object<unk... Remove this comment to see the full error message
       setGroupType(farmer?.type);
+
       // @ts-expect-error TS(2339): Property 'assets' does not exist on type 'Object<u... Remove this comment to see the full error message
       setGroupGoals(farmer?.assets?.map((asset: any) => asset.subcategory));
       setOverlayTitle("Actualizar Tipo de Organização");
 
+
       // @ts-expect-error TS(2576): Property 'name' does not exist on type 'Object<unk... Remove this comment to see the full error message
       setOldGroupName(farmer?.name);
+
       // @ts-expect-error TS(2339): Property 'type' does not exist on type 'Object<unk... Remove this comment to see the full error message
       setOldGroupType(farmer?.type);
+
       // @ts-expect-error TS(2339): Property 'assets' does not exist on type 'Object<u... Remove this comment to see the full error message
       setOldGroupGoals(farmer?.assets?.map((asset: any) => asset.subcategory));
     }
 
     if (dataToBeUpdated === "groupMembers" && resourceName === "Group") {
+
       // @ts-expect-error TS(2339): Property 'operationalStatus' does not exist on typ... Remove this comment to see the full error message
       setIsGroupActive(farmer?.operationalStatus ? true : false);
+
       // @ts-expect-error TS(2339): Property 'operationalStatus' does not exist on typ... Remove this comment to see the full error message
       setIsGroupInactive(!farmer?.operationalStatus ? true : false);
       setOverlayTitle("Actualizar Efectividade.");
 
+
       // @ts-expect-error TS(2339): Property 'operationalStatus' does not exist on typ... Remove this comment to see the full error message
       setIsOldGroupActive(farmer?.operationalStatus ? true : false);
+
       // @ts-expect-error TS(2339): Property 'operationalStatus' does not exist on typ... Remove this comment to see the full error message
       setIsOldGroupInactive(!farmer?.operationalStatus ? true : false);
 
+
       // @ts-expect-error TS(2339): Property 'numberOfMembers' does not exist on type ... Remove this comment to see the full error message
       setGroupMembersNumber(farmer?.numberOfMembers.total);
+
       // @ts-expect-error TS(2339): Property 'numberOfMembers' does not exist on type ... Remove this comment to see the full error message
       setGroupWomenNumber(farmer?.numberOfMembers.women);
 
+
       // @ts-expect-error TS(2339): Property 'numberOfMembers' does not exist on type ... Remove this comment to see the full error message
       setOldGroupMembersNumber(farmer?.numberOfMembers.total);
+
       // @ts-expect-error TS(2339): Property 'numberOfMembers' does not exist on type ... Remove this comment to see the full error message
       setOldGroupWomenNumber(farmer?.numberOfMembers.women);
     }
 
     if (dataToBeUpdated === "groupIdentity" && resourceName === "Group") {
+
       // @ts-expect-error TS(2339): Property 'affiliationYear' does not exist on type ... Remove this comment to see the full error message
       setGroupAffiliationYear(farmer?.affiliationYear);
+
       // @ts-expect-error TS(2339): Property 'licence' does not exist on type 'Object<... Remove this comment to see the full error message
       setGroupOperatingLicence(farmer?.licence);
+
       // @ts-expect-error TS(2339): Property 'nuit' does not exist on type 'Object<unk... Remove this comment to see the full error message
       setGroupNuit(farmer?.nuit);
+
       // @ts-expect-error TS(2339): Property 'nuel' does not exist on type 'Object<unk... Remove this comment to see the full error message
       setGroupNuel(farmer?.nuel);
+
       // @ts-expect-error TS(2339): Property 'creationYear' does not exist on type 'Ob... Remove this comment to see the full error message
       setGroupCreationYear(farmer?.creationYear);
+
       // @ts-expect-error TS(2339): Property 'legalStatus' does not exist on type 'Obj... Remove this comment to see the full error message
       setGroupLegalStatus(farmer?.legalStatus);
 
       setOverlayTitle("Actualizar Identidade.");
 
+
       // @ts-expect-error TS(2339): Property 'affiliationYear' does not exist on type ... Remove this comment to see the full error message
       setOldGroupAffiliationYear(farmer?.affiliationYear);
+
       // @ts-expect-error TS(2339): Property 'licence' does not exist on type 'Object<... Remove this comment to see the full error message
       setOldGroupOperatingLicence(farmer?.licence);
+
       // @ts-expect-error TS(2339): Property 'nuit' does not exist on type 'Object<unk... Remove this comment to see the full error message
       setOldGroupNuit(farmer?.nuit);
+
       // @ts-expect-error TS(2339): Property 'nuel' does not exist on type 'Object<unk... Remove this comment to see the full error message
       setOldGroupNuel(farmer?.nuel);
+
       // @ts-expect-error TS(2339): Property 'creationYear' does not exist on type 'Ob... Remove this comment to see the full error message
       setOldGroupCreationYear(farmer?.creationYear);
+
       // @ts-expect-error TS(2339): Property 'legalStatus' does not exist on type 'Obj... Remove this comment to see the full error message
       setOldGroupLegalStatus(farmer?.legalStatus);
     }
@@ -233,22 +260,29 @@ const EditGroupData = ({
 
     if (dataToBeUpdated === "groupType" && resourceName === "Group") {
       // incoming data
+
       // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       newData["type"] = validatedData?.type ? validatedData?.type?.trim() : "";
+
       // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       newData["name"] = validatedData?.name ? validatedData?.name?.trim() : "";
       // normalize the asset object
+
       // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       newData["goals"] =
+
         // @ts-expect-error TS(2339): Property 'goals' does not exist on type 'false | {... Remove this comment to see the full error message
         validatedData?.goals?.length > 0 ? validatedData?.goals : [];
 
       // old data
+
       // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       oldData["type"] = oldGroupType ? oldGroupType : "";
+
       // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       oldData["name"] = oldGroupName ? oldGroupName : "";
       // normalize the asset object
+
       // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       oldData["goals"] = oldGroupGoals ? oldGroupGoals : [];
 
@@ -258,56 +292,74 @@ const EditGroupData = ({
 
     if (dataToBeUpdated === "groupIdentity" && resourceName === "Group") {
       // new incoming data
+
       // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       newData["legalStatus"] = validatedData?.legalStatus
+
         // @ts-expect-error TS(2339): Property 'legalStatus' does not exist on type 'fal... Remove this comment to see the full error message
         ? validatedData?.legalStatus?.trim()
         : "";
+
       // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       newData["licence"] = validatedData?.licence
+
         // @ts-expect-error TS(2339): Property 'licence' does not exist on type 'false |... Remove this comment to see the full error message
         ? validatedData?.licence?.trim()
         : "";
+
       // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       newData["creationYear"] = validatedData?.creationYear
+
         // @ts-expect-error TS(2339): Property 'creationYear' does not exist on type 'fa... Remove this comment to see the full error message
         ? Number(parseInt(validatedData?.creationYear))
         : 0;
+
       // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       newData["affiliationYear"] = validatedData?.affiliationYear
+
         // @ts-expect-error TS(2339): Property 'affiliationYear' does not exist on type ... Remove this comment to see the full error message
         ? Number(parseInt(validatedData?.affiliationYear))
         : 0;
+
       // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       newData["nuit"] = validatedData?.nuit
+
         // @ts-expect-error TS(2339): Property 'nuit' does not exist on type 'false | { ... Remove this comment to see the full error message
         ? Number(parseInt(validatedData?.nuit))
         : 0;
+
       // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       newData["nuel"] = validatedData?.nuel
+
         // @ts-expect-error TS(2339): Property 'nuel' does not exist on type 'false | { ... Remove this comment to see the full error message
         ? Number(parseInt(validatedData?.nuel))
         : 0;
 
       // old data
+
       // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       oldData["legalStatus"] = oldGroupLegalStatus
         ? oldGroupLegalStatus?.trim()
         : "";
+
       // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       oldData["licence"] = oldGroupOperatingLicence
         ? oldGroupOperatingLicence?.trim()
         : "";
+
       // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       oldData["creationYear"] = oldGroupCreationYear
         ? Number(parseInt(oldGroupCreationYear))
         : 0;
+
       // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       oldData["affiliationYear"] = oldGroupAffiliationYear
         ? Number(parseInt(oldGroupAffiliationYear))
         : 0;
+
       // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       oldData["nuit"] = oldGroupNuit ? Number(parseInt(oldGroupNuit)) : 0;
+
       // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       oldData["nuel"] = oldGroupNuel ? Number(parseInt(oldGroupNuel)) : 0;
 
@@ -317,31 +369,40 @@ const EditGroupData = ({
 
     if (dataToBeUpdated === "groupMembers" && resourceName === "Group") {
       // new incoming data
+
       // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       newData["operationalStatus"] = validatedData?.operationalStatus
+
         // @ts-expect-error TS(2339): Property 'operationalStatus' does not exist on typ... Remove this comment to see the full error message
         ? validatedData?.operationalStatus
         : false;
+
       // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       newData["total"] = validatedData?.total
+
         // @ts-expect-error TS(2339): Property 'total' does not exist on type 'false | {... Remove this comment to see the full error message
         ? Number(parseInt(validatedData?.total))
         : 0;
+
       // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       newData["women"] = validatedData?.women
+
         // @ts-expect-error TS(2339): Property 'women' does not exist on type 'false | {... Remove this comment to see the full error message
         ? Number(parseInt(validatedData?.women))
         : 0;
 
       // old data
+
       // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       oldData["operationalStatus"] = isOldGroupActive
         ? isOldGroupActive
         : false;
+
       // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       oldData["total"] = oldGroupMembersNumber
         ? Number(parseInt(oldGroupMembersNumber))
         : 0;
+
       // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       oldData["women"] = oldGroupWomenNumber
         ? Number(parseInt(oldGroupWomenNumber))
@@ -492,6 +553,7 @@ const EditGroupData = ({
                         _text={{ fontSize: "xs" }}
                       >
                         // @ts-expect-error TS(2339): Property 'groupType' does not exist on type '{}'.
+                        // @ts-expect-error TS(2339): Property 'groupType' does not exist on type '{}'.
                         {errors?.groupType}
                       </FormControl.ErrorMessage>
                     ) : (
@@ -523,6 +585,7 @@ const EditGroupData = ({
                         }
                         _text={{ fontSize: "xs" }}
                       >
+                        // @ts-expect-error TS(2339): Property 'groupName' does not exist on type '{}'.
                         // @ts-expect-error TS(2339): Property 'groupName' does not exist on type '{}'.
                         {errors?.groupName}
                       </FormControl.ErrorMessage>
@@ -584,6 +647,7 @@ const EditGroupData = ({
                         _text={{ fontSize: "xs" }}
                       >
                         // @ts-expect-error TS(2339): Property 'groupGoals' does not exist on type '{}'.
+                        // @ts-expect-error TS(2339): Property 'groupGoals' does not exist on type '{}'.
                         {errors?.groupGoals}
                       </FormControl.ErrorMessage>
                     ) : (
@@ -608,6 +672,7 @@ const EditGroupData = ({
                         Ano de criação
                       </FormControl.Label>
                       <SelectList
+
                         // @ts-expect-error TS(2769): No overload matches this call.
                         data={() => getFullYears2(70)}
                         setSelected={(newYear: any) => {
@@ -666,6 +731,7 @@ const EditGroupData = ({
                           }
                           _text={{ fontSize: "xs" }}
                         >
+                          // @ts-expect-error TS(2339): Property 'groupCreationYear' does not exist on typ... Remove this comment to see the full error message
                           // @ts-expect-error TS(2339): Property 'groupCreationYear' does not exist on typ... Remove this comment to see the full error message
                           {errors?.groupCreationYear}
                         </FormControl.ErrorMessage>
@@ -809,6 +875,7 @@ const EditGroupData = ({
                           _text={{ fontSize: "xs" }}
                         >
                           // @ts-expect-error TS(2339): Property 'groupLegalStatus' does not exist on type... Remove this comment to see the full error message
+                          // @ts-expect-error TS(2339): Property 'groupLegalStatus' does not exist on type... Remove this comment to see the full error message
                           {errors?.groupLegalStatus}
                         </FormControl.ErrorMessage>
                       ) : (
@@ -897,6 +964,7 @@ const EditGroupData = ({
                             Ano de legalização
                           </FormControl.Label>
                           <SelectList
+
                             // @ts-expect-error TS(2769): No overload matches this call.
                             data={() => getFullYears2(70)}
                             setSelected={(newYear: any) => {
@@ -955,6 +1023,7 @@ const EditGroupData = ({
                               }
                               _text={{ fontSize: "xs" }}
                             >
+                              // @ts-expect-error TS(2339): Property 'groupAffiliationYear' does not exist on ... Remove this comment to see the full error message
                               // @ts-expect-error TS(2339): Property 'groupAffiliationYear' does not exist on ... Remove this comment to see the full error message
                               {errors?.groupAffiliationYear}
                             </FormControl.ErrorMessage>
@@ -1065,6 +1134,7 @@ const EditGroupData = ({
                               _text={{ fontSize: "xs" }}
                             >
                               // @ts-expect-error TS(2339): Property 'groupOperatingLicence' does not exist on... Remove this comment to see the full error message
+                              // @ts-expect-error TS(2339): Property 'groupOperatingLicence' does not exist on... Remove this comment to see the full error message
                               {errors?.groupOperatingLicence}
                             </FormControl.ErrorMessage>
                           ) : (
@@ -1102,6 +1172,7 @@ const EditGroupData = ({
                               }
                               _text={{ fontSize: "xs" }}
                             >
+                              // @ts-expect-error TS(2339): Property 'groupNuit' does not exist on type '{}'.
                               // @ts-expect-error TS(2339): Property 'groupNuit' does not exist on type '{}'.
                               {errors?.groupNuit}
                             </FormControl.ErrorMessage>
@@ -1141,6 +1212,7 @@ const EditGroupData = ({
                               }
                               _text={{ fontSize: "xs" }}
                             >
+                              // @ts-expect-error TS(2339): Property 'groupNuel' does not exist on type '{}'.
                               // @ts-expect-error TS(2339): Property 'groupNuel' does not exist on type '{}'.
                               {errors?.groupNuel}
                             </FormControl.ErrorMessage>
@@ -1205,6 +1277,7 @@ const EditGroupData = ({
                                 iconStyle={{ marginRight: 1 }}
                               />
                             }
+
                             // @ts-expect-error TS(2322): Type '{ center: true; fontFamily: string; containe... Remove this comment to see the full error message
                             onPress={() => {
                               setIsGroupInactive(false);
@@ -1241,6 +1314,7 @@ const EditGroupData = ({
                                 iconStyle={{ marginRight: 1 }}
                               />
                             }
+
                             // @ts-expect-error TS(2322): Type '{ center: true; fontFamily: string; containe... Remove this comment to see the full error message
                             onPress={() => {
                               setIsGroupInactive(true);
@@ -1256,6 +1330,7 @@ const EditGroupData = ({
                           }
                           _text={{ fontSize: "xs" }}
                         >
+                          // @ts-expect-error TS(2339): Property 'operationalStatus' does not exist on typ... Remove this comment to see the full error message
                           // @ts-expect-error TS(2339): Property 'operationalStatus' does not exist on typ... Remove this comment to see the full error message
                           {errors?.operationalStatus}
                         </FormControl.ErrorMessage>
@@ -1296,6 +1371,7 @@ const EditGroupData = ({
                           _text={{ fontSize: "xs" }}
                         >
                           // @ts-expect-error TS(2339): Property 'groupMembersNumber' does not exist on ty... Remove this comment to see the full error message
+                          // @ts-expect-error TS(2339): Property 'groupMembersNumber' does not exist on ty... Remove this comment to see the full error message
                           {errors?.groupMembersNumber}
                         </FormControl.ErrorMessage>
                       ) : (
@@ -1334,6 +1410,7 @@ const EditGroupData = ({
                           _text={{ fontSize: "xs" }}
                         >
                           // @ts-expect-error TS(2339): Property 'groupWomenNumber' does not exist on type... Remove this comment to see the full error message
+                          // @ts-expect-error TS(2339): Property 'groupWomenNumber' does not exist on type... Remove this comment to see the full error message
                           {errors?.groupWomenNumber}
                         </FormControl.ErrorMessage>
                       ) : (
@@ -1357,6 +1434,7 @@ const EditGroupData = ({
                 marginTop: 30,
               }}
               type="outline"
+
               // @ts-expect-error TS(2322): Type '{ title: string; titleStyle: { color: string... Remove this comment to see the full error message
               onPress={() => {
                 if (

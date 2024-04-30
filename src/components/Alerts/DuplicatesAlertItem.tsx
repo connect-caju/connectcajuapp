@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { Button, Box, Center } from "native-base"
+
 // @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { View, Text, Image, Dimensions, TouchableOpacity } from "react-native"
 import { Icon, CheckBox, Avatar } from "@rneui/themed"
@@ -68,6 +69,7 @@ const DuplicatesAlertItem = ({
 
   return (
     <Box
+
       // @ts-expect-error TS(2322): Type '{ children: Element; style: { width: string;... Remove this comment to see the full error message
       style={{
         width: "85%",
@@ -79,6 +81,7 @@ const DuplicatesAlertItem = ({
     >
       <View>
         <Box
+
           // @ts-expect-error TS(2322): Type '{ children: Element[]; style: { flexDirectio... Remove this comment to see the full error message
           style={{
             flexDirection: "row",
@@ -88,6 +91,7 @@ const DuplicatesAlertItem = ({
           <TouchableOpacity style={{}} onPress={() => {}}></TouchableOpacity>
 
           <Box
+
             // @ts-expect-error TS(2322): Type '{ children: Element[]; style: { flexDirectio... Remove this comment to see the full error message
             style={{
               flexDirection: "row",
@@ -117,6 +121,7 @@ const DuplicatesAlertItem = ({
         </Box>
 
         <Box
+
           // @ts-expect-error TS(2322): Type '{ children: Element; style: { paddingBottom:... Remove this comment to see the full error message
           style={{
             paddingBottom: 20,
@@ -143,6 +148,7 @@ const DuplicatesAlertItem = ({
         </Box>
 
         <Box
+
           // @ts-expect-error TS(2322): Type '{ children: Element; style: { paddingBottom:... Remove this comment to see the full error message
           style={{
             paddingBottom: 15,
@@ -165,12 +171,14 @@ const DuplicatesAlertItem = ({
         </Box>
 
         <Box
+
           // @ts-expect-error TS(2322): Type '{ children: Element[]; style: { paddingVerti... Remove this comment to see the full error message
           style={{
             paddingVertical: 20,
           }}
         >
           <Box
+
             // @ts-expect-error TS(2322): Type '{ children: Element[]; style: { flexDirectio... Remove this comment to see the full error message
             style={{
               flexDirection: "row",
@@ -180,6 +188,7 @@ const DuplicatesAlertItem = ({
             }}
           >
             <Box
+
               // @ts-expect-error TS(2322): Type '{ children: Element; style: { width: string;... Remove this comment to see the full error message
               style={{
                 width: "20%",
@@ -193,6 +202,7 @@ const DuplicatesAlertItem = ({
             </Box>
 
             <Box
+
               // @ts-expect-error TS(2322): Type '{ children: Element; style: { width: string;... Remove this comment to see the full error message
               style={{
                 width: "80%",
@@ -221,6 +231,7 @@ const DuplicatesAlertItem = ({
           </Box>
 
           <Box
+
             // @ts-expect-error TS(2322): Type '{ children: Element[]; style: { flexDirectio... Remove this comment to see the full error message
             style={{
               flexDirection: "row",
@@ -230,6 +241,7 @@ const DuplicatesAlertItem = ({
             }}
           >
             <Box
+
               // @ts-expect-error TS(2322): Type '{ children: Element; style: { width: string;... Remove this comment to see the full error message
               style={{
                 width: "20%",
@@ -249,6 +261,7 @@ const DuplicatesAlertItem = ({
             </Box>
 
             <Box
+
               // @ts-expect-error TS(2322): Type '{ children: Element; style: { width: string;... Remove this comment to see the full error message
               style={{
                 width: "80%",
@@ -273,6 +286,7 @@ const DuplicatesAlertItem = ({
           <CustomDivider thickness={2} my={2} bg={COLORS.grey} />
         </Box>
         <Box
+
           // @ts-expect-error TS(2322): Type '{ children: Element; style: { paddingTop: nu... Remove this comment to see the full error message
           style={{
             paddingTop: 20,

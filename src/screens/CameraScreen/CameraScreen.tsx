@@ -10,6 +10,7 @@ import {
 // @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 } from "react-native";
 import { Camera, useCameraDevices } from "react-native-vision-camera";
+
 // @ts-expect-error TS(2305): Module '"@rneui/base"' has no exported member 'Box... Remove this comment to see the full error message
 import { Divider, Icon, Avatar, BottomSheet, Box } from "@rneui/base";
 import COLORS from "../../consts/colors";
@@ -55,6 +56,7 @@ export default function CameraScreen({
   useEffect(() => {
     async function getPhonePermission() {
       const permission = await Camera.requestCameraPermission();
+
       // @ts-expect-error TS(2584): Cannot find name 'console'. Do you need to change ... Remove this comment to see the full error message
       console.log(`Camera permission status: ${permission}`);
       if (permission === "denied") await Linking.openSettings();
@@ -73,6 +75,7 @@ export default function CameraScreen({
 
   useEffect(() => {
     if (successLottieVisible) {
+
       // @ts-expect-error TS(2304): Cannot find name 'setTimeout'.
       setTimeout(() => {
         setSuccessLottieVisible(false);
@@ -83,8 +86,10 @@ export default function CameraScreen({
 
   const capturePhoto = async () => {
     if (!camera.current)
+
       // @ts-expect-error TS(2584): Cannot find name 'console'. Do you need to change ... Remove this comment to see the full error message
       return console.log("device is null: is there no Camera?");
+
 
     // @ts-expect-error TS(2339): Property 'takeSnapshot' does not exist on type 'ne... Remove this comment to see the full error message
     const photo = await camera.current?.takeSnapshot({
@@ -97,14 +102,17 @@ export default function CameraScreen({
 
   const fetchImage = async (uri: any) => {
     try {
+
       // @ts-expect-error TS(2304): Cannot find name 'fetch'.
       const imageResponse = await fetch(uri);
       const imageBlob = await imageResponse.blob();
       const base64Data = await blobToBase64(imageBlob);
+
       // @ts-expect-error TS(2345): Argument of type 'unknown' is not assignable to pa... Remove this comment to see the full error message
       setImageSource(base64Data);
       setShowCamera(false);
     } catch (error) {
+
       // @ts-expect-error TS(2584): Cannot find name 'console'. Do you need to change ... Remove this comment to see the full error message
       console.log("fetchImage failed: ", { cause: error });
     }
@@ -112,6 +120,7 @@ export default function CameraScreen({
 
   const blobToBase64 = (blob: any) => {
     return new Promise((resolve, reject) => {
+
       // @ts-expect-error TS(2304): Cannot find name 'FileReader'.
       const reader = new FileReader();
       reader.onerror = reject;
@@ -130,19 +139,24 @@ export default function CameraScreen({
         path: "images",
       },
     };
+
     // @ts-expect-error TS(2345): Argument of type '{ includeBase64: boolean; storag... Remove this comment to see the full error message
     launchImageLibrary(options, (response) => {
       if (response.didCancel) {
+
         // @ts-expect-error TS(2584): Cannot find name 'console'. Do you need to change ... Remove this comment to see the full error message
         console.log("User cancelled image picker");
       } else if (response.errorCode) {
+
         // @ts-expect-error TS(2584): Cannot find name 'console'. Do you need to change ... Remove this comment to see the full error message
         console.log("ImagePicker Error: ", response.error);
       } else {
+
         // @ts-expect-error TS(2532): Object is possibly 'undefined'.
         const source = { uri: response.assets.uri };
 
         const imageString =
+
           // @ts-expect-error TS(2532): Object is possibly 'undefined'.
           "data:image/jpeg;base64," + response.assets[0].base64;
 
@@ -223,6 +237,7 @@ export default function CameraScreen({
         <>
           <Camera
             ref={camera}
+
             // @ts-expect-error TS(2322): Type '{ ref: MutableRefObject<null>; style: any; d... Remove this comment to see the full error message
             style={StyleSheet.absoluteFill}
             device={device}

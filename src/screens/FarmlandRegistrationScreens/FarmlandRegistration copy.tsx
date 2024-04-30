@@ -55,6 +55,7 @@ import COLORS from "../../consts/colors"
 import validateFarmlandMainData from "../../helpers/validateFarmlandMainData"
 import { assetTypes } from "../../consts/assetTypes"
 
+
 // @ts-expect-error TS(7016): Could not find a declaration file for module 'uuid... Remove this comment to see the full error message
 import { v4 as uuidv4 } from "uuid"
 import {
@@ -174,17 +175,20 @@ export default function FarmlandRegistration({
   const snapPoints = ["50%", "75%", "90%"]
 
   function handlePresentModal() {
+
     // @ts-expect-error TS(2339): Property 'present' does not exist on type 'never'.
     bottomSheetModalRef.current?.present()
   }
 
   function handleDismissModal() {
+
     // @ts-expect-error TS(2339): Property 'dismiss' does not exist on type 'never'.
     bottomSheetModalRef.current?.dismiss()
   }
 
   useEffect(() => {
     if (successLottieVisible) {
+
       // @ts-expect-error TS(2304): Cannot find name 'setTimeout'.
       setTimeout(() => {
         setSuccessLottieVisible(false)
@@ -227,16 +231,22 @@ export default function FarmlandRegistration({
 
     const block = {
       _id: uuidv4(),
+
       // @ts-expect-error TS(2339): Property 'plantingYear' does not exist on type 'fa... Remove this comment to see the full error message
       plantingYear: retrievedBlockData?.plantingYear,
+
       // @ts-expect-error TS(2339): Property 'density' does not exist on type 'false |... Remove this comment to see the full error message
       density: retrievedBlockData?.density,
+
       // @ts-expect-error TS(2339): Property 'trees' does not exist on type 'false | {... Remove this comment to see the full error message
       trees: retrievedBlockData?.trees,
+
       // @ts-expect-error TS(2339): Property 'usedArea' does not exist on type 'false ... Remove this comment to see the full error message
       usedArea: Number(retrievedBlockData?.usedArea.toFixed(1)),
+
       // @ts-expect-error TS(2339): Property 'sameTypeTrees' does not exist on type 'f... Remove this comment to see the full error message
       sameTypeTrees: retrievedBlockData?.sameTypeTrees,
+
       // @ts-expect-error TS(2339): Property 'plantTypes' does not exist on type 'fals... Remove this comment to see the full error message
       plantTypes: retrievedBlockData?.plantTypes,
       userName: customUserData?.name,
@@ -263,6 +273,7 @@ export default function FarmlandRegistration({
       try {
         addInvalidationMessage(farmlandId, invalidationMessage, realm)
       } catch (error) {
+
         // @ts-expect-error TS(2584): Cannot find name 'console'. Do you need to change ... Remove this comment to see the full error message
         console.log("could not add invalidation message:", { cause: error })
       }
@@ -485,6 +496,7 @@ export default function FarmlandRegistration({
   }
 
   const onAddFarmland = useCallback(
+
     // @ts-expect-error TS(7030): Not all code paths return a value.
     (farmlandMainData: any, realm: any) => {
       const { description, consociatedCrops, trees, totalArea } =
@@ -642,8 +654,10 @@ export default function FarmlandRegistration({
       // update user stat (1 more farmland registered by the user)
       if (currentUserStat) {
         realm.write(() => {
+
           // @ts-expect-error TS(2339): Property 'registeredFarmlands' does not exist on t... Remove this comment to see the full error message
           currentUserStat.registeredFarmlands =
+
             // @ts-expect-error TS(2339): Property 'registeredFarmlands' does not exist on t... Remove this comment to see the full error message
             currentUserStat.registeredFarmlands + 1
         })
@@ -772,6 +786,7 @@ export default function FarmlandRegistration({
               // navigation.goBack();
               navigateBack()
             } catch (error) {
+
               // @ts-expect-error TS(2584): Cannot find name 'console'. Do you need to change ... Remove this comment to see the full error message
               console.log("could not finish invalidation task: ", {
                 cause: error,
@@ -794,6 +809,7 @@ export default function FarmlandRegistration({
         <Box
           w="100%"
           // alignItems={'center'}
+
           // @ts-expect-error TS(2322): Type '{ children: Element[]; w: "100%"; style: { b... Remove this comment to see the full error message
           style={{
             backgroundColor: COLORS.fourth,
@@ -838,6 +854,7 @@ export default function FarmlandRegistration({
           <Box w="5%"></Box>
           <Box
             w="95%"
+
             // @ts-expect-error TS(2322): Type '{ children: Element[]; w: "95%"; style: { fl... Remove this comment to see the full error message
             style={{
               flexDirection: "row",
@@ -859,6 +876,7 @@ export default function FarmlandRegistration({
               <Icon name="account-circle" size={80} color={COLORS.lightgrey} />
             )}
             <Box
+
               // @ts-expect-error TS(2322): Type '{ children: Element[]; style: { justifyConte... Remove this comment to see the full error message
               style={{
                 justifyContent: "flex-end",
@@ -909,6 +927,7 @@ export default function FarmlandRegistration({
         <Box
           w="100%"
           p="4"
+
           // @ts-expect-error TS(2322): Type '{ children: Element[]; w: "100%"; p: "4"; st... Remove this comment to see the full error message
           style={{
             flexDirection: "row",
@@ -932,6 +951,7 @@ export default function FarmlandRegistration({
             )}
           </Box>
           <Center
+
             // @ts-expect-error TS(2322): Type '{ children: Element; style: { borderWidth: n... Remove this comment to see the full error message
             style={{
               borderWidth: 2,
@@ -974,6 +994,7 @@ export default function FarmlandRegistration({
                     }
                     _text={{ fontSize: "xs" }}
                   >
+                    // @ts-expect-error TS(2339): Property 'description' does not exist on type '{}'... Remove this comment to see the full error message
                     // @ts-expect-error TS(2339): Property 'description' does not exist on type '{}'... Remove this comment to see the full error message
                     {errors?.description}
                   </FormControl.ErrorMessage>
@@ -1041,6 +1062,7 @@ export default function FarmlandRegistration({
                       _text={{ fontSize: "xs" }}
                     >
                       // @ts-expect-error TS(2339): Property 'consociatedCrops' does not exist on type... Remove this comment to see the full error message
+                      // @ts-expect-error TS(2339): Property 'consociatedCrops' does not exist on type... Remove this comment to see the full error message
                       {errors?.consociatedCrops}
                     </FormControl.ErrorMessage>
                   ) : (
@@ -1051,6 +1073,7 @@ export default function FarmlandRegistration({
                 {/* show all the newCrops that are typed by the user */}
                 {otherConsociatedCrops.length > 0 && (
                   <Box
+
                     // @ts-expect-error TS(2322): Type '{ children: Element[]; style: { flexDirectio... Remove this comment to see the full error message
                     style={{
                       flexDirection: "row",
@@ -1062,6 +1085,7 @@ export default function FarmlandRegistration({
                   >
                     <Box
                       w="90%"
+
                       // @ts-expect-error TS(2322): Type '{ children: Element; w: "90%"; style: { padd... Remove this comment to see the full error message
                       style={{
                         padding: 5,
@@ -1082,6 +1106,7 @@ export default function FarmlandRegistration({
                     </Box>
                     <Box
                       w="10%"
+
                       // @ts-expect-error TS(2322): Type '{ children: Element; w: "10%"; style: { alig... Remove this comment to see the full error message
                       style={{
                         alignItems: "flex-end",
@@ -1106,6 +1131,7 @@ export default function FarmlandRegistration({
 
                 {/* Show this only when the user chooses 'Outras' option in the consociatedCrops */}
                 {consociatedCrops?.find((crop) => crop === "Outras") && (
+
                   // @ts-expect-error TS(2322): Type '{ children: Element; style: {}; }' is not as... Remove this comment to see the full error message
                   <Box style={{}}>
                     <Stack direction="row" w="100%" space={2}>
@@ -1121,6 +1147,7 @@ export default function FarmlandRegistration({
                             keyboardType="default"
                             textAlign="center"
                             placeholder="Outra cultura"
+
                             // @ts-expect-error TS(2339): Property 'newCrop' does not exist on type '{}'.
                             borderColor={errors?.newCrop ? "red" : ""}
                             value={newCrop}
@@ -1142,6 +1169,7 @@ export default function FarmlandRegistration({
                               _text={{ fontSize: "xs" }}
                             >
                               // @ts-expect-error TS(2339): Property 'newCrop' does not exist on type '{}'.
+                              // @ts-expect-error TS(2339): Property 'newCrop' does not exist on type '{}'.
                               {errors?.newCrop}
                             </FormControl.ErrorMessage>
                           ) : (
@@ -1152,10 +1180,12 @@ export default function FarmlandRegistration({
 
                       <Box
                         w="20%"
+
                         // @ts-expect-error TS(2322): Type '{ children: Element; w: "20%"; style: { just... Remove this comment to see the full error message
                         style={{
                           justifyContent: "center",
                           alignItems: "center",
+
                           // @ts-expect-error TS(2339): Property 'newCrop' does not exist on type '{}'.
                           paddingTop: errors?.newCrop ? 10 : 20,
                           // borderWidth: 1,
@@ -1167,11 +1197,13 @@ export default function FarmlandRegistration({
                               newCrop !== "" &&
                               !otherConsociatedCrops?.find(
                                 (crop) =>
+
                                   // @ts-expect-error TS(2339): Property 'toLowerCase' does not exist on type 'nev... Remove this comment to see the full error message
                                   crop?.toLowerCase() ===
                                   newCrop?.toLowerCase(),
                               )
                             ) {
+
                               // @ts-expect-error TS(2345): Argument of type '(prev: never[]) => string[]' is ... Remove this comment to see the full error message
                               setOtherConsociatedCrops((prev) => [
                                 ...prev,
@@ -1197,6 +1229,8 @@ export default function FarmlandRegistration({
                   </Box>
                 )}
 
+                // @ts-expect-error TS(2304): Cannot find name 'children'.
+                // @ts-expect-error TS(2322): Type '{ children: Element; style: {}; }' is not as... Remove this comment to see the full error message
                 // @ts-expect-error TS(2322): Type '{ children: Element; style: {}; }' is not as... Remove this comment to see the full error message
                 <Box style={{}}>
                   <Stack direction="row" w="100%" space={2}>
@@ -1217,6 +1251,7 @@ export default function FarmlandRegistration({
                           value={totalArea}
                           onChangeText={(newNumber: any) => {
                             setErrors((prev) => ({ ...prev, totalArea: "" }))
+
                             // @ts-expect-error TS(2345): Argument of type 'number' is not assignable to par... Remove this comment to see the full error message
                             setTotalArea(Number(newNumber))
                           }}
@@ -1234,6 +1269,7 @@ export default function FarmlandRegistration({
                             _text={{ fontSize: "xs" }}
                           >
                             // @ts-expect-error TS(2339): Property 'totalArea' does not exist on type '{}'.
+                            // @ts-expect-error TS(2339): Property 'totalArea' does not exist on type '{}'.
                             {errors?.totalArea}
                           </FormControl.ErrorMessage>
                         ) : (
@@ -1244,6 +1280,7 @@ export default function FarmlandRegistration({
 
                     <Box
                       w="48%"
+
                       // @ts-expect-error TS(2322): Type '{ children: Element; w: "48%"; style: { just... Remove this comment to see the full error message
                       style={{
                         justifyContent: "flex-end",
@@ -1281,6 +1318,7 @@ export default function FarmlandRegistration({
                             _text={{ fontSize: "xs" }}
                           >
                             // @ts-expect-error TS(2339): Property 'trees' does not exist on type '{}'.
+                            // @ts-expect-error TS(2339): Property 'trees' does not exist on type '{}'.
                             {errors?.trees}
                           </FormControl.ErrorMessage>
                         ) : (
@@ -1300,6 +1338,7 @@ export default function FarmlandRegistration({
             <Box
               w="100%"
               // alignItems={"flex-end"}
+
               // @ts-expect-error TS(2322): Type '{ children: Element[]; w: "100%"; style: { p... Remove this comment to see the full error message
               style={{
                 padding: 20,
@@ -1316,6 +1355,7 @@ export default function FarmlandRegistration({
                   Área Total
                 </Text>
                 <Chip
+
                   // @ts-expect-error TS(2339): Property 'totalArea' does not exist on type 'Objec... Remove this comment to see the full error message
                   title={`${Number(farmland?.totalArea.toFixed(1))} hectares`}
                   // disabled
@@ -1342,6 +1382,7 @@ export default function FarmlandRegistration({
                   Cajueiros
                 </Text>
                 <Chip
+
                   // @ts-expect-error TS(2339): Property 'trees' does not exist on type 'Object<un... Remove this comment to see the full error message
                   title={`${farmland?.trees} árvores`}
                   // disabled
@@ -1372,6 +1413,7 @@ export default function FarmlandRegistration({
                   Consociação
                 </Text>
                 <Chip
+
                   // @ts-expect-error TS(2339): Property 'consociatedCrops' does not exist on type... Remove this comment to see the full error message
                   title={farmland?.consociatedCrops?.join("; ")}
                   // disabled
@@ -1389,12 +1431,15 @@ export default function FarmlandRegistration({
             </Box>
 
             // @ts-expect-error TS(2339): Property 'blocks' does not exist on type 'Object<u... Remove this comment to see the full error message
+            // @ts-expect-error TS(2339): Property 'blocks' does not exist on type 'Object<u... Remove this comment to see the full error message
             {farmland?.blocks?.length > 0 &&
+
               // @ts-expect-error TS(2339): Property 'blocks' does not exist on type 'Object<u... Remove this comment to see the full error message
               normalizeBlockList(farmland?.blocks)?.map((block: any, index: any) => {
                 return (
                   <Box
                     key={index}
+
                     // @ts-expect-error TS(2322): Type '{ children: Element; key: any; style: { flex... Remove this comment to see the full error message
                     style={{
                       flex: 1,
@@ -1402,7 +1447,8 @@ export default function FarmlandRegistration({
                     }}
                   >
                     <Box
-                      // @ts-expect-error TS(2322): Type '{ children: Element[]; style: { borderBottom... Remove this comment to see the full error message
+
+                      // @ts-expect-error TS(2322): Type '{ children: any[]; style: { borderBottomWidt... Remove this comment to see the full error message
                       style={{
                         borderBottomWidth: 2,
                         borderBottomColor: COLORS.main,
@@ -1410,6 +1456,7 @@ export default function FarmlandRegistration({
                     >
                       <Box
                         w="100%"
+
                         // @ts-expect-error TS(2322): Type '{ children: Element[]; w: "100%"; style: { b... Remove this comment to see the full error message
                         style={{
                           backgroundColor: COLORS.main,
@@ -1420,6 +1467,7 @@ export default function FarmlandRegistration({
                       >
                         <Box
                           w="85%"
+
                           // @ts-expect-error TS(2322): Type '{ children: Element; w: "85%"; style: { padd... Remove this comment to see the full error message
                           style={{
                             paddingLeft: 10,
@@ -1441,6 +1489,7 @@ export default function FarmlandRegistration({
                         <Box w="15%">
                           <TouchableOpacity
                             disabled={
+
                               // @ts-expect-error TS(2339): Property 'blocks' does not exist on type 'Object<u... Remove this comment to see the full error message
                               block?.position === farmland?.blocks?.length - 1
                                 ? false
@@ -1459,6 +1508,7 @@ export default function FarmlandRegistration({
                           >
                             <Icon
                               name={
+
                                 // @ts-expect-error TS(2339): Property 'blocks' does not exist on type 'Object<u... Remove this comment to see the full error message
                                 block?.position === farmland?.blocks?.length - 1
                                   ? "delete-forever"
@@ -1466,6 +1516,7 @@ export default function FarmlandRegistration({
                               }
                               size={35}
                               color={
+
                                 // @ts-expect-error TS(2339): Property 'blocks' does not exist on type 'Object<u... Remove this comment to see the full error message
                                 block?.position === farmland?.blocks?.length - 1
                                   ? COLORS.ghostwhite
@@ -1476,6 +1527,8 @@ export default function FarmlandRegistration({
                         </Box>
                         <Box w="5%"></Box>
                       </Box>
+                      // @ts-expect-error TS(2304): Cannot find name 'children'.
+                      // @ts-expect-error TS(2322): Type '{ children: Element; w: "100%"; style: {}; }... Remove this comment to see the full error message
                       // @ts-expect-error TS(2322): Type '{ children: Element; w: "100%"; style: {}; }... Remove this comment to see the full error message
                       <Box w="100%" style={{}}>
                         <Stack direction="row" w="100%" space={1} my="3">
@@ -1506,6 +1559,8 @@ export default function FarmlandRegistration({
                         </Stack>
                       </Box>
 
+                      // @ts-expect-error TS(2304): Cannot find name 'children'.
+                      // @ts-expect-error TS(2322): Type '{ children: Element; w: "100%"; style: {}; }... Remove this comment to see the full error message
                       // @ts-expect-error TS(2322): Type '{ children: Element; w: "100%"; style: {}; }... Remove this comment to see the full error message
                       <Box w="100%" style={{}}>
                         <Stack direction="row" w="100%" space={1} my="3">
@@ -1569,6 +1624,7 @@ export default function FarmlandRegistration({
               }}
             >
               // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
+              // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
               A {ordinalNumberings[farmland?.blocks?.length + 1]} parcela!
             </Text>
           </Box>
@@ -1578,12 +1634,14 @@ export default function FarmlandRegistration({
         <Stack w="100%" direction="row" pb="10">
           <Box
             w="50%"
-            // @ts-expect-error TS(2322): Type '{ children: false | Element; w: "50%"; style... Remove this comment to see the full error message
+
+            // @ts-expect-error TS(2322): Type '{ children: (string | false | Element)[]; w:... Remove this comment to see the full error message
             style={{
               justifyContent: "center",
               alignItems: "center",
             }}
           >
+            // @ts-expect-error TS(2339): Property 'blocks' does not exist on type 'Object<u... Remove this comment to see the full error message
             // @ts-expect-error TS(2339): Property 'blocks' does not exist on type 'Object<u... Remove this comment to see the full error message
             {farmland?.blocks?.length > 0 && (
               <Box w="70%">
@@ -1595,6 +1653,7 @@ export default function FarmlandRegistration({
                   }}
                 >
                   <Box
+
                     // @ts-expect-error TS(2322): Type '{ children: Element; style: { borderWidth: n... Remove this comment to see the full error message
                     style={{
                       borderWidth: 2,
@@ -1625,6 +1684,7 @@ export default function FarmlandRegistration({
 
           <Box
             w="50%"
+
             // @ts-expect-error TS(2322): Type '{ children: Element; w: "50%"; style: { just... Remove this comment to see the full error message
             style={{
               justifyContent: "center",
@@ -1647,6 +1707,7 @@ export default function FarmlandRegistration({
                   }}
                 >
                   <Box
+
                     // @ts-expect-error TS(2322): Type '{ children: Element; style: { flexDirection:... Remove this comment to see the full error message
                     style={{
                       flexDirection: "row",

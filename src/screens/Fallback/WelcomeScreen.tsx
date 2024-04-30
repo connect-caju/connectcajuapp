@@ -117,6 +117,7 @@ export default function WelcomeScreen() {
       return app.currentUser;
     } catch (error) {
       setAlert(true);
+
       // @ts-expect-error TS(2345): Argument of type 'unknown' is not assignable to pa... Remove this comment to see the full error message
       setErrorFlag(error);
       return;
@@ -157,20 +158,28 @@ export default function WelcomeScreen() {
 
       // extract validated user data
       const {
+
         // @ts-expect-error TS(2339): Property 'name' does not exist on type 'false | { ... Remove this comment to see the full error message
         name,
+
         // @ts-expect-error TS(2339): Property 'email' does not exist on type 'false | {... Remove this comment to see the full error message
         email,
+
         // @ts-expect-error TS(2339): Property 'password' does not exist on type 'false ... Remove this comment to see the full error message
         password,
+
         // @ts-expect-error TS(2339): Property 'phone' does not exist on type 'false | {... Remove this comment to see the full error message
         phone,
+
         // @ts-expect-error TS(2339): Property 'role' does not exist on type 'false | { ... Remove this comment to see the full error message
         role,
+
         // @ts-expect-error TS(2339): Property 'userDistrict' does not exist on type 'fa... Remove this comment to see the full error message
         userDistrict,
+
         // @ts-expect-error TS(2339): Property 'userProvince' does not exist on type 'fa... Remove this comment to see the full error message
         userProvince,
+
         // @ts-expect-error TS(2339): Property 'coop' does not exist on type 'false | { ... Remove this comment to see the full error message
         coop,
       } = await validateUserData(userData, errors, setErrors);
@@ -214,8 +223,10 @@ export default function WelcomeScreen() {
         const customUserData = await newUser.refreshCustomData();
       } catch (error) {
         setAlert(true);
+
         // @ts-expect-error TS(2584): Cannot find name 'console'. Do you need to change ... Remove this comment to see the full error message
         console.log("error: ", { cause: error });
+
         // @ts-expect-error TS(2345): Argument of type 'unknown' is not assignable to pa... Remove this comment to see the full error message
         setErrorFlag(error);
         return;
@@ -228,8 +239,10 @@ export default function WelcomeScreen() {
   useEffect(() => {
     if (
       alert &&
+
       // @ts-expect-error TS(2339): Property 'toString' does not exist on type 'never'... Remove this comment to see the full error message
       (errorFlag?.toString()?.includes(errorMessages.signIn.logUsernameFlag) ||
+
         // @ts-expect-error TS(2339): Property 'toString' does not exist on type 'never'... Remove this comment to see the full error message
         errorFlag?.toString()?.includes(errorMessages.signIn.logPasswordFlag))
     ) {
@@ -241,6 +254,7 @@ export default function WelcomeScreen() {
       setCancelText(errorMessages.signIn.cancelText);
     } else if (
       alert &&
+
       // @ts-expect-error TS(2339): Property 'toString' does not exist on type 'never'... Remove this comment to see the full error message
       errorFlag?.toString()?.includes(errorMessages.network.logFlag)
     ) {
@@ -252,6 +266,7 @@ export default function WelcomeScreen() {
       setCancelText(errorMessages.network.cancelText);
     } else if (
       alert &&
+
       // @ts-expect-error TS(2339): Property 'toString' does not exist on type 'never'... Remove this comment to see the full error message
       errorFlag?.toString()?.includes(errorMessages.signUp.logFlag)
     ) {
@@ -273,6 +288,7 @@ export default function WelcomeScreen() {
 
   useEffect(() => {
     if (userProvince) {
+
       // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       setSelectedDistricts(districts[userProvince]);
     }
@@ -314,6 +330,7 @@ export default function WelcomeScreen() {
                 height: 60,
                 borderRadius: 100,
               }}
+
               // @ts-expect-error TS(2591): Cannot find name 'require'. Do you need to install... Remove this comment to see the full error message
               source={require("../../../assets/images/iamLogo2.png")}
             />
@@ -332,6 +349,7 @@ export default function WelcomeScreen() {
       </View>
 
       <ScrollView
+
         // @ts-expect-error TS(2322): Type '{ children: Element[]; contentContainerStyle... Remove this comment to see the full error message
         contentContainerStyle={{
           minHeight: "100%",
@@ -347,6 +365,7 @@ export default function WelcomeScreen() {
             </Box>
           ) : (
             <Box
+
               // @ts-expect-error TS(2322): Type '{ children: Element[]; style: { flexDirectio... Remove this comment to see the full error message
               style={{
                 flexDirection: "row",
@@ -440,6 +459,7 @@ export default function WelcomeScreen() {
                     _text={{ fontSize: "xs" }}
                   >
                     // @ts-expect-error TS(2339): Property 'name' does not exist on type '{}'.
+                    // @ts-expect-error TS(2339): Property 'name' does not exist on type '{}'.
                     {errors?.name}
                   </FormControl.ErrorMessage>
                 ) : (
@@ -475,6 +495,7 @@ export default function WelcomeScreen() {
                   }
                   _text={{ fontSize: "xs" }}
                 >
+                  // @ts-expect-error TS(2339): Property 'email' does not exist on type '{}'.
                   // @ts-expect-error TS(2339): Property 'email' does not exist on type '{}'.
                   {errors?.email}
                 </FormControl.ErrorMessage>
@@ -512,6 +533,7 @@ export default function WelcomeScreen() {
                     }
                     _text={{ fontSize: "xs" }}
                   >
+                    // @ts-expect-error TS(2339): Property 'password' does not exist on type '{}'.
                     // @ts-expect-error TS(2339): Property 'password' does not exist on type '{}'.
                     {errors?.password}
                   </FormControl.ErrorMessage>
@@ -558,6 +580,7 @@ export default function WelcomeScreen() {
                         }
                         _text={{ fontSize: "xs" }}
                       >
+                        // @ts-expect-error TS(2339): Property 'password' does not exist on type '{}'.
                         // @ts-expect-error TS(2339): Property 'password' does not exist on type '{}'.
                         {errors?.password}
                       </FormControl.ErrorMessage>
@@ -611,6 +634,7 @@ export default function WelcomeScreen() {
                         _text={{ fontSize: "xs" }}
                       >
                         // @ts-expect-error TS(2339): Property 'passwordConfirm' does not exist on type ... Remove this comment to see the full error message
+                        // @ts-expect-error TS(2339): Property 'passwordConfirm' does not exist on type ... Remove this comment to see the full error message
                         {errors?.passwordConfirm}
                       </FormControl.ErrorMessage>
                     ) : (
@@ -659,6 +683,7 @@ export default function WelcomeScreen() {
                         _text={{ fontSize: "xs" }}
                       >
                         // @ts-expect-error TS(2339): Property 'phone' does not exist on type '{}'.
+                        // @ts-expect-error TS(2339): Property 'phone' does not exist on type '{}'.
                         {errors?.phone}
                       </FormControl.ErrorMessage>
                     ) : (
@@ -680,6 +705,7 @@ export default function WelcomeScreen() {
                       <FormControl.Label>Perfil</FormControl.Label>
                       <Select
                         selectedValue={role}
+
                         // @ts-expect-error TS(2322): Type '{ children: Element[]; selectedValue: string... Remove this comment to see the full error message
                         accessibilityLabel="Escolha seu perfil"
                         placeholder="Escolha seu perfil"
@@ -741,6 +767,7 @@ export default function WelcomeScreen() {
                           _text={{ fontSize: "xs" }}
                         >
                           // @ts-expect-error TS(2339): Property 'role' does not exist on type '{}'.
+                          // @ts-expect-error TS(2339): Property 'role' does not exist on type '{}'.
                           {errors?.role}
                         </FormControl.ErrorMessage>
                       ) : (
@@ -768,6 +795,7 @@ export default function WelcomeScreen() {
                       <FormControl.Label>Província</FormControl.Label>
                       <Select
                         selectedValue={userProvince}
+
                         // @ts-expect-error TS(2322): Type '{ children: Element[]; selectedValue: string... Remove this comment to see the full error message
                         accessibilityLabel="Escolha sua província"
                         placeholder="Escolha sua província"
@@ -826,6 +854,7 @@ export default function WelcomeScreen() {
                           _text={{ fontSize: "xs" }}
                         >
                           // @ts-expect-error TS(2339): Property 'userProvince' does not exist on type '{}... Remove this comment to see the full error message
+                          // @ts-expect-error TS(2339): Property 'userProvince' does not exist on type '{}... Remove this comment to see the full error message
                           {errors?.userProvince}
                         </FormControl.ErrorMessage>
                       ) : (
@@ -843,6 +872,7 @@ export default function WelcomeScreen() {
                         <FormControl.Label>Distrito</FormControl.Label>
                         <Select
                           selectedValue={userDistrict}
+
                           // @ts-expect-error TS(2322): Type '{ children: Element[]; selectedValue: string... Remove this comment to see the full error message
                           accessibilityLabel="Escolha seu distrito"
                           placeholder="Escolha seu distrito"
@@ -896,6 +926,7 @@ export default function WelcomeScreen() {
                             _text={{ fontSize: "xs" }}
                           >
                             // @ts-expect-error TS(2339): Property 'userDistrict' does not exist on type '{}... Remove this comment to see the full error message
+                            // @ts-expect-error TS(2339): Property 'userDistrict' does not exist on type '{}... Remove this comment to see the full error message
                             {errors?.userDistrict}
                           </FormControl.ErrorMessage>
                         ) : (
@@ -921,7 +952,8 @@ export default function WelcomeScreen() {
                       <FormControl.Label>Nome da Entidade</FormControl.Label>
                       <Select
                         selectedValue={coop}
-                        // @ts-expect-error TS(2322): Type '{ children: any; selectedValue: string; acce... Remove this comment to see the full error message
+
+                        // @ts-expect-error TS(2322): Type '{ children: any[]; selectedValue: string; ac... Remove this comment to see the full error message
                         accessibilityLabel="Escolha sua entidade"
                         placeholder="Escolha sua entidade"
                         _selectedItem={{
@@ -954,6 +986,7 @@ export default function WelcomeScreen() {
                         }}
                       >
                         // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
+                        // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
                         {cooperatives[userDistrict]?.map((coop: any, index: any) => (
                           <Select.Item key={coop} label={coop} value={coop} />
                         ))}
@@ -969,6 +1002,7 @@ export default function WelcomeScreen() {
                           }
                           _text={{ fontSize: "xs" }}
                         >
+                          // @ts-expect-error TS(2339): Property 'coop' does not exist on type '{}'.
                           // @ts-expect-error TS(2339): Property 'coop' does not exist on type '{}'.
                           {errors?.coop}
                         </FormControl.ErrorMessage>
@@ -1047,6 +1081,7 @@ export default function WelcomeScreen() {
             {isLoggingIn && (
               <Box alignItems="center" w="100%" pt="-3">
                 <Box
+
                   // @ts-expect-error TS(2322): Type '{ children: Element; style: { paddingTop: nu... Remove this comment to see the full error message
                   style={{
                     paddingTop: 10,
@@ -1073,6 +1108,7 @@ export default function WelcomeScreen() {
 
                 <Box
                   px={5}
+
                   // @ts-expect-error TS(2322): Type '{ children: Element[]; px: number; style: { ... Remove this comment to see the full error message
                   style={{
                     flexDirection: "row",
@@ -1115,6 +1151,7 @@ export default function WelcomeScreen() {
               <Box alignItems="center" w="100%" pt="-3">
                 <Box
                   px={5}
+
                   // @ts-expect-error TS(2322): Type '{ children: Element[]; px: number; style: { ... Remove this comment to see the full error message
                   style={{
                     flexDirection: "row",

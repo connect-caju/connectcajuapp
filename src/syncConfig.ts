@@ -3,6 +3,7 @@
 import { realm } from "./screens/HomeScreen/HomeScreen";
 import { Realm, useApp } from "@realm/react";
 
+
 // @ts-expect-error TS(7006): Parameter 'isManualResetConfirmed' implicitly has ... Remove this comment to see the full error message
 export const syncConfig = (isManualResetConfirmed, onSyncError) => ({
     flexible: true,
@@ -16,12 +17,15 @@ export const syncConfig = (isManualResetConfirmed, onSyncError) => ({
     clientReset: {
         mode: "recoverUnsyncedChanges",
         onBefore: (realm: any) => {
+
             // @ts-expect-error TS(2584): Cannot find name 'console'. Do you need to change ... Remove this comment to see the full error message
             console.log("Beginning the client reset for", realm.path);
         },
         onAfter: (beforeRealm: any, afterRealm: any) => {
+
             // @ts-expect-error TS(2584): Cannot find name 'console'. Do you need to change ... Remove this comment to see the full error message
             console.log("Finished the client reset for", beforeRealm.path);
+
             // @ts-expect-error TS(2584): Cannot find name 'console'. Do you need to change ... Remove this comment to see the full error message
             console.log("New realm path", afterRealm.path);
         },
@@ -44,6 +48,7 @@ export const syncConfig = (isManualResetConfirmed, onSyncError) => ({
             } catch (error) {
                 // Reset failed. Notify user that they'll need to
                 // update the app
+
                 // @ts-expect-error TS(2584): Cannot find name 'console'. Do you need to change ... Remove this comment to see the full error message
                 console.log("Client Reset Error =>", { cause: error });
             }
@@ -52,6 +57,7 @@ export const syncConfig = (isManualResetConfirmed, onSyncError) => ({
 
     onError: (_: any, error: any) => {
         onSyncError(error);
+
         // @ts-expect-error TS(2584): Cannot find name 'console'. Do you need to change ... Remove this comment to see the full error message
         console.log("Sync Error =>", error);
     }

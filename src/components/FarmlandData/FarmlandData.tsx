@@ -183,10 +183,12 @@ const FarmlandData = ({
       );
     });
 
+
     // @ts-expect-error TS(2304): Cannot find name 'setInterval'.
     const interval = setInterval(() => {
       setAutoRefresh(!autoRefresh);
     }, 2000);
+
 
     // @ts-expect-error TS(2304): Cannot find name 'clearInterval'.
     clearInterval(interval);
@@ -382,6 +384,7 @@ const FarmlandData = ({
                       farmland?.status === resourceValidation.status.validated}
                     className=""
                     onPress={() =>
+
                       // @ts-expect-error TS(2345): Argument of type 'string' is not assignable to par... Remove this comment to see the full error message
                       navigation.navigate("FarmlandAreaAudit", {
                         farmlandId: farmland._id,
@@ -517,6 +520,7 @@ const FarmlandData = ({
                   disabled={
                     farmland?.status === resourceValidation.status.validated}
                   onPress={() => {
+
                     // @ts-expect-error TS(2345): Argument of type 'string' is not assignable to par... Remove this comment to see the full error message
                     navigation.navigate("Geolocation", {
                       resourceName: "Farmland",
@@ -873,6 +877,7 @@ const FarmlandData = ({
                   </View>
                 )}
                 <Box
+
                   // @ts-expect-error TS(2322): Type '{ children: Element; style: { paddingTop: nu... Remove this comment to see the full error message
                   style={{
                     paddingTop: 20,

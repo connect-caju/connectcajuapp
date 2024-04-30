@@ -3,12 +3,14 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { Text, Stack, Box, Center, Divider } from "native-base";
 import { Button, Icon } from "@rneui/themed";
+
 // @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { Modal, ScrollView, TouchableOpacity } from "react-native";
 import CustomDivider from "../Divider/CustomDivider";
 import styles from "./styles";
 
 import "react-native-get-random-values";
+
 // @ts-expect-error TS(7016): Could not find a declaration file for module 'uuid... Remove this comment to see the full error message
 import { v4 as uuidv4 } from "uuid";
 import Realm from "realm";
@@ -57,6 +59,7 @@ export default function FarmlandModal({
   )[0];
 
   const onAddFarmland = useCallback(
+
     // @ts-expect-error TS(7030): Not all code paths return a value.
     (farmlandData: any, realm: any) => {
       const {
@@ -134,8 +137,10 @@ export default function FarmlandModal({
       // update user stat (1 more farmland registered by the user)
       if (currentUserStat) {
         realm.write(() => {
+
           // @ts-expect-error TS(2339): Property 'registeredFarmlands' does not exist on t... Remove this comment to see the full error message
           currentUserStat.registeredFarmlands =
+
             // @ts-expect-error TS(2339): Property 'registeredFarmlands' does not exist on t... Remove this comment to see the full error message
             currentUserStat.registeredFarmlands + 1;
         });
@@ -201,6 +206,7 @@ export default function FarmlandModal({
         }}
       >
         <Center
+
           // @ts-expect-error TS(2322): Type '{ children: Element; style: { paddingBottom:... Remove this comment to see the full error message
           style={{
             paddingBottom: 5,
@@ -210,6 +216,7 @@ export default function FarmlandModal({
           }}
         >
           <Text
+
             // @ts-expect-error TS(2322): Type '{ children: string; style: { fontFamily: str... Remove this comment to see the full error message
             style={{
               fontFamily: "JosefinSans-Bold",
@@ -227,11 +234,17 @@ export default function FarmlandModal({
           <CustomDivider marginVertical="1" thickness={1} bg="grey" />
           <Stack direction="row" w="100%" my="1">
             <Box w="40%">
+              // @ts-expect-error TS(2304): Cannot find name 'children'.
+              // @ts-expect-error TS(2322): Type '{ children: string; style: any; }' is not as... Remove this comment to see the full error message
               // @ts-expect-error TS(2322): Type '{ children: string; style: any; }' is not as... Remove this comment to see the full error message
               <Text style={styles.keys}>Pomar:</Text>
             </Box>
+            // @ts-expect-error TS(2304): Cannot find name 'children'.
             // @ts-expect-error TS(2322): Type '{ children: Element; w: "60%"; style: any; }... Remove this comment to see the full error message
+            // @ts-expect-error TS(2322): Type '{ children: any[]; w: "60%"; style: any; }' ... Remove this comment to see the full error message
             <Box w="60%" style={styles.values}>
+              // @ts-expect-error TS(2304): Cannot find name 'children'.
+              // @ts-expect-error TS(2322): Type '{ children: any; style: any; }' is not assig... Remove this comment to see the full error message
               // @ts-expect-error TS(2322): Type '{ children: any; style: any; }' is not assig... Remove this comment to see the full error message
               <Text style={styles.values}>{farmlandData?.description}</Text>
             </Box>
@@ -239,11 +252,17 @@ export default function FarmlandModal({
           <CustomDivider marginVertical="1" thickness={1} bg="grey" />
           <Stack direction="row" w="100%" my="1">
             <Box w="40%">
+              // @ts-expect-error TS(2304): Cannot find name 'children'.
+              // @ts-expect-error TS(2322): Type '{ children: string; style: any; }' is not as... Remove this comment to see the full error message
               // @ts-expect-error TS(2322): Type '{ children: string; style: any; }' is not as... Remove this comment to see the full error message
               <Text style={styles.keys}>Ano de plantio:</Text>
             </Box>
+            // @ts-expect-error TS(2304): Cannot find name 'children'.
             // @ts-expect-error TS(2322): Type '{ children: Element; w: "60%"; style: any; }... Remove this comment to see the full error message
+            // @ts-expect-error TS(2322): Type '{ children: any[]; w: "60%"; style: any; }' ... Remove this comment to see the full error message
             <Box w="60%" style={styles.values}>
+              // @ts-expect-error TS(2304): Cannot find name 'children'.
+              // @ts-expect-error TS(2322): Type '{ children: any[]; style: any; }' is not ass... Remove this comment to see the full error message
               // @ts-expect-error TS(2322): Type '{ children: any[]; style: any; }' is not ass... Remove this comment to see the full error message
               <Text style={styles.values}>
                 {farmlandData?.plantingYear} (ano)
@@ -253,14 +272,19 @@ export default function FarmlandModal({
           <CustomDivider marginVertical="1" thickness={1} bg="grey" />
           <Stack direction="row" w="100%" my="1">
             <Box w="40%">
+              // @ts-expect-error TS(2304): Cannot find name 'children'.
+              // @ts-expect-error TS(2322): Type '{ children: string; style: any; }' is not as... Remove this comment to see the full error message
               // @ts-expect-error TS(2322): Type '{ children: string; style: any; }' is not as... Remove this comment to see the full error message
               <Text style={styles.keys}>Culturas consociadas:</Text>
             </Box>
+            // @ts-expect-error TS(2304): Cannot find name 'children'.
+            // @ts-expect-error TS(2322): Type '{ children: any; w: "60%"; style: any; }' is... Remove this comment to see the full error message
             // @ts-expect-error TS(2322): Type '{ children: any; w: "60%"; style: any; }' is... Remove this comment to see the full error message
             <Box w="60%" style={styles.values}>
               {farmlandData?.consociatedCrops?.length > 0 &&
                 farmlandData?.consociatedCrops?.map((crop: any) => {
                   return (
+
                     // @ts-expect-error TS(2322): Type '{ children: any; key: any; style: any; }' is... Remove this comment to see the full error message
                     <Text key={crop} style={styles.values}>
                       {crop}
@@ -272,11 +296,17 @@ export default function FarmlandModal({
           <CustomDivider marginVertical="1" thickness={1} bg="grey" />
           <Stack direction="row" w="100%" my="1">
             <Box w="40%">
+              // @ts-expect-error TS(2304): Cannot find name 'children'.
+              // @ts-expect-error TS(2322): Type '{ children: string; style: any; }' is not as... Remove this comment to see the full error message
               // @ts-expect-error TS(2322): Type '{ children: string; style: any; }' is not as... Remove this comment to see the full error message
               <Text style={styles.keys}>Cajueiros:</Text>
             </Box>
+            // @ts-expect-error TS(2304): Cannot find name 'children'.
             // @ts-expect-error TS(2322): Type '{ children: Element; w: "60%"; style: any; }... Remove this comment to see the full error message
+            // @ts-expect-error TS(2322): Type '{ children: any[]; w: "60%"; style: any; }' ... Remove this comment to see the full error message
             <Box w="60%" style={styles.values}>
+              // @ts-expect-error TS(2304): Cannot find name 'children'.
+              // @ts-expect-error TS(2322): Type '{ children: any[]; style: any; }' is not ass... Remove this comment to see the full error message
               // @ts-expect-error TS(2322): Type '{ children: any[]; style: any; }' is not ass... Remove this comment to see the full error message
               <Text style={styles.values}>{farmlandData?.trees} árvores</Text>
             </Box>
@@ -285,15 +315,23 @@ export default function FarmlandModal({
 
           <Stack direction="row" w="100%" my="1">
             <Box w="40%">
+              // @ts-expect-error TS(2304): Cannot find name 'children'.
+              // @ts-expect-error TS(2322): Type '{ children: string; style: any; }' is not as... Remove this comment to see the full error message
               // @ts-expect-error TS(2322): Type '{ children: string; style: any; }' is not as... Remove this comment to see the full error message
               <Text style={styles.keys}>Área:</Text>
             </Box>
+            // @ts-expect-error TS(2304): Cannot find name 'children'.
             // @ts-expect-error TS(2322): Type '{ children: Element[]; w: "60%"; style: any;... Remove this comment to see the full error message
+            // @ts-expect-error TS(2322): Type '{ children: any[]; w: "60%"; style: any; }' ... Remove this comment to see the full error message
             <Box w="60%" style={styles.values}>
+              // @ts-expect-error TS(2304): Cannot find name 'children'.
+              // @ts-expect-error TS(2322): Type '{ children: any[]; style: any; }' is not ass... Remove this comment to see the full error message
               // @ts-expect-error TS(2322): Type '{ children: any[]; style: any; }' is not ass... Remove this comment to see the full error message
               <Text style={styles.values}>
                 {farmlandData?.totalArea} hectares (total)
               </Text>
+              // @ts-expect-error TS(2304): Cannot find name 'children'.
+              // @ts-expect-error TS(2322): Type '{ children: any[]; style: any; }' is not ass... Remove this comment to see the full error message
               // @ts-expect-error TS(2322): Type '{ children: any[]; style: any; }' is not ass... Remove this comment to see the full error message
               <Text style={styles.values}>
                 {farmlandData?.usedArea} hectares (aproveitada)
@@ -304,21 +342,29 @@ export default function FarmlandModal({
 
           <Stack direction="row" w="100%" my="1">
             <Box w="40%">
+              // @ts-expect-error TS(2304): Cannot find name 'children'.
+              // @ts-expect-error TS(2322): Type '{ children: string; style: any; }' is not as... Remove this comment to see the full error message
               // @ts-expect-error TS(2322): Type '{ children: string; style: any; }' is not as... Remove this comment to see the full error message
               <Text style={styles.keys}>Compasso:</Text>
             </Box>
             <Box w="60%">
               <Box>
+                // @ts-expect-error TS(2304): Cannot find name 'children'.
+                // @ts-expect-error TS(2322): Type '{ children: any; style: any; }' is not assig... Remove this comment to see the full error message
                 // @ts-expect-error TS(2322): Type '{ children: any; style: any; }' is not assig... Remove this comment to see the full error message
                 <Text style={styles.values}>
                   {farmlandData?.density?.mode}
                 </Text>
                 {farmlandData?.density?.mode === "Regular" && (
                   <>
+                    // @ts-expect-error TS(2304): Cannot find name 'children'.
+                    // @ts-expect-error TS(2322): Type '{ children: string; style: any; }' is not as... Remove this comment to see the full error message
                     // @ts-expect-error TS(2322): Type '{ children: string; style: any; }' is not as... Remove this comment to see the full error message
                     <Text style={styles.values}>
                       {farmlandData?.density?.length + " (comprimento)"}
                     </Text>
+                    // @ts-expect-error TS(2304): Cannot find name 'children'.
+                    // @ts-expect-error TS(2322): Type '{ children: string; style: any; }' is not as... Remove this comment to see the full error message
                     // @ts-expect-error TS(2322): Type '{ children: string; style: any; }' is not as... Remove this comment to see the full error message
                     <Text style={styles.values}>
                       {farmlandData?.density?.width + " (largura)"}
@@ -331,13 +377,19 @@ export default function FarmlandModal({
           <CustomDivider marginVertical="1" thickness={1} bg="grey" />
           <Stack direction="row" w="100%" my="1">
             <Box w="40%">
+              // @ts-expect-error TS(2304): Cannot find name 'children'.
+              // @ts-expect-error TS(2322): Type '{ children: string; style: any; }' is not as... Remove this comment to see the full error message
               // @ts-expect-error TS(2322): Type '{ children: string; style: any; }' is not as... Remove this comment to see the full error message
               <Text style={styles.keys}>Tipo de plantas:</Text>
             </Box>
             <Box w="60%">
               <Box>
+                // @ts-expect-error TS(2304): Cannot find name 'children'.
                 // @ts-expect-error TS(2322): Type '{ children: any; style: any; }' is not assig... Remove this comment to see the full error message
+                // @ts-expect-error TS(2322): Type '{ children: any[]; style: any; }' is not ass... Remove this comment to see the full error message
                 <Box style={styles.values}>
+                  // @ts-expect-error TS(2304): Cannot find name 'children'.
+                  // @ts-expect-error TS(2322): Type '{ children: any; key: any; style: any; }' is... Remove this comment to see the full error message
                   // @ts-expect-error TS(2322): Type '{ children: any; key: any; style: any; }' is... Remove this comment to see the full error message
                   {farmlandData.plantTypes?.plantType?.map((p: any) => <Text key={p} style={styles.values}>
                     {p}
@@ -348,6 +400,7 @@ export default function FarmlandModal({
                     <Box>
                       {farmlandData.plantTypes?.clones?.map((clone: any) => <Text
                         key={clone}
+
                         // @ts-expect-error TS(2322): Type '{ children: any[]; key: any; style: any[]; }... Remove this comment to see the full error message
                         style={[styles.values, { paddingLeft: 10 }]}
                       >
@@ -361,6 +414,7 @@ export default function FarmlandModal({
           <CustomDivider marginVertical="1" thickness={1} bg="grey" />
           <Center w="100%">
             <Button
+
               // @ts-expect-error TS(2322): Type '{ onPress: () => void; type: "outline"; titl... Remove this comment to see the full error message
               onPress={() => {
                 try {
@@ -369,6 +423,7 @@ export default function FarmlandModal({
                   setIsCoordinatesModalVisible(true);
                 } catch (error) {
                   throw new Error("Failed to register Farmland", {
+
                     // @ts-expect-error TS(2322): Type 'unknown' is not assignable to type 'Error | ... Remove this comment to see the full error message
                     cause: error,
                   });

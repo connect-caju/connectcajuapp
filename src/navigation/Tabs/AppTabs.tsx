@@ -1,6 +1,7 @@
 /* eslint-disable linebreak-style */
 /* eslint-disable prettier/prettier */
 import React from "react";
+
 // @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { StatusBar, useColorScheme } from "react-native";
 import { DarkTheme, DefaultTheme, NavigationContainer, getFocusedRouteNameFromRoute } from "@react-navigation/native";
@@ -42,6 +43,7 @@ export default function AppTabs() {
           initialRouteName="HomeStack"
           shifting={true}
           labeled={false}
+
           // @ts-expect-error TS(2322): Type '() => { headerShown: false; tabBarStyle: { m... Remove this comment to see the full error message
           screenOptions={() => ({
             headerShown: false,

@@ -6,6 +6,7 @@
 
 import React, { useCallback, useEffect, useState } from "react";
 import { Text, Stack, Box, Center, Divider } from "native-base";
+
 // @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { ScrollView, Pressable, View, TouchableOpacity } from "react-native";
 import { Button, Icon } from "@rneui/themed";
@@ -14,11 +15,13 @@ import styles from "./styles";
 import Modal from "react-native-modal";
 
 import "react-native-get-random-values";
+
 // @ts-expect-error TS(7016): Could not find a declaration file for module 'uuid... Remove this comment to see the full error message
 import { v4 as uuidv4 } from "uuid";
 import Realm from "realm";
 
 import SuccessModal from "./SuccessModal";
+
 // @ts-expect-error TS(2307): Cannot find module '../../helpers/generateUUID' or... Remove this comment to see the full error message
 import { generateUUID } from "../../helpers/generateUUID";
 import { generateFormattedDate } from "../../helpers/generateFormattedDate";
@@ -55,7 +58,7 @@ export default function GroupModal({
   setGroupWomenNumber,
   setFarmerItem,
   setIsCoordinatesModalVisible,
-  customUserData
+  customUserData,
 }: any) {
   const [addDataModalVisible, setAddDataModalVisible] = useState(false);
   // const [farmerId, setFarmerId] = useState(null);
@@ -197,7 +200,7 @@ export default function GroupModal({
               size={20}
               color={COLORS.black}
               onPress={() => setModalVisible(false)}
-            // style={{ position: 'relative', top: 10, right: 10, }}
+              // style={{ position: 'relative', top: 10, right: 10, }}
             />
           </View>
         </View>
@@ -212,25 +215,25 @@ export default function GroupModal({
               borderBottomRightRadius: 8,
             }}
           >
-            <Box mx="2">
+            <View
+              style={{
+                marginHorizontal: 2,
+              }}
+            >
               <Stack direction="row" w="100%" my="1">
-                <Box w="40%">
-                  // @ts-expect-error TS(2322): Type '{ children: string; style: any; }' is not as... Remove this comment to see the full error message
-                  <Text style={styles.keys}>Organização:</Text>
-                </Box>
-                // @ts-expect-error TS(2322): Type '{ children: Element; w: "60%"; style: any; }... Remove this comment to see the full error message
-                <Box w="60%" style={styles.values}>
-                  <Box>
-                    // @ts-expect-error TS(2322): Type '{ children: any[]; style: any; }' is not ass... Remove this comment to see the full error message
-                    <Text style={styles.values}>
+                <View style={[styles.keys, {width: "40%"}]}>
+                  <Text>Organização:</Text>
+                </View>
+                <View w="60%" style={styles.values}>
+                  <View style={styles.values}>
+                    <Text>
                       {farmerData?.name} ({farmerData?.type})
                     </Text>
-                    // @ts-expect-error TS(2322): Type '{ children: string; style: any; }' is not as... Remove this comment to see the full error message
-                    <Text style={styles.values}>
+                    <Text>
                       {farmerData?.operationalStatus ? "Activo" : "Inactivo"}
                     </Text>
-                  </Box>
-                </Box>
+                  </View>
+                </View>
               </Stack>
 
               <CustomDivider
@@ -240,21 +243,18 @@ export default function GroupModal({
               />
 
               <Stack direction="row" w="100%" my="1">
-                <Box w="40%">
-                  // @ts-expect-error TS(2322): Type '{ children: string; style: any; }' is not as... Remove this comment to see the full error message
-                  <Text style={styles.keys}>Finalidade:</Text>
-                </Box>
-                // @ts-expect-error TS(2322): Type '{ children: Element; w: "60%"; style: any; }... Remove this comment to see the full error message
-                <Box w="60%" style={styles.values}>
-                  <Box>
+                <View style={[styles.keys, {width: "40%"}]} >
+                  <Text>Finalidade:</Text>
+                </View>
+                <View w="60%" style={[styles.values, {width: "60%", }]}>
+                  <View style={styles.values}>
                     {farmerData?.assets?.map((asset: any, index: any) => (
-                      // @ts-expect-error TS(2322): Type '{ children: any; key: any; style: any; }' is... Remove this comment to see the full error message
-                      <Text key={index} style={styles.values}>
+                      <Text key={index}>
                         {asset?.subcategory}
                       </Text>
                     ))}
-                  </Box>
-                </Box>
+                  </View>
+                </View>
               </Stack>
 
               <CustomDivider
@@ -263,36 +263,31 @@ export default function GroupModal({
                 bg={COLORS.lightgrey}
               />
 
-              <Stack direction="row" w="100%" my="1">
-                <Box w="40%">
-                  // @ts-expect-error TS(2322): Type '{ children: string; style: any; }' is not as... Remove this comment to see the full error message
-                  <Text style={styles.keys}>Membros</Text>
-                </Box>
-                <Box w="60%">
-                  <Box>
-                    // @ts-expect-error TS(2322): Type '{ children: any[]; style: any; }' is not ass... Remove this comment to see the full error message
-                    <Text style={styles.values}>
+              <View style={{ flexDirection: "row", width: "100%", marginVertical: 1, }}>
+                <View style={[styles.keys, {width: "40%"}]} >
+                  <Text >Membros</Text>
+                </View>
+                <View w="60%">
+                  <View style={styles.values}>
+                    <Text>
                       {farmerData.numberOfMembers?.women} (Mulheres)
                     </Text>
-                  </Box>
-                  <Box>
-                    // @ts-expect-error TS(2322): Type '{ children: (string | number)[]; style: any;... Remove this comment to see the full error message
-                    <Text style={styles.values}>
+                  </View>
+                  <View style={styles.values}>
+                    <Text>
                       {farmerData.numberOfMembers?.total -
                         farmerData.numberOfMembers?.women}{" "}
                       (Homens)
                     </Text>
-                  </Box>
-                  <Box>
-                    // @ts-expect-error TS(2322): Type '{ children: string; style: any; }' is not as... Remove this comment to see the full error message
-                    <Text style={styles.values}>________</Text>
-                    // @ts-expect-error TS(2322): Type '{ children: any[]; style: any; }' is not ass... Remove this comment to see the full error message
-                    <Text style={styles.values}>
+                  </View>
+                  <View style={styles.values}>
+                    <Text>________</Text>
+                    <Text>
                       {farmerData.numberOfMembers?.total} (Total)
                     </Text>
-                  </Box>
-                </Box>
-              </Stack>
+                  </View>
+                </View>
+              </View>
 
               <CustomDivider
                 marginVertical="1"
@@ -300,69 +295,67 @@ export default function GroupModal({
                 bg={COLORS.lightgrey}
               />
 
-              <Stack direction="row" w="100%" my="1">
-                <Box w="40%">
-                  // @ts-expect-error TS(2322): Type '{ children: string; style: any; }' is not as... Remove this comment to see the full error message
-                  <Text style={styles.keys}>Estado de legalização</Text>
-                </Box>
-                <Box w="60%">
-                  <Box>
-                    // @ts-expect-error TS(2322): Type '{ children: any; style: any; }' is not assig... Remove this comment to see the full error message
-                    <Text style={styles.values}>{farmerData?.legalStatus}</Text>
-                    // @ts-expect-error TS(2322): Type '{ children: any[]; style: any; }' is not ass... Remove this comment to see the full error message
-                    <Text style={styles.values}>
-                      {farmerData?.creationYear} (ano de criação)
-                    </Text>
+              <View
+                style={{
+                  flexDirection: "row",
+                  width: "100%",
+                  marginVertical: 1,
+                }}
+              >
+                <View style={[styles.keys, { width: "40%" }]}>
+                  <Text>Estado de legalização</Text>
+                </View>
+                <View style={{ width: "40%" }}>
+                  <View style={styles.values}>
+                    <Text>{farmerData?.legalStatus}</Text>
+                    <Text>{farmerData?.creationYear} (ano de criação)</Text>
                     {farmerData?.legalStatus ===
                       groupAffiliationStatus.affiliated && (
-                        // @ts-expect-error TS(2322): Type '{ children: any[]; style: any; }' is not ass... Remove this comment to see the full error message
-                        <Text style={styles.values}>
-                          {farmerData?.affiliationYear} (ano de legalização)
-                        </Text>
-                      )}
-                  </Box>
-                </Box>
-              </Stack>
+                      <Text>
+                        {farmerData?.affiliationYear} (ano de legalização)
+                      </Text>
+                    )}
+                  </View>
+                </View>
+              </View>
 
               {farmerData?.legalStatus ===
                 groupAffiliationStatus.affiliated && (
-                  <>
-                    <CustomDivider
-                      marginVertical="1"
-                      thickness={1}
-                      bg={COLORS.lightgrey}
-                    />
+                <View>
+                  <CustomDivider
+                    marginVertical="1"
+                    thickness={1}
+                    bg={COLORS.lightgrey}
+                  />
 
-                    <Stack direction="row" w="100%" my="1">
-                      <Box w="40%">
-                        // @ts-expect-error TS(2322): Type '{ children: string; style: any; }' is not as... Remove this comment to see the full error message
-                        <Text style={styles.keys}>Documentação:</Text>
-                      </Box>
-                      <Box w="60%">
-                        <Box>
-                          // @ts-expect-error TS(2322): Type '{ children: string; style: any; }' is not as... Remove this comment to see the full error message
-                          <Text style={styles.values}>
-                            {farmerData?.nuel
-                              ? farmerData?.nuel + " (NUEL)"
-                              : "Nenhum (NUEL"}
-                          </Text>
-                          // @ts-expect-error TS(2322): Type '{ children: string; style: any; }' is not as... Remove this comment to see the full error message
-                          <Text style={styles.values}>
-                            {farmerData?.nuit
-                              ? farmerData?.nuit + " (NUIT)"
-                              : "Nenhum (NUIT)"}
-                          </Text>
-                          // @ts-expect-error TS(2322): Type '{ children: string; style: any; }' is not as... Remove this comment to see the full error message
-                          <Text style={styles.values}>
-                            {farmerData?.licence
-                              ? farmerData?.licence + " (Licença/Alvará)"
-                              : "Nenhum (Licença/Alvará)"}
-                          </Text>
-                        </Box>
-                      </Box>
-                    </Stack>
-                  </>
-                )}
+                  <Stack direction="row" w="100%" my="1">
+                    <View style={[styles.keys, { width: "40%" }]}>
+                      <Text>Documentação:</Text>
+                    </View>
+                    <View w="60%" style={{ width: "60%" }}>
+                      <View style={styles.values}>
+                        <Text>
+                          {farmerData?.nuel
+                            ? farmerData?.nuel + " (NUEL)"
+                            : "Nenhum (NUEL"}
+                        </Text>
+
+                        <Text>
+                          {farmerData?.nuit
+                            ? farmerData?.nuit + " (NUIT)"
+                            : "Nenhum (NUIT)"}
+                        </Text>
+
+                        <Text>
+                          {farmerData?.licence
+                            ? farmerData?.licence + " (Licença/Alvará)"
+                            : "Nenhum (Licença/Alvará)"}
+                        </Text>
+                      </View>
+                    </View>
+                  </Stack>
+                </View>
+              )}
 
               <CustomDivider
                 marginVertical="1"
@@ -371,32 +364,21 @@ export default function GroupModal({
               />
 
               <Stack direction="row" w="100%" my="1">
-                <Box w="40%">
-                  // @ts-expect-error TS(2322): Type '{ children: string; style: any; }' is not as... Remove this comment to see the full error message
-                  <Text style={styles.keys}>Endereço:</Text>
-                </Box>
-                <Box w="60%">
-                  <Box>
-                    // @ts-expect-error TS(2322): Type '{ children: any[]; style: any; }' is not ass... Remove this comment to see the full error message
-                    <Text style={styles.values}>
-                      {farmerData?.address?.province} (Província)
-                    </Text>
-                    // @ts-expect-error TS(2322): Type '{ children: any[]; style: any; }' is not ass... Remove this comment to see the full error message
-                    <Text style={styles.values}>
-                      {farmerData?.address?.district} (Distrito)
-                    </Text>
-                    // @ts-expect-error TS(2322): Type '{ children: any[]; style: any; }' is not ass... Remove this comment to see the full error message
-                    <Text style={styles.values}>
-                      {farmerData?.address?.adminPost} (Posto Admin.)
-                    </Text>
-                    // @ts-expect-error TS(2322): Type '{ children: string; style: any; }' is not as... Remove this comment to see the full error message
-                    <Text style={styles.values}>
+                <View style={[styles.keys, { width: "40%" }]}>
+                  <Text>Endereço:</Text>
+                </View>
+                <View style={{ width: "60%" }} w="60%">
+                  <View style={[styles.values]}>
+                    <Text>{farmerData?.address?.province} (Província)</Text>
+                    <Text>{farmerData?.address?.district} (Distrito)</Text>
+                    <Text>{farmerData?.address?.adminPost} (Posto Admin.)</Text>
+                    <Text>
                       {farmerData.address?.village
                         ? farmerData.address?.village + " (localidade)"
                         : "Nenhum (Localidade)"}
                     </Text>
-                  </Box>
-                </Box>
+                  </View>
+                </View>
               </Stack>
 
               <CustomDivider
@@ -405,7 +387,7 @@ export default function GroupModal({
                 bg={COLORS.lightgrey}
               />
               <Center w="100%" py="3">
-                <PrimaryButton 
+                <PrimaryButton
                   onPress={() => {
                     try {
                       addGroup(farmerData, realm);
@@ -413,7 +395,6 @@ export default function GroupModal({
                       setIsCoordinatesModalVisible(true);
                     } catch (error) {
                       throw new Error("Failed to register Group", {
-                        // @ts-expect-error TS(2322): Type 'unknown' is not assignable to type 'Error | ... Remove this comment to see the full error message
                         cause: error,
                       });
                     } finally {
@@ -422,23 +403,19 @@ export default function GroupModal({
                       setGroupAffiliationYear("");
                       setGroupAdminPost("");
                       setGroupVillage("");
-                      // setGroupManagerName('');
-                      // setGroupManagerPhone('');
                       setGroupOperatingLicence("");
                       setGroupNuit("");
                       setGroupMembersNumber("");
                       setGroupWomenNumber("");
                     }
                   }}
-                  title="Salvar dados"                  
+                  title="Salvar dados"
                 />
               </Center>
-            </Box>
+            </View>
           </View>
         </ScrollView>
       </View>
     </Modal>
   );
 }
-
-// export default GroupModal;

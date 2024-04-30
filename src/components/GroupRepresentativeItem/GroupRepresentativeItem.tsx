@@ -24,6 +24,7 @@ import React, { useEffect, useRef, useState, useCallback } from "react";
 import { ListItem, Avatar, Icon, SearchBar } from "@rneui/themed";
 import { Box, Center, Pressable, Stack } from "native-base";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
+
 // @ts-expect-error TS(7016): Could not find a declaration file for module 'uuid... Remove this comment to see the full error message
 import { v4 as uuidv4 } from "uuid";
 
@@ -83,6 +84,7 @@ export default function GroupRepresentativeItem({
       <Stack direction="row" w="100%">
         <Box
           w="10%"
+
           // @ts-expect-error TS(2322): Type '{ children: Element; w: "10%"; style: { heig... Remove this comment to see the full error message
           style={{
             height: "100%",
@@ -142,6 +144,7 @@ export default function GroupRepresentativeItem({
         </Box>
         <Box
           w="10%"
+
           // @ts-expect-error TS(2322): Type '{ children: Element; w: "10%"; style: { heig... Remove this comment to see the full error message
           style={{
             height: "100%",
@@ -152,6 +155,7 @@ export default function GroupRepresentativeItem({
         >
           <TouchableOpacity
             onPress={() => {
+
               // @ts-expect-error TS(2345): Argument of type 'string' is not assignable to par... Remove this comment to see the full error message
               navigation.navigate("Profile", {
                 ownerId: item._id,

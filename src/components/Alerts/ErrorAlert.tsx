@@ -12,6 +12,7 @@ import {
   Center,
   NativeBaseProvider,
 } from "native-base"
+
 // @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { Pressable } from "react-native"
 import COLORS from "../../consts/colors"
@@ -53,6 +54,7 @@ const ErrorAlert = ({
                 _icon={{
                   color: "coolGray.600",
                 }}
+
                 // @ts-expect-error TS(2322): Type '{ variant: "unstyled"; _focus: { borderWidth... Remove this comment to see the full error message
                 onPress={() => setErrorAlert(false)}
               />
@@ -81,6 +83,7 @@ const ErrorAlert = ({
         mx="auto"
       >
         <Text
+
           // @ts-expect-error TS(2322): Type '{ children: string; style: { color: string; ... Remove this comment to see the full error message
           style={{
             color: COLORS.main,

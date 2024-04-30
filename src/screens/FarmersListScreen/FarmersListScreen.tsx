@@ -341,6 +341,7 @@ const FarmersListScreen = ({
   const handleEndReached = () => {
     if (!isEndReached && !isLoading) {
       setIsLoading(true);
+
       // @ts-expect-error TS(2304): Cannot find name 'setTimeout'.
       setTimeout(() => {
         setIsLoading(false);
@@ -424,6 +425,7 @@ const FarmersListScreen = ({
                     icon={faSearch}
                     size={25}
                     color={COLORS.black}
+
                     // @ts-expect-error TS(2322): Type '{ icon: IconDefinition; size: number; color:... Remove this comment to see the full error message
                     fade
                   />
@@ -444,6 +446,7 @@ const FarmersListScreen = ({
                     icon={faEllipsisVertical}
                     size={25}
                     color={COLORS.black}
+
                     // @ts-expect-error TS(2322): Type '{ icon: IconDefinition; size: number; color:... Remove this comment to see the full error message
                     fade
                   />
@@ -456,6 +459,7 @@ const FarmersListScreen = ({
           <Stack direction="row" w="100%">
             <Center w="10%">
               <Pressable
+
                 // @ts-expect-error TS(2322): Type '{ children: Element; onPress: () => void; st... Remove this comment to see the full error message
                 onPress={() => {
                   if (isSearching) {
@@ -480,6 +484,7 @@ const FarmersListScreen = ({
             </Center>
             <Box
               w="90%"
+
               // @ts-expect-error TS(2322): Type '{ children: Element; w: "90%"; style: { alig... Remove this comment to see the full error message
               style={{
                 alignItems: "center",
@@ -579,6 +584,7 @@ const FarmersListScreen = ({
         <Box
           alignItems="stretch"
           w="100%"
+
           // @ts-expect-error TS(2322): Type '{ children: Element; alignItems: "stretch"; ... Remove this comment to see the full error message
           style={{
             marginVertical: 7,
@@ -588,6 +594,7 @@ const FarmersListScreen = ({
           <FlatList
             StickyHeaderComponent={() => (
               <Box
+
                 // @ts-expect-error TS(2322): Type '{ children: never[]; style: { height: number... Remove this comment to see the full error message
                 style={{
                   height: hp("10%"),
@@ -603,6 +610,7 @@ const FarmersListScreen = ({
             keyExtractor={keyExtractor}
             onEndReached={handleEndReached}
             onEndReachedThreshold={0.1}
+
             // @ts-expect-error TS(7030): Not all code paths return a value.
             renderItem={({
               item
@@ -629,6 +637,7 @@ const FarmersListScreen = ({
               if (!isEndReached) {
                 return (
                   <Box
+
                     // @ts-expect-error TS(2322): Type '{ style: { backgroundColor: string; paddingB... Remove this comment to see the full error message
                     style={{
                       // height: 10,
@@ -648,6 +657,7 @@ const FarmersListScreen = ({
           <Box
             alignItems="stretch"
             w="100%"
+
             // @ts-expect-error TS(2322): Type '{ children: Element; alignItems: "stretch"; ... Remove this comment to see the full error message
             style={{
               marginVertical: 7,
@@ -657,6 +667,7 @@ const FarmersListScreen = ({
             <FlatList
               StickyHeaderComponent={() => (
                 <Box
+
                   // @ts-expect-error TS(2322): Type '{ children: never[]; style: { height: number... Remove this comment to see the full error message
                   style={{
                     height: hp("10%"),
@@ -672,6 +683,7 @@ const FarmersListScreen = ({
               keyExtractor={keyExtractor}
               onEndReached={handleEndReached}
               onEndReachedThreshold={0.1}
+
               // @ts-expect-error TS(7030): Not all code paths return a value.
               renderItem={({
                 item
@@ -694,6 +706,7 @@ const FarmersListScreen = ({
                 if (!isEndReached) {
                   return (
                     <Box
+
                       // @ts-expect-error TS(2322): Type '{ style: { backgroundColor: string; paddingB... Remove this comment to see the full error message
                       style={{
                         // height: 10,
@@ -710,6 +723,7 @@ const FarmersListScreen = ({
           </Box>
         ) : (
           <Box
+
             // @ts-expect-error TS(2322): Type '{ children: Element; style: { justifyContent... Remove this comment to see the full error message
             style={{
               justifyContent: "center",
@@ -740,6 +754,7 @@ const FarmersListScreen = ({
 
       {foundFarmersList.length === 0 && searchQuery.length > 0 && (
         <Box
+
           // @ts-expect-error TS(2322): Type '{ children: Element; style: { justifyContent... Remove this comment to see the full error message
           style={{
             justifyContent: "center",

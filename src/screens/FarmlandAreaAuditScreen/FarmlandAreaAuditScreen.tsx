@@ -29,9 +29,11 @@ import { realmContext } from "../../models/realmContext";
 import COLORS from "../../consts/colors";
 import MapModal from "../../components/Modals/MapModal";
 import { useFocusEffect } from "@react-navigation/native";
+
 // @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { InteractionManager } from "react-native";
 import CustomActivityIndicator from "../../components/ActivityIndicator/CustomActivityIndicator";
+
 // @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { Pressable } from "react-native";
 import { calculateArea, calculatePolygonArea } from "../../helpers/calculatePolygonArea";
@@ -67,6 +69,7 @@ const FarmlandAreaAuditScreen = ({
   const [isCalculatedAreaConfirmed, setIsCalculatedAreaConfirmed] =
     useState(false);
 
+
   // @ts-expect-error TS(2769): No overload matches this call.
   const farmland = useObject("Farmland", farmlandId);
 
@@ -88,17 +91,21 @@ const FarmlandAreaAuditScreen = ({
         setPermissionGranted(true);
         setConfirmGeoAlert(true);
         subscribeLocation();
+
         // @ts-expect-error TS(2584): Cannot find name 'console'. Do you need to change ... Remove this comment to see the full error message
         console.log("You can use the app");
       } else {
         setPermissionGranted(false);
         // setRejectGeoAlert(true);
+
         // @ts-expect-error TS(2584): Cannot find name 'console'. Do you need to change ... Remove this comment to see the full error message
         console.log("Location Permission Denied");
       }
     } catch (err) {
+
       // @ts-expect-error TS(2584): Cannot find name 'console'. Do you need to change ... Remove this comment to see the full error message
       console.log("not granted:", granted);
+
       // @ts-expect-error TS(2584): Cannot find name 'console'. Do you need to change ... Remove this comment to see the full error message
       console.warn(err);
       setFailedGeoLocationRequest(true);
@@ -114,6 +121,7 @@ const FarmlandAreaAuditScreen = ({
   };
 
   const subscribeLocation = () => {
+
     // @ts-expect-error TS(2304): Cannot find name 'watchID'.
     watchID = Geolocation.watchPosition(
       (position) => {
@@ -131,6 +139,7 @@ const FarmlandAreaAuditScreen = ({
       },
       {
         enableHighAccuracy: true,
+
         // @ts-expect-error TS(2559): Type 'string' has no properties in common with typ... Remove this comment to see the full error message
         accuracy: "high",
         timeout: 15000,
@@ -156,6 +165,7 @@ const FarmlandAreaAuditScreen = ({
       Geolocation.getCurrentPosition(
         (position) => {
           // get the exact position to the point
+
           // @ts-expect-error TS(2339): Property 'extremeCoordinates' does not exist on ty... Remove this comment to see the full error message
           const number = getPosition(farmland?.extremeCoordinates);
 
@@ -172,6 +182,7 @@ const FarmlandAreaAuditScreen = ({
         },
         {
           enableHighAccuracy: true,
+
           // @ts-expect-error TS(2559): Type 'string' has no properties in common with typ... Remove this comment to see the full error message
           accuracy: "high",
           timeout: 15000,
@@ -185,6 +196,7 @@ const FarmlandAreaAuditScreen = ({
   useEffect(() => {
     requestLocationPermission();
     return () => {
+
       // @ts-expect-error TS(2304): Cannot find name 'watchID'.
       Geolocation.clearWatch(watchID);
     };
@@ -192,15 +204,19 @@ const FarmlandAreaAuditScreen = ({
 
   const navigateBack = () => {
     navigation.navigate("Profile", {
+
       // @ts-expect-error TS(2339): Property 'farmerId' does not exist on type 'Object... Remove this comment to see the full error message
       ownerId: farmland?.farmerId,
       farmerType:
+
         // @ts-expect-error TS(2531): Object is possibly 'null'.
         farmland.ownerType === "Single"
           ? farmerTypes.farmer
+
           // @ts-expect-error TS(2531): Object is possibly 'null'.
           : farmland.ownerType === "Group"
             ? farmerTypes.group
+
             // @ts-expect-error TS(2531): Object is possibly 'null'.
             : farmland.ownerType === "Institution"
               ? farmerTypes.institution
@@ -223,8 +239,10 @@ const FarmlandAreaAuditScreen = ({
 
   // organize the coordinates point objects
   const handleCalculateArea = () => {
+
     // @ts-expect-error TS(2531): Object is possibly 'null'.
     let coordinates = farmland.extremeCoordinates;
+
 
     // @ts-expect-error TS(2304): Cannot find name 'points'.
     points = coordinates?.map((point: any) => {
@@ -233,12 +251,16 @@ const FarmlandAreaAuditScreen = ({
         lng: parseFloat(point?.longitude),
       };
     });
+
     // @ts-expect-error TS(2304): Cannot find name 'points'.
     points.push(points[0]);
+
     // @ts-expect-error TS(2304): Cannot find name 'points'.
     const area = calculateArea(points);
+
     // @ts-expect-error TS(2345): Argument of type 'number' is not assignable to par... Remove this comment to see the full error message
     setArea(Number(area));
+
     // @ts-expect-error TS(2584): Cannot find name 'console'. Do you need to change ... Remove this comment to see the full error message
     console.log("area:", area);
     return area;
@@ -247,6 +269,7 @@ const FarmlandAreaAuditScreen = ({
   // save the area that has been calculated
   const saveAuditedArea = (area: any) => {
     realm.write(() => {
+
       // @ts-expect-error TS(2531): Object is possibly 'null'.
       farmland.auditedArea = parseFloat(area);
     });
@@ -264,6 +287,7 @@ const FarmlandAreaAuditScreen = ({
     // The SuccessLottie Overlay should show up for 2 seconds
     // And disappear by its own
     if (successLottieVisibile && !isCalculatedAreaConfirmed) {
+
       // @ts-expect-error TS(2304): Cannot find name 'setTimeout'.
       setTimeout(() => {
         navigateBack();
@@ -421,6 +445,7 @@ const FarmlandAreaAuditScreen = ({
         </View>
         <View >
           // @ts-expect-error TS(2339): Property 'extremeCoordinates' does not exist on ty... Remove this comment to see the full error message
+          // @ts-expect-error TS(2339): Property 'extremeCoordinates' does not exist on ty... Remove this comment to see the full error message
           {farmland?.extremeCoordinates.length > 0 && (
             <TouchableOpacity
               onPress={async () => await getGeolocation()}
@@ -434,13 +459,16 @@ const FarmlandAreaAuditScreen = ({
 
 
       // @ts-expect-error TS(2339): Property 'extremeCoordinates' does not exist on ty... Remove this comment to see the full error message
+      // @ts-expect-error TS(2339): Property 'extremeCoordinates' does not exist on ty... Remove this comment to see the full error message
       {farmland?.extremeCoordinates.length === 0 && (
+
         // @ts-expect-error TS(2322): Type '{ children: Element[]; style: { minHeight: s... Remove this comment to see the full error message
         <Center style={{ minHeight: "100%" }}>
           <TouchableOpacity onPress={async () => await getGeolocation()}>
             <GeoPin />
           </TouchableOpacity>
           <Box
+
             // @ts-expect-error TS(2322): Type '{ children: Element; style: { backgroundColo... Remove this comment to see the full error message
             style={{
               backgroundColor: COLORS.lightestgrey,
@@ -466,16 +494,19 @@ const FarmlandAreaAuditScreen = ({
       )}
 
       <FlatList
+
         // @ts-expect-error TS(2339): Property 'extremeCoordinates' does not exist on ty... Remove this comment to see the full error message
         data={sortCoordinatesByPositions(farmland?.extremeCoordinates)}
         keyExtractor={keyExtractor}
         renderItem={({
           item
         }: any) => {
+
           // @ts-expect-error TS(2786): 'CoordinatesItem' cannot be used as a JSX componen... Remove this comment to see the full error message
           return <CoordinatesItem item={item} farmland={farmland} />;
         }}
       />
+      // @ts-expect-error TS(2339): Property 'extremeCoordinates' does not exist on ty... Remove this comment to see the full error message
       // @ts-expect-error TS(2339): Property 'extremeCoordinates' does not exist on ty... Remove this comment to see the full error message
       {farmland?.extremeCoordinates.length > 2 && (
         <TouchableOpacity
@@ -505,6 +536,7 @@ const FarmlandAreaAuditScreen = ({
         </TouchableOpacity>
       )}
       <MapModal
+
         // @ts-expect-error TS(2531): Object is possibly 'null'.
         farmlandId={farmland._id}
         isMapVisible={isMapVisible}

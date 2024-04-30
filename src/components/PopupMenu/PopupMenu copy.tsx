@@ -1,4 +1,5 @@
 import { Icon } from "@rneui/base"
+
 // @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { ScrollView, StyleSheet, Text, View } from "react-native"
 import { Stack, Box, Center } from "native-base"
@@ -30,6 +31,7 @@ export function CustomizedMenuOption({
 }: any) {
   return (
     <MenuOption
+
       // @ts-expect-error TS(2304): Cannot find name 'alert'.
       onSelect={() => alert(`You clicked ${value}`)}
       customStyles={{
@@ -66,6 +68,7 @@ export function PopupMenu({}) {
               icon={faEllipsisVertical}
               size={20}
               color={COLORS.main}
+
               // @ts-expect-error TS(2322): Type '{ icon: IconDefinition; size: number; color:... Remove this comment to see the full error message
               fade
             />

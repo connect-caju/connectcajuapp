@@ -85,6 +85,7 @@ export default function InstitutionScreen({
   const snapPoints = ["25%", "50%", "75%"]
 
   function handlePresentModal() {
+
     // @ts-expect-error TS(2339): Property 'present' does not exist on type 'never'.
     bottomSheetModalRef.current?.present()
   }
@@ -94,6 +95,7 @@ export default function InstitutionScreen({
   // SuccesLottie effect
   useEffect(() => {
     if (successLottieVisible) {
+
       // @ts-expect-error TS(2304): Cannot find name 'setTimeout'.
       setTimeout(() => {
         setSuccessLottieVisible(false)
@@ -103,8 +105,10 @@ export default function InstitutionScreen({
 
   useEffect(() => {
     if (farmersIDs?.length > 0) {
+
       // @ts-expect-error TS(2304): Cannot find name 'current'.
       current = farmersIDs.find((node: any) => node.current === ownerId)
+
       // @ts-expect-error TS(2304): Cannot find name 'current'.
       setCurrentNode(current)
     }
@@ -227,6 +231,7 @@ export default function InstitutionScreen({
         </View>
 
         <Box
+
           // @ts-expect-error TS(2322): Type '{ children: null; style: { position: string;... Remove this comment to see the full error message
           style={{
             position: "absolute",
@@ -266,6 +271,7 @@ export default function InstitutionScreen({
         </Box>
 
         <Box
+
           // @ts-expect-error TS(2322): Type '{ children: null; style: { position: string;... Remove this comment to see the full error message
           style={{
             position: "absolute",
@@ -321,6 +327,7 @@ export default function InstitutionScreen({
           >
             <Box
               w="100%"
+
               // @ts-expect-error TS(2322): Type '{ children: Element[]; w: "100%"; style: { a... Remove this comment to see the full error message
               style={{
                 alignItems: "center",
@@ -335,6 +342,7 @@ export default function InstitutionScreen({
                 onPress={() => {
                   navigation.navigate("Camera", {
                     ownerType: "Instituição",
+
                     // @ts-expect-error TS(2339): Property '_id' does not exist on type 'Object<unkn... Remove this comment to see the full error message
                     ownerId: farmer?._id,
                     farmersIDs,
@@ -345,10 +353,13 @@ export default function InstitutionScreen({
                   top: -50,
                 }}
               >
+                // @ts-expect-error TS(2339): Property 'un' does not exist on type 'JSX.Intrinsi... Remove this comment to see the full error message
+                // @ts-expect-error TS(2339): Property 'image' does not exist on type 'Object<un... Remove this comment to see the full error message
                 // @ts-expect-error TS(2339): Property 'image' does not exist on type 'Object<un... Remove this comment to see the full error message
                 {farmer?.image ? (
                   <>
                     <Image
+
                       // @ts-expect-error TS(2339): Property 'image' does not exist on type 'Object<un... Remove this comment to see the full error message
                       source={{ uri: farmer?.image }}
                       style={styles.images}
@@ -379,6 +390,7 @@ export default function InstitutionScreen({
                   top: -50,
                 }}
               >
+                // @ts-expect-error TS(2339): Property 'manager' does not exist on type 'Object<... Remove this comment to see the full error message
                 // @ts-expect-error TS(2339): Property 'manager' does not exist on type 'Object<... Remove this comment to see the full error message
                 {farmer?.manager?.fullname}
               </Text>
@@ -415,6 +427,7 @@ export default function InstitutionScreen({
                 }}
               >
                 // @ts-expect-error TS(2339): Property 'identifier' does not exist on type 'Obje... Remove this comment to see the full error message
+                // @ts-expect-error TS(2339): Property 'identifier' does not exist on type 'Obje... Remove this comment to see the full error message
                 {farmer?.identifier}
               </Text>
 
@@ -424,6 +437,7 @@ export default function InstitutionScreen({
             <Box
               alignItems="stretch"
               w="100%"
+
               // @ts-expect-error TS(2322): Type '{ children: (false | Element | Element[])[];... Remove this comment to see the full error message
               style={{
                 flex: 1,
@@ -457,6 +471,7 @@ export default function InstitutionScreen({
                   <Box w="50%"></Box>
                   <Box
                     w="50%"
+
                     // @ts-expect-error TS(2322): Type '{ children: Element; w: "50%"; style: { alig... Remove this comment to see the full error message
                     style={{
                       alignItems: "flex-end",
@@ -468,12 +483,16 @@ export default function InstitutionScreen({
                       }}
                       onPress={() =>
                         navigation.navigate("FarmlandForm1", {
+
                           // @ts-expect-error TS(2339): Property '_id' does not exist on type 'Object<unkn... Remove this comment to see the full error message
                           ownerId: farmer?._id,
+
                           // @ts-expect-error TS(2339): Property 'type' does not exist on type 'Object<unk... Remove this comment to see the full error message
                           ownerName: `${farmer?.type} ${farmer?.name}`,
+
                           // @ts-expect-error TS(2339): Property 'image' does not exist on type 'Object<un... Remove this comment to see the full error message
                           ownerImage: farmer?.image,
+
                           // @ts-expect-error TS(2339): Property 'address' does not exist on type 'Object<... Remove this comment to see the full error message
                           ownerAddress: farmer?.address,
                           flag: "Instituição",
@@ -481,6 +500,7 @@ export default function InstitutionScreen({
                       }
                     >
                       <Box
+
                         // @ts-expect-error TS(2322): Type '{ children: Element[]; style: { flexDirectio... Remove this comment to see the full error message
                         style={{
                           flexDirection: "row",
@@ -515,11 +535,13 @@ export default function InstitutionScreen({
 
               {farmlands?.map((farmland) => (
                 <FarmlandData
+
                   // @ts-expect-error TS(2339): Property '_id' does not exist on type 'Object<unkn... Remove this comment to see the full error message
                   key={farmland?._id}
                   farmland={farmland}
                   successLottieVisible={successLottieVisible}
                   setSuccessLottieVisible={setSuccessLottieVisible}
+
                   // @ts-expect-error TS(2339): Property 'image' does not exist on type 'Object<un... Remove this comment to see the full error message
                   ownerImage={farmer?.image}
                 />

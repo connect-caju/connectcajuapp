@@ -1,17 +1,11 @@
-/* eslint-disable prettier/prettier */
-/* eslint-disable linebreak-style */
-/* eslint-disable react/prop-types */
 import React, { useCallback, useState } from "react";
 import { Text, Stack, Box, Center } from "native-base";
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { ScrollView, View, } from "react-native";
 import { Button, Icon } from "@rneui/themed";
 import Modal from "react-native-modal";
 import CustomDivider from "../Divider/CustomDivider";
 import styles from "./styles";
-
 import "react-native-get-random-values";
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'uuid... Remove this comment to see the full error message
 import { v4 as uuidv4 } from "uuid";
 
 import { generateUAID } from "../../helpers/generateUAID";
@@ -113,10 +107,9 @@ export default function IndividualModal({
       // update user stat (1 more farmer registered by the user)
       if (currentUserStat) {
         realm.write(() => {
+
           // @ts-expect-error TS(2339): Property 'registeredFarmers' does not exist on typ... Remove this comment to see the full error message
-          currentUserStat.registeredFarmers =
-            // @ts-expect-error TS(2339): Property 'registeredFarmers' does not exist on typ... Remove this comment to see the full error message
-            currentUserStat.registeredFarmers + 1;
+          currentUserStat.registeredFarmers =  currentUserStat.registeredFarmers + 1;
         });
       } else {
         realm.write(() => {
@@ -187,6 +180,7 @@ export default function IndividualModal({
         try {
           addSprayingServiceProvider(actor, realm);
         } catch (error) {
+
           // @ts-expect-error TS(2584): Cannot find name 'console'. Do you need to change ... Remove this comment to see the full error message
           console.log("Could not save actor as spraying service provider:", {
             cause: error,
@@ -198,6 +192,7 @@ export default function IndividualModal({
         try {
           addActorMembership(actor, realm);
         } catch (error) {
+
           // @ts-expect-error TS(2584): Cannot find name 'console'. Do you need to change ... Remove this comment to see the full error message
           console.log("Could not save actor as member of an organization:", {
             cause: error,
@@ -231,17 +226,12 @@ export default function IndividualModal({
             borderTopRightRadius: 8,
           }}
         >
-          <View style={{ width: "90%" }}>
-            <Text
-              // @ts-expect-error TS(2322): Type '{ children: string; style: { fontFamily: str... Remove this comment to see the full error message
-              style={{
-                fontFamily: "JosefinSans-Bold",
+          <View style={{ width: "90%", fontFamily: "JosefinSans-Bold",
                 fontSize: 16,
                 color: COLORS.black,
                 paddingTop: 15,
-                textAlign: "center",
-              }}
-            >
+                textAlign: "center", }}>
+            <Text>
               Confirmar Dados
             </Text>
           </View>
@@ -270,284 +260,241 @@ export default function IndividualModal({
               borderBottomRightRadius: 8,
             }}
           >
-            <Box mx="2">
-              <Stack direction="row" w="100%" my="1">
-                <Box w="50%">
-                  // @ts-expect-error TS(2322): Type '{ children: string; style: any; }' is not as... Remove this comment to see the full error message
-                  <Text style={styles.keys}>Nome Completo:</Text>
-                </Box>
-                // @ts-expect-error TS(2322): Type '{ children: Element; w: "50%"; style: any; }... Remove this comment to see the full error message
-                <Box w="50%" style={styles.values}>
-                  <Box>
-                    // @ts-expect-error TS(2322): Type '{ children: any[]; style: any; }' is not ass... Remove this comment to see the full error message
-                    <Text style={styles.values}>
+            <View style={{marginHorizontal: 2}}>
+              <View style={{flexDirection: "row", width: "100%", marginVertical: 1, }}>
+                <View style={[styles.keys, { width: "50%"}]}>
+                  <Text>Nome Completo:</Text>
+                </View>
+                <View style={[styles.values, { width: "50%"}]} >
+                  <View>
+                    <Text>
                       {farmerData?.names?.surname} (Apelido)
                     </Text>
-                    // @ts-expect-error TS(2322): Type '{ children: any[]; style: any; }' is not ass... Remove this comment to see the full error message
-                    <Text style={styles.values}>
+                    <Text>
                       {farmerData?.names?.otherNames} (Outros nomes)
                     </Text>
-                  </Box>
-                </Box>
-              </Stack>
+                  </View>
+                </View>
+              </View>
               <CustomDivider
                 marginVertical="1"
                 thickness={1}
                 bg={COLORS.lightgrey}
               />
-              <Stack direction="row" w="100%" my="1">
-                <Box w="50%">
-                  // @ts-expect-error TS(2322): Type '{ children: string; style: any; }' is not as... Remove this comment to see the full error message
-                  <Text style={styles.keys}>Provedor de Serviços:</Text>
-                </Box>
-                // @ts-expect-error TS(2322): Type '{ children: Element; w: "50%"; style: any; }... Remove this comment to see the full error message
-                <Box w="50%" style={styles.values}>
-                  // @ts-expect-error TS(2322): Type '{ children: string; style: any; }' is not as... Remove this comment to see the full error message
-                  <Text style={styles.values}>
+              <View style={{flexDirection: "row", width: "100%", marginVertical: 1, }}>
+                <View style={[styles.keys, { width: "50%"}]}>
+                  <Text>Provedor de Serviços:</Text>
+                </View>
+                <View style={[styles.values, { width: "50%"}]}>
+                  <Text>
                     {farmerData?.isSprayingAgent ? "Sim" : "Não"}
                   </Text>
-                </Box>
-              </Stack>
+                </View>
+              </View>
 
               <CustomDivider
                 marginVertical="1"
                 thickness={1}
                 bg={COLORS.lightgrey}
               />
-              <Stack direction="row" w="100%" my="1">
-                <Box w="50%">
-                  // @ts-expect-error TS(2322): Type '{ children: string; style: any; }' is not as... Remove this comment to see the full error message
-                  <Text style={styles.keys}>Membro de organização:</Text>
-                </Box>
-                // @ts-expect-error TS(2322): Type '{ children: Element; w: "50%"; style: any; }... Remove this comment to see the full error message
-                <Box w="50%" style={styles.values}>
-                  // @ts-expect-error TS(2322): Type '{ children: string; style: any; }' is not as... Remove this comment to see the full error message
-                  <Text style={styles.values}>
+              <View style={{flexDirection: "row", width: "100%", marginVertical: 1, }}>
+                <View style={[styles.keys, { width: "50%"}]}>
+                  <Text>Membro de organização:</Text>
+                </View>
+                <View style={[styles.values, { width: "50%"}]}>
+                  <Text>
                     {farmerData?.isGroupMember ? "Sim" : "Não"}
                   </Text>
-                </Box>
-              </Stack>
+                </View>
+              </View>
 
               <CustomDivider
                 marginVertical="1"
                 thickness={1}
                 bg={COLORS.lightgrey}
               />
-              <Stack direction="row" w="100%" my="1">
-                <Box w="50%">
-                  // @ts-expect-error TS(2322): Type '{ children: string; style: any; }' is not as... Remove this comment to see the full error message
-                  <Text style={styles.keys}>Género:</Text>
-                </Box>
-                // @ts-expect-error TS(2322): Type '{ children: Element; w: "50%"; style: any; }... Remove this comment to see the full error message
-                <Box w="50%" style={styles.values}>
-                  // @ts-expect-error TS(2322): Type '{ children: any; style: any; }' is not assig... Remove this comment to see the full error message
-                  <Text style={styles.values}>{farmerData?.gender}</Text>
-                </Box>
-              </Stack>
+              <View style={{flexDirection: "row", width: "100%", marginVertical: 1, }}>
+                <View style={[styles.keys, { width: "50%"}]}>
+                  <Text>Género:</Text>
+                </View>
+                <View style={[styles.values, { width: "50%"}]}>
+                  <Text>{farmerData?.gender}</Text>
+                </View>
+              </View>
 
               <CustomDivider
                 marginVertical="1"
                 thickness={1}
                 bg={COLORS.lightgrey}
               />
-              <Stack direction="row" w="100%" my="1">
-                <Box w="50%">
-                  // @ts-expect-error TS(2322): Type '{ children: string; style: any; }' is not as... Remove this comment to see the full error message
-                  <Text style={styles.keys}>Agregado Familiar:</Text>
-                </Box>
-                // @ts-expect-error TS(2322): Type '{ children: Element; w: "50%"; style: any; }... Remove this comment to see the full error message
-                <Box w="50%" style={styles.values}>
-                  // @ts-expect-error TS(2322): Type '{ children: any[]; style: any; }' is not ass... Remove this comment to see the full error message
-                  <Text style={styles.values}>
+              <View style={{flexDirection: "row", width: "100%", marginVertical: 1, }}>
+                <View style={[styles.keys, { width: "50%"}]}>
+                  <Text>Agregado Familiar:</Text>
+                </View>
+                <View style={[styles.values, { width: "50%"}]}>
+                  <Text>
                     {farmerData?.familySize} (membros)
                   </Text>
-                </Box>
-              </Stack>
+                </View>
+              </View>
 
               <CustomDivider
                 marginVertical="1"
                 thickness={1}
                 bg={COLORS.lightgrey}
               />
-              <Stack direction="row" w="100%" my="1">
-                <Box w="50%">
-                  // @ts-expect-error TS(2322): Type '{ children: string; style: any; }' is not as... Remove this comment to see the full error message
-                  <Text style={styles.keys}>Data Nascimento:</Text>
-                </Box>
-                // @ts-expect-error TS(2322): Type '{ children: Element; w: "50%"; style: any; }... Remove this comment to see the full error message
-                <Box w="50%" style={styles.values}>
-                  // @ts-expect-error TS(2322): Type '{ children: string; style: any; }' is not as... Remove this comment to see the full error message
-                  <Text style={styles.values}>
+              <View style={{flexDirection: "row", width: "100%", marginVertical: 1, }}>
+                <View style={[styles.keys, { width: "50%"}]}>
+                  <Text>Data Nascimento:</Text>
+                </View>
+                <View style={[styles.values, { width: "50%"}]}>
+                  <Text>
                     {farmerData?.birthDate
                       ? `${new Date(farmerData?.birthDate).getDate()}/${new Date(farmerData?.birthDate).getMonth() + 1
                       }/${new Date(farmerData?.birthDate).getFullYear()}`
                       : "Nenhum"}
                   </Text>
-                </Box>
-              </Stack>
+                </View>
+              </View>
               <CustomDivider
                 marginVertical="1"
                 thickness={1}
                 bg={COLORS.lightgrey}
               />
-              <Stack direction="row" w="100%" my="1">
-                <Box w="50%">
-                  // @ts-expect-error TS(2322): Type '{ children: string; style: any; }' is not as... Remove this comment to see the full error message
-                  <Text style={styles.keys}>Residência:</Text>
-                </Box>
-                <Box w="50%">
-                  <Box>
-                    // @ts-expect-error TS(2322): Type '{ children: any[]; style: any; }' is not ass... Remove this comment to see the full error message
-                    <Text style={styles.values}>
+              <View style={{flexDirection: "row", width: "100%", marginVertical: 1, }}>
+                <View style={[styles.keys, { width: "50%"}]}>
+                  <Text>Residência:</Text>
+                </View>
+                <View style={{ width: "50%"}}>
+                  <View style={[styles.values, ]}>
+                      <Text>
                       {farmerData?.address?.province} (província)
                     </Text>
-                    // @ts-expect-error TS(2322): Type '{ children: any[]; style: any; }' is not ass... Remove this comment to see the full error message
-                    <Text style={styles.values}>
+                    <Text>
                       {farmerData?.address?.district} (distrito)
                     </Text>
-                    // @ts-expect-error TS(2322): Type '{ children: any[]; style: any; }' is not ass... Remove this comment to see the full error message
-                    <Text style={styles.values}>
+                    <Text>
                       {farmerData?.address?.adminPost} (posto admin.)
                     </Text>
-                    // @ts-expect-error TS(2322): Type '{ children: string; style: any; }' is not as... Remove this comment to see the full error message
-                    <Text style={styles.values}>
+                    <Text>
                       {farmerData?.address?.village
                         ? farmerData?.address?.village + " (localidade)"
                         : "Nenhum (localidade)"}
                     </Text>
-                  </Box>
-                </Box>
-              </Stack>
+                  </View>
+                </View>
+              </View>
               <CustomDivider
                 marginVertical="1"
                 thickness={1}
                 bg={COLORS.lightgrey}
               />
-              <Stack direction="row" w="100%" my="1">
-                <Box w="50%">
-                  // @ts-expect-error TS(2322): Type '{ children: string; style: any; }' is not as... Remove this comment to see the full error message
-                  <Text style={styles.keys}>Telemóveis:</Text>
-                </Box>
-                <Box w="50%">
+              <View style={{flexDirection: "row", width: "100%", marginVertical: 1, }}>
+                <View style={[styles.keys, { width: "50%"}]}>
+                   <Text>Telemóveis:</Text>
+                </View>
+                <View style={{ width: "50%"}}>
                   {farmerData?.contact?.primaryPhone &&
                     farmerData?.contact?.secondaryPhone ? (
-                    <Box>
-                      // @ts-expect-error TS(2322): Type '{ children: any[]; style: any; }' is not ass... Remove this comment to see the full error message
-                      <Text style={styles.values}>
+                    <View style={styles.values}>
+                      <Text>
                         {farmerData?.contact?.primaryPhone} (principal)
                       </Text>
-                      // @ts-expect-error TS(2322): Type '{ children: any[]; style: any; }' is not ass... Remove this comment to see the full error message
-                      <Text style={styles.values}>
+                      <Text>
                         {farmerData?.contact?.secondaryPhone} (alternativo)
                       </Text>
-                    </Box>
+                    </View>
                   ) : farmerData?.contact?.primaryPhone ? (
-                    <Box>
-                      // @ts-expect-error TS(2322): Type '{ children: any[]; style: any; }' is not ass... Remove this comment to see the full error message
-                      <Text style={styles.values}>
+                    <View style={styles.value}>
+                      <Text>
                         {farmerData?.contact?.primaryPhone} (principal)
                       </Text>
-                      // @ts-expect-error TS(2322): Type '{ children: string; style: any; }' is not as... Remove this comment to see the full error message
-                      <Text style={styles.values}>Nenhum (alternativo)</Text>
-                    </Box>
+                      <Text>Nenhum (alternativo)</Text>
+                    </View>
                   ) : farmerData?.contact?.secondaryPhone ? (
-                    <Box>
-                      // @ts-expect-error TS(2322): Type '{ children: string; style: any; }' is not as... Remove this comment to see the full error message
-                      <Text style={styles.values}>Nenhum (principal)</Text>
-                      // @ts-expect-error TS(2322): Type '{ children: any[]; style: any; }' is not ass... Remove this comment to see the full error message
-                      <Text style={styles.values}>
+                    <View style={styles.value}>
+                      <Text>Nenhum (principal)</Text>
+                      <Text>
                         {farmerData?.contact?.secondaryPhone} (alternativo)
                       </Text>
-                    </Box>
+                    </View>
                   ) : (
-                    <Box>
-                      // @ts-expect-error TS(2322): Type '{ children: string; style: any; }' is not as... Remove this comment to see the full error message
-                      <Text style={styles.values}>Nenhum (principal)</Text>
-                      // @ts-expect-error TS(2322): Type '{ children: string; style: any; }' is not as... Remove this comment to see the full error message
-                      <Text style={styles.values}>Nenhum (alternativo)</Text>
-                    </Box>
+                    <View style={styles.values}>
+                      <Text>Nenhum (principal)</Text>
+                      <Text>Nenhum (alternativo)</Text>
+                    </View>
                   )}
-                </Box>
-              </Stack>
+                </View>
+              </View>
               <CustomDivider
                 marginVertical="1"
                 thickness={1}
                 bg={COLORS.lightgrey}
               />
-              <Stack direction="row" w="100%" my="1">
-                <Box w="50%">
-                  // @ts-expect-error TS(2322): Type '{ children: string; style: any; }' is not as... Remove this comment to see the full error message
-                  <Text style={styles.keys}>Local Nascimento:</Text>
-                </Box>
-                <Box w="50%">
+              <View style={{flexDirection: "row", width: "100%", marginVertical: 1, }}>
+                <View style={[styles.keys, { width: "50%"}]}>
+                  <Text>Local Nascimento:</Text>
+                </View>
+                <View w="50%">
                   {!farmerData?.birthPlace?.province?.includes(
                     "Estrangeiro",
                   ) ? (
-                    <Box>
-                      // @ts-expect-error TS(2322): Type '{ children: string; style: any; }' is not as... Remove this comment to see the full error message
-                      <Text style={styles.values}>
+                    <View style={styles.values}>
+                      <Text>
                         {farmerData?.birthPlace?.province + " (província)"}
                       </Text>
-                      // @ts-expect-error TS(2322): Type '{ children: string; style: any; }' is not as... Remove this comment to see the full error message
-                      <Text style={styles.values}>
+                      <Text>
                         {farmerData?.birthPlace?.district + " (distrito)"}
                       </Text>
-                      // @ts-expect-error TS(2322): Type '{ children: string; style: any; }' is not as... Remove this comment to see the full error message
-                      <Text style={styles.values}>
+                      <Text>
                         {farmerData?.birthPlace?.adminPost + " (posto admin.)"}
                       </Text>
-                    </Box>
+                    </View>
                   ) : (
-                    <Box>
-                      // @ts-expect-error TS(2322): Type '{ children: string; style: any; }' is not as... Remove this comment to see the full error message
-                      <Text style={styles.values}>
+                    <View style={styles.values}>
+                      <Text>
                         {farmerData?.birthPlace?.district +
                           " (País Estrangeiro)"}
                       </Text>
-                    </Box>
+                    </View>
                   )}
-                </Box>
-              </Stack>
+                </View>
+              </View>
               <CustomDivider
                 marginVertical="1"
                 thickness={1}
                 bg={COLORS.lightgrey}
               />
-              <Stack direction="row" w="100%" my="1">
-                <Box w="50%">
-                  // @ts-expect-error TS(2322): Type '{ children: string; style: any; }' is not as... Remove this comment to see the full error message
-                  <Text style={styles.keys}>Doc. Identificação:</Text>
-                </Box>
-                <Box w="50%">
+              <View style={{flexDirection: "row", width: "100%", marginVertical: 1, }}>
+                <View style={[styles.keys, { width: "50%"}]}>
+                  <Text>Doc. Identificação:</Text>
+                </View>
+                <View style={[styles.values, { width: "50%"}]}>
                   {farmerData?.idDocument?.docNumber !== "Nenhum" ? (
-                    // @ts-expect-error TS(2322): Type '{ children: any[]; style: any; }' is not ass... Remove this comment to see the full error message
-                    <Text style={styles.values}>
+
+                    <Text>
                       {farmerData?.idDocument?.docNumber} (
                       {farmerData?.idDocument?.docType})
                     </Text>
                   ) : farmerData?.idDocument?.docType === "Não tem" ? (
-                    // @ts-expect-error TS(2322): Type '{ children: string; style: any; }' is not as... Remove this comment to see the full error message
-                    <Text style={styles.values}>Não tem</Text>
+                    <Text>Não tem</Text>
                   ) : (
-                    // @ts-expect-error TS(2322): Type '{ children: string; style: any; }' is not as... Remove this comment to see the full error message
-                    <Text style={styles.values}>Nenhum (Nenhum)</Text>
+                    <Text>Nenhum (Nenhum)</Text>
                   )}
-                </Box>
-              </Stack>
-              <Stack direction="row" w="100%" my="1">
-                <Box w="50%"></Box>
-                <Box w="50%">
+                </View>
+              </View>
+              <View style={{flexDirection: "row", width: "100%", marginVertical: 1, }}>
+                <View style={[styles.keys, { width: "50%"}]}></View>
+                <View style={[styles.values, { width: "50%"}]}>
                   {farmerData?.idDocument?.nuit ? (
-                    // @ts-expect-error TS(2322): Type '{ children: any[]; style: any; }' is not ass... Remove this comment to see the full error message
-                    <Text style={styles.values}>
+                    <Text>
                       {farmerData?.idDocument?.nuit} (NUIT)
                     </Text>
                   ) : (
-                    // @ts-expect-error TS(2322): Type '{ children: string; style: any; }' is not as... Remove this comment to see the full error message
-                    <Text style={styles.values}>Nenhum (NUIT)</Text>
+                    <Text>Nenhum (NUIT)</Text>
                   )}
-                </Box>
-              </Stack>
+                </View>
+              </View>
               <CustomDivider
                 marginVertical="1"
                 thickness={1}
@@ -562,7 +509,6 @@ export default function IndividualModal({
                       setIsCoordinatesModalVisible(true);
                     } catch (error) {
                       throw new Error("Failed to register IndividualFarmer", {
-                        // @ts-expect-error TS(2322): Type 'unknown' is not assignable to type 'Error | ... Remove this comment to see the full error message
                         cause: error,
                       });
                     } finally {
@@ -587,7 +533,7 @@ export default function IndividualModal({
                   title="Salvar dados"
                 />
               </Center>
-            </Box>
+            </View>
           </View>
         </ScrollView>
       </View>

@@ -1,5 +1,6 @@
 /* eslint-disable prettier/prettier */
 import React, { useState } from "react";
+
 // @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { StyleSheet, Text, View } from "react-native";
 import { Dropdown } from "react-native-element-dropdown";
@@ -52,6 +53,7 @@ const DropdownComponent = () => {
         onFocus={() => setIsFocus(true)}
         onBlur={() => setIsFocus(false)}
         onChange={(item) => {
+
           // @ts-expect-error TS(2345): Argument of type 'string' is not assignable to par... Remove this comment to see the full error message
           setValue(item.value);
           setIsFocus(false);

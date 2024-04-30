@@ -78,6 +78,7 @@ const validateFarmlandData = (
     return false;
   }
 
+
   // @ts-expect-error TS(2367): This condition will always return 'false' since th... Remove this comment to see the full error message
   if (!retrievedTotalArea || retrievedTotalArea === "") {
     setErrors({ ...errors, totalArea: "Área total." });
@@ -91,6 +92,7 @@ const validateFarmlandData = (
 
   if (
     retrievedDensityMode === "Regular" &&
+
     // @ts-expect-error TS(2367): This condition will always return 'false' since th... Remove this comment to see the full error message
     (retrievedDensityLength === "" || retrievedDensityWidth === "")
   ) {

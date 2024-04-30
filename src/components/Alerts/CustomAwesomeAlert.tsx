@@ -1,4 +1,5 @@
 import React from "react"
+
 // @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { View } from "react-native"
 import AwesomeAlert from "react-native-awesome-alerts"
@@ -19,12 +20,14 @@ const CustomAwesomeAlert = ({
       show={alert}
       titleStyle={{
         fontSize: 20,
+
         // @ts-expect-error TS(2304): Cannot find name 'COLORS'.
         color: COLORS.main,
         fontWeight: "bold",
       }}
       messageStyle={{
         fontSize: 18,
+
         // @ts-expect-error TS(2304): Cannot find name 'COLORS'.
         color: COLORS.grey,
         fontFamily: "JosefinSans-Regular",
@@ -53,6 +56,7 @@ const CustomAwesomeAlert = ({
       cancelText={cancelText}
       confirmText={confirmText}
       cancelButtonColor="#DD6B55"
+
       // @ts-expect-error TS(2304): Cannot find name 'COLORS'.
       confirmButtonColor={COLORS.main}
       onCancelPressed={onCancelPressed}

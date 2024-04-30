@@ -120,6 +120,7 @@ export default function UsersListScreen({
 
 
   const districts = Array.from(
+
     // @ts-expect-error TS(2339): Property 'userDistrict' does not exist on type 'Ob... Remove this comment to see the full error message
     new Set(stats.map((stat) => stat?.userDistrict)),
   ).filter((district) => district !== "NA");
@@ -154,6 +155,7 @@ export default function UsersListScreen({
     "Instituição",
   );
 
+
   // @ts-expect-error TS(2339): Property 'userDistrict' does not exist on type 'Ob... Remove this comment to see the full error message
   const filteredStats = stats?.filter((stat) => stat.userDistrict !== "NA");
   // ------------------------------------------------------
@@ -173,8 +175,10 @@ export default function UsersListScreen({
       const district = districts[i];
       let newObject = {};
       const usersStats = stats.filter((stat: any) => stat.userDistrict === district);
+
       // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       newObject["title"] = `${district}`;
+
       // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       newObject["data"] = usersStats;
       statsByDistrict.push(newObject);
@@ -200,8 +204,9 @@ export default function UsersListScreen({
   }
   if (farmersList.length > 0) {
     farmersList = farmersList?.sort(
-      // @ts-expect-error TS(7006): Parameter 'a' implicitly has an 'any' type.
-      (a, b) => new Date(b?.createdAt) - new Date(a?.createdAt),
+
+      // @ts-expect-error TS(2362): The left-hand side of an arithmetic operation must... Remove this comment to see the full error message
+      (a: any, b: any) => new Date(b?.createdAt) - new Date(a?.createdAt),
     );
   }
 
@@ -303,6 +308,7 @@ export default function UsersListScreen({
         {stats?.length === 0 ? (
           <Box>
             <Center
+
               // @ts-expect-error TS(2322): Type '{ children: Element[]; style: { margin: numb... Remove this comment to see the full error message
               style={{
                 margin: 20,
@@ -327,6 +333,7 @@ export default function UsersListScreen({
           <Box
             alignItems="stretch"
             w="100%"
+
             // @ts-expect-error TS(2322): Type '{ children: Element; alignItems: "stretch"; ... Remove this comment to see the full error message
             style={{
               marginBottom: 140,

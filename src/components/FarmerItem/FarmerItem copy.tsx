@@ -1,3 +1,4 @@
+
 // @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { TouchableOpacity, View, Text } from "react-native"
 import React, { useState, useEffect } from "react"
@@ -98,6 +99,7 @@ const FarmerItem = ({
       }}
     >
       <Box
+
         // @ts-expect-error TS(2322): Type '{ children: Element; style: { position: stri... Remove this comment to see the full error message
         style={{
           position: "absolute",
@@ -137,6 +139,7 @@ const FarmerItem = ({
           />
           {item?.isSprayingAgent && (
             <Box
+
               // @ts-expect-error TS(2322): Type '{ children: Element; style: { position: stri... Remove this comment to see the full error message
               style={{
                 position: "absolute",
@@ -152,6 +155,7 @@ const FarmerItem = ({
         <Box w="80%">
           <TouchableOpacity
             onPress={() => {
+
               // @ts-expect-error TS(2345): Argument of type 'string' is not assignable to par... Remove this comment to see the full error message
               navigation.navigate("Farmer", {
                 ownerId: item._id,
@@ -183,6 +187,7 @@ const FarmerItem = ({
               <Stack direction="row">
                 <Box w="100%">
                   <Box
+
                     // @ts-expect-error TS(2322): Type '{ children: any; style: {}; }' is not assign... Remove this comment to see the full error message
                     style={
                       {
@@ -219,6 +224,7 @@ const FarmerItem = ({
                     {/* <Stack direction="row"> */}
                     <Box
                       // w="30%"
+
                       // @ts-expect-error TS(2322): Type '{ children: Element[]; style: { flexDirectio... Remove this comment to see the full error message
                       style={{
                         flexDirection: "row",

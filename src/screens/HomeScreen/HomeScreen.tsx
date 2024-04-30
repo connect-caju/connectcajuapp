@@ -1,7 +1,3 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable linebreak-style */
-/* eslint-disable prettier/prettier */
-
 import {
   View,
   Text,
@@ -9,8 +5,6 @@ import {
   SafeAreaView,
   Image,
   TouchableOpacity,
-  // ScrollView,
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 } from "react-native";
 import React, { useCallback, useState, useEffect } from "react";
 import { Box, Stack, Center } from "native-base";
@@ -21,7 +15,6 @@ import {
 } from "react-native-responsive-screen";
 
 import { responsiveFontSize } from "react-native-responsive-dimensions";
-// import { t } from "reac"
 
 
 import COLORS from "../../consts/colors";
@@ -45,6 +38,7 @@ const { useRealm, useQuery } = realmContext;
 const userStats = "userStats";
 
 // realm variable used for manual client reset in the syncConfig
+
 // @ts-expect-error TS(7005): Variable 'realm' implicitly has an 'any' type.
 export let realm;
 
@@ -72,6 +66,7 @@ export default function HomeScreen({
 
   // --------------------------------------------------------
   const districts = Array.from(
+
     // @ts-expect-error TS(2339): Property 'userDistrict' does not exist on type 'Ob... Remove this comment to see the full error message
     new Set(provincialUserStats.map((stat) => stat?.userDistrict)),
   );
@@ -82,8 +77,10 @@ export default function HomeScreen({
   // get extract stats from whole province
   const tWholeProvince = provincialUserStats?.map((stat) => {
     return {
+
       // @ts-expect-error TS(2339): Property 'targetFarmers' does not exist on type 'O... Remove this comment to see the full error message
       tFarmers: stat.targetFarmers,
+
       // @ts-expect-error TS(2339): Property 'targetFarmlands' does not exist on type ... Remove this comment to see the full error message
       tFarmlands: stat.targetFarmlands,
     };
@@ -91,8 +88,10 @@ export default function HomeScreen({
 
   const rWholeProvince = provincialUserStats?.map((stat) => {
     return {
+
       // @ts-expect-error TS(2339): Property 'registeredFarmers' does not exist on typ... Remove this comment to see the full error message
       rFarmers: stat.registeredFarmers,
+
       // @ts-expect-error TS(2339): Property 'registeredFarmlands' does not exist on t... Remove this comment to see the full error message
       rFarmlands: stat.registeredFarmlands,
     };
@@ -122,15 +121,19 @@ export default function HomeScreen({
   const tWholeDistrict = provincialUserStats
     ?.filter(
       (stat) =>
+
         // @ts-expect-error TS(2339): Property 'userDistrict' does not exist on type 'Ob... Remove this comment to see the full error message
         stat.userDistrict === customUserData?.userDistrict &&
+
         // @ts-expect-error TS(2339): Property 'userDistrict' does not exist on type 'Ob... Remove this comment to see the full error message
         stat.userDistrict !== "NA",
     )
     ?.map((stat) => {
       return {
+
         // @ts-expect-error TS(2339): Property 'targetFarmers' does not exist on type 'O... Remove this comment to see the full error message
         tFarmers: stat.targetFarmers,
+
         // @ts-expect-error TS(2339): Property 'targetFarmlands' does not exist on type ... Remove this comment to see the full error message
         tFarmlands: stat.targetFarmlands,
       };
@@ -139,15 +142,19 @@ export default function HomeScreen({
   const rWholeDistrict = provincialUserStats
     ?.filter(
       (stat) =>
+
         // @ts-expect-error TS(2339): Property 'userDistrict' does not exist on type 'Ob... Remove this comment to see the full error message
         stat.userDistrict === customUserData?.userDistrict &&
+
         // @ts-expect-error TS(2339): Property 'userDistrict' does not exist on type 'Ob... Remove this comment to see the full error message
         stat.userDistrict !== "NA",
     )
     ?.map((stat) => {
       return {
+
         // @ts-expect-error TS(2339): Property 'registeredFarmers' does not exist on typ... Remove this comment to see the full error message
         rFarmers: stat.registeredFarmers,
+
         // @ts-expect-error TS(2339): Property 'registeredFarmlands' does not exist on t... Remove this comment to see the full error message
         rFarmlands: stat.registeredFarmlands,
       };
@@ -174,24 +181,30 @@ export default function HomeScreen({
   // extract stats of the current user
 
   const tCurrentUser = provincialUserStats
+
     // @ts-expect-error TS(2339): Property 'userId' does not exist on type 'Object<u... Remove this comment to see the full error message
     ?.filter((stat) => stat.userId === customUserData?.userId)
     ?.map((stat) => {
       return {
+
         // @ts-expect-error TS(2339): Property 'targetFarmers' does not exist on type 'O... Remove this comment to see the full error message
         tFarmers: stat.targetFarmers,
+
         // @ts-expect-error TS(2339): Property 'targetFarmlands' does not exist on type ... Remove this comment to see the full error message
         tFarmlands: stat.targetFarmlands,
       };
     });
 
   const rCurrentUser = provincialUserStats
+
     // @ts-expect-error TS(2339): Property 'userId' does not exist on type 'Object<u... Remove this comment to see the full error message
     ?.filter((stat) => stat.userId === customUserData?.userId)
     ?.map((stat) => {
       return {
+
         // @ts-expect-error TS(2339): Property 'registeredFarmers' does not exist on typ... Remove this comment to see the full error message
         rFarmers: stat.registeredFarmers,
+
         // @ts-expect-error TS(2339): Property 'registeredFarmlands' does not exist on t... Remove this comment to see the full error message
         rFarmlands: stat.registeredFarmlands,
       };
@@ -228,8 +241,10 @@ export default function HomeScreen({
     });
 
     if (
+
       // @ts-expect-error TS(2571): Object is of type 'unknown'.
       customUserData?.role?.includes(roles.provincialManager) ||
+
       // @ts-expect-error TS(2571): Object is of type 'unknown'.
       customUserData?.role?.includes(roles.ampcmSupervisor)
     ) {
@@ -350,6 +365,7 @@ export default function HomeScreen({
         className={"w-full light:bg-[#EBEBE4]"}
       >
         <Box
+
           // @ts-expect-error TS(2322): Type '{ children: Element; style: { paddingVertica... Remove this comment to see the full error message
           style={{
             paddingVertical: 10,
@@ -363,6 +379,7 @@ export default function HomeScreen({
             <Box w="40%" alignItems={"center"}>
               <Image
                 style={{ width: 55, height: 55, borderRadius: 100 }}
+
                 // @ts-expect-error TS(2591): Cannot find name 'require'. Do you need to install... Remove this comment to see the full error message
                 source={require("../../../assets/images/iamLogo2.png")}
               />
@@ -389,7 +406,6 @@ export default function HomeScreen({
                 <Text
                   className="text-center text-gray-600 font-normal text-sm -mt-1"
                 >
-                  // @ts-expect-error TS(2571): Object is of type 'unknown'.
                   {customUserData?.name?.split(" ")[0]}
                 </Text>
               </TouchableOpacity>
@@ -426,6 +442,7 @@ export default function HomeScreen({
             className="w-full rounded-t-2xl shadow-md light:bg-neutral-100 px-2 my-6 mx-2 self-center overflow-y-scroll"
           >
             <Box
+
               // @ts-expect-error TS(2322): Type '{ children: Element[]; className: string; }'... Remove this comment to see the full error message
               className="bg-green-600 dark:bg-gray-800 w-full items-center  rounded-t-2xl"
             >
@@ -464,6 +481,7 @@ export default function HomeScreen({
               </View>
             </Box>
             {!isPerformanceButtonActive && (
+
               // @ts-expect-error TS(2322): Type '{ children: Element[]; direction: "column"; ... Remove this comment to see the full error message
               <Stack direction="column" w="100%" pt="4" className="border-gray-300 border-x-2 border-b-2 bg-white dark:bg-gray-900 dark:border-x-2 dark:border-x-gray-600 dark:border-b-2 dark:border-b-gray-600 pb-2 rounded-b-lg">
                 <Stack direction="row">
@@ -476,7 +494,6 @@ export default function HomeScreen({
                     <Text
                       className="font-normal text-xs text-center text-slate-600"
                     >
-                      // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
                       Até {months[new Date().getMonth()]}{" "}
                       {new Date().getFullYear()}
                     </Text>
@@ -521,6 +538,7 @@ export default function HomeScreen({
             )}
 
             {isPerformanceButtonActive && (
+
               // @ts-expect-error TS(2322): Type '{ children: Element[]; direction: "column"; ... Remove this comment to see the full error message
               <Stack direction="column" w="100%" pt="4" className="border-gray-300 border-x-2 border-b-2 bg-white dark:bg-gray-900 dark:border-x-2 dark:border-x-gray-600 dark:border-b-2 dark:border-b-gray-600 pb-2 rounded-b-lg">
                 <Stack direction="row">
@@ -534,7 +552,6 @@ export default function HomeScreen({
                     <Text
                       className="font-normal text-xs text-center text-slate-600"
                     >
-                      // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
                       Até {months[new Date().getMonth()]}{" "}
                       {new Date().getFullYear()}
                     </Text>

@@ -17,6 +17,7 @@ import { containsNonNumeric } from "./containsNonNumeric"
  * in the form.
  */
 
+
 // @ts-expect-error TS(7030): Not all code paths return a value.
 const validateGroupEditedData = (
   {
@@ -204,6 +205,7 @@ const validateGroupEditedData = (
 
     if (
       retrievedGroupNuit &&
+
       // @ts-expect-error TS(2345): Argument of type 'number' is not assignable to par... Remove this comment to see the full error message
       (!Number.isInteger(parseInt(retrievedGroupNuit)) ||
         retrievedGroupNuit?.toString().length !== 9 ||
@@ -279,8 +281,10 @@ const validateGroupEditedData = (
       setErrors({ ...errors, groupWomenNumber: "Número total de mulheres." })
       return false
     } else if (
+
       // @ts-expect-error TS(2345): Argument of type 'number' is not assignable to par... Remove this comment to see the full error message
       parseInt(retrievedGroupWomenNumber) >
+
       // @ts-expect-error TS(2345): Argument of type 'number' is not assignable to par... Remove this comment to see the full error message
       parseInt(retrievedGroupMembersNumber)
     ) {

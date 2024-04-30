@@ -81,6 +81,7 @@ const ProfileScreen = ({
   } else if (farmerType === farmerTypes.group) {
     farmer = realm.objectForPrimaryKey("Group", ownerId)
     if (farmer?.manager) {
+
       // @ts-expect-error TS(2322): Type '(string & Object<unknown, never>) | null' is... Remove this comment to see the full error message
       manager = realm.objectForPrimaryKey("Actor", farmer?.manager)
     }
@@ -113,10 +114,12 @@ const ProfileScreen = ({
   const bottomSheetRef = useRef(null)
   const snapPoints = useMemo(() => ["25%", "40%", "60", "80%"], [])
   const handlePresentModalPress = useCallback(() => {
+
     // @ts-expect-error TS(2339): Property 'present' does not exist on type 'never'.
     bottomSheetRef?.current?.present()
   }, [])
   const handleDismissModalPress = useCallback(() => {
+
     // @ts-expect-error TS(2339): Property 'dismiss' does not exist on type 'never'.
     bottomSheetRef?.current?.dismiss()
   }, [])
@@ -129,13 +132,16 @@ const ProfileScreen = ({
   } = useBottomSheetDynamicSnapPoints(initialSnapPoints)
 
   const onPressEllipsis = useCallback((flag: any) => {
+
     // @ts-expect-error TS(2339): Property 'isActive' does not exist on type 'never'... Remove this comment to see the full error message
     const isActive = ref?.current?.isActive()
     if (isActive) {
+
       // @ts-expect-error TS(2339): Property 'scrollTo' does not exist on type 'never'... Remove this comment to see the full error message
       ref?.current?.scrollTo(0)
       setBottomSheetFlag("")
     } else {
+
       // @ts-expect-error TS(2339): Property 'scrollTo' does not exist on type 'never'... Remove this comment to see the full error message
       ref?.current?.scrollTo(-300)
       setBottomSheetFlag(flag)

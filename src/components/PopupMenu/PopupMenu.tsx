@@ -34,18 +34,21 @@ export function PopupMenu({
     {
       title: "Publicar",
       icon: "add",
+
       // @ts-expect-error TS(2304): Cannot find name 'alert'.
       action: () => alert("publicar"),
     },
     {
       title: "Delete",
       icon: "delete",
+
       // @ts-expect-error TS(2304): Cannot find name 'alert'.
       action: () => alert("delete"),
     },
     {
       title: "Directions",
       icon: "directions",
+
       // @ts-expect-error TS(2304): Cannot find name 'alert'.
       action: () => alert("directions"),
     },

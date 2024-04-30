@@ -3,13 +3,17 @@
 import React, { useState, useTransition } from "react";
 import COLORS from "../../consts/colors";
 import { farmerTypes } from "../../consts/farmerTypes";
+
 // @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { View } from "react-native";
 import { faInstitution, faPeopleGroup, faPerson } from "@fortawesome/free-solid-svg-icons";
+
 // @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { FlatList } from "react-native";
+
 // @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { Text } from "react-native";
+
 // @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { TouchableOpacity } from "react-native";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";

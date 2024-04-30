@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable linebreak-style */
 /* eslint-disable prettier/prettier */
+
 // @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { Text, SafeAreaView, Pressable, View, TouchableOpacity } from "react-native";
 import React, { useState, useEffect } from "react";
@@ -171,6 +172,7 @@ export default function FarmerRegistration({
 
       // generate actor identifier
       let identifier = generateUniqueNumber(
+
         // @ts-expect-error TS(2339): Property 'address' does not exist on type 'boolean... Remove this comment to see the full error message
         retrievedFarmerData.address,
         farmerTypes.farmer,
@@ -182,6 +184,7 @@ export default function FarmerRegistration({
       // keep checking until no match is found
       while (foundIdentierMatches?.length > 0) {
         identifier = generateUniqueNumber(
+
           // @ts-expect-error TS(2339): Property 'address' does not exist on type 'boolean... Remove this comment to see the full error message
           retrievedFarmerData.address,
           farmerTypes.farmer,
@@ -190,6 +193,7 @@ export default function FarmerRegistration({
           .objects("Actor")
           .filtered("identifier == $0", identifier);
       }
+
 
       // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       retrievedFarmerData["identifier"] = identifier;
@@ -200,12 +204,16 @@ export default function FarmerRegistration({
       // on with registration after the alert on suspecious duplicates
       if (!isAllowed) {
         const uaidData = {
+
           // @ts-expect-error TS(2339): Property 'names' does not exist on type 'boolean |... Remove this comment to see the full error message
           names: retrievedFarmerData.names,
+
           // @ts-expect-error TS(2339): Property 'birthDate' does not exist on type 'boole... Remove this comment to see the full error message
           birthDate: retrievedFarmerData.birthDate,
+
           // @ts-expect-error TS(2339): Property 'birthPlace' does not exist on type 'bool... Remove this comment to see the full error message
           birthPlace: retrievedFarmerData.birthPlace,
+
           // @ts-expect-error TS(2339): Property 'address' does not exist on type 'boolean... Remove this comment to see the full error message
           address: retrievedFarmerData.address,
         };
@@ -252,6 +260,7 @@ export default function FarmerRegistration({
 
       // generate actor identifier
       let identifier = generateUniqueNumber(
+
         // @ts-expect-error TS(2339): Property 'address' does not exist on type 'boolean... Remove this comment to see the full error message
         retrievedFarmerData.address,
         farmerTypes.institution,
@@ -263,6 +272,7 @@ export default function FarmerRegistration({
       // keep checking until no match is found
       while (foundIdentierMatches?.length > 0) {
         identifier = generateUniqueNumber(
+
           // @ts-expect-error TS(2339): Property 'address' does not exist on type 'boolean... Remove this comment to see the full error message
           retrievedFarmerData.address,
           farmerTypes.institution,
@@ -271,6 +281,7 @@ export default function FarmerRegistration({
           .objects("Institution")
           .filtered("identifier == $0", identifier);
       }
+
 
       // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       retrievedFarmerData["identifier"] = identifier;
@@ -299,6 +310,7 @@ export default function FarmerRegistration({
         groupVillage,
 
       };
+
       // @ts-expect-error TS(2554): Expected 3 arguments, but got 4.
       if (!validateGroupFarmerData(farmerData, errors, setErrors, farmerType)) {
         setErrorAlert(true);
@@ -308,12 +320,14 @@ export default function FarmerRegistration({
         farmerData,
         errors,
         setErrors,
+
         // @ts-expect-error TS(2554): Expected 3 arguments, but got 4.
         farmerType,
       );
 
       // generate actor identifier
       let identifier = generateUniqueNumber(
+
         // @ts-expect-error TS(2339): Property 'address' does not exist on type 'boolean... Remove this comment to see the full error message
         retrievedFarmerData.address,
         farmerTypes.group,
@@ -324,12 +338,14 @@ export default function FarmerRegistration({
 
       // keep checking until no match is found
       while (foundIdentierMatches?.length > 0) {
+
         // @ts-expect-error TS(2339): Property 'address' does not exist on type 'boolean... Remove this comment to see the full error message
         identifier = generateUniqueNumber(retrievedFarmerData.address, farmerTypes.group);
         foundIdentierMatches = realm
           .objects("Group")
           .filtered("identifier == $0", identifier);
       }
+
       // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       retrievedFarmerData["identifier"] = identifier;
 
@@ -341,6 +357,7 @@ export default function FarmerRegistration({
   useEffect(() => {
     if (customUserData && customUserData.userDistrict) {
       const { userDistrict } = customUserData;
+
       // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       setSelectedAddressAdminPosts(administrativePosts[userDistrict]);
     }
@@ -367,6 +384,7 @@ export default function FarmerRegistration({
         bg={COLORS.fourth}
         w="100%"
         px="3"
+
         // @ts-expect-error TS(2322): Type '{ children: Element[]; bg: string; w: "100%"... Remove this comment to see the full error message
         style={{
           borderBottomWidth: 2,
@@ -424,6 +442,7 @@ export default function FarmerRegistration({
               </Text>
             </Box>
             <Box
+
               // @ts-expect-error TS(2322): Type '{ children: Element; style: { position: stri... Remove this comment to see the full error message
               style={{
                 position: "absolute",

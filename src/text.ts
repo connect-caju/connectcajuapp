@@ -6,14 +6,18 @@ export default function Component({
 }: any) {
   // some code here
 
+
   // @ts-expect-error TS(2304): Cannot find name 'useEffect'.
   useEffect(() => {
+
     // @ts-expect-error TS(2304): Cannot find name 'switched'.
     if (switched) {
+
       // @ts-expect-error TS(2552): Cannot find name 'realm'. Did you mean 'Realm'?
       realm.subscriptions.update((mutableSubs: any) => {
         mutableSubs.removeByName(byUserId);
         mutableSubs.add(
+
           // @ts-expect-error TS(2552): Cannot find name 'realm'. Did you mean 'Realm'?
           realm
             .objects("Farmer")
@@ -23,10 +27,12 @@ export default function Component({
         );
       });
     } else {
+
       // @ts-expect-error TS(2552): Cannot find name 'realm'. Did you mean 'Realm'?
       realm.subscriptions.update((mutableSubs: any) => {
         mutableSubs.removeByName(byDistrict);
         mutableSubs.add(
+
           // @ts-expect-error TS(2552): Cannot find name 'realm'. Did you mean 'Realm'?
           realm
             .objects("Farmer")

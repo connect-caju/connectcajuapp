@@ -14,12 +14,8 @@ import {
 import React, { useCallback, useState, useEffect } from "react";
 import { Box, Stack, Center } from "native-base";
 import { Icon, Overlay } from "@rneui/themed";
-// import { useFocusEffect } from "@react-navigation/native";
-// import { launchCamera, launchImageLibrary } from "react-native-image-picker";
 
 import COLORS from "../../consts/colors";
-// import CustomActivityIndicator from "../../components/ActivityIndicator/CustomActivityIndicator";
-// import { months } from "../../helpers/dates";
 import CustomDivider from "../../components/Divider/CustomDivider";
 import PhotoModal from "../Modals/PhotoModal";
 import { roles } from "../../consts/roles";
@@ -79,6 +75,7 @@ export default function UserProfile({
       const customUserData = await user.refreshCustomData();
     } catch (error) {
       // console.log('Failed to save image: ', { cause: error })
+
       // @ts-expect-error TS(2571): Object is of type 'unknown'.
       if (error.includes(errorMessages.network.logFlag)) {
         // Alert message
@@ -94,6 +91,7 @@ export default function UserProfile({
         setTitleAlert(errorMessages.server.title);
         setMessageAlert(errorMessages.server.message);
         setShowCancelButton(errorMessages.server.showCancelButton);
+
         // @ts-expect-error TS(2339): Property 'service' does not exist on type '{ autom... Remove this comment to see the full error message
         setShowConfirmButtom(errorMessages.service.showConfirmButton);
         setConfirmText(errorMessages.server.confirmText);
@@ -143,8 +141,7 @@ export default function UserProfile({
         }}
       />
 
-      // @ts-expect-error TS(2322): Type '{ children: Element[]; w: "100%"; style: { f... Remove this comment to see the full error message
-      <Box w="100%" style={{ flex: 1 }}>
+      <View w="100%" style={{ flex: 1 }}>
         <Stack w="100%" direction="row">
           <Box w="10%">
             <Icon
@@ -300,7 +297,7 @@ export default function UserProfile({
             </Text>
           </TouchableOpacity>
         </View>
-      </Box>
+      </View>
 
       <View className="flex flex-col gap-1 mb-4 ml-1">
         <TouchableOpacity

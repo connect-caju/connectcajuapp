@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable linebreak-style */
 /* eslint-disable prettier/prettier */
+
 // @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { View, Text, Pressable, TouchableOpacity, FlatList, TextInput, SafeAreaView, } from "react-native";
 import React, { useEffect, useState } from "react";
@@ -237,17 +238,20 @@ const FarmersSearchScreen = ({
         switch (selectedCriteria) {
             case searchCriteria.adminPost:
                 if (farmerType === farmerTypes.farmer) {
+
                     // @ts-expect-error TS(2740): Type 'Results<Object<unknown, never>>' is missing ... Remove this comment to see the full error message
                     farmers = realm
                         .objects("Actor")
                         .filtered("address.adminPost == $0", item);
 
                 } else if (farmerType === farmerTypes.group) {
+
                     // @ts-expect-error TS(2322): Type 'Results<Object<unknown, never>>' is not assi... Remove this comment to see the full error message
                     farmers = realm
                         .objects("Group")
                         .filtered("address.adminPost == $0", item);
                 } else if (farmerType === farmerTypes.institution) {
+
                     // @ts-expect-error TS(2322): Type 'Results<Object<unknown, never>>' is not assi... Remove this comment to see the full error message
                     farmers = realm
                         .objects("Institution")
@@ -256,17 +260,20 @@ const FarmersSearchScreen = ({
                 break;
             case searchCriteria.village:
                 if (farmerType === farmerTypes.farmer) {
+
                     // @ts-expect-error TS(2322): Type 'Results<Object<unknown, never>>' is not assi... Remove this comment to see the full error message
                     farmers = realm
                         .objects("Actor")
                         .filtered("address.village == $0", item);
 
                 } else if (farmerType === farmerTypes.group) {
+
                     // @ts-expect-error TS(2322): Type 'Results<Object<unknown, never>>' is not assi... Remove this comment to see the full error message
                     farmers = realm
                         .objects("Group")
                         .filtered("address.village == $0", item);
                 } else if (farmerType === farmerTypes.institution) {
+
                     // @ts-expect-error TS(2322): Type 'Results<Object<unknown, never>>' is not assi... Remove this comment to see the full error message
                     farmers = realm
                         .objects("Institution")
@@ -275,17 +282,20 @@ const FarmersSearchScreen = ({
                 break;
             case searchCriteria.status:
                 if (farmerType === farmerTypes.farmer) {
+
                     // @ts-expect-error TS(2322): Type 'Results<Object<unknown, never>>' is not assi... Remove this comment to see the full error message
                     farmers = realm
                         .objects("Actor")
                         .filtered("status == $0", item);
 
                 } else if (farmerType === farmerTypes.group) {
+
                     // @ts-expect-error TS(2322): Type 'Results<Object<unknown, never>>' is not assi... Remove this comment to see the full error message
                     farmers = realm
                         .objects("Group")
                         .filtered("status == $0", item);
                 } else if (farmerType === farmerTypes.institution) {
+
                     // @ts-expect-error TS(2322): Type 'Results<Object<unknown, never>>' is not assi... Remove this comment to see the full error message
                     farmers = realm
                         .objects("Institution")
@@ -293,18 +303,21 @@ const FarmersSearchScreen = ({
                 }
                 break;
             case searchCriteria.farmerSubcategory:
+
                 // @ts-expect-error TS(2322): Type 'Results<Object<unknown, never>>' is not assi... Remove this comment to see the full error message
                 farmers = realm
                     .objects("Actor")
                     .filtered("assets.subcategory == $0", item);
                 break;
             case searchCriteria.isPrivateInstitution:
+
                 // @ts-expect-error TS(2322): Type 'Results<Object<unknown, never>>' is not assi... Remove this comment to see the full error message
                 farmers = realm
                     .objects("Institution")
                     .filtered("private == $0", item);
                 break;
             case searchCriteria.groupType:
+
                 // @ts-expect-error TS(2322): Type 'Results<Object<unknown, never>>' is not assi... Remove this comment to see the full error message
                 farmers = realm
                     .objects("Group")
@@ -343,6 +356,7 @@ const FarmersSearchScreen = ({
         // Grupo: legalizados, em processo de legalizacao, nao legalizados, pendentes, validados
         // Instituicao: privados, publicos, pendentes, validados
         const filtered = filterByCriteria.filter((criteria) => criteria.farmerType === farmerType);
+
         // @ts-expect-error TS(2345): Argument of type '({ criteriaName: string; criteri... Remove this comment to see the full error message
         setFilteredCriteria(filtered);
 
@@ -361,6 +375,7 @@ const FarmersSearchScreen = ({
             let farmers = [];
             let matchedResources = [];
             if (farmerType?.includes("Indiv")) {
+
                 // @ts-expect-error TS(2322): Type 'Results<Object<unknown, never>>' is not assi... Remove this comment to see the full error message
                 farmers = realm.objects("Actor").filtered("userDistrict == $0", customUserData?.userDistrict);
                 farmers = customizeItem(farmers, [], [], {}, farmerType);
@@ -368,6 +383,7 @@ const FarmersSearchScreen = ({
                 );
             }
             else if (farmerType?.includes("Grupo")) {
+
                 // @ts-expect-error TS(2322): Type 'Results<Object<unknown, never>>' is not assi... Remove this comment to see the full error message
                 farmers = realm.objects("Group").filtered("userDistrict == $0", customUserData?.userDistrict);
                 farmers = customizeItem(farmers, [], [], {}, farmerType);
@@ -376,6 +392,7 @@ const FarmersSearchScreen = ({
                 );
             }
             else if (farmerType?.includes("Institu")) {
+
                 // @ts-expect-error TS(2322): Type 'Results<Object<unknown, never>>' is not assi... Remove this comment to see the full error message
                 farmers = realm.objects("Institution").filtered("userDistrict == $0", customUserData?.userDistrict);
                 farmers = customizeItem(farmers, [], [], {}, farmerType);
@@ -481,10 +498,12 @@ const FarmersSearchScreen = ({
                                 }}
                                 value={searchQuery}
                                 onFocus={() => {
+
                                     // @ts-expect-error TS(2345): Argument of type 'true' is not assignable to param... Remove this comment to see the full error message
                                     setFocusedOption(true);
                                 }}
                                 onEndEditing={() => {
+
                                     // @ts-expect-error TS(2345): Argument of type 'false' is not assignable to para... Remove this comment to see the full error message
                                     setFocusedOption(false);
                                     setIsSearching(true);

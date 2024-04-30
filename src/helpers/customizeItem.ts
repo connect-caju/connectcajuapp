@@ -35,6 +35,7 @@ export const customizeItem = (
   let institutionsIds = [];
 
   return farmersList
+
     // @ts-expect-error TS(7030): Not all code paths return a value.
     ?.map((item: any, index: any) => {
       const farmlands = farmlandsList?.filter(

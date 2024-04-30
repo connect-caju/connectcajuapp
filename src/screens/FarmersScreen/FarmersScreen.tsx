@@ -114,6 +114,7 @@ export default function FarmersScreen({
 
 
   const districts = Array.from(
+
     // @ts-expect-error TS(2339): Property 'userDistrict' does not exist on type 'Ob... Remove this comment to see the full error message
     new Set(stats.map((stat) => stat?.userDistrict)),
   ).filter((district) => district !== "NA");
@@ -148,6 +149,7 @@ export default function FarmersScreen({
     "Instituição",
   );
 
+
   // @ts-expect-error TS(2339): Property 'userDistrict' does not exist on type 'Ob... Remove this comment to see the full error message
   const filteredStats = stats?.filter((stat) => stat.userDistrict !== "NA");
   // ------------------------------------------------------
@@ -167,8 +169,10 @@ export default function FarmersScreen({
       const district = districts[i];
       let newObject = {};
       const usersStats = stats.filter((stat: any) => stat.userDistrict === district);
+
       // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       newObject["title"] = `${district}`;
+
       // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       newObject["data"] = usersStats;
       statsByDistrict.push(newObject);
@@ -194,8 +198,9 @@ export default function FarmersScreen({
   }
   if (farmersList.length > 0) {
     farmersList = farmersList?.sort(
-      // @ts-expect-error TS(7006): Parameter 'a' implicitly has an 'any' type.
-      (a, b) => new Date(b?.createdAt) - new Date(a?.createdAt),
+
+      // @ts-expect-error TS(2362): The left-hand side of an arithmetic operation must... Remove this comment to see the full error message
+      (a: any, b: any) => new Date(b?.createdAt) - new Date(a?.createdAt),
     );
   }
 
@@ -275,6 +280,7 @@ export default function FarmersScreen({
                 }}
               >
                 <Pressable
+
                   // @ts-expect-error TS(2322): Type '{ children: Element; onPress: () => void; }'... Remove this comment to see the full error message
                   onPress={() => {
                     setRefresh(!refresh);
@@ -329,6 +335,7 @@ export default function FarmersScreen({
 
             {
               <Box
+
                 // @ts-expect-error TS(2322): Type '{ children: Element; style: { justifyContent... Remove this comment to see the full error message
                 style={{
                   // display: pop ? "none" : "flex",
@@ -342,6 +349,7 @@ export default function FarmersScreen({
                   horizontal={false}
                   StickyHeaderComponent={() => (
                     <Box
+
                       // @ts-expect-error TS(2322): Type '{ style: { height: number; justifyContent: s... Remove this comment to see the full error message
                       style={{
                         height: hp("10%"),
@@ -371,6 +379,7 @@ export default function FarmersScreen({
                   ListFooterComponent={() => {
                     return (
                       <Box
+
                         // @ts-expect-error TS(2322): Type '{ children: Element; style: { paddingBottom:... Remove this comment to see the full error message
                         style={{
                           paddingBottom: 100,

@@ -20,6 +20,7 @@ import {
   AccordionList,
 // @ts-expect-error TS(7016): Could not find a declaration file for module 'acco... Remove this comment to see the full error message
 } from "accordion-collapse-react-native"
+
 // @ts-expect-error TS(7016): Could not find a declaration file for module 'uuid... Remove this comment to see the full error message
 import { v4 as uuidv4 } from "uuid"
 import { useFocusEffect } from "@react-navigation/native"
@@ -42,6 +43,7 @@ import {
 
 import CustomDivider from "../../components/Divider/CustomDivider"
 import COLORS from "../../consts/colors"
+
 // @ts-expect-error TS(2307): Cannot find module '../EditData/EditData' or its c... Remove this comment to see the full error message
 import EditData from "../EditData/EditData"
 import EditFarmerData from "../EditData/EditFarmerData"
@@ -67,6 +69,7 @@ export default function EllipsisModal({
   // ---------------------------------------------------------------
 
   const handleEllipsisOptions = (option: any) => {
+
     // @ts-expect-error TS(2584): Cannot find name 'console'. Do you need to change ... Remove this comment to see the full error message
     console.log(`selected option: ${option}`)
     settIsEllipsisVisible(false)

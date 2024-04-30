@@ -1,9 +1,11 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable linebreak-style */
 /* eslint-disable prettier/prettier */
+
 // @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { View, Text, TextInput } from "react-native";
 import React, { useEffect, useCallback, useMemo, useRef, } from "react";
+
 // @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { FlatList } from "react-native";
 import COLORS from "../../consts/colors";
@@ -31,21 +33,25 @@ const PendingResources = ({
 
 
     if (resourceType === resourceTypes.actor) {
+
         // @ts-expect-error TS(2740): Type 'Results<Object<unknown, never>>' is missing ... Remove this comment to see the full error message
         resources = realm.objects(resourceTypes.actor).filtered("status == $0 && userId == $1", resourceValidation.status.pending, userId);
         resources = customizeItem(resources, [], [], {}, farmerTypes.farmer);
     }
     else if (resourceType === resourceTypes.group) {
+
         // @ts-expect-error TS(2322): Type 'Results<Object<unknown, never>>' is not assi... Remove this comment to see the full error message
         resources = realm.objects(resourceTypes.group).filtered("status == $0 && userId == $1", resourceValidation.status.pending, userId);
         resources = customizeItem(resources, [], [], {}, farmerTypes.group);
     }
     else if (resourceType === resourceTypes.institution) {
+
         // @ts-expect-error TS(2322): Type 'Results<Object<unknown, never>>' is not assi... Remove this comment to see the full error message
         resources = realm.objects(resourceTypes.institution).filtered("status == $0 && userId == $1", resourceValidation.status.pending, userId);
         resources = customizeItem(resources, [], [], {}, farmerTypes.institution);
     }
     else if (resourceType === resourceTypes.farmland) {
+
         // @ts-expect-error TS(2322): Type 'Results<Object<unknown, never>>' is not assi... Remove this comment to see the full error message
         resources = realm.objects(resourceTypes.farmland).filtered("status == $0 && userId == $1", resourceValidation.status.pending, userId);
         resources = customizeItem(resources, [], [], {}, resourceTypes.farmland);
@@ -78,6 +84,7 @@ const PendingResources = ({
                         keyExtractor={keyExtractor}
                         // onEndReached={handleEndReached}
                         onEndReachedThreshold={0.1}
+
                         // @ts-expect-error TS(7030): Not all code paths return a value.
                         renderItem={({
                             item

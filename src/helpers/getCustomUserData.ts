@@ -18,12 +18,16 @@ export const getCustomUserData = async () => {
     return {
       // @ts-expect-error TS(2339): Property 'name' does not exist on type 'Document<a... Remove this comment to see the full error message
       name: userData?.name,
+
       // @ts-expect-error TS(2339): Property 'email' does not exist on type 'Document<... Remove this comment to see the full error message
       email: userData?.email,
+
       // @ts-expect-error TS(2339): Property 'userId' does not exist on type 'Document... Remove this comment to see the full error message
       userId: userData?.userId,
+
       // @ts-expect-error TS(2339): Property 'userDistrict' does not exist on type 'Do... Remove this comment to see the full error message
       district: userData?.userDistrict,
+
       // @ts-expect-error TS(2339): Property 'userProvince' does not exist on type 'Do... Remove this comment to see the full error message
       province: userData?.userProvince,
     };

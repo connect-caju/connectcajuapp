@@ -55,20 +55,25 @@ function PhotoModal({
         path: "images",
       },
     }
+
     // @ts-expect-error TS(2345): Argument of type '{ includeBase64: boolean; storag... Remove this comment to see the full error message
     launchCamera(options, (response) => {
       //   console.log('Response = ', response);
 
       if (response.didCancel) {
+
         // @ts-expect-error TS(2584): Cannot find name 'console'. Do you need to change ... Remove this comment to see the full error message
         console.log("User cancelled image picker")
       } else if (response.errorCode) {
+
         // @ts-expect-error TS(2584): Cannot find name 'console'. Do you need to change ... Remove this comment to see the full error message
         console.log("ImagePicker Error: ", response.errorMessage)
       } else {
+
         // @ts-expect-error TS(2339): Property 'uri' does not exist on type 'ImagePicker... Remove this comment to see the full error message
         const source = { uri: response.uri }
         const imageString =
+
           // @ts-expect-error TS(2532): Object is possibly 'undefined'.
           "data:image/jpeg;base64," + response.assets[0].base64
 
@@ -83,16 +88,19 @@ function PhotoModal({
         setIsPhotoModalVisible(false)
 
         if (photoOwnerType === "Grupo") {
+
           // @ts-expect-error TS(2345): Argument of type 'string' is not assignable to par... Remove this comment to see the full error message
           navigation.navigate("Group", {
             ownerId: photoOwner?._id,
           })
         } else if (photoOwnerType === "Indivíduo") {
+
           // @ts-expect-error TS(2345): Argument of type 'string' is not assignable to par... Remove this comment to see the full error message
           navigation.navigate("Farmer", {
             ownerId: photoOwner?._id,
           })
         } else if (photoOwnerType === "Instituição") {
+
           // @ts-expect-error TS(2345): Argument of type 'string' is not assignable to par... Remove this comment to see the full error message
           navigation.navigate("Institution", {
             ownerId: photoOwner?._id,
@@ -112,16 +120,19 @@ function PhotoModal({
       })
 
       if (photoOwnerType === "Grupo") {
+
         // @ts-expect-error TS(2345): Argument of type 'string' is not assignable to par... Remove this comment to see the full error message
         navigation.navigate("Group", {
           ownerId: photoOwner?._id,
         })
       } else if (photoOwnerType === "Indivíduo") {
+
         // @ts-expect-error TS(2345): Argument of type 'string' is not assignable to par... Remove this comment to see the full error message
         navigation.navigate("Farmer", {
           ownerId: photoOwner?._id,
         })
       } else if (photoOwnerType === "Instituição") {
+
         // @ts-expect-error TS(2345): Argument of type 'string' is not assignable to par... Remove this comment to see the full error message
         navigation.navigate("Institution", {
           ownerId: photoOwner?._id,
@@ -216,6 +227,7 @@ function PhotoModal({
         }}
       >
         <Box
+
           // @ts-expect-error TS(2322): Type '{ children: Element; style: { position: stri... Remove this comment to see the full error message
           style={{
             position: "absolute",
@@ -229,16 +241,19 @@ function PhotoModal({
             onPress={() => {
               setIsPhotoModalVisible(false)
               if (photoOwnerType === "Grupo") {
+
                 // @ts-expect-error TS(2345): Argument of type 'string' is not assignable to par... Remove this comment to see the full error message
                 navigation.navigate("Group", {
                   ownerId: photoOwner?._id,
                 })
               } else if (photoOwnerType === "Indivíduo") {
+
                 // @ts-expect-error TS(2345): Argument of type 'string' is not assignable to par... Remove this comment to see the full error message
                 navigation.navigate("Farmer", {
                   ownerId: photoOwner?._id,
                 })
               } else if (photoOwnerType === "Instituição") {
+
                 // @ts-expect-error TS(2345): Argument of type 'string' is not assignable to par... Remove this comment to see the full error message
                 navigation.navigate("Institution", {
                   ownerId: photoOwner?._id,
@@ -264,6 +279,7 @@ function PhotoModal({
                 </Box> */}
 
         <Box
+
           // @ts-expect-error TS(2322): Type '{ children: Element; style: { flex: number; ... Remove this comment to see the full error message
           style={{
             flex: 1,
@@ -298,6 +314,7 @@ function PhotoModal({
             direction="column"
             space={4}
             // py="6"
+
             // @ts-expect-error TS(2322): Type '{ children: Element; direction: "column"; sp... Remove this comment to see the full error message
             mh="5"
             w="100%"
@@ -343,6 +360,7 @@ function PhotoModal({
                   <TouchableOpacity
                     onPress={() => {
                       // launchNativeCamera();
+
                       // @ts-expect-error TS(2304): Cannot find name 'setShowCamera'.
                       setShowCamera(true)
                     }}

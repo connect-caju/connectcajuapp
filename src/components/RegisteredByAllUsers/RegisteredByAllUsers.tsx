@@ -1,10 +1,12 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable linebreak-style */
 /* eslint-disable prettier/prettier */
+
 // @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { View, Text } from "react-native";
 import React from "react";
 import { customizeItem } from "../../helpers/customizeItem";
+
 // @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { FlatList } from "react-native";
 import GroupItem from "../GroupItem/GroupItem";
@@ -129,6 +131,7 @@ const RegisteredByAllUsers = ({
                         keyExtractor={keyExtractor}
                         // onEndReached={handleEndReached}
                         onEndReachedThreshold={0.1}
+
                         // @ts-expect-error TS(7030): Not all code paths return a value.
                         renderItem={({
                             item

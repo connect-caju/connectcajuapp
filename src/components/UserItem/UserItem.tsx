@@ -12,6 +12,7 @@ import {
 } from "react-native";
 import { Overlay, Icon, Button } from "@rneui/base";
 import { Box, CheckIcon, FormControl, Select, Stack } from "native-base";
+
 // @ts-expect-error TS(7016): Could not find a declaration file for module 'uuid... Remove this comment to see the full error message
 import { v4 as uuidv4 } from "uuid";
 
@@ -54,12 +55,16 @@ export default function UserItem({
 
         if (userStat) {
           realm.write(() => {
+
             // @ts-expect-error TS(2339): Property 'targetFarmers' does not exist on type 'O... Remove this comment to see the full error message
             userStat.targetFarmers = tFarmers;
+
             // @ts-expect-error TS(2339): Property 'targetFarmlands' does not exist on type ... Remove this comment to see the full error message
             userStat.targetFarmlands = tFarmlands;
+
             // @ts-expect-error TS(2339): Property 'modifiedAt' does not exist on type 'Obje... Remove this comment to see the full error message
             userStat.modifiedAt = new Date();
+
             // @ts-expect-error TS(2339): Property 'modifiedBy' does not exist on type 'Obje... Remove this comment to see the full error message
             userStat.modifiedBy = customUserData?.name;
           });
@@ -88,13 +93,17 @@ export default function UserItem({
 
   useEffect(() => {
     if (!userStat) {
+
       // @ts-expect-error TS(2345): Argument of type 'number' is not assignable to par... Remove this comment to see the full error message
       setTargetFarmers(0);
+
       // @ts-expect-error TS(2345): Argument of type 'number' is not assignable to par... Remove this comment to see the full error message
       setTargetFarmlands(0);
     } else {
+
       // @ts-expect-error TS(2339): Property 'targetFarmers' does not exist on type 'O... Remove this comment to see the full error message
       setTargetFarmers(userStat.targetFarmers);
+
       // @ts-expect-error TS(2339): Property 'targetFarmlands' does not exist on type ... Remove this comment to see the full error message
       setTargetFarmlands(userStat.targetFarmlands);
     }
@@ -112,12 +121,14 @@ export default function UserItem({
 
   return (
     <Box
+
       // @ts-expect-error TS(2322): Type '{ children: any[]; className: string; }' is ... Remove this comment to see the full error message
       className="flex flex-1 bg-white shadow-md shadow-slate-200 my-1 h-16 items-center justify-center"
     >
       <Stack w="100%" direction="row" space={1} >
         <Box
           w="40%"
+
           // @ts-expect-error TS(2322): Type '{ children: Element; w: "40%"; className: st... Remove this comment to see the full error message
           className="justify-center "
         >
@@ -129,6 +140,7 @@ export default function UserItem({
         </Box>
         <Box
           w="20%"
+
           // @ts-expect-error TS(2322): Type '{ children: Element; w: "20%"; className: st... Remove this comment to see the full error message
           className="justify-center items-center"
         >
@@ -155,6 +167,7 @@ export default function UserItem({
 
         <Box
           w="20%"
+
           // @ts-expect-error TS(2322): Type '{ children: Element; w: "20%"; className: st... Remove this comment to see the full error message
           className="justify-center items-center"
         >
@@ -181,6 +194,7 @@ export default function UserItem({
 
         <Box
           w="20%"
+
           // @ts-expect-error TS(2322): Type '{ children: Element; w: "20%"; className: st... Remove this comment to see the full error message
           className="justify-center"
         >
@@ -195,10 +209,12 @@ export default function UserItem({
                 setUpdate(false);
                 setReset(false);
                 setTargetFarmers(
+
                   // @ts-expect-error TS(2532): Object is possibly 'undefined'.
                   userStat.targetFarmers ? userStat.targetFarmers : 0,
                 );
                 setTargetFarmlands(
+
                   // @ts-expect-error TS(2532): Object is possibly 'undefined'.
                   userStat.targetFarmlands ? userStat.targetFarmlands : 0,
                 );
@@ -219,10 +235,12 @@ export default function UserItem({
         </Box>
       </Stack>
       // @ts-expect-error TS(2339): Property 'errorMessage' does not exist on type '{}... Remove this comment to see the full error message
+      // @ts-expect-error TS(2339): Property 'errorMessage' does not exist on type '{}... Remove this comment to see the full error message
       {errors.errorMessage && (
         <Text
           className="text-red-400 text-center text-xs"
         >
+          // @ts-expect-error TS(2339): Property 'errorMessage' does not exist on type '{}... Remove this comment to see the full error message
           // @ts-expect-error TS(2339): Property 'errorMessage' does not exist on type '{}... Remove this comment to see the full error message
           {errors.errorMessage}
         </Text>

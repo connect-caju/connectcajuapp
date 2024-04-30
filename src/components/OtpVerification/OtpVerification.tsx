@@ -49,6 +49,7 @@ const CodeInputField = ({
 
   const handleOnPress = () => {
     setInputContainerIsFocused(true)
+
     // @ts-expect-error TS(2339): Property 'focus' does not exist on type 'never'.
     textInputRef?.current?.focus()
   }

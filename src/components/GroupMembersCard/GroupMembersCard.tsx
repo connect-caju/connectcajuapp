@@ -218,6 +218,7 @@ export default function GroupMembersCard({
             }}
           >
             {members.filter(member=>member)?.map((member, index) => {
+
                 // @ts-expect-error TS(2339): Property '_id' does not exist on type 'Object<unkn... Remove this comment to see the full error message
                 return <GroupMemberItem key={member?._id} member={member} />;
             })}

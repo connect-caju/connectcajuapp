@@ -1,6 +1,7 @@
 /* eslint-disable linebreak-style */
 /* eslint-disable prettier/prettier */
 import React, { useState, useEffect, useCallback } from "react";
+
 // @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { View, Text, StyleSheet, ScrollView, Pressable } from "react-native";
 import { Overlay, Icon, Button } from "@rneui/base";
@@ -26,6 +27,7 @@ import { secrets } from "../../secrets";
 import { useUser } from "@realm/react";
 import UserItem from "../UserItem/UserItem";
 import { useFocusEffect } from "@react-navigation/native";
+
 // @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { InteractionManager } from "react-native";
 import { errorMessages } from "../../consts/errorMessages";
@@ -75,9 +77,11 @@ export default function UserGoalEdit({
     let users;
     try {
       users = await collection.find({ userDistrict: district });
+
       // @ts-expect-error TS(2345): Argument of type 'Document<any>[]' is not assignab... Remove this comment to see the full error message
       setDistritalUsers(users);
     } catch (error) {
+
       // @ts-expect-error TS(2571): Object is of type 'unknown'.
       if (error.includes(errorMessages.network.logFlag)) {
         // Alert message
@@ -93,6 +97,7 @@ export default function UserGoalEdit({
         setTitleAlert(errorMessages.server.title);
         setMessageAlert(errorMessages.server.message);
         setShowCancelButton(errorMessages.server.showCancelButton);
+
         // @ts-expect-error TS(2339): Property 'service' does not exist on type '{ autom... Remove this comment to see the full error message
         setShowConfirmBttom(errorMessages.service.showConfirmButton);
         setConfirmText(errorMessages.server.confirmText);
@@ -106,6 +111,7 @@ export default function UserGoalEdit({
 
   useEffect(() => {
     if (province) {
+
       // @ts-expect-error TS(2538): Type 'unknown' cannot be used as an index type.
       setSelectedDistricts(districts[province]);
     }
@@ -145,6 +151,7 @@ export default function UserGoalEdit({
 
             </Box>
             <Box
+
               // @ts-expect-error TS(2322): Type '{ children: Element; className: string; }' i... Remove this comment to see the full error message
               className="w-full justify-center items-center"
             >
@@ -164,6 +171,7 @@ export default function UserGoalEdit({
             }}
           ></Text>
           <Box
+
             // @ts-expect-error TS(2322): Type '{ children: Element; style: { width: string;... Remove this comment to see the full error message
             style={{
               width: "100%",
@@ -175,6 +183,7 @@ export default function UserGoalEdit({
                   <FormControl isRequired my="3">
                     <FormControl.Label>Província</FormControl.Label>
                     <Select
+
                       // @ts-expect-error TS(2322): Type 'unknown' is not assignable to type 'string |... Remove this comment to see the full error message
                       selectedValue={province}
                       accessibilityLabel="Escolha província"
@@ -210,8 +219,10 @@ export default function UserGoalEdit({
                       }}
                     >
                       <Select.Item
+
                         // @ts-expect-error TS(2322): Type 'unknown' is not assignable to type 'string'.
                         label={customUserData?.userProvince}
+
                         // @ts-expect-error TS(2322): Type 'unknown' is not assignable to type 'string'.
                         value={customUserData?.userProvince}
                       />
@@ -224,6 +235,7 @@ export default function UserGoalEdit({
                   <FormControl.Label>Distrito</FormControl.Label>
                   <Select
                     selectedValue={district}
+
                     // @ts-expect-error TS(2322): Type '{ children: Element[]; selectedValue: string... Remove this comment to see the full error message
                     accessibilityLabel="Escolha distrito"
                     placeholder="Escolha distrito"
@@ -269,6 +281,7 @@ export default function UserGoalEdit({
           </Box>
 
           <Box
+
             // @ts-expect-error TS(2322): Type '{ children: (false | "" | Element)[]; style:... Remove this comment to see the full error message
             style={{
               width: "100%",
@@ -308,16 +321,19 @@ export default function UserGoalEdit({
               //   flex: 1,
               //   width: "100%",
               // }}
+
               // @ts-expect-error TS(2322): Type '{ children: Element[]; className: string; }'... Remove this comment to see the full error message
               className="flex flex-1 w-full"
             >
               <Stack
+
 
                 // @ts-expect-error TS(2322): Type '{ children: Element[]; className: string; }'... Remove this comment to see the full error message
                 className="w-full flex flex-row mb-2 bg-slate-400 rounded-t-md p-2 gap-1"
               >
                 <Box
                   w="40%"
+
                   // @ts-expect-error TS(2322): Type '{ children: Element; w: "40%"; className: st... Remove this comment to see the full error message
                   className="justify-center"
                 >
@@ -354,6 +370,7 @@ export default function UserGoalEdit({
 
                 <Box
                   w="20%"
+
                   // @ts-expect-error TS(2322): Type '{ children: Element; w: "20%"; style: { just... Remove this comment to see the full error message
                   style={{
                     justifyContent: "center",
@@ -368,6 +385,7 @@ export default function UserGoalEdit({
               </Stack>
               <ScrollView>
                 {districtalUsers?.map((userItem) => {
+
                   // @ts-expect-error TS(2339): Property 'userId' does not exist on type 'never'.
                   return <UserItem key={userItem.userId} userItem={userItem} />;
                 })}

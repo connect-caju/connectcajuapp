@@ -2,6 +2,7 @@ import { actorCategory } from "../consts/actorCategories"
 import districtCodes from "../consts/districtCodes"
 
 export const generateUniqueNumber = (address: any, category: any) => {
+
   // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
   let addressCode = districtCodes[address?.province][address?.district]
 

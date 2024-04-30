@@ -1,6 +1,3 @@
-/* eslint-disable linebreak-style */
-/* eslint-disable react/prop-types */
-/* eslint-disable prettier/prettier */
 import React, { useState, useEffect, useCallback } from "react";
 import {
   View,
@@ -9,7 +6,7 @@ import {
   Modal,
   Animated,
   SafeAreaView,
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
+  TouchableOpacity,
 } from "react-native";
 import {
   Box,
@@ -31,12 +28,7 @@ import { getFullYears, getFullYears2 } from "../../helpers/dates";
 import { plantingTypes } from "../../consts/plantingTypes";
 import cloneList from "../../consts/clones";
 import { CustomInput } from "../Inputs/CustomInput";
-
-// import { v4 as uuidv4 } from 'uuid';
-
 import { realmContext } from "../../models/realmContext";
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
-import { TouchableOpacity } from "react-native";
 import validateBlockData from "../../helpers/validateBlockData";
 import AwesomeAlert from "react-native-awesome-alerts";
 import { errorMessages } from "../../consts/errorMessages";
@@ -197,8 +189,6 @@ export default function FarmlandBlockRegistration({
         }}
         onTouchCancel={
           () => { }
-          // resizeBlockBox(0)
-          // setIsOverlayVisible(false)
         }
       >
         <Animated.View
@@ -289,21 +279,18 @@ export default function FarmlandBlockRegistration({
             }}
           />
 
-          <Box w="100%">
-            <Text
-              style={{
+          <View style={{
                 textAlign: "center",
                 color: COLORS.black,
                 fontSize: 24,
                 fontFamily: "JosefinSans-Bold",
-              }}
-            >
-              // @ts-expect-error TS(2339): Property 'blocks' does not exist on type 'Object<u... Remove this comment to see the full error message
+                width: "100%",
+              }}>
+            <Text>
               Parcela {foundFarmland?.blocks?.length + 1}
             </Text>
-          </Box>
-          <Box
-            // @ts-expect-error TS(2322): Type '{ children: Element; style: { position: stri... Remove this comment to see the full error message
+          </View>
+          <View
             style={{
               position: "absolute",
               top: 5,
@@ -322,7 +309,7 @@ export default function FarmlandBlockRegistration({
             >
               <Icon name="close" color={COLORS.grey} size={25} />
             </TouchableOpacity>
-          </Box>
+          </View>
           <Animated.ScrollView
             decelerationRate={"normal"}
             fadingEdgeLength={2}
@@ -337,16 +324,15 @@ export default function FarmlandBlockRegistration({
                 paddingBottom: 50,
               }}
             >
-              <Box
-                w="100%"
-                px="1"
-                // @ts-expect-error TS(2322): Type '{ children: Element[]; w: "100%"; px: "1"; s... Remove this comment to see the full error message
+              <View
                 style={{
                   flexDirection: "row",
                   justifyContent: "space-between",
                   alignItems: "center",
                   paddingTop: 10,
                   paddingBottom: 20,
+                  width: "100%",
+                  paddingHorizontal: 1,
                 }}
               >
                 {ownerImage ? (
@@ -367,7 +353,7 @@ export default function FarmlandBlockRegistration({
                     color={COLORS.lightgrey}
                   />
                 )}
-                <Box>
+                <View>
                   <Text
                     style={{
                       fontSize: 14,
@@ -388,10 +374,10 @@ export default function FarmlandBlockRegistration({
                   >
                     Quais dos {(totalArea - areaFlag).toFixed(1)} hectares?
                   </Text>
-                </Box>
-              </Box>
-              <Stack direction="row" mx="3" w="100%">
-                <Box w="100%" px="1">
+                </View>
+              </View>
+              <View direction="row" mx="3" w="100%">
+                <View w="100%" px="1">
                   <FormControl
                     isRequired
                     my="1"
@@ -400,6 +386,7 @@ export default function FarmlandBlockRegistration({
                     <FormControl.Label>Ano de plantio</FormControl.Label>
 
                     <SelectList
+
                       // @ts-expect-error TS(2769): No overload matches this call.
                       data={() => getFullYears2(70)}
                       setSelected={(newYear: any) => {
@@ -454,13 +441,11 @@ export default function FarmlandBlockRegistration({
                       <FormControl.HelperText></FormControl.HelperText>
                     )}
                   </FormControl>
-                </Box>
-              </Stack>
-
-              // @ts-expect-error TS(2322): Type '{ children: any[]; style: {}; }' is not assi... Remove this comment to see the full error message
-              <Box style={{}}>
-                <Stack direction="row" w="100%" space={2}>
-                  <Box w={"48%"}>
+                </View>
+              </View>
+             <View>
+                <View style={{flexDirection: "row", width: "100%", gap: 2}}>
+                  <View style={{ width: "48%"}}>
                     <FormControl
                       isRequired
                       my="2"
@@ -484,13 +469,13 @@ export default function FarmlandBlockRegistration({
                         }}
                       />
                     </FormControl>
-                  </Box>
+                  </View>
 
-                  <Box
-                    w="48%"
-                    // @ts-expect-error TS(2322): Type '{ children: Element; w: "48%"; style: { just... Remove this comment to see the full error message
+                  <View
+                 
                     style={{
                       justifyContent: "flex-end",
+                      width: "48%"
                     }}
                   >
                     <FormControl
@@ -516,12 +501,12 @@ export default function FarmlandBlockRegistration({
                         }}
                       />
                     </FormControl>
-                  </Box>
-                </Stack>
+                  </View>
+                </View>
 
                 {errors?.blockTrees && errors?.usedArea && (
-                  <Box
-                    // @ts-expect-error TS(2322): Type '{ children: Element[]; style: { backgroundCo... Remove this comment to see the full error message
+                  <View
+
                     style={{
                       backgroundColor: COLORS.danger,
                     }}
@@ -571,11 +556,11 @@ export default function FarmlandBlockRegistration({
                       />{" "}
                       {errors?.treeDensity}
                     </Text>
-                  </Box>
+                  </View>
                 )}
 
                 {errors?.blockTrees && !errors?.usedArea && (
-                  <Box>
+                  <View>
                     <Text
                       style={{ fontSize: 14, color: COLORS.red, padding: 6 }}
                     >
@@ -587,11 +572,11 @@ export default function FarmlandBlockRegistration({
                       />{" "}
                       {errors?.blockTrees}
                     </Text>
-                  </Box>
+                  </View>
                 )}
 
                 {!errors?.blockTrees && errors?.usedArea && (
-                  <Box>
+                  <View>
                     <Text
                       style={{ fontSize: 14, color: COLORS.red, padding: 6 }}
                     >
@@ -603,15 +588,15 @@ export default function FarmlandBlockRegistration({
                       />{" "}
                       {errors?.usedArea}
                     </Text>
-                  </Box>
+                  </View>
                 )}
-              </Box>
+              </View>
 
-              <Box
-                w="100%"
-                // @ts-expect-error TS(2322): Type '{ children: Element; w: "100%"; style: { mar... Remove this comment to see the full error message
+              <View
+             
+
                 style={{
-                  marginTop: errors?.usedArea && errors?.blockTrees ? 0 : 0,
+                  marginTop: errors?.usedArea && errors?.blockTrees ? 0 : 0, width: "100%"
                 }}
               >
                 <FormControl
@@ -631,8 +616,8 @@ export default function FarmlandBlockRegistration({
                       Compasso
                     </Text>
                   </FormControl.Label>
-                  <Stack direction="row" mx="3" w="100%">
-                    <Box w="50%" px="1">
+                  <View direction="row" mx="3" w="100%">
+                    <View w="50%" px="1">
                       <CheckBox
                         center
                         fontFamily="JosefinSans-Bold"
@@ -673,8 +658,8 @@ export default function FarmlandBlockRegistration({
                           });
                         }}
                       />
-                    </Box>
-                    <Box w="50%" px="1">
+                    </View>
+                    <View w="50%" px="1">
                       <CheckBox
                         center
                         fontFamily="JosefinSans-Bold"
@@ -705,6 +690,7 @@ export default function FarmlandBlockRegistration({
                             iconStyle={{ marginRight: 1 }}
                           />
                         }
+
                         // @ts-expect-error TS(2322): Type '{ center: true; fontFamily: string; containe... Remove this comment to see the full error message
                         onPress={() => {
                           setIsDensityModeIrregular(true);
@@ -717,8 +703,8 @@ export default function FarmlandBlockRegistration({
                           setDensityLength("");
                         }}
                       />
-                    </Box>
-                  </Stack>
+                    </View>
+                  </View>
                   {"densityMode" in errors ? (
                     <FormControl.ErrorMessage
                       leftIcon={
@@ -732,11 +718,11 @@ export default function FarmlandBlockRegistration({
                     <FormControl.HelperText></FormControl.HelperText>
                   )}
                 </FormControl>
-              </Box>
+              </View>
 
               {isDensityModeRegular && (
-                <Stack direction="row" mx="3" w="100%">
-                  <Box w="45%" px="1">
+                <View direction="row" mx="3" w="100%">
+                  <View w="45%" px="1">
                     <FormControl
                       my="1"
                       isRequired
@@ -774,14 +760,13 @@ export default function FarmlandBlockRegistration({
                         <FormControl.HelperText></FormControl.HelperText>
                       )}
                     </FormControl>
-                  </Box>
-                  <Box
-                    w="10%"
-                    // @ts-expect-error TS(2322): Type '{ children: Element; w: "10%"; style: { just... Remove this comment to see the full error message
-                    style={{
+                  </View>
+                  <View
+                                  style={{
                       justifyContent: "center",
                       alignItems: "center",
                       paddingTop: "density" in errors ? 10 : 20,
+                      width: "10%",
                     }}
                   >
                     <Text
@@ -791,8 +776,8 @@ export default function FarmlandBlockRegistration({
                     >
                       X
                     </Text>
-                  </Box>
-                  <Box w="45%" px="1">
+                  </View>
+                  <View w="45%" px="1">
                     <FormControl
                       my="1"
                       isRequired
@@ -830,8 +815,8 @@ export default function FarmlandBlockRegistration({
                         <FormControl.HelperText></FormControl.HelperText>
                       )}
                     </FormControl>
-                  </Box>
-                </Stack>
+                  </View>
+                </View>
               )}
 
               <FormControl isRequired my="1" isInvalid={"plantTypes" in errors}>
@@ -959,15 +944,17 @@ export default function FarmlandBlockRegistration({
                   </FormControl>
 
                   {clones?.find((clone: any) => clone === "Outro") && (
-                    <Box
-                      w="100%"
+                    <View
+ 
                       alignItems={"center"}
-                      // @ts-expect-error TS(2322): Type '{ children: Element[]; w: "100%"; alignItems... Remove this comment to see the full error message
                       style={{
                         flexDirection: "row",
+                        display: "flex",
+                        alignItems: "center",
+                        width: "100%"
                       }}
                     >
-                      <Box w="70%">
+                      <View w="70%">
                         <FormControl my="1" isInvalid={"addedClone" in errors}>
                           <FormControl.Label>
                             Adiciona novo clone
@@ -1002,10 +989,8 @@ export default function FarmlandBlockRegistration({
                             <FormControl.HelperText></FormControl.HelperText>
                           )}
                         </FormControl>
-                      </Box>
-                      <Box
-                        // w="15%"
-                        // @ts-expect-error TS(2322): Type '{ children: Element; style: { justifyContent... Remove this comment to see the full error message
+                      </View>
+                      <View
                         style={{
                           justifyContent: "center",
                           alignItems: "center",
@@ -1046,18 +1031,19 @@ export default function FarmlandBlockRegistration({
                             color={COLORS.ghostwhite}
                           />
                         </TouchableOpacity>
-                      </Box>
-                      <Box w="15%"></Box>
-                    </Box>
+                      </View>
+                      <View w="15%"></View>
+                    </View>
                   )}
                 </>
               )}
 
               {plantTypes.length > 0 && sameTypeTreesList.length > 0 && (
-                <Box w="100%" my="5">
+                <View w="100%" my="5">
                   {errors?.sameTypeTrees && (
-                    <Box
-                      // @ts-expect-error TS(2322): Type '{ children: Element[]; style: { flexDirectio... Remove this comment to see the full error message
+                    <View
+
+
                       style={{
                         flexDirection: "row",
                         paddingHorizontal: 10,
@@ -1075,12 +1061,12 @@ export default function FarmlandBlockRegistration({
                       >
                         {errors?.sameTypeTrees}
                       </Text>
-                    </Box>
+                    </View>
                   )}
 
-                  <Box w="100%" mb="2">
+                  <View w="100%" mb="2">
                     <Stack direction="row" space={2}>
-                      <Box w="65%">
+                      <View w="65%">
                         <Text
                           style={{
                             color: COLORS.main,
@@ -1090,8 +1076,8 @@ export default function FarmlandBlockRegistration({
                         >
                           Tipos de plantas
                         </Text>
-                      </Box>
-                      <Box w="35%">
+                      </View>
+                      <View w="35%">
                         <Text
                           style={{
                             color: COLORS.main,
@@ -1101,23 +1087,23 @@ export default function FarmlandBlockRegistration({
                         >
                           Cajueiros
                         </Text>
-                      </Box>
+                      </View>
                     </Stack>
-                  </Box>
+                  </View>
 
                   {sameTypeTreesList?.map((sameTypeTree: any, index: any) => (
-                    <Box w="100%" key={index} mb="1">
-                      <Stack
+                    <View w="100%" key={index} mb="1">
+                      <View
                         direction="row"
                         w="100%"
                         space={2}
                       // mt="1"
                       >
-                        <Box
-                          w="65%"
-                          // @ts-expect-error TS(2322): Type '{ children: Element; w: "65%"; style: { just... Remove this comment to see the full error message
+                        <View
+                          
                           style={{
                             justifyContent: "center",
+                            width: "65%",
                           }}
                         >
                           <Text
@@ -1134,8 +1120,8 @@ export default function FarmlandBlockRegistration({
                             />{" "}
                             {sameTypeTree?.treeType}
                           </Text>
-                        </Box>
-                        <Box w="35%">
+                        </View>
+                        <View w="35%">
                           <CustomInput
                             width="90%"
                             textAlign="center"
@@ -1159,18 +1145,20 @@ export default function FarmlandBlockRegistration({
                               );
                             }}
                           />
-                        </Box>
-                      </Stack>
-                    </Box>
+                        </View>
+                      </View>
+                    </View>
                   ))}
-                </Box>
+                </View>
               )}
-              <Center
-                // @ts-expect-error TS(2322): Type '{ children: Element; style: { width: string;... Remove this comment to see the full error message
+              <View
                 style={{
                   width: "100%",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  paddingVertical: 3,
                 }}
-                py="3"
               >
                 <PrimaryButton
                   onPress={() => {
@@ -1218,7 +1206,7 @@ export default function FarmlandBlockRegistration({
                   }}
                   title="Salvar parcela"
                 />
-              </Center>
+              </View>
             </View>
           </Animated.ScrollView>
         </Animated.View>

@@ -83,6 +83,7 @@ export function MemberItem({
     >
       <TouchableOpacity
         onPress={() => {
+
           // @ts-expect-error TS(2345): Argument of type 'string' is not assignable to par... Remove this comment to see the full error message
           navigation.navigate("Profile", {
             ownerId: item._id,
@@ -181,6 +182,7 @@ export default function GroupMembersScreen({
   const realm = useRealm();
 
   const group = realm.objectForPrimaryKey("Group", groupId);
+
   // @ts-expect-error TS(2339): Property 'members' does not exist on type 'Object<... Remove this comment to see the full error message
   const members = group?.members.map((memberId: any) => {
     return realm.objectForPrimaryKey("Actor", memberId);
@@ -250,7 +252,6 @@ export default function GroupMembersScreen({
                 numberOfLines={1}
                 ellipsizeMode={"tail"}
               >
-                // @ts-expect-error TS(2576): Property 'name' does not exist on type 'Object<unk... Remove this comment to see the full error message
                 {group?.name}
               </Text>
 
@@ -262,7 +263,6 @@ export default function GroupMembersScreen({
                       fonSize: responsiveFontSize(1),
                     }}
                   >
-                    // @ts-expect-error TS(2339): Property 'numberOfMembers' does not exist on type ... Remove this comment to see the full error message
                     [{"Declarados:"} {group?.numberOfMembers.total}]
                   </Text>
                 </Center>
@@ -281,6 +281,7 @@ export default function GroupMembersScreen({
           </Box>
           <Box
             w="10%"
+
             // @ts-expect-error TS(2322): Type '{ w: "10%"; style: { justifyContent: string;... Remove this comment to see the full error message
             style={{
               justifyContent: "center",
@@ -303,6 +304,7 @@ export default function GroupMembersScreen({
             horizontal={false}
             StickyHeaderComponent={() => (
               <Box
+
                 // @ts-expect-error TS(2322): Type '{ style: { height: number; justifyContent: s... Remove this comment to see the full error message
                 style={{
                   height: hp("10%"),
@@ -320,6 +322,7 @@ export default function GroupMembersScreen({
               item
             }: any) => {
               // check if this MemberItem is of the Group Manager
+
               // @ts-expect-error TS(2531): Object is possibly 'null'.
               const isGroupManager = item._id === group.manager;
               return (
@@ -333,6 +336,7 @@ export default function GroupMembersScreen({
             ListFooterComponent={() => {
               return (
                 <Box
+
                   // @ts-expect-error TS(2322): Type '{ children: Element; style: { paddingBottom:... Remove this comment to see the full error message
                   style={{
                     paddingBottom: 150,
@@ -359,7 +363,6 @@ export default function GroupMembersScreen({
                 textAlign: "center",
               }}
             >
-              // @ts-expect-error TS(2576): Property 'name' does not exist on type 'Object<unk... Remove this comment to see the full error message
               {group?.name}
             </Text>
             <Text

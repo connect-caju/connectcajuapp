@@ -15,6 +15,7 @@ import {
 import React, { useEffect, useRef, useState, useCallback, useMemo } from "react";
 import { ListItem, Avatar, Icon, SearchBar } from "@rneui/themed";
 import { Box, Center, Pressable, Stack } from "native-base";
+
 // @ts-expect-error TS(7016): Could not find a declaration file for module 'uuid... Remove this comment to see the full error message
 import { v4 as uuidv4 } from "uuid";
 
@@ -72,6 +73,7 @@ export default function GroupRepresentativeScreen({
   const computedItems = useMemo(() => {
     let result = [];
     if (searchQuery) {
+
       // @ts-expect-error TS(7006): Parameter 'item' implicitly has an 'any' type.
       result = farmers.filter((item) => {
         return (
@@ -93,6 +95,7 @@ export default function GroupRepresentativeScreen({
   const handleEndReached = () => {
     if (!isEndReached) {
       setIsLoading(true);
+
       // @ts-expect-error TS(2304): Cannot find name 'setTimeout'.
       setTimeout(() => { }, 2000);
 
@@ -116,15 +119,18 @@ export default function GroupRepresentativeScreen({
     realm.write(async () => {
       if (selectedId) {
         // update the group manager
+
         // @ts-expect-error TS(2531): Object is possibly 'null'.
         group.manager = selectedId;
       }
       // add the manager to the group in case is not yes a member
       if (
         selectedId &&
+
         // @ts-expect-error TS(2531): Object is possibly 'null'.
         !group.members.find((memberId: any) => memberId === selectedId)
       ) {
+
         // @ts-expect-error TS(2531): Object is possibly 'null'.
         group.members.push(selectedId);
       }
@@ -143,6 +149,7 @@ export default function GroupRepresentativeScreen({
       } else {
         // find the farmer to extract actorName from
         const foundFarmer = farmers?.find(
+
           // @ts-expect-error TS(7006): Parameter 'farmer' implicitly has an 'any' type.
           (farmer) => farmer?._id === selectedId,
         );
@@ -204,6 +211,7 @@ export default function GroupRepresentativeScreen({
           <Stack direction="row" w="100%">
             <Box w="10%">
               <Pressable
+
                 // @ts-expect-error TS(2322): Type '{ children: Element; onPress: () => void; st... Remove this comment to see the full error message
                 onPress={() => {
                   if (isSearching) {
@@ -211,6 +219,7 @@ export default function GroupRepresentativeScreen({
                     setSearchQuery("");
                   } else {
                     navigation.navigate("Profile", {
+
                       // @ts-expect-error TS(2531): Object is possibly 'null'.
                       ownerId: group._id,
                       farmerType: farmerTypes.group,
@@ -234,6 +243,7 @@ export default function GroupRepresentativeScreen({
             </Box>
             <Box
               w="90%"
+
               // @ts-expect-error TS(2322): Type '{ children: Element; w: "90%"; style: { alig... Remove this comment to see the full error message
               style={{
                 alignItems: "center",
@@ -271,6 +281,7 @@ export default function GroupRepresentativeScreen({
                 <Box w="100%">
                   <Box
                     w="100%"
+
                     // @ts-expect-error TS(2322): Type '{ children: Element; w: "100%"; style: { fle... Remove this comment to see the full error message
                     style={{
                       flexDirection: "row",
@@ -278,6 +289,7 @@ export default function GroupRepresentativeScreen({
                   >
                     <Box
                       w="80%"
+
                       // @ts-expect-error TS(2322): Type '{ children: Element[]; w: "80%"; style: { ju... Remove this comment to see the full error message
                       style={{
                         justifyContent: "center",
@@ -292,7 +304,6 @@ export default function GroupRepresentativeScreen({
                         numberOfLines={1}
                         ellipsizeMode="tail"
                       >
-                        // @ts-expect-error TS(2576): Property 'name' does not exist on type 'Object<unk... Remove this comment to see the full error message
                         {`${group?.name}`}
                       </Text>
                       <Text
@@ -303,12 +314,13 @@ export default function GroupRepresentativeScreen({
                           fontFamily: "JosefinSans-Regular",
                         }}
                       >
-                        // @ts-expect-error TS(2339): Property 'manager' does not exist on type 'Object<... Remove this comment to see the full error message
                         {!group?.manager && group?.type === "Cooperativa"
                           ? "Indicar o Presidente"
+
                           // @ts-expect-error TS(2339): Property 'manager' does not exist on type 'Object<... Remove this comment to see the full error message
                           : !group?.manager && group?.type !== "Cooperativa"
                             ? "Indicar o Representante"
+
                             // @ts-expect-error TS(2339): Property 'manager' does not exist on type 'Object<... Remove this comment to see the full error message
                             : group?.manager && group?.type === "Cooperativa"
                               ? "Mudar de Presidente"
@@ -322,6 +334,7 @@ export default function GroupRepresentativeScreen({
             {!isSearching && (
               <Box
                 w="10%"
+
                 // @ts-expect-error TS(2322): Type '{ children: Element; w: "10%"; style: { posi... Remove this comment to see the full error message
                 style={{
                   position: "absolute",
@@ -345,6 +358,7 @@ export default function GroupRepresentativeScreen({
                     icon={faMagnifyingGlass}
                     size={20}
                     color={COLORS.black}
+
                     // @ts-expect-error TS(2322): Type '{ icon: IconDefinition; size: number; color:... Remove this comment to see the full error message
                     rotation={90}
                   />
@@ -364,6 +378,7 @@ export default function GroupRepresentativeScreen({
         <Box
           alignItems="stretch"
           w="100%"
+
           // @ts-expect-error TS(2322): Type '{ children: Element; alignItems: "stretch"; ... Remove this comment to see the full error message
           style={{
             marginBottom: 50,
@@ -373,6 +388,7 @@ export default function GroupRepresentativeScreen({
           <FlatList
             StickyHeaderComponent={() => (
               <Box
+
                 // @ts-expect-error TS(2322): Type '{ children: never[]; style: { height: number... Remove this comment to see the full error message
                 style={{
                   height: hp("10%"),
@@ -411,6 +427,7 @@ export default function GroupRepresentativeScreen({
               if (!isEndReached) {
                 return (
                   <Box
+
                     // @ts-expect-error TS(2322): Type '{ children: never[]; style: { backgroundColo... Remove this comment to see the full error message
                     style={{
                       // height: 10,
@@ -433,6 +450,7 @@ export default function GroupRepresentativeScreen({
           searchQuery.length > 0 &&
           isSearching && (
             <Box
+
               // @ts-expect-error TS(2322): Type '{ children: Element[]; style: { flex: number... Remove this comment to see the full error message
               style={{
                 flex: 1,
