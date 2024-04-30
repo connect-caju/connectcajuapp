@@ -30,6 +30,7 @@ import { secrets } from "./secrets";
 import { AppProvider, UserProvider } from "@realm/react";
 import { realmContext } from "./models/realmContext";
 const { RealmProvider } = realmContext;
+import RealmPlugin from "realm-flipper-plugin-device";
 
 import { toastConfig } from "./config/toastConfig";
 import { syncConfig } from "./syncConfig";
@@ -40,13 +41,14 @@ import { useDeviceContext } from "twrnc";
 import tw from "./lib/tailwind";
 
 if (__DEV__) {
-  import("../ReactotronConfig").then(() => console.log("Reactotron Configured"));
+  import("../ReactotronConfig").then(() =>
+    console.log("Reactotron Configured"),
+  );
 }
 
 export default function App() {
-
   // allowing prefixes to twrnc (dark, focus, screen breakpoints, etc)
-  useDeviceContext(tw); 
+  useDeviceContext(tw);
 
   const [isManualResetConfirmed, setIsManualResetConfirmed] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
@@ -62,7 +64,6 @@ export default function App() {
   useEffect(() => {
     SplashScreen.hide(); //hides the splash screen on app load.
   }, []);
-
 
   // dispaly manual client reset dialog
   const onSyncError = (error) => {
@@ -113,3 +114,5 @@ export default function App() {
     </>
   );
 }
+
+

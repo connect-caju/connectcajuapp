@@ -408,25 +408,25 @@ export default function HomeScreen({ route, navigation }) {
                 className="w-full flex-row justify-between self-center"
               >
                 <TouchableOpacity
-                  className={`w-1/2 sm:w-1/3 rounded-t-2xl border-t-2 border-r-2 border-l-2 border-gray-300 dark:border-gray-600 py-2 ${isPerformanceButtonActive ? "dark:bg-gray-900" : "bg-white dark:bg-gray-800"}`}
+                  className={`w-1/2 sm:w-1/3 rounded-t-2xl border-t-2 border-r-2 border-l-2 border-gray-300 dark:border-gray-600 py-2 ${!isPerformanceButtonActive ? "dark:bg-gray-900" : "bg-white dark:bg-gray-800"}`}
                   onPress={() => {
                     setIsPerformanceButtonActive((prev) => !prev);
                   }}
                 >
                   <Text
-                    className={`text-center font-bold text-sm ${isPerformanceButtonActive ? "text-green-700" : "text-gray-600"}`}
+                    className={`text-center font-bold text-sm ${!isPerformanceButtonActive ? "text-green-700" : "text-gray-600"}`}
                   >
                     Produtores
                   </Text>
                 </TouchableOpacity>
                 <TouchableOpacity
-                  className={`w-1/2 sm:w-1/3 rounded-t-2xl border-t-2 border-r-2 border-l-2 border-gray-300 dark:border-gray-600 py-2 ${isPerformanceButtonActive ? "bg-white dark:bg-gray-800" : "dark:bg-gray-900"}`}
+                  className={`w-1/2 sm:w-1/3 rounded-t-2xl border-t-2 border-r-2 border-l-2 border-gray-300 dark:border-gray-600 py-2 ${!isPerformanceButtonActive ? "bg-white dark:bg-gray-800" : "dark:bg-gray-900"}`}
                   onPress={() => {
                     setIsPerformanceButtonActive((prev) => !prev);
                   }}
                 >
                   <Text
-                    className={`text-center font-bold text-sm ${isPerformanceButtonActive ? "text-gray-600" : "text-green-700"}`}
+                    className={`text-center font-bold text-sm ${!isPerformanceButtonActive ? "text-gray-600" : "text-green-700"}`}
                   >
                     Pomares
                   </Text>

@@ -46,6 +46,7 @@
     "react-native-element-dropdown": "^2.9.0",
     "react-native-extra-dimensions-android": "^1.2.5",
     "react-native-fast-image": "^8.6.3",
+    "react-native-flipper": "^0.212.0",
     "react-native-geocoding": "^0.5.0",
     "react-native-geolocation-service": "^5.3.1",
     "react-native-gesture-handler": "^2.13.1",
@@ -73,6 +74,7 @@
     "react-native-vision-camera": "^2.15.4",
     "react-native-walkthrough-tooltip": "^1.5.0",
     "realm": "^11.3.1",
+    "realm-flipper-plugin-device": "^1.1.0",
     "styled-components": "^6.0.0-rc.3",
     "twrnc": "^3.6.5",
     "uuid": "^9.0.0"
