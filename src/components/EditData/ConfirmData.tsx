@@ -1,9 +1,4 @@
-/* eslint-disable linebreak-style */
-/* eslint-disable prettier/prettier */
-/* eslint-disable react/prop-types */
 import React, { useState, useEffect, useCallback } from "react";
-
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { View, Text, StyleSheet, ScrollView } from "react-native";
 import Modal from "react-native-modal";
 import {

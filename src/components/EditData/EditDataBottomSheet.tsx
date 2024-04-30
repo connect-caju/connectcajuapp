@@ -1,6 +1,4 @@
 import React, { useCallback, useImperativeHandle } from "react"
-
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { View, Text, StyleSheet, Dimensions } from "react-native"
 import { Divider, Icon } from "@rneui/base"
 

@@ -732,7 +732,6 @@ export default function FarmlandRegistration({
                 navigateBack();
               } catch (error) {
 
-                // @ts-expect-error TS(2584): Cannot find name 'console'. Do you need to change ... Remove this comment to see the full error message
                 console.log("could not finish invalidation task: ", {
                   cause: error,
                 });
@@ -951,8 +950,7 @@ export default function FarmlandRegistration({
                       }
                       _text={{ fontSize: "xs" }}
                     >
-                      // @ts-expect-error TS(2339): Property 'description' does not exist on type '{}'... Remove this comment to see the full error message
-                      // @ts-expect-error TS(2339): Property 'description' does not exist on type '{}'... Remove this comment to see the full error message
+
                       {errors?.description}
                     </FormControl.ErrorMessage>
                   ) : (
@@ -1017,8 +1015,6 @@ export default function FarmlandRegistration({
                         }
                         _text={{ fontSize: "xs" }}
                       >
-                        // @ts-expect-error TS(2339): Property 'consociatedCrops' does not exist on type... Remove this comment to see the full error message
-                        // @ts-expect-error TS(2339): Property 'consociatedCrops' does not exist on type... Remove this comment to see the full error message
                         {errors?.consociatedCrops}
                       </FormControl.ErrorMessage>
                     ) : (
@@ -1126,8 +1122,7 @@ export default function FarmlandRegistration({
                                 }
                                 _text={{ fontSize: "xs" }}
                               >
-                                // @ts-expect-error TS(2339): Property 'newCrop' does not exist on type '{}'.
-                                // @ts-expect-error TS(2339): Property 'newCrop' does not exist on type '{}'.
+
                                 {errors?.newCrop}
                               </FormControl.ErrorMessage>
                             ) : (
@@ -1221,8 +1216,7 @@ export default function FarmlandRegistration({
                               }
                               _text={{ fontSize: "xs" }}
                             >
-                              // @ts-expect-error TS(2339): Property 'totalArea' does not exist on type '{}'.
-                              // @ts-expect-error TS(2339): Property 'totalArea' does not exist on type '{}'.
+
                               {errors?.totalArea}
                             </FormControl.ErrorMessage>
                           ) : (
@@ -1268,8 +1262,7 @@ export default function FarmlandRegistration({
                               }
                               _text={{ fontSize: "xs" }}
                             >
-                              // @ts-expect-error TS(2339): Property 'trees' does not exist on type '{}'.
-                              // @ts-expect-error TS(2339): Property 'trees' does not exist on type '{}'.
+                              
                               {errors?.trees}
                             </FormControl.ErrorMessage>
                           ) : (
@@ -1665,8 +1658,7 @@ export default function FarmlandRegistration({
                     marginVertical: 5,
                   }}
                 >
-                  // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-                  // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
+
                   {ordinalNumberings[farmland?.blocks?.length + 1]} parcela.
                 </Text>
               )}

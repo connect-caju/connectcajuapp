@@ -314,6 +314,7 @@ export default function FarmlandBlockRegistration({
             decelerationRate={"normal"}
             fadingEdgeLength={2}
             style={{}}
+           showsVerticalScrollIndicator={false}
           >
             <View
               style={{
@@ -376,8 +377,9 @@ export default function FarmlandBlockRegistration({
                   </Text>
                 </View>
               </View>
-              <View direction="row" mx="3" w="100%">
-                <View w="100%" px="1">
+                <View 
+                className="w-full"
+                >
                   <FormControl
                     isRequired
                     my="1"
@@ -442,9 +444,10 @@ export default function FarmlandBlockRegistration({
                     )}
                   </FormControl>
                 </View>
-              </View>
              <View>
-                <View style={{flexDirection: "row", width: "100%", gap: 2}}>
+                <View 
+                className="flex flex-row gap-2 items-center justify-center w-full"
+                >
                   <View style={{ width: "48%"}}>
                     <FormControl
                       isRequired
@@ -472,6 +475,8 @@ export default function FarmlandBlockRegistration({
                   </View>
 
                   <View
+
+                 
                  
                     style={{
                       justifyContent: "flex-end",
@@ -616,7 +621,10 @@ export default function FarmlandBlockRegistration({
                       Compasso
                     </Text>
                   </FormControl.Label>
-                  <View direction="row" mx="3" w="100%">
+                  <View 
+                  className="flex flex-row gap-2 justify-between w-full"
+                  
+                  >
                     <View w="50%" px="1">
                       <CheckBox
                         center
@@ -721,8 +729,8 @@ export default function FarmlandBlockRegistration({
               </View>
 
               {isDensityModeRegular && (
-                <View direction="row" mx="3" w="100%">
-                  <View w="45%" px="1">
+                <View className="w-full flex flex-row">
+                  <View className="flex-1">
                     <FormControl
                       my="1"
                       isRequired
@@ -762,12 +770,7 @@ export default function FarmlandBlockRegistration({
                     </FormControl>
                   </View>
                   <View
-                                  style={{
-                      justifyContent: "center",
-                      alignItems: "center",
-                      paddingTop: "density" in errors ? 10 : 20,
-                      width: "10%",
-                    }}
+                     className="mx-2 flex items-center justify-center"
                   >
                     <Text
                       style={{
@@ -777,7 +780,7 @@ export default function FarmlandBlockRegistration({
                       X
                     </Text>
                   </View>
-                  <View w="45%" px="1">
+                  <View className="flex-1">
                     <FormControl
                       my="1"
                       isRequired
@@ -1064,53 +1067,44 @@ export default function FarmlandBlockRegistration({
                     </View>
                   )}
 
-                  <View w="100%" mb="2">
-                    <Stack direction="row" space={2}>
-                      <View w="65%">
+                
+                    {/* <View className="w-[100%] flex flex-row justify-between ">
+                
                         <Text
                           style={{
                             color: COLORS.main,
                             fontSize: 16,
                             fontFamily: "JosefinSans-Bold",
                           }}
-                        >
+                          >
                           Tipos de plantas
                         </Text>
-                      </View>
-                      <View w="35%">
+ 
+                
                         <Text
                           style={{
                             color: COLORS.main,
                             fontSize: 16,
                             fontFamily: "JosefinSans-Bold",
                           }}
-                        >
+                          >
                           Cajueiros
                         </Text>
-                      </View>
-                    </Stack>
-                  </View>
+            
+                   
+                          </View> */}
+                  
 
                   {sameTypeTreesList?.map((sameTypeTree: any, index: any) => (
-                    <View w="100%" key={index} mb="1">
-                      <View
-                        direction="row"
-                        w="100%"
-                        space={2}
-                      // mt="1"
-                      >
-                        <View
-                          
-                          style={{
-                            justifyContent: "center",
-                            width: "65%",
-                          }}
-                        >
+                    <View className="flex flex-row justify-between" key={index}>
+                      
+
                           <Text
                             style={{
                               fontSize: 16,
                               fontFamily: "JosefinSans-Regular",
                               color: COLORS.grey,
+                              textAlign: "left"
                             }}
                           >
                             <Icon
@@ -1120,10 +1114,9 @@ export default function FarmlandBlockRegistration({
                             />{" "}
                             {sameTypeTree?.treeType}
                           </Text>
-                        </View>
-                        <View w="35%">
+                      
                           <CustomInput
-                            width="90%"
+                            width="20%"
                             textAlign="center"
                             keyboardType="numeric"
                             placeholder="Cajueiros"
@@ -1145,9 +1138,8 @@ export default function FarmlandBlockRegistration({
                               );
                             }}
                           />
-                        </View>
                       </View>
-                    </View>
+ 
                   ))}
                 </View>
               )}

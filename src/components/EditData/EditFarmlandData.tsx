@@ -1,6 +1,3 @@
-/* eslint-disable no-constant-condition */
-/* eslint-disable prettier/prettier */
-/* eslint-disable react/prop-types */
 import React, { useState, useEffect, useCallback } from "react";
 import {
   Text,
@@ -11,7 +8,6 @@ import {
   TextInput,
   View,
   Animated,
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 } from "react-native";
 import { Overlay, Icon, Button, CheckBox } from "@rneui/base";
 import {

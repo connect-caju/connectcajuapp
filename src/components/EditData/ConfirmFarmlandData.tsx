@@ -1,9 +1,5 @@
-/* eslint-disable prettier/prettier */
-/* eslint-disable react/prop-types */
 import React, { useState, useEffect, useCallback } from "react";
-
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
-import { View, Text, StyleSheet, ScrollView } from "react-native";
+import { View, Text, StyleSheet, ScrollView, Pressable } from "react-native";
 import {
   Box,
   FormControl,
@@ -21,8 +17,6 @@ import { resourceValidation } from "../../consts/resourceValidation";
 import { useUser } from "@realm/react";
 import { realmContext } from "../../models/realmContext";
 
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
-import { Pressable } from "react-native";
 const { useRealm } = realmContext;
 
 const ConfirmFarmlandData = ({
@@ -36,13 +30,6 @@ const ConfirmFarmlandData = ({
   resourceName,
   ownerName,
   resource,
-
-  // setAutoRefresh,
-  // autoRefresh,
-  // refresh,
-  // setRefresh,
-  // checkAreasConformity,
-  // farmland,
   blockId
 }: any) => {
   const realm = useRealm();
