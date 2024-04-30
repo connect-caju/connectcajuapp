@@ -7,6 +7,7 @@
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest",
+    "test:types": "tsc",
     "lint": "eslint --ext .tsx --ext .ts src/*",
     "format": "prettier --check ./src"
   },
@@ -84,6 +85,10 @@
     "@babel/runtime": "^7.12.5",
     "@react-native-community/cli-debugger-ui": "^11.3.9",
     "@react-native-community/eslint-config": "^2.0.0",
+    "@types/jest": "^29.5.12",
+    "@types/react": "^18.3.1",
+    "@types/react-native": "^0.73.0",
+    "@types/react-test-renderer": "^18.3.0",
     "babel-jest": "^26.6.3",
     "eslint": "^7.32.0",
     "eslint-plugin-react": "^7.33.2",
@@ -91,7 +96,9 @@
     "metro-react-native-babel-preset": "0.72.3",
     "react-test-renderer": "18.1.0",
     "reactotron-react-native": "^5.0.4",
-    "tailwindcss": "^3.3.2"
+    "tailwindcss": "^3.3.2",
+    "ts-migrate": "^0.1.35",
+    "typescript": "^5.4.5"
   },
   "jest": {
     "preset": "react-native"
