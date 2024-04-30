@@ -1,5 +1,7 @@
+// @ts-expect-error TS(2307): Cannot find module 'expo-image' or its correspondi... Remove this comment to see the full error message
 import { Image } from 'expo-image';
 import { useState } from 'react';
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { Text, View } from 'react-native';
 
 interface AvatarProps {

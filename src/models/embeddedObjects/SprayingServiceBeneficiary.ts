@@ -11,4 +11,4 @@ export const SprayingServiceBeneficiary = {
       beneficiaryName: "string",
       trees: { type: "int", default: 0 },
     },
-  }
+  };

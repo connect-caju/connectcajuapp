@@ -415,5 +415,5 @@ const administrativePosts = {
   ],
   Tsangano: ["Ntengo-Wa-Mbalame", "Tsangano (Sede)"],
   Zumbo: ["Muze", "Zambue", "Zumbo (Sede)"],
-}
-export default administrativePosts
+};
+export default administrativePosts;

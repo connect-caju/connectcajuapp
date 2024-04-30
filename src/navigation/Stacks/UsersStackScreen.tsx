@@ -23,7 +23,10 @@ import UsersListScreen from "../../screens/UsersList.js/UsersListScreen";
 const UsersStack = createNativeStackNavigator();
 
 
-export default function UsersStackScreen({ route, navigation }) {
+export default function UsersStackScreen({
+    route,
+    navigation
+}: any) {
 
     return (
         <UsersStack.Navigator
@@ -45,6 +48,7 @@ export default function UsersStackScreen({ route, navigation }) {
             <UsersStack.Screen name="FarmerForm1" component={FarmerRegistration} />
             <UsersStack.Screen
                 name="FarmlandForm1"
+                // @ts-expect-error TS(2322): Type '({ route, navigation }: any) => Element | un... Remove this comment to see the full error message
                 component={FarmlandRegistration}
             />
             <UsersStack.Screen

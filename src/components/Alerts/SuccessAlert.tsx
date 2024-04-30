@@ -5,6 +5,7 @@ import { useNavigation } from "@react-navigation/native";
 import { Center, Alert, Stack, Box } from "native-base";
 import React, { useState } from "react";
 import { Icon, CheckBox } from "@rneui/themed";
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { Button, Text, View, Pressable, TouchableOpacity } from "react-native";
 import COLORS from "../../consts/colors";
 import Modal from "react-native-modal";
@@ -15,11 +16,19 @@ function SuccessAlert({
   isCoordinatesModalVisible,
   setIsCoordinatesModalVisible,
   farmlandId,
-  farmerItem, // an object with 3 properties: ownerId, ownerName and, flag=Individuo/Grupo/Instituicao
-  farmlandOwnerType, // the farmland owner type (Farmer, Group or Institution)
-  ownerId, // the ownerId (farmland owner) is used after a successful farmland registration
-  flag, // the flag here refers to the resourceType (farmer= Single, Group or Institution); (farmland)
-}) {
+
+  // an object with 3 properties: ownerId, ownerName and, flag=Individuo/Grupo/Instituicao
+  farmerItem,
+
+  // the farmland owner type (Farmer, Group or Institution)
+  farmlandOwnerType,
+
+  // the ownerId (farmland owner) is used after a successful farmland registration
+  ownerId,
+
+  // the flag here refers to the resourceType (farmer= Single, Group or Institution); (farmland)
+  flag
+}: any) {
   const navigation = useNavigation();
 
   // after any successful actor/farmland registration
@@ -31,6 +40,7 @@ function SuccessAlert({
         farmerItem.flag === farmerTypes.group ||
         farmerItem.flag === farmerTypes.institution
       ) {
+        // @ts-expect-error TS(2345): Argument of type 'string' is not assignable to par... Remove this comment to see the full error message
         navigation.navigate("Profile", {
           ownerId: farmerItem.ownerId,
           farmerType: farmerItem.flag,
@@ -42,6 +52,7 @@ function SuccessAlert({
       // find out which actor type is the owner of the farmland
       // take the user back to the current actor screen
 
+      // @ts-expect-error TS(2345): Argument of type 'string' is not assignable to par... Remove this comment to see the full error message
       navigation.navigate("Profile", {
         ownerId: ownerId,
         farmerType: farmlandOwnerType,
@@ -96,6 +107,7 @@ function SuccessAlert({
           <Box
             w="100%"
             h="60%"
+            // @ts-expect-error TS(2322): Type '{ children: Element; w: "100%"; h: "60%"; st... Remove this comment to see the full error message
             style={{
               // flex: 1,
               justifyContent: "center",
@@ -105,6 +117,7 @@ function SuccessAlert({
               direction="column"
               space={10}
               // py="6"
+              // @ts-expect-error TS(2322): Type '{ children: Element[]; direction: "column"; ... Remove this comment to see the full error message
               mh="10"
               w="100%"
             >
@@ -138,6 +151,7 @@ function SuccessAlert({
             {farmlandId && (
               <TouchableOpacity
                 onPress={() => {
+                  // @ts-expect-error TS(2345): Argument of type 'string' is not assignable to par... Remove this comment to see the full error message
                   navigation.navigate("FarmlandAreaAudit", {
                     farmlandId,
                   });
@@ -145,6 +159,7 @@ function SuccessAlert({
                 }}
               >
                 <Box
+                  // @ts-expect-error TS(2322): Type '{ children: Element; style: { borderWidth: n... Remove this comment to see the full error message
                   style={{
                     borderWidth: 2,
                     borderColor: COLORS.main,
@@ -175,11 +190,13 @@ function SuccessAlert({
               <TouchableOpacity
                 disabled={farmerItem.flag === farmerTypes.group}
                 onPress={() => {
+                  // @ts-expect-error TS(2345): Argument of type 'string' is not assignable to par... Remove this comment to see the full error message
                   navigation.navigate("FarmlandForm1", farmerItem);
                   setIsCoordinatesModalVisible(false);
                 }}
               >
                 <Box
+                  // @ts-expect-error TS(2322): Type '{ children: Element; style: { borderWidth: n... Remove this comment to see the full error message
                   style={{
                     borderWidth: 2,
                     borderColor: COLORS.main,

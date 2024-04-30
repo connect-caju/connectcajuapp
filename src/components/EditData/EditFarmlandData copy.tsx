@@ -9,6 +9,7 @@ import {
   View,
   Modal,
   Animated,
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 } from "react-native"
 import { Overlay, Icon, Button, CheckBox } from "@rneui/base"
 import {
@@ -25,6 +26,7 @@ import {
   SelectList,
 } from "react-native-dropdown-select-list"
 
+// @ts-expect-error TS(2307): Cannot find module './ConfirmDataCopy' or its corr... Remove this comment to see the full error message
 import ConfirmData from "./ConfirmDataCopy"
 import COLORS from "../../consts/colors"
 import { getFullYears, getFullYears2 } from "../../helpers/dates"
@@ -48,14 +50,11 @@ const EditFarmlandData = ({
   setIsOverlayVisible,
   isConfirmDataVisible,
   setIsConfirmDataVisible,
-
   ownerName,
   resource,
   blocks,
-
   resourceName,
   dataToBeUpdated,
-
   newDataObject,
   oldDataObject,
   setNewDataObject,
@@ -63,6 +62,7 @@ const EditFarmlandData = ({
 
   // farmland main data
   description,
+
   setDescription,
   consociatedCrops,
   setConsociatedCrops,
@@ -70,7 +70,6 @@ const EditFarmlandData = ({
   setTotalArea,
   trees,
   setTrees,
-
   oldDescription,
   setOldDescription,
   oldConsociatedCrops,
@@ -82,8 +81,8 @@ const EditFarmlandData = ({
 
   // block data
   setBlockId,
-  blockId,
 
+  blockId,
   plantingYear,
   setPlantingYear,
   blockTrees,
@@ -110,7 +109,6 @@ const EditFarmlandData = ({
   setSameTypeTreesList,
   remainingArea,
   setRemainingArea,
-
   oldBlockId,
   etOldBlockId,
   oldPlantingYear,
@@ -137,12 +135,11 @@ const EditFarmlandData = ({
   setOldSameTypeTreesList,
   oldRemainingArea,
   setOldRemainingArea,
-
   isEditBlockVisible,
   setIsEditBlockVisible,
   setAutoRefresh,
-  autoRefresh,
-}) => {
+  autoRefresh
+}: any) => {
   const realm = useRealm()
   const user = useUser()
   const customUserData = user?.customData
@@ -158,12 +155,12 @@ const EditFarmlandData = ({
     let selectedClones = []
     let mergedSameTypeTrees = []
     const filteredPlantTypes = plantTypes.filter(
-      (plantType) => !plantType.includes("enxer"),
+      (plantType: any) => !plantType.includes("enxer"),
     )
     if (
-      plantTypes.filter((plantType) => plantType.includes("enxer")).length > 0
+      plantTypes.filter((plantType: any) => plantType.includes("enxer")).length > 0
     ) {
-      selectedClones = clones?.map((clone) => `Clone: ${clone}`)
+      selectedClones = clones?.map((clone: any) => `Clone: ${clone}`)
       mergedSameTypeTrees = filteredPlantTypes.concat(selectedClones)
     } else {
       mergedSameTypeTrees = filteredPlantTypes
@@ -171,9 +168,9 @@ const EditFarmlandData = ({
         setClones([])
       }
     }
-    let normalizedSameTypeTrees = mergedSameTypeTrees?.map((treeType) => ({
+    let normalizedSameTypeTrees = mergedSameTypeTrees?.map((treeType: any) => ({
       treeType,
-      trees: "",
+      trees: ""
     }))
     setSameTypeTreesList(normalizedSameTypeTrees)
   }, [clones, plantTypes])
@@ -188,8 +185,8 @@ const EditFarmlandData = ({
     if (isEditBlockVisible) {
       const totalArea = resource?.totalArea
       const blocksAreas = resource?.blocks
-        ?.map((block) => block?.usedArea)
-        ?.reduce((acc, el) => acc + el, 0)
+        ?.map((block: any) => block?.usedArea)
+        ?.reduce((acc: any, el: any) => acc + el, 0)
       const remainingArea = totalArea - blocksAreas
       setRemainingArea(remainingArea)
     }
@@ -221,7 +218,7 @@ const EditFarmlandData = ({
 
     // The farmland block is to be updated
     if (dataToBeUpdated === "blockData" && resourceName === "Farmland") {
-      const block = resource?.blocks.find((block) => block._id === blockId)
+      const block = resource?.blocks.find((block: any) => block._id === blockId)
       setPlantingYear(block?.plantingYear)
       setUsedArea(block?.usedArea)
       setBlockTrees(block?.trees)
@@ -252,7 +249,7 @@ const EditFarmlandData = ({
     // I want to make sure the state associated to this block changes also
   }, [dataToBeUpdated, resourceName, blockId])
 
-  const onConfirmUpdate = (dataToBeUpdated, resourceName) => {
+  const onConfirmUpdate = (dataToBeUpdated: any, resourceName: any) => {
     const newData = {}
     const oldData = {}
 
@@ -298,15 +295,23 @@ const EditFarmlandData = ({
         )
 
         // new incoming data
+        // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
         newData["description"] = validatedData?.description
+        // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
         newData["consociatedCrops"] = validatedData?.consociatedCrops
+        // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
         newData["totalArea"] = validatedData?.totalArea
+        // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
         newData["trees"] = validatedData?.trees
 
         // old data
+        // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
         oldData["description"] = oldDescription
+        // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
         oldData["consociatedCrops"] = oldConsociatedCrops
+        // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
         oldData["totalArea"] = oldTotalArea
+        // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
         oldData["trees"] = oldTrees
       }
     }
@@ -362,7 +367,9 @@ const EditFarmlandData = ({
       )
 
       // incoming data
+      // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       newData["plantTypes"] = validatedData?.plantTypes
+      // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       newData["sameTypeTrees"] = validatedData?.sameTypeTrees
     }
 
@@ -405,6 +412,7 @@ const EditFarmlandData = ({
         return
       }
 
+      // @ts-expect-error TS(2554): Expected 7 arguments, but got 6.
       const validatedData = validateEditedBlockData(
         {
           plantingYear,
@@ -427,19 +435,27 @@ const EditFarmlandData = ({
       )
 
       // incoming data
+      // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       newData["plantingYear"] = validatedData?.plantingYear
+      // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       newData["density"] = validatedData?.density
+      // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       newData["trees"] = validatedData?.trees
+      // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       newData["usedArea"] = validatedData?.usedArea
 
       // old data
+      // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       oldData["plantingYear"] = oldPlantingYear
+      // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       oldData["density"] = {
         mode: isOldDensityModeRegular ? "Regular" : "Irregular",
         length: isOldDensityModeRegular ? oldDensityLength : "",
         width: isOldDensityModeRegular ? oldDensityWidth : "",
       }
+      // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       oldData["trees"] = oldBlockTrees
+      // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       oldData["usedArea"] = oldUsedArea
     }
 
@@ -467,6 +483,7 @@ const EditFarmlandData = ({
     //     isVisible={isOverlayVisible}
     //     onBackdropPress={toggleOverlay}
     // >
+    // </Overlay>
     <Modal
       transparent
       statusBarTranslucent
@@ -582,6 +599,7 @@ const EditFarmlandData = ({
                   <Stack direction="column">
                     <Box
                       w="100%"
+                      // @ts-expect-error TS(2322): Type '{ children: Element[]; w: "100%"; style: {};... Remove this comment to see the full error message
                       style={
                         {
                           // position: 'absolute',
@@ -646,8 +664,9 @@ const EditFarmlandData = ({
                           <FormControl.Label>Ano de plantio</FormControl.Label>
 
                           <SelectList
+                            // @ts-expect-error TS(2769): No overload matches this call.
                             data={() => getFullYears2(70)}
-                            setSelected={(newYear) => {
+                            setSelected={(newYear: any) => {
                               setErrors((prev) => ({
                                 ...prev,
                                 plantingYear: "",
@@ -737,6 +756,7 @@ const EditFarmlandData = ({
                               }
                               _text={{ fontSize: "xs" }}
                             >
+                              // @ts-expect-error TS(2339): Property 'plantingYear' does not exist on type '{}... Remove this comment to see the full error message
                               {errors?.plantingYear}
                             </FormControl.ErrorMessage>
                           ) : (
@@ -758,7 +778,7 @@ const EditFarmlandData = ({
                         textAlign="center"
                         placeholder="Hectares"
                         value={usedArea ? usedArea?.toString() : ""}
-                        onChangeText={(newNumber) => {
+                        onChangeText={(newNumber: any) => {
                           setErrors((prev) => ({
                             ...prev,
                             blockTrees: null,
@@ -777,6 +797,7 @@ const EditFarmlandData = ({
                           }
                           _text={{ fontSize: "xs" }}
                         >
+                          // @ts-expect-error TS(2339): Property 'usedArea' does not exist on type '{}'.
                           {errors?.usedArea}
                         </FormControl.ErrorMessage>
                       ) : (
@@ -796,7 +817,7 @@ const EditFarmlandData = ({
                         textAlign="center"
                         placeholder="Cajueiros"
                         value={blockTrees ? blockTrees?.toString() : ""}
-                        onChangeText={(newNumber) => {
+                        onChangeText={(newNumber: any) => {
                           setErrors((prev) => ({
                             ...prev,
                             blockTrees: null,
@@ -810,6 +831,7 @@ const EditFarmlandData = ({
 
                       {"blockTrees" in errors ? (
                         <FormControl.ErrorMessage
+                          // @ts-expect-error TS(2322): Type '{ children: any; style: { paddingVertical: n... Remove this comment to see the full error message
                           style={{
                             paddingVertical: 5,
                           }}
@@ -818,6 +840,7 @@ const EditFarmlandData = ({
                           }
                           _text={{ fontSize: "xs", paddingRight: 10 }}
                         >
+                          // @ts-expect-error TS(2339): Property 'blockTrees' does not exist on type '{}'.
                           {errors?.blockTrees}
                         </FormControl.ErrorMessage>
                       ) : (
@@ -874,6 +897,7 @@ const EditFarmlandData = ({
                                 iconStyle={{ marginRight: 1 }}
                               />
                             }
+                            // @ts-expect-error TS(2322): Type '{ center: true; fontFamily: string; containe... Remove this comment to see the full error message
                             onPress={() => {
                               setIsDensityModeRegular(true)
                               setIsDensityModeIrregular(false)
@@ -919,6 +943,7 @@ const EditFarmlandData = ({
                                 iconStyle={{ marginRight: 1 }}
                               />
                             }
+                            // @ts-expect-error TS(2322): Type '{ center: true; fontFamily: string; containe... Remove this comment to see the full error message
                             onPress={() => {
                               setIsDensityModeIrregular(true)
                               setIsDensityModeRegular(false)
@@ -943,6 +968,7 @@ const EditFarmlandData = ({
                           }
                           _text={{ fontSize: "xs" }}
                         >
+                          // @ts-expect-error TS(2339): Property 'densityMode' does not exist on type '{}'... Remove this comment to see the full error message
                           {errors?.densityMode}
                         </FormControl.ErrorMessage>
                       ) : (
@@ -967,7 +993,7 @@ const EditFarmlandData = ({
                               value={
                                 densityLength ? densityLength?.toString() : ""
                               }
-                              onChangeText={(newNumber) => {
+                              onChangeText={(newNumber: any) => {
                                 setErrors((prev) => ({
                                   ...prev,
                                   blockTrees: null,
@@ -990,6 +1016,7 @@ const EditFarmlandData = ({
                                 }
                                 _text={{ fontSize: "xs" }}
                               >
+                                // @ts-expect-error TS(2339): Property 'density' does not exist on type '{}'.
                                 {errors?.density}
                               </FormControl.ErrorMessage>
                             ) : (
@@ -999,6 +1026,7 @@ const EditFarmlandData = ({
                         </Box>
                         <Box
                           w="10%"
+                          // @ts-expect-error TS(2322): Type '{ children: Element; w: "10%"; style: { just... Remove this comment to see the full error message
                           style={{
                             justifyContent: "center",
                             alignItems: "center",
@@ -1028,7 +1056,7 @@ const EditFarmlandData = ({
                               value={
                                 densityWidth ? densityWidth?.toString() : ""
                               }
-                              onChangeText={(newNumber) => {
+                              onChangeText={(newNumber: any) => {
                                 setErrors((prev) => ({
                                   ...prev,
                                   blockTrees: null,
@@ -1050,6 +1078,7 @@ const EditFarmlandData = ({
                                 }
                                 _text={{ fontSize: "xs" }}
                               >
+                                // @ts-expect-error TS(2339): Property 'density' does not exist on type '{}'.
                                 {errors?.density}
                               </FormControl.ErrorMessage>
                             ) : (
@@ -1095,7 +1124,7 @@ const EditFarmlandData = ({
                     >
                       <FormControl.Label>Tipo de plantas</FormControl.Label>
                       <MultipleSelectList
-                        setSelected={(type) => {
+                        setSelected={(type: any) => {
                           setErrors((prev) => ({ ...prev, plantTypes: null }))
                           setPlantTypes(type)
                           setIsSameTypeTreesUpdated(true)
@@ -1145,6 +1174,7 @@ const EditFarmlandData = ({
                           }
                           _text={{ fontSize: "xs" }}
                         >
+                          // @ts-expect-error TS(2339): Property 'plantTypes' does not exist on type '{}'.
                           {errors?.plantTypes}
                         </FormControl.ErrorMessage>
                       ) : (
@@ -1152,7 +1182,7 @@ const EditFarmlandData = ({
                       )}
                     </FormControl>
 
-                    {plantTypes?.some((el) => el?.includes("enxert")) && (
+                    {plantTypes?.some((el: any) => el?.includes("enxert")) && (
                       <>
                         <FormControl
                           my="1"
@@ -1161,7 +1191,7 @@ const EditFarmlandData = ({
                         >
                           <FormControl.Label>Clones</FormControl.Label>
                           <MultipleSelectList
-                            setSelected={(type) => {
+                            setSelected={(type: any) => {
                               setErrors((prev) => ({ ...prev, clones: null }))
                               setClones(type)
                               setIsSameTypeTreesUpdated(true)
@@ -1212,6 +1242,7 @@ const EditFarmlandData = ({
                               }
                               _text={{ fontSize: "xs" }}
                             >
+                              // @ts-expect-error TS(2339): Property 'clones' does not exist on type '{}'.
                               {errors?.clones}
                             </FormControl.ErrorMessage>
                           ) : (
@@ -1221,6 +1252,7 @@ const EditFarmlandData = ({
                         <Box
                           w="100%"
                           alignItems={"center"}
+                          // @ts-expect-error TS(2322): Type '{ children: Element[]; w: "100%"; alignItems... Remove this comment to see the full error message
                           style={{
                             flexDirection: "row",
                           }}
@@ -1238,7 +1270,7 @@ const EditFarmlandData = ({
                                 type="text"
                                 placeholder="Clone não econtrado na lista"
                                 value={addedClone}
-                                onChangeText={(newClone) => {
+                                onChangeText={(newClone: any) => {
                                   setErrors({
                                     ...errors,
                                     addedClone: null,
@@ -1257,6 +1289,7 @@ const EditFarmlandData = ({
                                   }
                                   _text={{ fontSize: "xs" }}
                                 >
+                                  // @ts-expect-error TS(2339): Property 'addedClone' does not exist on type '{}'.
                                   {errors?.addedClone}
                                 </FormControl.ErrorMessage>
                               ) : (
@@ -1266,6 +1299,7 @@ const EditFarmlandData = ({
                           </Box>
                           <Box
                             // w="15%"
+                            // @ts-expect-error TS(2322): Type '{ children: Element; style: { justifyContent... Remove this comment to see the full error message
                             style={{
                               justifyContent: "center",
                               alignItems: "center",
@@ -1289,7 +1323,7 @@ const EditFarmlandData = ({
                               }}
                               onPress={() => {
                                 if (addedClone) {
-                                  setClones((prev) => [...prev, addedClone])
+                                  setClones((prev: any) => [...prev, addedClone])
                                   setAddedClone("")
                                 } else {
                                   setErrors({
@@ -1312,9 +1346,12 @@ const EditFarmlandData = ({
                     )}
 
                     {plantTypes.length > 0 && sameTypeTreesList.length > 0 && (
+                      // @ts-expect-error TS(2322): Type '{ children: any[]; w: "100%"; my: "5"; style... Remove this comment to see the full error message
                       <Box w="100%" my="5" style={{}}>
+                        // @ts-expect-error TS(2339): Property 'sameTypeTrees' does not exist on type '{... Remove this comment to see the full error message
                         {errors?.sameTypeTrees && (
                           <Box
+                            // @ts-expect-error TS(2322): Type '{ children: Element[]; style: { flexDirectio... Remove this comment to see the full error message
                             style={{
                               flexDirection: "row",
                             }}
@@ -1328,6 +1365,7 @@ const EditFarmlandData = ({
                                 paddingLeft: 5,
                               }}
                             >
+                              // @ts-expect-error TS(2339): Property 'sameTypeTrees' does not exist on type '{... Remove this comment to see the full error message
                               {errors?.sameTypeTrees}
                             </Text>
                           </Box>
@@ -1336,6 +1374,7 @@ const EditFarmlandData = ({
                         <Box
                           w="100%"
                           mb="2"
+                          // @ts-expect-error TS(2322): Type '{ children: Element; w: "100%"; mb: "2"; sty... Remove this comment to see the full error message
                           style={
                             {
                               // backgroundColor: COLORS.pantone,
@@ -1372,12 +1411,13 @@ const EditFarmlandData = ({
                           </Stack>
                         </Box>
 
-                        {sameTypeTreesList?.map((sameTypeTree, index) => (
+                        {sameTypeTreesList?.map((sameTypeTree: any, index: any) => (
                           <Box
                             key={index}
                             w="100%"
                             // px="5"
                             mb="1"
+                            // @ts-expect-error TS(2322): Type '{ children: Element; key: any; w: "100%"; mb... Remove this comment to see the full error message
                             style={
                               {
                                 // borderColor: COLORS.lightgrey,
@@ -1388,6 +1428,7 @@ const EditFarmlandData = ({
                             <Stack direction="row" w="100%" space={2}>
                               <Box
                                 w="65%"
+                                // @ts-expect-error TS(2322): Type '{ children: Element; w: "65%"; style: { just... Remove this comment to see the full error message
                                 style={{
                                   justifyContent: "center",
                                 }}
@@ -1414,13 +1455,13 @@ const EditFarmlandData = ({
                                   keyboardType="numeric"
                                   placeholder="Cajueiros"
                                   value={sameTypeTree?.trees}
-                                  onChangeText={(newTrees) => {
+                                  onChangeText={(newTrees: any) => {
                                     setErrors((prev) => ({
                                       ...prev,
                                       sameTypeTrees: null,
                                     }))
                                     setSameTypeTreesList(
-                                      sameTypeTreesList.map((object) => {
+                                      sameTypeTreesList.map((object: any) => {
                                         if (
                                           object?.treeType ===
                                           sameTypeTree?.treeType
@@ -1446,13 +1487,17 @@ const EditFarmlandData = ({
               {dataToBeUpdated === "farmlandMainData" &&
                 resourceName === "Farmland" && (
                   <Stack direction="column">
+                    // @ts-expect-error TS(2339): Property 'areaInconsistencies' does not exist on t... Remove this comment to see the full error message
                     {(errors?.areaInconsistencies ||
+                      // @ts-expect-error TS(2339): Property 'treesInconsistencies' does not exist on ... Remove this comment to see the full error message
                       errors?.treesInconsistencies) && (
                       <Box
+                        // @ts-expect-error TS(2322): Type '{ children: any[]; style: { backgroundColor:... Remove this comment to see the full error message
                         style={{
                           backgroundColor: COLORS.danger,
                         }}
                       >
+                        // @ts-expect-error TS(2339): Property 'areaInconsistencies' does not exist on t... Remove this comment to see the full error message
                         {errors?.areaInconsistencies && (
                           <Text
                             style={{
@@ -1467,9 +1512,11 @@ const EditFarmlandData = ({
                               size={20}
                               color={COLORS.ghostwhite}
                             />{" "}
+                            // @ts-expect-error TS(2339): Property 'areaInconsistencies' does not exist on t... Remove this comment to see the full error message
                             {errors?.areaInconsistencies}
                           </Text>
                         )}
+                        // @ts-expect-error TS(2339): Property 'treesInconsistencies' does not exist on ... Remove this comment to see the full error message
                         {errors?.treesInconsistencies && (
                           <Text
                             style={{
@@ -1484,6 +1531,7 @@ const EditFarmlandData = ({
                               size={20}
                               color={COLORS.ghostwhite}
                             />{" "}
+                            // @ts-expect-error TS(2339): Property 'treesInconsistencies' does not exist on ... Remove this comment to see the full error message
                             {errors?.treesInconsistencies}
                           </Text>
                         )}
@@ -1503,7 +1551,7 @@ const EditFarmlandData = ({
                         type="text"
                         placeholder="Descrição da localização"
                         value={description}
-                        onChangeText={(newDescription) => {
+                        onChangeText={(newDescription: any) => {
                           setErrors((prev) => ({
                             ...prev,
                             consociatedCrops: "",
@@ -1521,6 +1569,7 @@ const EditFarmlandData = ({
                           }
                           _text={{ fontSize: "xs" }}
                         >
+                          // @ts-expect-error TS(2339): Property 'description' does not exist on type '{}'... Remove this comment to see the full error message
                           {errors?.description}
                         </FormControl.ErrorMessage>
                       ) : (
@@ -1537,7 +1586,7 @@ const EditFarmlandData = ({
                         Culturas consociadas
                       </FormControl.Label>
                       <MultipleSelectList
-                        setSelected={(crop) => {
+                        setSelected={(crop: any) => {
                           setErrors((prev) => ({
                             ...prev,
                             consociatedCrops: "",
@@ -1582,6 +1631,7 @@ const EditFarmlandData = ({
                           }
                           _text={{ fontSize: "xs" }}
                         >
+                          // @ts-expect-error TS(2339): Property 'consociatedCrops' does not exist on type... Remove this comment to see the full error message
                           {errors?.consociatedCrops}
                         </FormControl.ErrorMessage>
                       ) : (
@@ -1603,7 +1653,7 @@ const EditFarmlandData = ({
                         textAlign="center"
                         placeholder="Hectares"
                         value={totalArea ? totalArea?.toString() : ""}
-                        onChangeText={(newNumber) => {
+                        onChangeText={(newNumber: any) => {
                           setErrors((prev) => ({
                             ...prev,
                             consociatedCrops: "",
@@ -1623,6 +1673,7 @@ const EditFarmlandData = ({
                           }
                           _text={{ fontSize: "xs" }}
                         >
+                          // @ts-expect-error TS(2339): Property 'totalArea' does not exist on type '{}'.
                           {errors?.totalArea}
                         </FormControl.ErrorMessage>
                       ) : (
@@ -1644,7 +1695,7 @@ const EditFarmlandData = ({
                         textAlign="center"
                         placeholder="Cajueiros"
                         value={trees ? trees?.toString() : ""}
-                        onChangeText={(newNumber) => {
+                        onChangeText={(newNumber: any) => {
                           setErrors((prev) => ({
                             ...prev,
                             consociatedCrops: "",
@@ -1664,6 +1715,7 @@ const EditFarmlandData = ({
                           }
                           _text={{ fontSize: "xs" }}
                         >
+                          // @ts-expect-error TS(2339): Property 'trees' does not exist on type '{}'.
                           {errors?.trees}
                         </FormControl.ErrorMessage>
                       ) : (
@@ -1685,6 +1737,7 @@ const EditFarmlandData = ({
                   marginTop: 30,
                 }}
                 type="outline"
+                // @ts-expect-error TS(2322): Type '{ title: string; titleStyle: { color: string... Remove this comment to see the full error message
                 onPress={() => {
                   onConfirmUpdate(dataToBeUpdated, resourceName)
                 }}
@@ -1694,9 +1747,7 @@ const EditFarmlandData = ({
         </Animated.View>
       </SafeAreaView>
     </Modal>
-
-    // </Overlay>
-  )
+  );
 }
 
 export default EditFarmlandData

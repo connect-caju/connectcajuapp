@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable prettier/prettier */
 /* eslint-disable linebreak-style */
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { View, Text, Image, } from "react-native";
 import React from "react";
 import CustomDivider from "../Divider/CustomDivider";
@@ -16,7 +17,10 @@ import { calculateFarmlandBlockTrees } from "../../helpers/calculateFarmlandBloc
 import { faMix } from "@fortawesome/free-brands-svg-icons";
 import { normalizeBlockList } from "../../helpers/normalizeBlockList";
 
-const FarmlandDetails = ({ resource, owner }) => {
+const FarmlandDetails = ({
+    resource,
+    owner
+}: any) => {
     return (
         <View
             flex={1}
@@ -32,6 +36,7 @@ const FarmlandDetails = ({ resource, owner }) => {
                         height: 150,
                         resizeMode: "cover",
                     }}
+                    // @ts-expect-error TS(2591): Cannot find name 'require'. Do you need to install... Remove this comment to see the full error message
                     source={require("../../../assets/images/plot1.jpg")}
                 />
                 <View
@@ -104,6 +109,7 @@ const FarmlandDetails = ({ resource, owner }) => {
                     w="90%"
                     alignItems={"center"}
                     // spce={3}
+                    // @ts-expect-error TS(2322): Type '{ children: Element[]; w: "90%"; alignItems:... Remove this comment to see the full error message
                     style={{
                         flexDirection: "row",
                         justifyContent: "space-around",
@@ -111,6 +117,7 @@ const FarmlandDetails = ({ resource, owner }) => {
                 >
                     <Box
                         w="100%"
+                        // @ts-expect-error TS(2322): Type '{ children: Element[]; w: "100%"; style: { j... Remove this comment to see the full error message
                         style={{
                             justifyContent: "flex-start",
                         }}
@@ -160,6 +167,7 @@ const FarmlandDetails = ({ resource, owner }) => {
                     w="90%"
                     alignItems={"center"}
                     // spce={3}
+                    // @ts-expect-error TS(2322): Type '{ children: Element[]; w: "90%"; alignItems:... Remove this comment to see the full error message
                     style={{
                         flexDirection: "row",
                         justifyContent: "space-around",
@@ -167,6 +175,7 @@ const FarmlandDetails = ({ resource, owner }) => {
                 >
                     <Box
                         w="45%"
+                        // @ts-expect-error TS(2322): Type '{ children: Element[]; w: "45%"; style: { ju... Remove this comment to see the full error message
                         style={{
                             justifyContent: "flex-start",
                         }}
@@ -182,6 +191,7 @@ const FarmlandDetails = ({ resource, owner }) => {
                     <View style={{ width: 10, }} />
                     <Box
                         w="45%"
+                        // @ts-expect-error TS(2322): Type '{ children: Element[]; w: "45%"; style: { ju... Remove this comment to see the full error message
                         style={{
                             justifyContent: "flex-start",
                         }}
@@ -215,6 +225,7 @@ const FarmlandDetails = ({ resource, owner }) => {
                     w="90%"
                     alignItems={"center"}
                     // spce={3}
+                    // @ts-expect-error TS(2322): Type '{ children: Element[]; w: "90%"; alignItems:... Remove this comment to see the full error message
                     style={{
                         flexDirection: "row",
                         justifyContent: "space-around",
@@ -222,6 +233,7 @@ const FarmlandDetails = ({ resource, owner }) => {
                 >
                     <Box
                         w="45%"
+                        // @ts-expect-error TS(2322): Type '{ children: Element[]; w: "45%"; style: { ju... Remove this comment to see the full error message
                         style={{
                             justifyContent: "flex-start",
                         }}
@@ -241,6 +253,7 @@ const FarmlandDetails = ({ resource, owner }) => {
                     <View style={{ width: 10, }} />
                     <Box
                         w="45%"
+                        // @ts-expect-error TS(2322): Type '{ children: Element[]; w: "45%"; style: { ju... Remove this comment to see the full error message
                         style={{
                             justifyContent: "flex-start",
                         }}
@@ -251,7 +264,7 @@ const FarmlandDetails = ({ resource, owner }) => {
                                 color: COLORS.black,
                             }}
                         >Anos de Plantio:</Text>
-                        <Text>{resource?.blocks?.map(block => block?.plantingYear).join("; ")}</Text>
+                        <Text>{resource?.blocks?.map((block: any) => block?.plantingYear).join("; ")}</Text>
                     </Box>
                 </Box>
             </View>
@@ -275,6 +288,7 @@ const FarmlandDetails = ({ resource, owner }) => {
                     w="90%"
                     alignItems={"center"}
                     // spce={3}
+                    // @ts-expect-error TS(2322): Type '{ children: Element[]; w: "90%"; alignItems:... Remove this comment to see the full error message
                     style={{
                         flexDirection: "row",
                         justifyContent: "space-around",
@@ -282,6 +296,7 @@ const FarmlandDetails = ({ resource, owner }) => {
                 >
                     <Box
                         w="45%"
+                        // @ts-expect-error TS(2322): Type '{ children: Element[]; w: "45%"; style: { ju... Remove this comment to see the full error message
                         style={{
                             justifyContent: "flex-start",
                         }}
@@ -301,6 +316,7 @@ const FarmlandDetails = ({ resource, owner }) => {
                     <View style={{ width: 10, }} />
                     <Box
                         w="45%"
+                        // @ts-expect-error TS(2322): Type '{ children: Element[]; w: "45%"; style: { ju... Remove this comment to see the full error message
                         style={{
                             justifyContent: "flex-start",
                         }}
@@ -338,6 +354,7 @@ const FarmlandDetails = ({ resource, owner }) => {
                     w="90%"
                     alignItems={"center"}
                     // spce={3}
+                    // @ts-expect-error TS(2322): Type '{ children: Element[]; w: "90%"; alignItems:... Remove this comment to see the full error message
                     style={{
                         flexDirection: "row",
                         justifyContent: "space-around",
@@ -345,6 +362,7 @@ const FarmlandDetails = ({ resource, owner }) => {
                 >
                     <Box
                         w="100%"
+                        // @ts-expect-error TS(2322): Type '{ children: Element[]; w: "100%"; style: { j... Remove this comment to see the full error message
                         style={{
                             justifyContent: "flex-start",
                         }}
@@ -392,6 +410,7 @@ const FarmlandDetails = ({ resource, owner }) => {
                     w="90%"
                     alignItems={"center"}
                     // spce={3}
+                    // @ts-expect-error TS(2322): Type '{ children: Element[]; w: "90%"; alignItems:... Remove this comment to see the full error message
                     style={{
                         flexDirection: "row",
                         justifyContent: "space-around",
@@ -399,6 +418,7 @@ const FarmlandDetails = ({ resource, owner }) => {
                 >
                     <Box
                         w="45%"
+                        // @ts-expect-error TS(2322): Type '{ children: Element[]; w: "45%"; style: { ju... Remove this comment to see the full error message
                         style={{
                             justifyContent: "flex-start",
                         }}
@@ -418,6 +438,7 @@ const FarmlandDetails = ({ resource, owner }) => {
                     <View style={{ width: 10, }} />
                     <Box
                         w="45%"
+                        // @ts-expect-error TS(2322): Type '{ children: Element[]; w: "45%"; style: { ju... Remove this comment to see the full error message
                         style={{
                             justifyContent: "flex-start",
                         }}
@@ -486,14 +507,16 @@ const FarmlandDetails = ({ resource, owner }) => {
                 </View>
             )}
 
-            {normalizeBlockList(resource?.blocks)?.map((block, index) => (
+            {normalizeBlockList(resource?.blocks)?.map((block: any, index: any) => (
                 <Box
                     key={index}
+                    // @ts-expect-error TS(2322): Type '{ children: Element; key: any; style: { marg... Remove this comment to see the full error message
                     style={{
                         margin: 10,
                     }}
                 >
                     <Box
+                        // @ts-expect-error TS(2322): Type '{ children: Element[]; style: { paddingVerti... Remove this comment to see the full error message
                         style={{
                             paddingVertical: 5,
                         }}
@@ -501,6 +524,7 @@ const FarmlandDetails = ({ resource, owner }) => {
                         <Stack w="100%" direction="row" space={2}>
                             <Box
                                 w="10%"
+                                // @ts-expect-error TS(2322): Type '{ children: Element; w: "10%"; style: { alig... Remove this comment to see the full error message
                                 style={{
                                     alignItems: "center",
                                     backgroundColor: COLORS.dark,
@@ -550,6 +574,7 @@ const FarmlandDetails = ({ resource, owner }) => {
                                 w="90%"
                                 alignItems={"center"}
                                 // spce={3}
+                                // @ts-expect-error TS(2322): Type '{ children: Element[]; w: "90%"; alignItems:... Remove this comment to see the full error message
                                 style={{
                                     flexDirection: "row",
                                     justifyContent: "space-around",
@@ -557,6 +582,7 @@ const FarmlandDetails = ({ resource, owner }) => {
                             >
                                 <Box
                                     w="45%"
+                                    // @ts-expect-error TS(2322): Type '{ children: Element[]; w: "45%"; style: { ju... Remove this comment to see the full error message
                                     style={{
                                         justifyContent: "flex-start",
                                     }}
@@ -577,6 +603,7 @@ const FarmlandDetails = ({ resource, owner }) => {
                                 <View style={{ width: 10, }} />
                                 <Box
                                     w="45%"
+                                    // @ts-expect-error TS(2322): Type '{ children: Element[]; w: "45%"; style: { ju... Remove this comment to see the full error message
                                     style={{
                                         justifyContent: "flex-start",
                                     }}
@@ -610,6 +637,7 @@ const FarmlandDetails = ({ resource, owner }) => {
                                 w="90%"
                                 alignItems={"center"}
                                 // spce={3}
+                                // @ts-expect-error TS(2322): Type '{ children: Element[]; w: "90%"; alignItems:... Remove this comment to see the full error message
                                 style={{
                                     flexDirection: "column",
                                     justifyContent: "space-around",
@@ -617,6 +645,7 @@ const FarmlandDetails = ({ resource, owner }) => {
                             >
                                 <Box
                                     w="100%"
+                                    // @ts-expect-error TS(2322): Type '{ children: Element; w: "100%"; style: { jus... Remove this comment to see the full error message
                                     style={{
                                         justifyContent: "flex-start",
                                     }}
@@ -633,12 +662,13 @@ const FarmlandDetails = ({ resource, owner }) => {
                                 <View style={{ width: 10, }} />
                                 <Box
                                     w="100%"
+                                    // @ts-expect-error TS(2322): Type '{ children: any; w: "100%"; style: { justify... Remove this comment to see the full error message
                                     style={{
                                         justifyContent: "flex-start",
                                     }}
                                 >
                                     {block?.sameTypeTrees?.length > 0 ? (
-                                        block?.sameTypeTrees?.map((sameType, index) => (
+                                        block?.sameTypeTrees?.map((sameType: any, index: any) => (
                                             <Box key={index}>
                                                 <Text
                                                     style={{

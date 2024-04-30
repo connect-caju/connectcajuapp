@@ -3,6 +3,7 @@
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable prettier/prettier */
 /* eslint-disable prettier/prettier */
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { Text, SafeAreaView, ScrollView, TextInput, View } from "react-native";
 import React, { useState, useEffect } from "react";
 import {
@@ -26,6 +27,7 @@ import CustomDivider from "../../components/Divider/CustomDivider";
 import styles from "./styles";
 
 import {
+  // @ts-expect-error TS(2305): Module '"../../helpers/dates"' has no exported mem... Remove this comment to see the full error message
   fullYears,
   getFullYears,
   getFullYears2,
@@ -79,8 +81,8 @@ export default function GroupFarmerForm({
   isGroupActive,
   setIsGroupActive,
   isGroupInactive,
-  setIsGroupInactive,
-}) {
+  setIsGroupInactive
+}: any) {
   return (
     <Box px="3" my="6">
       <Box w="100%" alignItems="center">
@@ -132,6 +134,7 @@ export default function GroupFarmerForm({
                       iconStyle={{ marginRight: 1 }}
                     />
                   }
+                  // @ts-expect-error TS(2322): Type '{ center: true; fontFamily: string; containe... Remove this comment to see the full error message
                   onPress={() => {
                     setIsGroupInactive(false);
                     setIsGroupActive(true);
@@ -175,6 +178,7 @@ export default function GroupFarmerForm({
                       iconStyle={{ marginRight: 1 }}
                     />
                   }
+                  // @ts-expect-error TS(2322): Type '{ center: true; fontFamily: string; containe... Remove this comment to see the full error message
                   onPress={() => {
                     setIsGroupInactive(true);
                     setIsGroupActive(false);
@@ -205,6 +209,7 @@ export default function GroupFarmerForm({
               <FormControl.Label>Tipo de organiz.</FormControl.Label>
               <Select
                 selectedValue={groupType}
+                // @ts-expect-error TS(2322): Type '{ children: Element[]; selectedValue: any; a... Remove this comment to see the full error message
                 accessibilityLabel="Grupo"
                 placeholder="Tipo de grupo "
                 minHeight={55}
@@ -231,7 +236,10 @@ export default function GroupFarmerForm({
                   )
                 }
                 onValueChange={(newGroupType) => {
-                  setErrors((prev) => ({ ...prev, groupType: "" }));
+                  setErrors((prev: any) => ({
+                    ...prev,
+                    groupType: ""
+                  }));
                   setGroupType(newGroupType);
                 }}
               >
@@ -260,8 +268,11 @@ export default function GroupFarmerForm({
                 autoCapitalize="words"
                 placeholder="Nome do grupo"
                 value={groupName}
-                onChangeText={(newGroupName) => {
-                  setErrors((prev) => ({ ...prev, groupName: "" }));
+                onChangeText={(newGroupName: any) => {
+                  setErrors((prev: any) => ({
+                    ...prev,
+                    groupName: ""
+                  }));
                   setGroupName(newGroupName);
                 }}
               />
@@ -290,8 +301,11 @@ export default function GroupFarmerForm({
                 textAlign={"center"}
                 keyboardType="numeric"
                 value={groupMembersNumber}
-                onChangeText={(groupMembers) => {
-                  setErrors((prev) => ({ ...prev, groupMembersNumber: "" }));
+                onChangeText={(groupMembers: any) => {
+                  setErrors((prev: any) => ({
+                    ...prev,
+                    groupMembersNumber: ""
+                  }));
                   setGroupMembersNumber(groupMembers);
                 }}
               />
@@ -318,8 +332,11 @@ export default function GroupFarmerForm({
                 isDisabled={groupMembersNumber === "" ? true : false}
                 value={groupWomenNumber}
                 keyboardType="numeric"
-                onChangeText={(womenNumber) => {
-                  setErrors((prev) => ({ ...prev, groupWomenNumber: "" }));
+                onChangeText={(womenNumber: any) => {
+                  setErrors((prev: any) => ({
+                    ...prev,
+                    groupWomenNumber: ""
+                  }));
                   setGroupWomenNumber(womenNumber);
                 }}
               />
@@ -344,8 +361,11 @@ export default function GroupFarmerForm({
                 Finalidades de {!groupType ? "Grupo" : groupType}
               </FormControl.Label>
               <MultipleSelectList
-                setSelected={(goal) => {
-                  setErrors((prev) => ({ ...prev, groupGoals: "" }));
+                setSelected={(goal: any) => {
+                  setErrors((prev: any) => ({
+                    ...prev,
+                    groupGoals: ""
+                  }));
                   setGroupGoals(goal);
                 }}
                 data={groupPurposes}
@@ -433,8 +453,11 @@ export default function GroupFarmerForm({
               <FormControl.Label>Ano de criação</FormControl.Label>
               <SelectList
                 data={getFullYears2(50)}
-                setSelected={(newYear) => {
-                  setErrors((prev) => ({ ...prev, groupCreationYear: "" }));
+                setSelected={(newYear: any) => {
+                  setErrors((prev: any) => ({
+                    ...prev,
+                    groupCreationYear: ""
+                  }));
                   setGroupCreationYear(newYear);
                 }}
                 save="value"
@@ -490,15 +513,15 @@ export default function GroupFarmerForm({
               <FormControl.Label>Situação Legal</FormControl.Label>
               <SelectList
                 data={groupAffiliationStatus2}
-                setSelected={(status) => {
-                  setErrors((prev) => ({
+                setSelected={(status: any) => {
+                  setErrors((prev: any) => ({
                     ...prev,
                     groupCreationYear: "",
                     groupLegalStatus: "",
                     groupNuel: "",
                     groupNuit: "",
                     groupOperatingLicence: "",
-                    groupAffiliationYear: "",
+                    groupAffiliationYear: ""
                   }));
                   setGroupLegalStatus(status);
                   setGroupNuit();
@@ -566,10 +589,10 @@ export default function GroupFarmerForm({
 
                   <SelectList
                     data={getFullYears2(50)}
-                    setSelected={(newYear) => {
-                      setErrors((prev) => ({
+                    setSelected={(newYear: any) => {
+                      setErrors((prev: any) => ({
                         ...prev,
-                        groupAffiliationYear: "",
+                        groupAffiliationYear: ""
                       }));
                       setGroupAffiliationYear(newYear);
                     }}
@@ -635,10 +658,10 @@ export default function GroupFarmerForm({
                     width="100%"
                     placeholder="Alvará"
                     value={groupOperatingLicence}
-                    onChangeText={(newOperatingLicence) => {
-                      setErrors((prev) => ({
+                    onChangeText={(newOperatingLicence: any) => {
+                      setErrors((prev: any) => ({
                         ...prev,
-                        groupOperatingLicence: "",
+                        groupOperatingLicence: ""
                       }));
                       setGroupOperatingLicence(newOperatingLicence);
                     }}
@@ -676,8 +699,11 @@ export default function GroupFarmerForm({
                     placeholder="NUIT"
                     value={groupNuit}
                     keyboardType="numeric"
-                    onChangeText={(newNuit) => {
-                      setErrors((prev) => ({ ...prev, groupNuit: "" }));
+                    onChangeText={(newNuit: any) => {
+                      setErrors((prev: any) => ({
+                        ...prev,
+                        groupNuit: ""
+                      }));
                       setGroupNuit(newNuit);
                     }}
                   />
@@ -712,8 +738,11 @@ export default function GroupFarmerForm({
                     placeholder="NUEL"
                     value={groupNuel}
                     keyboardType="numeric"
-                    onChangeText={(newNuel) => {
-                      setErrors((prev) => ({ ...prev, groupNuel: "" }));
+                    onChangeText={(newNuel: any) => {
+                      setErrors((prev: any) => ({
+                        ...prev,
+                        groupNuel: ""
+                      }));
                       setGroupNuel(newNuel);
                     }}
                   />
@@ -751,6 +780,7 @@ export default function GroupFarmerForm({
               <FormControl.Label>Posto Adm.</FormControl.Label>
               <Select
                 selectedValue={groupAdminPost}
+                // @ts-expect-error TS(2322): Type '{ children: any; selectedValue: any; accessi... Remove this comment to see the full error message
                 accessibilityLabel="posto administrativo"
                 placeholder="Escolha posto administrativo"
                 minHeight={55}
@@ -777,11 +807,14 @@ export default function GroupFarmerForm({
                 }
                 mt={1}
                 onValueChange={(newAdminPost) => {
-                  setErrors((prev) => ({ ...prev, groupAdminPost: "" }));
+                  setErrors((prev: any) => ({
+                    ...prev,
+                    groupAdminPost: ""
+                  }));
                   setGroupAdminPost(newAdminPost);
                 }}
               >
-                {selectedAddressAdminPosts?.map((adminPost, index) => (
+                {selectedAddressAdminPosts?.map((adminPost: any, index: any) => (
                   <Select.Item
                     key={index}
                     label={adminPost}
@@ -806,6 +839,7 @@ export default function GroupFarmerForm({
               <FormControl.Label>Localidade</FormControl.Label>
               <Select
                 selectedValue={groupVillage}
+                // @ts-expect-error TS(2322): Type '{ children: any; selectedValue: any; accessi... Remove this comment to see the full error message
                 accessibilityLabel="Escolha uma localidade"
                 placeholder="Escolha uma localidade"
                 minHeight={55}
@@ -833,7 +867,8 @@ export default function GroupFarmerForm({
                 mt={1}
                 onValueChange={(newVillage) => setGroupVillage(newVillage)}
               >
-                {villages[groupAdminPost]?.map((village, index) => (
+                // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
+                {villages[groupAdminPost]?.map((village: any, index: any) => (
                   <Select.Item key={index} label={village} value={village} />
                 ))}
               </Select>

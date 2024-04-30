@@ -11,6 +11,7 @@ import {
   SafeAreaView,
   Easing,
   Animated as NativeAnimated,
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 } from "react-native"
 import COLORS from "../../consts/colors"
 import Animated, {
@@ -65,18 +66,22 @@ const ownFarmlands = "ownFarmlands"
 
 const { height: SCREEN_HEIGHT } = Dimensions.get("window")
 
-const ProfileScreen = ({ route, navigation }) => {
+const ProfileScreen = ({
+  route,
+  navigation
+}: any) => {
   const { ownerId, farmerType, farmersIDs } = route.params
   const realm = useRealm()
   const user = useUser()
   const customUserData = user?.customData
-  let farmer
+  let farmer: any
   let manager = ""
   if (farmerType === farmerTypes.farmer) {
     farmer = realm.objectForPrimaryKey("Actor", ownerId)
   } else if (farmerType === farmerTypes.group) {
     farmer = realm.objectForPrimaryKey("Group", ownerId)
     if (farmer?.manager) {
+      // @ts-expect-error TS(2322): Type '(string & Object<unknown, never>) | null' is... Remove this comment to see the full error message
       manager = realm.objectForPrimaryKey("Actor", farmer?.manager)
     }
   } else if (farmerType === farmerTypes.institution) {
@@ -108,9 +113,11 @@ const ProfileScreen = ({ route, navigation }) => {
   const bottomSheetRef = useRef(null)
   const snapPoints = useMemo(() => ["25%", "40%", "60", "80%"], [])
   const handlePresentModalPress = useCallback(() => {
+    // @ts-expect-error TS(2339): Property 'present' does not exist on type 'never'.
     bottomSheetRef?.current?.present()
   }, [])
   const handleDismissModalPress = useCallback(() => {
+    // @ts-expect-error TS(2339): Property 'dismiss' does not exist on type 'never'.
     bottomSheetRef?.current?.dismiss()
   }, [])
   const initialSnapPoints = useMemo(() => ["25%", "CONTENT_HEIGHT"], [])
@@ -121,12 +128,15 @@ const ProfileScreen = ({ route, navigation }) => {
     handleContentLayout,
   } = useBottomSheetDynamicSnapPoints(initialSnapPoints)
 
-  const onPressEllipsis = useCallback((flag) => {
+  const onPressEllipsis = useCallback((flag: any) => {
+    // @ts-expect-error TS(2339): Property 'isActive' does not exist on type 'never'... Remove this comment to see the full error message
     const isActive = ref?.current?.isActive()
     if (isActive) {
+      // @ts-expect-error TS(2339): Property 'scrollTo' does not exist on type 'never'... Remove this comment to see the full error message
       ref?.current?.scrollTo(0)
       setBottomSheetFlag("")
     } else {
+      // @ts-expect-error TS(2339): Property 'scrollTo' does not exist on type 'never'... Remove this comment to see the full error message
       ref?.current?.scrollTo(-300)
       setBottomSheetFlag(flag)
     }
@@ -256,7 +266,7 @@ const ProfileScreen = ({ route, navigation }) => {
               </Text>
               {farmerType === farmerTypes.farmer && (
                 <>
-                  {farmer?.assets?.map((asset, index) => (
+                  {farmer?.assets?.map((asset: any, index: any) => (
                     <Text
                       key={index}
                       style={{
@@ -886,7 +896,7 @@ const ProfileScreen = ({ route, navigation }) => {
 
     </BottomSheet> */}
     </BottomSheetModalProvider>
-  )
+  );
 }
 
 const styles = StyleSheet.create({

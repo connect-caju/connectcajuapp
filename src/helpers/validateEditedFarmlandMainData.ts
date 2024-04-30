@@ -14,6 +14,7 @@ import { capitalize } from "./capitalize"
  * in the form.
  */
 
+// @ts-expect-error TS(7030): Not all code paths return a value.
 const validateEditedFarmlandMainData = (
   {
     description,
@@ -24,12 +25,12 @@ const validateEditedFarmlandMainData = (
     oldConsociatedCrops,
     oldTotalArea,
     oldTrees,
-    blocks,
-  },
-  errors,
-  setErrors,
-  dataToBeUpdated,
-  resourceName,
+    blocks
+  }: any,
+  errors: any,
+  setErrors: any,
+  dataToBeUpdated: any,
+  resourceName: any,
 ) => {
   // sanitizing recieved data
   if (dataToBeUpdated === "farmlandMainData" && resourceName == "Farmland") {
@@ -59,7 +60,7 @@ const validateEditedFarmlandMainData = (
       retrievedConsociatedCrops?.length ===
         retrievedOldConsociatedCrops?.length &&
       retrievedConsociatedCrops.every(
-        (el, index) => el === retrievedOldConsociatedCrops[index],
+        (el: any, index: any) => el === retrievedOldConsociatedCrops[index],
       )
     ) {
       setErrors({
@@ -89,7 +90,7 @@ const validateEditedFarmlandMainData = (
       })
       return false
     } else if (
-      retrievedConsociatedCrops.find((crop) => crop.includes("Nenhuma")) &&
+      retrievedConsociatedCrops.find((crop: any) => crop.includes("Nenhuma")) &&
       retrievedConsociatedCrops.length > 1
     ) {
       setErrors({

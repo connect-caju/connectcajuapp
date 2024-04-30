@@ -30,6 +30,6 @@ const COLORS = {
   salmon: "#ED7014",
   lightSalmon: "#FFA07A",
   marron: "#800000",
-}
+};
 
 export default COLORS;

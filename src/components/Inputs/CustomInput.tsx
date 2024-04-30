@@ -9,6 +9,7 @@ import {
   TextInput,
   StyleSheet,
   TouchableOpacity,
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 } from "react-native"
 // import { Icon } from '@rneui/themed';
 import { Input, Box, Stack } from "native-base"
@@ -37,7 +38,7 @@ export function CustomInput({
   multiline,
   borderColor,
   ...props
-}) {
+}: any) {
   return (
     <Input
       size="2xl"

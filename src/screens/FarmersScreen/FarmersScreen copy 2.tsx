@@ -17,6 +17,7 @@ import {
   SectionList,
   ActivityIndicator,
   useNativeDriver,
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 } from "react-native";
 import React, { useEffect, useRef, useState } from "react";
 import { Icon } from "@rneui/themed";
@@ -92,7 +93,10 @@ const farmersTypes = [
   },
 ];
 
-export default function FarmersScreen({ route, navigation }) {
+export default function FarmersScreen({
+  route,
+  navigation
+}: any) {
   const realm = useRealm();
   const user = useUser();
   let customUserData = user.customData;
@@ -169,6 +173,7 @@ export default function FarmersScreen({ route, navigation }) {
 
 
   const districts = Array.from(
+    // @ts-expect-error TS(2339): Property 'userDistrict' does not exist on type 'Ob... Remove this comment to see the full error message
     new Set(stats.map((stat) => stat?.userDistrict)),
   ).filter((district) => district !== "NA");
 
@@ -202,16 +207,17 @@ export default function FarmersScreen({ route, navigation }) {
     "Instituição",
   );
 
+  // @ts-expect-error TS(2339): Property 'userDistrict' does not exist on type 'Ob... Remove this comment to see the full error message
   const filteredStats = stats?.filter((stat) => stat.userDistrict !== "NA");
   // ------------------------------------------------------
 
   // ----------------------------------------------------------------------------
-  const listStatsByDistrict = (stats) => {
+  const listStatsByDistrict = (stats: any) => {
     // get the array of all the districts in which users are living
     // to create a SectionList where each item has title and data properties
     // excluding the stats whose district value is 'NA'
     const districts = Array.from(
-      new Set(stats.map((stat) => stat.userDistrict)),
+      new Set(stats.map((stat: any) => stat.userDistrict)),
     )
       .filter((district) => district !== "NA")
       .sort();
@@ -219,8 +225,10 @@ export default function FarmersScreen({ route, navigation }) {
     for (let i = 0; i < districts.length; i++) {
       const district = districts[i];
       let newObject = {};
-      const usersStats = stats.filter((stat) => stat.userDistrict === district);
+      const usersStats = stats.filter((stat: any) => stat.userDistrict === district);
+      // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       newObject["title"] = `${district}`;
+      // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       newObject["data"] = usersStats;
       statsByDistrict.push(newObject);
     }
@@ -232,7 +240,7 @@ export default function FarmersScreen({ route, navigation }) {
   //  ---------------------------------------------------------------------------------
 
   // // merge the three arrays of farmers and sort the items by createdAt
-  let farmersList = [];
+  let farmersList: any = [];
 
   if (individualsList.length > 0) {
     farmersList = farmersList.concat(individualsList);
@@ -245,6 +253,7 @@ export default function FarmersScreen({ route, navigation }) {
   }
   if (farmersList.length > 0) {
     farmersList = farmersList?.sort(
+      // @ts-expect-error TS(7006): Parameter 'a' implicitly has an 'any' type.
       (a, b) => new Date(b?.createdAt) - new Date(a?.createdAt),
     );
   }
@@ -272,7 +281,7 @@ export default function FarmersScreen({ route, navigation }) {
     // showAll
   ]);
 
-  const keyExtractor = (item, index) => index.toString();
+  const keyExtractor = (item: any, index: any) => index.toString();
 
   const addFarmer = () => {
     navigation.navigate("FarmerForm1", { customUserData });

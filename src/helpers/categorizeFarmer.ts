@@ -1,6 +1,6 @@
 import { sumTreesOrAreas } from "./sumTreesOrAreas";
 
-export const categorizeFarmer = (farmlands) => {
+export const categorizeFarmer = (farmlands: any) => {
   const trees = sumTreesOrAreas(farmlands, "trees");
   const declaredAreas = sumTreesOrAreas(farmlands, "declaredAreas");
 

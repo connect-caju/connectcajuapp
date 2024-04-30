@@ -198,6 +198,6 @@ const districts = {
     "Muanza",
     "Nhamatanda",
   ],
-}
+};
 
-export default districts
+export default districts;

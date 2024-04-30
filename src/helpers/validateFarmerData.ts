@@ -12,18 +12,20 @@ const validateFarmerData = (
     birthDistrict,
     birthAdminPost,
     birthVillage,
+
     // addressProvince,
     // addressDistrict,
     addressAdminPost,
+
     addressVillage,
     primaryPhone,
     secondaryPhone,
     docType,
     docNumber,
-    nuit,
-  },
-  errors,
-  setErrors,
+    nuit
+  }: any,
+  errors: any,
+  setErrors: any,
 ) => {
   const retrievedSurname = surname?.trim()
   const retrievedOtherNames = otherNames?.trim()

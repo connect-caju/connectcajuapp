@@ -24,4 +24,4 @@ export const ActorMembership = {
     createdAt: { type: "date", default: () => new Date() },
     modifiedAt: { type: "date", default: () => new Date() },
   },
-}
+};

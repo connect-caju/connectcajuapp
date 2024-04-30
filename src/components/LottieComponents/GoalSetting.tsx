@@ -1,5 +1,6 @@
 /* eslint-disable linebreak-style */
 /* eslint-disable prettier/prettier */
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { View, Text } from "react-native";
 import LottieView from "lottie-react-native";
 
@@ -14,6 +15,7 @@ const GoalSetting = () => {
             }}
         >
             <LottieView
+                // @ts-expect-error TS(2591): Cannot find name 'require'. Do you need to install... Remove this comment to see the full error message
                 source={require("../../../assets/lottie/goal.json")}
                 style={{}}
                 autoPlay

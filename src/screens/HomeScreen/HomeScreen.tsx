@@ -10,6 +10,7 @@ import {
   Image,
   TouchableOpacity,
   // ScrollView,
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 } from "react-native";
 import React, { useCallback, useState, useEffect } from "react";
 import { Box, Stack, Center } from "native-base";
@@ -44,9 +45,13 @@ const { useRealm, useQuery } = realmContext;
 const userStats = "userStats";
 
 // realm variable used for manual client reset in the syncConfig
+// @ts-expect-error TS(7005): Variable 'realm' implicitly has an 'any' type.
 export let realm;
 
-export default function HomeScreen({ route, navigation }) {
+export default function HomeScreen({
+  route,
+  navigation
+}: any) {
   realm = useRealm();
   const user = useUser();
   const customUserData = user?.customData;
@@ -67,6 +72,7 @@ export default function HomeScreen({ route, navigation }) {
 
   // --------------------------------------------------------
   const districts = Array.from(
+    // @ts-expect-error TS(2339): Property 'userDistrict' does not exist on type 'Ob... Remove this comment to see the full error message
     new Set(provincialUserStats.map((stat) => stat?.userDistrict)),
   );
 
@@ -76,14 +82,18 @@ export default function HomeScreen({ route, navigation }) {
   // get extract stats from whole province
   const tWholeProvince = provincialUserStats?.map((stat) => {
     return {
+      // @ts-expect-error TS(2339): Property 'targetFarmers' does not exist on type 'O... Remove this comment to see the full error message
       tFarmers: stat.targetFarmers,
+      // @ts-expect-error TS(2339): Property 'targetFarmlands' does not exist on type ... Remove this comment to see the full error message
       tFarmlands: stat.targetFarmlands,
     };
   });
 
   const rWholeProvince = provincialUserStats?.map((stat) => {
     return {
+      // @ts-expect-error TS(2339): Property 'registeredFarmers' does not exist on typ... Remove this comment to see the full error message
       rFarmers: stat.registeredFarmers,
+      // @ts-expect-error TS(2339): Property 'registeredFarmlands' does not exist on t... Remove this comment to see the full error message
       rFarmlands: stat.registeredFarmlands,
     };
   });
@@ -112,12 +122,16 @@ export default function HomeScreen({ route, navigation }) {
   const tWholeDistrict = provincialUserStats
     ?.filter(
       (stat) =>
+        // @ts-expect-error TS(2339): Property 'userDistrict' does not exist on type 'Ob... Remove this comment to see the full error message
         stat.userDistrict === customUserData?.userDistrict &&
+        // @ts-expect-error TS(2339): Property 'userDistrict' does not exist on type 'Ob... Remove this comment to see the full error message
         stat.userDistrict !== "NA",
     )
     ?.map((stat) => {
       return {
+        // @ts-expect-error TS(2339): Property 'targetFarmers' does not exist on type 'O... Remove this comment to see the full error message
         tFarmers: stat.targetFarmers,
+        // @ts-expect-error TS(2339): Property 'targetFarmlands' does not exist on type ... Remove this comment to see the full error message
         tFarmlands: stat.targetFarmlands,
       };
     });
@@ -125,12 +139,16 @@ export default function HomeScreen({ route, navigation }) {
   const rWholeDistrict = provincialUserStats
     ?.filter(
       (stat) =>
+        // @ts-expect-error TS(2339): Property 'userDistrict' does not exist on type 'Ob... Remove this comment to see the full error message
         stat.userDistrict === customUserData?.userDistrict &&
+        // @ts-expect-error TS(2339): Property 'userDistrict' does not exist on type 'Ob... Remove this comment to see the full error message
         stat.userDistrict !== "NA",
     )
     ?.map((stat) => {
       return {
+        // @ts-expect-error TS(2339): Property 'registeredFarmers' does not exist on typ... Remove this comment to see the full error message
         rFarmers: stat.registeredFarmers,
+        // @ts-expect-error TS(2339): Property 'registeredFarmlands' does not exist on t... Remove this comment to see the full error message
         rFarmlands: stat.registeredFarmlands,
       };
     });
@@ -156,19 +174,25 @@ export default function HomeScreen({ route, navigation }) {
   // extract stats of the current user
 
   const tCurrentUser = provincialUserStats
+    // @ts-expect-error TS(2339): Property 'userId' does not exist on type 'Object<u... Remove this comment to see the full error message
     ?.filter((stat) => stat.userId === customUserData?.userId)
     ?.map((stat) => {
       return {
+        // @ts-expect-error TS(2339): Property 'targetFarmers' does not exist on type 'O... Remove this comment to see the full error message
         tFarmers: stat.targetFarmers,
+        // @ts-expect-error TS(2339): Property 'targetFarmlands' does not exist on type ... Remove this comment to see the full error message
         tFarmlands: stat.targetFarmlands,
       };
     });
 
   const rCurrentUser = provincialUserStats
+    // @ts-expect-error TS(2339): Property 'userId' does not exist on type 'Object<u... Remove this comment to see the full error message
     ?.filter((stat) => stat.userId === customUserData?.userId)
     ?.map((stat) => {
       return {
+        // @ts-expect-error TS(2339): Property 'registeredFarmers' does not exist on typ... Remove this comment to see the full error message
         rFarmers: stat.registeredFarmers,
+        // @ts-expect-error TS(2339): Property 'registeredFarmlands' does not exist on t... Remove this comment to see the full error message
         rFarmlands: stat.registeredFarmlands,
       };
     });
@@ -193,7 +217,7 @@ export default function HomeScreen({ route, navigation }) {
 
   // realm subscription to all the resources
   useEffect(() => {
-    realm.subscriptions.update((mutableSubs) => {
+    realm.subscriptions.update((mutableSubs: any) => {
       mutableSubs.removeByName(userStats);
       mutableSubs.add(
         realm
@@ -204,7 +228,9 @@ export default function HomeScreen({ route, navigation }) {
     });
 
     if (
+      // @ts-expect-error TS(2571): Object is of type 'unknown'.
       customUserData?.role?.includes(roles.provincialManager) ||
+      // @ts-expect-error TS(2571): Object is of type 'unknown'.
       customUserData?.role?.includes(roles.ampcmSupervisor)
     ) {
       setIsFieldAgent(false);
@@ -216,7 +242,7 @@ export default function HomeScreen({ route, navigation }) {
       customUserData?.role !== roles.provincialManager &&
       customUserData?.role !== roles.ampcmSupervisor
     ) {
-      realm.subscriptions.update((mutableSubs) => {
+      realm.subscriptions.update((mutableSubs: any) => {
         mutableSubs.add(
           realm
             .objects("Actor")
@@ -225,7 +251,7 @@ export default function HomeScreen({ route, navigation }) {
         );
       });
 
-      realm.subscriptions.update((mutableSubs) => {
+      realm.subscriptions.update((mutableSubs: any) => {
         // mutableSubs.removeByName(districtGroupFarmers)
         mutableSubs.add(
           realm
@@ -235,7 +261,7 @@ export default function HomeScreen({ route, navigation }) {
         );
       });
 
-      realm.subscriptions.update((mutableSubs) => {
+      realm.subscriptions.update((mutableSubs: any) => {
         mutableSubs.add(
           realm
             .objects("Institution")
@@ -245,7 +271,7 @@ export default function HomeScreen({ route, navigation }) {
       });
 
 
-      realm.subscriptions.update((mutableSubs) => {
+      realm.subscriptions.update((mutableSubs: any) => {
         mutableSubs.add(
           realm
             .objects("Farmland")
@@ -254,7 +280,7 @@ export default function HomeScreen({ route, navigation }) {
         );
       });
 
-      realm.subscriptions.update((mutableSubs) => {
+      realm.subscriptions.update((mutableSubs: any) => {
         mutableSubs.add(
           realm
             .objects("SprayingServiceProvider")
@@ -263,7 +289,7 @@ export default function HomeScreen({ route, navigation }) {
         );
       });
 
-      realm.subscriptions.update((mutableSubs) => {
+      realm.subscriptions.update((mutableSubs: any) => {
         mutableSubs.add(
           realm
             .objects("ActorMembership")
@@ -276,7 +302,7 @@ export default function HomeScreen({ route, navigation }) {
       // customUserData?.role === roles.coopManager ||
       customUserData?.role === roles.ampcmSupervisor
     ) {
-      realm.subscriptions.update((mutableSubs) => {
+      realm.subscriptions.update((mutableSubs: any) => {
         // mutableSubs.removeByName(provincialStats);
         mutableSubs.add(
           realm
@@ -324,6 +350,7 @@ export default function HomeScreen({ route, navigation }) {
         className={"w-full light:bg-[#EBEBE4]"}
       >
         <Box
+          // @ts-expect-error TS(2322): Type '{ children: Element; style: { paddingVertica... Remove this comment to see the full error message
           style={{
             paddingVertical: 10,
             paddingHorizontal: 5,
@@ -336,6 +363,7 @@ export default function HomeScreen({ route, navigation }) {
             <Box w="40%" alignItems={"center"}>
               <Image
                 style={{ width: 55, height: 55, borderRadius: 100 }}
+                // @ts-expect-error TS(2591): Cannot find name 'require'. Do you need to install... Remove this comment to see the full error message
                 source={require("../../../assets/images/iamLogo2.png")}
               />
               <Text
@@ -361,6 +389,7 @@ export default function HomeScreen({ route, navigation }) {
                 <Text
                   className="text-center text-gray-600 font-normal text-sm -mt-1"
                 >
+                  // @ts-expect-error TS(2571): Object is of type 'unknown'.
                   {customUserData?.name?.split(" ")[0]}
                 </Text>
               </TouchableOpacity>
@@ -397,6 +426,7 @@ export default function HomeScreen({ route, navigation }) {
             className="w-full rounded-t-2xl shadow-md light:bg-neutral-100 px-2 my-6 mx-2 self-center overflow-y-scroll"
           >
             <Box
+              // @ts-expect-error TS(2322): Type '{ children: Element[]; className: string; }'... Remove this comment to see the full error message
               className="bg-green-600 dark:bg-gray-800 w-full items-center  rounded-t-2xl"
             >
               <Text
@@ -434,6 +464,7 @@ export default function HomeScreen({ route, navigation }) {
               </View>
             </Box>
             {!isPerformanceButtonActive && (
+              // @ts-expect-error TS(2322): Type '{ children: Element[]; direction: "column"; ... Remove this comment to see the full error message
               <Stack direction="column" w="100%" pt="4" className="border-gray-300 border-x-2 border-b-2 bg-white dark:bg-gray-900 dark:border-x-2 dark:border-x-gray-600 dark:border-b-2 dark:border-b-gray-600 pb-2 rounded-b-lg">
                 <Stack direction="row">
                   <Box w="50%">
@@ -445,6 +476,7 @@ export default function HomeScreen({ route, navigation }) {
                     <Text
                       className="font-normal text-xs text-center text-slate-600"
                     >
+                      // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
                       Até {months[new Date().getMonth()]}{" "}
                       {new Date().getFullYear()}
                     </Text>
@@ -489,6 +521,7 @@ export default function HomeScreen({ route, navigation }) {
             )}
 
             {isPerformanceButtonActive && (
+              // @ts-expect-error TS(2322): Type '{ children: Element[]; direction: "column"; ... Remove this comment to see the full error message
               <Stack direction="column" w="100%" pt="4" className="border-gray-300 border-x-2 border-b-2 bg-white dark:bg-gray-900 dark:border-x-2 dark:border-x-gray-600 dark:border-b-2 dark:border-b-gray-600 pb-2 rounded-b-lg">
                 <Stack direction="row">
                   <Box w="50%">
@@ -501,6 +534,7 @@ export default function HomeScreen({ route, navigation }) {
                     <Text
                       className="font-normal text-xs text-center text-slate-600"
                     >
+                      // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
                       Até {months[new Date().getMonth()]}{" "}
                       {new Date().getFullYear()}
                     </Text>

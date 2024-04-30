@@ -18,11 +18,13 @@ import {
   SectionList,
   ActivityIndicator,
   Platform,
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 } from "react-native";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { ListItem, Avatar, Icon, SearchBar } from "@rneui/themed";
 import { Box, Center, Pressable, Stack } from "native-base";
 import { useFocusEffect } from "@react-navigation/native";
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'uuid... Remove this comment to see the full error message
 import { v4 as uuidv4 } from "uuid";
 
 import {
@@ -62,8 +64,8 @@ function MemberGroupItem({
   setIsFarmerAdded,
   isFarmerRemoved,
   setIsFarmerRemoved,
-  farmerName,
-}) {
+  farmerName
+}: any) {
   const realm = useRealm();
   const user = useUser();
   let customUserData = user.customData;
@@ -73,7 +75,7 @@ function MemberGroupItem({
   const membership = realm
     .objects("ActorMembership")
     .filtered(`actorId == "${farmerId}"`);
-  let member;
+  let member: any;
 
   if (membership.length > 0) {
     member = membership[0];
@@ -84,7 +86,9 @@ function MemberGroupItem({
   const showRemovedFarmerToast = () => {
     Toast.show({
       type: "removedFarmerFromGroup",
+      // @ts-expect-error TS(2339): Property 'type' does not exist on type 'Object<unk... Remove this comment to see the full error message
       text1: `Retirada de ${currentGroup?.type}`,
+      // @ts-expect-error TS(2339): Property 'type' does not exist on type 'Object<unk... Remove this comment to see the full error message
       props: { message: `Retirado de ${currentGroup?.type}.` },
     });
   };
@@ -92,18 +96,20 @@ function MemberGroupItem({
   const showAddedFarmerToast = () => {
     Toast.show({
       type: "addedFarmerToGroup",
+      // @ts-expect-error TS(2339): Property 'type' does not exist on type 'Object<unk... Remove this comment to see the full error message
       text1: `Adesão a ${currentGroup?.type}`,
+      // @ts-expect-error TS(2339): Property 'type' does not exist on type 'Object<unk... Remove this comment to see the full error message
       props: { message: `Adicionado a ${currentGroup?.type}.` },
     });
   };
   // remove the farmer from the group
-  const removeFarmerFromGroup = (realm, farmerId, currentGroup) => {
+  const removeFarmerFromGroup = (realm: any, farmerId: any, currentGroup: any) => {
     try {
       realm.write(() => {
 
         // remove the farmer id from the group
         const updatedFarmerIds = currentGroup.members?.filter(
-          (id) => id !== farmerId,
+          (id: any) => id !== farmerId,
         );
         currentGroup.members = [];
         for (let i = 0; i < updatedFarmerIds?.length; i++) {
@@ -116,10 +122,10 @@ function MemberGroupItem({
         if (currentActorMemberships && currentActorMemberships?.length > 0) {
           // find the organization object that the actor want to unsubscribe from
           const membershipToDelete = currentActorMemberships.find(
-            (memb) => memb.organizationId === currentGroup?._id,
+            (memb: any) => memb.organizationId === currentGroup?._id,
           );
           const index = currentActorMemberships.findIndex(
-            (memb) => memb.organizationId === membershipToDelete.organizationId,
+            (memb: any) => memb.organizationId === membershipToDelete.organizationId,
           );
 
           // remove that organization object from
@@ -130,12 +136,13 @@ function MemberGroupItem({
         setIsFarmerRemoved(true);
       });
     } catch (error) {
+      // @ts-expect-error TS(2584): Cannot find name 'console'. Do you need to change ... Remove this comment to see the full error message
       console.log("The farmer could not be deleted from the group!");
     }
   };
 
   // add the farmer to the group
-  const addFarmerToGroup = (realm, farmerId, currentGroup) => {
+  const addFarmerToGroup = (realm: any, farmerId: any, currentGroup: any) => {
     try {
       realm.write(async () => {
         // add the farmer id to the group
@@ -146,6 +153,7 @@ function MemberGroupItem({
         // the the group object to the farmer membership
         if (membership?.length > 0) {
           let member = membership[0];
+          // @ts-expect-error TS(2532): Object is possibly 'undefined'.
           member.membership.push({
             subscriptionYear: new Date().getFullYear(),
             unsubscriptionYear: null,
@@ -180,6 +188,7 @@ function MemberGroupItem({
         setIsFarmerAdded(true);
       });
     } catch (error) {
+      // @ts-expect-error TS(2584): Cannot find name 'console'. Do you need to change ... Remove this comment to see the full error message
       console.log("The farmer could not be added to the group!", {
         cause: error,
       });
@@ -190,7 +199,8 @@ function MemberGroupItem({
   useEffect(() => {
     // if the farmer is already added to this group
     // then, set the state to true, else set the state to false
-    if (currentGroup.members?.find((id) => id === farmerId)) {
+    // @ts-expect-error TS(2531): Object is possibly 'null'.
+    if (currentGroup.members?.find((id: any) => id === farmerId)) {
       setIsFarmerAlreadyAdded(true);
     } else {
       setIsFarmerAlreadyAdded(false);
@@ -204,6 +214,7 @@ function MemberGroupItem({
       <Stack direction="row" w="100%">
         <Box
           w="10%"
+          // @ts-expect-error TS(2322): Type '{ children: Element; w: "10%"; style: { heig... Remove this comment to see the full error message
           style={{
             height: "100%",
             justifyContent: "center",
@@ -213,7 +224,8 @@ function MemberGroupItem({
         >
           <TouchableOpacity
             onPress={() => {
-              if (!currentGroup.members?.find((id) => id === farmerId)) {
+              // @ts-expect-error TS(2531): Object is possibly 'null'.
+              if (!currentGroup.members?.find((id: any) => id === farmerId)) {
                 // add the actor as one of member of this group
                 addFarmerToGroup(realm, farmerId, currentGroup);
 
@@ -239,7 +251,8 @@ function MemberGroupItem({
         <Box w="80%">
           <TouchableOpacity
             onPress={() => {
-              if (!currentGroup.members?.find((id) => id === farmerId)) {
+              // @ts-expect-error TS(2531): Object is possibly 'null'.
+              if (!currentGroup.members?.find((id: any) => id === farmerId)) {
                 // add the actor as one of member of this group
                 addFarmerToGroup(realm, farmerId, currentGroup);
 
@@ -296,6 +309,7 @@ function MemberGroupItem({
         </Box>
         <Box
           w="10%"
+          // @ts-expect-error TS(2322): Type '{ children: Element; w: "10%"; style: { heig... Remove this comment to see the full error message
           style={{
             height: "100%",
             justifyContent: "center",
@@ -306,6 +320,7 @@ function MemberGroupItem({
           <TouchableOpacity
             disabled={isFarmerAlreadyAdded ? false : true}
             onPress={() => {
+              // @ts-expect-error TS(2345): Argument of type 'string' is not assignable to par... Remove this comment to see the full error message
               navigation.navigate("GroupMembers", {
                 groupId: item._id,
               });
@@ -324,7 +339,10 @@ function MemberGroupItem({
   );
 }
 
-export default function MembershipScreen({ route, navigation }) {
+export default function MembershipScreen({
+  route,
+  navigation
+}: any) {
   const realm = useRealm();
   const user = useUser();
   let customUserData = user.customData;
@@ -360,11 +378,14 @@ export default function MembershipScreen({ route, navigation }) {
     if (searchQuery) {
       result = groups.filter((item) => {
         return (
+          // @ts-expect-error TS(2339): Property 'type' does not exist on type 'Object<unk... Remove this comment to see the full error message
           item.type.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          // @ts-expect-error TS(2576): Property 'name' does not exist on type 'Object<unk... Remove this comment to see the full error message
           item.name.toLowerCase().includes(searchQuery.toLowerCase())
         );
       });
     } else {
+      // @ts-expect-error TS(2740): Type 'Results<Object<unknown, never>>' is missing ... Remove this comment to see the full error message
       result = groups;
     }
     return result;
@@ -373,6 +394,7 @@ export default function MembershipScreen({ route, navigation }) {
   const handleEndReached = () => {
     if (!isEndReached) {
       setIsLoading(true);
+      // @ts-expect-error TS(2304): Cannot find name 'setTimeout'.
       setTimeout(() => { }, 2000);
 
       setIsLoading(false);
@@ -382,6 +404,7 @@ export default function MembershipScreen({ route, navigation }) {
   useEffect(() => {
 
     groups.map((group) => {
+      // @ts-expect-error TS(2339): Property 'members' does not exist on type 'Object<... Remove this comment to see the full error message
       if (group.members.indexOf(farmerId) >= 0) {
         setCountIdOccurrence((prev) => prev + 1);
       }
@@ -389,7 +412,7 @@ export default function MembershipScreen({ route, navigation }) {
     //  }
   }, [autoRefresh]);
 
-  const keyExtractor = (item, index) => index.toString();
+  const keyExtractor = (item: any, index: any) => index.toString();
 
   return (
     <SafeAreaView
@@ -419,6 +442,7 @@ export default function MembershipScreen({ route, navigation }) {
           <Stack direction="row" w="100%">
             <Box w="10%">
               <Pressable
+                // @ts-expect-error TS(2322): Type '{ children: Element; onPress: () => void; st... Remove this comment to see the full error message
                 onPress={() => {
                   if (isSearching) {
                     setIsSearching(false);
@@ -448,6 +472,7 @@ export default function MembershipScreen({ route, navigation }) {
 
             <Box
               w="90%"
+              // @ts-expect-error TS(2322): Type '{ children: Element; w: "90%"; style: { alig... Remove this comment to see the full error message
               style={{
                 alignItems: "center",
                 justifyContent: "center",
@@ -478,18 +503,20 @@ export default function MembershipScreen({ route, navigation }) {
                   onEndEditing={() => {
                     // setIsFocused(false);
                   }}
-                  onChangeText={(text) => setSearchQuery(text)}
+                  onChangeText={(text: any) => setSearchQuery(text)}
                 />
               ) : (
                 <Box w="100%">
                   <Box
                     w="100%"
+                    // @ts-expect-error TS(2322): Type '{ children: Element; w: "100%"; style: { fle... Remove this comment to see the full error message
                     style={{
                       flexDirection: "row",
                     }}
                   >
                     <Box
                       w="80%"
+                      // @ts-expect-error TS(2322): Type '{ children: Element[]; w: "80%"; style: { ju... Remove this comment to see the full error message
                       style={{
                         justifyContent: "center",
                       }}
@@ -503,6 +530,7 @@ export default function MembershipScreen({ route, navigation }) {
                         numberOfLines={1}
                         ellipsizeMode={"tail"}
                       >
+                        // @ts-expect-error TS(2339): Property 'names' does not exist on type 'Object<un... Remove this comment to see the full error message
                         {`${farmer?.names?.otherNames} ${farmer?.names?.surname}`}
                       </Text>
                       <Text
@@ -530,6 +558,7 @@ export default function MembershipScreen({ route, navigation }) {
             {!isSearching && (
               <Box
                 w="10%"
+                // @ts-expect-error TS(2322): Type '{ children: Element; w: "10%"; style: { posi... Remove this comment to see the full error message
                 style={{
                   position: "absolute",
                   top: 10,
@@ -552,6 +581,7 @@ export default function MembershipScreen({ route, navigation }) {
                     icon={faMagnifyingGlass}
                     size={20}
                     color={COLORS.black}
+                    // @ts-expect-error TS(2322): Type '{ icon: IconDefinition; size: number; color:... Remove this comment to see the full error message
                     rotation={90}
                   />
                 </TouchableOpacity>
@@ -569,6 +599,7 @@ export default function MembershipScreen({ route, navigation }) {
         <Box
           alignItems="stretch"
           w="100%"
+          // @ts-expect-error TS(2322): Type '{ children: Element; alignItems: "stretch"; ... Remove this comment to see the full error message
           style={{
             marginBottom: 50,
             marginTop: 20,
@@ -577,6 +608,7 @@ export default function MembershipScreen({ route, navigation }) {
           <FlatList
             StickyHeaderComponent={() => (
               <Box
+                // @ts-expect-error TS(2322): Type '{ children: never[]; style: { height: number... Remove this comment to see the full error message
                 style={{
                   height: hp("10%"),
                   justifyContent: "center",
@@ -595,7 +627,9 @@ export default function MembershipScreen({ route, navigation }) {
             keyExtractor={keyExtractor}
             onEndReached={handleEndReached}
             onEndReachedThreshold={0.1}
-            renderItem={({ item }) => {
+            renderItem={({
+              item
+            }: any) => {
               return (
                 <MemberGroupItem
                   autoRefresh={autoRefresh}
@@ -608,6 +642,7 @@ export default function MembershipScreen({ route, navigation }) {
                   setIsFarmerAdded={setIsFarmerAdded}
                   isFarmerRemoved={isFarmerRemoved}
                   setIsFarmerRemoved={setIsFarmerRemoved}
+                  // @ts-expect-error TS(2339): Property 'names' does not exist on type 'Object<un... Remove this comment to see the full error message
                   farmerName={`${farmer?.names?.otherNames} ${farmer?.names?.surname}`}
                 />
               );
@@ -616,6 +651,7 @@ export default function MembershipScreen({ route, navigation }) {
               if (!isEndReached) {
                 return (
                   <Box
+                    // @ts-expect-error TS(2322): Type '{ children: Element | null; style: { backgro... Remove this comment to see the full error message
                     style={{
                       // height: 10,
                       backgroundColor: COLORS.ghostwhite,
@@ -636,6 +672,7 @@ export default function MembershipScreen({ route, navigation }) {
           searchQuery.length > 0 &&
           isSearching && (
             <Box
+              // @ts-expect-error TS(2322): Type '{ children: Element[]; style: { flex: number... Remove this comment to see the full error message
               style={{
                 flex: 1,
                 position: "absolute",

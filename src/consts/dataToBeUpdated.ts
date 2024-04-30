@@ -18,4 +18,4 @@ export const dataTobeUpdated = {
     blockData: "blockData",
     plantType: "plantType",
   },
-}
+};

@@ -8,14 +8,14 @@ export const institutions = [
   "Confissão Religiosa",
   "Empresa",
   "Outra",
-]
+];
 
 export const groups = [
   "Associação",
   "Cooperativa",
   "Grupo de Produtores",
   "Escola na Machamba do Camponês",
-]
+];
 
 export const publicInstitutions = [
   "Escola Primária (EP1)",
@@ -24,7 +24,7 @@ export const publicInstitutions = [
   "Escola Secundária",
   "Estabelecimento Prisional",
   "Outra",
-]
+];
 
 export const privateInstitutions = [
   "Escola Primária (EP1)",
@@ -35,17 +35,17 @@ export const privateInstitutions = [
   "ONG",
   "Empresa",
   "Outra",
-]
+];
 
 export const groups2 = [
   { key: 1, value: "Associação" },
   { key: 2, value: "Cooperativa" },
   { key: 3, value: "Grupo de Produtores" },
   { key: 4, value: "Escola na Machamba do Camponês" },
-]
+];
 
 export const farmerTypes = {
   farmer: "Indivíduo",
   group: "Grupo",
   institution: "Instituição",
-}
+};

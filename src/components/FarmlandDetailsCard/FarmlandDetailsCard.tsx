@@ -4,6 +4,7 @@
 
 import { Icon } from "@rneui/base";
 import React from "react";
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { View, Text, TouchableOpacity } from "react-native";
 import Animated from "react-native-reanimated";
 import COLORS from "../../consts/colors";
@@ -16,8 +17,8 @@ export default function FarmlandDetailsCard({
   setRefresh,
   farmer,
   customUserData,
-  farmerType,
-}) {
+  farmerType
+}: any) {
   const navigation = useNavigation();
 
 
@@ -45,6 +46,7 @@ export default function FarmlandDetailsCard({
             ) && (
                 <TouchableOpacity
                   onPress={() => {
+                    // @ts-expect-error TS(2345): Argument of type 'string' is not assignable to par... Remove this comment to see the full error message
                     navigation.navigate("FarmlandForm1", {
                       ownerId: farmer._id,
                       ownerName:

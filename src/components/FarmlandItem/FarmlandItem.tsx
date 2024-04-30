@@ -1,3 +1,4 @@
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { TouchableOpacity, View, Text } from "react-native"
 import React, { useState } from "react"
 import { Icon, Avatar } from "@rneui/themed"
@@ -26,7 +27,10 @@ import { months } from "../../helpers/dates"
 import { resourceValidation } from "../../consts/resourceValidation"
 import { getPlantingYears } from "../../helpers/getPlantingYears"
 
-export default function FarmlandItem({ item, route }) {
+export default function FarmlandItem({
+  item,
+  route
+}: any) {
   const [visible, setVisible] = useState(false)
   const navigation = useNavigation()
 
@@ -51,6 +55,7 @@ export default function FarmlandItem({ item, route }) {
       }}
     >
       <Box
+        // @ts-expect-error TS(2322): Type '{ children: Element; style: { position: stri... Remove this comment to see the full error message
         style={{
           position: "absolute",
           top: 1,
@@ -79,14 +84,17 @@ export default function FarmlandItem({ item, route }) {
       <TouchableOpacity
         onPress={() => {
           if (item?.ownerType === "Single") {
+            // @ts-expect-error TS(2345): Argument of type 'string' is not assignable to par... Remove this comment to see the full error message
             navigation.navigate("Farmer", {
               ownerId: item?.farmerId,
             })
           } else if (item?.ownerType === "Group") {
+            // @ts-expect-error TS(2345): Argument of type 'string' is not assignable to par... Remove this comment to see the full error message
             navigation.navigate("Group", {
               ownerId: item?.farmerId,
             })
           } else if (item?.ownerType === "Institution") {
+            // @ts-expect-error TS(2345): Argument of type 'string' is not assignable to par... Remove this comment to see the full error message
             navigation.navigate("Institution", {
               ownerId: item?.farmerId,
             })

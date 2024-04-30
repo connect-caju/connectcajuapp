@@ -1,7 +1,9 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable linebreak-style */
 /* eslint-disable prettier/prettier */
+// @ts-expect-error TS(2305): Module '"react"' has no exported member 'Image'.
 import React, { useState, Image, SafeAreaView, TouchableOpacity } from "react";
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { View, Text } from "react-native";
 import COLORS from "../../consts/colors";
 import { Box, Center, Stack } from "native-base";
@@ -9,7 +11,9 @@ import { Icon } from "@rneui/base";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faUserGroup } from "@fortawesome/free-solid-svg-icons";
 import { ProgressChart } from "react-native-chart-kit";
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { Dimensions } from "react-native";
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { ScrollView } from "react-native";
 
 import { useUser } from "@realm/react";
@@ -22,7 +26,16 @@ const userStats = "userStats";
 
 // export let realm;
 
-const ProvincialManager = ({ tpFarmers, tpFarmlands, provincialUserStats, pFarmlandsPercentage, pFarmersPercentage, customUserData, setIsUserProfileVisible, isUserProfileVisible }) => {
+const ProvincialManager = ({
+    tpFarmers,
+    tpFarmlands,
+    provincialUserStats,
+    pFarmlandsPercentage,
+    pFarmersPercentage,
+    customUserData,
+    setIsUserProfileVisible,
+    isUserProfileVisible
+}: any) => {
 
     const width = Dimensions.get("window").width - 15;
 
@@ -68,6 +81,7 @@ const ProvincialManager = ({ tpFarmers, tpFarmlands, provincialUserStats, pFarml
                     paddingVertical: 10,
                 }}
             >
+                // @ts-expect-error TS(2769): No overload matches this call.
                 <LinearGradient colors={["#909A90", "#398093"]} style={{
                     flex: 1,
                     paddingLeft: 15,
@@ -90,6 +104,7 @@ const ProvincialManager = ({ tpFarmers, tpFarmlands, provincialUserStats, pFarml
                     }}
                 />
 
+                // @ts-expect-error TS(2769): No overload matches this call.
                 <LinearGradient colors={["#909A90", "#398093"]} style={{
                     flex: 1,
                     paddingLeft: 15,
@@ -118,6 +133,7 @@ const ProvincialManager = ({ tpFarmers, tpFarmlands, provincialUserStats, pFarml
                     paddingVertical: 10,
                 }}
             >
+                // @ts-expect-error TS(2769): No overload matches this call.
                 <LinearGradient colors={["#4D5F4D", "#799AA3"]} style={{
                     flex: 1,
                     paddingLeft: 15,
@@ -140,6 +156,7 @@ const ProvincialManager = ({ tpFarmers, tpFarmlands, provincialUserStats, pFarml
                     }}
                 />
 
+                // @ts-expect-error TS(2769): No overload matches this call.
                 <LinearGradient colors={["#4D5F4D", "#799AA3"]} style={{
                     flex: 1,
                     paddingLeft: 15,

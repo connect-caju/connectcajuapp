@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable linebreak-style */
 /* eslint-disable prettier/prettier */
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { View, Text, SafeAreaView, TouchableOpacity, FlatList } from "react-native";
 import COLORS from "../../consts/colors";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
@@ -35,13 +36,16 @@ const filterByCriteria = [
 
 
 
-const FarmersListLayout = ({ route, navigation }) => {
+const FarmersListLayout = ({
+    route,
+    navigation
+}: any) => {
 
     const farmerType = route.params?.farmerType || farmerTypes.farmer;
     const [focusedOption, setFocusedOption] = useState(1);
     const [loadingActivitiyIndicator, setLoadingActivityIndicator] = useState(false);
 
-    const handleFocusedOption = (option) => {
+    const handleFocusedOption = (option: any) => {
         setFocusedOption(option);
     };
 
@@ -55,7 +59,7 @@ const FarmersListLayout = ({ route, navigation }) => {
         setLoadingActivityIndicator(true);
     }, [focusedOption]);
 
-    const keyExtractor2 = (item, index) => index.toString();
+    const keyExtractor2 = (item: any, index: any) => index.toString();
 
     return (
         <SafeAreaView
@@ -108,6 +112,7 @@ const FarmersListLayout = ({ route, navigation }) => {
                             icon={faEllipsisVertical}
                             size={20}
                             color={COLORS.lightestgrey}
+                            // @ts-expect-error TS(2322): Type '{ icon: IconDefinition; size: number; color:... Remove this comment to see the full error message
                             fade
                         />
                     </TouchableOpacity>
@@ -124,7 +129,9 @@ const FarmersListLayout = ({ route, navigation }) => {
                     // ListHeaderComponent={<View style={{ width: 6, }} />}
                     snapToInterval={86}
                     decelerationRate="fast"
-                    renderItem={({ item }) => {
+                    renderItem={({
+                        item
+                    }: any) => {
                         return (
                             <TouchableOpacity
                                 style={{

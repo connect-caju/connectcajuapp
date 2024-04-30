@@ -9,6 +9,7 @@ import {
   InteractionManager,
   SafeAreaView,
   FlatList,
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 } from "react-native"
 import { Box, FormControl, Stack } from "native-base"
 import { Divider, Icon } from "@rneui/base"
@@ -17,7 +18,9 @@ import {
   CollapseHeader,
   CollapseBody,
   AccordionList,
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'acco... Remove this comment to see the full error message
 } from "accordion-collapse-react-native"
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'uuid... Remove this comment to see the full error message
 import { v4 as uuidv4 } from "uuid"
 import { useFocusEffect } from "@react-navigation/native"
 import {
@@ -40,6 +43,7 @@ import Tooltip from "react-native-walkthrough-tooltip"
 
 import CustomDivider from "../../components/Divider/CustomDivider"
 import COLORS from "../../consts/colors"
+// @ts-expect-error TS(2307): Cannot find module '../EditData/EditData' or its c... Remove this comment to see the full error message
 import EditData from "../EditData/EditData"
 import EditFarmerData from "../EditData/EditFarmerData"
 import { errorMessages } from "../../consts/errorMessages"
@@ -63,7 +67,11 @@ const { useRealm, useQuery, useObject } = realmContext
 
 const resourceMessage = "resourceMessage"
 
-const PersonalData = ({ farmer, setRefresh, refresh }) => {
+const PersonalData = ({
+  farmer,
+  setRefresh,
+  refresh
+}: any) => {
   const realm = useRealm()
   const navigation = useNavigation()
   const user = useUser()
@@ -147,7 +155,7 @@ const PersonalData = ({ farmer, setRefresh, refresh }) => {
   // ---------------------------------------------------------------
 
   // ---------------------------------------------------
-  const validationAction = (realm, resourceId, flag) => {
+  const validationAction = (realm: any, resourceId: any, flag: any) => {
     realm.write(() => {
       const foundFarmer = realm.objectForPrimaryKey("Actor", `${resourceId}`)
       if (flag === "validate") {
@@ -161,7 +169,7 @@ const PersonalData = ({ farmer, setRefresh, refresh }) => {
   }
 
   const addMessage = useCallback(
-    (realm, newResourceId, newMessage) => {
+    (realm: any, newResourceId: any, newMessage: any) => {
       if (!validateInvalidationMessage(newMessage, errors, setErrors)) {
         return
       }
@@ -215,10 +223,12 @@ const PersonalData = ({ farmer, setRefresh, refresh }) => {
       )
     })
 
+    // @ts-expect-error TS(2304): Cannot find name 'setInterval'.
     const interval = setInterval(() => {
       setAutoRefresh(!autoRefresh)
     }, 2000)
 
+    // @ts-expect-error TS(2304): Cannot find name 'clearInterval'.
     clearInterval(interval)
   }, [realm, user, message, invalidationMotives, autoRefresh, isCollapseOn])
 
@@ -243,598 +253,575 @@ const PersonalData = ({ farmer, setRefresh, refresh }) => {
     )
   }
 
-  return (
-    <>
-      <AwesomeAlert
-        show={alert}
-        titleStyle={{
-          fontSize: 18,
-          // paddingVertical: 15,
-          // color: COLORS.ghostwhite,
-          fontWeight: "bold",
-          marginBottom: 5,
-          // backgroundColor: COLORS.main,
-          width: "100%",
-          textAlign: "center",
-        }}
-        messageStyle={{
-          fontSize: 18,
-          color: COLORS.grey,
-          fontFamily: "JosefinSans-Regular",
-          lineHeight: 25,
-          textAlign: "center",
-        }}
-        alertContainerStyle={
-          {
-            // width: 300,
-          }
+  return <>
+    <AwesomeAlert
+      show={alert}
+      titleStyle={{
+        fontSize: 18,
+        // paddingVertical: 15,
+        // color: COLORS.ghostwhite,
+        fontWeight: "bold",
+        marginBottom: 5,
+        // backgroundColor: COLORS.main,
+        width: "100%",
+        textAlign: "center",
+      }}
+      messageStyle={{
+        fontSize: 18,
+        color: COLORS.grey,
+        fontFamily: "JosefinSans-Regular",
+        lineHeight: 25,
+        textAlign: "center",
+      }}
+      alertContainerStyle={
+        {
+          // width: 300,
         }
-        overlayStyle={
-          {
-            // width: 100,
-          }
+      }
+      overlayStyle={
+        {
+          // width: 100,
         }
-        contentContainerStyle={
-          {
-            // width: '90%',
-            // height: '70%',
-          }
+      }
+      contentContainerStyle={
+        {
+          // width: '90%',
+          // height: '70%',
         }
-        contentStyle={
-          {
-            // flex: 1,
-            // paddingVertical: 20,
-          }
+      }
+      contentStyle={
+        {
+          // flex: 1,
+          // paddingVertical: 20,
         }
-        cancelButtonStyle={{
-          // width: 120,
-          marginRight: 15,
-        }}
-        cancelButtonTextStyle={{
-          fontSize: 18,
-          textAlign: "center",
-          //   fontWeight: 'bold',
-          fontFamily: "JosefinSans-Bold",
-        }}
-        confirmButtonStyle={{
-          // width: 120,
-          marginLeft: 15,
-        }}
-        confirmButtonTextStyle={{
-          fontSize: 18,
-          textAlign: "center",
-          //   fontWeight: 'bold',
-          fontFamily: "JosefinSans-Bold",
-        }}
-        showProgress={false}
-        title={titleAlert}
-        message={messageAlert}
-        closeOnTouchOutside={false}
-        closeOnHardwareBackPress={false}
-        showCancelButton={showCancelButton}
-        showConfirmButton={showConfirmButton}
-        cancelText={cancelText}
-        confirmText={confirmText}
-        cancelButtonColor="#DD6B55"
-        confirmButtonColor={COLORS.main}
-        onCancelPressed={() => {
-          setAlert(false)
+      }
+      cancelButtonStyle={{
+        // width: 120,
+        marginRight: 15,
+      }}
+      cancelButtonTextStyle={{
+        fontSize: 18,
+        textAlign: "center",
+        //   fontWeight: 'bold',
+        fontFamily: "JosefinSans-Bold",
+      }}
+      confirmButtonStyle={{
+        // width: 120,
+        marginLeft: 15,
+      }}
+      confirmButtonTextStyle={{
+        fontSize: 18,
+        textAlign: "center",
+        //   fontWeight: 'bold',
+        fontFamily: "JosefinSans-Bold",
+      }}
+      showProgress={false}
+      title={titleAlert}
+      message={messageAlert}
+      closeOnTouchOutside={false}
+      closeOnHardwareBackPress={false}
+      showCancelButton={showCancelButton}
+      showConfirmButton={showConfirmButton}
+      cancelText={cancelText}
+      confirmText={confirmText}
+      cancelButtonColor="#DD6B55"
+      confirmButtonColor={COLORS.main}
+      onCancelPressed={() => {
+        setAlert(false)
+        setValidated(false)
+        setInvalidated(false)
+      }}
+      onConfirmPressed={() => {
+        setAlert(false)
+        if (validated) {
+          validationAction(realm, farmer?._id, "validate")
           setValidated(false)
+        } else if (invalidated) {
+          validationAction(realm, farmer?._id, "invalidate")
           setInvalidated(false)
-        }}
-        onConfirmPressed={() => {
-          setAlert(false)
-          if (validated) {
-            validationAction(realm, farmer?._id, "validate")
-            setValidated(false)
-          } else if (invalidated) {
-            validationAction(realm, farmer?._id, "invalidate")
-            setInvalidated(false)
-          }
-        }}
-      />
-      <Collapse
+        }
+      }}
+    />
+    <Collapse
+      style={{
+        flex: 1,
+      }}
+      onToggle={(isOn: any) => {
+        setIsCallapseOne(isOn)
+        setRefresh(!isOn)
+      }}
+    >
+      <CollapseHeader
         style={{
-          flex: 1,
-        }}
-        onToggle={(isOn) => {
-          setIsCallapseOne(isOn)
-          setRefresh(!isOn)
+          height: hp("10%"),
+          paddingTop: 14,
+          backgroundColor: COLORS.pantone,
+          paddingHorizontal: 10,
+          marginVertical: hp("1%"),
         }}
       >
-        <CollapseHeader
-          style={{
-            height: hp("10%"),
-            paddingTop: 14,
-            backgroundColor: COLORS.pantone,
-            paddingHorizontal: 10,
-            marginVertical: hp("1%"),
-          }}
-        >
-          <View style={{}}>
-            <Text
-              style={{
-                fontSize: responsiveFontSize(2),
-                color: "ghostwhite",
-                fontFamily: "JosefinSans-Bold",
-              }}
-            >
-              Dados Pessoais
-            </Text>
-          </View>
-        </CollapseHeader>
-        <CollapseBody>
-          <View
+        <View style={{}}>
+          <Text
             style={{
-              marginBottom: 40,
-              padding: 10,
-              borderColor: COLORS.pantone,
-              shadowColor: COLORS.pantone,
-              shadowOffset: {
-                width: 0,
-                height: 3,
-              },
-              shadowOpacity: 0.27,
-              shadowRadius: 4.65,
-              elevation: 3,
-              paddingLeft: 20,
+              fontSize: responsiveFontSize(2),
+              color: "ghostwhite",
+              fontFamily: "JosefinSans-Bold",
             }}
           >
-            <Box
+            Dados Pessoais
+          </Text>
+        </View>
+      </CollapseHeader>
+      <CollapseBody>
+        <View
+          style={{
+            marginBottom: 40,
+            padding: 10,
+            borderColor: COLORS.pantone,
+            shadowColor: COLORS.pantone,
+            shadowOffset: {
+              width: 0,
+              height: 3,
+            },
+            shadowOpacity: 0.27,
+            shadowRadius: 4.65,
+            elevation: 3,
+            paddingLeft: 20,
+          }}
+        >
+          <Box
+            // @ts-expect-error TS(2322): Type '{ children: Element[]; style: { justifyConte... Remove this comment to see the full error message
+            style={{
+              justifyContent: "center",
+              alignItems: "center",
+              position: "absolute",
+              top: 4,
+              right: 4,
+              zIndex: 1,
+              flexDirection: "row",
+              borderColor:
+                farmer?.status === resourceValidation.status.pending
+                  ? COLORS.danger
+                  : farmer?.status === resourceValidation.status.validated
+                  ? COLORS.pantone
+                  : COLORS.red,
+              borderWidth: 2,
+              borderRadius: 10,
+            }}
+          >
+            <Icon
+              name={
+                farmer?.status === resourceValidation.status.pending
+                  ? "pending-actions"
+                  : farmer?.status === resourceValidation.status.validated
+                  ? "check-circle"
+                  : "dangerous"
+              }
+              size={wp("6%")}
+              color={
+                farmer?.status === resourceValidation.status.pending
+                  ? COLORS.danger
+                  : farmer?.status === resourceValidation.status.validated
+                  ? COLORS.pantone
+                  : COLORS.red
+              }
+            />
+            <Text
               style={{
-                justifyContent: "center",
-                alignItems: "center",
-                position: "absolute",
-                top: 4,
-                right: 4,
-                zIndex: 1,
-                flexDirection: "row",
-                borderColor:
+                color:
                   farmer?.status === resourceValidation.status.pending
                     ? COLORS.danger
                     : farmer?.status === resourceValidation.status.validated
                     ? COLORS.pantone
                     : COLORS.red,
-                borderWidth: 2,
-                borderRadius: 10,
               }}
             >
-              <Icon
-                name={
-                  farmer?.status === resourceValidation.status.pending
-                    ? "pending-actions"
-                    : farmer?.status === resourceValidation.status.validated
-                    ? "check-circle"
-                    : "dangerous"
-                }
-                size={wp("6%")}
-                color={
-                  farmer?.status === resourceValidation.status.pending
-                    ? COLORS.danger
-                    : farmer?.status === resourceValidation.status.validated
-                    ? COLORS.pantone
-                    : COLORS.red
-                }
-              />
-              <Text
-                style={{
-                  color:
-                    farmer?.status === resourceValidation.status.pending
-                      ? COLORS.danger
-                      : farmer?.status === resourceValidation.status.validated
-                      ? COLORS.pantone
-                      : COLORS.red,
-                }}
-              >
-                {farmer?.status === resourceValidation.status.pending
-                  ? resourceValidation.message.pendingResourceMessage
-                  : farmer?.status === resourceValidation.status.validated
-                  ? resourceValidation.message.validatedResourceMessage
-                  : resourceValidation.message.invalidatedResourceMessage}
-              </Text>
-            </Box>
+              {farmer?.status === resourceValidation.status.pending
+                ? resourceValidation.message.pendingResourceMessage
+                : farmer?.status === resourceValidation.status.validated
+                ? resourceValidation.message.validatedResourceMessage
+                : resourceValidation.message.invalidatedResourceMessage}
+            </Text>
+          </Box>
 
-            <Stack w="100%" direction="column" pt="8" pb="4">
-              <Stack w="100%" direction="row">
-                <Box w="90%">
-                  <Text
-                    style={{
-                      color: "#000",
-                      fontSize: 16,
-                      fontFamily: "JosefinSans-Bold",
-                    }}
-                  >
-                    Nascimento
-                  </Text>
-                </Box>
-                {/* <Box w="25%"></Box> */}
-                <Box w="10%">
-                  {
-                    // customUserData?.role !== roles.provincialManager &&
-                    //         <TouchableOpacity
-                    //             disabled={farmer?.status === resourceValidation.status.validated ? true : false}
-                    //             style={{
-                    //             }}
-                    //             onPress={
-                    //                 ()=>{
-                    //                     setIsOverlayVisible(!isOverlayVisible);
-                    //                 }
-                    //             }
-                    //         >
-                    //             <Icon
-                    //                 // name="home"
-                    //                 name="edit"
-                    //                 size={20}
-                    //                 color={farmer?.status === resourceValidation.status.validated ? COLORS.lightgrey : farmer?.status === resourceValidation.status.invalidated ? COLORS.red : COLORS.main }
-                    //                 />
-                    //         </TouchableOpacity>
-                  }
-                </Box>
-              </Stack>
+          <Stack w="100%" direction="column" pt="8" pb="4">
+            <Stack w="100%" direction="row">
+              <Box w="90%">
+                <Text
+                  style={{
+                    color: "#000",
+                    fontSize: 16,
+                    fontFamily: "JosefinSans-Bold",
+                  }}
+                >
+                  Nascimento
+                </Text>
+              </Box>
+              {/* <Box w="25%"></Box> */}
+              <Box w="10%">
+                {
+                  // customUserData?.role !== roles.provincialManager &&
+                  //         <TouchableOpacity
+                  //             disabled={farmer?.status === resourceValidation.status.validated ? true : false}
+                  //             style={{
+                  //             }}
+                  //             onPress={
+                  //                 ()=>{
+                  //                     setIsOverlayVisible(!isOverlayVisible);
+                  //                 }
+                  //             }
+                  //         >
+                  //             <Icon
+                  //                 // name="home"
+                  //                 name="edit"
+                  //                 size={20}
+                  //                 color={farmer?.status === resourceValidation.status.validated ? COLORS.lightgrey : farmer?.status === resourceValidation.status.invalidated ? COLORS.red : COLORS.main }
+                  //                 />
+                  //         </TouchableOpacity>
+                }
+              </Box>
+            </Stack>
 
-              <Stack w="100%" direction="row" space={1}>
-                <Box w="50%">
+            <Stack w="100%" direction="row" space={1}>
+              <Box w="50%">
+                <Text
+                  style={{
+                    color: "grey",
+                    fontSize: 14,
+                    fontFamily: "JosefinSans-Regular",
+                  }}
+                >
+                  Data:
+                </Text>
+              </Box>
+              <Box w="50%">
+                <Text
+                  style={{
+                    color: "grey",
+                    fontSize: 14,
+                    // paddingLeft: 10,
+                    fontFamily: "JosefinSans-Regular",
+                  }}
+                >
+                  {`${new Date(farmer?.birthDate).getDate()}/${
+                    new Date(farmer?.birthDate).getMonth() + 1
+                  }/${new Date(farmer?.birthDate).getFullYear()}`}{" "}
+                  (
+                  {new Date().getFullYear() -
+                    new Date(farmer?.birthDate).getFullYear()}{" "}
+                  anos)
+                </Text>
+              </Box>
+            </Stack>
+            <Stack w="100%" direction="row" space={1}>
+              <Box w="50%">
+                <Text
+                  style={{
+                    color: "grey",
+                    fontSize: 14,
+                    fontFamily: "JosefinSans-Regular",
+                  }}
+                >
+                  {farmer?.birthPlace?.province?.includes("Estrangeiro")
+                    ? "País"
+                    : "Província"}
+                </Text>
+              </Box>
+              <Box>
+                {farmer?.birthPlace?.province && (
                   <Text
                     style={{
                       color: "grey",
                       fontSize: 14,
+                      //  paddingLeft: 10,
                       fontFamily: "JosefinSans-Regular",
                     }}
                   >
-                    Data:
+                    {farmer?.birthPlace?.province}
                   </Text>
-                </Box>
-                <Box w="50%">
-                  <Text
-                    style={{
-                      color: "grey",
-                      fontSize: 14,
-                      // paddingLeft: 10,
-                      fontFamily: "JosefinSans-Regular",
-                    }}
-                  >
-                    {`${new Date(farmer?.birthDate).getDate()}/${
-                      new Date(farmer?.birthDate).getMonth() + 1
-                    }/${new Date(farmer?.birthDate).getFullYear()}`}{" "}
-                    (
-                    {new Date().getFullYear() -
-                      new Date(farmer?.birthDate).getFullYear()}{" "}
-                    anos)
-                  </Text>
-                </Box>
-              </Stack>
-              <Stack w="100%" direction="row" space={1}>
-                <Box w="50%">
-                  <Text
-                    style={{
-                      color: "grey",
-                      fontSize: 14,
-                      fontFamily: "JosefinSans-Regular",
-                    }}
-                  >
-                    {farmer?.birthPlace?.province?.includes("Estrangeiro")
-                      ? "País"
-                      : "Província"}
-                  </Text>
-                </Box>
-                <Box>
-                  {farmer?.birthPlace?.province && (
+                )}
+              </Box>
+            </Stack>
+            {!farmer?.birthPlace?.province?.includes("Estrangeiro") && (
+              <>
+                <Stack w="100%" direction="row" space={1}>
+                  <Box w="50%">
                     <Text
                       style={{
                         color: "grey",
                         fontSize: 14,
-                        //  paddingLeft: 10,
                         fontFamily: "JosefinSans-Regular",
                       }}
                     >
-                      {farmer?.birthPlace?.province}
+                      Distrito
                     </Text>
-                  )}
-                </Box>
-              </Stack>
-              {!farmer?.birthPlace?.province?.includes("Estrangeiro") && (
-                <>
-                  <Stack w="100%" direction="row" space={1}>
-                    <Box w="50%">
-                      <Text
-                        style={{
-                          color: "grey",
-                          fontSize: 14,
-                          fontFamily: "JosefinSans-Regular",
-                        }}
-                      >
-                        Distrito
-                      </Text>
-                    </Box>
-                    <Box>
-                      <Text
-                        style={{
-                          color: "grey",
-                          fontSize: 14,
-                          fontFamily: "JosefinSans-Regular",
-                        }}
-                      >
-                        {farmer?.birthPlace?.district
-                          ? farmer?.birthPlace?.district
-                          : "(Não Aplicável)"}
-                      </Text>
-                    </Box>
-                  </Stack>
-
-                  <Stack w="100%" direction="row" space={1}>
-                    <Box w="50%">
-                      <Text
-                        style={{
-                          color: "grey",
-                          fontSize: 14,
-                          fontFamily: "JosefinSans-Regular",
-                        }}
-                      >
-                        Posto Admin.
-                      </Text>
-                    </Box>
-                    <Box>
-                      <Text
-                        style={{
-                          color: "grey",
-                          fontSize: 14,
-                          fontFamily: "JosefinSans-Regular",
-                        }}
-                      >
-                        {farmer?.birthPlace?.adminPost
-                          ? farmer?.birthPlace?.adminPost
-                          : "(Não Aplicável)"}
-                      </Text>
-                    </Box>
-                  </Stack>
-                </>
-              )}
-            </Stack>
-            <CustomDivider />
-
-            <Stack w="100%" direction="column" py="4">
-              <Stack w="100%" direction="row">
-                <Box w="90%">
-                  <Text
-                    style={{
-                      color: COLORS.black,
-                      fontSize: 16,
-                      fontFamily: "JosefinSans-Bold",
-                    }}
-                  >
-                    Endereço
-                  </Text>
-                </Box>
-                {/* <Box w="25%"></Box> */}
-                <Box w="10%">
-                  {customUserData?.role !== roles.provincialManager && (
-                    <TouchableOpacity
-                      disabled={
-                        farmer?.status === resourceValidation.status.validated
-                          ? true
-                          : false
-                      }
-                      style={{}}
-                      onPress={() => {
-                        setIsOverlayVisible(!isOverlayVisible)
-                        setDataToBeUpdated("address")
-                      }}
-                    >
-                      <Icon
-                        // name="home"
-                        name="edit"
-                        size={20}
-                        color={
-                          farmer?.status === resourceValidation.status.validated
-                            ? COLORS.lightgrey
-                            : farmer?.status ===
-                              resourceValidation.status.invalidated
-                            ? COLORS.red
-                            : COLORS.pantone
-                        }
-                      />
-                    </TouchableOpacity>
-                  )}
-                </Box>
-              </Stack>
-
-              <Stack w="100%" direction="row" space={1}>
-                <Box w="50%">
-                  <Text
-                    style={{
-                      color: "grey",
-                      fontSize: 14,
-                      fontFamily: "JosefinSans-Regular",
-                    }}
-                  >
-                    Província
-                  </Text>
-                </Box>
-                <Box>
-                  {farmer?.address?.province && (
+                  </Box>
+                  <Box>
                     <Text
                       style={{
                         color: "grey",
                         fontSize: 14,
-                        //  paddingLeft: 10,
                         fontFamily: "JosefinSans-Regular",
                       }}
                     >
-                      {farmer?.address?.province}
+                      {farmer?.birthPlace?.district
+                        ? farmer?.birthPlace?.district
+                        : "(Não Aplicável)"}
                     </Text>
-                  )}
-                </Box>
-              </Stack>
+                  </Box>
+                </Stack>
 
-              <Stack w="100%" direction="row" space={1}>
-                <Box w="50%">
-                  <Text
-                    style={{
-                      color: "grey",
-                      fontSize: 14,
-                      fontFamily: "JosefinSans-Regular",
-                    }}
-                  >
-                    Distrito
-                  </Text>
-                </Box>
-                <Box>
-                  <Text
-                    style={{
-                      color: "grey",
-                      fontSize: 14,
-                      fontFamily: "JosefinSans-Regular",
-                    }}
-                  >
-                    {farmer?.address?.district
-                      ? farmer?.address?.district
-                      : "(Não Aplicável)"}
-                  </Text>
-                </Box>
-              </Stack>
-
-              <Stack w="100%" direction="row" space={1}>
-                <Box w="50%">
-                  <Text
-                    style={{
-                      color: "grey",
-                      fontSize: 14,
-                      fontFamily: "JosefinSans-Regular",
-                    }}
-                  >
-                    Posto Admin.
-                  </Text>
-                </Box>
-                <Box>
-                  <Text
-                    style={{
-                      color: "grey",
-                      fontSize: 14,
-                      fontFamily: "JosefinSans-Regular",
-                    }}
-                  >
-                    {farmer?.address?.adminPost
-                      ? farmer?.address?.adminPost
-                      : "(Não Aplicável)"}
-                  </Text>
-                </Box>
-              </Stack>
-
-              <Stack w="100%" direction="row" space={1}>
-                <Box w="50%">
-                  <Text
-                    style={{
-                      color: "grey",
-                      fontSize: 14,
-                      fontFamily: "JosefinSans-Regular",
-                    }}
-                  >
-                    Localidade
-                  </Text>
-                </Box>
-                <Box>
-                  <Text
-                    style={{
-                      color: "grey",
-                      fontSize: 14,
-                      fontFamily: "JosefinSans-Regular",
-                    }}
-                  >
-                    {farmer?.address?.village
-                      ? farmer?.address?.village
-                      : "(Não Aplicável)"}
-                  </Text>
-                </Box>
-              </Stack>
-            </Stack>
-
-            <CustomDivider />
-
-            <Stack w="100%" direction="column" py="4">
-              <Stack w="100%" direction="row">
-                <Box w="90%">
-                  <Text
-                    style={{
-                      color: COLORS.black,
-                      fontSize: 16,
-                      fontFamily: "JosefinSans-Bold",
-                    }}
-                  >
-                    Contacto
-                  </Text>
-                </Box>
-                {/* <Box w="25%"></Box> */}
-                <Box w="10%">
-                  {customUserData?.role !== roles.provincialManager && (
-                    <TouchableOpacity
-                      disabled={
-                        farmer?.status === resourceValidation.status.validated
-                          ? true
-                          : false
-                      }
-                      style={{}}
-                      onPress={() => {
-                        setIsOverlayVisible(!isOverlayVisible)
-                        setDataToBeUpdated("contact")
+                <Stack w="100%" direction="row" space={1}>
+                  <Box w="50%">
+                    <Text
+                      style={{
+                        color: "grey",
+                        fontSize: 14,
+                        fontFamily: "JosefinSans-Regular",
                       }}
                     >
-                      <Icon
-                        // name="contacts"
-                        name="edit"
-                        size={20}
-                        color={
-                          farmer?.status === resourceValidation.status.validated
-                            ? COLORS.lightgrey
-                            : farmer?.status ===
-                              resourceValidation.status.invalidated
-                            ? COLORS.red
-                            : COLORS.pantone
-                        }
-                      />
-                    </TouchableOpacity>
-                  )}
-                </Box>
-              </Stack>
+                      Posto Admin.
+                    </Text>
+                  </Box>
+                  <Box>
+                    <Text
+                      style={{
+                        color: "grey",
+                        fontSize: 14,
+                        fontFamily: "JosefinSans-Regular",
+                      }}
+                    >
+                      {farmer?.birthPlace?.adminPost
+                        ? farmer?.birthPlace?.adminPost
+                        : "(Não Aplicável)"}
+                    </Text>
+                  </Box>
+                </Stack>
+              </>
+            )}
+          </Stack>
+          <CustomDivider />
 
-              <Stack w="100%" direction="row" space={1}>
-                <Box w="50%">
+          <Stack w="100%" direction="column" py="4">
+            <Stack w="100%" direction="row">
+              <Box w="90%">
+                <Text
+                  style={{
+                    color: COLORS.black,
+                    fontSize: 16,
+                    fontFamily: "JosefinSans-Bold",
+                  }}
+                >
+                  Endereço
+                </Text>
+              </Box>
+              {/* <Box w="25%"></Box> */}
+              <Box w="10%">
+                {customUserData?.role !== roles.provincialManager && (
+                  <TouchableOpacity
+                    disabled={
+                      farmer?.status === resourceValidation.status.validated
+                        ? true
+                        : false
+                    }
+                    style={{}}
+                    onPress={() => {
+                      setIsOverlayVisible(!isOverlayVisible)
+                      setDataToBeUpdated("address")
+                    }}
+                  >
+                    <Icon
+                      // name="home"
+                      name="edit"
+                      size={20}
+                      color={
+                        farmer?.status === resourceValidation.status.validated
+                          ? COLORS.lightgrey
+                          : farmer?.status ===
+                            resourceValidation.status.invalidated
+                          ? COLORS.red
+                          : COLORS.pantone
+                      }
+                    />
+                  </TouchableOpacity>
+                )}
+              </Box>
+            </Stack>
+
+            <Stack w="100%" direction="row" space={1}>
+              <Box w="50%">
+                <Text
+                  style={{
+                    color: "grey",
+                    fontSize: 14,
+                    fontFamily: "JosefinSans-Regular",
+                  }}
+                >
+                  Província
+                </Text>
+              </Box>
+              <Box>
+                {farmer?.address?.province && (
                   <Text
                     style={{
                       color: "grey",
                       fontSize: 14,
+                      //  paddingLeft: 10,
                       fontFamily: "JosefinSans-Regular",
                     }}
                   >
-                    Telefone
+                    {farmer?.address?.province}
                   </Text>
-                </Box>
-                <Box w="50%">
-                  {farmer?.contact?.primaryPhone !== 0 &&
-                    farmer?.contact?.secondaryPhone !== 0 && (
-                      <>
-                        <Text
-                          style={{
-                            color: "grey",
-                            fontSize: 14,
-                            fontFamily: "JosefinSans-Regular",
-                          }}
-                        >
-                          {farmer?.contact?.primaryPhone}
-                        </Text>
-                        <Text
-                          style={{
-                            color: "grey",
-                            fontSize: 14,
-                            fontFamily: "JosefinSans-Regular",
-                          }}
-                        >
-                          {farmer?.contact?.secondaryPhone}
-                        </Text>
-                      </>
-                    )}
+                )}
+              </Box>
+            </Stack>
 
-                  {farmer?.contact?.primaryPhone !== 0 &&
-                    farmer?.contact?.secondaryPhone === 0 && (
+            <Stack w="100%" direction="row" space={1}>
+              <Box w="50%">
+                <Text
+                  style={{
+                    color: "grey",
+                    fontSize: 14,
+                    fontFamily: "JosefinSans-Regular",
+                  }}
+                >
+                  Distrito
+                </Text>
+              </Box>
+              <Box>
+                <Text
+                  style={{
+                    color: "grey",
+                    fontSize: 14,
+                    fontFamily: "JosefinSans-Regular",
+                  }}
+                >
+                  {farmer?.address?.district
+                    ? farmer?.address?.district
+                    : "(Não Aplicável)"}
+                </Text>
+              </Box>
+            </Stack>
+
+            <Stack w="100%" direction="row" space={1}>
+              <Box w="50%">
+                <Text
+                  style={{
+                    color: "grey",
+                    fontSize: 14,
+                    fontFamily: "JosefinSans-Regular",
+                  }}
+                >
+                  Posto Admin.
+                </Text>
+              </Box>
+              <Box>
+                <Text
+                  style={{
+                    color: "grey",
+                    fontSize: 14,
+                    fontFamily: "JosefinSans-Regular",
+                  }}
+                >
+                  {farmer?.address?.adminPost
+                    ? farmer?.address?.adminPost
+                    : "(Não Aplicável)"}
+                </Text>
+              </Box>
+            </Stack>
+
+            <Stack w="100%" direction="row" space={1}>
+              <Box w="50%">
+                <Text
+                  style={{
+                    color: "grey",
+                    fontSize: 14,
+                    fontFamily: "JosefinSans-Regular",
+                  }}
+                >
+                  Localidade
+                </Text>
+              </Box>
+              <Box>
+                <Text
+                  style={{
+                    color: "grey",
+                    fontSize: 14,
+                    fontFamily: "JosefinSans-Regular",
+                  }}
+                >
+                  {farmer?.address?.village
+                    ? farmer?.address?.village
+                    : "(Não Aplicável)"}
+                </Text>
+              </Box>
+            </Stack>
+          </Stack>
+
+          <CustomDivider />
+
+          <Stack w="100%" direction="column" py="4">
+            <Stack w="100%" direction="row">
+              <Box w="90%">
+                <Text
+                  style={{
+                    color: COLORS.black,
+                    fontSize: 16,
+                    fontFamily: "JosefinSans-Bold",
+                  }}
+                >
+                  Contacto
+                </Text>
+              </Box>
+              {/* <Box w="25%"></Box> */}
+              <Box w="10%">
+                {customUserData?.role !== roles.provincialManager && (
+                  <TouchableOpacity
+                    disabled={
+                      farmer?.status === resourceValidation.status.validated
+                        ? true
+                        : false
+                    }
+                    style={{}}
+                    onPress={() => {
+                      setIsOverlayVisible(!isOverlayVisible)
+                      setDataToBeUpdated("contact")
+                    }}
+                  >
+                    <Icon
+                      // name="contacts"
+                      name="edit"
+                      size={20}
+                      color={
+                        farmer?.status === resourceValidation.status.validated
+                          ? COLORS.lightgrey
+                          : farmer?.status ===
+                            resourceValidation.status.invalidated
+                          ? COLORS.red
+                          : COLORS.pantone
+                      }
+                    />
+                  </TouchableOpacity>
+                )}
+              </Box>
+            </Stack>
+
+            <Stack w="100%" direction="row" space={1}>
+              <Box w="50%">
+                <Text
+                  style={{
+                    color: "grey",
+                    fontSize: 14,
+                    fontFamily: "JosefinSans-Regular",
+                  }}
+                >
+                  Telefone
+                </Text>
+              </Box>
+              <Box w="50%">
+                {farmer?.contact?.primaryPhone !== 0 &&
+                  farmer?.contact?.secondaryPhone !== 0 && (
+                    <>
                       <Text
                         style={{
                           color: "grey",
@@ -844,10 +831,6 @@ const PersonalData = ({ farmer, setRefresh, refresh }) => {
                       >
                         {farmer?.contact?.primaryPhone}
                       </Text>
-                    )}
-
-                  {farmer?.contact?.primaryPhone === 0 &&
-                    farmer?.contact?.secondaryPhone !== 0 && (
                       <Text
                         style={{
                           color: "grey",
@@ -857,280 +840,74 @@ const PersonalData = ({ farmer, setRefresh, refresh }) => {
                       >
                         {farmer?.contact?.secondaryPhone}
                       </Text>
-                    )}
+                    </>
+                  )}
 
-                  {farmer?.contact?.primaryPhone === 0 &&
-                    farmer?.contact?.secondaryPhone === 0 && (
-                      <Text
-                        style={{
-                          color: "grey",
-                          fontSize: 14,
-                          fontFamily: "JosefinSans-Regular",
-                        }}
-                      >
-                        Nenhum
-                      </Text>
-                    )}
-
-                  {/* <Text 
-                    style={{
-                        color: 'grey',
+                {farmer?.contact?.primaryPhone !== 0 &&
+                  farmer?.contact?.secondaryPhone === 0 && (
+                    <Text
+                      style={{
+                        color: "grey",
                         fontSize: 14,
-                        fontFamily: 'JosefinSans-Regular',
-                    }}  
-                >
-                    {farmer?.contact?.primaryPhone !== 0 ? farmer?.contact?.primaryPhone : 'Nenhum'} 
-                </Text>
-                <Text 
-                    style={{
-                        color: 'grey',
-                        fontSize: 14,
-                        fontFamily: 'JosefinSans-Regular',
-                    }}  
-                    >
-                    {farmer?.contact?.secondaryPhone !== 0 ? farmer?.contact?.secondaryPhone: 'Nenhum'} 
-                </Text>     */}
-                </Box>
-              </Stack>
-            </Stack>
-
-            <CustomDivider />
-
-            <Stack w="100%" direction="column" py="4">
-              <Stack w="100%" direction="row">
-                <Box w="90%">
-                  <Text
-                    style={{
-                      color: COLORS.black,
-                      fontSize: 16,
-                      fontFamily: "JosefinSans-Bold",
-                    }}
-                  >
-                    Documentos de Identificação
-                  </Text>
-                </Box>
-                {/* <Box w="5%"></Box> */}
-                <Box w="10%">
-                  {customUserData?.role !== roles.provincialManager && (
-                    <TouchableOpacity
-                      disabled={
-                        farmer?.status === resourceValidation.status.validated
-                          ? true
-                          : false
-                      }
-                      style={{}}
-                      onPress={() => {
-                        setIsOverlayVisible(!isOverlayVisible)
-                        setDataToBeUpdated("idDocument")
+                        fontFamily: "JosefinSans-Regular",
                       }}
                     >
-                      <Icon
-                        // name="file-present"
-                        name="edit"
-                        size={20}
-                        color={
-                          farmer?.status === resourceValidation.status.validated
-                            ? COLORS.lightgrey
-                            : farmer?.status ===
-                              resourceValidation.status.invalidated
-                            ? COLORS.red
-                            : COLORS.pantone
-                        }
-                      />
-                    </TouchableOpacity>
+                      {farmer?.contact?.primaryPhone}
+                    </Text>
                   )}
-                </Box>
-              </Stack>
 
-              <Stack w="100%" direction="row" space={1}>
-                <Box w="50%">
-                  <Text
-                    style={{
-                      color: "grey",
-                      fontSize: 14,
-                      fontFamily: "JosefinSans-Regular",
-                    }}
-                  >
-                    Tipo
-                  </Text>
-                </Box>
-                <Box>
-                  <Text
-                    style={{
-                      color: "grey",
-                      fontSize: 14,
-                      //  paddingLeft: 10,
-                      fontFamily: "JosefinSans-Regular",
-                    }}
-                  >
-                    {farmer?.idDocument?.docType !== "Nenhum"
-                      ? farmer?.idDocument?.docType
-                      : "(Nenhum)"}
-                  </Text>
-                </Box>
-              </Stack>
+                {farmer?.contact?.primaryPhone === 0 &&
+                  farmer?.contact?.secondaryPhone !== 0 && (
+                    <Text
+                      style={{
+                        color: "grey",
+                        fontSize: 14,
+                        fontFamily: "JosefinSans-Regular",
+                      }}
+                    >
+                      {farmer?.contact?.secondaryPhone}
+                    </Text>
+                  )}
 
-              <Stack w="100%" direction="row" space={1}>
-                <Box w="50%">
-                  <Text
-                    style={{
-                      color: "grey",
-                      fontSize: 14,
-                      fontFamily: "JosefinSans-Regular",
-                    }}
-                  >
-                    Número
-                  </Text>
-                </Box>
-                <Box>
-                  <Text
-                    style={{
-                      color: "grey",
-                      fontSize: 14,
-                      fontFamily: "JosefinSans-Regular",
-                    }}
-                  >
-                    {farmer?.idDocument?.docNumber !== "Nenhum"
-                      ? farmer?.idDocument?.docNumber
-                      : "(Nenhum)"}
-                  </Text>
-                </Box>
-              </Stack>
+                {farmer?.contact?.primaryPhone === 0 &&
+                  farmer?.contact?.secondaryPhone === 0 && (
+                    <Text
+                      style={{
+                        color: "grey",
+                        fontSize: 14,
+                        fontFamily: "JosefinSans-Regular",
+                      }}
+                    >
+                      Nenhum
+                    </Text>
+                  )}
 
-              <Stack w="100%" direction="row" space={1}>
-                <Box w="50%">
-                  <Text
-                    style={{
-                      color: "grey",
+                {/* <Text 
+                  style={{
+                      color: 'grey',
                       fontSize: 14,
-                      fontFamily: "JosefinSans-Regular",
-                    }}
-                  >
-                    NUIT
-                  </Text>
-                </Box>
-                <Box>
-                  <Text
-                    style={{
-                      color: "grey",
+                      fontFamily: 'JosefinSans-Regular',
+                  }}  
+              >
+                  {farmer?.contact?.primaryPhone !== 0 ? farmer?.contact?.primaryPhone : 'Nenhum'} 
+              </Text>
+              <Text 
+                  style={{
+                      color: 'grey',
                       fontSize: 14,
-                      fontFamily: "JosefinSans-Regular",
-                    }}
+                      fontFamily: 'JosefinSans-Regular',
+                  }}  
                   >
-                    {farmer?.idDocument?.nuit !== 0
-                      ? farmer?.idDocument?.nuit
-                      : "(Nenhum)"}
-                  </Text>
-                </Box>
-              </Stack>
-              <Box py="4">
-                <CustomDivider />
+                  {farmer?.contact?.secondaryPhone !== 0 ? farmer?.contact?.secondaryPhone: 'Nenhum'} 
+              </Text>     */}
               </Box>
-
-              <Stack w="100%" direction="row">
-                <Box w="90%">
-                  <Text
-                    style={{
-                      color: COLORS.black,
-                      fontSize: 16,
-                      fontFamily: "JosefinSans-Bold",
-                    }}
-                  >
-                    Geolocalização
-                  </Text>
-                </Box>
-                <Box w="10%">
-                  {customUserData?.role !== roles.provincialManager && (
-                    <TouchableOpacity
-                      disabled={
-                        farmer?.status === resourceValidation.status.validated
-                          ? true
-                          : false
-                      }
-                      style={{}}
-                      onPress={() => {
-                        navigation.navigate("Geolocation", {
-                          resourceName: "Farmer",
-                          resourceId: farmer._id,
-                        })
-                      }}
-                    >
-                      <Icon
-                        name="add-location-alt"
-                        size={30}
-                        color={
-                          farmer?.status === resourceValidation.status.validated
-                            ? COLORS.lightgrey
-                            : farmer?.status ===
-                              resourceValidation.status.invalidated
-                            ? COLORS.red
-                            : COLORS.pantone
-                        }
-                      />
-                    </TouchableOpacity>
-                  )}
-                </Box>
-              </Stack>
-              {farmer?.geolocation?.latitude &&
-                farmer?.geolocation?.longitude && (
-                  <>
-                    <Stack w="100%" direction="row">
-                      <Box w="50%">
-                        <Text
-                          style={{
-                            color: COLORS.grey,
-                            fontSize: 14,
-                            fontFamily: "JosefinSans-Regular",
-                          }}
-                        >
-                          Latitude
-                        </Text>
-                      </Box>
-                      <Box>
-                        <Text
-                          style={{
-                            color: COLORS.grey,
-                            fontSize: 14,
-                            fontFamily: "JosefinSans-Regular",
-                          }}
-                        >
-                          {farmer?.geolocation?.latitude}
-                        </Text>
-                      </Box>
-                    </Stack>
-                    <Stack w="100%" direction="row">
-                      <Box w="50%">
-                        <Text
-                          style={{
-                            color: COLORS.grey,
-                            fontSize: 14,
-                            fontFamily: "JosefinSans-Regular",
-                          }}
-                        >
-                          Longitude
-                        </Text>
-                      </Box>
-                      <Box>
-                        <Text
-                          style={{
-                            color: COLORS.grey,
-                            fontSize: 14,
-                            fontFamily: "JosefinSans-Regular",
-                          }}
-                        >
-                          {farmer?.geolocation?.longitude}
-                        </Text>
-                      </Box>
-                    </Stack>
-                  </>
-                )}
             </Stack>
+          </Stack>
 
-            <Box py="4">
-              <CustomDivider />
-            </Box>
+          <CustomDivider />
 
-            <Stack w="100%" direction="row" pb="4">
+          <Stack w="100%" direction="column" py="4">
+            <Stack w="100%" direction="row">
               <Box w="90%">
                 <Text
                   style={{
@@ -1139,209 +916,474 @@ const PersonalData = ({ farmer, setRefresh, refresh }) => {
                     fontFamily: "JosefinSans-Bold",
                   }}
                 >
-                  Adesão à Organização
+                  Documentos de Identificação
+                </Text>
+              </Box>
+              {/* <Box w="5%"></Box> */}
+              <Box w="10%">
+                {customUserData?.role !== roles.provincialManager && (
+                  <TouchableOpacity
+                    disabled={
+                      farmer?.status === resourceValidation.status.validated
+                        ? true
+                        : false
+                    }
+                    style={{}}
+                    onPress={() => {
+                      setIsOverlayVisible(!isOverlayVisible)
+                      setDataToBeUpdated("idDocument")
+                    }}
+                  >
+                    <Icon
+                      // name="file-present"
+                      name="edit"
+                      size={20}
+                      color={
+                        farmer?.status === resourceValidation.status.validated
+                          ? COLORS.lightgrey
+                          : farmer?.status ===
+                            resourceValidation.status.invalidated
+                          ? COLORS.red
+                          : COLORS.pantone
+                      }
+                    />
+                  </TouchableOpacity>
+                )}
+              </Box>
+            </Stack>
+
+            <Stack w="100%" direction="row" space={1}>
+              <Box w="50%">
+                <Text
+                  style={{
+                    color: "grey",
+                    fontSize: 14,
+                    fontFamily: "JosefinSans-Regular",
+                  }}
+                >
+                  Tipo
+                </Text>
+              </Box>
+              <Box>
+                <Text
+                  style={{
+                    color: "grey",
+                    fontSize: 14,
+                    //  paddingLeft: 10,
+                    fontFamily: "JosefinSans-Regular",
+                  }}
+                >
+                  {farmer?.idDocument?.docType !== "Nenhum"
+                    ? farmer?.idDocument?.docType
+                    : "(Nenhum)"}
+                </Text>
+              </Box>
+            </Stack>
+
+            <Stack w="100%" direction="row" space={1}>
+              <Box w="50%">
+                <Text
+                  style={{
+                    color: "grey",
+                    fontSize: 14,
+                    fontFamily: "JosefinSans-Regular",
+                  }}
+                >
+                  Número
+                </Text>
+              </Box>
+              <Box>
+                <Text
+                  style={{
+                    color: "grey",
+                    fontSize: 14,
+                    fontFamily: "JosefinSans-Regular",
+                  }}
+                >
+                  {farmer?.idDocument?.docNumber !== "Nenhum"
+                    ? farmer?.idDocument?.docNumber
+                    : "(Nenhum)"}
+                </Text>
+              </Box>
+            </Stack>
+
+            <Stack w="100%" direction="row" space={1}>
+              <Box w="50%">
+                <Text
+                  style={{
+                    color: "grey",
+                    fontSize: 14,
+                    fontFamily: "JosefinSans-Regular",
+                  }}
+                >
+                  NUIT
+                </Text>
+              </Box>
+              <Box>
+                <Text
+                  style={{
+                    color: "grey",
+                    fontSize: 14,
+                    fontFamily: "JosefinSans-Regular",
+                  }}
+                >
+                  {farmer?.idDocument?.nuit !== 0
+                    ? farmer?.idDocument?.nuit
+                    : "(Nenhum)"}
+                </Text>
+              </Box>
+            </Stack>
+            <Box py="4">
+              <CustomDivider />
+            </Box>
+
+            <Stack w="100%" direction="row">
+              <Box w="90%">
+                <Text
+                  style={{
+                    color: COLORS.black,
+                    fontSize: 16,
+                    fontFamily: "JosefinSans-Bold",
+                  }}
+                >
+                  Geolocalização
                 </Text>
               </Box>
               <Box w="10%">
                 {customUserData?.role !== roles.provincialManager && (
-                  <Tooltip
-                    isVisible={isEllipsisVisible}
-                    disableShadow={true}
-                    placement="left"
-                    childContentSpacing={4}
-                    content={
-                      <Box
-                        style={{
-                          flexDirection: "column",
-                          minWidth: 250,
-                          // height: 80,
-                        }}
-                      >
-                        <Box>
-                          <TouchableOpacity
-                            onPress={() => {
-                              navigation.navigate("Membership", {
-                                resourceName: "Farmer",
-                                resourceId: farmer._id,
-                              })
-                              setIsEllipsisVisible(false)
-                            }}
-                          >
-                            <Box
-                              style={{
-                                flexDirection: "row",
-                                width: "100%",
-                                alignItems: "center",
-                                paddingLeft: 10,
-                                paddingVertical: 10,
-                                // height: 80,
-                              }}
-                            >
-                              <FontAwesomeIcon
-                                icon={faPeopleGroup}
-                                size={20}
-                                color={COLORS.grey}
-                              />
-                              <Text
-                                style={{
-                                  fontSize: 15,
-                                  fontFamily: "JosefinSans-Regular",
-                                  color: COLORS.grey,
-                                  paddingLeft: 20,
-                                }}
-                              >
-                                Aderir a uma organização
-                              </Text>
-                            </Box>
-                          </TouchableOpacity>
-                        </Box>
-                        <CustomDivider />
-                        <Box>
-                          <TouchableOpacity
-                            onPress={() => {
-                              navigation.navigate("FarmerGroups", {
-                                farmerId: farmer._id,
-                              })
-                              setIsEllipsisVisible(false)
-                            }}
-                          >
-                            <Box
-                              style={{
-                                flexDirection: "row",
-                                width: "100%",
-                                alignItems: "center",
-                                paddingLeft: 10,
-                                paddingVertical: 10,
-                                // height: 80,
-                              }}
-                            >
-                              <FontAwesomeIcon
-                                icon={faEye}
-                                size={20}
-                                color={COLORS.grey}
-                              />
-                              <Text
-                                style={{
-                                  fontSize: 15,
-                                  fontFamily: "JosefinSans-Regular",
-                                  color: COLORS.grey,
-                                  paddingLeft: 20,
-                                }}
-                              >
-                                Ver organizações
-                              </Text>
-                            </Box>
-                          </TouchableOpacity>
-                        </Box>
-                      </Box>
+                  <TouchableOpacity
+                    disabled={
+                      farmer?.status === resourceValidation.status.validated
+                        ? true
+                        : false
                     }
-                    onClose={() => setIsEllipsisVisible(false)}
+                    style={{}}
+                    onPress={() => {
+                      // @ts-expect-error TS(2345): Argument of type 'string' is not assignable to par... Remove this comment to see the full error message
+                      navigation.navigate("Geolocation", {
+                        resourceName: "Farmer",
+                        resourceId: farmer._id,
+                      })
+                    }}
                   >
-                    <TouchableOpacity
-                      style={{}}
-                      onPress={() => {
-                        setIsEllipsisVisible(true)
-                      }}
-                    >
-                      <Box>
-                        <FontAwesomeIcon
-                          icon={faEllipsisVertical}
-                          size={20}
-                          color={
-                            farmer?.status ===
-                            resourceValidation.status.validated
-                              ? COLORS.lightgrey
-                              : farmer?.status ===
-                                resourceValidation.status.invalidated
-                              ? COLORS.red
-                              : COLORS.pantone
-                          }
-                          fade
-                        />
-                      </Box>
-                    </TouchableOpacity>
-                  </Tooltip>
+                    <Icon
+                      name="add-location-alt"
+                      size={30}
+                      color={
+                        farmer?.status === resourceValidation.status.validated
+                          ? COLORS.lightgrey
+                          : farmer?.status ===
+                            resourceValidation.status.invalidated
+                          ? COLORS.red
+                          : COLORS.pantone
+                      }
+                    />
+                  </TouchableOpacity>
                 )}
               </Box>
             </Stack>
-            {member && member?.membership?.length === 0 && (
-              <>
-                <Stack w="100%" direction="row">
-                  <Box w="50%">
-                    <Text
+            {farmer?.geolocation?.latitude &&
+              farmer?.geolocation?.longitude && (
+                <>
+                  <Stack w="100%" direction="row">
+                    <Box w="50%">
+                      <Text
+                        style={{
+                          color: COLORS.grey,
+                          fontSize: 14,
+                          fontFamily: "JosefinSans-Regular",
+                        }}
+                      >
+                        Latitude
+                      </Text>
+                    </Box>
+                    <Box>
+                      <Text
+                        style={{
+                          color: COLORS.grey,
+                          fontSize: 14,
+                          fontFamily: "JosefinSans-Regular",
+                        }}
+                      >
+                        {farmer?.geolocation?.latitude}
+                      </Text>
+                    </Box>
+                  </Stack>
+                  <Stack w="100%" direction="row">
+                    <Box w="50%">
+                      <Text
+                        style={{
+                          color: COLORS.grey,
+                          fontSize: 14,
+                          fontFamily: "JosefinSans-Regular",
+                        }}
+                      >
+                        Longitude
+                      </Text>
+                    </Box>
+                    <Box>
+                      <Text
+                        style={{
+                          color: COLORS.grey,
+                          fontSize: 14,
+                          fontFamily: "JosefinSans-Regular",
+                        }}
+                      >
+                        {farmer?.geolocation?.longitude}
+                      </Text>
+                    </Box>
+                  </Stack>
+                </>
+              )}
+          </Stack>
+
+          <Box py="4">
+            <CustomDivider />
+          </Box>
+
+          <Stack w="100%" direction="row" pb="4">
+            <Box w="90%">
+              <Text
+                style={{
+                  color: COLORS.black,
+                  fontSize: 16,
+                  fontFamily: "JosefinSans-Bold",
+                }}
+              >
+                Adesão à Organização
+              </Text>
+            </Box>
+            <Box w="10%">
+              {customUserData?.role !== roles.provincialManager && (
+                <Tooltip
+                  isVisible={isEllipsisVisible}
+                  disableShadow={true}
+                  placement="left"
+                  childContentSpacing={4}
+                  content={
+                    <Box
+                      // @ts-expect-error TS(2322): Type '{ children: Element[]; style: { flexDirectio... Remove this comment to see the full error message
                       style={{
-                        color: "grey",
-                        fontSize: 14,
-                        fontFamily: "JosefinSans-Regular",
+                        flexDirection: "column",
+                        minWidth: 250,
+                        // height: 80,
                       }}
                     >
-                      Membro de organização
-                    </Text>
-                  </Box>
-                  <Box w="50%">
-                    <Text
-                      style={{
-                        color: "grey",
-                        fontSize: 14,
-                        fontFamily: "JosefinSans-Regular",
-                      }}
-                    >
-                      Sim
-                    </Text>
-                  </Box>
-                </Stack>
-                <Box w="100%" py="4">
-                  <Text
-                    style={{
-                      color: COLORS.red,
-                      fontSize: 15,
-                      fontFamily: "JosefinSans-Regular",
-                      textAlign: "center",
-                      paddingHorizontal: 10,
-                      lineHeight: 25,
+                      <Box>
+                        <TouchableOpacity
+                          onPress={() => {
+                            // @ts-expect-error TS(2345): Argument of type 'string' is not assignable to par... Remove this comment to see the full error message
+                            navigation.navigate("Membership", {
+                              resourceName: "Farmer",
+                              resourceId: farmer._id,
+                            })
+                            setIsEllipsisVisible(false)
+                          }}
+                        >
+                          <Box
+                            // @ts-expect-error TS(2322): Type '{ children: Element[]; style: { flexDirectio... Remove this comment to see the full error message
+                            style={{
+                              flexDirection: "row",
+                              width: "100%",
+                              alignItems: "center",
+                              paddingLeft: 10,
+                              paddingVertical: 10,
+                              // height: 80,
+                            }}
+                          >
+                            <FontAwesomeIcon
+                              icon={faPeopleGroup}
+                              size={20}
+                              color={COLORS.grey}
+                            />
+                            <Text
+                              style={{
+                                fontSize: 15,
+                                fontFamily: "JosefinSans-Regular",
+                                color: COLORS.grey,
+                                paddingLeft: 20,
+                              }}
+                            >
+                              Aderir a uma organização
+                            </Text>
+                          </Box>
+                        </TouchableOpacity>
+                      </Box>
+                      <CustomDivider />
+                      <Box>
+                        <TouchableOpacity
+                          onPress={() => {
+                            // @ts-expect-error TS(2345): Argument of type 'string' is not assignable to par... Remove this comment to see the full error message
+                            navigation.navigate("FarmerGroups", {
+                              farmerId: farmer._id,
+                            })
+                            setIsEllipsisVisible(false)
+                          }}
+                        >
+                          <Box
+                            // @ts-expect-error TS(2322): Type '{ children: Element[]; style: { flexDirectio... Remove this comment to see the full error message
+                            style={{
+                              flexDirection: "row",
+                              width: "100%",
+                              alignItems: "center",
+                              paddingLeft: 10,
+                              paddingVertical: 10,
+                              // height: 80,
+                            }}
+                          >
+                            <FontAwesomeIcon
+                              icon={faEye}
+                              size={20}
+                              color={COLORS.grey}
+                            />
+                            <Text
+                              style={{
+                                fontSize: 15,
+                                fontFamily: "JosefinSans-Regular",
+                                color: COLORS.grey,
+                                paddingLeft: 20,
+                              }}
+                            >
+                              Ver organizações
+                            </Text>
+                          </Box>
+                        </TouchableOpacity>
+                      </Box>
+                    </Box>
+                  }
+                  onClose={() => setIsEllipsisVisible(false)}
+                >
+                  <TouchableOpacity
+                    style={{}}
+                    onPress={() => {
+                      setIsEllipsisVisible(true)
                     }}
                   >
-                    Especifica a organização a qual este produtor aderiu.
+                    <Box>
+                      <FontAwesomeIcon
+                        icon={faEllipsisVertical}
+                        size={20}
+                        color={
+                          farmer?.status ===
+                          resourceValidation.status.validated
+                            ? COLORS.lightgrey
+                            : farmer?.status ===
+                              resourceValidation.status.invalidated
+                            ? COLORS.red
+                            : COLORS.pantone
+                        }
+                        // @ts-expect-error TS(2322): Type '{ icon: IconDefinition; size: number; color:... Remove this comment to see the full error message
+                        fade
+                      />
+                    </Box>
+                  </TouchableOpacity>
+                </Tooltip>
+              )}
+            </Box>
+          </Stack>
+          // @ts-expect-error TS(2339): Property 'membership' does not exist on type 'Obje... Remove this comment to see the full error message
+          {member && member?.membership?.length === 0 && (
+            <>
+              <Stack w="100%" direction="row">
+                <Box w="50%">
+                  <Text
+                    style={{
+                      color: "grey",
+                      fontSize: 14,
+                      fontFamily: "JosefinSans-Regular",
+                    }}
+                  >
+                    Membro de organização
                   </Text>
                 </Box>
-              </>
-            )}
-
-            {member && member?.membership?.length > 0 && (
-              <Box pb="4">
-                <Stack w="100%" direction="row">
-                  <Box w="50%">
-                    <Text
-                      style={{
-                        color: "grey",
-                        fontSize: 14,
-                        fontFamily: "JosefinSans-Regular",
-                      }}
-                    >
-                      Membro
-                    </Text>
-                  </Box>
-                  <Box w="50%">
-                    <Text
-                      style={{
-                        color: "grey",
-                        fontSize: 14,
-                        fontFamily: "JosefinSans-Regular",
-                      }}
-                    >
-                      {member?.membership?.length}{" "}
-                      {member?.membership?.length == 1
-                        ? "organização"
-                        : "organizações"}
-                    </Text>
-                  </Box>
-                </Stack>
+                <Box w="50%">
+                  <Text
+                    style={{
+                      color: "grey",
+                      fontSize: 14,
+                      fontFamily: "JosefinSans-Regular",
+                    }}
+                  >
+                    Sim
+                  </Text>
+                </Box>
+              </Stack>
+              <Box w="100%" py="4">
+                <Text
+                  style={{
+                    color: COLORS.red,
+                    fontSize: 15,
+                    fontFamily: "JosefinSans-Regular",
+                    textAlign: "center",
+                    paddingHorizontal: 10,
+                    lineHeight: 25,
+                  }}
+                >
+                  Especifica a organização a qual este produtor aderiu.
+                </Text>
               </Box>
-            )}
+            </>
+          )}
 
-            <CustomDivider />
+          // @ts-expect-error TS(2339): Property 'membership' does not exist on type 'Obje... Remove this comment to see the full error message
+          {member && member?.membership?.length > 0 && (
+            <Box pb="4">
+              <Stack w="100%" direction="row">
+                <Box w="50%">
+                  <Text
+                    style={{
+                      color: "grey",
+                      fontSize: 14,
+                      fontFamily: "JosefinSans-Regular",
+                    }}
+                  >
+                    Membro
+                  </Text>
+                </Box>
+                <Box w="50%">
+                  <Text
+                    style={{
+                      color: "grey",
+                      fontSize: 14,
+                      fontFamily: "JosefinSans-Regular",
+                    }}
+                  >
+                    // @ts-expect-error TS(2339): Property 'membership' does not exist on type 'Obje... Remove this comment to see the full error message
+                    {member?.membership?.length}{" "}
+                    // @ts-expect-error TS(2339): Property 'membership' does not exist on type 'Obje... Remove this comment to see the full error message
+                    {member?.membership?.length == 1
+                      ? "organização"
+                      : "organizações"}
+                  </Text>
+                </Box>
+              </Stack>
+            </Box>
+          )}
 
-            <Stack direction="column" w="100%" style={{ paddingTop: 5 }}>
+          <CustomDivider />
+
+          // @ts-expect-error TS(2322): Type '{ children: any[]; direction: "column"; w: "... Remove this comment to see the full error message
+          <Stack direction="column" w="100%" style={{ paddingTop: 5 }}>
+            <Box w="100%">
+              <Text
+                style={{
+                  textAlign: "right",
+                  color: COLORS.grey,
+                  fontFamily: "JosefinSans-Italic",
+                  fontSize: 12,
+                }}
+              >
+                Registado por{" "}
+                {farmer?.userName === customUserData?.name
+                  ? "mim"
+                  : farmer?.userName}{" "}
+                aos {new Date(farmer?.createdAt).getDate()}-
+                {new Date(farmer?.createdAt).getMonth() + 1}-
+                {new Date(farmer?.createdAt).getFullYear()}
+              </Text>
+            </Box>
+
+            {farmer?.modifiedBy && (
               <Box w="100%">
                 <Text
                   style={{
@@ -1351,138 +1393,79 @@ const PersonalData = ({ farmer, setRefresh, refresh }) => {
                     fontSize: 12,
                   }}
                 >
-                  Registado por{" "}
-                  {farmer?.userName === customUserData?.name
+                  Actualizado por{" "}
+                  {farmer?.modifiedBy === customUserData?.name
                     ? "mim"
-                    : farmer?.userName}{" "}
-                  aos {new Date(farmer?.createdAt).getDate()}-
-                  {new Date(farmer?.createdAt).getMonth() + 1}-
-                  {new Date(farmer?.createdAt).getFullYear()}
+                    : farmer?.modifiedBy}{" "}
+                  aos {new Date(farmer?.modifiedAt).getDate()}-
+                  {new Date(farmer?.modifiedAt).getMonth() + 1}-
+                  {new Date(farmer?.modifiedAt).getFullYear()}
                 </Text>
               </Box>
-
-              {farmer?.modifiedBy && (
-                <Box w="100%">
-                  <Text
-                    style={{
-                      textAlign: "right",
-                      color: COLORS.grey,
-                      fontFamily: "JosefinSans-Italic",
-                      fontSize: 12,
-                    }}
-                  >
-                    Actualizado por{" "}
-                    {farmer?.modifiedBy === customUserData?.name
-                      ? "mim"
-                      : farmer?.modifiedBy}{" "}
-                    aos {new Date(farmer?.modifiedAt).getDate()}-
-                    {new Date(farmer?.modifiedAt).getMonth() + 1}-
-                    {new Date(farmer?.modifiedAt).getFullYear()}
-                  </Text>
-                </Box>
-              )}
-
-              {farmer?.status === resourceValidation.status.invalidated && (
-                <Box w="100%">
-                  <Text
-                    style={{
-                      textAlign: "right",
-                      color: COLORS.grey,
-                      fontFamily: "JosefinSans-Italic",
-                      fontSize: 12,
-                    }}
-                  >
-                    Invalidado por{" "}
-                    {farmer?.checkedBy ? farmer?.checkedBy : "ConnectCaju"}
-                    {/* Invalidado por {farmer?.checkedBy} */}
-                  </Text>
-                </Box>
-              )}
-              {farmer?.status === resourceValidation.status.validated && (
-                <Box w="100%">
-                  <Text
-                    style={{
-                      textAlign: "right",
-                      color: COLORS.grey,
-                      fontFamily: "JosefinSans-Italic",
-                      fontSize: 12,
-                    }}
-                  >
-                    Validado por {farmer?.checkedBy}
-                  </Text>
-                </Box>
-              )}
-            </Stack>
+            )}
 
             {farmer?.status === resourceValidation.status.invalidated && (
-              <>
-                {customUserData?.role !== roles.provincialManager && (
-                  <Text
-                    style={{
-                      textAlign: "left",
-                      color: COLORS.red,
-                      fontSize: 16,
-                      fontFamily: "JosefinSans-Bold",
-                    }}
-                  >
-                    Motivo da invalidação
-                  </Text>
-                )}
-                {/* <Box 
-        // w="100%"
-        style={{
-            // alignItems: 'center',
-            paddingTop: 5,
-        }}
-    > */}
-                {invalidationMotives?.length > 0 ? (
-                  invalidationMotives?.length > 0 &&
-                  invalidationMotives[0]?.messages?.length > 0 &&
-                  invalidationMotives[0]?.messages?.map((motive, index) => (
-                    <Box
-                      key={index}
-                      style={{
-                        flexGrow: 1,
-                        backgroundColor: COLORS.fourth,
-                        borderRadius: 20,
-                        paddingHorizontal: 5,
-                        paddingVertical: 5,
-                        marginVertical: 5,
-                        marginHorizontal: 5,
-                        alignItems: "flex-end",
-                      }}
-                    >
-                      {/* <Box> */}
-                      <Text
-                        style={{
-                          fontSize: 14,
-                          fontFamily: "JosefinSans-Italic",
-                          color: COLORS.black,
-                          textAlign: "left",
-                        }}
-                      >
-                        {motive.message ? motive.message : ""}
-                      </Text>
+              <Box w="100%">
+                <Text
+                  style={{
+                    textAlign: "right",
+                    color: COLORS.grey,
+                    fontFamily: "JosefinSans-Italic",
+                    fontSize: 12,
+                  }}
+                >
+                  Invalidado por{" "}
+                  {farmer?.checkedBy ? farmer?.checkedBy : "ConnectCaju"}
+                  {/* Invalidado por {farmer?.checkedBy} */}
+                </Text>
+              </Box>
+            )}
+            {farmer?.status === resourceValidation.status.validated && (
+              <Box w="100%">
+                <Text
+                  style={{
+                    textAlign: "right",
+                    color: COLORS.grey,
+                    fontFamily: "JosefinSans-Italic",
+                    fontSize: 12,
+                  }}
+                >
+                  Validado por {farmer?.checkedBy}
+                </Text>
+              </Box>
+            )}
+          </Stack>
 
-                      <Text
-                        style={{
-                          textAlign: "right",
-                          fontSize: 12,
-                          color: COLORS.black,
-                          paddingTop: 5,
-                        }}
-                      >
-                        {motive?.ownerName} (
-                        {new Date(motive?.createdAt).getDate()}-
-                        {new Date(motive?.createdAt).getMonth() + 1}-
-                        {new Date(motive?.createdAt).getFullYear()})
-                      </Text>
-                      {/* </Box> */}
-                    </Box>
-                  ))
-                ) : (
+          {farmer?.status === resourceValidation.status.invalidated && (
+            <>
+              {customUserData?.role !== roles.provincialManager && (
+                <Text
+                  style={{
+                    textAlign: "left",
+                    color: COLORS.red,
+                    fontSize: 16,
+                    fontFamily: "JosefinSans-Bold",
+                  }}
+                >
+                  Motivo da invalidação
+                </Text>
+              )}
+              {/* <Box 
+      // w="100%"
+      style={{
+          // alignItems: 'center',
+          paddingTop: 5,
+      }}
+  > */}
+              {invalidationMotives?.length > 0 ? (
+                invalidationMotives?.length > 0 &&
+                // @ts-expect-error TS(2339): Property 'messages' does not exist on type 'Object... Remove this comment to see the full error message
+                invalidationMotives[0]?.messages?.length > 0 &&
+                // @ts-expect-error TS(2339): Property 'messages' does not exist on type 'Object... Remove this comment to see the full error message
+                invalidationMotives[0]?.messages?.map((motive: any, index: any) => (
                   <Box
-                    // key={index}
+                    key={index}
+                    // @ts-expect-error TS(2322): Type '{ children: Element[]; key: any; style: { fl... Remove this comment to see the full error message
                     style={{
                       flexGrow: 1,
                       backgroundColor: COLORS.fourth,
@@ -1494,327 +1477,376 @@ const PersonalData = ({ farmer, setRefresh, refresh }) => {
                       alignItems: "flex-end",
                     }}
                   >
+                    {/* <Box> */}
                     <Text
                       style={{
-                        fontSize: responsiveFontSize(1.6),
+                        fontSize: 14,
                         fontFamily: "JosefinSans-Italic",
                         color: COLORS.black,
                         textAlign: "left",
                       }}
                     >
-                      Dados incompletos.
+                      {motive.message ? motive.message : ""}
                     </Text>
+
                     <Text
                       style={{
                         textAlign: "right",
-                        fontSize: responsiveFontSize(1.6),
+                        fontSize: 12,
                         color: COLORS.black,
                         paddingTop: 5,
                       }}
                     >
-                      Connect Caju.
+                      {motive?.ownerName} (
+                      {new Date(motive?.createdAt).getDate()}-
+                      {new Date(motive?.createdAt).getMonth() + 1}-
+                      {new Date(motive?.createdAt).getFullYear()})
                     </Text>
+                    {/* </Box> */}
                   </Box>
-                )}
+                ))
+              ) : (
+                <Box
+                  // key={index}
+                  // @ts-expect-error TS(2322): Type '{ children: Element[]; style: { flexGrow: nu... Remove this comment to see the full error message
+                  style={{
+                    flexGrow: 1,
+                    backgroundColor: COLORS.fourth,
+                    borderRadius: 20,
+                    paddingHorizontal: 5,
+                    paddingVertical: 5,
+                    marginVertical: 5,
+                    marginHorizontal: 5,
+                    alignItems: "flex-end",
+                  }}
+                >
+                  <Text
+                    style={{
+                      fontSize: responsiveFontSize(1.6),
+                      fontFamily: "JosefinSans-Italic",
+                      color: COLORS.black,
+                      textAlign: "left",
+                    }}
+                  >
+                    Dados incompletos.
+                  </Text>
+                  <Text
+                    style={{
+                      textAlign: "right",
+                      fontSize: responsiveFontSize(1.6),
+                      color: COLORS.black,
+                      paddingTop: 5,
+                    }}
+                  >
+                    Connect Caju.
+                  </Text>
+                </Box>
+              )}
 
-                {/* </Box> */}
+              {/* </Box> */}
+            </>
+          )}
+
+          {farmer?.status === resourceValidation.status.invalidated &&
+            customUserData?.role === roles.provincialManager && (
+              <>
+                <Stack direction="row" w="100%" space={1}>
+                  <Box w="85%">
+                    <FormControl
+                      isRequired
+                      isInvalid={"invalidationMessage" in errors}
+                    >
+                      <FormControl.Label>
+                        Motivo da invalidação
+                      </FormControl.Label>
+                      <TextInput
+                        style={{
+                          borderWidth: 2,
+                          borderColor: COLORS.lightgrey,
+                          borderRadius: 20,
+                          padding: 10,
+                          fontSize: 16,
+                          backgroundColor: "#efefef",
+                        }}
+                        placeholder={`Deixa uma mensagem para ${
+                          farmer?.userName?.split(" ")[0]
+                        }`}
+                        multiline={true}
+                        textAlignVertical="top"
+                        numberOfLines={2}
+                        maxLength={120}
+                        value={message}
+                        onChangeText={(newMessage: any) => {
+                          setErrors({
+                            invalidationMessage: "",
+                          })
+                          setMessage(newMessage)
+                        }}
+                      />
+                      {"invalidationMessage" in errors ? (
+                        <FormControl.ErrorMessage
+                          leftIcon={
+                            <Icon
+                              name="error-outline"
+                              size={16}
+                              color="red"
+                            />
+                          }
+                          _text={{ fontSize: "xs" }}
+                        >
+                          // @ts-expect-error TS(2339): Property 'invalidationMessage' does not exist on t... Remove this comment to see the full error message
+                          {errors?.invalidationMessage}
+                        </FormControl.ErrorMessage>
+                      ) : (
+                        <FormControl.HelperText></FormControl.HelperText>
+                      )}
+                    </FormControl>
+                  </Box>
+                  <Box
+                    // @ts-expect-error TS(2322): Type '{ children: "" | Element; style: { width: st... Remove this comment to see the full error message
+                    style={{
+                      width: "15%",
+                      alignItems: "baseline",
+                      justifyContent: "center",
+                    }}
+                  >
+                    {message && (
+                      <Box
+                        // @ts-expect-error TS(2322): Type '{ children: Element; style: { position: stri... Remove this comment to see the full error message
+                        style={{
+                          position: "absolute",
+                          bottom: 10,
+                          right: 10,
+                          padding: 5,
+                          borderRadius: 100,
+                          width: wp("10%"),
+                          height: hp("6%"),
+                          borderWidth: 1,
+                          borderColor: COLORS.pantone,
+                          backgroundColor: COLORS.pantone,
+                        }}
+                      >
+                        <TouchableOpacity
+                          onPress={() => {
+                            try {
+                              addMessage(realm, farmer?._id, message)
+                            } catch (error) {
+                              // @ts-expect-error TS(2584): Cannot find name 'console'. Do you need to change ... Remove this comment to see the full error message
+                              console.log(
+                                "Failed to add invalidation message",
+                              )
+                              return
+                            } finally {
+                              setMessage("")
+                            }
+                          }}
+                        >
+                          <Icon
+                            name="send"
+                            size={wp("6%")}
+                            color={COLORS.ghostwhite}
+                            iconStyle={{
+                              transform: [{ rotate: "-45deg" }],
+                            }}
+                          />
+                        </TouchableOpacity>
+                      </Box>
+                    )}
+                  </Box>
+                  <Box w="0%"></Box>
+                </Stack>
               </>
             )}
 
-            {farmer?.status === resourceValidation.status.invalidated &&
-              customUserData?.role === roles.provincialManager && (
-                <>
-                  <Stack direction="row" w="100%" space={1}>
-                    <Box w="85%">
-                      <FormControl
-                        isRequired
-                        isInvalid={"invalidationMessage" in errors}
-                      >
-                        <FormControl.Label>
-                          Motivo da invalidação
-                        </FormControl.Label>
-                        <TextInput
-                          style={{
-                            borderWidth: 2,
-                            borderColor: COLORS.lightgrey,
-                            borderRadius: 20,
-                            padding: 10,
-                            fontSize: 16,
-                            backgroundColor: "#efefef",
-                          }}
-                          placeholder={`Deixa uma mensagem para ${
-                            farmer?.userName?.split(" ")[0]
-                          }`}
-                          multiline={true}
-                          textAlignVertical="top"
-                          numberOfLines={2}
-                          maxLength={120}
-                          value={message}
-                          onChangeText={(newMessage) => {
-                            setErrors({
-                              invalidationMessage: "",
-                            })
-                            setMessage(newMessage)
-                          }}
-                        />
-                        {"invalidationMessage" in errors ? (
-                          <FormControl.ErrorMessage
-                            leftIcon={
-                              <Icon
-                                name="error-outline"
-                                size={16}
-                                color="red"
-                              />
-                            }
-                            _text={{ fontSize: "xs" }}
-                          >
-                            {errors?.invalidationMessage}
-                          </FormControl.ErrorMessage>
-                        ) : (
-                          <FormControl.HelperText></FormControl.HelperText>
-                        )}
-                      </FormControl>
-                    </Box>
-                    <Box
-                      style={{
-                        width: "15%",
-                        alignItems: "baseline",
-                        justifyContent: "center",
-                      }}
-                    >
-                      {message && (
-                        <Box
-                          style={{
-                            position: "absolute",
-                            bottom: 10,
-                            right: 10,
-                            padding: 5,
-                            borderRadius: 100,
-                            width: wp("10%"),
-                            height: hp("6%"),
-                            borderWidth: 1,
-                            borderColor: COLORS.pantone,
-                            backgroundColor: COLORS.pantone,
-                          }}
-                        >
-                          <TouchableOpacity
-                            onPress={() => {
-                              try {
-                                addMessage(realm, farmer?._id, message)
-                              } catch (error) {
-                                console.log(
-                                  "Failed to add invalidation message",
-                                )
-                                return
-                              } finally {
-                                setMessage("")
-                              }
-                            }}
-                          >
-                            <Icon
-                              name="send"
-                              size={wp("6%")}
-                              color={COLORS.ghostwhite}
-                              iconStyle={{
-                                transform: [{ rotate: "-45deg" }],
-                              }}
-                            />
-                          </TouchableOpacity>
-                        </Box>
-                      )}
-                    </Box>
-                    <Box w="0%"></Box>
-                  </Stack>
-                </>
-              )}
-
-            {customUserData?.role === roles.provincialManager &&
-              farmer?.status === resourceValidation.status.pending && (
-                <Stack
-                  direction="row"
-                  w="100%"
-                  style={{ paddingVertical: 5 }}
-                  space={3}
+          {customUserData?.role === roles.provincialManager &&
+            farmer?.status === resourceValidation.status.pending && (
+              <Stack
+                direction="row"
+                w="100%"
+                // @ts-expect-error TS(2322): Type '{ children: Element[]; direction: "row"; w: ... Remove this comment to see the full error message
+                style={{ paddingVertical: 5 }}
+                space={3}
+              >
+                <Box
+                  w="50%"
+                  // @ts-expect-error TS(2322): Type '{ children: Element; w: "50%"; style: { alig... Remove this comment to see the full error message
+                  style={{
+                    alignItems: "center",
+                  }}
                 >
-                  <Box
-                    w="50%"
-                    style={{
-                      alignItems: "center",
+                  <TouchableOpacity
+                    disabled={
+                      farmer?.status === resourceValidation.status.validated
+                        ? true
+                        : false
+                    }
+                    onPress={() => {
+                      // validationAction(realm, farmer._id, 'validate');
+                      setAlert(true)
+                      setValidated(true)
+                      setTitleAlert(errorMessages.resourceValidation.title)
+                      setMessageAlert(
+                        errorMessages.resourceValidation.message,
+                      )
+                      setShowCancelButton(
+                        errorMessages.resourceValidation.showCancelButton,
+                      )
+                      setShowConfirmButton(
+                        errorMessages.resourceValidation.showConfirmButton,
+                      )
+                      setCancelText(
+                        errorMessages.resourceValidation.cancelText,
+                      )
+                      setConfirmText(
+                        errorMessages.resourceValidation.confirmText,
+                      )
                     }}
                   >
-                    <TouchableOpacity
-                      disabled={
-                        farmer?.status === resourceValidation.status.validated
-                          ? true
-                          : false
-                      }
-                      onPress={() => {
-                        // validationAction(realm, farmer._id, 'validate');
-                        setAlert(true)
-                        setValidated(true)
-                        setTitleAlert(errorMessages.resourceValidation.title)
-                        setMessageAlert(
-                          errorMessages.resourceValidation.message,
-                        )
-                        setShowCancelButton(
-                          errorMessages.resourceValidation.showCancelButton,
-                        )
-                        setShowConfirmButton(
-                          errorMessages.resourceValidation.showConfirmButton,
-                        )
-                        setCancelText(
-                          errorMessages.resourceValidation.cancelText,
-                        )
-                        setConfirmText(
-                          errorMessages.resourceValidation.confirmText,
-                        )
+                    <Text
+                      style={{
+                        color:
+                          farmer.status ===
+                          resourceValidation.status.validated
+                            ? COLORS.lightgrey
+                            : COLORS.main,
+                        fontSize: 15,
+                        fontFamily: "JosefinSans-Bold",
                       }}
                     >
-                      <Text
-                        style={{
-                          color:
-                            farmer.status ===
-                            resourceValidation.status.validated
-                              ? COLORS.lightgrey
-                              : COLORS.main,
-                          fontSize: 15,
-                          fontFamily: "JosefinSans-Bold",
-                        }}
-                      >
-                        Validar Registo
-                      </Text>
-                    </TouchableOpacity>
-                  </Box>
-                  <Box
-                    w="50%"
-                    style={{
-                      alignItems: "center",
-                      paddingRight: 5,
+                      Validar Registo
+                    </Text>
+                  </TouchableOpacity>
+                </Box>
+                <Box
+                  w="50%"
+                  // @ts-expect-error TS(2322): Type '{ children: Element; w: "50%"; style: { alig... Remove this comment to see the full error message
+                  style={{
+                    alignItems: "center",
+                    paddingRight: 5,
+                  }}
+                >
+                  <TouchableOpacity
+                    disabled={
+                      farmer?.status === resourceValidation.status.validated
+                        ? true
+                        : false
+                    }
+                    onPress={() => {
+                      setAlert(true)
+                      setInvalidated(true)
+                      setTitleAlert(errorMessages.resourceInvalidation.title)
+                      setMessageAlert(
+                        errorMessages.resourceInvalidation.message,
+                      )
+                      setShowCancelButton(
+                        errorMessages.resourceInvalidation.showCancelButton,
+                      )
+                      setShowConfirmButton(
+                        errorMessages.resourceInvalidation.showConfirmButton,
+                      )
+                      setCancelText(
+                        errorMessages.resourceInvalidation.cancelText,
+                      )
+                      setConfirmText(
+                        errorMessages.resourceInvalidation.confirmText,
+                      )
                     }}
                   >
-                    <TouchableOpacity
-                      disabled={
-                        farmer?.status === resourceValidation.status.validated
-                          ? true
-                          : false
-                      }
-                      onPress={() => {
-                        setAlert(true)
-                        setInvalidated(true)
-                        setTitleAlert(errorMessages.resourceInvalidation.title)
-                        setMessageAlert(
-                          errorMessages.resourceInvalidation.message,
-                        )
-                        setShowCancelButton(
-                          errorMessages.resourceInvalidation.showCancelButton,
-                        )
-                        setShowConfirmButton(
-                          errorMessages.resourceInvalidation.showConfirmButton,
-                        )
-                        setCancelText(
-                          errorMessages.resourceInvalidation.cancelText,
-                        )
-                        setConfirmText(
-                          errorMessages.resourceInvalidation.confirmText,
-                        )
+                    <Text
+                      style={{
+                        color:
+                          farmer?.status ===
+                          resourceValidation.status.validated
+                            ? COLORS.lightgrey
+                            : COLORS.red,
+                        fontSize: 15,
+                        fontFamily: "JosefinSans-Bold",
                       }}
                     >
-                      <Text
-                        style={{
-                          color:
-                            farmer?.status ===
-                            resourceValidation.status.validated
-                              ? COLORS.lightgrey
-                              : COLORS.red,
-                          fontSize: 15,
-                          fontFamily: "JosefinSans-Bold",
-                        }}
-                      >
-                        Invalidar Registo
-                      </Text>
-                    </TouchableOpacity>
-                  </Box>
-                </Stack>
-              )}
-          </View>
-          {isOverlayVisible && (
-            <EditFarmerData
-              isOverlayVisible={isOverlayVisible}
-              setIsOverlayVisible={setIsOverlayVisible}
-              isConfirmDataVisible={isConfirmDataVisible}
-              setIsConfirmDataVisible={setIsConfirmDataVisible}
-              ownerName={
-                farmer?.names?.otherNames + " " + farmer?.names?.surname
-              }
-              resource={farmer}
-              resourceName={"Farmer"}
-              dataToBeUpdated={dataToBeUpdated}
-              newDataObject={newDataObject}
-              oldDataObject={oldDataObject}
-              setNewDataObject={setNewDataObject}
-              setOldDataObject={setOldDataObject}
-              addressProvince={addressProvince}
-              setAddressProvince={setAddressProvince}
-              addressDistrict={addressDistrict}
-              setAddressDistrict={setAddressDistrict}
-              addressAdminPost={addressAdminPost}
-              setAddressAdminPost={setAddressAdminPost}
-              addressVillage={addressVillage}
-              setAddressVillage={setAddressVillage}
-              selectedAddressAdminPosts={selectedAddressAdminPosts}
-              setSelectedAddressAdminPosts={setSelectedAddressAdminPosts}
-              addressOldProvince={addressOldProvince}
-              setAddressOldProvince={setAddressOldProvince}
-              addressOldDistrict={addressOldDistrict}
-              setAddressOldDistrict={setAddressOldDistrict}
-              addressOldAdminPost={addressOldAdminPost}
-              setAddressOldAdminPost={setAddressOldAdminPost}
-              addressOldVillage={addressOldVillage}
-              setAddressOldVillage={setAddressOldVillage}
-              // contact
-              setPrimaryPhone={setPrimaryPhone}
-              setSecondaryPhone={setSecondaryPhone}
-              primaryPhone={primaryPhone}
-              secondaryPhone={secondaryPhone}
-              oldPrimaryPhone={oldPrimaryPhone}
-              oldSecondaryPhone={oldSecondaryPhone}
-              setOldPrimaryPhone={setOldPrimaryPhone}
-              setOldSecondaryPhone={setOldSecondaryPhone}
-              // idDocument
-              setDocNumber={setDocNumber}
-              docNumber={docNumber}
-              docType={docType}
-              setDocType={setDocType}
-              nuit={nuit}
-              setNuit={setNuit}
-              setOldDocNumber={setOldDocNumber}
-              oldDocNumber={oldDocNumber}
-              oldDocType={oldDocType}
-              setOldDocType={setOldDocType}
-              oldNuit={oldNuit}
-              setOldNuit={setOldNuit}
-            />
-          )}
+                      Invalidar Registo
+                    </Text>
+                  </TouchableOpacity>
+                </Box>
+              </Stack>
+            )}
+        </View>
+        {isOverlayVisible && (
+          <EditFarmerData
+            isOverlayVisible={isOverlayVisible}
+            setIsOverlayVisible={setIsOverlayVisible}
+            isConfirmDataVisible={isConfirmDataVisible}
+            setIsConfirmDataVisible={setIsConfirmDataVisible}
+            ownerName={
+              farmer?.names?.otherNames + " " + farmer?.names?.surname
+            }
+            resource={farmer}
+            resourceName={"Farmer"}
+            dataToBeUpdated={dataToBeUpdated}
+            newDataObject={newDataObject}
+            oldDataObject={oldDataObject}
+            setNewDataObject={setNewDataObject}
+            setOldDataObject={setOldDataObject}
+            addressProvince={addressProvince}
+            setAddressProvince={setAddressProvince}
+            addressDistrict={addressDistrict}
+            setAddressDistrict={setAddressDistrict}
+            addressAdminPost={addressAdminPost}
+            setAddressAdminPost={setAddressAdminPost}
+            addressVillage={addressVillage}
+            setAddressVillage={setAddressVillage}
+            selectedAddressAdminPosts={selectedAddressAdminPosts}
+            setSelectedAddressAdminPosts={setSelectedAddressAdminPosts}
+            addressOldProvince={addressOldProvince}
+            setAddressOldProvince={setAddressOldProvince}
+            addressOldDistrict={addressOldDistrict}
+            setAddressOldDistrict={setAddressOldDistrict}
+            addressOldAdminPost={addressOldAdminPost}
+            setAddressOldAdminPost={setAddressOldAdminPost}
+            addressOldVillage={addressOldVillage}
+            setAddressOldVillage={setAddressOldVillage}
+            // contact
+            setPrimaryPhone={setPrimaryPhone}
+            setSecondaryPhone={setSecondaryPhone}
+            primaryPhone={primaryPhone}
+            secondaryPhone={secondaryPhone}
+            oldPrimaryPhone={oldPrimaryPhone}
+            oldSecondaryPhone={oldSecondaryPhone}
+            setOldPrimaryPhone={setOldPrimaryPhone}
+            setOldSecondaryPhone={setOldSecondaryPhone}
+            // idDocument
+            setDocNumber={setDocNumber}
+            docNumber={docNumber}
+            docType={docType}
+            setDocType={setDocType}
+            nuit={nuit}
+            setNuit={setNuit}
+            setOldDocNumber={setOldDocNumber}
+            oldDocNumber={oldDocNumber}
+            oldDocType={oldDocType}
+            setOldDocType={setOldDocType}
+            oldNuit={oldNuit}
+            setOldNuit={setOldNuit}
+          />
+        )}
 
-          {isConfirmDataVisible && (
-            <ConfirmData
-              // setIsOverlayVisible={setIsOverlayVisible}
-              // isConfirmDataVisible={isConfirmDataVisible}
-              setIsConfirmDataVisible={setIsConfirmDataVisible}
-              ownerName={
-                farmer?.names?.otherNames + " " + farmer?.names?.surname
-              }
-              newDataObject={newDataObject}
-              oldDataObject={oldDataObject}
-              dataToBeUpdated={dataToBeUpdated}
-              resource={farmer}
-              resourceName={"Farmer"}
-            />
-          )}
-        </CollapseBody>
-      </Collapse>
-    </>
-  )
+        {isConfirmDataVisible && (
+          <ConfirmData
+            // setIsOverlayVisible={setIsOverlayVisible}
+            // isConfirmDataVisible={isConfirmDataVisible}
+            setIsConfirmDataVisible={setIsConfirmDataVisible}
+            ownerName={
+              farmer?.names?.otherNames + " " + farmer?.names?.surname
+            }
+            newDataObject={newDataObject}
+            oldDataObject={oldDataObject}
+            dataToBeUpdated={dataToBeUpdated}
+            resource={farmer}
+            resourceName={"Farmer"}
+          />
+        )}
+      </CollapseBody>
+    </Collapse>
+  </>;
 }
 
 export default PersonalData

@@ -10,6 +10,7 @@ import {
   TouchableOpacity,
   Pressable,
   ImageBackground,
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 } from "react-native";
 import { Box, Stack, Center } from "native-base";
 import { Icon } from "@rneui/base";
@@ -29,7 +30,9 @@ import { realmContext } from "../../models/realmContext";
 
 const { useRealm, useQuery } = realmContext;
 
-export function FarmerGroupItem({ item }) {
+export function FarmerGroupItem({
+  item
+}: any) {
   const navigation = useNavigation();
 
   return (
@@ -54,6 +57,7 @@ export function FarmerGroupItem({ item }) {
           }
         }
         onPress={() => {
+          // @ts-expect-error TS(2345): Argument of type 'string' is not assignable to par... Remove this comment to see the full error message
           navigation.navigate("Group", { ownerId: item?._id });
         }}
       >
@@ -127,6 +131,7 @@ export function FarmerGroupItem({ item }) {
 
             <Stack
               direction="row"
+              // @ts-expect-error TS(2322): Type '{ children: Element[]; direction: "row"; sty... Remove this comment to see the full error message
               style={{
                 // paddingHorizontal: 10,
                 paddingTop: 4,
@@ -164,7 +169,10 @@ export function FarmerGroupItem({ item }) {
   );
 }
 
-export default function FarmerGroupsScreen({ navigation, route }) {
+export default function FarmerGroupsScreen({
+  navigation,
+  route
+}: any) {
   const { farmerId } = route.params;
   const realm = useRealm();
 
@@ -174,27 +182,31 @@ export default function FarmerGroupsScreen({ navigation, route }) {
   const [groupsList, setGroupsList] = useState([]);
   const [actorName, setActorName] = useState("");
 
-  let groups = [];
+  let groups: any = [];
   let actor = realm.objectForPrimaryKey("Actor", farmerId);
   if (farmerMembership.length > 0) {
+    // @ts-expect-error TS(2322): Type 'Object<unknown, never> | undefined' is not a... Remove this comment to see the full error message
     farmerMembership = farmerMembership[0];
-    groups = farmerMembership?.membership.map((membership) => {
+    // @ts-expect-error TS(2339): Property 'membership' does not exist on type 'Resu... Remove this comment to see the full error message
+    groups = farmerMembership?.membership.map((membership: any) => {
       return realm.objectForPrimaryKey("Group", membership.organizationId);
     });
   }
 
   const handleGroupsList = () => {
     if (groups.length > 0) {
+      // @ts-expect-error TS(7006): Parameter 'group' implicitly has an 'any' type.
       setGroupsList(groups?.map((group) => group));
     }
   };
 
   useEffect(() => {
     handleGroupsList();
+    // @ts-expect-error TS(2339): Property 'names' does not exist on type 'Object<un... Remove this comment to see the full error message
     setActorName(`${actor?.names.otherNames} ${actor?.names.surname}`);
   }, [realm]);
 
-  const keyExtractor = (item, index) => index.toString();
+  const keyExtractor = (item: any, index: any) => index.toString();
 
   return (
     <SafeAreaView
@@ -261,7 +273,9 @@ export default function FarmerGroupsScreen({ navigation, route }) {
                 }}
               >
                 [
+                // @ts-expect-error TS(2339): Property 'membership' does not exist on type 'Resu... Remove this comment to see the full error message
                 {`Organizações de Produtores: ${farmerMembership?.membership?.length > 0
+                    // @ts-expect-error TS(2339): Property 'membership' does not exist on type 'Resu... Remove this comment to see the full error message
                     ? farmerMembership?.membership?.length
                     : 0
                   }`}
@@ -271,6 +285,7 @@ export default function FarmerGroupsScreen({ navigation, route }) {
           </Box>
           <Box
             w="10%"
+            // @ts-expect-error TS(2322): Type '{ w: "10%"; style: { justifyContent: string;... Remove this comment to see the full error message
             style={{
               justifyContent: "center",
               alignItems: "center",
@@ -281,17 +296,21 @@ export default function FarmerGroupsScreen({ navigation, route }) {
 
       {groupsList?.length > 0 ? (
         <FlatList
+          // @ts-expect-error TS(2322): Type '{ style: {}; }' is not assignable to type 'I... Remove this comment to see the full error message
           StickyHeaderComponent={() => <Box style={{}}></Box>}
           stickyHeaderHiddenOnScroll={true}
           data={groupsList}
           keyExtractor={keyExtractor}
           onEndReachedThreshold={0.1}
-          renderItem={({ item }) => {
+          renderItem={({
+            item
+          }: any) => {
             return <FarmerGroupItem route={route} item={item} />;
           }}
           ListFooterComponent={() => {
             return (
               <Box
+                // @ts-expect-error TS(2322): Type '{ children: Element; style: { paddingBottom:... Remove this comment to see the full error message
                 style={{
                   paddingBottom: 150,
                 }}

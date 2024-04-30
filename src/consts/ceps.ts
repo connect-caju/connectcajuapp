@@ -105,6 +105,7 @@ export const ceps = {
   "Ressano Garcia": "020603",
   Sabie: "020504",
 
+  // @ts-expect-error TS(1117): An object literal cannot have multiple properties ... Remove this comment to see the full error message
   "3 de Fevereiro": "020701",
   Calanga: "020702",
   "Ilha Josina Machel": "020703",
@@ -315,6 +316,7 @@ export const ceps = {
 
   // Manica
   "Chibote (Sede)": "060101",
+  // @ts-expect-error TS(1117): An object literal cannot have multiple properties ... Remove this comment to see the full error message
   Save: "060102",
 
   Chiurairue: "060201",
@@ -383,6 +385,7 @@ export const ceps = {
   Degue: "070502",
   "Filipe Samuel Magaia": "070503",
   "Francisco Manyanga": "070504",
+  // @ts-expect-error TS(1117): An object literal cannot have multiple properties ... Remove this comment to see the full error message
   "Josina Machel": "070505",
   "Mateus Sansão Muthemba": "070506",
   Matundo: "070507",
@@ -435,9 +438,13 @@ export const ceps = {
   Gonhane: "080301",
   "Inhassunge (Sede)": "080302",
 
+  // @ts-expect-error TS(1117): An object literal cannot have multiple properties ... Remove this comment to see the full error message
   "Posto Admin. 1 (Sede)": "080401",
+  // @ts-expect-error TS(1117): An object literal cannot have multiple properties ... Remove this comment to see the full error message
   "Posto Admin. 2": "080402",
+  // @ts-expect-error TS(1117): An object literal cannot have multiple properties ... Remove this comment to see the full error message
   "Posto Admin. 3": "080403",
+  // @ts-expect-error TS(1117): An object literal cannot have multiple properties ... Remove this comment to see the full error message
   "Posto Admin. 4": "080404",
   "Posto Admin. 5": "080405",
   Maquival: "080406",
@@ -594,6 +601,7 @@ export const ceps = {
   Cariaco: "100502",
   "Cimento (Sede)": "100503",
   Chuiba: "100504",
+  // @ts-expect-error TS(1117): An object literal cannot have multiple properties ... Remove this comment to see the full error message
   "Eduardo Mondlane": "100505",
   Ingonane: "100506",
   Marringanha: "100507",
@@ -642,6 +650,7 @@ export const ceps = {
   // Niassa
   "Cuamba (Sede)": "110101",
   Etatara: "110102",
+  // @ts-expect-error TS(1117): An object literal cannot have multiple properties ... Remove this comment to see the full error message
   Lurio: "110103",
   Chiuta: "110201",
   "Insaca (Sede)": "110202",
@@ -891,4 +900,4 @@ export const ceps = {
   Vietname: "840000",
   Zâmbia: "260000",
   Zimbábue: "263000",
-}
+};

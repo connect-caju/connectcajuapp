@@ -23,6 +23,7 @@ import {
   Animated as NativeAnimated,
   Easing,
   useNativeDriverr,
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 } from "react-native";
 import Animated, { BounceIn } from "react-native-reanimated";
 import CustomDivider from "../Divider/CustomDivider";
@@ -42,8 +43,8 @@ export default function GroupMembersCard({
   setPresentGroupMemberOptions,
   handlePresentModalPress,
   group,
-  customUserData,
-}) {
+  customUserData
+}: any) {
   const realm = useRealm();
   const navigation = useNavigation();
   const isFocused = useIsFocused();
@@ -217,6 +218,7 @@ export default function GroupMembersCard({
             }}
           >
             {members.filter(member=>member)?.map((member, index) => {
+                // @ts-expect-error TS(2339): Property '_id' does not exist on type 'Object<unkn... Remove this comment to see the full error message
                 return <GroupMemberItem key={member?._id} member={member} />;
             })}
           </View>

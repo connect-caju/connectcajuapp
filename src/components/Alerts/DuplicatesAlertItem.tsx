@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react"
 import { Button, Box, Center } from "native-base"
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { View, Text, Image, Dimensions, TouchableOpacity } from "react-native"
 import { Icon, CheckBox, Avatar } from "@rneui/themed"
 import {
@@ -25,13 +26,15 @@ import { useNavigation } from "@react-navigation/native"
 import CustomDivider from "../Divider/CustomDivider"
 import CustomActivityIndicator from "../ActivityIndicator/CustomActivityIndicator"
 
-const DuplicatesAlertItem = ({ suspectedDuplicates }) => {
+const DuplicatesAlertItem = ({
+  suspectedDuplicates
+}: any) => {
   const navigation = useNavigation()
   const [itemIndex, setItemIndex] = useState(0)
   const [loadingActivitiyIndicator, setLoadingActivityIndicator] =
     useState(false)
 
-  const setNextItem = (itemsList) => {
+  const setNextItem = (itemsList: any) => {
     if (
       (itemsList?.length > 0 && itemIndex === itemsList?.length - 1) ||
       itemsList?.length === 1
@@ -65,6 +68,7 @@ const DuplicatesAlertItem = ({ suspectedDuplicates }) => {
 
   return (
     <Box
+      // @ts-expect-error TS(2322): Type '{ children: Element; style: { width: string;... Remove this comment to see the full error message
       style={{
         width: "85%",
         alignItems: "center",
@@ -75,6 +79,7 @@ const DuplicatesAlertItem = ({ suspectedDuplicates }) => {
     >
       <View>
         <Box
+          // @ts-expect-error TS(2322): Type '{ children: Element[]; style: { flexDirectio... Remove this comment to see the full error message
           style={{
             flexDirection: "row",
             justifyContent: "space-between",
@@ -83,6 +88,7 @@ const DuplicatesAlertItem = ({ suspectedDuplicates }) => {
           <TouchableOpacity style={{}} onPress={() => {}}></TouchableOpacity>
 
           <Box
+            // @ts-expect-error TS(2322): Type '{ children: Element[]; style: { flexDirectio... Remove this comment to see the full error message
             style={{
               flexDirection: "row",
               justifyContent: "center",
@@ -111,6 +117,7 @@ const DuplicatesAlertItem = ({ suspectedDuplicates }) => {
         </Box>
 
         <Box
+          // @ts-expect-error TS(2322): Type '{ children: Element; style: { paddingBottom:... Remove this comment to see the full error message
           style={{
             paddingBottom: 20,
             justifyContent: "center",
@@ -136,6 +143,7 @@ const DuplicatesAlertItem = ({ suspectedDuplicates }) => {
         </Box>
 
         <Box
+          // @ts-expect-error TS(2322): Type '{ children: Element; style: { paddingBottom:... Remove this comment to see the full error message
           style={{
             paddingBottom: 15,
           }}
@@ -157,11 +165,13 @@ const DuplicatesAlertItem = ({ suspectedDuplicates }) => {
         </Box>
 
         <Box
+          // @ts-expect-error TS(2322): Type '{ children: Element[]; style: { paddingVerti... Remove this comment to see the full error message
           style={{
             paddingVertical: 20,
           }}
         >
           <Box
+            // @ts-expect-error TS(2322): Type '{ children: Element[]; style: { flexDirectio... Remove this comment to see the full error message
             style={{
               flexDirection: "row",
               width: "100%",
@@ -170,6 +180,7 @@ const DuplicatesAlertItem = ({ suspectedDuplicates }) => {
             }}
           >
             <Box
+              // @ts-expect-error TS(2322): Type '{ children: Element; style: { width: string;... Remove this comment to see the full error message
               style={{
                 width: "20%",
               }}
@@ -182,6 +193,7 @@ const DuplicatesAlertItem = ({ suspectedDuplicates }) => {
             </Box>
 
             <Box
+              // @ts-expect-error TS(2322): Type '{ children: Element; style: { width: string;... Remove this comment to see the full error message
               style={{
                 width: "80%",
                 justifyContent: "center",
@@ -209,6 +221,7 @@ const DuplicatesAlertItem = ({ suspectedDuplicates }) => {
           </Box>
 
           <Box
+            // @ts-expect-error TS(2322): Type '{ children: Element[]; style: { flexDirectio... Remove this comment to see the full error message
             style={{
               flexDirection: "row",
               width: "100%",
@@ -217,6 +230,7 @@ const DuplicatesAlertItem = ({ suspectedDuplicates }) => {
             }}
           >
             <Box
+              // @ts-expect-error TS(2322): Type '{ children: Element; style: { width: string;... Remove this comment to see the full error message
               style={{
                 width: "20%",
                 // justifyContent: 'center',
@@ -235,6 +249,7 @@ const DuplicatesAlertItem = ({ suspectedDuplicates }) => {
             </Box>
 
             <Box
+              // @ts-expect-error TS(2322): Type '{ children: Element; style: { width: string;... Remove this comment to see the full error message
               style={{
                 width: "80%",
                 justifyContent: "center",
@@ -258,6 +273,7 @@ const DuplicatesAlertItem = ({ suspectedDuplicates }) => {
           <CustomDivider thickness={2} my={2} bg={COLORS.grey} />
         </Box>
         <Box
+          // @ts-expect-error TS(2322): Type '{ children: Element; style: { paddingTop: nu... Remove this comment to see the full error message
           style={{
             paddingTop: 20,
           }}

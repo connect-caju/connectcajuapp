@@ -202,5 +202,5 @@ const countries2 = [
   { label: "Vaticano", value: "Vaticano" },
   { label: "Venezuela", value: "Venezuela" },
   { key: "Vietname", value: "Vietname" },
-]
-export default countries2
+];
+export default countries2;

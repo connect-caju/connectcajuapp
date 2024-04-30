@@ -28,4 +28,4 @@ export const ordinalNumberings = {
   27: "Vigésima e sétima",
   28: "Vigésima e oitava",
   29: "Vigésima e nova",
-}
+};

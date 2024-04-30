@@ -1,8 +1,8 @@
 // loop over suspectedDuplicates to detect any evidence of
 // duplications
-export const detectDuplicates = (newFarmer, duplicates) => {
+export const detectDuplicates = (newFarmer: any, duplicates: any) => {
   // check if names are equal
-  const checkNames = (newFarmerNames, suspectedNames) => {
+  const checkNames = (newFarmerNames: any, suspectedNames: any) => {
     return (
       (suspectedNames.surname
         .toLowerCase()
@@ -20,7 +20,7 @@ export const detectDuplicates = (newFarmer, duplicates) => {
   }
 
   // check if addresses are equal
-  const checkAddress = (newFarmerAddress, suspectedAddress) => {
+  const checkAddress = (newFarmerAddress: any, suspectedAddress: any) => {
     return (
       ((newFarmerAddress?.adminPost &&
         suspectedAddress?.adminPost &&
@@ -33,10 +33,10 @@ export const detectDuplicates = (newFarmer, duplicates) => {
     )
   }
 
-  return duplicates?.filter((farmer) => {
+  return duplicates?.filter((farmer: any) => {
     return (
       checkNames(newFarmer?.names, farmer?.names) &&
       checkAddress(newFarmer?.address, farmer?.address)
     )
-  })
+  });
 }

@@ -4,4 +4,4 @@ export const bottomSheetFlags = {
   plotDetails: "plotDetails",
   groupDetails: "groupDetails",
   institutionDetails: "institutionDetails",
-}
+};

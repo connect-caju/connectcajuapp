@@ -1,11 +1,14 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable linebreak-style */
 /* eslint-disable prettier/prettier */
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { View, Text, Pressable, } from "react-native";
 import React, { useState, } from "react";
 import Modal from "react-native-modal";
 import COLORS from "../../consts/colors";
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { Dimensions } from "react-native";
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { ScrollView } from "react-native";
 import { Icon } from "@rneui/base";
 import tw from "twrnc";
@@ -26,7 +29,13 @@ import { farmlandOwners } from "../../consts/farmlandOwners";
 import { backgroundStyle } from "../../styles/globals";
 const { useRealm } = realmContext;
 
-const ValidationCard = ({ modalVisible, setModalVisible, handleModalVisible, resourceId, resourceType, }) => {
+const ValidationCard = ({
+    modalVisible,
+    setModalVisible,
+    handleModalVisible,
+    resourceId,
+    resourceType
+}: any) => {
     const { width, height } = Dimensions.get("window");
     const realm = useRealm();
     const user = useUser();

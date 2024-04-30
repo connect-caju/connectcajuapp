@@ -23,7 +23,10 @@ import FarmersSearchScreen from "../../screens/FarmersSearchScreen/FarmersSearch
 const FarmersStack = createNativeStackNavigator();
 
 
-export default function FarmersStackScreen({ route, navigation }) {
+export default function FarmersStackScreen({
+  route,
+  navigation
+}: any) {
 
 
   return (
@@ -46,6 +49,7 @@ export default function FarmersStackScreen({ route, navigation }) {
       <FarmersStack.Screen name="FarmerForm1" component={FarmerRegistration} />
       <FarmersStack.Screen
         name="FarmlandForm1"
+        // @ts-expect-error TS(2322): Type '({ route, navigation }: any) => Element | un... Remove this comment to see the full error message
         component={FarmlandRegistration}
       />
       <FarmersStack.Screen

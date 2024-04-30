@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef, useCallback } from "react"
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { View, StyleSheet, Text, TouchableOpacity } from "react-native"
 import { Camera, useCameraDevices } from "react-native-vision-camera"
 import Animated from "react-native-reanimated"
@@ -11,8 +12,8 @@ export default function PhotoBottomSheet({
   ownerId,
   farmersIDs,
   setIsPhotoModalVisible,
-  launchNativeImageLibrary,
-}) {
+  launchNativeImageLibrary
+}: any) {
   const navigation = useNavigation()
 
   return (
@@ -25,6 +26,7 @@ export default function PhotoBottomSheet({
     >
       <TouchableOpacity
         onPress={() => {
+          // @ts-expect-error TS(2345): Argument of type 'string' is not assignable to par... Remove this comment to see the full error message
           navigation.navigate("Camera", {
             ownerType,
             ownerId,
@@ -59,6 +61,7 @@ export default function PhotoBottomSheet({
 
       <TouchableOpacity
         onPress={() => {
+          // @ts-expect-error TS(2345): Argument of type 'string' is not assignable to par... Remove this comment to see the full error message
           navigation.navigate("Camera", {
             ownerType,
             ownerId,

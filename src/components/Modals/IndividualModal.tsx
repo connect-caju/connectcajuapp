@@ -3,6 +3,7 @@
 /* eslint-disable react/prop-types */
 import React, { useCallback, useState } from "react";
 import { Text, Stack, Box, Center } from "native-base";
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { ScrollView, View, } from "react-native";
 import { Button, Icon } from "@rneui/themed";
 import Modal from "react-native-modal";
@@ -10,6 +11,7 @@ import CustomDivider from "../Divider/CustomDivider";
 import styles from "./styles";
 
 import "react-native-get-random-values";
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'uuid... Remove this comment to see the full error message
 import { v4 as uuidv4 } from "uuid";
 
 import { generateUAID } from "../../helpers/generateUAID";
@@ -25,7 +27,6 @@ export default function IndividualModal({
   modalVisible,
   setModalVisible,
   farmerData,
-
   setSurname,
   setOtherNames,
   setIsSprayingAgent,
@@ -42,14 +43,12 @@ export default function IndividualModal({
   setDocType,
   setDocNumber,
   setNuit,
-
   setFarmerItem,
   setIsCoordinatesModalVisible,
-
   customUserData,
   setActor,
-  actor,
-}) {
+  actor
+}: any) {
   const realm = useRealm();
   const [isActorSaved, setIsActorSaved] = useState(false);
 
@@ -60,7 +59,7 @@ export default function IndividualModal({
 
   // create a new actor with data received from the form
   const addFarmer = useCallback(
-    (farmerData, realm) => {
+    (farmerData: any, realm: any) => {
       const {
         names,
         // isSprayingAgent,
@@ -114,7 +113,9 @@ export default function IndividualModal({
       // update user stat (1 more farmer registered by the user)
       if (currentUserStat) {
         realm.write(() => {
+          // @ts-expect-error TS(2339): Property 'registeredFarmers' does not exist on typ... Remove this comment to see the full error message
           currentUserStat.registeredFarmers =
+            // @ts-expect-error TS(2339): Property 'registeredFarmers' does not exist on typ... Remove this comment to see the full error message
             currentUserStat.registeredFarmers + 1;
         });
       } else {
@@ -135,7 +136,7 @@ export default function IndividualModal({
   );
 
   const addSprayingServiceProvider = useCallback(
-    (actor, realm) => {
+    (actor: any, realm: any) => {
       const sprayingProviderObject = {
         _id: uuidv4(),
         actorId: actor?._id,
@@ -158,7 +159,7 @@ export default function IndividualModal({
   );
 
   const addActorMembership = useCallback(
-    (actor, realm) => {
+    (actor: any, realm: any) => {
       const actorMembershipObject = {
         _id: uuidv4(),
         actorId: actor?._id,
@@ -186,6 +187,7 @@ export default function IndividualModal({
         try {
           addSprayingServiceProvider(actor, realm);
         } catch (error) {
+          // @ts-expect-error TS(2584): Cannot find name 'console'. Do you need to change ... Remove this comment to see the full error message
           console.log("Could not save actor as spraying service provider:", {
             cause: error,
           });
@@ -196,6 +198,7 @@ export default function IndividualModal({
         try {
           addActorMembership(actor, realm);
         } catch (error) {
+          // @ts-expect-error TS(2584): Cannot find name 'console'. Do you need to change ... Remove this comment to see the full error message
           console.log("Could not save actor as member of an organization:", {
             cause: error,
           });
@@ -230,6 +233,7 @@ export default function IndividualModal({
         >
           <View style={{ width: "90%" }}>
             <Text
+              // @ts-expect-error TS(2322): Type '{ children: string; style: { fontFamily: str... Remove this comment to see the full error message
               style={{
                 fontFamily: "JosefinSans-Bold",
                 fontSize: 16,
@@ -269,13 +273,17 @@ export default function IndividualModal({
             <Box mx="2">
               <Stack direction="row" w="100%" my="1">
                 <Box w="50%">
+                  // @ts-expect-error TS(2322): Type '{ children: string; style: any; }' is not as... Remove this comment to see the full error message
                   <Text style={styles.keys}>Nome Completo:</Text>
                 </Box>
+                // @ts-expect-error TS(2322): Type '{ children: Element; w: "50%"; style: any; }... Remove this comment to see the full error message
                 <Box w="50%" style={styles.values}>
                   <Box>
+                    // @ts-expect-error TS(2322): Type '{ children: any[]; style: any; }' is not ass... Remove this comment to see the full error message
                     <Text style={styles.values}>
                       {farmerData?.names?.surname} (Apelido)
                     </Text>
+                    // @ts-expect-error TS(2322): Type '{ children: any[]; style: any; }' is not ass... Remove this comment to see the full error message
                     <Text style={styles.values}>
                       {farmerData?.names?.otherNames} (Outros nomes)
                     </Text>
@@ -289,9 +297,12 @@ export default function IndividualModal({
               />
               <Stack direction="row" w="100%" my="1">
                 <Box w="50%">
+                  // @ts-expect-error TS(2322): Type '{ children: string; style: any; }' is not as... Remove this comment to see the full error message
                   <Text style={styles.keys}>Provedor de Serviços:</Text>
                 </Box>
+                // @ts-expect-error TS(2322): Type '{ children: Element; w: "50%"; style: any; }... Remove this comment to see the full error message
                 <Box w="50%" style={styles.values}>
+                  // @ts-expect-error TS(2322): Type '{ children: string; style: any; }' is not as... Remove this comment to see the full error message
                   <Text style={styles.values}>
                     {farmerData?.isSprayingAgent ? "Sim" : "Não"}
                   </Text>
@@ -305,9 +316,12 @@ export default function IndividualModal({
               />
               <Stack direction="row" w="100%" my="1">
                 <Box w="50%">
+                  // @ts-expect-error TS(2322): Type '{ children: string; style: any; }' is not as... Remove this comment to see the full error message
                   <Text style={styles.keys}>Membro de organização:</Text>
                 </Box>
+                // @ts-expect-error TS(2322): Type '{ children: Element; w: "50%"; style: any; }... Remove this comment to see the full error message
                 <Box w="50%" style={styles.values}>
+                  // @ts-expect-error TS(2322): Type '{ children: string; style: any; }' is not as... Remove this comment to see the full error message
                   <Text style={styles.values}>
                     {farmerData?.isGroupMember ? "Sim" : "Não"}
                   </Text>
@@ -321,9 +335,12 @@ export default function IndividualModal({
               />
               <Stack direction="row" w="100%" my="1">
                 <Box w="50%">
+                  // @ts-expect-error TS(2322): Type '{ children: string; style: any; }' is not as... Remove this comment to see the full error message
                   <Text style={styles.keys}>Género:</Text>
                 </Box>
+                // @ts-expect-error TS(2322): Type '{ children: Element; w: "50%"; style: any; }... Remove this comment to see the full error message
                 <Box w="50%" style={styles.values}>
+                  // @ts-expect-error TS(2322): Type '{ children: any; style: any; }' is not assig... Remove this comment to see the full error message
                   <Text style={styles.values}>{farmerData?.gender}</Text>
                 </Box>
               </Stack>
@@ -335,9 +352,12 @@ export default function IndividualModal({
               />
               <Stack direction="row" w="100%" my="1">
                 <Box w="50%">
+                  // @ts-expect-error TS(2322): Type '{ children: string; style: any; }' is not as... Remove this comment to see the full error message
                   <Text style={styles.keys}>Agregado Familiar:</Text>
                 </Box>
+                // @ts-expect-error TS(2322): Type '{ children: Element; w: "50%"; style: any; }... Remove this comment to see the full error message
                 <Box w="50%" style={styles.values}>
+                  // @ts-expect-error TS(2322): Type '{ children: any[]; style: any; }' is not ass... Remove this comment to see the full error message
                   <Text style={styles.values}>
                     {farmerData?.familySize} (membros)
                   </Text>
@@ -351,9 +371,12 @@ export default function IndividualModal({
               />
               <Stack direction="row" w="100%" my="1">
                 <Box w="50%">
+                  // @ts-expect-error TS(2322): Type '{ children: string; style: any; }' is not as... Remove this comment to see the full error message
                   <Text style={styles.keys}>Data Nascimento:</Text>
                 </Box>
+                // @ts-expect-error TS(2322): Type '{ children: Element; w: "50%"; style: any; }... Remove this comment to see the full error message
                 <Box w="50%" style={styles.values}>
+                  // @ts-expect-error TS(2322): Type '{ children: string; style: any; }' is not as... Remove this comment to see the full error message
                   <Text style={styles.values}>
                     {farmerData?.birthDate
                       ? `${new Date(farmerData?.birthDate).getDate()}/${new Date(farmerData?.birthDate).getMonth() + 1
@@ -369,19 +392,24 @@ export default function IndividualModal({
               />
               <Stack direction="row" w="100%" my="1">
                 <Box w="50%">
+                  // @ts-expect-error TS(2322): Type '{ children: string; style: any; }' is not as... Remove this comment to see the full error message
                   <Text style={styles.keys}>Residência:</Text>
                 </Box>
                 <Box w="50%">
                   <Box>
+                    // @ts-expect-error TS(2322): Type '{ children: any[]; style: any; }' is not ass... Remove this comment to see the full error message
                     <Text style={styles.values}>
                       {farmerData?.address?.province} (província)
                     </Text>
+                    // @ts-expect-error TS(2322): Type '{ children: any[]; style: any; }' is not ass... Remove this comment to see the full error message
                     <Text style={styles.values}>
                       {farmerData?.address?.district} (distrito)
                     </Text>
+                    // @ts-expect-error TS(2322): Type '{ children: any[]; style: any; }' is not ass... Remove this comment to see the full error message
                     <Text style={styles.values}>
                       {farmerData?.address?.adminPost} (posto admin.)
                     </Text>
+                    // @ts-expect-error TS(2322): Type '{ children: string; style: any; }' is not as... Remove this comment to see the full error message
                     <Text style={styles.values}>
                       {farmerData?.address?.village
                         ? farmerData?.address?.village + " (localidade)"
@@ -397,36 +425,45 @@ export default function IndividualModal({
               />
               <Stack direction="row" w="100%" my="1">
                 <Box w="50%">
+                  // @ts-expect-error TS(2322): Type '{ children: string; style: any; }' is not as... Remove this comment to see the full error message
                   <Text style={styles.keys}>Telemóveis:</Text>
                 </Box>
                 <Box w="50%">
                   {farmerData?.contact?.primaryPhone &&
                     farmerData?.contact?.secondaryPhone ? (
                     <Box>
+                      // @ts-expect-error TS(2322): Type '{ children: any[]; style: any; }' is not ass... Remove this comment to see the full error message
                       <Text style={styles.values}>
                         {farmerData?.contact?.primaryPhone} (principal)
                       </Text>
+                      // @ts-expect-error TS(2322): Type '{ children: any[]; style: any; }' is not ass... Remove this comment to see the full error message
                       <Text style={styles.values}>
                         {farmerData?.contact?.secondaryPhone} (alternativo)
                       </Text>
                     </Box>
                   ) : farmerData?.contact?.primaryPhone ? (
                     <Box>
+                      // @ts-expect-error TS(2322): Type '{ children: any[]; style: any; }' is not ass... Remove this comment to see the full error message
                       <Text style={styles.values}>
                         {farmerData?.contact?.primaryPhone} (principal)
                       </Text>
+                      // @ts-expect-error TS(2322): Type '{ children: string; style: any; }' is not as... Remove this comment to see the full error message
                       <Text style={styles.values}>Nenhum (alternativo)</Text>
                     </Box>
                   ) : farmerData?.contact?.secondaryPhone ? (
                     <Box>
+                      // @ts-expect-error TS(2322): Type '{ children: string; style: any; }' is not as... Remove this comment to see the full error message
                       <Text style={styles.values}>Nenhum (principal)</Text>
+                      // @ts-expect-error TS(2322): Type '{ children: any[]; style: any; }' is not ass... Remove this comment to see the full error message
                       <Text style={styles.values}>
                         {farmerData?.contact?.secondaryPhone} (alternativo)
                       </Text>
                     </Box>
                   ) : (
                     <Box>
+                      // @ts-expect-error TS(2322): Type '{ children: string; style: any; }' is not as... Remove this comment to see the full error message
                       <Text style={styles.values}>Nenhum (principal)</Text>
+                      // @ts-expect-error TS(2322): Type '{ children: string; style: any; }' is not as... Remove this comment to see the full error message
                       <Text style={styles.values}>Nenhum (alternativo)</Text>
                     </Box>
                   )}
@@ -439,6 +476,7 @@ export default function IndividualModal({
               />
               <Stack direction="row" w="100%" my="1">
                 <Box w="50%">
+                  // @ts-expect-error TS(2322): Type '{ children: string; style: any; }' is not as... Remove this comment to see the full error message
                   <Text style={styles.keys}>Local Nascimento:</Text>
                 </Box>
                 <Box w="50%">
@@ -446,18 +484,22 @@ export default function IndividualModal({
                     "Estrangeiro",
                   ) ? (
                     <Box>
+                      // @ts-expect-error TS(2322): Type '{ children: string; style: any; }' is not as... Remove this comment to see the full error message
                       <Text style={styles.values}>
                         {farmerData?.birthPlace?.province + " (província)"}
                       </Text>
+                      // @ts-expect-error TS(2322): Type '{ children: string; style: any; }' is not as... Remove this comment to see the full error message
                       <Text style={styles.values}>
                         {farmerData?.birthPlace?.district + " (distrito)"}
                       </Text>
+                      // @ts-expect-error TS(2322): Type '{ children: string; style: any; }' is not as... Remove this comment to see the full error message
                       <Text style={styles.values}>
                         {farmerData?.birthPlace?.adminPost + " (posto admin.)"}
                       </Text>
                     </Box>
                   ) : (
                     <Box>
+                      // @ts-expect-error TS(2322): Type '{ children: string; style: any; }' is not as... Remove this comment to see the full error message
                       <Text style={styles.values}>
                         {farmerData?.birthPlace?.district +
                           " (País Estrangeiro)"}
@@ -473,17 +515,21 @@ export default function IndividualModal({
               />
               <Stack direction="row" w="100%" my="1">
                 <Box w="50%">
+                  // @ts-expect-error TS(2322): Type '{ children: string; style: any; }' is not as... Remove this comment to see the full error message
                   <Text style={styles.keys}>Doc. Identificação:</Text>
                 </Box>
                 <Box w="50%">
                   {farmerData?.idDocument?.docNumber !== "Nenhum" ? (
+                    // @ts-expect-error TS(2322): Type '{ children: any[]; style: any; }' is not ass... Remove this comment to see the full error message
                     <Text style={styles.values}>
                       {farmerData?.idDocument?.docNumber} (
                       {farmerData?.idDocument?.docType})
                     </Text>
                   ) : farmerData?.idDocument?.docType === "Não tem" ? (
+                    // @ts-expect-error TS(2322): Type '{ children: string; style: any; }' is not as... Remove this comment to see the full error message
                     <Text style={styles.values}>Não tem</Text>
                   ) : (
+                    // @ts-expect-error TS(2322): Type '{ children: string; style: any; }' is not as... Remove this comment to see the full error message
                     <Text style={styles.values}>Nenhum (Nenhum)</Text>
                   )}
                 </Box>
@@ -492,10 +538,12 @@ export default function IndividualModal({
                 <Box w="50%"></Box>
                 <Box w="50%">
                   {farmerData?.idDocument?.nuit ? (
+                    // @ts-expect-error TS(2322): Type '{ children: any[]; style: any; }' is not ass... Remove this comment to see the full error message
                     <Text style={styles.values}>
                       {farmerData?.idDocument?.nuit} (NUIT)
                     </Text>
                   ) : (
+                    // @ts-expect-error TS(2322): Type '{ children: string; style: any; }' is not as... Remove this comment to see the full error message
                     <Text style={styles.values}>Nenhum (NUIT)</Text>
                   )}
                 </Box>
@@ -514,6 +562,7 @@ export default function IndividualModal({
                       setIsCoordinatesModalVisible(true);
                     } catch (error) {
                       throw new Error("Failed to register IndividualFarmer", {
+                        // @ts-expect-error TS(2322): Type 'unknown' is not assignable to type 'Error | ... Remove this comment to see the full error message
                         cause: error,
                       });
                     } finally {

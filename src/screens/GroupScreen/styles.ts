@@ -1,11 +1,12 @@
-import { StyleSheet } from "react-native"
-import COLORS from "../../consts/colors"
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
+import { StyleSheet } from "react-native";
+import COLORS from "../../consts/colors";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
   listenOrientationChange as lor,
   removeOrientationListener as rol,
-} from "react-native-responsive-screen"
+} from "react-native-responsive-screen";
 
 import {
   responsiveFontSize,
@@ -15,7 +16,7 @@ import {
   responsiveScreenHeight,
   responsiveScreenWidth,
   useDimensionsChange,
-} from "react-native-responsive-dimensions"
+} from "react-native-responsive-dimensions";
 
 const styles = StyleSheet.create({
   images: {
@@ -26,6 +27,6 @@ const styles = StyleSheet.create({
     marginHorizontal: 3,
     borderRadius: 100,
   },
-})
+});
 
-export default styles
+export default styles;

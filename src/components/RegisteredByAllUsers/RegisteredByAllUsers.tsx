@@ -1,9 +1,11 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable linebreak-style */
 /* eslint-disable prettier/prettier */
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { View, Text } from "react-native";
 import React from "react";
 import { customizeItem } from "../../helpers/customizeItem";
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { FlatList } from "react-native";
 import GroupItem from "../GroupItem/GroupItem";
 import FarmerItem from "../FarmerItem/FarmerItem";
@@ -20,7 +22,11 @@ import Info from "../Info/Info";
 
 const { useRealm } = realmContext;
 
-const RegisteredByAllUsers = ({ farmerType, route, navigation }) => {
+const RegisteredByAllUsers = ({
+    farmerType,
+    route,
+    navigation
+}: any) => {
 
     let realm = useRealm();
     let user = useUser();
@@ -96,7 +102,7 @@ const RegisteredByAllUsers = ({ farmerType, route, navigation }) => {
         );
     }
 
-    const keyExtractor = (item, index) => index.toString();
+    const keyExtractor = (item: any, index: any) => index.toString();
 
     return (
         <View>
@@ -123,7 +129,10 @@ const RegisteredByAllUsers = ({ farmerType, route, navigation }) => {
                         keyExtractor={keyExtractor}
                         // onEndReached={handleEndReached}
                         onEndReachedThreshold={0.1}
-                        renderItem={({ item }) => {
+                        // @ts-expect-error TS(7030): Not all code paths return a value.
+                        renderItem={({
+                            item
+                        }: any) => {
                             // add all the IDs to each item to allow swiping between screens...
                             // when the user open any item from the list
                             if (item.flag === "Grupo") {

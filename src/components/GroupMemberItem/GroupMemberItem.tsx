@@ -7,6 +7,7 @@ import {
   Animated,
   Image,
   TouchableOpacity,
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 } from "react-native";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faCheck, faRemove } from "@fortawesome/free-solid-svg-icons";
@@ -14,7 +15,9 @@ import COLORS from "../../consts/colors";
 import { Icon } from "@rneui/base";
 import { calculateAge } from "../../helpers/dates";
 
-export default function GroupMemberItem({ member }) {
+export default function GroupMemberItem({
+  member
+}: any) {
   const [onPressMember, setOnPressMember] = useState(false);
   const togglePressedMember = () => {
     setOnPressMember(!onPressMember);

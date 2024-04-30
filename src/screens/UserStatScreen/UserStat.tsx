@@ -8,6 +8,7 @@ import {
   Text,
   View,
   TouchableOpacity,
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import { Icon } from "@rneui/themed";
@@ -54,7 +55,10 @@ const filterByCriteria = [
 ];
 
 
-export default function UserStat({ route, navigation }) {
+export default function UserStat({
+  route,
+  navigation
+}: any) {
   const { userId, userName } = route.params;
   const realm = useRealm();
   const [focusedOption, setFocusedOption] = useState(1);
@@ -110,18 +114,19 @@ export default function UserStat({ route, navigation }) {
   ]);
 
 
-  const keyExtractor = (item, index) => index.toString();
+  const keyExtractor = (item: any, index: any) => index.toString();
 
   const handleEndReached = () => {
     if (!isEndReached && !isLoading) {
       setIsLoading(true);
+      // @ts-expect-error TS(2304): Cannot find name 'setTimeout'.
       setTimeout(() => {
         setIsLoading(false);
       }, 3000);
     }
   };
 
-  const handleFocusedOption = (option) => {
+  const handleFocusedOption = (option: any) => {
     setFocusedOption(option);
   };
 
@@ -218,7 +223,9 @@ export default function UserStat({ route, navigation }) {
             // ListHeaderComponent={<View style={{ width: 6, }} />}
             snapToInterval={86}
             decelerationRate="fast"
-            renderItem={({ item }) => {
+            renderItem={({
+              item
+            }: any) => {
               return (
                 <TouchableOpacity
                   style={{

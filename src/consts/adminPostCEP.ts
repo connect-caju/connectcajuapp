@@ -907,4 +907,4 @@ const adminPostCEP = {
     Maniamba: "1116-03",
     "Metangula-Sede": "1116-04",
   },
-}
+};

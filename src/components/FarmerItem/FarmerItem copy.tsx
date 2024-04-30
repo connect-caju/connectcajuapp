@@ -1,3 +1,4 @@
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { TouchableOpacity, View, Text } from "react-native"
 import React, { useState, useEffect } from "react"
 import { Icon, Avatar } from "@rneui/themed"
@@ -36,7 +37,11 @@ const { useRealm, useQuery, useObject } = realmContext
 
 const subScribedFarmlands = "subScribedFarmlands"
 
-const FarmerItem = ({ item, route, farmerType }) => {
+const FarmerItem = ({
+  item,
+  route,
+  farmerType
+}: any) => {
   const navigation = useNavigation()
   const [farmlandStatus, setFarmlandStatus] = useState("")
 
@@ -46,14 +51,13 @@ const FarmerItem = ({ item, route, farmerType }) => {
     if (item?.farmlandsList?.length > 0) {
       if (
         item?.farmlandsList.some(
-          (farmland) =>
-            farmland.status === resourceValidation.status.invalidated,
+          (farmland: any) => farmland.status === resourceValidation.status.invalidated,
         )
       ) {
         setFarmlandStatus(resourceValidation.status.invalidated)
       } else if (
         item?.farmlandsList.some(
-          (farmland) => farmland.status === resourceValidation.status.pending,
+          (farmland: any) => farmland.status === resourceValidation.status.pending,
         )
       ) {
         setFarmlandStatus(resourceValidation.status.pending)
@@ -94,6 +98,7 @@ const FarmerItem = ({ item, route, farmerType }) => {
       }}
     >
       <Box
+        // @ts-expect-error TS(2322): Type '{ children: Element; style: { position: stri... Remove this comment to see the full error message
         style={{
           position: "absolute",
           top: 1,
@@ -132,6 +137,7 @@ const FarmerItem = ({ item, route, farmerType }) => {
           />
           {item?.isSprayingAgent && (
             <Box
+              // @ts-expect-error TS(2322): Type '{ children: Element; style: { position: stri... Remove this comment to see the full error message
               style={{
                 position: "absolute",
                 bottom: -1,
@@ -146,6 +152,7 @@ const FarmerItem = ({ item, route, farmerType }) => {
         <Box w="80%">
           <TouchableOpacity
             onPress={() => {
+              // @ts-expect-error TS(2345): Argument of type 'string' is not assignable to par... Remove this comment to see the full error message
               navigation.navigate("Farmer", {
                 ownerId: item._id,
                 farmersIDs: item?.farmersIDs,
@@ -176,13 +183,14 @@ const FarmerItem = ({ item, route, farmerType }) => {
               <Stack direction="row">
                 <Box w="100%">
                   <Box
+                    // @ts-expect-error TS(2322): Type '{ children: any; style: {}; }' is not assign... Remove this comment to see the full error message
                     style={
                       {
                         // flexDirection: 'row',
                       }
                     }
                   >
-                    {item.assets?.map((asset, index) => (
+                    {item.assets?.map((asset: any, index: any) => (
                       <Text
                         key={index}
                         style={{
@@ -211,6 +219,7 @@ const FarmerItem = ({ item, route, farmerType }) => {
                     {/* <Stack direction="row"> */}
                     <Box
                       // w="30%"
+                      // @ts-expect-error TS(2322): Type '{ children: Element[]; style: { flexDirectio... Remove this comment to see the full error message
                       style={{
                         flexDirection: "row",
                         // borderWidth: 1,
@@ -287,7 +296,7 @@ const FarmerItem = ({ item, route, farmerType }) => {
         </Box>
       </Stack>
     </Animated.View>
-  )
+  );
 }
 
 export default FarmerItem

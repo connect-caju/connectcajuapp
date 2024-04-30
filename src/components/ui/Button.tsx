@@ -1,3 +1,4 @@
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { Text, TouchableOpacity } from 'react-native';
 
 const defaultContainerClasses = 'py-2 px-5 rounded-lg';

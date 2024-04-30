@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable linebreak-style */
 /* eslint-disable prettier/prettier */
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { TouchableOpacity, View, Text } from "react-native";
 import React, { useState, useEffect } from "react";
 import { Icon, Avatar } from "@rneui/themed";
@@ -18,7 +19,10 @@ import { farmerTypes } from "../../consts/farmerTypes";
 import ResourceSignature from "../ResourceSignature/ResourceSignature";
 
 
-const FarmerItem = ({ item, customUserData }) => {
+const FarmerItem = ({
+  item,
+  customUserData
+}: any) => {
   const navigation = useNavigation();
   const [farmlandStatus, setFarmlandStatus] = useState("");
 
@@ -26,14 +30,13 @@ const FarmerItem = ({ item, customUserData }) => {
     if (item?.farmlandsList?.length > 0) {
       if (
         item?.farmlandsList.some(
-          (farmland) =>
-            farmland.status === resourceValidation.status.invalidated,
+          (farmland: any) => farmland.status === resourceValidation.status.invalidated,
         )
       ) {
         setFarmlandStatus(resourceValidation.status.invalidated);
       } else if (
         item?.farmlandsList.some(
-          (farmland) => farmland.status === resourceValidation.status.pending,
+          (farmland: any) => farmland.status === resourceValidation.status.pending,
         )
       ) {
         setFarmlandStatus(resourceValidation.status.pending);
@@ -50,6 +53,7 @@ const FarmerItem = ({ item, customUserData }) => {
       className="bg-white dark:bg-gray-800 mx-2 my-1 py-1 rounded-md"
     >
       <Box
+        // @ts-expect-error TS(2322): Type '{ children: Element; style: { position: stri... Remove this comment to see the full error message
         style={{
           position: "absolute",
           top: 20,
@@ -88,6 +92,7 @@ const FarmerItem = ({ item, customUserData }) => {
           />
           {item?.isSprayingAgent && (
             <Box
+              // @ts-expect-error TS(2322): Type '{ children: Element; style: { position: stri... Remove this comment to see the full error message
               style={{
                 position: "absolute",
                 bottom: 1,
@@ -102,6 +107,7 @@ const FarmerItem = ({ item, customUserData }) => {
         <Box w="80%" pt="3">
           <TouchableOpacity
             onPress={() => {
+              // @ts-expect-error TS(2345): Argument of type 'string' is not assignable to par... Remove this comment to see the full error message
               navigation.navigate("Profile", {
                 ownerId: item._id,
                 farmersIDs: item?.farmersIDs,
@@ -116,7 +122,7 @@ const FarmerItem = ({ item, customUserData }) => {
             >
               {item?.name}
             </Text>
-            {item?.assets?.map((asset, index) => (
+            {item?.assets?.map((asset: any, index: any) => (
               <Text
                 key={index}
                 numberOfLines={1}

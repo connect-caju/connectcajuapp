@@ -1,9 +1,10 @@
 /* eslint-disable prettier/prettier */
-import React, { useState } from "react"
-import { StyleSheet, Text, View } from "react-native"
-import { Dropdown } from "react-native-element-dropdown"
-import provinces2 from "../../consts/provinces2"
-import COLORS from "../../consts/colors"
+import React, { useState } from "react";
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
+import { StyleSheet, Text, View } from "react-native";
+import { Dropdown } from "react-native-element-dropdown";
+import provinces2 from "../../consts/provinces2";
+import COLORS from "../../consts/colors";
 
 const data = [
   { label: "Item 1", value: "1" },
@@ -14,11 +15,11 @@ const data = [
   { label: "Item 6", value: "6" },
   { label: "Item 7", value: "7" },
   { label: "Item 8", value: "8" },
-]
+];
 
 const DropdownComponent = () => {
-  const [value, setValue] = useState(null)
-  const [isFocus, setIsFocus] = useState(false)
+  const [value, setValue] = useState(null);
+  const [isFocus, setIsFocus] = useState(false);
 
   const renderLabel = () => {
     if (value || isFocus) {
@@ -26,10 +27,10 @@ const DropdownComponent = () => {
         <Text style={[styles.label, isFocus && { color: "gray" }]}>
           Dropdown label
         </Text>
-      )
+      );
     }
-    return null
-  }
+    return null;
+  };
 
   return (
     <View style={styles.container}>
@@ -51,18 +52,19 @@ const DropdownComponent = () => {
         onFocus={() => setIsFocus(true)}
         onBlur={() => setIsFocus(false)}
         onChange={(item) => {
-          setValue(item.value)
-          setIsFocus(false)
+          // @ts-expect-error TS(2345): Argument of type 'string' is not assignable to par... Remove this comment to see the full error message
+          setValue(item.value);
+          setIsFocus(false);
         }}
         //   renderLeftIcon={() => (
 
         //   )}
       />
     </View>
-  )
-}
+  );
+};
 
-export default DropdownComponent
+export default DropdownComponent;
 
 const styles = StyleSheet.create({
   container: {
@@ -102,4 +104,4 @@ const styles = StyleSheet.create({
     height: 40,
     fontSize: 16,
   },
-})
+});

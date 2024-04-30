@@ -1,5 +1,6 @@
 /* eslint-disable prettier/prettier */
 import React, { useEffect } from "react"
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { StatusBar, View, Text } from "react-native"
 import { SafeAreaProvider } from "react-native-safe-area-context"
 import SplashScreen from "react-native-splash-screen"
@@ -10,7 +11,10 @@ import { faWarning } from "@fortawesome/free-solid-svg-icons"
 
 // toastConfig customized the toast messages
 export const toastConfig = {
-  networkConnection: ({ text1, props }) => (
+  networkConnection: ({
+    text1,
+    props
+  }: any) => (
     <View
       style={{
         minHeight: 60,
@@ -56,7 +60,10 @@ export const toastConfig = {
     </View>
   ),
 
-  addedFarmerToGroup: ({ text1, props }) => (
+  addedFarmerToGroup: ({
+    text1,
+    props
+  }: any) => (
     <View
       style={{
         minHeight: 60,
@@ -102,7 +109,10 @@ export const toastConfig = {
     </View>
   ),
 
-  removedFarmerFromGroup: ({ text1, props }) => (
+  removedFarmerFromGroup: ({
+    text1,
+    props
+  }: any) => (
     <View
       style={{
         // minHeight: 60,
@@ -149,7 +159,10 @@ export const toastConfig = {
     </View>
   ),
 
-  addedGroupManager: ({ text1, props }) => (
+  addedGroupManager: ({
+    text1,
+    props
+  }: any) => (
     <View
       style={{
         minHeight: 60,
@@ -195,7 +208,10 @@ export const toastConfig = {
     </View>
   ),
 
-  userSignUp: ({ text1, props }) => (
+  userSignUp: ({
+    text1,
+    props
+  }: any) => (
     <View
       style={{
         minHeight: 60,

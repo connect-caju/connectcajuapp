@@ -25,6 +25,6 @@ const categories = {
       selling: "Venda Conjunta",
     },
   },
-}
+};
 
-export default categories
+export default categories;

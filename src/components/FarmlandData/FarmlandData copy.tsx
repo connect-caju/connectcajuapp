@@ -10,15 +10,19 @@ import {
   Animated,
   Easing,
   useNativeDriver,
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 } from "react-native";
 import {
   Box,
   FormControl,
   Stack,
   Center,
+  // @ts-expect-error TS(2305): Module '"native-base"' has no exported member 'Sep... Remove this comment to see the full error message
   Separator,
+  // @ts-expect-error TS(2305): Module '"native-base"' has no exported member 'Thu... Remove this comment to see the full error message
   Thumbnail,
   List,
+  // @ts-expect-error TS(2305): Module '"native-base"' has no exported member 'Lis... Remove this comment to see the full error message
   ListItem,
 } from "native-base";
 import { Avatar, Divider, Icon, Tooltip } from "@rneui/base";
@@ -27,7 +31,9 @@ import {
   CollapseHeader,
   CollapseBody,
   AccordionList,
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'acco... Remove this comment to see the full error message
 } from "accordion-collapse-react-native";
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'uuid... Remove this comment to see the full error message
 import { v4 as uuidv4 } from "uuid";
 import {
   widthPercentageToDP as wp,
@@ -56,6 +62,7 @@ import EditFarmlandData from "../EditData/EditFarmlandData";
 import { roles } from "../../consts/roles";
 import { errorMessages } from "../../consts/errorMessages";
 import validateInvalidationMessage from "../../helpers/validateInvalidationMessage";
+// @ts-expect-error TS(2307): Cannot find module '../EditData/ConfirmDataCopy' o... Remove this comment to see the full error message
 import ConfirmData from "../EditData/ConfirmDataCopy";
 
 import { useUser } from "@realm/react";
@@ -77,8 +84,8 @@ const FarmlandData = ({
   scale,
   resizeBox,
   isOverlayVisible,
-  setIsOverlayVisible,
-}) => {
+  setIsOverlayVisible
+}: any) => {
   const realm = useRealm();
   const user = useUser();
   const customUserData = user?.customData;
@@ -173,11 +180,11 @@ const FarmlandData = ({
   // check if there is enough area for a new Block to be added in
   // this function prevent adding new cashew trees in a farmland
   // where there is no enough space left
-  const checkAreasConformity = (farmland) => {
+  const checkAreasConformity = (farmland: any) => {
     const totalArea = farmland?.totalArea;
     const blocksAreas = farmland?.blocks
-      ?.map((block) => block?.usedArea)
-      .reduce((acc, el) => acc + el, 0);
+      ?.map((block: any) => block?.usedArea)
+      .reduce((acc: any, el: any) => acc + el, 0);
     if (totalArea - blocksAreas <= 0.02) {
       setIsAreaNotEnough(true);
     }
@@ -187,7 +194,7 @@ const FarmlandData = ({
     checkAreasConformity(farmland);
   }, [farmland, autoRefresh, refresh]);
 
-  const validationAction = (realm, resourceId, flag) => {
+  const validationAction = (realm: any, resourceId: any, flag: any) => {
     realm.write(() => {
       const foundFarmland = realm.objectForPrimaryKey(
         "Farmland",
@@ -204,7 +211,7 @@ const FarmlandData = ({
   };
 
   const addMessage = useCallback(
-    (realm, newResourceId, newMessage) => {
+    (realm: any, newResourceId: any, newMessage: any) => {
       if (!validateInvalidationMessage(newMessage, errors, setErrors)) {
         return;
       }
@@ -258,10 +265,12 @@ const FarmlandData = ({
       );
     });
 
+    // @ts-expect-error TS(2304): Cannot find name 'setInterval'.
     const interval = setInterval(() => {
       setAutoRefresh(!autoRefresh);
     }, 2000);
 
+    // @ts-expect-error TS(2304): Cannot find name 'clearInterval'.
     clearInterval(interval);
   }, [
     realm,
@@ -273,7 +282,7 @@ const FarmlandData = ({
     isNewBlockVisible,
   ]);
 
-  const resizeBlockBox = (to) => {
+  const resizeBlockBox = (to: any) => {
     to === 1 && setIsNewBlockVisible(true);
     Animated.timing(scaleBlockBox, {
       toValue: to,
@@ -390,7 +399,7 @@ const FarmlandData = ({
             backgroundColor: COLORS.mediumseagreen,
             paddingHorizontal: 10,
           }}
-          onToggle={(isOn) => {
+          onToggle={(isOn: any) => {
             setIsCallapseOne(isOn);
             setRefresh(!isOn);
           }}
@@ -435,6 +444,7 @@ const FarmlandData = ({
             }}
           >
             <Box
+              // @ts-expect-error TS(2322): Type '{ children: Element[]; style: { justifyConte... Remove this comment to see the full error message
               style={{
                 justifyContent: "center",
                 alignItems: "center",
@@ -666,6 +676,7 @@ const FarmlandData = ({
                       }
                       style={{}}
                       onPress={() =>
+                        // @ts-expect-error TS(2345): Argument of type 'string' is not assignable to par... Remove this comment to see the full error message
                         navigation.navigate("FarmlandAreaAudit", {
                           farmlandId: farmland._id,
                         })
@@ -688,12 +699,13 @@ const FarmlandData = ({
                 </Box>
               </Stack>
               {farmland?.extremeCoordinates.length > 0 &&
-                farmland?.extremeCoordinates?.map((coords) => {
+                farmland?.extremeCoordinates?.map((coords: any) => {
                   return (
                     <Stack
                       key={coords?.position}
                       w="100%"
                       direction="row"
+                      // @ts-expect-error TS(2322): Type '{ children: Element[]; key: any; w: "100%"; ... Remove this comment to see the full error message
                       style={{
                         // backgroundColor: 'grey',
                         marginVertical: 5,
@@ -701,6 +713,7 @@ const FarmlandData = ({
                     >
                       <Box
                         w="40%"
+                        // @ts-expect-error TS(2322): Type '{ children: Element; w: "40%"; style: { just... Remove this comment to see the full error message
                         style={{
                           justifyContent: "center",
                         }}
@@ -792,6 +805,7 @@ const FarmlandData = ({
                       }
                       style={{}}
                       onPress={() => {
+                        // @ts-expect-error TS(2345): Argument of type 'string' is not assignable to par... Remove this comment to see the full error message
                         navigation.navigate("Geolocation", {
                           resourceName: "Farmland",
                           resourceId: farmland._id,
@@ -939,6 +953,7 @@ const FarmlandData = ({
             {/* blocks start here */}
             <Box
               w="100%"
+              // @ts-expect-error TS(2322): Type '{ children: Element; w: "100%"; style: { bac... Remove this comment to see the full error message
               style={{
                 backgroundColor: COLORS.mediumseagreen,
                 paddingVertical: 10,
@@ -969,16 +984,18 @@ const FarmlandData = ({
               </Text>
             )}
 
-            {normalizeBlockList(farmland?.blocks)?.map((block, index) => (
+            {normalizeBlockList(farmland?.blocks)?.map((block: any, index: any) => (
               <Box
                 key={index}
                 mt="3"
+                // @ts-expect-error TS(2322): Type '{ children: any[]; key: any; mt: "3"; style:... Remove this comment to see the full error message
                 style={{
                   marginBottom: 15,
                   marginRight: 10,
                 }}
               >
                 <Box
+                  // @ts-expect-error TS(2322): Type '{ children: Element[]; style: { paddingVerti... Remove this comment to see the full error message
                   style={{
                     paddingVertical: 20,
                   }}
@@ -987,6 +1004,7 @@ const FarmlandData = ({
                     {/* <Box w="5%"></Box> */}
                     <Box
                       w="10%"
+                      // @ts-expect-error TS(2322): Type '{ children: Element; w: "10%"; style: { alig... Remove this comment to see the full error message
                       style={{
                         // backgroundColor: COLORS.black,
                         // borderRadius: 100,
@@ -996,6 +1014,7 @@ const FarmlandData = ({
                       }}
                     >
                       <Box
+                        // @ts-expect-error TS(2322): Type '{ children: Element; style: { backgroundColo... Remove this comment to see the full error message
                         style={{
                           backgroundColor: COLORS.black,
                           borderRadius: 100,
@@ -1066,6 +1085,7 @@ const FarmlandData = ({
                   </Stack>
 
                   <Stack w="100%" direction="row">
+                    // @ts-expect-error TS(2322): Type '{ children: Element; w: "35%"; style: {}; }'... Remove this comment to see the full error message
                     <Box w="35%" style={{}}>
                       <Text
                         style={{
@@ -1095,6 +1115,7 @@ const FarmlandData = ({
                   </Stack>
 
                   <Stack w="100%" direction="row">
+                    // @ts-expect-error TS(2322): Type '{ children: Element; w: "35%"; style: {}; }'... Remove this comment to see the full error message
                     <Box w="35%" style={{}}>
                       <Text
                         style={{
@@ -1120,6 +1141,7 @@ const FarmlandData = ({
                   </Stack>
 
                   <Stack w="100%" direction="row">
+                    // @ts-expect-error TS(2322): Type '{ children: Element; w: "35%"; style: {}; }'... Remove this comment to see the full error message
                     <Box w="35%" style={{}}>
                       <Text
                         style={{
@@ -1197,13 +1219,14 @@ const FarmlandData = ({
                   </Box>
                 </Stack>
                 {block?.sameTypeTrees?.length > 0 ? (
-                  block?.sameTypeTrees?.map((sameType, index) => (
+                  block?.sameTypeTrees?.map((sameType: any, index: any) => (
                     <Box key={index}>
                       <Stack
                         w="100%"
                         direction="row"
                       // pl="4"
                       >
+                        // @ts-expect-error TS(2322): Type '{ children: Element; w: "60%"; style: {}; }'... Remove this comment to see the full error message
                         <Box w="60%" style={{}}>
                           <Text
                             style={{
@@ -1249,6 +1272,7 @@ const FarmlandData = ({
                   </Text>
                 )}
                 <Box
+                  // @ts-expect-error TS(2322): Type '{ children: Element; style: { paddingTop: nu... Remove this comment to see the full error message
                   style={{
                     paddingTop: 20,
                   }}
@@ -1259,6 +1283,7 @@ const FarmlandData = ({
             ))}
 
             <Box
+              // @ts-expect-error TS(2322): Type '{ children: (false | Element)[]; style: { ma... Remove this comment to see the full error message
               style={{
                 marginTop: -10,
                 backgroundColor: COLORS.verylightgrey,
@@ -1266,6 +1291,7 @@ const FarmlandData = ({
             >
               {/* <CustomDivider /> */}
 
+              // @ts-expect-error TS(2322): Type '{ children: (false | Element)[]; direction: ... Remove this comment to see the full error message
               <Stack direction="column" w="100%" style={{ paddingTop: 5 }}>
                 <Box w="100%">
                   <Text
@@ -1362,10 +1388,13 @@ const FarmlandData = ({
     > */}
                   {invalidationMotives?.length > 0 ? (
                     invalidationMotives?.length > 0 &&
+                    // @ts-expect-error TS(2339): Property 'messages' does not exist on type 'Object... Remove this comment to see the full error message
                     invalidationMotives[0]?.messages?.length > 0 &&
-                    invalidationMotives[0]?.messages?.map((motive, index) => (
+                    // @ts-expect-error TS(2339): Property 'messages' does not exist on type 'Object... Remove this comment to see the full error message
+                    invalidationMotives[0]?.messages?.map((motive: any, index: any) => (
                       <Box
                         key={index}
+                        // @ts-expect-error TS(2322): Type '{ children: Element[]; key: any; style: { fl... Remove this comment to see the full error message
                         style={{
                           flexGrow: 1,
                           backgroundColor: COLORS.fourth,
@@ -1411,6 +1440,7 @@ const FarmlandData = ({
                   ) : (
                     <Box
                       // key={index}
+                      // @ts-expect-error TS(2322): Type '{ children: Element[]; style: { flexGrow: nu... Remove this comment to see the full error message
                       style={{
                         flexGrow: 1,
                         backgroundColor: COLORS.fourth,
@@ -1477,7 +1507,7 @@ const FarmlandData = ({
                             numberOfLines={2}
                             maxLength={120}
                             value={message}
-                            onChangeText={(newMessage) => {
+                            onChangeText={(newMessage: any) => {
                               setErrors({
                                 invalidationMessage: "",
                               });
@@ -1495,6 +1525,7 @@ const FarmlandData = ({
                               }
                               _text={{ fontSize: "xs" }}
                             >
+                              // @ts-expect-error TS(2339): Property 'invalidationMessage' does not exist on t... Remove this comment to see the full error message
                               {errors?.invalidationMessage}
                             </FormControl.ErrorMessage>
                           ) : (
@@ -1503,6 +1534,7 @@ const FarmlandData = ({
                         </FormControl>
                       </Box>
                       <Box
+                        // @ts-expect-error TS(2322): Type '{ children: "" | Element; style: { width: st... Remove this comment to see the full error message
                         style={{
                           width: "15%",
                           alignItems: "baseline",
@@ -1511,6 +1543,7 @@ const FarmlandData = ({
                       >
                         {message && (
                           <Box
+                            // @ts-expect-error TS(2322): Type '{ children: Element; style: { position: stri... Remove this comment to see the full error message
                             style={{
                               position: "absolute",
                               bottom: 10,
@@ -1529,6 +1562,7 @@ const FarmlandData = ({
                                 try {
                                   addMessage(realm, farmland?._id, message);
                                 } catch (error) {
+                                  // @ts-expect-error TS(2584): Cannot find name 'console'. Do you need to change ... Remove this comment to see the full error message
                                   console.log(
                                     "Failed to add invalidation message",
                                   );
@@ -1560,11 +1594,13 @@ const FarmlandData = ({
                   <Stack
                     direction="row"
                     w="100%"
+                    // @ts-expect-error TS(2322): Type '{ children: Element[]; direction: "row"; w: ... Remove this comment to see the full error message
                     style={{ paddingVertical: 5 }}
                     space={3}
                   >
                     <Box
                       w="50%"
+                      // @ts-expect-error TS(2322): Type '{ children: Element; w: "50%"; style: { alig... Remove this comment to see the full error message
                       style={{
                         alignItems: "center",
                       }}
@@ -1614,6 +1650,7 @@ const FarmlandData = ({
                     </Box>
                     <Box
                       w="50%"
+                      // @ts-expect-error TS(2322): Type '{ children: Element; w: "50%"; style: { alig... Remove this comment to see the full error message
                       style={{
                         alignItems: "center",
                         paddingRight: 5,

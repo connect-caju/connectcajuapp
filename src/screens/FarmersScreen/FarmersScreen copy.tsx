@@ -15,6 +15,7 @@ import {
   TouchableOpacity,
   SectionList,
   ActivityIndicator,
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 } from "react-native"
 import React, { useEffect, useRef, useState } from "react"
 import { ListItem, Avatar, Icon } from "@rneui/themed"
@@ -68,7 +69,10 @@ const actorMembershipSubs = "actorMembershipSubs"
 
 const provincialStats = "provincialStats"
 
-export default function FarmersScreen({ route, navigation }) {
+export default function FarmersScreen({
+  route,
+  navigation
+}: any) {
   const realm = useRealm()
   const user = useUser()
   let customUserData = user.customData
@@ -98,6 +102,7 @@ export default function FarmersScreen({ route, navigation }) {
   const [fetchedFarmlands, setFetchedFarmlands] = useState([])
 
   const districts = Array.from(
+    // @ts-expect-error TS(2339): Property 'userDistrict' does not exist on type 'Ob... Remove this comment to see the full error message
     new Set(stats.map((stat) => stat?.userDistrict)),
   ).filter((district) => district !== "NA")
 
@@ -135,6 +140,7 @@ export default function FarmersScreen({ route, navigation }) {
     "Instituição",
   )
 
+  // @ts-expect-error TS(2339): Property 'userDistrict' does not exist on type 'Ob... Remove this comment to see the full error message
   const filteredStats = stats?.filter((stat) => stat.userDistrict !== "NA")
   // ------------------------------------------------------
 
@@ -142,12 +148,12 @@ export default function FarmersScreen({ route, navigation }) {
   const [isEndReached, setIsEndReached] = useState(false)
 
   // // ----------------------------------------------------------------------------
-  const listStatsByDistrict = (stats) => {
+  const listStatsByDistrict = (stats: any) => {
     // get the array of all the districts in which users are living
     // to create a SectionList where each item has title and data properties
     // excluding the stats whose district value is 'NA'
     const districts = Array.from(
-      new Set(stats.map((stat) => stat.userDistrict)),
+      new Set(stats.map((stat: any) => stat.userDistrict)),
     )
       .filter((district) => district !== "NA")
       .sort()
@@ -155,8 +161,10 @@ export default function FarmersScreen({ route, navigation }) {
     for (let i = 0; i < districts.length; i++) {
       const district = districts[i]
       let newObject = {}
-      const usersStats = stats.filter((stat) => stat.userDistrict === district)
+      const usersStats = stats.filter((stat: any) => stat.userDistrict === district)
+      // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       newObject["title"] = `${district}`
+      // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       newObject["data"] = usersStats
       statsByDistrict.push(newObject)
     }
@@ -177,7 +185,7 @@ export default function FarmersScreen({ route, navigation }) {
   )
 
   // // merge the three arrays of farmers and sort the items by createdAt
-  let farmersList = []
+  let farmersList: any = []
 
   if (individualsList.length > 0) {
     farmersList = farmersList.concat(individualsList)
@@ -190,6 +198,7 @@ export default function FarmersScreen({ route, navigation }) {
   }
   if (farmersList.length > 0) {
     farmersList = farmersList?.sort(
+      // @ts-expect-error TS(7006): Parameter 'a' implicitly has an 'any' type.
       (a, b) => new Date(b?.createdAt) - new Date(a?.createdAt),
     )
   }
@@ -197,6 +206,7 @@ export default function FarmersScreen({ route, navigation }) {
   const handleEndReached = () => {
     if (!isEndReached && !isLoading) {
       setIsLoading(true)
+      // @ts-expect-error TS(2304): Cannot find name 'setTimeout'.
       setTimeout(() => {
         setIsLoading(false)
       }, 2000)
@@ -207,24 +217,34 @@ export default function FarmersScreen({ route, navigation }) {
     if (customUserData.role !== roles.provincialManager) {
       if (!showAll) {
         // this is a bug! it should: showAll should set to true for it to setAll
+        // @ts-expect-error TS(2345): Argument of type 'Results<Object<unknown, never>>'... Remove this comment to see the full error message
         setFetchedFarmers(farmers)
+        // @ts-expect-error TS(2345): Argument of type 'Results<Object<unknown, never>>'... Remove this comment to see the full error message
         setFetchedGroups(groups)
+        // @ts-expect-error TS(2345): Argument of type 'Results<Object<unknown, never>>'... Remove this comment to see the full error message
         setFetchedInstitutions(institutions)
+        // @ts-expect-error TS(2345): Argument of type 'Results<Object<unknown, never>>'... Remove this comment to see the full error message
         setFetchedFarmlands(farmlands)
       } else {
         setFetchedFarmers(
+          // @ts-expect-error TS(2345): Argument of type 'Object<unknown, never>[]' is not... Remove this comment to see the full error message
           farmers.filter((farmer) => farmer?.userId === customUserData.userId),
         )
         setFetchedGroups(
+          // @ts-expect-error TS(2345): Argument of type 'Object<unknown, never>[]' is not... Remove this comment to see the full error message
           groups.filter((group) => group?.userId === customUserData.userId),
         )
         setFetchedInstitutions(
+          // @ts-expect-error TS(2345): Argument of type 'Object<unknown, never>[]' is not... Remove this comment to see the full error message
           institutions.filter(
+            // @ts-expect-error TS(2339): Property 'userId' does not exist on type 'Object<u... Remove this comment to see the full error message
             (institution) => institution?.userId === customUserData.userId,
           ),
         )
         setFetchedFarmlands(
+          // @ts-expect-error TS(2345): Argument of type 'Object<unknown, never>[]' is not... Remove this comment to see the full error message
           farmlands.filter(
+            // @ts-expect-error TS(2339): Property 'userId' does not exist on type 'Object<u... Remove this comment to see the full error message
             (farmland) => farmland?.userId === customUserData.userId,
           ),
         )
@@ -386,7 +406,7 @@ export default function FarmersScreen({ route, navigation }) {
     // }
   }, [realm, user, showAll])
 
-  const keyExtractor = (item, index) => index.toString()
+  const keyExtractor = (item: any, index: any) => index.toString()
 
   const addFarmer = () => {
     navigation.navigate("FarmerForm1", { customUserData })
@@ -486,6 +506,7 @@ export default function FarmersScreen({ route, navigation }) {
           {stats?.length === 0 ? (
             <Box>
               <Center
+                // @ts-expect-error TS(2322): Type '{ children: Element[]; style: { margin: numb... Remove this comment to see the full error message
                 style={{
                   margin: 20,
                 }}
@@ -509,19 +530,24 @@ export default function FarmersScreen({ route, navigation }) {
             <Box
               alignItems="stretch"
               w="100%"
+              // @ts-expect-error TS(2322): Type '{ children: Element; alignItems: "stretch"; ... Remove this comment to see the full error message
               style={{
                 marginBottom: 140,
               }}
             >
               <SectionList
                 sections={statsByDistrict}
-                keyExtractor={(item, index) => {
+                keyExtractor={(item: any, index: any) => {
                   return item.userId
                 }}
-                renderItem={({ item }) => (
+                renderItem={({
+                  item
+                }: any) => (
                   <StatItem route={route} navigation={navigation} item={item} />
                 )}
-                renderSectionHeader={({ section: { title } }) => (
+                renderSectionHeader={({
+                  section: { title }
+                }: any) => (
                   <Text
                     style={{
                       paddingLeft: 10,
@@ -564,6 +590,7 @@ export default function FarmersScreen({ route, navigation }) {
                   trackColor={{ true: COLORS.main, false: COLORS.grey }}
                   thumbColor={showAll ? COLORS.grey : COLORS.main}
                   onValueChange={() => {
+                    // @ts-expect-error TS(2345): Argument of type 'boolean' is not assignable to pa... Remove this comment to see the full error message
                     setShowAll(!showAll)
                     setLoadingActivityIndicator(true)
                   }}
@@ -615,6 +642,7 @@ export default function FarmersScreen({ route, navigation }) {
               </Box>
               <Box
                 w="20%"
+                // @ts-expect-error TS(2322): Type '{ children: Element; w: "20%"; style: { just... Remove this comment to see the full error message
                 style={{
                   justifyContent: "center",
                   alignItems: "center",
@@ -626,6 +654,7 @@ export default function FarmersScreen({ route, navigation }) {
                 }}
               >
                 <Box
+                  // @ts-expect-error TS(2322): Type '{ children: Element; style: { justifyContent... Remove this comment to see the full error message
                   style={{
                     // width: '80%',
                     // height: '80%',
@@ -654,6 +683,7 @@ export default function FarmersScreen({ route, navigation }) {
           institutions.length === 0 ? (
             <Box>
               <Center
+                // @ts-expect-error TS(2322): Type '{ children: Element[]; style: { margin: numb... Remove this comment to see the full error message
                 style={{
                   margin: 20,
                 }}
@@ -676,6 +706,7 @@ export default function FarmersScreen({ route, navigation }) {
             <Box
               alignItems="stretch"
               w="100%"
+              // @ts-expect-error TS(2322): Type '{ children: Element; alignItems: "stretch"; ... Remove this comment to see the full error message
               style={{
                 marginBottom: 15,
                 // marginTop: 10,
@@ -684,6 +715,7 @@ export default function FarmersScreen({ route, navigation }) {
               <FlatList
                 StickyHeaderComponent={() => (
                   <Box
+                    // @ts-expect-error TS(2322): Type '{ children: never[]; style: { height: number... Remove this comment to see the full error message
                     style={{
                       height: hp("10%"),
                       justifyContent: "center",
@@ -698,7 +730,10 @@ export default function FarmersScreen({ route, navigation }) {
                 keyExtractor={keyExtractor}
                 onEndReached={handleEndReached}
                 onEndReachedThreshold={0.1}
-                renderItem={({ item }) => {
+                // @ts-expect-error TS(7030): Not all code paths return a value.
+                renderItem={({
+                  item
+                }: any) => {
                   if (item.flag === "Grupo") {
                     return <GroupItem route={route} item={item} />
                   } else if (item.flag === "Indivíduo") {
@@ -717,6 +752,7 @@ export default function FarmersScreen({ route, navigation }) {
                   if (!isEndReached) {
                     return (
                       <Box
+                        // @ts-expect-error TS(2322): Type '{ children: never[]; style: { backgroundColo... Remove this comment to see the full error message
                         style={{
                           // height: 10,
                           backgroundColor: COLORS.ghostwhite,
@@ -736,5 +772,5 @@ export default function FarmersScreen({ route, navigation }) {
         </Box>
       )}
     </SafeAreaView>
-  )
+  );
 }

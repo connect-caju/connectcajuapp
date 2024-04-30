@@ -13,6 +13,6 @@ const provinces = [
   "Tete",
   "Zambézia",
   "País Estrangeiro",
-]
+];
 
-export default provinces
+export default provinces;

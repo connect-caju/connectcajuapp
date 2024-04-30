@@ -16,4 +16,4 @@ export const positions = {
   15: "Décimo quinto",
   16: "Décimo sexto",
   17: "Décimo sétimo",
-}
+};

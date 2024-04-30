@@ -15,4 +15,4 @@ export const alertStatus = [
     status: "warning",
     title: "Poor internet connection.",
   },
-]
+];

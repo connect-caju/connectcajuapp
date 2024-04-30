@@ -1,10 +1,14 @@
 /* eslint-disable linebreak-style */
 /* eslint-disable prettier/prettier */
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { View, Text, Animated } from "react-native";
 import React, { useState } from "react";
 import COLORS from "../../consts/colors";
 
-const MenuFromEllipsis = ({ menu, pop }) => {
+const MenuFromEllipsis = ({
+    menu,
+    pop
+}: any) => {
     // const [menu] = useState(new Animated.Value(10));
     // const [pop, setPop] = useState(false);
 

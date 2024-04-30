@@ -5,6 +5,7 @@ import {
     View,
     TouchableOpacity,
     TextInput,
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 } from "react-native";
 import {
     Box,
@@ -13,12 +14,14 @@ import {
 import React, { useState, useCallback } from "react";
 import { Icon } from "@rneui/base";
 import COLORS from "../../consts/colors";
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'uuid... Remove this comment to see the full error message
 import { v4 as uuidv4 } from "uuid";
 import validateInvalidationMessage from "../../helpers/validateInvalidationMessage";
 
 import { useUser } from "@realm/react";
 import { realmContext } from "../../models/realmContext";
 import { useEffect } from "react";
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { Text } from "react-native";
 import { resourceValidation } from "../../consts/resourceValidation";
 import { roles } from "../../consts/roles";
@@ -26,7 +29,10 @@ import { errorMessages } from "../../consts/errorMessages";
 import CustomDivider from "../Divider/CustomDivider";
 const { useRealm, useQuery, useObject } = realmContext;
 
-const InvalidationMessage = ({ resource, resourceType, }) => {
+const InvalidationMessage = ({
+    resource,
+    resourceType
+}: any) => {
     const realm = useRealm();
     const user = useUser();
     const customUserData = user?.customData;
@@ -38,7 +44,7 @@ const InvalidationMessage = ({ resource, resourceType, }) => {
 
 
     const addMessage = useCallback(
-        (realm, newResourceId, newMessage) => {
+        (realm: any, newResourceId: any, newMessage: any) => {
             if (!validateInvalidationMessage(newMessage, errors, setErrors)) {
                 return;
             }
@@ -118,8 +124,10 @@ const InvalidationMessage = ({ resource, resourceType, }) => {
                     )}
                     {invalidationMotives?.length > 0 ? (
                         invalidationMotives?.length > 0 &&
+                        // @ts-expect-error TS(2339): Property 'messages' does not exist on type 'Object... Remove this comment to see the full error message
                         invalidationMotives[0]?.messages?.length > 0 &&
-                        invalidationMotives[0]?.messages?.map((motive, index) => (
+                        // @ts-expect-error TS(2339): Property 'messages' does not exist on type 'Object... Remove this comment to see the full error message
+                        invalidationMotives[0]?.messages?.map((motive: any, index: any) => (
                             <View key={index}
                                 style={{
                                     marginHorizontal: 5,
@@ -142,6 +150,7 @@ const InvalidationMessage = ({ resource, resourceType, }) => {
                                     {motive?.ownerName.split(" ")[0]}
                                 </Text>
                                 <Box
+                                    // @ts-expect-error TS(2322): Type '{ children: Element; style: { borderRadius: ... Remove this comment to see the full error message
                                     style={{
                                         // backgroundColor: COLORS.main,
                                         borderRadius: 30,
@@ -188,6 +197,7 @@ const InvalidationMessage = ({ resource, resourceType, }) => {
                         ))
                     ) : (
                         <Box
+                            // @ts-expect-error TS(2322): Type '{ children: Element[]; style: { margin: numb... Remove this comment to see the full error message
                             style={{
                                 margin: 5,
                                 maxWidth: "80%",
@@ -201,6 +211,7 @@ const InvalidationMessage = ({ resource, resourceType, }) => {
                                 Connect Caju
                             </Text>
                             <Box
+                                // @ts-expect-error TS(2322): Type '{ children: Element; style: { borderRadius: ... Remove this comment to see the full error message
                                 style={{
                                     // backgroundColor: COLORS.main,
                                     borderRadius: 30,
@@ -274,7 +285,7 @@ const InvalidationMessage = ({ resource, resourceType, }) => {
                             numberOfLines={3}
                             maxLength={255}
                             value={message}
-                            onChangeText={(newMessage) => {
+                            onChangeText={(newMessage: any) => {
                                 setErrors({
                                     invalidationMessage: "",
                                 });
@@ -292,6 +303,7 @@ const InvalidationMessage = ({ resource, resourceType, }) => {
                                 }
                                 _text={{ fontSize: "xs" }}
                             >
+                                // @ts-expect-error TS(2339): Property 'invalidationMessage' does not exist on t... Remove this comment to see the full error message
                                 {errors?.invalidationMessage}
                             </FormControl.ErrorMessage>
                         )}
@@ -320,6 +332,7 @@ const InvalidationMessage = ({ resource, resourceType, }) => {
                                 try {
                                     addMessage(realm, resource?._id, message);
                                 } catch (error) {
+                                    // @ts-expect-error TS(2584): Cannot find name 'console'. Do you need to change ... Remove this comment to see the full error message
                                     console.log(
                                         "Failed to add invalidation message",
                                     );

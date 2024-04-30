@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable prettier/prettier */
 /* eslint-disable linebreak-style */
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { View, Text, Image, } from "react-native";
 import React from "react";
 import CustomDivider from "../Divider/CustomDivider";
@@ -12,8 +13,12 @@ import { Icon } from "@rneui/base";
 import { groupTypes } from "../../consts/groupTypes";
 
 
-const GroupDetails = ({ resource, manager }) => {
+const GroupDetails = ({
+    resource,
+    manager
+}: any) => {
 
+    // @ts-expect-error TS(2584): Cannot find name 'console'. Do you need to change ... Remove this comment to see the full error message
     console.log("resourceManager: ", manager);
     return (
         <View>
@@ -102,6 +107,7 @@ const GroupDetails = ({ resource, manager }) => {
                     w="80%"
                     alignItems={"center"}
                     // spce={3}
+                    // @ts-expect-error TS(2322): Type '{ children: Element[]; w: "80%"; alignItems:... Remove this comment to see the full error message
                     style={{
                         flexDirection: "row",
                         justifyContent: "space-around",
@@ -109,6 +115,7 @@ const GroupDetails = ({ resource, manager }) => {
                 >
                     <Box
                         w="100%"
+                        // @ts-expect-error TS(2322): Type '{ children: Element[]; w: "100%"; style: { j... Remove this comment to see the full error message
                         style={{
                             justifyContent: "flex-start",
                         }}
@@ -161,6 +168,7 @@ const GroupDetails = ({ resource, manager }) => {
                     w="90%"
                     alignItems={"center"}
                     // spce={3}
+                    // @ts-expect-error TS(2322): Type '{ children: Element[]; w: "90%"; alignItems:... Remove this comment to see the full error message
                     style={{
                         flexDirection: "row",
                         justifyContent: "space-around",
@@ -168,6 +176,7 @@ const GroupDetails = ({ resource, manager }) => {
                 >
                     <Box
                         w="45%"
+                        // @ts-expect-error TS(2322): Type '{ children: Element[]; w: "45%"; style: { ju... Remove this comment to see the full error message
                         style={{
                             justifyContent: "flex-start",
                         }}
@@ -183,6 +192,7 @@ const GroupDetails = ({ resource, manager }) => {
                     <View style={{ width: 10, }} />
                     <Box
                         w="45%"
+                        // @ts-expect-error TS(2322): Type '{ children: Element[]; w: "45%"; style: { ju... Remove this comment to see the full error message
                         style={{
                             justifyContent: "flex-start",
                         }}
@@ -216,6 +226,7 @@ const GroupDetails = ({ resource, manager }) => {
                     w="90%"
                     alignItems={"center"}
                     // spce={3}
+                    // @ts-expect-error TS(2322): Type '{ children: Element[]; w: "90%"; alignItems:... Remove this comment to see the full error message
                     style={{
                         flexDirection: "row",
                         justifyContent: "space-around",
@@ -223,6 +234,7 @@ const GroupDetails = ({ resource, manager }) => {
                 >
                     <Box
                         w="45%"
+                        // @ts-expect-error TS(2322): Type '{ children: Element[]; w: "45%"; style: { ju... Remove this comment to see the full error message
                         style={{
                             justifyContent: "flex-start",
                         }}
@@ -242,6 +254,7 @@ const GroupDetails = ({ resource, manager }) => {
                     <View style={{ width: 10, }} />
                     <Box
                         w="45%"
+                        // @ts-expect-error TS(2322): Type '{ children: Element[]; w: "45%"; style: { ju... Remove this comment to see the full error message
                         style={{
                             justifyContent: "flex-start",
                         }}
@@ -278,6 +291,7 @@ const GroupDetails = ({ resource, manager }) => {
                     w="90%"
                     alignItems={"center"}
                     // spce={3}
+                    // @ts-expect-error TS(2322): Type '{ children: Element[]; w: "90%"; alignItems:... Remove this comment to see the full error message
                     style={{
                         flexDirection: "row",
                         justifyContent: "space-around",
@@ -285,6 +299,7 @@ const GroupDetails = ({ resource, manager }) => {
                 >
                     <Box
                         w="45%"
+                        // @ts-expect-error TS(2322): Type '{ children: Element[]; w: "45%"; style: { ju... Remove this comment to see the full error message
                         style={{
                             justifyContent: "flex-start",
                         }}
@@ -304,6 +319,7 @@ const GroupDetails = ({ resource, manager }) => {
                     <View style={{ width: 10, }} />
                     <Box
                         w="45%"
+                        // @ts-expect-error TS(2322): Type '{ children: Element[]; w: "45%"; style: { ju... Remove this comment to see the full error message
                         style={{
                             justifyContent: "flex-start",
                         }}
@@ -340,6 +356,7 @@ const GroupDetails = ({ resource, manager }) => {
                     w="90%"
                     alignItems={"center"}
                     // spce={3}
+                    // @ts-expect-error TS(2322): Type '{ children: Element[]; w: "90%"; alignItems:... Remove this comment to see the full error message
                     style={{
                         flexDirection: "row",
                         justifyContent: "space-around",
@@ -347,6 +364,7 @@ const GroupDetails = ({ resource, manager }) => {
                 >
                     <Box
                         w="100%"
+                        // @ts-expect-error TS(2322): Type '{ children: Element[]; w: "100%"; style: { j... Remove this comment to see the full error message
                         style={{
                             justifyContent: "flex-start",
                         }}
@@ -364,7 +382,7 @@ const GroupDetails = ({ resource, manager }) => {
                         >
                             {resource?.assets?.length > 0
                                 ? resource?.assets
-                                    ?.map((asset) => asset.subcategory)
+                                    ?.map((asset: any) => asset.subcategory)
                                     ?.join("; ")
                                 : "Não específica"
                             }
@@ -409,6 +427,7 @@ const GroupDetails = ({ resource, manager }) => {
                     w="90%"
                     alignItems={"center"}
                     // spce={3}
+                    // @ts-expect-error TS(2322): Type '{ children: Element[]; w: "90%"; alignItems:... Remove this comment to see the full error message
                     style={{
                         flexDirection: "row",
                         justifyContent: "space-around",
@@ -416,6 +435,7 @@ const GroupDetails = ({ resource, manager }) => {
                 >
                     <Box
                         w="45%"
+                        // @ts-expect-error TS(2322): Type '{ children: Element[]; w: "45%"; style: { ju... Remove this comment to see the full error message
                         style={{
                             justifyContent: "flex-start",
                         }}
@@ -435,6 +455,7 @@ const GroupDetails = ({ resource, manager }) => {
                     <View style={{ width: 10, }} />
                     <Box
                         w="45%"
+                        // @ts-expect-error TS(2322): Type '{ children: Element[]; w: "45%"; style: { ju... Remove this comment to see the full error message
                         style={{
                             justifyContent: "flex-start",
                         }}
@@ -471,6 +492,7 @@ const GroupDetails = ({ resource, manager }) => {
                     w="90%"
                     alignItems={"center"}
                     // spce={3}
+                    // @ts-expect-error TS(2322): Type '{ children: Element[]; w: "90%"; alignItems:... Remove this comment to see the full error message
                     style={{
                         flexDirection: "row",
                         justifyContent: "space-around",
@@ -478,6 +500,7 @@ const GroupDetails = ({ resource, manager }) => {
                 >
                     <Box
                         w="45%"
+                        // @ts-expect-error TS(2322): Type '{ children: Element[]; w: "45%"; style: { ju... Remove this comment to see the full error message
                         style={{
                             justifyContent: "flex-start",
                         }}
@@ -497,6 +520,7 @@ const GroupDetails = ({ resource, manager }) => {
                     <View style={{ width: 10, }} />
                     <Box
                         w="45%"
+                        // @ts-expect-error TS(2322): Type '{ children: Element[]; w: "45%"; style: { ju... Remove this comment to see the full error message
                         style={{
                             justifyContent: "flex-start",
                         }}
@@ -533,6 +557,7 @@ const GroupDetails = ({ resource, manager }) => {
                     w="90%"
                     alignItems={"center"}
                     // spce={3}
+                    // @ts-expect-error TS(2322): Type '{ children: Element[]; w: "90%"; alignItems:... Remove this comment to see the full error message
                     style={{
                         flexDirection: "row",
                         justifyContent: "space-around",
@@ -540,6 +565,7 @@ const GroupDetails = ({ resource, manager }) => {
                 >
                     <Box
                         w="45%"
+                        // @ts-expect-error TS(2322): Type '{ children: Element[]; w: "45%"; style: { ju... Remove this comment to see the full error message
                         style={{
                             justifyContent: "flex-start",
                         }}
@@ -559,6 +585,7 @@ const GroupDetails = ({ resource, manager }) => {
                     <View style={{ width: 10, }} />
                     <Box
                         w="45%"
+                        // @ts-expect-error TS(2322): Type '{ children: Element[]; w: "45%"; style: { ju... Remove this comment to see the full error message
                         style={{
                             justifyContent: "flex-start",
                         }}

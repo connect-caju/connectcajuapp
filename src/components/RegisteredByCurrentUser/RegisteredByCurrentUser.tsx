@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable linebreak-style */
 /* eslint-disable prettier/prettier */
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { View, Text } from "react-native";
 import React, { useEffect } from "react";
 import { realmContext } from "../../models/realmContext";
@@ -18,7 +19,11 @@ import { FlatList } from "react-native-gesture-handler";
 import Info from "../Info/Info";
 const { useRealm } = realmContext;
 
-const RegisteredByCurrentUser = ({ farmerType, route, navigation }) => {
+const RegisteredByCurrentUser = ({
+    farmerType,
+    route,
+    navigation
+}: any) => {
     let realm = useRealm();
     let user = useUser();
     let customUserData = user?.customData;
@@ -93,85 +98,85 @@ const RegisteredByCurrentUser = ({ farmerType, route, navigation }) => {
     }
 
 
-    const keyExtractor = (item, index) => index.toString();
+    const keyExtractor = (item: any, index: any) => index.toString();
 
-    return (
-        <>
-            {farmers.length > 0 ?
-                <View
-                    style={{
-                        marginBottom: 120,
+    return <>
+        {farmers.length > 0 ?
+            <View
+                style={{
+                    marginBottom: 120,
+                }}
+            >
+                <FlatList
+                    StickyHeaderComponent={() => (
+                        <View
+                            style={{
+                                justifyContent: "center",
+                                alignItems: "center",
+                            }}
+                        >
+                        </View>
+                    )}
+                    stickyHeaderHiddenOnScroll={true}
+                    data={farmers}
+                    keyExtractor={keyExtractor}
+                    // onEndReached={handleEndReached}
+                    onEndReachedThreshold={0.1}
+                    // @ts-expect-error TS(7030): Not all code paths return a value.
+                    renderItem={({
+                        item
+                    }: any) => {
+                        // add all the IDs to each item to allow swiping between screens...
+                        // when the user open any item from the list
+                        if (item.flag === "Grupo") {
+                            return (
+                                <GroupItem
+                                    item={item}
+                                    customUserData={customUserData}
+                                />
+                            );
+                        } else if (item.flag === "Indivíduo") {
+                            return (
+                                <FarmerItem
+                                    item={item}
+                                    customUserData={customUserData}
+                                />
+                            );
+                        } else if (item.flag === "Instituição") {
+                            return (
+                                <InstitutionItem
+                                    item={item}
+                                    customUserData={customUserData}
+                                />
+                            );
+                        }
                     }}
-                >
-                    <FlatList
-                        StickyHeaderComponent={() => (
-                            <View
-                                style={{
-                                    justifyContent: "center",
-                                    alignItems: "center",
-                                }}
-                            >
-                            </View>
-                        )}
-                        stickyHeaderHiddenOnScroll={true}
-                        data={farmers}
-                        keyExtractor={keyExtractor}
-                        // onEndReached={handleEndReached}
-                        onEndReachedThreshold={0.1}
-                        renderItem={({ item }) => {
-                            // add all the IDs to each item to allow swiping between screens...
-                            // when the user open any item from the list
-                            if (item.flag === "Grupo") {
-                                return (
-                                    <GroupItem
-                                        item={item}
-                                        customUserData={customUserData}
-                                    />
-                                );
-                            } else if (item.flag === "Indivíduo") {
-                                return (
-                                    <FarmerItem
-                                        item={item}
-                                        customUserData={customUserData}
-                                    />
-                                );
-                            } else if (item.flag === "Instituição") {
-                                return (
-                                    <InstitutionItem
-                                        item={item}
-                                        customUserData={customUserData}
-                                    />
-                                );
-                            }
-                        }}
-                        ListFooterComponent={() => {
-                            return (<View
-                                style={{
-                                    paddingBottom: 30,
-                                }}
-                            />);
-                        }}
-                    />
-
-                </View>
-                :
-                <View
-                    style={{
-                        justifyContent: "center",
-                        alignItems: "center",
-                        height: "80%",
-                        paddingHorizontal: 30,
+                    ListFooterComponent={() => {
+                        return (<View
+                            style={{
+                                paddingBottom: 30,
+                            }}
+                        />);
                     }}
-                >
-                    <InfoIcon />
-                   <Info 
-                    info={"Nenhum registo"}
-                   />
-                </View>
-            }
-        </>
+                />
 
-    );
+            </View>
+            :
+            <View
+                style={{
+                    justifyContent: "center",
+                    alignItems: "center",
+                    height: "80%",
+                    paddingHorizontal: 30,
+                }}
+            >
+                <InfoIcon />
+               <Info 
+                info={"Nenhum registo"}
+               />
+            </View>
+        }
+    </>;
 };
 
 export default RegisteredByCurrentUser;

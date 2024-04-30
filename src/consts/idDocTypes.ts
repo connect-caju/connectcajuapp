@@ -7,6 +7,6 @@ const idDocTypes = [
   "DIRE",
   "Passaporte",
   "Não tem",
-]
+];
 
-export default idDocTypes
+export default idDocTypes;

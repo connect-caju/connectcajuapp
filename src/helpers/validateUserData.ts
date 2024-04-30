@@ -13,10 +13,10 @@ const validateUserData = (
     role,
     userDistrict,
     userProvince,
-    coop,
-  },
-  errors,
-  setErrors,
+    coop
+  }: any,
+  errors: any,
+  setErrors: any,
 ) => {
   const retrievedName = capitalize(name?.trim());
   const retrievedEmail = email.trim();

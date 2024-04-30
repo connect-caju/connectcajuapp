@@ -1,4 +1,5 @@
 import { Icon } from "@rneui/base"
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { ScrollView, StyleSheet, Text, View } from "react-native"
 import { Stack, Box, Center } from "native-base"
 import CustomDivider from "../Divider/CustomDivider"
@@ -22,9 +23,14 @@ import COLORS from "../../consts/colors"
 
 const { SlideInMenu } = renderers
 
-export function CustomizedMenuOption({ text, iconName, value }) {
+export function CustomizedMenuOption({
+  text,
+  iconName,
+  value
+}: any) {
   return (
     <MenuOption
+      // @ts-expect-error TS(2304): Cannot find name 'alert'.
       onSelect={() => alert(`You clicked ${value}`)}
       customStyles={{
         optionWrapper: {
@@ -60,6 +66,7 @@ export function PopupMenu({}) {
               icon={faEllipsisVertical}
               size={20}
               color={COLORS.main}
+              // @ts-expect-error TS(2322): Type '{ icon: IconDefinition; size: number; color:... Remove this comment to see the full error message
               fade
             />
           </Box>
@@ -262,7 +269,9 @@ export function PopupMenu({}) {
 </MenuProvider> */
 }
 
-export function PopMenuWrapper({ children }) {
+export function PopMenuWrapper({
+  children
+}: any) {
   return (
     <View
       style={{

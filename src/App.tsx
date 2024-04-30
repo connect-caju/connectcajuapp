@@ -2,6 +2,7 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable linebreak-style */
 import React, { useEffect } from "react";
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { StatusBar } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import SplashScreen from "react-native-splash-screen";
@@ -35,12 +36,15 @@ import { toastConfig } from "./config/toastConfig";
 import { syncConfig } from "./syncConfig";
 import { useState } from "react";
 import ClientResetModal from "./components/Modals/ClientResetModal";
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { setCustomText } from "react-native-global-props";
 import { useDeviceContext } from "twrnc";
 import tw from "./lib/tailwind";
 
+// @ts-expect-error TS(2304): Cannot find name '__DEV__'.
 if (__DEV__) {
   import("../ReactotronConfig").then(() =>
+    // @ts-expect-error TS(2584): Cannot find name 'console'. Do you need to change ... Remove this comment to see the full error message
     console.log("Reactotron Configured"),
   );
 }
@@ -65,7 +69,7 @@ export default function App() {
   }, []);
 
   // dispaly manual client reset dialog
-  const onSyncError = (error) => {
+  const onSyncError = (error: any) => {
     if (error.name === "ClientReset") {
       setIsVisible(true);
     }
@@ -83,6 +87,7 @@ export default function App() {
                   <AppProvider id={secrets.appID} baseUrl={secrets.baseUrl}>
                     <UserProvider fallback={<WelcomeScreen />}>
                       <RealmProvider
+                        // @ts-expect-error TS(2322): Type '{ flexible: boolean; existingRealmFileBehavi... Remove this comment to see the full error message
                         sync={syncConfig(isManualResetConfirmed, onSyncError)}
                         fallback={<CustomActivityIndicator />}
                       >

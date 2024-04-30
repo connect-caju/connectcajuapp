@@ -1,6 +1,7 @@
 /* eslint-disable linebreak-style */
 /* eslint-disable react/prop-types */
 /* eslint-disable prettier/prettier */
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { TouchableOpacity, View, Text } from "react-native";
 import React from "react";
 import { Avatar } from "@rneui/themed";
@@ -11,12 +12,16 @@ import { useNavigation } from "@react-navigation/native";
 import COLORS from "../../consts/colors";
 import { getPercentage } from "../../helpers/getPercentage";
 
-export default function StatItem({ item, route }) {
+export default function StatItem({
+  item,
+  route
+}: any) {
   const navigation = useNavigation();
 
   return (
     <TouchableOpacity
       onPress={() => {
+        // @ts-expect-error TS(2345): Argument of type 'string' is not assignable to par... Remove this comment to see the full error message
         navigation.navigate("UserStat", {
           userId: item?.userId,
           userName: item?.userName,

@@ -152,4 +152,4 @@ export const cooperatives = {
     "Cooperativa Agropecuária de Alto Maganha",
   ],
   "Quelimane (Cidade)": ["AMPCM"],
-}
+};

@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable linebreak-style */
 /* eslint-disable prettier/prettier */
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { TouchableOpacity, View, Text } from "react-native";
 import React, { useState, useEffect } from "react";
 import { Icon, Avatar } from "@rneui/themed";
@@ -22,7 +23,11 @@ import { resourceTypes } from "../../consts/resourceTypes";
 
 
 
-const PendingInstitutionItem = ({ item, refresh, setRefresh }) => {
+const PendingInstitutionItem = ({
+    item,
+    refresh,
+    setRefresh
+}: any) => {
     const navigation = useNavigation();
     const [modalVisible, setModalVisible] = useState(false);
 
@@ -88,6 +93,7 @@ const PendingInstitutionItem = ({ item, refresh, setRefresh }) => {
                 <Center w="10%">
                     <TouchableOpacity
                         onPress={() => {
+                            // @ts-expect-error TS(2345): Argument of type 'string' is not assignable to par... Remove this comment to see the full error message
                             navigation.navigate("Profile", {
                                 ownerId: item._id,
                                 farmersIDs: item?.farmersIDs,

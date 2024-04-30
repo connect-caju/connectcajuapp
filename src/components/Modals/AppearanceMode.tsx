@@ -1,5 +1,6 @@
 /* eslint-disable linebreak-style */
 /* eslint-disable prettier/prettier */
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { View, Text, Pressable, TouchableOpacity } from "react-native";
 import React, { useEffect } from "react";
 import { Modal } from "react-native-paper";
@@ -10,10 +11,13 @@ import { faCheck, faCheckDouble, faCircle, faRadio } from "@fortawesome/free-sol
 import COLORS from "../../consts/colors";
 
 const AppearanceMode = ({
-    isAppearanceModeModalVisible, setIsAppearanceModeModalVisible,
-    colorScheme, toggleColorScheme, themeMode, setThemeMode,
-
-}) => {
+    isAppearanceModeModalVisible,
+    setIsAppearanceModeModalVisible,
+    colorScheme,
+    toggleColorScheme,
+    themeMode,
+    setThemeMode
+}: any) => {
 
     useEffect(() => {
         setThemeMode(colorScheme);

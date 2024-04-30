@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useRef, useState } from 'react';
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { Animated, Text, View } from 'react-native';
 
 import { cn } from '../lib/utils';
@@ -174,4 +175,5 @@ function useToast() {
   return context;
 }
 
+// @ts-expect-error TS(1205): Re-exporting a type when the '--isolatedModules' f... Remove this comment to see the full error message
 export { ToastProvider, ToastVariant, Toast, toastVariants, useToast };

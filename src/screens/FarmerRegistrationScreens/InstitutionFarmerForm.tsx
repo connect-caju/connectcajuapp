@@ -2,6 +2,7 @@
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable prettier/prettier */
 /* eslint-disable prettier/prettier */
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { Text, SafeAreaView, ScrollView, TextInput, View } from "react-native";
 import React, { useState, useEffect } from "react";
 import {
@@ -59,8 +60,8 @@ export default function InstitutionFarmerForm({
   isInstitutionPrivate,
   isInstitutionPublic,
   setIsInstitutionPrivate,
-  setIsInstitutionPublic,
-}) {
+  setIsInstitutionPublic
+}: any) {
   useEffect(() => {
     if (institutionType === "") {
       setInstitutionName("");
@@ -126,6 +127,7 @@ export default function InstitutionFarmerForm({
                       iconStyle={{ marginRight: 1 }}
                     />
                   }
+                  // @ts-expect-error TS(2322): Type '{ center: true; fontFamily: string; containe... Remove this comment to see the full error message
                   onPress={() => {
                     setIsInstitutionPrivate(true);
                     setIsInstitutionPublic(false);
@@ -173,6 +175,7 @@ export default function InstitutionFarmerForm({
                       iconStyle={{ marginRight: 1 }}
                     />
                   }
+                  // @ts-expect-error TS(2322): Type '{ center: true; fontFamily: string; containe... Remove this comment to see the full error message
                   onPress={() => {
                     setIsInstitutionPrivate(false);
                     setIsInstitutionPublic(true);
@@ -213,6 +216,7 @@ export default function InstitutionFarmerForm({
                   !isInstitutionPrivate && !isInstitutionPublic ? true : false
                 }
                 selectedValue={institutionType}
+                // @ts-expect-error TS(2322): Type '{ children: any[]; isDisabled: boolean; sele... Remove this comment to see the full error message
                 accessibilityLabel="Tipo de Instituição"
                 placeholder={"Escolha uma instituição"}
                 minHeight={55}
@@ -239,7 +243,10 @@ export default function InstitutionFarmerForm({
                 }}
                 mt={1}
                 onValueChange={(newInstitutionType) => {
-                  setErrors((prev) => ({ ...prev, institutionType: "" }));
+                  setErrors((prev: any) => ({
+                    ...prev,
+                    institutionType: ""
+                  }));
                   setInstitutionType(newInstitutionType);
                 }}
               >
@@ -285,8 +292,11 @@ export default function InstitutionFarmerForm({
                 autoCapitalize="words"
                 placeholder="Nome da Instituição"
                 value={institutionName}
-                onChangeText={(newInstitutionName) => {
-                  setErrors((prev) => ({ ...prev, institutionName: "" }));
+                onChangeText={(newInstitutionName: any) => {
+                  setErrors((prev: any) => ({
+                    ...prev,
+                    institutionName: ""
+                  }));
                   setInstitutionName(newInstitutionName);
                 }}
               />
@@ -314,6 +324,7 @@ export default function InstitutionFarmerForm({
               <FormControl.Label>Posto Adm.</FormControl.Label>
               <Select
                 selectedValue={institutionAdminPost}
+                // @ts-expect-error TS(2322): Type '{ children: any; selectedValue: any; accessi... Remove this comment to see the full error message
                 accessibilityLabel="posto administrativo"
                 placeholder="Escolha posto administrativo"
                 minHeight={55}
@@ -340,11 +351,14 @@ export default function InstitutionFarmerForm({
                 }
                 mt={1}
                 onValueChange={(newAdminPost) => {
-                  setErrors((prev) => ({ ...prev, institutionAdminPost: "" }));
+                  setErrors((prev: any) => ({
+                    ...prev,
+                    institutionAdminPost: ""
+                  }));
                   setInstitutionAdminPost(newAdminPost);
                 }}
               >
-                {selectedAddressAdminPosts?.map((adminPost, index) => (
+                {selectedAddressAdminPosts?.map((adminPost: any, index: any) => (
                   <Select.Item
                     key={index}
                     label={adminPost}
@@ -369,6 +383,7 @@ export default function InstitutionFarmerForm({
               <FormControl.Label>Localidade</FormControl.Label>
               <Select
                 selectedValue={institutionVillage}
+                // @ts-expect-error TS(2322): Type '{ children: any; selectedValue: any; accessi... Remove this comment to see the full error message
                 accessibilityLabel="Escolha uma localidade"
                 placeholder="Escolha uma localidade"
                 minHeight={55}
@@ -398,7 +413,8 @@ export default function InstitutionFarmerForm({
                   setInstitutionVillage(newVillage)
                 }
               >
-                {villages[institutionAdminPost]?.map((village, index) => (
+                // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
+                {villages[institutionAdminPost]?.map((village: any, index: any) => (
                   <Select.Item key={index} label={village} value={village} />
                 ))}
               </Select>
@@ -419,8 +435,11 @@ export default function InstitutionFarmerForm({
             autoCapitalize="words"
             placeholder="Nome completo do representante"
             value={institutionManagerName}
-            onChangeText={(newManagerName) => {
-              setErrors((prev) => ({ ...prev, institutionManagerName: "" }));
+            onChangeText={(newManagerName: any) => {
+              setErrors((prev: any) => ({
+                ...prev,
+                institutionManagerName: ""
+              }));
               setInstitutionManagerName(newManagerName);
             }}
           />
@@ -446,10 +465,10 @@ export default function InstitutionFarmerForm({
                 placeholder="Telemóvel"
                 keyboardType="phone-pad"
                 value={institutionManagerPhone}
-                onChangeText={(newManagerPhone) => {
-                  setErrors((prev) => ({
+                onChangeText={(newManagerPhone: any) => {
+                  setErrors((prev: any) => ({
                     ...prev,
-                    institutionManagerPhone: "",
+                    institutionManagerPhone: ""
                   }));
                   setInstitutionManagerPhone(newManagerPhone);
                 }}
@@ -478,8 +497,11 @@ export default function InstitutionFarmerForm({
                 placeholder="NUIT"
                 value={institutionNuit}
                 keyboardType="numeric"
-                onChangeText={(newNuit) => {
-                  setErrors((prev) => ({ ...prev, institutionNuit: "" }));
+                onChangeText={(newNuit: any) => {
+                  setErrors((prev: any) => ({
+                    ...prev,
+                    institutionNuit: ""
+                  }));
                   setInstitutionNuit(newNuit);
                 }}
               />
@@ -509,8 +531,11 @@ export default function InstitutionFarmerForm({
                     placeholder="Alvará"
                     // keyboardType="numeric"
                     value={institutionLicence}
-                    onChangeText={(newLicence) => {
-                      setErrors((prev) => ({ ...prev, institutionLicence: "" }));
+                    onChangeText={(newLicence: any) => {
+                      setErrors((prev: any) => ({
+                        ...prev,
+                        institutionLicence: ""
+                      }));
                       setInstitutionLicence(newLicence);
                     }}
                   />

@@ -15,12 +15,20 @@ import { containsNonNumeric } from "./containsNonNumeric"
  * in the form.
  */
 
+// @ts-expect-error TS(7030): Not all code paths return a value.
 const validateIndividualFarmerData = (
-  { address, oldAddress, contact, oldContact, idDocument, oldIdDocument },
-  errors,
-  setErrors,
-  dataToBeUpdated,
-  resourceName,
+  {
+    address,
+    oldAddress,
+    contact,
+    oldContact,
+    idDocument,
+    oldIdDocument
+  }: any,
+  errors: any,
+  setErrors: any,
+  dataToBeUpdated: any,
+  resourceName: any,
 ) => {
   // sanitizing recieved data
   if (dataToBeUpdated === "address" && resourceName == "Farmer") {
@@ -91,7 +99,9 @@ const validateIndividualFarmerData = (
     if (
       retrievedPrimaryPhone === retrievedOldPrimaryPhone &&
       retrievedSecondaryPhone === retrievedOldSecondaryPhone &&
+      // @ts-expect-error TS(2367): This condition will always return 'true' since the... Remove this comment to see the full error message
       (retrievedPrimaryPhone !== 0 || retrievedPrimaryPhone !== "") &&
+      // @ts-expect-error TS(2367): This condition will always return 'true' since the... Remove this comment to see the full error message
       (retrievedSecondaryPhone !== 0 || retrievedSecondaryPhone !== "")
     ) {
       setErrors({
@@ -104,6 +114,7 @@ const validateIndividualFarmerData = (
 
     if (
       retrievedPrimaryPhone === retrievedOldPrimaryPhone &&
+      // @ts-expect-error TS(2367): This condition will always return 'true' since the... Remove this comment to see the full error message
       (retrievedPrimaryPhone !== 0 || retrievedPrimaryPhone !== "") &&
       retrievedSecondaryPhone === retrievedOldSecondaryPhone
     ) {
@@ -117,6 +128,7 @@ const validateIndividualFarmerData = (
 
     if (
       retrievedSecondaryPhone === retrievedOldSecondaryPhone &&
+      // @ts-expect-error TS(2367): This condition will always return 'true' since the... Remove this comment to see the full error message
       (retrievedSecondaryPhone !== 0 || retrievedSecondaryPhone !== "") &&
       retrievedPrimaryPhone === retrievedOldPrimaryPhone
     ) {
@@ -147,10 +159,13 @@ const validateIndividualFarmerData = (
     ) {
       if (
         retrievedPrimaryPhone !== 0 &&
+        // @ts-expect-error TS(2345): Argument of type 'number' is not assignable to par... Remove this comment to see the full error message
         (!Number.isInteger(parseInt(retrievedPrimaryPhone)) ||
           retrievedPrimaryPhone?.toString().length !== 9 ||
+          // @ts-expect-error TS(2345): Argument of type 'string | undefined' is not assig... Remove this comment to see the full error message
           parseInt(retrievedPrimaryPhone?.toString()[0]) !== 8 ||
           [2, 3, 4, 5, 6, 7].indexOf(
+            // @ts-expect-error TS(2345): Argument of type 'string | undefined' is not assig... Remove this comment to see the full error message
             parseInt(retrievedPrimaryPhone?.toString()[1]),
           ) < 0)
       ) {
@@ -160,10 +175,13 @@ const validateIndividualFarmerData = (
 
       if (
         retrievedSecondaryPhone !== 0 &&
+        // @ts-expect-error TS(2345): Argument of type 'number' is not assignable to par... Remove this comment to see the full error message
         (!Number.isInteger(parseInt(retrievedSecondaryPhone)) ||
           retrievedSecondaryPhone?.toString().length !== 9 ||
+          // @ts-expect-error TS(2345): Argument of type 'string | undefined' is not assig... Remove this comment to see the full error message
           parseInt(retrievedSecondaryPhone?.toString()[0]) !== 8 ||
           [2, 3, 4, 5, 6, 7].indexOf(
+            // @ts-expect-error TS(2345): Argument of type 'string | undefined' is not assig... Remove this comment to see the full error message
             parseInt(retrievedSecondaryPhone?.toString()[1]),
           ) < 0)
       ) {
@@ -175,10 +193,13 @@ const validateIndividualFarmerData = (
     if (
       retrievedPrimaryPhone !== 0 &&
       retrievedSecondaryPhone === 0 &&
+      // @ts-expect-error TS(2345): Argument of type 'number' is not assignable to par... Remove this comment to see the full error message
       (!Number.isInteger(parseInt(retrievedPrimaryPhone)) ||
         retrievedPrimaryPhone?.toString().length !== 9 ||
+        // @ts-expect-error TS(2345): Argument of type 'string | undefined' is not assig... Remove this comment to see the full error message
         parseInt(retrievedPrimaryPhone?.toString()[0]) !== 8 ||
         [2, 3, 4, 5, 6, 7].indexOf(
+          // @ts-expect-error TS(2345): Argument of type 'string | undefined' is not assig... Remove this comment to see the full error message
           parseInt(retrievedPrimaryPhone?.toString()[1]),
         ) < 0)
     ) {
@@ -189,10 +210,13 @@ const validateIndividualFarmerData = (
     if (
       retrievedSecondaryPhone !== 0 &&
       retrievedPrimaryPhone === 0 &&
+      // @ts-expect-error TS(2345): Argument of type 'number' is not assignable to par... Remove this comment to see the full error message
       (!Number.isInteger(parseInt(retrievedSecondaryPhone)) ||
         retrievedSecondaryPhone?.toString().length !== 9 ||
+        // @ts-expect-error TS(2345): Argument of type 'string | undefined' is not assig... Remove this comment to see the full error message
         parseInt(retrievedSecondaryPhone?.toString()[0]) !== 8 ||
         [2, 3, 4, 5, 6, 7].indexOf(
+          // @ts-expect-error TS(2345): Argument of type 'string | undefined' is not assig... Remove this comment to see the full error message
           parseInt(retrievedSecondaryPhone?.toString()[1]),
         ) < 0)
     ) {
@@ -201,9 +225,11 @@ const validateIndividualFarmerData = (
     }
     return {
       primaryPhone: retrievedPrimaryPhone
+        // @ts-expect-error TS(2345): Argument of type 'number' is not assignable to par... Remove this comment to see the full error message
         ? Number(parseInt(retrievedPrimaryPhone))
         : 0,
       secondaryPhone: retrievedSecondaryPhone
+        // @ts-expect-error TS(2345): Argument of type 'number' is not assignable to par... Remove this comment to see the full error message
         ? Number(parseInt(retrievedSecondaryPhone))
         : 0,
     }
@@ -218,7 +244,9 @@ const validateIndividualFarmerData = (
     const retrievedOldDocNumber = oldIdDocument?.docNumber
     const retrievedOldNuit = oldIdDocument?.nuit
 
+    // @ts-expect-error TS(2584): Cannot find name 'console'. Do you need to change ... Remove this comment to see the full error message
     console.log("new doc:", JSON.stringify(idDocument))
+    // @ts-expect-error TS(2584): Cannot find name 'console'. Do you need to change ... Remove this comment to see the full error message
     console.log("old doc:", JSON.stringify(oldIdDocument))
 
     if (

@@ -7,8 +7,10 @@ import {
   Linking,
   ActivityIndicator,
   Image,
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 } from "react-native";
 import { Camera, useCameraDevices } from "react-native-vision-camera";
+// @ts-expect-error TS(2305): Module '"@rneui/base"' has no exported member 'Box... Remove this comment to see the full error message
 import { Divider, Icon, Avatar, BottomSheet, Box } from "@rneui/base";
 import COLORS from "../../consts/colors";
 import { useIsFocused } from "@react-navigation/native";
@@ -19,7 +21,10 @@ import { launchImageLibrary } from "react-native-image-picker";
 import { SuccessLottie } from "../../components/LottieComponents/SuccessLottie";
 const { useRealm, useQuery, useObject } = realmContext;
 
-export default function CameraScreen({ route, navigation }) {
+export default function CameraScreen({
+  route,
+  navigation
+}: any) {
   const realm = useRealm();
   const user = useUser();
   const customUserData = user?.customData;
@@ -37,7 +42,7 @@ export default function CameraScreen({ route, navigation }) {
   const ownerType = route.params?.ownerType;
   const ownerId = route.params?.ownerId;
   const farmersIDs = route.params?.farmersIDs;
-  let photoOwner;
+  let photoOwner: any;
   if (ownerType === "Grupo") {
     photoOwner = realm.objectForPrimaryKey("Group", ownerId);
   } else if (ownerType === "Indivíduo") {
@@ -50,6 +55,7 @@ export default function CameraScreen({ route, navigation }) {
   useEffect(() => {
     async function getPhonePermission() {
       const permission = await Camera.requestCameraPermission();
+      // @ts-expect-error TS(2584): Cannot find name 'console'. Do you need to change ... Remove this comment to see the full error message
       console.log(`Camera permission status: ${permission}`);
       if (permission === "denied") await Linking.openSettings();
       if (permission === "authorized" && photoOwner?.image === "") {
@@ -67,6 +73,7 @@ export default function CameraScreen({ route, navigation }) {
 
   useEffect(() => {
     if (successLottieVisible) {
+      // @ts-expect-error TS(2304): Cannot find name 'setTimeout'.
       setTimeout(() => {
         setSuccessLottieVisible(false);
         navigateBack();
@@ -76,8 +83,10 @@ export default function CameraScreen({ route, navigation }) {
 
   const capturePhoto = async () => {
     if (!camera.current)
+      // @ts-expect-error TS(2584): Cannot find name 'console'. Do you need to change ... Remove this comment to see the full error message
       return console.log("device is null: is there no Camera?");
 
+    // @ts-expect-error TS(2339): Property 'takeSnapshot' does not exist on type 'ne... Remove this comment to see the full error message
     const photo = await camera.current?.takeSnapshot({
       quality: 85,
       skipMetadata: true,
@@ -86,20 +95,24 @@ export default function CameraScreen({ route, navigation }) {
     fetchImage(`file://${photo.path}`);
   };
 
-  const fetchImage = async (uri) => {
+  const fetchImage = async (uri: any) => {
     try {
+      // @ts-expect-error TS(2304): Cannot find name 'fetch'.
       const imageResponse = await fetch(uri);
       const imageBlob = await imageResponse.blob();
       const base64Data = await blobToBase64(imageBlob);
+      // @ts-expect-error TS(2345): Argument of type 'unknown' is not assignable to pa... Remove this comment to see the full error message
       setImageSource(base64Data);
       setShowCamera(false);
     } catch (error) {
+      // @ts-expect-error TS(2584): Cannot find name 'console'. Do you need to change ... Remove this comment to see the full error message
       console.log("fetchImage failed: ", { cause: error });
     }
   };
 
-  const blobToBase64 = (blob) => {
+  const blobToBase64 = (blob: any) => {
     return new Promise((resolve, reject) => {
+      // @ts-expect-error TS(2304): Cannot find name 'FileReader'.
       const reader = new FileReader();
       reader.onerror = reject;
       reader.onload = () => {
@@ -117,15 +130,20 @@ export default function CameraScreen({ route, navigation }) {
         path: "images",
       },
     };
+    // @ts-expect-error TS(2345): Argument of type '{ includeBase64: boolean; storag... Remove this comment to see the full error message
     launchImageLibrary(options, (response) => {
       if (response.didCancel) {
+        // @ts-expect-error TS(2584): Cannot find name 'console'. Do you need to change ... Remove this comment to see the full error message
         console.log("User cancelled image picker");
       } else if (response.errorCode) {
+        // @ts-expect-error TS(2584): Cannot find name 'console'. Do you need to change ... Remove this comment to see the full error message
         console.log("ImagePicker Error: ", response.error);
       } else {
+        // @ts-expect-error TS(2532): Object is possibly 'undefined'.
         const source = { uri: response.assets.uri };
 
         const imageString =
+          // @ts-expect-error TS(2532): Object is possibly 'undefined'.
           "data:image/jpeg;base64," + response.assets[0].base64;
 
         savePhoto(realm, photoOwner, imageString);
@@ -134,7 +152,7 @@ export default function CameraScreen({ route, navigation }) {
   };
 
   const savePhoto = useCallback(
-    (realm, photoOwner, imageSource) => {
+    (realm: any, photoOwner: any, imageSource: any) => {
       realm.write(() => {
         photoOwner.image = imageSource;
       });
@@ -145,7 +163,7 @@ export default function CameraScreen({ route, navigation }) {
   );
 
   const deletePhoto = useCallback(
-    (photoOwner, realm) => {
+    (photoOwner: any, realm: any) => {
       realm.write(() => {
         photoOwner.image = "";
       });
@@ -205,6 +223,7 @@ export default function CameraScreen({ route, navigation }) {
         <>
           <Camera
             ref={camera}
+            // @ts-expect-error TS(2322): Type '{ ref: MutableRefObject<null>; style: any; d... Remove this comment to see the full error message
             style={StyleSheet.absoluteFill}
             device={device}
             isActive={showCamera}

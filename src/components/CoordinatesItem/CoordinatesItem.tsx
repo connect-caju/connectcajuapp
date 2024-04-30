@@ -6,6 +6,7 @@ import {
   ScrollView,
   TouchableOpacity,
   Pressable,
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 } from "react-native";
 import { Stack, Box, Center } from "native-base";
 import { Icon } from "@rneui/base";
@@ -14,13 +15,17 @@ import AwesomeAlert from "react-native-awesome-alerts";
 import CustomDivider from "../Divider/CustomDivider";
 
 import { realmContext } from "../../models/realmContext";
+// @ts-expect-error TS(2305): Module '"../../helpers/updateCoordinates"' has no ... Remove this comment to see the full error message
 import { updateCoordinates } from "../../helpers/updateCoordinates";
 import COLORS from "../../consts/colors";
 const { useRealm, useObject, useQuery } = realmContext;
 
 let FLAG = false;
 
-const CoordinatesItem = ({ item, farmland }) => {
+const CoordinatesItem = ({
+  item,
+  farmland
+}: any) => {
   const realm = useRealm();
 
   const [deleteAlert, setDeleteAlert] = useState(false);
@@ -66,6 +71,7 @@ const CoordinatesItem = ({ item, farmland }) => {
       <Stack direction="row" w="100%">
         <Box
           w="20%"
+          // @ts-expect-error TS(2322): Type '{ children: Element; w: "20%"; style: { flex... Remove this comment to see the full error message
           style={{
             flex: 1,
             justifyContent: "center",
@@ -125,6 +131,7 @@ const CoordinatesItem = ({ item, farmland }) => {
         <Box w="20%" alignItems={"center"}>
           <Box
             w="50%"
+            // @ts-expect-error TS(2322): Type '{ children: Element; w: "50%"; style: { flex... Remove this comment to see the full error message
             style={{
               flex: 1,
               justifyContent: "center",

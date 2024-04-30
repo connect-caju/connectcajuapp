@@ -12,6 +12,7 @@ import {
   Dimensions,
   Easing,
   Animated as NativeAnimated,
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 } from "react-native";
 import COLORS from "../../consts/colors";
 import Animated, {
@@ -62,7 +63,10 @@ const ownFarmlands = "ownFarmlands";
 
 const { height: SCREEN_HEIGHT } = Dimensions.get("window");
 
-const ProfileScreen = ({ route, navigation }) => {
+const ProfileScreen = ({
+  route,
+  navigation
+}: any) => {
   const {
     ownerId,
     farmerType,
@@ -73,7 +77,7 @@ const ProfileScreen = ({ route, navigation }) => {
   const realm = useRealm();
   const user = useUser();
   const customUserData = user?.customData;
-  let farmer;
+  let farmer: any;
   let manager = "";
   let ownerName = "";
 
@@ -83,6 +87,7 @@ const ProfileScreen = ({ route, navigation }) => {
   } else if (farmerType === farmerTypes.group) {
     farmer = realm.objectForPrimaryKey("Group", ownerId);
     if (farmer?.manager) {
+      // @ts-expect-error TS(2322): Type '(string & Object<unknown, never>) | null' is... Remove this comment to see the full error message
       manager = realm.objectForPrimaryKey("Actor", farmer?.manager);
     }
     ownerName = farmer?.name;
@@ -113,7 +118,7 @@ const ProfileScreen = ({ route, navigation }) => {
   const snapPoints = useMemo(() => ["25%", "40%", "60", "80%"], []);
 
   // Animate by resizing EditFarmerData Component
-  const resizeBox = (to) => {
+  const resizeBox = (to: any) => {
     to === 1 && setIsOverlayVisible(true);
     NativeAnimated.timing(scale, {
       toValue: to,
@@ -124,21 +129,26 @@ const ProfileScreen = ({ route, navigation }) => {
   };
 
   const handlePresentModalPress = useCallback(() => {
+    // @ts-expect-error TS(2339): Property 'present' does not exist on type 'never'.
     bottomSheetRef?.current?.present();
   }, []);
 
   const handleDismissModalPress = useCallback(() => {
+    // @ts-expect-error TS(2339): Property 'dismiss' does not exist on type 'never'.
     bottomSheetRef?.current?.dismiss();
     setPresentGroupMemberOptions(false);
     setPresentFarmlandMenu(false);
   }, []);
 
-  const onPressEditData = useCallback((bottomSheetFlag) => {
+  const onPressEditData = useCallback((bottomSheetFlag: any) => {
+    // @ts-expect-error TS(2339): Property 'isActive' does not exist on type 'never'... Remove this comment to see the full error message
     const isActive = ref?.current?.isActive();
     if (isActive) {
+      // @ts-expect-error TS(2339): Property 'scrollTo' does not exist on type 'never'... Remove this comment to see the full error message
       ref?.current?.scrollTo(0);
       setBottomSheetFlag("");
     } else {
+      // @ts-expect-error TS(2339): Property 'scrollTo' does not exist on type 'never'... Remove this comment to see the full error message
       ref?.current?.scrollTo(-300);
       setBottomSheetFlag(bottomSheetFlag);
     }
@@ -303,7 +313,7 @@ const ProfileScreen = ({ route, navigation }) => {
 
               {farmerType === farmerTypes.farmer && (
                 <>
-                  {farmer?.assets?.map((asset, index) => (
+                  {farmer?.assets?.map((asset: any, index: any) => (
                     <Text
                       key={index}
                       className="text-gray-500 text-xs font-light text-center"
@@ -400,6 +410,7 @@ const ProfileScreen = ({ route, navigation }) => {
         {farmlands?.length > 0 &&
           farmlands?.map((farmland) => (
             <FarmlandData
+              // @ts-expect-error TS(2339): Property '_id' does not exist on type 'Object<unkn... Remove this comment to see the full error message
               key={farmland?._id}
               farmland={farmland}
               refresh={refresh}
@@ -445,6 +456,7 @@ const ProfileScreen = ({ route, navigation }) => {
                   farmer?.type === groupTypes.farmerGroup
                   ? "deste Grupo"
                   : farmerType === farmerTypes.group &&
+                    // @ts-expect-error TS(2339): Property 'faBirthdayCake' does not exist on type '... Remove this comment to see the full error message
                     farmer?.type === groupTypes.faBirthdayCake
                     ? "desta Escola"
                     : "deste Grupo"}

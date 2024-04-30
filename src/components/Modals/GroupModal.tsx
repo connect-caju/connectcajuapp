@@ -6,6 +6,7 @@
 
 import React, { useCallback, useEffect, useState } from "react";
 import { Text, Stack, Box, Center, Divider } from "native-base";
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { ScrollView, Pressable, View, TouchableOpacity } from "react-native";
 import { Button, Icon } from "@rneui/themed";
 import CustomDivider from "../Divider/CustomDivider";
@@ -13,10 +14,12 @@ import styles from "./styles";
 import Modal from "react-native-modal";
 
 import "react-native-get-random-values";
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'uuid... Remove this comment to see the full error message
 import { v4 as uuidv4 } from "uuid";
 import Realm from "realm";
 
 import SuccessModal from "./SuccessModal";
+// @ts-expect-error TS(2307): Cannot find module '../../helpers/generateUUID' or... Remove this comment to see the full error message
 import { generateUUID } from "../../helpers/generateUUID";
 import { generateFormattedDate } from "../../helpers/generateFormattedDate";
 import { generateFormattedAdminPost } from "../../helpers/generateFormattedAdminPost";
@@ -37,24 +40,23 @@ export default function GroupModal({
   farmerData,
   farmerType,
   setFarmerType,
-
   setGroupType,
   setGroupName,
   setGroupAffiliationYear,
   setGroupAdminPost,
   setGroupVillage,
+
   // setGroupManagerName,
   // setGroupManagerPhone,
   setGroupOperatingLicence,
+
   setGroupNuit,
   setGroupMembersNumber,
   setGroupWomenNumber,
-
   setFarmerItem,
   setIsCoordinatesModalVisible,
-
-  customUserData,
-}) {
+  customUserData
+}: any) {
   const [addDataModalVisible, setAddDataModalVisible] = useState(false);
   // const [farmerId, setFarmerId] = useState(null);
   const navigation = useNavigation();
@@ -67,7 +69,7 @@ export default function GroupModal({
   )[0];
 
   const addGroup = useCallback(
-    (farmerData, realm) => {
+    (farmerData: any, realm: any) => {
       const {
         operationalStatus,
         type,
@@ -117,7 +119,9 @@ export default function GroupModal({
       // update userStat (1 more farmer registered by the user)
       if (currentUserStat) {
         realm.write(() => {
+          // @ts-expect-error TS(2339): Property 'registeredFarmers' does not exist on typ... Remove this comment to see the full error message
           currentUserStat.registeredFarmers =
+            // @ts-expect-error TS(2339): Property 'registeredFarmers' does not exist on typ... Remove this comment to see the full error message
             currentUserStat.registeredFarmers + 1;
         });
       } else {
@@ -142,6 +146,7 @@ export default function GroupModal({
   );
 
   return (
+    // </View>
     <Modal
       isVisible={modalVisible}
       supportedOrientations={["portrait", "landscape"]}
@@ -167,6 +172,7 @@ export default function GroupModal({
         >
           <View style={{ width: "90%" }}>
             <Text
+              // @ts-expect-error TS(2322): Type '{ children: string; style: { fontFamily: str... Remove this comment to see the full error message
               style={{
                 fontFamily: "JosefinSans-Bold",
                 fontSize: 16,
@@ -209,13 +215,17 @@ export default function GroupModal({
             <Box mx="2">
               <Stack direction="row" w="100%" my="1">
                 <Box w="40%">
+                  // @ts-expect-error TS(2322): Type '{ children: string; style: any; }' is not as... Remove this comment to see the full error message
                   <Text style={styles.keys}>Organização:</Text>
                 </Box>
+                // @ts-expect-error TS(2322): Type '{ children: Element; w: "60%"; style: any; }... Remove this comment to see the full error message
                 <Box w="60%" style={styles.values}>
                   <Box>
+                    // @ts-expect-error TS(2322): Type '{ children: any[]; style: any; }' is not ass... Remove this comment to see the full error message
                     <Text style={styles.values}>
                       {farmerData?.name} ({farmerData?.type})
                     </Text>
+                    // @ts-expect-error TS(2322): Type '{ children: string; style: any; }' is not as... Remove this comment to see the full error message
                     <Text style={styles.values}>
                       {farmerData?.operationalStatus ? "Activo" : "Inactivo"}
                     </Text>
@@ -231,11 +241,14 @@ export default function GroupModal({
 
               <Stack direction="row" w="100%" my="1">
                 <Box w="40%">
+                  // @ts-expect-error TS(2322): Type '{ children: string; style: any; }' is not as... Remove this comment to see the full error message
                   <Text style={styles.keys}>Finalidade:</Text>
                 </Box>
+                // @ts-expect-error TS(2322): Type '{ children: Element; w: "60%"; style: any; }... Remove this comment to see the full error message
                 <Box w="60%" style={styles.values}>
                   <Box>
-                    {farmerData?.assets?.map((asset, index) => (
+                    {farmerData?.assets?.map((asset: any, index: any) => (
+                      // @ts-expect-error TS(2322): Type '{ children: any; key: any; style: any; }' is... Remove this comment to see the full error message
                       <Text key={index} style={styles.values}>
                         {asset?.subcategory}
                       </Text>
@@ -252,15 +265,18 @@ export default function GroupModal({
 
               <Stack direction="row" w="100%" my="1">
                 <Box w="40%">
+                  // @ts-expect-error TS(2322): Type '{ children: string; style: any; }' is not as... Remove this comment to see the full error message
                   <Text style={styles.keys}>Membros</Text>
                 </Box>
                 <Box w="60%">
                   <Box>
+                    // @ts-expect-error TS(2322): Type '{ children: any[]; style: any; }' is not ass... Remove this comment to see the full error message
                     <Text style={styles.values}>
                       {farmerData.numberOfMembers?.women} (Mulheres)
                     </Text>
                   </Box>
                   <Box>
+                    // @ts-expect-error TS(2322): Type '{ children: (string | number)[]; style: any;... Remove this comment to see the full error message
                     <Text style={styles.values}>
                       {farmerData.numberOfMembers?.total -
                         farmerData.numberOfMembers?.women}{" "}
@@ -268,7 +284,9 @@ export default function GroupModal({
                     </Text>
                   </Box>
                   <Box>
+                    // @ts-expect-error TS(2322): Type '{ children: string; style: any; }' is not as... Remove this comment to see the full error message
                     <Text style={styles.values}>________</Text>
+                    // @ts-expect-error TS(2322): Type '{ children: any[]; style: any; }' is not ass... Remove this comment to see the full error message
                     <Text style={styles.values}>
                       {farmerData.numberOfMembers?.total} (Total)
                     </Text>
@@ -284,16 +302,20 @@ export default function GroupModal({
 
               <Stack direction="row" w="100%" my="1">
                 <Box w="40%">
+                  // @ts-expect-error TS(2322): Type '{ children: string; style: any; }' is not as... Remove this comment to see the full error message
                   <Text style={styles.keys}>Estado de legalização</Text>
                 </Box>
                 <Box w="60%">
                   <Box>
+                    // @ts-expect-error TS(2322): Type '{ children: any; style: any; }' is not assig... Remove this comment to see the full error message
                     <Text style={styles.values}>{farmerData?.legalStatus}</Text>
+                    // @ts-expect-error TS(2322): Type '{ children: any[]; style: any; }' is not ass... Remove this comment to see the full error message
                     <Text style={styles.values}>
                       {farmerData?.creationYear} (ano de criação)
                     </Text>
                     {farmerData?.legalStatus ===
                       groupAffiliationStatus.affiliated && (
+                        // @ts-expect-error TS(2322): Type '{ children: any[]; style: any; }' is not ass... Remove this comment to see the full error message
                         <Text style={styles.values}>
                           {farmerData?.affiliationYear} (ano de legalização)
                         </Text>
@@ -313,20 +335,24 @@ export default function GroupModal({
 
                     <Stack direction="row" w="100%" my="1">
                       <Box w="40%">
+                        // @ts-expect-error TS(2322): Type '{ children: string; style: any; }' is not as... Remove this comment to see the full error message
                         <Text style={styles.keys}>Documentação:</Text>
                       </Box>
                       <Box w="60%">
                         <Box>
+                          // @ts-expect-error TS(2322): Type '{ children: string; style: any; }' is not as... Remove this comment to see the full error message
                           <Text style={styles.values}>
                             {farmerData?.nuel
                               ? farmerData?.nuel + " (NUEL)"
                               : "Nenhum (NUEL"}
                           </Text>
+                          // @ts-expect-error TS(2322): Type '{ children: string; style: any; }' is not as... Remove this comment to see the full error message
                           <Text style={styles.values}>
                             {farmerData?.nuit
                               ? farmerData?.nuit + " (NUIT)"
                               : "Nenhum (NUIT)"}
                           </Text>
+                          // @ts-expect-error TS(2322): Type '{ children: string; style: any; }' is not as... Remove this comment to see the full error message
                           <Text style={styles.values}>
                             {farmerData?.licence
                               ? farmerData?.licence + " (Licença/Alvará)"
@@ -346,19 +372,24 @@ export default function GroupModal({
 
               <Stack direction="row" w="100%" my="1">
                 <Box w="40%">
+                  // @ts-expect-error TS(2322): Type '{ children: string; style: any; }' is not as... Remove this comment to see the full error message
                   <Text style={styles.keys}>Endereço:</Text>
                 </Box>
                 <Box w="60%">
                   <Box>
+                    // @ts-expect-error TS(2322): Type '{ children: any[]; style: any; }' is not ass... Remove this comment to see the full error message
                     <Text style={styles.values}>
                       {farmerData?.address?.province} (Província)
                     </Text>
+                    // @ts-expect-error TS(2322): Type '{ children: any[]; style: any; }' is not ass... Remove this comment to see the full error message
                     <Text style={styles.values}>
                       {farmerData?.address?.district} (Distrito)
                     </Text>
+                    // @ts-expect-error TS(2322): Type '{ children: any[]; style: any; }' is not ass... Remove this comment to see the full error message
                     <Text style={styles.values}>
                       {farmerData?.address?.adminPost} (Posto Admin.)
                     </Text>
+                    // @ts-expect-error TS(2322): Type '{ children: string; style: any; }' is not as... Remove this comment to see the full error message
                     <Text style={styles.values}>
                       {farmerData.address?.village
                         ? farmerData.address?.village + " (localidade)"
@@ -382,6 +413,7 @@ export default function GroupModal({
                       setIsCoordinatesModalVisible(true);
                     } catch (error) {
                       throw new Error("Failed to register Group", {
+                        // @ts-expect-error TS(2322): Type 'unknown' is not assignable to type 'Error | ... Remove this comment to see the full error message
                         cause: error,
                       });
                     } finally {
@@ -406,7 +438,6 @@ export default function GroupModal({
         </ScrollView>
       </View>
     </Modal>
-    // </View>
   );
 }
 

@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   Animated,
   Easing,
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 } from "react-native";
 import {
   Box,
@@ -18,6 +19,7 @@ import {
   Collapse,
   CollapseHeader,
   CollapseBody,
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'acco... Remove this comment to see the full error message
 } from "accordion-collapse-react-native";
 import {
   widthPercentageToDP as wp,
@@ -72,8 +74,8 @@ const FarmlandData = ({
   farmland,
   setRefresh,
   refresh,
-  ownerImage,
-}) => {
+  ownerImage
+}: any) => {
   const realm = useRealm();
   const user = useUser();
   const customUserData = user?.customData;
@@ -156,11 +158,11 @@ const FarmlandData = ({
   // check if there is enough area for a new Block to be added in
   // this function prevent adding new cashew trees in a farmland
   // where there is no enough space left
-  const checkAreasConformity = (farmland) => {
+  const checkAreasConformity = (farmland: any) => {
     const totalArea = farmland?.totalArea;
     const blocksAreas = farmland?.blocks
-      ?.map((block) => block?.usedArea)
-      .reduce((acc, el) => acc + el, 0);
+      ?.map((block: any) => block?.usedArea)
+      .reduce((acc: any, el: any) => acc + el, 0);
     if (totalArea - blocksAreas <= 0.02) {
       setIsAreaNotEnough(true);
     }
@@ -181,10 +183,12 @@ const FarmlandData = ({
       );
     });
 
+    // @ts-expect-error TS(2304): Cannot find name 'setInterval'.
     const interval = setInterval(() => {
       setAutoRefresh(!autoRefresh);
     }, 2000);
 
+    // @ts-expect-error TS(2304): Cannot find name 'clearInterval'.
     clearInterval(interval);
   }, [
     realm,
@@ -194,7 +198,7 @@ const FarmlandData = ({
     isNewBlockVisible,
   ]);
 
-  const resizeBlockBox = (to) => {
+  const resizeBlockBox = (to: any) => {
     to === 1 && setIsNewBlockVisible(true);
     Animated.timing(scaleBlockBox, {
       toValue: to,
@@ -208,7 +212,7 @@ const FarmlandData = ({
     <Collapse
       style={tw`my-2 py-2`}
 
-      onToggle={(isExpanded) => {
+      onToggle={(isExpanded: any) => {
         setIsCallapseOn(isExpanded);
         setRefresh(!isExpanded);
       }}
@@ -349,16 +353,14 @@ const FarmlandData = ({
               className="flex flex-row"
             >
               {
-                farmland?.consociatedCrops?.map((crop) => (
-                  <View
-                    key={crop}
-                    className="p-2 mb-2 -mt-2 mr-2 bg-gray-200 dark:bg-gray-700 rounded-full shadow-md"
-                  >
-                    <Text
-                      className="text-sm text-gray-500 font-light"
-                    >{crop}</Text>
-                  </View>
-                ))
+                farmland?.consociatedCrops?.map((crop: any) => <View
+                  key={crop}
+                  className="p-2 mb-2 -mt-2 mr-2 bg-gray-200 dark:bg-gray-700 rounded-full shadow-md"
+                >
+                  <Text
+                    className="text-sm text-gray-500 font-light"
+                  >{crop}</Text>
+                </View>)
               }
             </View>
 
@@ -380,6 +382,7 @@ const FarmlandData = ({
                       farmland?.status === resourceValidation.status.validated}
                     className=""
                     onPress={() =>
+                      // @ts-expect-error TS(2345): Argument of type 'string' is not assignable to par... Remove this comment to see the full error message
                       navigation.navigate("FarmlandAreaAudit", {
                         farmlandId: farmland._id,
                       })
@@ -430,7 +433,7 @@ const FarmlandData = ({
               </View>
 
               {farmland?.extremeCoordinates.length > 0 &&
-                farmland?.extremeCoordinates?.map((coords) => {
+                farmland?.extremeCoordinates?.map((coords: any) => {
                   return (
                     <View
                       key={coords?.position}
@@ -514,6 +517,7 @@ const FarmlandData = ({
                   disabled={
                     farmland?.status === resourceValidation.status.validated}
                   onPress={() => {
+                    // @ts-expect-error TS(2345): Argument of type 'string' is not assignable to par... Remove this comment to see the full error message
                     navigation.navigate("Geolocation", {
                       resourceName: "Farmland",
                       resourceId: farmland._id,
@@ -670,7 +674,7 @@ const FarmlandData = ({
               </View>
             )}
 
-            {normalizeBlockList(farmland?.blocks)?.map((block, index) => (
+            {normalizeBlockList(farmland?.blocks)?.map((block: any, index: any) => (
               <View
                 key={index}
                 className="my-3 pr-1 border-l-8 border-l-gray-600 shadow-sm shadow-slate-300"
@@ -834,7 +838,7 @@ const FarmlandData = ({
 
 
                 {block?.sameTypeTrees?.length > 0 ? (
-                  block?.sameTypeTrees?.map((sameType, index) => (
+                  block?.sameTypeTrees?.map((sameType: any, index: any) => (
 
                     <View
                       key={index}
@@ -869,6 +873,7 @@ const FarmlandData = ({
                   </View>
                 )}
                 <Box
+                  // @ts-expect-error TS(2322): Type '{ children: Element; style: { paddingTop: nu... Remove this comment to see the full error message
                   style={{
                     paddingTop: 20,
                   }}

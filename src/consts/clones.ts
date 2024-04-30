@@ -65,11 +65,11 @@ const clones = [
   "PJJEM6",
   "2.7NASS",
   "Outro",
-]
+];
 
 const cloneList = clones.map((clone, index) => ({
   key: `${index}`,
   value: `${clone}`,
-}))
+}));
 
-export default cloneList
+export default cloneList;

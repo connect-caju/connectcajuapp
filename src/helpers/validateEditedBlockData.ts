@@ -5,29 +5,38 @@ const errorCoeffients = {
 }
 
 // get estimates for trees number, area, and density
-const getThreshold = (trees, area, width, length) => {
+const getThreshold = (trees: any, area: any, width: any, length: any) => {
   const estimatedArea = ((trees * width * length) / 10000).toFixed(2)
   const estimatedTrees = ((area * 10000) / (width * length)).toFixed(2)
   const estimatedDensity = Math.sqrt((area * 10000) / trees).toFixed(2)
 
   if (
+    // @ts-expect-error TS(2362): The left-hand side of an arithmetic operation must... Remove this comment to see the full error message
     estimatedTrees - errorCoeffients.trees <= trees &&
     estimatedTrees + errorCoeffients.trees >= trees &&
+    // @ts-expect-error TS(2362): The left-hand side of an arithmetic operation must... Remove this comment to see the full error message
     estimatedArea - errorCoeffients.area <= area &&
     estimatedArea + errorCoeffients.area >= area &&
+    // @ts-expect-error TS(2362): The left-hand side of an arithmetic operation must... Remove this comment to see the full error message
     estimatedDensity - errorCoeffients.density <= length &&
     estimatedDensity + errorCoeffients.density >= length &&
+    // @ts-expect-error TS(2362): The left-hand side of an arithmetic operation must... Remove this comment to see the full error message
     estimatedDensity - errorCoeffients.density <= width &&
     estimatedDensity + errorCoeffients.density >= width
   ) {
     return { status: true }
   }
+  // @ts-expect-error TS(2584): Cannot find name 'console'. Do you need to change ... Remove this comment to see the full error message
   console.log("----------------------")
+  // @ts-expect-error TS(2584): Cannot find name 'console'. Do you need to change ... Remove this comment to see the full error message
   console.log(
     `estimatedDensity: ${estimatedDensity}; length: ${length} & width: ${width}`,
   )
+  // @ts-expect-error TS(2584): Cannot find name 'console'. Do you need to change ... Remove this comment to see the full error message
   console.log(`estimatedTrees: ${estimatedTrees}; trees: ${trees}`)
+  // @ts-expect-error TS(2584): Cannot find name 'console'. Do you need to change ... Remove this comment to see the full error message
   console.log(`estimatedArea: ${estimatedArea}; area: ${area}`)
+  // @ts-expect-error TS(2584): Cannot find name 'console'. Do you need to change ... Remove this comment to see the full error message
   console.log("----------------------")
 
   return {
@@ -41,15 +50,15 @@ const getThreshold = (trees, area, width, length) => {
 // make sure the number of trees of the edited block doesn't result into
 // the sum of blocks trees being greater than the total trees of the farmland
 const areTotalTreesAndBlocksTreesConsistent = (
-  resource,
-  currentBlockTrees,
-  blockId,
+  resource: any,
+  currentBlockTrees: any,
+  blockId: any,
 ) => {
   // get the sum of all the block trees except the current block trees
   const blocksTrees = resource.blocks
-    ?.filter((block) => block._id !== blockId)
-    ?.map((block) => block.trees)
-    ?.reduce((acc, el) => acc + el, 0)
+    ?.filter((block: any) => block._id !== blockId)
+    ?.map((block: any) => block.trees)
+    ?.reduce((acc: any, el: any) => acc + el, 0)
   if (resource.trees < blocksTrees + currentBlockTrees) {
     return false
   } else {
@@ -57,6 +66,7 @@ const areTotalTreesAndBlocksTreesConsistent = (
   }
 }
 
+// @ts-expect-error TS(7030): Not all code paths return a value.
 const validateEditedBlockData = (
   {
     plantingYear,
@@ -80,14 +90,14 @@ const validateEditedBlockData = (
     sameTypeTreesList,
     oldSameTypeTreesList,
     remainingArea,
-    oldRemainingArea,
-  },
-  errors,
-  setErrors,
-  dataToBeUpdated,
-  resourceName,
-  resource,
-  blockId,
+    oldRemainingArea
+  }: any,
+  errors: any,
+  setErrors: any,
+  dataToBeUpdated: any,
+  resourceName: any,
+  resource: any,
+  blockId: any,
 ) => {
   const retrievedTreesNumber = blockTrees ? parseInt(blockTrees) : 0
   const retrievedOldTreesNumber = oldBlockTrees ? parseInt(oldBlockTrees) : 0
@@ -114,6 +124,7 @@ const validateEditedBlockData = (
     }
 
     const sumOfTrees = retrievedSameTypeTreesList
+      // @ts-expect-error TS(2345): Argument of type 'number' is not assignable to par... Remove this comment to see the full error message
       .map((object) => parseInt(object?.trees))
       .reduce((acc, el) => acc + el, 0)
 
@@ -214,6 +225,7 @@ const validateEditedBlockData = (
 
     if (
       retrievedDensityMode === "Regular" &&
+      // @ts-expect-error TS(2367): This condition will always return 'false' since th... Remove this comment to see the full error message
       (retrievedDensityLength === "" || retrievedDensityWidth === "")
     ) {
       setErrors({ ...errors, density: "Indica comprimento e largura." })

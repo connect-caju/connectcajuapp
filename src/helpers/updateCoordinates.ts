@@ -1,7 +1,7 @@
-export const getPosition = (coordinates) => {
+export const getPosition = (coordinates: any) => {
   const length = coordinates.length + 1
   for (let i = 1; i <= length; i++) {
-    const position = coordinates.find((p) => p.position == i)
+    const position = coordinates.find((p: any) => p.position == i)
     if (!position) {
       return i
     }
@@ -10,7 +10,7 @@ export const getPosition = (coordinates) => {
 }
 
 // sort coordinates by their position
-export const sortCoordinatesByPositions = (coordinates) => {
+export const sortCoordinatesByPositions = (coordinates: any) => {
   let toBeSorted = [...coordinates]
   let length = toBeSorted.length
 
@@ -27,7 +27,7 @@ export const sortCoordinatesByPositions = (coordinates) => {
     .sort((a, b) => b?.position - a?.position)
 }
 
-export const calculateAuditedArea = (coordinates) => {
+export const calculateAuditedArea = (coordinates: any) => {
   let extremeCoordinates = [...coordinates]
   //To do:
   // 1. extract all the coordinates with their respective positions;

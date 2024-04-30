@@ -9,6 +9,7 @@ import {
   Modal,
   Animated,
   SafeAreaView,
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 } from "react-native";
 import {
   Box,
@@ -34,6 +35,7 @@ import { CustomInput } from "../Inputs/CustomInput";
 // import { v4 as uuidv4 } from 'uuid';
 
 import { realmContext } from "../../models/realmContext";
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { TouchableOpacity } from "react-native";
 import validateBlockData from "../../helpers/validateBlockData";
 import AwesomeAlert from "react-native-awesome-alerts";
@@ -51,8 +53,10 @@ export default function FarmlandBlockRegistration({
   errors,
   setErrors,
   scale,
+
   // alert, setAlert,
   plantingYear,
+
   setPlantingYear,
   blockTrees,
   setBlockTrees,
@@ -60,7 +64,6 @@ export default function FarmlandBlockRegistration({
   setUsedArea,
   plantTypes,
   setPlantTypes,
-
   clones,
   setClones,
   densityLength,
@@ -71,23 +74,20 @@ export default function FarmlandBlockRegistration({
   isDensityModeRegular,
   setIsDensityModeIrregular,
   setIsDensityModeRegular,
-
   visualizeBlockData,
-
   sameTypeTreesList,
   setSameTypeTreesList,
-
   totalArea,
+
   // setTotalArea,
   // setTotalTrees,
   totalTrees,
+
   treesFlag,
   setTreesFlag,
   areaFlag,
   setAreaFlag,
-
   turnOffOverlay,
-
   alert,
   setAlert,
   messageAlert,
@@ -102,10 +102,8 @@ export default function FarmlandBlockRegistration({
   setShowCancelButton,
   showConfirmButton,
   setShowConfirmButton,
-
-  ownerImage,
-
-}) {
+  ownerImage
+}: any) {
   const realm = useRealm();
   const foundFarmland = realm.objectForPrimaryKey("Farmland", farmlandId);
   const [addedClone, setAddedClone] = useState("");
@@ -140,8 +138,8 @@ export default function FarmlandBlockRegistration({
         setTreeRedFlag(true);
         setAreaRedFlag(true);
 
-        setTreesFlag((prev) => prev - parseInt(blockTrees));
-        setAreaFlag((prev) => prev - parseFloat(usedArea));
+        setTreesFlag((prev: any) => prev - parseInt(blockTrees));
+        setAreaFlag((prev: any) => prev - parseFloat(usedArea));
 
         return;
       } else {
@@ -159,14 +157,14 @@ export default function FarmlandBlockRegistration({
     let selectedClones = [];
     let mergedSameTypeTrees = [];
     const filteredPlantTypes = plantTypes.filter(
-      (plantType) => !plantType.includes("enxer"),
+      (plantType: any) => !plantType.includes("enxer"),
     );
     if (
-      plantTypes.filter((plantType) => plantType.includes("enxer")).length > 0
+      plantTypes.filter((plantType: any) => plantType.includes("enxer")).length > 0
     ) {
       selectedClones = clones
-        ?.filter((clone) => clone !== "Outro")
-        ?.map((clone) => `Clone: ${clone}`);
+        ?.filter((clone: any) => clone !== "Outro")
+        ?.map((clone: any) => `Clone: ${clone}`);
       mergedSameTypeTrees = filteredPlantTypes.concat(selectedClones);
     } else {
       mergedSameTypeTrees = filteredPlantTypes;
@@ -174,9 +172,9 @@ export default function FarmlandBlockRegistration({
         setClones([]);
       }
     }
-    let normalizedSameTypeTrees = mergedSameTypeTrees?.map((treeType) => ({
+    let normalizedSameTypeTrees = mergedSameTypeTrees?.map((treeType: any) => ({
       treeType,
-      trees: "",
+      trees: ""
     }));
     setSameTypeTreesList(normalizedSameTypeTrees);
   }, [clones, plantTypes]);
@@ -300,10 +298,12 @@ export default function FarmlandBlockRegistration({
                 fontFamily: "JosefinSans-Bold",
               }}
             >
+              // @ts-expect-error TS(2339): Property 'blocks' does not exist on type 'Object<u... Remove this comment to see the full error message
               Parcela {foundFarmland?.blocks?.length + 1}
             </Text>
           </Box>
           <Box
+            // @ts-expect-error TS(2322): Type '{ children: Element; style: { position: stri... Remove this comment to see the full error message
             style={{
               position: "absolute",
               top: 5,
@@ -340,6 +340,7 @@ export default function FarmlandBlockRegistration({
               <Box
                 w="100%"
                 px="1"
+                // @ts-expect-error TS(2322): Type '{ children: Element[]; w: "100%"; px: "1"; s... Remove this comment to see the full error message
                 style={{
                   flexDirection: "row",
                   justifyContent: "space-between",
@@ -399,9 +400,13 @@ export default function FarmlandBlockRegistration({
                     <FormControl.Label>Ano de plantio</FormControl.Label>
 
                     <SelectList
+                      // @ts-expect-error TS(2769): No overload matches this call.
                       data={() => getFullYears2(70)}
-                      setSelected={(newYear) => {
-                        setErrors((prev) => ({ ...prev, plantingYear: "" }));
+                      setSelected={(newYear: any) => {
+                        setErrors((prev: any) => ({
+                          ...prev,
+                          plantingYear: ""
+                        }));
                         setPlantingYear(newYear);
                       }}
                       save="value"
@@ -452,6 +457,7 @@ export default function FarmlandBlockRegistration({
                 </Box>
               </Stack>
 
+              // @ts-expect-error TS(2322): Type '{ children: any[]; style: {}; }' is not assi... Remove this comment to see the full error message
               <Box style={{}}>
                 <Stack direction="row" w="100%" space={2}>
                   <Box w={"48%"}>
@@ -467,12 +473,12 @@ export default function FarmlandBlockRegistration({
                         textAlign="center"
                         placeholder="Hectares"
                         value={usedArea}
-                        onChangeText={(newNumber) => {
-                          setErrors((prev) => ({
+                        onChangeText={(newNumber: any) => {
+                          setErrors((prev: any) => ({
                             ...prev,
                             blockTrees: null,
                             usedArea: null,
-                            treeDensity: null,
+                            treeDensity: null
                           }));
                           setUsedArea(newNumber);
                         }}
@@ -482,6 +488,7 @@ export default function FarmlandBlockRegistration({
 
                   <Box
                     w="48%"
+                    // @ts-expect-error TS(2322): Type '{ children: Element; w: "48%"; style: { just... Remove this comment to see the full error message
                     style={{
                       justifyContent: "flex-end",
                     }}
@@ -498,12 +505,12 @@ export default function FarmlandBlockRegistration({
                         textAlign="center"
                         placeholder="Cajueiros"
                         value={blockTrees}
-                        onChangeText={(newNumber) => {
-                          setErrors((prev) => ({
+                        onChangeText={(newNumber: any) => {
+                          setErrors((prev: any) => ({
                             ...prev,
                             blockTrees: null,
                             usedArea: null,
-                            treeDensity: null,
+                            treeDensity: null
                           }));
                           setBlockTrees(newNumber);
                         }}
@@ -514,6 +521,7 @@ export default function FarmlandBlockRegistration({
 
                 {errors?.blockTrees && errors?.usedArea && (
                   <Box
+                    // @ts-expect-error TS(2322): Type '{ children: Element[]; style: { backgroundCo... Remove this comment to see the full error message
                     style={{
                       backgroundColor: COLORS.danger,
                     }}
@@ -601,6 +609,7 @@ export default function FarmlandBlockRegistration({
 
               <Box
                 w="100%"
+                // @ts-expect-error TS(2322): Type '{ children: Element; w: "100%"; style: { mar... Remove this comment to see the full error message
                 style={{
                   marginTop: errors?.usedArea && errors?.blockTrees ? 0 : 0,
                 }}
@@ -654,6 +663,7 @@ export default function FarmlandBlockRegistration({
                             iconStyle={{ marginRight: 1 }}
                           />
                         }
+                        // @ts-expect-error TS(2322): Type '{ center: true; fontFamily: string; containe... Remove this comment to see the full error message
                         onPress={() => {
                           setIsDensityModeRegular(true);
                           setIsDensityModeIrregular(false);
@@ -695,6 +705,7 @@ export default function FarmlandBlockRegistration({
                             iconStyle={{ marginRight: 1 }}
                           />
                         }
+                        // @ts-expect-error TS(2322): Type '{ center: true; fontFamily: string; containe... Remove this comment to see the full error message
                         onPress={() => {
                           setIsDensityModeIrregular(true);
                           setIsDensityModeRegular(false);
@@ -738,13 +749,13 @@ export default function FarmlandBlockRegistration({
                         keyboardType="numeric"
                         placeholder="Comprimento"
                         value={densityLength}
-                        onChangeText={(newNumber) => {
-                          setErrors((prev) => ({
+                        onChangeText={(newNumber: any) => {
+                          setErrors((prev: any) => ({
                             ...prev,
                             density: "",
                             blockTrees: null,
                             usedArea: null,
-                            treeDensity: null,
+                            treeDensity: null
                           }));
                           setDensityLength(newNumber);
                         }}
@@ -766,6 +777,7 @@ export default function FarmlandBlockRegistration({
                   </Box>
                   <Box
                     w="10%"
+                    // @ts-expect-error TS(2322): Type '{ children: Element; w: "10%"; style: { just... Remove this comment to see the full error message
                     style={{
                       justifyContent: "center",
                       alignItems: "center",
@@ -793,13 +805,13 @@ export default function FarmlandBlockRegistration({
                         textAlign="center"
                         placeholder="Largura"
                         value={densityWidth}
-                        onChangeText={(newNumber) => {
-                          setErrors((prev) => ({
+                        onChangeText={(newNumber: any) => {
+                          setErrors((prev: any) => ({
                             ...prev,
                             density: "",
                             blockTrees: null,
                             usedArea: null,
-                            treeDensity: null,
+                            treeDensity: null
                           }));
                           setDensityWidth(newNumber);
                         }}
@@ -825,8 +837,11 @@ export default function FarmlandBlockRegistration({
               <FormControl isRequired my="1" isInvalid={"plantTypes" in errors}>
                 <FormControl.Label>Tipo de plantas</FormControl.Label>
                 <MultipleSelectList
-                  setSelected={(type) => {
-                    setErrors((prev) => ({ ...prev, plantTypes: "" }));
+                  setSelected={(type: any) => {
+                    setErrors((prev: any) => ({
+                      ...prev,
+                      plantTypes: ""
+                    }));
                     setPlantTypes(type);
                   }}
                   data={plantingTypes}
@@ -881,13 +896,16 @@ export default function FarmlandBlockRegistration({
                 )}
               </FormControl>
 
-              {plantTypes?.some((el) => el?.includes("enxert")) && (
+              {plantTypes?.some((el: any) => el?.includes("enxert")) && (
                 <>
                   <FormControl my="1" isRequired isInvalid={"clones" in errors}>
                     <FormControl.Label>Clones</FormControl.Label>
                     <MultipleSelectList
-                      setSelected={(type) => {
-                        setErrors((prev) => ({ ...prev, clones: "" }));
+                      setSelected={(type: any) => {
+                        setErrors((prev: any) => ({
+                          ...prev,
+                          clones: ""
+                        }));
                         setClones(type);
                       }}
                       data={cloneList}
@@ -940,10 +958,11 @@ export default function FarmlandBlockRegistration({
                     ) : null}
                   </FormControl>
 
-                  {clones?.find((clone) => clone === "Outro") && (
+                  {clones?.find((clone: any) => clone === "Outro") && (
                     <Box
                       w="100%"
                       alignItems={"center"}
+                      // @ts-expect-error TS(2322): Type '{ children: Element[]; w: "100%"; alignItems... Remove this comment to see the full error message
                       style={{
                         flexDirection: "row",
                       }}
@@ -958,7 +977,7 @@ export default function FarmlandBlockRegistration({
                             type="text"
                             placeholder="Clone não econtrado na lista"
                             value={addedClone}
-                            onChangeText={(newClone) => {
+                            onChangeText={(newClone: any) => {
                               setErrors({
                                 ...errors,
                                 addedClone: "",
@@ -986,6 +1005,7 @@ export default function FarmlandBlockRegistration({
                       </Box>
                       <Box
                         // w="15%"
+                        // @ts-expect-error TS(2322): Type '{ children: Element; style: { justifyContent... Remove this comment to see the full error message
                         style={{
                           justifyContent: "center",
                           alignItems: "center",
@@ -1009,7 +1029,7 @@ export default function FarmlandBlockRegistration({
                           }}
                           onPress={() => {
                             if (addedClone) {
-                              setClones((prev) => [...prev, addedClone]);
+                              setClones((prev: any) => [...prev, addedClone]);
 
                               setAddedClone("");
                             } else {
@@ -1037,6 +1057,7 @@ export default function FarmlandBlockRegistration({
                 <Box w="100%" my="5">
                   {errors?.sameTypeTrees && (
                     <Box
+                      // @ts-expect-error TS(2322): Type '{ children: Element[]; style: { flexDirectio... Remove this comment to see the full error message
                       style={{
                         flexDirection: "row",
                         paddingHorizontal: 10,
@@ -1084,7 +1105,7 @@ export default function FarmlandBlockRegistration({
                     </Stack>
                   </Box>
 
-                  {sameTypeTreesList?.map((sameTypeTree, index) => (
+                  {sameTypeTreesList?.map((sameTypeTree: any, index: any) => (
                     <Box w="100%" key={index} mb="1">
                       <Stack
                         direction="row"
@@ -1094,6 +1115,7 @@ export default function FarmlandBlockRegistration({
                       >
                         <Box
                           w="65%"
+                          // @ts-expect-error TS(2322): Type '{ children: Element; w: "65%"; style: { just... Remove this comment to see the full error message
                           style={{
                             justifyContent: "center",
                           }}
@@ -1120,13 +1142,13 @@ export default function FarmlandBlockRegistration({
                             keyboardType="numeric"
                             placeholder="Cajueiros"
                             value={sameTypeTree?.trees}
-                            onChangeText={(newTrees) => {
-                              setErrors((prev) => ({
+                            onChangeText={(newTrees: any) => {
+                              setErrors((prev: any) => ({
                                 ...prev,
-                                sameTypeTrees: "",
+                                sameTypeTrees: ""
                               }));
                               setSameTypeTreesList(
-                                sameTypeTreesList.map((object) => {
+                                sameTypeTreesList.map((object: any) => {
                                   if (
                                     object?.treeType === sameTypeTree?.treeType
                                   ) {
@@ -1144,6 +1166,7 @@ export default function FarmlandBlockRegistration({
                 </Box>
               )}
               <Center
+                // @ts-expect-error TS(2322): Type '{ children: Element; style: { width: string;... Remove this comment to see the full error message
                 style={{
                   width: "100%",
                 }}
@@ -1185,8 +1208,8 @@ export default function FarmlandBlockRegistration({
                     // created the validated data object to be passed to the FarmlandModal component
                     // let retrievedBlockData = validateBlockData(blockData, errors, setErrors);
 
-                    setTreesFlag((prev) => prev + parseInt(blockTrees));
-                    setAreaFlag((prev) => prev + parseFloat(usedArea));
+                    setTreesFlag((prev: any) => prev + parseInt(blockTrees));
+                    setAreaFlag((prev: any) => prev + parseFloat(usedArea));
 
                     setAddBlockIsOn(true);
 

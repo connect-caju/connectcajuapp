@@ -8,9 +8,11 @@ import {
   StyleSheet,
   ScrollView,
   TouchableOpacity,
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 } from "react-native";
 import { Overlay, Icon, Button } from "@rneui/base";
 import { Box, CheckIcon, FormControl, Select, Stack } from "native-base";
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'uuid... Remove this comment to see the full error message
 import { v4 as uuidv4 } from "uuid";
 
 import { CustomInput } from "../Inputs/CustomInput";
@@ -21,7 +23,9 @@ import { useUser } from "@realm/react";
 import { realmContext } from "../../models/realmContext";
 const { useRealm, useQuery, useObject } = realmContext;
 
-export default function UserItem({ userItem }) {
+export default function UserItem({
+  userItem
+}: any) {
   const [targetFarmers, setTargetFarmers] = useState("");
   const [targetFarmlands, setTargetFarmlands] = useState("");
   const [userStats, setUserStats] = useState({});
@@ -40,7 +44,7 @@ export default function UserItem({ userItem }) {
 
   // updating user goal
   const updateUserGoal = useCallback(
-    (newTargetFarmers, newTargetFarmlands) => {
+    (newTargetFarmers: any, newTargetFarmlands: any) => {
       if (
         Number.isInteger(parseInt(newTargetFarmers)) &&
         Number.isInteger(parseInt(newTargetFarmlands))
@@ -50,9 +54,13 @@ export default function UserItem({ userItem }) {
 
         if (userStat) {
           realm.write(() => {
+            // @ts-expect-error TS(2339): Property 'targetFarmers' does not exist on type 'O... Remove this comment to see the full error message
             userStat.targetFarmers = tFarmers;
+            // @ts-expect-error TS(2339): Property 'targetFarmlands' does not exist on type ... Remove this comment to see the full error message
             userStat.targetFarmlands = tFarmlands;
+            // @ts-expect-error TS(2339): Property 'modifiedAt' does not exist on type 'Obje... Remove this comment to see the full error message
             userStat.modifiedAt = new Date();
+            // @ts-expect-error TS(2339): Property 'modifiedBy' does not exist on type 'Obje... Remove this comment to see the full error message
             userStat.modifiedBy = customUserData?.name;
           });
         } else {
@@ -80,10 +88,14 @@ export default function UserItem({ userItem }) {
 
   useEffect(() => {
     if (!userStat) {
+      // @ts-expect-error TS(2345): Argument of type 'number' is not assignable to par... Remove this comment to see the full error message
       setTargetFarmers(0);
+      // @ts-expect-error TS(2345): Argument of type 'number' is not assignable to par... Remove this comment to see the full error message
       setTargetFarmlands(0);
     } else {
+      // @ts-expect-error TS(2339): Property 'targetFarmers' does not exist on type 'O... Remove this comment to see the full error message
       setTargetFarmers(userStat.targetFarmers);
+      // @ts-expect-error TS(2339): Property 'targetFarmlands' does not exist on type ... Remove this comment to see the full error message
       setTargetFarmlands(userStat.targetFarmlands);
     }
   }, [userStat]);
@@ -100,11 +112,13 @@ export default function UserItem({ userItem }) {
 
   return (
     <Box
+      // @ts-expect-error TS(2322): Type '{ children: any[]; className: string; }' is ... Remove this comment to see the full error message
       className="flex flex-1 bg-white shadow-md shadow-slate-200 my-1 h-16 items-center justify-center"
     >
       <Stack w="100%" direction="row" space={1} >
         <Box
           w="40%"
+          // @ts-expect-error TS(2322): Type '{ children: Element; w: "40%"; className: st... Remove this comment to see the full error message
           className="justify-center "
         >
           <Text
@@ -115,6 +129,7 @@ export default function UserItem({ userItem }) {
         </Box>
         <Box
           w="20%"
+          // @ts-expect-error TS(2322): Type '{ children: Element; w: "20%"; className: st... Remove this comment to see the full error message
           className="justify-center items-center"
         >
           <FormControl isRequired my="1" isInvalid={"errorMessage" in errors}>
@@ -125,7 +140,7 @@ export default function UserItem({ userItem }) {
               isDisabled={!update}
               placeholder={`${targetFarmers}`}
               value={targetFarmers}
-              onChangeText={(newNumber) => {
+              onChangeText={(newNumber: any) => {
                 setErrors((prev) => ({
                   ...prev,
                   errorMessage: "",
@@ -140,6 +155,7 @@ export default function UserItem({ userItem }) {
 
         <Box
           w="20%"
+          // @ts-expect-error TS(2322): Type '{ children: Element; w: "20%"; className: st... Remove this comment to see the full error message
           className="justify-center items-center"
         >
           <FormControl isRequired my="1" isInvalid={"errorMessage" in errors}>
@@ -150,7 +166,7 @@ export default function UserItem({ userItem }) {
               isDisabled={!update}
               placeholder={`${targetFarmlands}`}
               value={targetFarmlands}
-              onChangeText={(newNumber) => {
+              onChangeText={(newNumber: any) => {
                 setErrors((prev) => ({
                   ...prev,
                   errorMessage: "",
@@ -165,6 +181,7 @@ export default function UserItem({ userItem }) {
 
         <Box
           w="20%"
+          // @ts-expect-error TS(2322): Type '{ children: Element; w: "20%"; className: st... Remove this comment to see the full error message
           className="justify-center"
         >
           <TouchableOpacity
@@ -178,9 +195,11 @@ export default function UserItem({ userItem }) {
                 setUpdate(false);
                 setReset(false);
                 setTargetFarmers(
+                  // @ts-expect-error TS(2532): Object is possibly 'undefined'.
                   userStat.targetFarmers ? userStat.targetFarmers : 0,
                 );
                 setTargetFarmlands(
+                  // @ts-expect-error TS(2532): Object is possibly 'undefined'.
                   userStat.targetFarmlands ? userStat.targetFarmlands : 0,
                 );
               } else {
@@ -199,10 +218,12 @@ export default function UserItem({ userItem }) {
           </TouchableOpacity>
         </Box>
       </Stack>
+      // @ts-expect-error TS(2339): Property 'errorMessage' does not exist on type '{}... Remove this comment to see the full error message
       {errors.errorMessage && (
         <Text
           className="text-red-400 text-center text-xs"
         >
+          // @ts-expect-error TS(2339): Property 'errorMessage' does not exist on type '{}... Remove this comment to see the full error message
           {errors.errorMessage}
         </Text>
       )}

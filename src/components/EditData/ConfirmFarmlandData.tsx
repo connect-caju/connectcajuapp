@@ -1,6 +1,7 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable react/prop-types */
 import React, { useState, useEffect, useCallback } from "react";
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { View, Text, StyleSheet, ScrollView } from "react-native";
 import {
   Box,
@@ -18,24 +19,21 @@ import { resourceValidation } from "../../consts/resourceValidation";
 
 import { useUser } from "@realm/react";
 import { realmContext } from "../../models/realmContext";
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { Pressable } from "react-native";
 const { useRealm } = realmContext;
 
 const ConfirmFarmlandData = ({
   // setIsOverlayVisible,
   isConfirmDataVisible,
-  setIsConfirmDataVisible,
 
+  setIsConfirmDataVisible,
   newDataObject,
   oldDataObject,
-
   dataToBeUpdated,
-
   resourceName,
   ownerName,
   resource,
-
-  blockId,
 
   // setAutoRefresh,
   // autoRefresh,
@@ -43,17 +41,18 @@ const ConfirmFarmlandData = ({
   // setRefresh,
   // checkAreasConformity,
   // farmland,
-}) => {
+  blockId
+}: any) => {
   const realm = useRealm();
   const user = useUser();
   const customUserData = user?.customData;
 
   const onUpdateData = (
-    resource,
-    newDataObject,
-    realm,
-    dataToBeUpdated,
-    resourceName,
+    resource: any,
+    newDataObject: any,
+    realm: any,
+    dataToBeUpdated: any,
+    resourceName: any,
   ) => {
     realm.write(() => {
       if (dataToBeUpdated === "address" && resourceName === "Farmer") {
@@ -135,10 +134,10 @@ const ConfirmFarmlandData = ({
       if (dataToBeUpdated === "groupType" && resourceName === "Group") {
         resource.name = newDataObject?.name;
         resource.type = newDataObject?.type;
-        resource.assets = newDataObject?.goals?.map((goal) => ({
+        resource.assets = newDataObject?.goals?.map((goal: any) => ({
           assetType: "Caju",
           category: "Grupo",
-          subcategory: goal,
+          subcategory: goal
         }));
 
         resource.modifiedAt = new Date();
@@ -162,8 +161,8 @@ const ConfirmFarmlandData = ({
         // only update the resource status if there is consistency
         // if (resource.status === resourceValidation.status.invalidated){
         let blocksTrees = resource?.blocks
-          ?.map((block) => block?.trees)
-          .reduce((acc, el) => acc + el, 0);
+          ?.map((block: any) => block?.trees)
+          .reduce((acc: any, el: any) => acc + el, 0);
         if (blocksTrees === resource.trees) {
           resource.status = resourceValidation.status.pending;
         } else {
@@ -174,7 +173,7 @@ const ConfirmFarmlandData = ({
       if (dataToBeUpdated === "blockData" && resourceName === "Farmland") {
         // find and update the block
         let blockTobeUpdated = resource?.blocks.find(
-          (block) => block._id === blockId,
+          (block: any) => block._id === blockId,
         );
         blockTobeUpdated.userName = customUserData?.name;
         blockTobeUpdated.modifiedAt = new Date();
@@ -192,8 +191,8 @@ const ConfirmFarmlandData = ({
         // only update the resource status if there is consistency
         if (resource.status === resourceValidation.status.invalidated) {
           let blocksTrees = resource?.blocks
-            ?.map((block) => block?.trees)
-            .reduce((acc, el) => acc + el, 0);
+            ?.map((block: any) => block?.trees)
+            .reduce((acc: any, el: any) => acc + el, 0);
           if (blocksTrees === resource.trees) {
             resource.status = resourceValidation.status.pending;
           }
@@ -203,7 +202,7 @@ const ConfirmFarmlandData = ({
       if (dataToBeUpdated === "plantType" && resourceName === "Farmland") {
         // find and update the block
         let blockTobeUpdated = resource?.blocks.find(
-          (block) => block._id === blockId,
+          (block: any) => block._id === blockId,
         );
 
         blockTobeUpdated.modifiedAt = new Date();
@@ -218,8 +217,8 @@ const ConfirmFarmlandData = ({
         // only update the resource status if there is consistency
         if (resource.status === resourceValidation.status.invalidated) {
           let blocksTrees = resource?.blocks
-            ?.map((block) => block?.trees)
-            .reduce((acc, el) => acc + el, 0);
+            ?.map((block: any) => block?.trees)
+            .reduce((acc: any, el: any) => acc + el, 0);
           if (blocksTrees === resource.trees) {
             resource.status = resourceValidation.status.pending;
           }
@@ -299,6 +298,7 @@ const ConfirmFarmlandData = ({
 
           {dataToBeUpdated === "plantType" && resourceName === "Farmland" && (
             <Box
+              // @ts-expect-error TS(2322): Type '{ children: Element[]; style: { paddingBotto... Remove this comment to see the full error message
               style={{
                 paddingBottom: 30,
                 // alignItems: 'center',
@@ -317,35 +317,33 @@ const ConfirmFarmlandData = ({
 
               <Stack direction="row">
                 <Box w="100%">
-                  {newDataObject.sameTypeTrees?.map((same) => (
-                    <Stack key={same.treeType} direction="row">
-                      <Box w="60%">
-                        <Text
-                          style={{
-                            fontFamily: "JosefinSans-Bold",
-                            paddingTop: 2,
-                          }}
-                        >
-                          <Icon
-                            name="arrow-forward"
-                            color={COLORS.grey}
-                            size={10}
-                          />{" "}
-                          {same?.treeType}
-                        </Text>
-                      </Box>
-                      <Box w="40%">
-                        <Text
-                          style={{
-                            fontFamily: "JosefinSans-Regular",
-                            paddingTop: 2,
-                          }}
-                        >
-                          {same?.trees} árvores
-                        </Text>
-                      </Box>
-                    </Stack>
-                  ))}
+                  {newDataObject.sameTypeTrees?.map((same: any) => <Stack key={same.treeType} direction="row">
+                    <Box w="60%">
+                      <Text
+                        style={{
+                          fontFamily: "JosefinSans-Bold",
+                          paddingTop: 2,
+                        }}
+                      >
+                        <Icon
+                          name="arrow-forward"
+                          color={COLORS.grey}
+                          size={10}
+                        />{" "}
+                        {same?.treeType}
+                      </Text>
+                    </Box>
+                    <Box w="40%">
+                      <Text
+                        style={{
+                          fontFamily: "JosefinSans-Regular",
+                          paddingTop: 2,
+                        }}
+                      >
+                        {same?.trees} árvores
+                      </Text>
+                    </Box>
+                  </Stack>)}
                 </Box>
               </Stack>
             </Box>
@@ -353,6 +351,7 @@ const ConfirmFarmlandData = ({
 
           {dataToBeUpdated === "blockData" && resourceName === "Farmland" && (
             <Box
+              // @ts-expect-error TS(2322): Type '{ children: Element[]; style: { paddingBotto... Remove this comment to see the full error message
               style={{
                 paddingBottom: 30,
                 // alignItems: 'center',
@@ -466,6 +465,7 @@ const ConfirmFarmlandData = ({
               </Stack>
 
               <Box
+                // @ts-expect-error TS(2322): Type '{ style: { paddingVertical: number; }; }' is... Remove this comment to see the full error message
                 style={{
                   paddingVertical: 20,
                 }}
@@ -585,6 +585,7 @@ const ConfirmFarmlandData = ({
           {dataToBeUpdated === "farmlandMainData" &&
             resourceName === "Farmland" && (
               <Box
+                // @ts-expect-error TS(2322): Type '{ children: Element[]; style: { paddingBotto... Remove this comment to see the full error message
                 style={{
                   paddingBottom: 30,
                   // alignItems: 'center',
@@ -696,6 +697,7 @@ const ConfirmFarmlandData = ({
                 </Stack>
 
                 <Box
+                  // @ts-expect-error TS(2322): Type '{ style: { paddingVertical: number; }; }' is... Remove this comment to see the full error message
                   style={{
                     paddingVertical: 20,
                   }}
@@ -812,6 +814,7 @@ const ConfirmFarmlandData = ({
 
           {dataToBeUpdated === "groupType" && resourceName === "Group" && (
             <Box
+              // @ts-expect-error TS(2322): Type '{ children: Element[]; style: { paddingBotto... Remove this comment to see the full error message
               style={{
                 paddingBottom: 30,
                 // alignItems: 'center',
@@ -897,6 +900,7 @@ const ConfirmFarmlandData = ({
               </Stack>
 
               <Box
+                // @ts-expect-error TS(2322): Type '{ style: { paddingVertical: number; }; }' is... Remove this comment to see the full error message
                 style={{
                   paddingVertical: 20,
                 }}
@@ -985,6 +989,7 @@ const ConfirmFarmlandData = ({
 
           {dataToBeUpdated === "groupIdentity" && resourceName === "Group" && (
             <Box
+              // @ts-expect-error TS(2322): Type '{ children: Element[]; style: { paddingBotto... Remove this comment to see the full error message
               style={{
                 paddingBottom: 30,
                 // alignItems: 'center',
@@ -1120,6 +1125,7 @@ const ConfirmFarmlandData = ({
               </Stack>
 
               <Box
+                // @ts-expect-error TS(2322): Type '{ style: { paddingVertical: number; }; }' is... Remove this comment to see the full error message
                 style={{
                   paddingVertical: 20,
                 }}
@@ -1258,6 +1264,7 @@ const ConfirmFarmlandData = ({
 
           {dataToBeUpdated === "groupMembers" && resourceName === "Group" && (
             <Box
+              // @ts-expect-error TS(2322): Type '{ children: Element[]; style: { paddingBotto... Remove this comment to see the full error message
               style={{
                 paddingBottom: 30,
                 // alignItems: 'center',
@@ -1341,6 +1348,7 @@ const ConfirmFarmlandData = ({
               </Stack>
 
               <Box
+                // @ts-expect-error TS(2322): Type '{ style: { paddingVertical: number; }; }' is... Remove this comment to see the full error message
                 style={{
                   paddingVertical: 20,
                 }}
@@ -1427,6 +1435,7 @@ const ConfirmFarmlandData = ({
 
           {dataToBeUpdated === "groupManager" && resourceName === "Group" && (
             <Box
+              // @ts-expect-error TS(2322): Type '{ children: Element[]; style: { paddingBotto... Remove this comment to see the full error message
               style={{
                 paddingBottom: 30,
                 // alignItems: 'center',
@@ -1490,6 +1499,7 @@ const ConfirmFarmlandData = ({
               </Stack>
 
               <Box
+                // @ts-expect-error TS(2322): Type '{ style: { paddingVertical: number; }; }' is... Remove this comment to see the full error message
                 style={{
                   paddingVertical: 20,
                 }}
@@ -1559,6 +1569,7 @@ const ConfirmFarmlandData = ({
           {dataToBeUpdated === "institutionManager" &&
             resourceName === "Institution" && (
               <Box
+                // @ts-expect-error TS(2322): Type '{ children: Element[]; style: { paddingBotto... Remove this comment to see the full error message
                 style={{
                   paddingBottom: 30,
                   // alignItems: 'center',
@@ -1622,6 +1633,7 @@ const ConfirmFarmlandData = ({
                 </Stack>
 
                 <Box
+                  // @ts-expect-error TS(2322): Type '{ style: { paddingVertical: number; }; }' is... Remove this comment to see the full error message
                   style={{
                     paddingVertical: 20,
                   }}
@@ -1689,6 +1701,7 @@ const ConfirmFarmlandData = ({
           {dataToBeUpdated === "institutionDocument" &&
             resourceName === "Institution" && (
               <Box
+                // @ts-expect-error TS(2322): Type '{ children: Element[]; style: { paddingBotto... Remove this comment to see the full error message
                 style={{
                   paddingBottom: 30,
                   // alignItems: 'center',
@@ -1751,6 +1764,7 @@ const ConfirmFarmlandData = ({
                   </Box>
                 </Stack>
                 <Box
+                  // @ts-expect-error TS(2322): Type '{ style: { paddingVertical: number; }; }' is... Remove this comment to see the full error message
                   style={{
                     paddingVertical: 20,
                   }}
@@ -1817,6 +1831,7 @@ const ConfirmFarmlandData = ({
 
           {dataToBeUpdated === "idDocument" && resourceName === "Farmer" && (
             <Box
+              // @ts-expect-error TS(2322): Type '{ children: Element[]; style: { paddingBotto... Remove this comment to see the full error message
               style={{
                 paddingBottom: 30,
                 // alignItems: 'center',
@@ -1902,6 +1917,7 @@ const ConfirmFarmlandData = ({
               </Stack>
 
               <Box
+                // @ts-expect-error TS(2322): Type '{ style: { paddingVertical: number; }; }' is... Remove this comment to see the full error message
                 style={{
                   paddingVertical: 20,
                 }}
@@ -1990,6 +2006,7 @@ const ConfirmFarmlandData = ({
 
           {dataToBeUpdated === "contact" && resourceName === "Farmer" && (
             <Box
+              // @ts-expect-error TS(2322): Type '{ children: Element[]; style: { paddingBotto... Remove this comment to see the full error message
               style={{
                 paddingBottom: 30,
                 // alignItems: 'center',
@@ -2055,6 +2072,7 @@ const ConfirmFarmlandData = ({
               </Stack>
 
               <Box
+                // @ts-expect-error TS(2322): Type '{ style: { paddingVertical: number; }; }' is... Remove this comment to see the full error message
                 style={{
                   paddingVertical: 20,
                 }}
@@ -2123,6 +2141,7 @@ const ConfirmFarmlandData = ({
 
           {dataToBeUpdated === "address" && resourceName === "Farmer" && (
             <Box
+              // @ts-expect-error TS(2322): Type '{ children: Element[]; style: { paddingBotto... Remove this comment to see the full error message
               style={{
                 paddingBottom: 30,
                 // alignItems: 'center',
@@ -2184,6 +2203,7 @@ const ConfirmFarmlandData = ({
               </Stack>
 
               <Box
+                // @ts-expect-error TS(2322): Type '{ style: { paddingVertical: number; }; }' is... Remove this comment to see the full error message
                 style={{
                   paddingVertical: 20,
                 }}
@@ -2259,6 +2279,7 @@ const ConfirmFarmlandData = ({
             // color: COLORS.ghostwhite,
           }}
           type="outline"
+          // @ts-expect-error TS(2322): Type '{ title: string; titleStyle: { color: string... Remove this comment to see the full error message
           onPress={() => {
             try {
               onUpdateData(
@@ -2269,6 +2290,7 @@ const ConfirmFarmlandData = ({
                 resourceName,
               );
             } catch (error) {
+              // @ts-expect-error TS(2584): Cannot find name 'console'. Do you need to change ... Remove this comment to see the full error message
               console.log("Could not update data", { cause: error });
             } finally {
               setIsConfirmDataVisible(false);

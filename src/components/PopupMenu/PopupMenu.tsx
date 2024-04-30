@@ -9,6 +9,7 @@ import {
   TouchableOpacity,
   Modal,
   SafeAreaView,
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 } from "react-native"
 import { Stack, Box, Center } from "native-base"
 import CustomDivider from "../Divider/CustomDivider"
@@ -23,23 +24,29 @@ import {
 } from "@fortawesome/free-solid-svg-icons"
 import COLORS from "../../consts/colors"
 
-export function PopupMenu({ popupMenuVisible, setPopupMenuVisible }) {
+export function PopupMenu({
+  popupMenuVisible,
+  setPopupMenuVisible
+}: any) {
   const scale = useRef(new Animated.Value(0)).current
 
   const options = [
     {
       title: "Publicar",
       icon: "add",
+      // @ts-expect-error TS(2304): Cannot find name 'alert'.
       action: () => alert("publicar"),
     },
     {
       title: "Delete",
       icon: "delete",
+      // @ts-expect-error TS(2304): Cannot find name 'alert'.
       action: () => alert("delete"),
     },
     {
       title: "Directions",
       icon: "directions",
+      // @ts-expect-error TS(2304): Cannot find name 'alert'.
       action: () => alert("directions"),
     },
   ]

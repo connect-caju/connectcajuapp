@@ -7,4 +7,4 @@ export const occupations = [
   { key: "6", value: "" },
   { key: "7", value: "" },
   { key: "8", value: "Mineiro" },
-]
+];

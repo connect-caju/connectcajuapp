@@ -1,4 +1,3 @@
-
 export const secrets = {
   baseUrl: "https://realm.mongodb.com",
   apiKey: "XDoM1VeE5DA85zOOlUpTFDRRhaXM8Q1GbR8dgbUB0o03io5xctKJ4zXljCxYKWvR", // HTTPEndpoints
@@ -15,5 +14,3 @@ export const secrets = {
   publicAPIKey: "imywqllj",
   googleAPIKey: "AIzaSyDfNO_DWXQX0o8qhybbOp-EDYc2da_4WeQ",
 };
-
-

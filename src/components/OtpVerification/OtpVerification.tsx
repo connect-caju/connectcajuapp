@@ -7,6 +7,7 @@ import {
   Image,
   TouchableOpacity,
   ScrollView,
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 } from "react-native"
 import React, { useCallback, useState, useEffect, useRef } from "react"
 import { Box, Stack, Center } from "native-base"
@@ -33,7 +34,12 @@ import COLORS from "../../consts/colors"
 //     )
 // }
 
-const CodeInputField = ({ code, setPinReady, setCode, maxCodeLength }) => {
+const CodeInputField = ({
+  code,
+  setPinReady,
+  setCode,
+  maxCodeLength
+}: any) => {
   const textInputRef = useRef(null)
   const [inputContainerIsFocused, setInputContainerIsFocused] = useState(false)
 
@@ -43,6 +49,7 @@ const CodeInputField = ({ code, setPinReady, setCode, maxCodeLength }) => {
 
   const handleOnPress = () => {
     setInputContainerIsFocused(true)
+    // @ts-expect-error TS(2339): Property 'focus' does not exist on type 'never'.
     textInputRef?.current?.focus()
   }
 
@@ -72,7 +79,10 @@ const CodeInputField = ({ code, setPinReady, setCode, maxCodeLength }) => {
   )
 }
 
-export default function OtpVerification({ isOTPVisible, setIsOTPVisible }) {
+export default function OtpVerification({
+  isOTPVisible,
+  setIsOTPVisible
+}: any) {
   const [code, setCode] = useState("")
   const [pinReady, setPinReady] = useState(false)
 

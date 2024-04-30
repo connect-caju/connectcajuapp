@@ -17,6 +17,7 @@ import { containsNonNumeric } from "./containsNonNumeric"
  * in the form.
  */
 
+// @ts-expect-error TS(7030): Not all code paths return a value.
 const validateGroupEditedData = (
   {
     groupName,
@@ -25,7 +26,6 @@ const validateGroupEditedData = (
     oldGroupName,
     oldGroupType,
     oldGroupGoals,
-
     groupAffiliationYear,
     groupCreationYear,
     groupLegalStatus,
@@ -36,7 +36,6 @@ const validateGroupEditedData = (
     oldGroupOperatingLicence,
     groupNuit,
     oldGroupNuit,
-
     isGroupActive,
     isGroupInactive,
     isOldGroupActive,
@@ -44,14 +43,15 @@ const validateGroupEditedData = (
     groupMembersNumber,
     oldGroupMembersNumber,
     groupWomenNumber,
-    oldGroupWomenNumber,
+
     // groupManagerName, oldGroupManagerName,
     // groupManagerPhone, oldGroupManagerPhone,
-  },
-  errors,
-  setErrors,
-  dataToBeUpdated,
-  resourceName,
+    oldGroupWomenNumber
+  }: any,
+  errors: any,
+  setErrors: any,
+  dataToBeUpdated: any,
+  resourceName: any,
 ) => {
   if (dataToBeUpdated === "groupType" && resourceName === "Group") {
     const retrievedGroupType = groupType ? groupType?.trim() : ""
@@ -68,7 +68,7 @@ const validateGroupEditedData = (
       retrievedGroupName === retrievedOldGroupName &&
       retrievedGroupGoals?.length === retrievedOldGroupGoals?.length &&
       retrievedGroupGoals.every(
-        (el, index) => el === retrievedOldGroupGoals[index],
+        (el: any, index: any) => el === retrievedOldGroupGoals[index],
       )
     ) {
       setErrors({
@@ -204,6 +204,7 @@ const validateGroupEditedData = (
 
     if (
       retrievedGroupNuit &&
+      // @ts-expect-error TS(2345): Argument of type 'number' is not assignable to par... Remove this comment to see the full error message
       (!Number.isInteger(parseInt(retrievedGroupNuit)) ||
         retrievedGroupNuit?.toString().length !== 9 ||
         containsNonNumeric(retrievedGroupNuit))
@@ -278,7 +279,9 @@ const validateGroupEditedData = (
       setErrors({ ...errors, groupWomenNumber: "Número total de mulheres." })
       return false
     } else if (
+      // @ts-expect-error TS(2345): Argument of type 'number' is not assignable to par... Remove this comment to see the full error message
       parseInt(retrievedGroupWomenNumber) >
+      // @ts-expect-error TS(2345): Argument of type 'number' is not assignable to par... Remove this comment to see the full error message
       parseInt(retrievedGroupMembersNumber)
     ) {
       setErrors({

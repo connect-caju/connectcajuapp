@@ -52,6 +52,7 @@ export const dateLimits = {
 };
 
 export const localeDateService = new NativeDateService("pt", {
+  // @ts-expect-error TS(2322): Type '{ dayNames: { short: string[]; long: string[... Remove this comment to see the full error message
   i18n,
   startDayOfWeek: 1,
 });
@@ -94,7 +95,7 @@ export const months = {
   11: "Dezembro",
 };
 
-export function calculateAge(dateOfBirth) {
+export function calculateAge(dateOfBirth: any) {
   const dob = new Date(dateOfBirth);
   const today = new Date();
 

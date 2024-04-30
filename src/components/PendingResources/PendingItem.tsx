@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable linebreak-style */
 /* eslint-disable prettier/prettier */
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { TouchableOpacity, View, Text } from "react-native";
 import React, { useState, useEffect } from "react";
 import { Icon, Avatar } from "@rneui/themed";
@@ -20,7 +21,11 @@ import CustomDivider from "../Divider/CustomDivider";
 import { farmlandOwners } from "../../consts/farmlandOwners";
 
 
-const PendingItem = ({ item, refresh, setRefresh }) => {
+const PendingItem = ({
+    item,
+    refresh,
+    setRefresh
+}: any) => {
     const navigation = useNavigation();
     const [modalVisible, setModalVisible] = useState(false);
     const [resourceType, setResourceType] = useState("");
@@ -121,6 +126,7 @@ const PendingItem = ({ item, refresh, setRefresh }) => {
                     <Center w="15%">
                         <TouchableOpacity
                             onPress={() => {
+                                // @ts-expect-error TS(2345): Argument of type 'string' is not assignable to par... Remove this comment to see the full error message
                                 navigation.navigate("Profile", {
                                     ownerId: item.farmerId,
                                     farmersIDs: item?.farmersIDs,
@@ -178,6 +184,7 @@ const PendingItem = ({ item, refresh, setRefresh }) => {
                     <Center w="15%">
                         <TouchableOpacity
                             onPress={() => {
+                                // @ts-expect-error TS(2345): Argument of type 'string' is not assignable to par... Remove this comment to see the full error message
                                 navigation.navigate("Profile", {
                                     ownerId: item._id,
                                     farmersIDs: item?.farmersIDs,

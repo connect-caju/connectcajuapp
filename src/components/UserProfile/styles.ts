@@ -1,5 +1,6 @@
-import { StyleSheet } from "react-native"
-import COLORS from "../../consts/colors"
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
+import { StyleSheet } from "react-native";
+import COLORS from "../../consts/colors";
 
 const styles = StyleSheet.create({
   container: {
@@ -16,6 +17,6 @@ const styles = StyleSheet.create({
     marginHorizontal: 3,
     borderRadius: 120,
   },
-})
+});
 
 export default styles;

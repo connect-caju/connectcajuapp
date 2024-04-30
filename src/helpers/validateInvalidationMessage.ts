@@ -1,4 +1,4 @@
-const validateInvalidationMessage = (message, errors, setErrors) => {
+const validateInvalidationMessage = (message: any, errors: any, setErrors: any) => {
   const retrievedMessage = message?.trim();
 
   if (

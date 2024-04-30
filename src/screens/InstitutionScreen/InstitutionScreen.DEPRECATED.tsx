@@ -11,6 +11,7 @@ import {
   Pressable,
   TouchableOpacity,
   Dimensions,
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 } from "react-native"
 import { Box, Stack, Center } from "native-base"
 import { Icon } from "@rneui/base"
@@ -55,7 +56,10 @@ const { useRealm, useQuery, useObject } = realmContext
 const institution = "institution"
 const institutionFarmlands = "institutionFarmlands"
 
-export default function InstitutionScreen({ route, navigation }) {
+export default function InstitutionScreen({
+  route,
+  navigation
+}: any) {
   const ownerId = route.params.ownerId
   const farmersIDs = route.params?.farmersIDs
   const realm = useRealm()
@@ -81,14 +85,16 @@ export default function InstitutionScreen({ route, navigation }) {
   const snapPoints = ["25%", "50%", "75%"]
 
   function handlePresentModal() {
+    // @ts-expect-error TS(2339): Property 'present' does not exist on type 'never'.
     bottomSheetModalRef.current?.present()
   }
 
-  const keyExtractor = (item, index) => index.toString()
+  const keyExtractor = (item: any, index: any) => index.toString()
 
   // SuccesLottie effect
   useEffect(() => {
     if (successLottieVisible) {
+      // @ts-expect-error TS(2304): Cannot find name 'setTimeout'.
       setTimeout(() => {
         setSuccessLottieVisible(false)
       }, 3000)
@@ -97,7 +103,9 @@ export default function InstitutionScreen({ route, navigation }) {
 
   useEffect(() => {
     if (farmersIDs?.length > 0) {
-      current = farmersIDs.find((node) => node.current === ownerId)
+      // @ts-expect-error TS(2304): Cannot find name 'current'.
+      current = farmersIDs.find((node: any) => node.current === ownerId)
+      // @ts-expect-error TS(2304): Cannot find name 'current'.
       setCurrentNode(current)
     }
   }, [ownerId])
@@ -219,6 +227,7 @@ export default function InstitutionScreen({ route, navigation }) {
         </View>
 
         <Box
+          // @ts-expect-error TS(2322): Type '{ children: null; style: { position: string;... Remove this comment to see the full error message
           style={{
             position: "absolute",
             top: Dimensions.get("window").height / 2,
@@ -257,6 +266,7 @@ export default function InstitutionScreen({ route, navigation }) {
         </Box>
 
         <Box
+          // @ts-expect-error TS(2322): Type '{ children: null; style: { position: string;... Remove this comment to see the full error message
           style={{
             position: "absolute",
             top: Dimensions.get("window").height / 2,
@@ -311,6 +321,7 @@ export default function InstitutionScreen({ route, navigation }) {
           >
             <Box
               w="100%"
+              // @ts-expect-error TS(2322): Type '{ children: Element[]; w: "100%"; style: { a... Remove this comment to see the full error message
               style={{
                 alignItems: "center",
                 marginTop: hp("10%"),
@@ -324,6 +335,7 @@ export default function InstitutionScreen({ route, navigation }) {
                 onPress={() => {
                   navigation.navigate("Camera", {
                     ownerType: "Instituição",
+                    // @ts-expect-error TS(2339): Property '_id' does not exist on type 'Object<unkn... Remove this comment to see the full error message
                     ownerId: farmer?._id,
                     farmersIDs,
                   })
@@ -333,9 +345,11 @@ export default function InstitutionScreen({ route, navigation }) {
                   top: -50,
                 }}
               >
+                // @ts-expect-error TS(2339): Property 'image' does not exist on type 'Object<un... Remove this comment to see the full error message
                 {farmer?.image ? (
                   <>
                     <Image
+                      // @ts-expect-error TS(2339): Property 'image' does not exist on type 'Object<un... Remove this comment to see the full error message
                       source={{ uri: farmer?.image }}
                       style={styles.images}
                     />
@@ -365,6 +379,7 @@ export default function InstitutionScreen({ route, navigation }) {
                   top: -50,
                 }}
               >
+                // @ts-expect-error TS(2339): Property 'manager' does not exist on type 'Object<... Remove this comment to see the full error message
                 {farmer?.manager?.fullname}
               </Text>
               <Text
@@ -399,6 +414,7 @@ export default function InstitutionScreen({ route, navigation }) {
                   letterSpacing: 5,
                 }}
               >
+                // @ts-expect-error TS(2339): Property 'identifier' does not exist on type 'Obje... Remove this comment to see the full error message
                 {farmer?.identifier}
               </Text>
 
@@ -408,6 +424,7 @@ export default function InstitutionScreen({ route, navigation }) {
             <Box
               alignItems="stretch"
               w="100%"
+              // @ts-expect-error TS(2322): Type '{ children: (false | Element | Element[])[];... Remove this comment to see the full error message
               style={{
                 flex: 1,
                 paddingVertical: 5,
@@ -440,6 +457,7 @@ export default function InstitutionScreen({ route, navigation }) {
                   <Box w="50%"></Box>
                   <Box
                     w="50%"
+                    // @ts-expect-error TS(2322): Type '{ children: Element; w: "50%"; style: { alig... Remove this comment to see the full error message
                     style={{
                       alignItems: "flex-end",
                     }}
@@ -450,15 +468,20 @@ export default function InstitutionScreen({ route, navigation }) {
                       }}
                       onPress={() =>
                         navigation.navigate("FarmlandForm1", {
+                          // @ts-expect-error TS(2339): Property '_id' does not exist on type 'Object<unkn... Remove this comment to see the full error message
                           ownerId: farmer?._id,
+                          // @ts-expect-error TS(2339): Property 'type' does not exist on type 'Object<unk... Remove this comment to see the full error message
                           ownerName: `${farmer?.type} ${farmer?.name}`,
+                          // @ts-expect-error TS(2339): Property 'image' does not exist on type 'Object<un... Remove this comment to see the full error message
                           ownerImage: farmer?.image,
+                          // @ts-expect-error TS(2339): Property 'address' does not exist on type 'Object<... Remove this comment to see the full error message
                           ownerAddress: farmer?.address,
                           flag: "Instituição",
                         })
                       }
                     >
                       <Box
+                        // @ts-expect-error TS(2322): Type '{ children: Element[]; style: { flexDirectio... Remove this comment to see the full error message
                         style={{
                           flexDirection: "row",
                           justifyContent: "center",
@@ -492,10 +515,12 @@ export default function InstitutionScreen({ route, navigation }) {
 
               {farmlands?.map((farmland) => (
                 <FarmlandData
+                  // @ts-expect-error TS(2339): Property '_id' does not exist on type 'Object<unkn... Remove this comment to see the full error message
                   key={farmland?._id}
                   farmland={farmland}
                   successLottieVisible={successLottieVisible}
                   setSuccessLottieVisible={setSuccessLottieVisible}
+                  // @ts-expect-error TS(2339): Property 'image' does not exist on type 'Object<un... Remove this comment to see the full error message
                   ownerImage={farmer?.image}
                 />
               ))}

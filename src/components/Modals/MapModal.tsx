@@ -7,6 +7,7 @@ import {
   Image,
   TouchableOpacity,
   StyleSheet,
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 } from "react-native"
 import React, { useCallback, useState, useEffect, useRef } from "react"
 import { Box, Stack, Center } from "native-base"
@@ -223,8 +224,8 @@ export default function MapModal({
   farmlandId,
   isMapVisible,
   setIsMapVisible,
-  currentCoordinates,
-}) {
+  currentCoordinates
+}: any) {
   // const [isOverlayVisible, setIsOverlayVisible] = useState(false);
   const realm = useRealm()
   const mapRef = useRef()
@@ -301,6 +302,7 @@ export default function MapModal({
       <Box
         h="100%"
         w="100%"
+        // @ts-expect-error TS(2322): Type '{ children: Element[]; h: "100%"; w: "100%";... Remove this comment to see the full error message
         style={{
           flex: 1,
           backgroundColor: COLORS.ghostwhite,
@@ -308,6 +310,7 @@ export default function MapModal({
       >
         <Stack
           w="100%"
+          // @ts-expect-error TS(2322): Type '{ children: Element[]; w: "100%"; style: { p... Remove this comment to see the full error message
           style={{
             paddingBottom: 20,
           }}
@@ -324,8 +327,10 @@ export default function MapModal({
           </Box>
           <Box w="90%"></Box>
         </Stack>
+        // @ts-expect-error TS(2322): Type '{ children: Element[]; style: any; }' is not... Remove this comment to see the full error message
         <Box style={styles.container}>
           <MapView
+            // @ts-expect-error TS(2322): Type 'MutableRefObject<undefined>' is not assignab... Remove this comment to see the full error message
             ref={mapRef}
             zoomControlEnabled={true}
             showsMyLocationButton={true}
@@ -342,7 +347,7 @@ export default function MapModal({
               latitudeDelta: 0.015,
               longitudeDelta: 0.0121,
             }}
-            onPress={(e) => {
+            onPress={(e: any) => {
               // console.log('e.nativeEvent: ', e.nativeEvent)
               setMarker(e.nativeEvent.coordinate)
             }}
@@ -429,5 +434,5 @@ export default function MapModal({
         </Box>
       </Box>
     </Overlay>
-  )
+  );
 }

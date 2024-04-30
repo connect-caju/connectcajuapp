@@ -9,6 +9,7 @@ import {
   Image,
   TouchableOpacity,
   ScrollView,
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 } from "react-native";
 import React, { useCallback, useState, useEffect } from "react";
 import { Box, Stack, Center } from "native-base";
@@ -37,9 +38,8 @@ export default function UserProfile({
   user,
   setIsGoalUpdateVisible,
   isUserProfileVisible,
-  setIsUserProfileVisible,
-
-}) {
+  setIsUserProfileVisible
+}: any) {
   // const [isOverlayVisible, setIsOverlayVisible] = useState(false);
   const realm = useRealm();
   const customUserData = user?.customData;
@@ -59,7 +59,7 @@ export default function UserProfile({
   // ----------------------------------------------------
 
   // on user registration
-  const updateUserImage = async (userId, imageString) => {
+  const updateUserImage = async (userId: any, imageString: any) => {
     // try to register new user
     try {
       const mongo = user.mongoClient(secrets.serviceName);
@@ -79,6 +79,7 @@ export default function UserProfile({
       const customUserData = await user.refreshCustomData();
     } catch (error) {
       // console.log('Failed to save image: ', { cause: error })
+      // @ts-expect-error TS(2571): Object is of type 'unknown'.
       if (error.includes(errorMessages.network.logFlag)) {
         // Alert message
         setTitleAlert(errorMessages.network.title);
@@ -93,6 +94,7 @@ export default function UserProfile({
         setTitleAlert(errorMessages.server.title);
         setMessageAlert(errorMessages.server.message);
         setShowCancelButton(errorMessages.server.showCancelButton);
+        // @ts-expect-error TS(2339): Property 'service' does not exist on type '{ autom... Remove this comment to see the full error message
         setShowConfirmButtom(errorMessages.service.showConfirmButton);
         setConfirmText(errorMessages.server.confirmText);
         setCancelText(errorMessages.server.cancelText);
@@ -141,6 +143,7 @@ export default function UserProfile({
         }}
       />
 
+      // @ts-expect-error TS(2322): Type '{ children: Element[]; w: "100%"; style: { f... Remove this comment to see the full error message
       <Box w="100%" style={{ flex: 1 }}>
         <Stack w="100%" direction="row">
           <Box w="10%">

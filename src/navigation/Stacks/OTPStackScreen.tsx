@@ -1,10 +1,10 @@
 // /* eslint-disable prettier/prettier */
-import React from "react"
-import { createNativeStackNavigator } from "@react-navigation/native-stack"
-import SearchScreen from "../../screens/SearchScreen/SearchScreen"
-import OTPVerificationScreen from "../../screens/OTPVerificationScreen/OTPVerificationScreen"
+import React from "react";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import SearchScreen from "../../screens/SearchScreen/SearchScreen";
+import OTPVerificationScreen from "../../screens/OTPVerificationScreen/OTPVerificationScreen";
 
-const OTPVerificationStack = createNativeStackNavigator()
+const OTPVerificationStack = createNativeStackNavigator();
 
 export default function OTPStackScreen() {
   return (
@@ -29,5 +29,5 @@ export default function OTPStackScreen() {
         component={OTPVerificationScreen}
       />
     </OTPVerificationStack.Navigator>
-  )
+  );
 }

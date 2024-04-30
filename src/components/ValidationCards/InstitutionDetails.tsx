@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable prettier/prettier */
 /* eslint-disable linebreak-style */
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { View, Text, Image, } from "react-native";
 import React from "react";
 import CustomDivider from "../Divider/CustomDivider";
@@ -10,7 +11,9 @@ import { faHome, faIdCard, faImage, faPhone, faUser } from "@fortawesome/free-so
 import { Box } from "native-base";
 import { Icon } from "@rneui/base";
 
-const InstitutionDetails = ({ resource }) => {
+const InstitutionDetails = ({
+    resource
+}: any) => {
     return (
         <View>
             <View
@@ -85,6 +88,7 @@ const InstitutionDetails = ({ resource }) => {
                     w="80%"
                     alignItems={"center"}
                     // spce={3}
+                    // @ts-expect-error TS(2322): Type '{ children: Element[]; w: "80%"; alignItems:... Remove this comment to see the full error message
                     style={{
                         flexDirection: "row",
                         justifyContent: "space-around",
@@ -92,6 +96,7 @@ const InstitutionDetails = ({ resource }) => {
                 >
                     <Box
                         w="100%"
+                        // @ts-expect-error TS(2322): Type '{ children: Element[]; w: "100%"; style: { j... Remove this comment to see the full error message
                         style={{
                             justifyContent: "flex-start",
                         }}
@@ -126,6 +131,7 @@ const InstitutionDetails = ({ resource }) => {
                     w="90%"
                     alignItems={"center"}
                     // spce={3}
+                    // @ts-expect-error TS(2322): Type '{ children: Element[]; w: "90%"; alignItems:... Remove this comment to see the full error message
                     style={{
                         flexDirection: "row",
                         justifyContent: "space-around",
@@ -133,6 +139,7 @@ const InstitutionDetails = ({ resource }) => {
                 >
                     <Box
                         w="45%"
+                        // @ts-expect-error TS(2322): Type '{ children: Element[]; w: "45%"; style: { ju... Remove this comment to see the full error message
                         style={{
                             justifyContent: "flex-start",
                         }}
@@ -148,6 +155,7 @@ const InstitutionDetails = ({ resource }) => {
                     <View style={{ width: 10, }} />
                     <Box
                         w="45%"
+                        // @ts-expect-error TS(2322): Type '{ children: Element[]; w: "45%"; style: { ju... Remove this comment to see the full error message
                         style={{
                             justifyContent: "flex-start",
                         }}
@@ -235,6 +243,7 @@ const InstitutionDetails = ({ resource }) => {
                     w="90%"
                     alignItems={"center"}
                     // spce={3}
+                    // @ts-expect-error TS(2322): Type '{ children: Element[]; w: "90%"; alignItems:... Remove this comment to see the full error message
                     style={{
                         flexDirection: "row",
                         justifyContent: "space-around",
@@ -242,6 +251,7 @@ const InstitutionDetails = ({ resource }) => {
                 >
                     <Box
                         w="100%"
+                        // @ts-expect-error TS(2322): Type '{ children: Element[]; w: "100%"; style: { j... Remove this comment to see the full error message
                         style={{
                             justifyContent: "flex-start",
                         }}
@@ -298,6 +308,7 @@ const InstitutionDetails = ({ resource }) => {
                     w="90%"
                     alignItems={"center"}
                     // spce={3}
+                    // @ts-expect-error TS(2322): Type '{ children: Element[]; w: "90%"; alignItems:... Remove this comment to see the full error message
                     style={{
                         flexDirection: "row",
                         justifyContent: "space-around",
@@ -305,6 +316,7 @@ const InstitutionDetails = ({ resource }) => {
                 >
                     <Box
                         w="45%"
+                        // @ts-expect-error TS(2322): Type '{ children: Element[]; w: "45%"; style: { ju... Remove this comment to see the full error message
                         style={{
                             justifyContent: "flex-start",
                         }}
@@ -324,6 +336,7 @@ const InstitutionDetails = ({ resource }) => {
                     <View style={{ width: 10, }} />
                     <Box
                         w="45%"
+                        // @ts-expect-error TS(2322): Type '{ children: Element[]; w: "45%"; style: { ju... Remove this comment to see the full error message
                         style={{
                             justifyContent: "flex-start",
                         }}
@@ -360,6 +373,7 @@ const InstitutionDetails = ({ resource }) => {
                     w="90%"
                     alignItems={"center"}
                     // spce={3}
+                    // @ts-expect-error TS(2322): Type '{ children: Element[]; w: "90%"; alignItems:... Remove this comment to see the full error message
                     style={{
                         flexDirection: "row",
                         justifyContent: "space-around",
@@ -367,6 +381,7 @@ const InstitutionDetails = ({ resource }) => {
                 >
                     <Box
                         w="45%"
+                        // @ts-expect-error TS(2322): Type '{ children: Element[]; w: "45%"; style: { ju... Remove this comment to see the full error message
                         style={{
                             justifyContent: "flex-start",
                         }}
@@ -386,6 +401,7 @@ const InstitutionDetails = ({ resource }) => {
                     <View style={{ width: 10, }} />
                     <Box
                         w="45%"
+                        // @ts-expect-error TS(2322): Type '{ children: Element[]; w: "45%"; style: { ju... Remove this comment to see the full error message
                         style={{
                             justifyContent: "flex-start",
                         }}

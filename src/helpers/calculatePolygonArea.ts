@@ -1,14 +1,15 @@
 /* eslint-disable prettier/prettier */
-const isEqual = (coord1, coord2) => {
+const isEqual = (coord1: any, coord2: any) => {
   return coord1.lat === coord2.lat && coord1.lng === coord2.lng;
 };
 
-export function calculateArea(coordinates) {
+export function calculateArea(coordinates: any) {
   // Ensure the polygon is closed (first and last coordinates are the same)
   if (
     coordinates.length < 3 ||
     !isEqual(coordinates[0], coordinates[coordinates.length - 1])
   ) {
+    // @ts-expect-error TS(2584): Cannot find name 'console'. Do you need to change ... Remove this comment to see the full error message
     console.error("Invalid polygon: Ensure the polygon is closed.");
     return null;
   }
@@ -16,7 +17,7 @@ export function calculateArea(coordinates) {
   const earthRadius = 6371000; // Earth radius in meters
 
   // Function to calculate the Haversine distance between two points
-  function haversine(lat1, lon1, lat2, lon2) {
+  function haversine(lat1: any, lon1: any, lat2: any, lon2: any) {
     const dLat = toRadians(lat2 - lat1);
     const dLon = toRadians(lon2 - lon1);
 
@@ -33,7 +34,7 @@ export function calculateArea(coordinates) {
   }
 
   // Function to convert degrees to radians
-  function toRadians(degrees) {
+  function toRadians(degrees: any) {
     return degrees * (Math.PI / 180);
   }
 
@@ -66,7 +67,7 @@ export function calculateArea(coordinates) {
 
 
 // calculate the area from the latitude and longitude points
-export const calculatePolygonArea = (points) => {
+export const calculatePolygonArea = (points: any) => {
 
   const earthRadiusKm = 6371; // Radius of the earth in kilometers
   let totalDistance = 0;

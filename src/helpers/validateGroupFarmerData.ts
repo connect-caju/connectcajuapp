@@ -22,12 +22,13 @@ const validateGroupFarmerData = (
     groupAdminPost,
     groupVillage,
     groupProvince,
-    groupDistrict,
+
     // groupManagerName,
     // groupManagerPhone,
-  },
-  errors,
-  setErrors,
+    groupDistrict
+  }: any,
+  errors: any,
+  setErrors: any,
 ) => {
   const retrievedIsGroupActive = isGroupActive;
   const retrievedIsGroupInactive = isGroupInactive;
@@ -51,7 +52,7 @@ const validateGroupFarmerData = (
 
   //  normalize asset array
   // const normalizeAssets = (assets)=>{
-  let normalizedAssets = retrievedGroupGoals?.map((asset) => {
+  let normalizedAssets = retrievedGroupGoals?.map((asset: any) => {
     return {
       category: categories.group.category,
       subcategory: asset,
@@ -97,6 +98,7 @@ const validateGroupFarmerData = (
     setErrors({ ...errors, groupWomenNumber: "Número total de mulheres." });
     return false;
   } else if (
+    // @ts-expect-error TS(2345): Argument of type 'number' is not assignable to par... Remove this comment to see the full error message
     parseInt(retrievedGroupWomenNumber) > parseInt(retrievedGroupMembersNumber)
   ) {
     setErrors({
@@ -174,6 +176,7 @@ const validateGroupFarmerData = (
 
   if (
     retrievedGroupNuit &&
+    // @ts-expect-error TS(2345): Argument of type 'number' is not assignable to par... Remove this comment to see the full error message
     (!Number.isInteger(parseInt(retrievedGroupNuit)) ||
       retrievedGroupNuit?.toString().length !== 9 ||
       containsNonNumeric(retrievedGroupNuit))
@@ -184,6 +187,7 @@ const validateGroupFarmerData = (
 
   if (
     retrievedGroupNuel &&
+    // @ts-expect-error TS(2345): Argument of type 'number' is not assignable to par... Remove this comment to see the full error message
     (!Number.isInteger(parseInt(retrievedGroupNuel)) ||
       retrievedGroupNuel?.toString().length !== 9 ||
       containsNonNumeric(retrievedGroupNuel))
@@ -211,19 +215,24 @@ const validateGroupFarmerData = (
     legalStatus: retrievedGroupLegalStatus,
     creationYear: retrievedGroupCreationYear,
     affiliationYear: retrievedGroupAffiliationYear
+      // @ts-expect-error TS(2345): Argument of type 'number' is not assignable to par... Remove this comment to see the full error message
       ? parseInt(retrievedGroupAffiliationYear)
       : 0,
     numberOfMembers: {
       total: retrievedGroupMembersNumber
+        // @ts-expect-error TS(2345): Argument of type 'number' is not assignable to par... Remove this comment to see the full error message
         ? parseInt(retrievedGroupMembersNumber)
         : 0,
       women: retrievedGroupWomenNumber
+        // @ts-expect-error TS(2345): Argument of type 'number' is not assignable to par... Remove this comment to see the full error message
         ? parseInt(retrievedGroupWomenNumber)
         : 0,
     },
 
     licence: retrievedGroupOperatingLicence,
+    // @ts-expect-error TS(2345): Argument of type 'number' is not assignable to par... Remove this comment to see the full error message
     nuel: retrievedGroupNuel ? parseInt(retrievedGroupNuel) : 0,
+    // @ts-expect-error TS(2345): Argument of type 'number' is not assignable to par... Remove this comment to see the full error message
     nuit: retrievedGroupNuit ? parseInt(retrievedGroupNuit) : 0,
   };
   return farmerData;

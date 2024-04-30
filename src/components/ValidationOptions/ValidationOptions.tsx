@@ -1,11 +1,13 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable prettier/prettier */
 /* eslint-disable linebreak-style */
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { View, Text } from "react-native";
 import React from "react";
 import {
     Center,
 } from "native-base";
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { TouchableOpacity } from "react-native";
 import { resourceValidation } from "../../consts/resourceValidation";
 import { errorMessages } from "../../consts/errorMessages";
@@ -13,7 +15,16 @@ import COLORS from "../../consts/colors";
 import AwesomeAlert from "react-native-awesome-alerts";
 import { useState } from "react";
 
-const ValidationOptions = ({ resource, resourceType, customUserData, realm, alert, setAlert, handleModalVisible, handleInvalidationMessage, }) => {
+const ValidationOptions = ({
+    resource,
+    resourceType,
+    customUserData,
+    realm,
+    alert,
+    setAlert,
+    handleModalVisible,
+    handleInvalidationMessage
+}: any) => {
     const [alertInfo, setAlertInfo] = useState({
         message: "",
         title: "",
@@ -60,7 +71,7 @@ const ValidationOptions = ({ resource, resourceType, customUserData, realm, aler
 
 
     // take validation action (validating or invalidating)
-    const validationAction = (realm, resourceId, resourceType, flag) => {
+    const validationAction = (realm: any, resourceId: any, resourceType: any, flag: any) => {
         realm.write(() => {
             const foundResource = realm.objectForPrimaryKey(
                 `${resourceType}`,
@@ -78,7 +89,7 @@ const ValidationOptions = ({ resource, resourceType, customUserData, realm, aler
         });
     };
 
-    const handleResourceValidationAlert = (flag) => {
+    const handleResourceValidationAlert = (flag: any) => {
         setAlert(true);
         if (flag === "invalidate") {
             setAlertInfo((prev) => ({
@@ -169,6 +180,7 @@ const ValidationOptions = ({ resource, resourceType, customUserData, realm, aler
             />
 
             <Center
+                // @ts-expect-error TS(2322): Type '{ children: Element; className: string; }' i... Remove this comment to see the full error message
                 className="w-1/2"
             >
                 <TouchableOpacity
@@ -189,6 +201,7 @@ const ValidationOptions = ({ resource, resourceType, customUserData, realm, aler
                 </TouchableOpacity>
             </Center>
             <Center
+                // @ts-expect-error TS(2322): Type '{ children: Element; className: string; }' i... Remove this comment to see the full error message
                 className="w-1/2"
             >
                 <TouchableOpacity

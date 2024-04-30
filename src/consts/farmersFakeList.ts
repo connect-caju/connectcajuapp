@@ -169,6 +169,6 @@ const farmersFakeList = [
   //   trees: 345,
   //   subcategory: 'comercial',
   // },
-]
+];
 
-export default farmersFakeList
+export default farmersFakeList;

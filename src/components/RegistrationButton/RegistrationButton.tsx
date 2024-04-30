@@ -6,6 +6,7 @@ import {
     Animated,
     TouchableOpacity,
     Text,
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 } from "react-native";
 import React, { useState, useEffect } from "react";
 import { Icon } from "@rneui/themed";
@@ -19,7 +20,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import COLORS from "../../consts/colors";
 import { farmerTypes } from "../../consts/farmerTypes";
 
-const RegistrationButton = ({ customUserData, pop, setPop, navigation, route, }) => {
+const RegistrationButton = ({
+    customUserData,
+    pop,
+    setPop,
+    navigation,
+    route
+}: any) => {
     const [icon_1,] = useState(new Animated.Value(30));
     const [icon_2,] = useState(new Animated.Value(30));
     const [icon_3,] = useState(new Animated.Value(30));
@@ -67,7 +74,7 @@ const RegistrationButton = ({ customUserData, pop, setPop, navigation, route, })
         }).start();
     };
 
-    const addFarmer = (farmerType) => {
+    const addFarmer = (farmerType: any) => {
         navigation.navigate("FarmerForm1", { customUserData, farmerType });
         popOut();
     };

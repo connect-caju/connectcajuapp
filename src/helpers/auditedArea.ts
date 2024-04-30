@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable linebreak-style */
-export const auditedArea = (item) => {
+export const auditedArea = (item: any) => {
     if (!item?.extremeCoordinates && !item?.auditedArea) {
         return "Área não auditada";
     }

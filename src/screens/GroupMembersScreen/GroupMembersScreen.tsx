@@ -13,6 +13,7 @@ import {
   Image,
   Pressable,
   ImageBackground,
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 } from "react-native";
 import { Box, Stack, Center } from "native-base";
 import { Icon, Card } from "@rneui/base";
@@ -58,7 +59,10 @@ import { backgroundStyle } from "../../styles/globals";
 // import { TextInput } from 'react-native-paper';
 const { useRealm, useQuery } = realmContext;
 
-export function MemberItem({ item, isGroupManager }) {
+export function MemberItem({
+  item,
+  isGroupManager
+}: any) {
   const navigation = useNavigation();
 
   return (
@@ -79,6 +83,7 @@ export function MemberItem({ item, isGroupManager }) {
     >
       <TouchableOpacity
         onPress={() => {
+          // @ts-expect-error TS(2345): Argument of type 'string' is not assignable to par... Remove this comment to see the full error message
           navigation.navigate("Profile", {
             ownerId: item._id,
             farmerType: farmerTypes.farmer,
@@ -168,26 +173,30 @@ export function MemberItem({ item, isGroupManager }) {
   );
 }
 
-export default function GroupMembersScreen({ navigation, route }) {
+export default function GroupMembersScreen({
+  navigation,
+  route
+}: any) {
   const { groupId } = route.params;
   const realm = useRealm();
 
   const group = realm.objectForPrimaryKey("Group", groupId);
-  const members = group?.members.map((memberId) => {
+  // @ts-expect-error TS(2339): Property 'members' does not exist on type 'Object<... Remove this comment to see the full error message
+  const members = group?.members.map((memberId: any) => {
     return realm.objectForPrimaryKey("Actor", memberId);
   });
 
   const [membersList, setMembersList] = useState([]);
 
   const handleMembersList = () => {
-    setMembersList(members.map((member) => member));
+    setMembersList(members.map((member: any) => member));
   };
 
   useEffect(() => {
     handleMembersList();
   }, [realm]);
 
-  const keyExtractor = (item, index) => index.toString();
+  const keyExtractor = (item: any, index: any) => index.toString();
 
   return (
     <SafeAreaView
@@ -241,6 +250,7 @@ export default function GroupMembersScreen({ navigation, route }) {
                 numberOfLines={1}
                 ellipsizeMode={"tail"}
               >
+                // @ts-expect-error TS(2576): Property 'name' does not exist on type 'Object<unk... Remove this comment to see the full error message
                 {group?.name}
               </Text>
 
@@ -252,6 +262,7 @@ export default function GroupMembersScreen({ navigation, route }) {
                       fonSize: responsiveFontSize(1),
                     }}
                   >
+                    // @ts-expect-error TS(2339): Property 'numberOfMembers' does not exist on type ... Remove this comment to see the full error message
                     [{"Declarados:"} {group?.numberOfMembers.total}]
                   </Text>
                 </Center>
@@ -270,6 +281,7 @@ export default function GroupMembersScreen({ navigation, route }) {
           </Box>
           <Box
             w="10%"
+            // @ts-expect-error TS(2322): Type '{ w: "10%"; style: { justifyContent: string;... Remove this comment to see the full error message
             style={{
               justifyContent: "center",
               alignItems: "center",
@@ -291,6 +303,7 @@ export default function GroupMembersScreen({ navigation, route }) {
             horizontal={false}
             StickyHeaderComponent={() => (
               <Box
+                // @ts-expect-error TS(2322): Type '{ style: { height: number; justifyContent: s... Remove this comment to see the full error message
                 style={{
                   height: hp("10%"),
                   justifyContent: "center",
@@ -303,8 +316,11 @@ export default function GroupMembersScreen({ navigation, route }) {
             keyExtractor={keyExtractor}
             // onEndReached={handleEndReached}
             onEndReachedThreshold={0.1}
-            renderItem={({ item }) => {
+            renderItem={({
+              item
+            }: any) => {
               // check if this MemberItem is of the Group Manager
+              // @ts-expect-error TS(2531): Object is possibly 'null'.
               const isGroupManager = item._id === group.manager;
               return (
                 <MemberItem
@@ -317,6 +333,7 @@ export default function GroupMembersScreen({ navigation, route }) {
             ListFooterComponent={() => {
               return (
                 <Box
+                  // @ts-expect-error TS(2322): Type '{ children: Element; style: { paddingBottom:... Remove this comment to see the full error message
                   style={{
                     paddingBottom: 150,
                   }}
@@ -342,6 +359,7 @@ export default function GroupMembersScreen({ navigation, route }) {
                 textAlign: "center",
               }}
             >
+              // @ts-expect-error TS(2576): Property 'name' does not exist on type 'Object<unk... Remove this comment to see the full error message
               {group?.name}
             </Text>
             <Text

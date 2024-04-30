@@ -196,5 +196,5 @@ const countries = [
   "Vaticano",
   "Venezuela",
   "Vietname",
-]
-export default countries
+];
+export default countries;

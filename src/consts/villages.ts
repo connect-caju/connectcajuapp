@@ -352,6 +352,6 @@ const villages = {
     "Zalala",
   ],
   Urbano: ["Quelimane (Cidade)"],
-}
+};
 
-export default villages
+export default villages;

@@ -1,7 +1,13 @@
 const validateFarmlandMainData = (
-  { description, consociatedCrops, otherConsociatedCrops, trees, totalArea },
-  errors,
-  setErrors,
+  {
+    description,
+    consociatedCrops,
+    otherConsociatedCrops,
+    trees,
+    totalArea
+  }: any,
+  errors: any,
+  setErrors: any,
 ) => {
   const retrievedFarmlandDescription = description?.trim();
   const retrievedTreesNumber = trees ? parseInt(trees) : "";
@@ -11,13 +17,13 @@ const validateFarmlandMainData = (
   //  chech if there are other crops that the user typed
   // if there some, concat them with the ones that were selected
   if (
-    consociatedCrops?.find((crop) => crop === "Outras") &&
+    consociatedCrops?.find((crop: any) => crop === "Outras") &&
     otherConsociatedCrops?.length > 0
   ) {
-    let allCrops = consociatedCrops.filter((crop) => crop !== "Outras");
+    let allCrops = consociatedCrops.filter((crop: any) => crop !== "Outras");
     retrievedConsociatedCrops = allCrops.concat(otherConsociatedCrops);
   } else if (
-    consociatedCrops?.find((crop) => crop === "Outras") &&
+    consociatedCrops?.find((crop: any) => crop === "Outras") &&
     otherConsociatedCrops?.length == 0
   ) {
     setErrors({
@@ -44,7 +50,7 @@ const validateFarmlandMainData = (
     });
     return false;
   } else if (
-    retrievedConsociatedCrops.find((crop) => crop.includes("Nenhuma")) &&
+    retrievedConsociatedCrops.find((crop: any) => crop.includes("Nenhuma")) &&
     retrievedConsociatedCrops.length > 1
   ) {
     setErrors({

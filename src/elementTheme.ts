@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { createTheme } from "@rneui/themed"
+import { createTheme } from "@rneui/themed";
 
 const elementTheme = createTheme({
   lightColors: {
@@ -30,10 +30,12 @@ const elementTheme = createTheme({
       containerStyle: {},
       disabledInputStyle: {},
       inputContainerStyle: {},
+      // @ts-expect-error TS(2322): Type '{}' is not assignable to type 'string'.
       errorMessage: {},
       errorStyle: {},
       errorProps: {},
       inputStyle: {},
+      // @ts-expect-error TS(2322): Type '{}' is not assignable to type 'ReactNode'.
       label: {},
       labelStyle: {},
       labelProps: {},
@@ -41,6 +43,7 @@ const elementTheme = createTheme({
       leftIconContainerStyle: {},
       rightIcon: {},
       rightIconContainerStyle: {},
+      // @ts-expect-error TS(2322): Type '{}' is not assignable to type 'ComponentType... Remove this comment to see the full error message
       InputComponent: {},
       placeholder: {},
     },
@@ -60,6 +63,6 @@ const elementTheme = createTheme({
     // },
     FAB: {},
   },
-})
+});
 
-export default elementTheme
+export default elementTheme;

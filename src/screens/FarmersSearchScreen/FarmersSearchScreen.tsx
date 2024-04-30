@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable linebreak-style */
 /* eslint-disable prettier/prettier */
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { View, Text, Pressable, TouchableOpacity, FlatList, TextInput, SafeAreaView, } from "react-native";
 import React, { useEffect, useState } from "react";
 import Animated, { SlideInRight } from "react-native-reanimated";
@@ -25,7 +26,11 @@ const { useRealm } = realmContext;
 
 
 
-const SuggestedCriteriaItem = ({ item, handleSearchByCriteriaItem, selectedCriteria }) => {
+const SuggestedCriteriaItem = ({
+    item,
+    handleSearchByCriteriaItem,
+    selectedCriteria
+}: any) => {
 
     return (
         <TouchableOpacity
@@ -65,7 +70,12 @@ const SuggestedCriteriaItem = ({ item, handleSearchByCriteriaItem, selectedCrite
     );
 };
 
-const CriteriaItem = ({ item, handleFocusedOption, focusedOption, selectedCriteria, }) => {
+const CriteriaItem = ({
+    item,
+    handleFocusedOption,
+    focusedOption,
+    selectedCriteria
+}: any) => {
 
     return (
         <TouchableOpacity
@@ -110,7 +120,11 @@ const CriteriaItem = ({ item, handleFocusedOption, focusedOption, selectedCriter
 };
 
 
-const FoundFarmerItem = ({ item, navigation, farmerType }) => {
+const FoundFarmerItem = ({
+    item,
+    navigation,
+    farmerType
+}: any) => {
     return (
         <TouchableOpacity
             onPress={() => {
@@ -155,7 +169,10 @@ const FoundFarmerItem = ({ item, navigation, farmerType }) => {
 
 
 
-const FarmersSearchScreen = ({ navigation, route }) => {
+const FarmersSearchScreen = ({
+    navigation,
+    route
+}: any) => {
 
     const farmerType = route.params?.farmerType || "Indivíduo";
     const [focusedOption, setFocusedOption] = useState(null);
@@ -171,12 +188,12 @@ const FarmersSearchScreen = ({ navigation, route }) => {
     const realm = useRealm();
 
 
-    const handleSearchCriteria = (selectedCriteria) => {
+    const handleSearchCriteria = (selectedCriteria: any) => {
         setSelectedCriteria(selectedCriteria);
     };
 
 
-    const handleFocusedOption = (option, item = "", selectedCriteria = "") => {
+    const handleFocusedOption = (option: any, item = "", selectedCriteria = "") => {
         if (option === focusedOption) {
             setFocusedOption(null);
         }
@@ -187,7 +204,7 @@ const FarmersSearchScreen = ({ navigation, route }) => {
         }
     };
 
-    const handleTextInputChange = (text) => {
+    const handleTextInputChange = (text: any) => {
         setSearchQuery(text);
         // setTimeout(() => {
         // }, 2000);
@@ -212,7 +229,7 @@ const FarmersSearchScreen = ({ navigation, route }) => {
     // selectedCriteria may be: - adminPost; - village; -- status
     // - subcategory; - private; - type
     // The query expression is built according to the object(collection) to be queried 
-    const handleSearchByCriteriaItem = (item, selectedCriteria) => {
+    const handleSearchByCriteriaItem = (item: any, selectedCriteria: any) => {
         let farmers = [];
 
         setLoading(true);
@@ -220,15 +237,18 @@ const FarmersSearchScreen = ({ navigation, route }) => {
         switch (selectedCriteria) {
             case searchCriteria.adminPost:
                 if (farmerType === farmerTypes.farmer) {
+                    // @ts-expect-error TS(2740): Type 'Results<Object<unknown, never>>' is missing ... Remove this comment to see the full error message
                     farmers = realm
                         .objects("Actor")
                         .filtered("address.adminPost == $0", item);
 
                 } else if (farmerType === farmerTypes.group) {
+                    // @ts-expect-error TS(2322): Type 'Results<Object<unknown, never>>' is not assi... Remove this comment to see the full error message
                     farmers = realm
                         .objects("Group")
                         .filtered("address.adminPost == $0", item);
                 } else if (farmerType === farmerTypes.institution) {
+                    // @ts-expect-error TS(2322): Type 'Results<Object<unknown, never>>' is not assi... Remove this comment to see the full error message
                     farmers = realm
                         .objects("Institution")
                         .filtered("address.adminPost == $0", item);
@@ -236,15 +256,18 @@ const FarmersSearchScreen = ({ navigation, route }) => {
                 break;
             case searchCriteria.village:
                 if (farmerType === farmerTypes.farmer) {
+                    // @ts-expect-error TS(2322): Type 'Results<Object<unknown, never>>' is not assi... Remove this comment to see the full error message
                     farmers = realm
                         .objects("Actor")
                         .filtered("address.village == $0", item);
 
                 } else if (farmerType === farmerTypes.group) {
+                    // @ts-expect-error TS(2322): Type 'Results<Object<unknown, never>>' is not assi... Remove this comment to see the full error message
                     farmers = realm
                         .objects("Group")
                         .filtered("address.village == $0", item);
                 } else if (farmerType === farmerTypes.institution) {
+                    // @ts-expect-error TS(2322): Type 'Results<Object<unknown, never>>' is not assi... Remove this comment to see the full error message
                     farmers = realm
                         .objects("Institution")
                         .filtered("address.village == $0", item);
@@ -252,31 +275,37 @@ const FarmersSearchScreen = ({ navigation, route }) => {
                 break;
             case searchCriteria.status:
                 if (farmerType === farmerTypes.farmer) {
+                    // @ts-expect-error TS(2322): Type 'Results<Object<unknown, never>>' is not assi... Remove this comment to see the full error message
                     farmers = realm
                         .objects("Actor")
                         .filtered("status == $0", item);
 
                 } else if (farmerType === farmerTypes.group) {
+                    // @ts-expect-error TS(2322): Type 'Results<Object<unknown, never>>' is not assi... Remove this comment to see the full error message
                     farmers = realm
                         .objects("Group")
                         .filtered("status == $0", item);
                 } else if (farmerType === farmerTypes.institution) {
+                    // @ts-expect-error TS(2322): Type 'Results<Object<unknown, never>>' is not assi... Remove this comment to see the full error message
                     farmers = realm
                         .objects("Institution")
                         .filtered("status == $0", item);
                 }
                 break;
             case searchCriteria.farmerSubcategory:
+                // @ts-expect-error TS(2322): Type 'Results<Object<unknown, never>>' is not assi... Remove this comment to see the full error message
                 farmers = realm
                     .objects("Actor")
                     .filtered("assets.subcategory == $0", item);
                 break;
             case searchCriteria.isPrivateInstitution:
+                // @ts-expect-error TS(2322): Type 'Results<Object<unknown, never>>' is not assi... Remove this comment to see the full error message
                 farmers = realm
                     .objects("Institution")
                     .filtered("private == $0", item);
                 break;
             case searchCriteria.groupType:
+                // @ts-expect-error TS(2322): Type 'Results<Object<unknown, never>>' is not assi... Remove this comment to see the full error message
                 farmers = realm
                     .objects("Group")
                     .filtered("type == $0", item);
@@ -314,6 +343,7 @@ const FarmersSearchScreen = ({ navigation, route }) => {
         // Grupo: legalizados, em processo de legalizacao, nao legalizados, pendentes, validados
         // Instituicao: privados, publicos, pendentes, validados
         const filtered = filterByCriteria.filter((criteria) => criteria.farmerType === farmerType);
+        // @ts-expect-error TS(2345): Argument of type '({ criteriaName: string; criteri... Remove this comment to see the full error message
         setFilteredCriteria(filtered);
 
     }, [farmerType]);
@@ -331,31 +361,33 @@ const FarmersSearchScreen = ({ navigation, route }) => {
             let farmers = [];
             let matchedResources = [];
             if (farmerType?.includes("Indiv")) {
+                // @ts-expect-error TS(2322): Type 'Results<Object<unknown, never>>' is not assi... Remove this comment to see the full error message
                 farmers = realm.objects("Actor").filtered("userDistrict == $0", customUserData?.userDistrict);
                 farmers = customizeItem(farmers, [], [], {}, farmerType);
-                matchedResources = farmers.filter((item) =>
-                    item.name?.toLowerCase()?.includes(searchQuery.toLowerCase())
+                matchedResources = farmers.filter((item: any) => item.name?.toLowerCase()?.includes(searchQuery.toLowerCase())
                 );
             }
             else if (farmerType?.includes("Grupo")) {
+                // @ts-expect-error TS(2322): Type 'Results<Object<unknown, never>>' is not assi... Remove this comment to see the full error message
                 farmers = realm.objects("Group").filtered("userDistrict == $0", customUserData?.userDistrict);
                 farmers = customizeItem(farmers, [], [], {}, farmerType);
-                matchedResources = farmers.filter((item) => (item.name?.toLowerCase()?.includes(searchQuery.toLowerCase()) ||
-                    item.type?.toLowerCase()?.includes(searchQuery.toLowerCase()))
+                matchedResources = farmers.filter((item: any) => item.name?.toLowerCase()?.includes(searchQuery.toLowerCase()) ||
+                    item.type?.toLowerCase()?.includes(searchQuery.toLowerCase())
                 );
             }
             else if (farmerType?.includes("Institu")) {
+                // @ts-expect-error TS(2322): Type 'Results<Object<unknown, never>>' is not assi... Remove this comment to see the full error message
                 farmers = realm.objects("Institution").filtered("userDistrict == $0", customUserData?.userDistrict);
                 farmers = customizeItem(farmers, [], [], {}, farmerType);
-                matchedResources = farmers.filter((item) => (item.name?.toLowerCase()?.includes(searchQuery.toLowerCase()) ||
-                    item.manager?.toLowerCase()?.includes(searchQuery.toLowerCase()))
+                matchedResources = farmers.filter((item: any) => item.name?.toLowerCase()?.includes(searchQuery.toLowerCase()) ||
+                    item.manager?.toLowerCase()?.includes(searchQuery.toLowerCase())
                 );
             }
             setSearchResults(matchedResources);
         }
     }, [searchQuery]);
 
-    const keyExtractor = (item, index) => index.toString();
+    const keyExtractor = (item: any, index: any) => index.toString();
 
     return (
         <SafeAreaView
@@ -449,9 +481,11 @@ const FarmersSearchScreen = ({ navigation, route }) => {
                                 }}
                                 value={searchQuery}
                                 onFocus={() => {
+                                    // @ts-expect-error TS(2345): Argument of type 'true' is not assignable to param... Remove this comment to see the full error message
                                     setFocusedOption(true);
                                 }}
                                 onEndEditing={() => {
+                                    // @ts-expect-error TS(2345): Argument of type 'false' is not assignable to para... Remove this comment to see the full error message
                                     setFocusedOption(false);
                                     setIsSearching(true);
                                 }}
@@ -476,7 +510,9 @@ const FarmersSearchScreen = ({ navigation, route }) => {
                                 // ListHeaderComponent={<View style={{ width: 6, }} />}
                                 snapToInterval={86}
                                 decelerationRate="fast"
-                                renderItem={({ item }) => {
+                                renderItem={({
+                                    item
+                                }: any) => {
                                     return (
                                         <CriteriaItem
                                             item={item}
@@ -589,7 +625,9 @@ const FarmersSearchScreen = ({ navigation, route }) => {
                                     showsVerticalScrollIndicator={false}
                                     snapToInterval={86}
                                     decelerationRate="fast"
-                                    renderItem={({ item }) => {
+                                    renderItem={({
+                                        item
+                                    }: any) => {
                                         return (
                                             <SuggestedCriteriaItem
                                                 item={item}
@@ -617,7 +655,9 @@ const FarmersSearchScreen = ({ navigation, route }) => {
                                     // ListHeaderComponent={<View style={{ width: 6, }} />}
                                     snapToInterval={86}
                                     decelerationRate="fast"
-                                    renderItem={({ item }) => {
+                                    renderItem={({
+                                        item
+                                    }: any) => {
                                         return (
                                             <FoundFarmerItem item={item} navigation={navigation} route={route} farmerType={farmerType} />
                                         );

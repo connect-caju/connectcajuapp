@@ -1,4 +1,5 @@
 import { cloneElement, createContext, useContext, useState } from 'react';
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { Modal, TouchableOpacity, View } from 'react-native';
 
 import { cn } from '../lib/utils';

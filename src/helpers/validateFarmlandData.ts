@@ -5,18 +5,21 @@ const validateFarmlandData = (
     description,
     consociatedCrops,
     trees,
+
     // declaredArea,
     usedArea,
+
     totalArea,
     densityMode,
     densityLength,
     densityWidth,
     plantTypes,
-    clones,
+
     // farmer,
-  },
-  errors,
-  setErrors,
+    clones
+  }: any,
+  errors: any,
+  setErrors: any,
 ) => {
   const retrievedPlantingYear = plantingYear ? parseInt(plantingYear) : "";
   const retrievedFarmlandDescription = description?.trim();
@@ -75,6 +78,7 @@ const validateFarmlandData = (
     return false;
   }
 
+  // @ts-expect-error TS(2367): This condition will always return 'false' since th... Remove this comment to see the full error message
   if (!retrievedTotalArea || retrievedTotalArea === "") {
     setErrors({ ...errors, totalArea: "Área total." });
     return false;
@@ -87,6 +91,7 @@ const validateFarmlandData = (
 
   if (
     retrievedDensityMode === "Regular" &&
+    // @ts-expect-error TS(2367): This condition will always return 'false' since th... Remove this comment to see the full error message
     (retrievedDensityLength === "" || retrievedDensityWidth === "")
   ) {
     setErrors({ ...errors, densityMode: "Indica comprimento e largura." });

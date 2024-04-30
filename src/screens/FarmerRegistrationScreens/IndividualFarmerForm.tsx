@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable linebreak-style */
 /* eslint-disable prettier/prettier */
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { Text, Pressable } from "react-native";
 import React, { useState, useCallback } from "react";
 import {
@@ -77,30 +78,30 @@ export default function IndividualFarmerForm({
   isNotGroupMember,
   setIsNotGroupMember,
   errors,
-  setErrors,
-}) {
+  setErrors
+}: any) {
   const [openDatePicker, setOpenDatePicker] = useState(false);
 
   const onDismissSingle = useCallback(() => {
     setOpenDatePicker(false);
   }, [setOpenDatePicker]);
 
-  const handleBirthDate = (date) => {
+  const handleBirthDate = (date: any) => {
       setOpenDatePicker(false);
       setBirthDate(date);
-      setErrors((prev) => ({
+      setErrors((prev: any) => ({
         ...prev,
-        birthDate: "",
+        birthDate: ""
       }));
   };
 
   const onConfirmSingle = useCallback(
-    (params) => {
+    (params: any) => {
       setOpenDatePicker(false);
       setBirthDate(params?.date);
-      setErrors((prev) => ({
+      setErrors((prev: any) => ({
         ...prev,
-        birthDate: "",
+        birthDate: ""
       }));
     },
     [setOpenDatePicker, setBirthDate],
@@ -157,6 +158,7 @@ export default function IndividualFarmerForm({
                     iconStyle={{ marginRight: 1 }}
                   />
                 }
+                // @ts-expect-error TS(2322): Type '{ center: true; fontFamily: string; containe... Remove this comment to see the full error message
                 onPress={() => {
                   setIsNotSprayingAgent(false);
                   setIsSprayingAgent(true);
@@ -200,6 +202,7 @@ export default function IndividualFarmerForm({
                     iconStyle={{ marginRight: 1 }}
                   />
                 }
+                // @ts-expect-error TS(2322): Type '{ center: true; fontFamily: string; containe... Remove this comment to see the full error message
                 onPress={() => {
                   setIsNotSprayingAgent(true);
                   setIsSprayingAgent(false);
@@ -231,8 +234,11 @@ export default function IndividualFarmerForm({
             autoCapitalize="words"
             placeholder="Apelido"
             value={surname}
-            onChangeText={(newSurname) => {
-              setErrors((prev) => ({ ...prev, surname: "" }));
+            onChangeText={(newSurname: any) => {
+              setErrors((prev: any) => ({
+                ...prev,
+                surname: ""
+              }));
               setSurname(newSurname);
             }}
           />
@@ -255,8 +261,11 @@ export default function IndividualFarmerForm({
             autoCapitalize="words"
             placeholder="Outros nomes"
             value={otherNames}
-            onChangeText={(newNames) => {
-              setErrors((prev) => ({ ...prev, otherNames: "" }));
+            onChangeText={(newNames: any) => {
+              setErrors((prev: any) => ({
+                ...prev,
+                otherNames: ""
+              }));
               setOtherNames(newNames);
             }}
           />
@@ -278,6 +287,7 @@ export default function IndividualFarmerForm({
               <FormControl.Label>Género</FormControl.Label>
               <Select
                 selectedValue={gender}
+                // @ts-expect-error TS(2322): Type '{ children: Element[]; selectedValue: any; a... Remove this comment to see the full error message
                 accessibilityLabel="Género"
                 placeholder="Género"
                 minHeight={55}
@@ -304,7 +314,10 @@ export default function IndividualFarmerForm({
                   )
                 }
                 onValueChange={(newGender) => {
-                  setErrors((prev) => ({ ...prev, gender: "" }));
+                  setErrors((prev: any) => ({
+                    ...prev,
+                    gender: ""
+                  }));
                   setGender(newGender);
                 }}
               >
@@ -335,8 +348,11 @@ export default function IndividualFarmerForm({
                 placeholder="Agregado"
                 value={familySize}
                 keyboardType="numeric"
-                onChangeText={(newSize) => {
-                  setErrors((prev) => ({ ...prev, familySize: "" }));
+                onChangeText={(newSize: any) => {
+                  setErrors((prev: any) => ({
+                    ...prev,
+                    familySize: ""
+                  }));
                   setFamilySize(newSize);
                 }}
               />
@@ -370,6 +386,7 @@ export default function IndividualFarmerForm({
               <FormControl.Label>Posto Adm.</FormControl.Label>
               <Select
                 selectedValue={addressAdminPost}
+                // @ts-expect-error TS(2322): Type '{ children: any; selectedValue: any; accessi... Remove this comment to see the full error message
                 accessibilityLabel="Escolha sua província"
                 placeholder="Escolha sua província"
                 minHeight={55}
@@ -396,11 +413,14 @@ export default function IndividualFarmerForm({
                 }
                 mt={1}
                 onValueChange={(newAdminPost) => {
-                  setErrors((prev) => ({ ...prev, addressAdminPost: "" }));
+                  setErrors((prev: any) => ({
+                    ...prev,
+                    addressAdminPost: ""
+                  }));
                   setAddressAdminPost(newAdminPost);
                 }}
               >
-                {selectedAddressAdminPosts?.map((adminPost, index) => (
+                {selectedAddressAdminPosts?.map((adminPost: any, index: any) => (
                   <Select.Item
                     key={index}
                     label={adminPost}
@@ -425,6 +445,7 @@ export default function IndividualFarmerForm({
               <FormControl.Label>Localidade</FormControl.Label>
               <Select
                 selectedValue={addressVillage}
+                // @ts-expect-error TS(2322): Type '{ children: any; selectedValue: any; accessi... Remove this comment to see the full error message
                 accessibilityLabel="Escolha uma localidade"
                 placeholder="Escolha uma localidade"
                 minHeight={55}
@@ -452,7 +473,8 @@ export default function IndividualFarmerForm({
                 mt={1}
                 onValueChange={(newVillage) => setAddressVillage(newVillage)}
               >
-                {villages[addressAdminPost]?.map((village, index) => (
+                // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
+                {villages[addressAdminPost]?.map((village: any, index: any) => (
                   <Select.Item key={index} label={village} value={village} />
                 ))}
               </Select>
@@ -471,8 +493,11 @@ export default function IndividualFarmerForm({
                 placeholder="Telemóvel"
                 keyboardType="phone-pad"
                 value={primaryPhone}
-                onChangeText={(newPhone) => {
-                  setErrors((prev) => ({ ...prev, primaryPhone: "" }));
+                onChangeText={(newPhone: any) => {
+                  setErrors((prev: any) => ({
+                    ...prev,
+                    primaryPhone: ""
+                  }));
                   setPrimaryPhone(newPhone);
                 }}
                 InputLeftElement={
@@ -500,8 +525,11 @@ export default function IndividualFarmerForm({
                 placeholder="Telemóvel"
                 keyboardType="phone-pad"
                 value={secondaryPhone}
-                onChangeText={(newPhone) => {
-                  setErrors((prev) => ({ ...prev, secondaryPhone: "" }));
+                onChangeText={(newPhone: any) => {
+                  setErrors((prev: any) => ({
+                    ...prev,
+                    secondaryPhone: ""
+                  }));
                   setSecondaryPhone(newPhone);
                 }}
                 InputLeftElement={
@@ -535,6 +563,7 @@ export default function IndividualFarmerForm({
               <Box>
                 <Pressable onPress={() => setOpenDatePicker(true)}>
                   <Box
+                    // @ts-expect-error TS(2322): Type '{ children: Element[]; style: { borderColor:... Remove this comment to see the full error message
                     style={{
                       borderColor: COLORS.lightgrey,
                       borderWidth: 1,
@@ -611,6 +640,7 @@ export default function IndividualFarmerForm({
 
               <Select
                 selectedValue={birthProvince}
+                // @ts-expect-error TS(2322): Type '{ children: Element[]; selectedValue: any; a... Remove this comment to see the full error message
                 accessibilityLabel="Escolha uma província"
                 placeholder="Escolha uma província"
                 minHeight={55}
@@ -637,7 +667,10 @@ export default function IndividualFarmerForm({
                 }
                 mt={1}
                 onValueChange={(newProvince) => {
-                  setErrors((prev) => ({ ...prev, birthProvince: "" }));
+                  setErrors((prev: any) => ({
+                    ...prev,
+                    birthProvince: ""
+                  }));
                   setBirthProvince(newProvince);
                 }}
               >
@@ -671,6 +704,7 @@ export default function IndividualFarmerForm({
                   </FormControl.Label>
                   <Select
                     selectedValue={birthDistrict}
+                    // @ts-expect-error TS(2322): Type '{ children: any; selectedValue: any; accessi... Remove this comment to see the full error message
                     accessibilityLabel="Escolha um distrito"
                     placeholder={
                       birthProvince?.includes("Estrangeiro")
@@ -701,7 +735,10 @@ export default function IndividualFarmerForm({
                     }
                     mt={1}
                     onValueChange={(newDistrict) => {
-                      setErrors((prev) => ({ ...prev, birthDistrict: "" }));
+                      setErrors((prev: any) => ({
+                        ...prev,
+                        birthDistrict: ""
+                      }));
                       setBirthDistrict(newDistrict);
                     }}
                   >
@@ -709,11 +746,14 @@ export default function IndividualFarmerForm({
                       ? countries3?.map((country, index) => (
                         <Select.Item
                           key={index}
+                          // @ts-expect-error TS(2322): Type '{ key: string; value: string; }' is not assi... Remove this comment to see the full error message
                           label={country}
+                          // @ts-expect-error TS(2322): Type '{ key: string; value: string; }' is not assi... Remove this comment to see the full error message
                           value={country}
                         />
                       ))
-                      : districts[birthProvince]?.map((district, index) => (
+                      // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
+                      : districts[birthProvince]?.map((district: any, index: any) => (
                         <Select.Item
                           key={index}
                           label={district}
@@ -748,6 +788,7 @@ export default function IndividualFarmerForm({
                       <FormControl.Label>Posto Adm.</FormControl.Label>
                       <Select
                         selectedValue={birthProvince ? birthAdminPost : ""}
+                        // @ts-expect-error TS(2322): Type '{ children: any; selectedValue: any; accessi... Remove this comment to see the full error message
                         accessibilityLabel="Escolha um posto administrativo"
                         placeholder="Escolha um posto administrativo"
                         minHeight={55}
@@ -774,12 +815,16 @@ export default function IndividualFarmerForm({
                         }
                         mt={1}
                         onValueChange={(newAdminPost) => {
-                          setErrors((prev) => ({ ...prev, birthAdminPost: "" }));
+                          setErrors((prev: any) => ({
+                            ...prev,
+                            birthAdminPost: ""
+                          }));
                           setBirthAdminPost(newAdminPost);
                         }}
                       >
+                        // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
                         {administrativePosts[birthDistrict]?.map(
-                          (adminPost, index) => (
+                          (adminPost: any, index: any) => (
                             <Select.Item
                               key={index}
                               label={adminPost}
@@ -816,8 +861,11 @@ export default function IndividualFarmerForm({
                   {birthProvince === "País Estrangeiro" ? "País" : "Distrito"}
                 </FormControl.Label>
                 <SelectList
-                  setSelected={(newDistrict) => {
-                    setErrors((prev) => ({ ...prev, birthDistrict: "" }));
+                  setSelected={(newDistrict: any) => {
+                    setErrors((prev: any) => ({
+                      ...prev,
+                      birthDistrict: ""
+                    }));
                     setBirthDistrict(newDistrict);
                   }}
                   data={countries3}
@@ -883,6 +931,7 @@ export default function IndividualFarmerForm({
               <FormControl.Label>Tipo</FormControl.Label>
               <Select
                 selectedValue={docType}
+                // @ts-expect-error TS(2322): Type '{ children: Element[]; selectedValue: any; a... Remove this comment to see the full error message
                 accessibilityLabel="Tipo de doc."
                 placeholder="Tipo de documento"
                 minHeight={55}
@@ -909,10 +958,10 @@ export default function IndividualFarmerForm({
                 }
                 mt={1}
                 onValueChange={(newDocType) => {
-                  setErrors((prev) => ({
+                  setErrors((prev: any) => ({
                     ...prev,
                     docType: "",
-                    docNumber: "",
+                    docNumber: ""
                   }));
                   setDocType(newDocType);
                 }}
@@ -942,8 +991,11 @@ export default function IndividualFarmerForm({
                 }
                 value={docNumber}
                 placeholder="Número do Documento"
-                onChangeText={(newDocNumber) => {
-                  setErrors((prev) => ({ ...prev, docNumber: "" }));
+                onChangeText={(newDocNumber: any) => {
+                  setErrors((prev: any) => ({
+                    ...prev,
+                    docNumber: ""
+                  }));
                   setDocNumber(newDocNumber);
                 }}
               />
@@ -969,8 +1021,11 @@ export default function IndividualFarmerForm({
                 placeholder="NUIT"
                 value={nuit}
                 keyboardType="numeric"
-                onChangeText={(newNuit) => {
-                  setErrors((prev) => ({ ...prev, nuit: "" }));
+                onChangeText={(newNuit: any) => {
+                  setErrors((prev: any) => ({
+                    ...prev,
+                    nuit: ""
+                  }));
                   setNuit(newNuit);
                 }}
               />
@@ -1047,6 +1102,7 @@ export default function IndividualFarmerForm({
                     iconStyle={{ marginRight: 1 }}
                   />
                 }
+                // @ts-expect-error TS(2322): Type '{ center: true; fontFamily: string; containe... Remove this comment to see the full error message
                 onPress={() => {
                   setIsNotGroupMember(false);
                   setIsGroupMember(true);
@@ -1090,6 +1146,7 @@ export default function IndividualFarmerForm({
                     iconStyle={{ marginRight: 1 }}
                   />
                 }
+                // @ts-expect-error TS(2322): Type '{ center: true; fontFamily: string; containe... Remove this comment to see the full error message
                 onPress={() => {
                   setIsNotGroupMember(true);
                   setIsGroupMember(false);

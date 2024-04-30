@@ -3,10 +3,14 @@
 import React, { useState, useTransition } from "react";
 import COLORS from "../../consts/colors";
 import { farmerTypes } from "../../consts/farmerTypes";
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { View } from "react-native";
 import { faInstitution, faPeopleGroup, faPerson } from "@fortawesome/free-solid-svg-icons";
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { FlatList } from "react-native";
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { Text } from "react-native";
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { TouchableOpacity } from "react-native";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 
@@ -31,18 +35,21 @@ const farmerTypeOptions = [
   },
 ];
 
-const FarmerTypeRadioButtons = ({ farmerType, setFarmerType }) => {
+const FarmerTypeRadioButtons = ({
+  farmerType,
+  setFarmerType
+}: any) => {
   const [focusedOption, setFocusedOption] = useState(farmerType);
   const [isPending, startTransition] = useTransition();
 
-  const handleFocusedOption = (option, farmerType) => {
+  const handleFocusedOption = (option: any, farmerType: any) => {
     startTransition(() => {
       setFocusedOption(option);
       setFarmerType(farmerType);
     });
   };
 
-  const keyExtractor = (item, index) => index.toString();
+  const keyExtractor = (item: any, index: any) => index.toString();
 
 
   return (
@@ -60,7 +67,9 @@ const FarmerTypeRadioButtons = ({ farmerType, setFarmerType }) => {
         showsHorizontalScrollIndicator={false}
         snapToInterval={86}
         decelerationRate="fast"
-        renderItem={({ item }) => {
+        renderItem={({
+          item
+        }: any) => {
           return (
             <TouchableOpacity
               style={{
@@ -106,7 +115,6 @@ const FarmerTypeRadioButtons = ({ farmerType, setFarmerType }) => {
         }}
       />
     </View>
-
   );
 };
 

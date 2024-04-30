@@ -6,18 +6,20 @@ import React, { useEffect, useState } from "react";
 import { Text, Stack, Box, Center } from "native-base";
 import { Button, Icon } from "@rneui/themed";
 import { useNavigation } from "@react-navigation/native";
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { Pressable, View, Modal, StyleSheet } from "react-native";
 import COLORS from "../../consts/colors";
 
 export default function SuccessModal({
   addDataModalVisible,
   setAddDataModalVisible,
-  setFarmerType,
-}) {
+  setFarmerType
+}: any) {
   const navigation = useNavigation();
 
   useEffect(() => {
     if (addDataModalVisible) {
+      // @ts-expect-error TS(2304): Cannot find name 'setTimeout'.
       setTimeout(() => {
         setAddDataModalVisible(false);
         setFarmerType("");
@@ -55,6 +57,7 @@ export default function SuccessModal({
             }}
           >
             <Text
+              // @ts-expect-error TS(2322): Type '{ children: string; style: { paddingVertical... Remove this comment to see the full error message
               style={{
                 paddingVertical: 10,
                 fontSize: 18,

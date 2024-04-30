@@ -1,11 +1,11 @@
 /* eslint-disable linebreak-style */
 /* eslint-disable prettier/prettier */
-export const calculateFarmlandBlockTrees = (item) => {
+export const calculateFarmlandBlockTrees = (item: any) => {
     if (!item?.blocks || item?.blocks?.length === 0) {
         return 0;
     }
     const totalTrees = item?.blocks
-        ?.map((block) => block.trees)
-        .reduce((acc, cur) => acc + cur, 0);
+        ?.map((block: any) => block.trees)
+        .reduce((acc: any, cur: any) => acc + cur, 0);
     return totalTrees;
 };

@@ -1,10 +1,10 @@
-export const getPlantingYears = (blocks) => {
+export const getPlantingYears = (blocks: any) => {
   if (blocks?.length > 0) {
     return blocks
-      ?.map((block) => {
+      ?.map((block: any) => {
         return block.plantingYear
       })
-      .join("; ")
+      .join("; ");
   } else {
     return "Desconhecido"
   }

@@ -13,6 +13,6 @@ const provinces2 = [
   { label: "Tete", value: "Tete" },
   { label: "Zambézia", value: "Zambézia" },
   { label: "País Estrangeiro", value: "País Estrangeiro" },
-]
+];
 
-export default provinces2
+export default provinces2;

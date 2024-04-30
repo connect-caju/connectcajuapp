@@ -202,9 +202,9 @@ const districtCodes = {
   //   "Muanza",
   //   "Nhamatanda",
   // // ],
-}
+};
 
-export default districtCodes
+export default districtCodes;
 
 // const adminPostCEP = {
 

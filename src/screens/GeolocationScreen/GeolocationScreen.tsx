@@ -10,6 +10,7 @@ import {
   PermissionsAndroid,
   Alert,
   Pressable,
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 } from "react-native";
 import { Stack, Box, Center } from "native-base";
 import Geolocation from "react-native-geolocation-service";
@@ -20,6 +21,7 @@ import GeoPin from "../../components/LottieComponents/GeoPin";
 import { realmContext } from "../../models/realmContext";
 import COLORS from "../../consts/colors";
 import { useFocusEffect } from "@react-navigation/native";
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { InteractionManager } from "react-native";
 import CustomActivityIndicator from "../../components/ActivityIndicator/CustomActivityIndicator";
 import { SuccessLottie } from "../../components/LottieComponents/SuccessLottie";
@@ -29,15 +31,18 @@ import { resourceValidation } from "../../consts/resourceValidation";
 import { backgroundStyle } from "../../styles/globals";
 const { useRealm, useObject, useQuery } = realmContext;
 
-const GeolocationScreen = ({ route, navigation }) => {
+const GeolocationScreen = ({
+  route,
+  navigation
+}: any) => {
   const realm = useRealm();
 
   const resourceName = route.params?.resourceName;
   const resourceId = route.params?.resourceId;
   const farmersIDs = route.params?.farmersIDs || [];
-  let resource;
-  let farmerType;
-  let ownerType; // farmland ownertype (single, group, institution)
+  let resource: any;
+  let farmerType: any;
+  let ownerType: any; // farmland ownertype (single, group, institution)
   const [areCoordinatesConfirmed, setAreCoordinatesConfirmed] = useState(false);
 
   if (resourceName === "Farmer") {
@@ -103,21 +108,25 @@ const GeolocationScreen = ({ route, navigation }) => {
         setPermissionGranted(true);
         // setConfirmGeoAlert(true);
         subscribeLocation();
+        // @ts-expect-error TS(2584): Cannot find name 'console'. Do you need to change ... Remove this comment to see the full error message
         console.log("You can use the app");
       } else {
         setPermissionGranted(false);
         setRejectGeoAlert(true);
+        // @ts-expect-error TS(2584): Cannot find name 'console'. Do you need to change ... Remove this comment to see the full error message
         console.log("Location Permission Denied");
       }
     } catch (err) {
+      // @ts-expect-error TS(2584): Cannot find name 'console'. Do you need to change ... Remove this comment to see the full error message
       console.log("not granted:", granted);
+      // @ts-expect-error TS(2584): Cannot find name 'console'. Do you need to change ... Remove this comment to see the full error message
       console.warn(err);
       setFailedGeoLocationRequest(true);
     }
   };
 
   // persist the acquired coordinates
-  const saveCoordinates = (resource, coordinates) => {
+  const saveCoordinates = (resource: any, coordinates: any) => {
     realm.write(() => {
       resource.geolocation = coordinates;
       resource.status = resourceValidation.status.pending;
@@ -125,6 +134,7 @@ const GeolocationScreen = ({ route, navigation }) => {
   };
 
   const subscribeLocation = () => {
+    // @ts-expect-error TS(2304): Cannot find name 'watchID'.
     watchID = Geolocation.watchPosition(
       (position) => {
         //Will give you the location on location change
@@ -140,6 +150,7 @@ const GeolocationScreen = ({ route, navigation }) => {
       },
       {
         enableHighAccuracy: true,
+        // @ts-expect-error TS(2559): Type 'string' has no properties in common with typ... Remove this comment to see the full error message
         accuracy: "high",
         timeout: 15000,
         maximumAge: 10000,
@@ -180,6 +191,7 @@ const GeolocationScreen = ({ route, navigation }) => {
         },
         {
           enableHighAccuracy: true,
+          // @ts-expect-error TS(2559): Type 'string' has no properties in common with typ... Remove this comment to see the full error message
           accuracy: "high",
           timeout: 15000,
           maximumAge: 10000,
@@ -228,6 +240,7 @@ const GeolocationScreen = ({ route, navigation }) => {
     // The SuccessLottie Overlay should show up for 2 seconds
     // And disappear by its own
     if (successLottieVisibile && !areCoordinatesConfirmed) {
+      // @ts-expect-error TS(2304): Cannot find name 'setTimeout'.
       setTimeout(() => {
         navigateBack();
         setSuccessLottieVisible(false);
@@ -238,6 +251,7 @@ const GeolocationScreen = ({ route, navigation }) => {
   useEffect(() => {
     requestLocationPermission();
     return () => {
+      // @ts-expect-error TS(2304): Cannot find name 'watchID'.
       Geolocation.clearWatch(watchID);
     };
   }, [navigation]);
@@ -364,6 +378,7 @@ const GeolocationScreen = ({ route, navigation }) => {
       )}
 
       <Box
+        // @ts-expect-error TS(2322): Type '{ children: Element; style: { backgroundColo... Remove this comment to see the full error message
         style={{
           backgroundColor: COLORS.fourth,
           paddingBottom: 15,
@@ -406,6 +421,7 @@ const GeolocationScreen = ({ route, navigation }) => {
       </Box>
 
       <Center
+        // @ts-expect-error TS(2322): Type '{ children: Element[]; style: { flex: number... Remove this comment to see the full error message
         style={{
           // minHeight: 300,
           flex: 1,

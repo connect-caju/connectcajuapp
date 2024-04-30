@@ -9,6 +9,7 @@ import {
   FlatList,
   TouchableOpacity,
   TextInput,
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 } from "react-native";
 import { Box, Center, Pressable, Stack } from "native-base";
 
@@ -73,7 +74,10 @@ const filterByCriteria = [
   },
 ];
 
-const FarmersListScreen = ({ route, navigation }) => {
+const FarmersListScreen = ({
+  route,
+  navigation
+}: any) => {
   const realm = useRealm();
   const user = useUser();
   let customUserData = user.customData;
@@ -87,16 +91,16 @@ const FarmersListScreen = ({ route, navigation }) => {
 
   const [focusedOption, setFocusedOption] = useState(1);
 
-  const handleFocusedOption = (option) => {
+  const handleFocusedOption = (option: any) => {
     setFocusedOption(option);
   };
 
   const farmerType = route.params?.farmerType || farmerTypes.farmer;
-  let farmersRegisteredByUser;
+  let farmersRegisteredByUser: any;
   // let farmersRegisteredByAllDistrictUsers;
   let farmlands;
   let serviceProviders;
-  let farmersIDs; // IDs to be used for swiping between farmersRegisteredByUser' screen
+  let farmersIDs: any; // IDs to be used for swiping between farmersRegisteredByUser' screen
 
   if (farmerType === farmerTypes.farmer) {
     farmersRegisteredByUser = realm
@@ -312,7 +316,7 @@ const FarmersListScreen = ({ route, navigation }) => {
   useEffect(() => {
     if (isSearching && searchQuery.length > 0) {
       setFoundFarmersList(
-        farmersRegisteredByUser.filter((item) => {
+        farmersRegisteredByUser.filter((item: any) => {
           if (farmerType?.includes(farmerTypes.farmer)) {
             return item.name?.toLowerCase()?.includes(searchQuery.toLowerCase());
           } else if (farmerType?.includes(farmerTypes.group)) {
@@ -331,12 +335,13 @@ const FarmersListScreen = ({ route, navigation }) => {
     }
   }, [isSearching, searchQuery]);
 
-  const keyExtractor = (item, index) => index.toString();
-  const keyExtractor2 = (item, index) => index.toString();
+  const keyExtractor = (item: any, index: any) => index.toString();
+  const keyExtractor2 = (item: any, index: any) => index.toString();
 
   const handleEndReached = () => {
     if (!isEndReached && !isLoading) {
       setIsLoading(true);
+      // @ts-expect-error TS(2304): Cannot find name 'setTimeout'.
       setTimeout(() => {
         setIsLoading(false);
       }, 2000);
@@ -419,6 +424,7 @@ const FarmersListScreen = ({ route, navigation }) => {
                     icon={faSearch}
                     size={25}
                     color={COLORS.black}
+                    // @ts-expect-error TS(2322): Type '{ icon: IconDefinition; size: number; color:... Remove this comment to see the full error message
                     fade
                   />
                 </TouchableOpacity>
@@ -438,6 +444,7 @@ const FarmersListScreen = ({ route, navigation }) => {
                     icon={faEllipsisVertical}
                     size={25}
                     color={COLORS.black}
+                    // @ts-expect-error TS(2322): Type '{ icon: IconDefinition; size: number; color:... Remove this comment to see the full error message
                     fade
                   />
                 </TouchableOpacity>
@@ -449,6 +456,7 @@ const FarmersListScreen = ({ route, navigation }) => {
           <Stack direction="row" w="100%">
             <Center w="10%">
               <Pressable
+                // @ts-expect-error TS(2322): Type '{ children: Element; onPress: () => void; st... Remove this comment to see the full error message
                 onPress={() => {
                   if (isSearching) {
                     setIsSearching(false);
@@ -472,6 +480,7 @@ const FarmersListScreen = ({ route, navigation }) => {
             </Center>
             <Box
               w="90%"
+              // @ts-expect-error TS(2322): Type '{ children: Element; w: "90%"; style: { alig... Remove this comment to see the full error message
               style={{
                 alignItems: "center",
                 justifyContent: "center",
@@ -498,7 +507,7 @@ const FarmersListScreen = ({ route, navigation }) => {
                 }}
                 onEndEditing={() => {
                 }}
-                onChangeText={(text) => setSearchQuery(text)}
+                onChangeText={(text: any) => setSearchQuery(text)}
               />
             </Box>
           </Stack>
@@ -520,7 +529,9 @@ const FarmersListScreen = ({ route, navigation }) => {
               // ListHeaderComponent={<View style={{ width: 6, }} />}
               snapToInterval={86}
               decelerationRate="fast"
-              renderItem={({ item }) => {
+              renderItem={({
+                item
+              }: any) => {
                 return (
                   <TouchableOpacity
                     style={{
@@ -568,6 +579,7 @@ const FarmersListScreen = ({ route, navigation }) => {
         <Box
           alignItems="stretch"
           w="100%"
+          // @ts-expect-error TS(2322): Type '{ children: Element; alignItems: "stretch"; ... Remove this comment to see the full error message
           style={{
             marginVertical: 7,
             // marginTop: 10,
@@ -576,6 +588,7 @@ const FarmersListScreen = ({ route, navigation }) => {
           <FlatList
             StickyHeaderComponent={() => (
               <Box
+                // @ts-expect-error TS(2322): Type '{ children: never[]; style: { height: number... Remove this comment to see the full error message
                 style={{
                   height: hp("10%"),
                   justifyContent: "center",
@@ -590,7 +603,10 @@ const FarmersListScreen = ({ route, navigation }) => {
             keyExtractor={keyExtractor}
             onEndReached={handleEndReached}
             onEndReachedThreshold={0.1}
-            renderItem={({ item }) => {
+            // @ts-expect-error TS(7030): Not all code paths return a value.
+            renderItem={({
+              item
+            }: any) => {
               // add all the IDs to each item to allow swiping between screens...
               // when the user open any item from the list
               item.farmersIDs = farmersIDs;
@@ -613,6 +629,7 @@ const FarmersListScreen = ({ route, navigation }) => {
               if (!isEndReached) {
                 return (
                   <Box
+                    // @ts-expect-error TS(2322): Type '{ style: { backgroundColor: string; paddingB... Remove this comment to see the full error message
                     style={{
                       // height: 10,
                       backgroundColor: COLORS.ghostwhite,
@@ -631,6 +648,7 @@ const FarmersListScreen = ({ route, navigation }) => {
           <Box
             alignItems="stretch"
             w="100%"
+            // @ts-expect-error TS(2322): Type '{ children: Element; alignItems: "stretch"; ... Remove this comment to see the full error message
             style={{
               marginVertical: 7,
               // marginTop: 10,
@@ -639,6 +657,7 @@ const FarmersListScreen = ({ route, navigation }) => {
             <FlatList
               StickyHeaderComponent={() => (
                 <Box
+                  // @ts-expect-error TS(2322): Type '{ children: never[]; style: { height: number... Remove this comment to see the full error message
                   style={{
                     height: hp("10%"),
                     justifyContent: "center",
@@ -653,7 +672,10 @@ const FarmersListScreen = ({ route, navigation }) => {
               keyExtractor={keyExtractor}
               onEndReached={handleEndReached}
               onEndReachedThreshold={0.1}
-              renderItem={({ item }) => {
+              // @ts-expect-error TS(7030): Not all code paths return a value.
+              renderItem={({
+                item
+              }: any) => {
                 if (item.flag === farmerTypes.group) {
                   return <GroupItem route={route} item={item} />;
                 } else if (item.flag === farmerTypes.farmer) {
@@ -672,6 +694,7 @@ const FarmersListScreen = ({ route, navigation }) => {
                 if (!isEndReached) {
                   return (
                     <Box
+                      // @ts-expect-error TS(2322): Type '{ style: { backgroundColor: string; paddingB... Remove this comment to see the full error message
                       style={{
                         // height: 10,
                         backgroundColor: COLORS.ghostwhite,
@@ -687,6 +710,7 @@ const FarmersListScreen = ({ route, navigation }) => {
           </Box>
         ) : (
           <Box
+            // @ts-expect-error TS(2322): Type '{ children: Element; style: { justifyContent... Remove this comment to see the full error message
             style={{
               justifyContent: "center",
               alignItems: "center",
@@ -716,6 +740,7 @@ const FarmersListScreen = ({ route, navigation }) => {
 
       {foundFarmersList.length === 0 && searchQuery.length > 0 && (
         <Box
+          // @ts-expect-error TS(2322): Type '{ children: Element; style: { justifyContent... Remove this comment to see the full error message
           style={{
             justifyContent: "center",
             alignItems: "center",

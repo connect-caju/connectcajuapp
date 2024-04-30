@@ -1,7 +1,8 @@
 /* eslint-disable prettier/prettier */
 
-import { StyleSheet } from "react-native"
-import COLORS from "../../consts/colors"
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
+import { StyleSheet } from "react-native";
+import COLORS from "../../consts/colors";
 import {
   responsiveFontSize,
   responsiveScreenFontSize,
@@ -10,7 +11,7 @@ import {
   responsiveScreenHeight,
   responsiveScreenWidth,
   useDimensionsChange,
-} from "react-native-responsive-dimensions"
+} from "react-native-responsive-dimensions";
 
 const styles = StyleSheet.create({
   // SignInScreen
@@ -76,6 +77,6 @@ const styles = StyleSheet.create({
       },
     ],
   },
-})
+});
 
-export default styles
+export default styles;

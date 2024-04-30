@@ -17,4 +17,4 @@ export const UserStat = {
     modifiedAt: { type: "date", default: () => new Date() },
     createdAt: { type: "date", default: () => new Date() },
   },
-}
+};

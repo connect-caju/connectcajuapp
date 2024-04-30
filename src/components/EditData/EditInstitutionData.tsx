@@ -6,6 +6,7 @@ import {
   ScrollView,
   TextInput,
   View,
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 } from "react-native";
 import { Overlay, Icon, Button, CheckBox } from "@rneui/base";
 import {
@@ -40,13 +41,11 @@ const EditInstitutionData = ({
   setIsOverlayVisible,
   setIsConfirmDataVisible,
   farmerId,
-
   resourceName,
   dataToBeUpdated,
-
   setNewDataObject,
-  setOldDataObject,
-}) => {
+  setOldDataObject
+}: any) => {
   const realm = useRealm();
   const user = useUser();
   const customUserData = user?.customData;
@@ -77,11 +76,15 @@ const EditInstitutionData = ({
       dataToBeUpdated === "institutionDocument" &&
       resourceName === "Institution"
     ) {
+      // @ts-expect-error TS(2339): Property 'nuit' does not exist on type 'Object<unk... Remove this comment to see the full error message
       setInstitutionNuit(farmer?.nuit);
+      // @ts-expect-error TS(2339): Property 'licence' does not exist on type 'Object<... Remove this comment to see the full error message
       setInstitutionLicence(farmer?.licence);
       setOverlayTitle("Actualizar Documentação.");
 
+      // @ts-expect-error TS(2339): Property 'nuit' does not exist on type 'Object<unk... Remove this comment to see the full error message
       setOldInstitutionNuit(farmer?.nuit);
+      // @ts-expect-error TS(2339): Property 'licence' does not exist on type 'Object<... Remove this comment to see the full error message
       setOldInstitutionLicence(farmer?.licence);
     }
 
@@ -89,16 +92,20 @@ const EditInstitutionData = ({
       dataToBeUpdated === "institutionManager" &&
       resourceName === "Institution"
     ) {
+      // @ts-expect-error TS(2339): Property 'manager' does not exist on type 'Object<... Remove this comment to see the full error message
       setInstitutionManagerName(farmer?.manager.fullname);
+      // @ts-expect-error TS(2339): Property 'manager' does not exist on type 'Object<... Remove this comment to see the full error message
       setInstitutionManagerPhone(farmer?.manager.phone);
       setOverlayTitle("Actualizar Contacto.");
 
+      // @ts-expect-error TS(2339): Property 'manager' does not exist on type 'Object<... Remove this comment to see the full error message
       setOldInstitutionManagerName(farmer?.manager.fullname);
+      // @ts-expect-error TS(2339): Property 'manager' does not exist on type 'Object<... Remove this comment to see the full error message
       setOldInstitutionManagerPhone(farmer?.manager.phone);
     }
   }, [dataToBeUpdated, resourceName]);
 
-  const onConfirmUpdate = (dataToBeUpdated, resourceName) => {
+  const onConfirmUpdate = (dataToBeUpdated: any, resourceName: any) => {
     const validatedData = validateInstitutionEditedData(
       {
         institutionNuit,
@@ -124,11 +131,15 @@ const EditInstitutionData = ({
       resourceName === "Institution"
     ) {
       //  new incoming data
+      // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       newData["nuit"] = validatedData?.nuit;
+      // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       newData["licence"] = validatedData?.licence;
 
       // old data
+      // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       oldData["nuit"] = oldInstitutionNuit;
+      // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       oldData["licence"] = oldInstitutionLicence;
 
       setNewDataObject(newData);
@@ -140,17 +151,21 @@ const EditInstitutionData = ({
       resourceName === "Institution"
     ) {
       // new incoming data
+      // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       newData["fullname"] = validatedData?.fullname
         ? validatedData?.fullname?.trim()
         : "";
+      // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       newData["phone"] = validatedData?.phone
         ? Number(parseInt(validatedData?.phone))
         : 0;
 
       // old data
+      // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       oldData["fullname"] = oldInstitutionManagerName
         ? oldInstitutionManagerName?.trim()
         : "";
+      // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       oldData["phone"] = oldInstitutionManagerPhone
         ? Number(parseInt(oldInstitutionManagerPhone))
         : 0;
@@ -181,6 +196,7 @@ const EditInstitutionData = ({
         setIsOverlayVisible(false);
       }}
       onModalHide={() => {
+        // @ts-expect-error TS(2304): Cannot find name 'isConfirmButtonPressed'.
         if (isConfirmButtonPressed) {
           setIsConfirmDataVisible(true);
         }
@@ -262,7 +278,7 @@ const EditInstitutionData = ({
                         autoCapitalize="words"
                         placeholder="Nome completo do representante"
                         value={institutionManagerName}
-                        onChangeText={(newManagerName) => {
+                        onChangeText={(newManagerName: any) => {
                           setErrors((prev) => ({
                             ...prev,
                             institutionManagerName: "",
@@ -277,6 +293,7 @@ const EditInstitutionData = ({
                           }
                           _text={{ fontSize: "xs" }}
                         >
+                          // @ts-expect-error TS(2339): Property 'institutionManagerName' does not exist o... Remove this comment to see the full error message
                           {errors?.institutionManagerName}
                         </FormControl.ErrorMessage>
                       ) : (
@@ -298,10 +315,11 @@ const EditInstitutionData = ({
                         }
                         keyboardType="numeric"
                         value={
+                          // @ts-expect-error TS(2367): This condition will always return 'true' since the... Remove this comment to see the full error message
                           institutionManagerPhone !== 0 &&
                           institutionManagerPhone?.toString()
                         }
-                        onChangeText={(newManagerPhone) => {
+                        onChangeText={(newManagerPhone: any) => {
                           setErrors((prev) => ({
                             ...prev,
                             institutionManagerPhone: "",
@@ -324,6 +342,7 @@ const EditInstitutionData = ({
                           }
                           _text={{ fontSize: "xs" }}
                         >
+                          // @ts-expect-error TS(2339): Property 'institutionManagerPhone' does not exist ... Remove this comment to see the full error message
                           {errors?.institutionManagerPhone}
                         </FormControl.ErrorMessage>
                       ) : (
@@ -352,7 +371,7 @@ const EditInstitutionData = ({
                         }
                         value={institutionNuit}
                         keyboardType="numeric"
-                        onChangeText={(newNuit) => {
+                        onChangeText={(newNuit: any) => {
                           setErrors((prev) => ({
                             ...prev,
                             institutionNuit: "",
@@ -367,6 +386,7 @@ const EditInstitutionData = ({
                           }
                           _text={{ fontSize: "xs" }}
                         >
+                          // @ts-expect-error TS(2339): Property 'institutionNuit' does not exist on type ... Remove this comment to see the full error message
                           {errors?.institutionNuit}
                         </FormControl.ErrorMessage>
                       ) : (
@@ -388,7 +408,7 @@ const EditInstitutionData = ({
                         }
                         // keyboardType="numeric"
                         value={institutionLicence?.toString()}
-                        onChangeText={(newLicence) => {
+                        onChangeText={(newLicence: any) => {
                           setErrors((prev) => ({
                             ...prev,
                             institutionLicence: "",
@@ -403,6 +423,7 @@ const EditInstitutionData = ({
                           }
                           _text={{ fontSize: "xs" }}
                         >
+                          // @ts-expect-error TS(2339): Property 'institutionLicence' does not exist on ty... Remove this comment to see the full error message
                           {errors?.institutionLicence}
                         </FormControl.ErrorMessage>
                       ) : (
@@ -428,6 +449,7 @@ const EditInstitutionData = ({
                 // color: COLORS.ghostwhite,
               }}
               type="outline"
+              // @ts-expect-error TS(2322): Type '{ title: string; titleStyle: { color: string... Remove this comment to see the full error message
               onPress={() => {
                 if (
                   !validateInstitutionEditedData(

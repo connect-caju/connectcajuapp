@@ -3,11 +3,13 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { Text, Stack, Box, Center, Divider } from "native-base";
 import { Button, Icon } from "@rneui/themed";
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { Modal, ScrollView, TouchableOpacity } from "react-native";
 import CustomDivider from "../Divider/CustomDivider";
 import styles from "./styles";
 
 import "react-native-get-random-values";
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'uuid... Remove this comment to see the full error message
 import { v4 as uuidv4 } from "uuid";
 import Realm from "realm";
 
@@ -26,23 +28,23 @@ export default function FarmlandModal({
   modalVisible,
   setModalVisible,
   farmlandData,
-
   setPlantingYear,
   setDescription,
   setConsociatedCrops,
   setClones,
   setTrees,
+
   // setDeclaredArea,
   setUsedArea,
+
   setTotalArea,
   setDensityLength,
   setDensityWidth,
   setPlantTypes,
   setDensityMode,
-
   setFarmlandId,
-  setIsCoordinatesModalVisible,
-}) {
+  setIsCoordinatesModalVisible
+}: any) {
   const navigation = useNavigation();
   const realm = useRealm();
   const user = useUser();
@@ -55,7 +57,8 @@ export default function FarmlandModal({
   )[0];
 
   const onAddFarmland = useCallback(
-    (farmlandData, realm) => {
+    // @ts-expect-error TS(7030): Not all code paths return a value.
+    (farmlandData: any, realm: any) => {
       const {
         plantingYear,
         description,
@@ -77,7 +80,7 @@ export default function FarmlandModal({
         };
       }
 
-      let owner;
+      let owner: any;
       if (flag === "Indivíduo") {
         owner = realm.objectForPrimaryKey("Farmer", ownerId);
       } else if (flag === "Grupo") {
@@ -121,7 +124,7 @@ export default function FarmlandModal({
         .objects("Farmland")
         .filtered("farmer == $0", owner._id);
       realm.write(() => {
-        owner.farmlands = ownerFarmlands?.map((farmland) => farmland._id);
+        owner.farmlands = ownerFarmlands?.map((farmland: any) => farmland._id);
         if (flag === "Indivíduo") {
           // categorize by 'comercial' | 'familiar' | 'nao-categorizado'
           owner.category = categorizeFarmer(ownerFarmlands);
@@ -131,7 +134,9 @@ export default function FarmlandModal({
       // update user stat (1 more farmland registered by the user)
       if (currentUserStat) {
         realm.write(() => {
+          // @ts-expect-error TS(2339): Property 'registeredFarmlands' does not exist on t... Remove this comment to see the full error message
           currentUserStat.registeredFarmlands =
+            // @ts-expect-error TS(2339): Property 'registeredFarmlands' does not exist on t... Remove this comment to see the full error message
             currentUserStat.registeredFarmlands + 1;
         });
       } else {
@@ -155,222 +160,243 @@ export default function FarmlandModal({
 
   // }, realm, farmlandData, owner)
 
-  return (
-    <>
-      <Modal
-        visible={modalVisible}
-        onRequestClose={() => setModalVisible(false)}
-        animationType="slide"
+  return <>
+    <Modal
+      visible={modalVisible}
+      onRequestClose={() => setModalVisible(false)}
+      animationType="slide"
+    >
+      <Stack
+        direction="row"
+        w="100%"
+        // pt="3"
+        bg={COLORS.fourth}
       >
-        <Stack
-          direction="row"
-          w="100%"
-          // pt="3"
-          bg={COLORS.fourth}
-        >
-          <Box w="20%">
-            <TouchableOpacity
-              onPress={() => {
-                // navigation.goBack();
-                setModalVisible(false);
-              }}
-            >
-              <Icon name="arrow-back-ios" color={COLORS.second} size={30} />
-            </TouchableOpacity>
-          </Box>
-          <Box w="60%"></Box>
-          <Box w="20%">
-            <Icon
-              name="close"
-              size={35}
-              color={COLORS.grey}
-              onPress={() => setModalVisible(false)}
-            />
-          </Box>
-        </Stack>
-        <ScrollView
-          contentContainerStyle={{
-            flex: 1,
-            justifyContent: "center",
-            minHeight: "100%",
-            paddingVertical: 15,
-          }}
-        >
-          <Center
-            style={{
-              paddingBottom: 5,
-              paddingTop: 10,
-              width: "100%",
-              // backgroundColor: '#EBEBE4',
+        <Box w="20%">
+          <TouchableOpacity
+            onPress={() => {
+              // navigation.goBack();
+              setModalVisible(false);
             }}
           >
-            <Text
-              style={{
-                fontFamily: "JosefinSans-Bold",
-                fontSize: 24,
-                fontWeigth: "bold",
-                color: COLORS.black,
-                paddingTop: 15,
-              }}
-            >
-              Confirmar Dados
-            </Text>
-          </Center>
+            <Icon name="arrow-back-ios" color={COLORS.second} size={30} />
+          </TouchableOpacity>
+        </Box>
+        <Box w="60%"></Box>
+        <Box w="20%">
+          <Icon
+            name="close"
+            size={35}
+            color={COLORS.grey}
+            onPress={() => setModalVisible(false)}
+          />
+        </Box>
+      </Stack>
+      <ScrollView
+        contentContainerStyle={{
+          flex: 1,
+          justifyContent: "center",
+          minHeight: "100%",
+          paddingVertical: 15,
+        }}
+      >
+        <Center
+          // @ts-expect-error TS(2322): Type '{ children: Element; style: { paddingBottom:... Remove this comment to see the full error message
+          style={{
+            paddingBottom: 5,
+            paddingTop: 10,
+            width: "100%",
+            // backgroundColor: '#EBEBE4',
+          }}
+        >
+          <Text
+            // @ts-expect-error TS(2322): Type '{ children: string; style: { fontFamily: str... Remove this comment to see the full error message
+            style={{
+              fontFamily: "JosefinSans-Bold",
+              fontSize: 24,
+              fontWeigth: "bold",
+              color: COLORS.black,
+              paddingTop: 15,
+            }}
+          >
+            Confirmar Dados
+          </Text>
+        </Center>
 
-          <Box mx="6" mt="5">
-            <CustomDivider marginVertical="1" thickness={1} bg="grey" />
-            <Stack direction="row" w="100%" my="1">
-              <Box w="40%">
-                <Text style={styles.keys}>Pomar:</Text>
-              </Box>
-              <Box w="60%" style={styles.values}>
-                <Text style={styles.values}>{farmlandData?.description}</Text>
-              </Box>
-            </Stack>
-            <CustomDivider marginVertical="1" thickness={1} bg="grey" />
-            <Stack direction="row" w="100%" my="1">
-              <Box w="40%">
-                <Text style={styles.keys}>Ano de plantio:</Text>
-              </Box>
-              <Box w="60%" style={styles.values}>
-                <Text style={styles.values}>
-                  {farmlandData?.plantingYear} (ano)
-                </Text>
-              </Box>
-            </Stack>
-            <CustomDivider marginVertical="1" thickness={1} bg="grey" />
-            <Stack direction="row" w="100%" my="1">
-              <Box w="40%">
-                <Text style={styles.keys}>Culturas consociadas:</Text>
-              </Box>
-              <Box w="60%" style={styles.values}>
-                {farmlandData?.consociatedCrops?.length > 0 &&
-                  farmlandData?.consociatedCrops?.map((crop) => {
-                    return (
-                      <Text key={crop} style={styles.values}>
-                        {crop}
-                      </Text>
-                    );
-                  })}
-              </Box>
-            </Stack>
-            <CustomDivider marginVertical="1" thickness={1} bg="grey" />
-            <Stack direction="row" w="100%" my="1">
-              <Box w="40%">
-                <Text style={styles.keys}>Cajueiros:</Text>
-              </Box>
-              <Box w="60%" style={styles.values}>
-                <Text style={styles.values}>{farmlandData?.trees} árvores</Text>
-              </Box>
-            </Stack>
-            <CustomDivider marginVertical="1" thickness={1} bg="grey" />
+        <Box mx="6" mt="5">
+          <CustomDivider marginVertical="1" thickness={1} bg="grey" />
+          <Stack direction="row" w="100%" my="1">
+            <Box w="40%">
+              // @ts-expect-error TS(2322): Type '{ children: string; style: any; }' is not as... Remove this comment to see the full error message
+              <Text style={styles.keys}>Pomar:</Text>
+            </Box>
+            // @ts-expect-error TS(2322): Type '{ children: Element; w: "60%"; style: any; }... Remove this comment to see the full error message
+            <Box w="60%" style={styles.values}>
+              // @ts-expect-error TS(2322): Type '{ children: any; style: any; }' is not assig... Remove this comment to see the full error message
+              <Text style={styles.values}>{farmlandData?.description}</Text>
+            </Box>
+          </Stack>
+          <CustomDivider marginVertical="1" thickness={1} bg="grey" />
+          <Stack direction="row" w="100%" my="1">
+            <Box w="40%">
+              // @ts-expect-error TS(2322): Type '{ children: string; style: any; }' is not as... Remove this comment to see the full error message
+              <Text style={styles.keys}>Ano de plantio:</Text>
+            </Box>
+            // @ts-expect-error TS(2322): Type '{ children: Element; w: "60%"; style: any; }... Remove this comment to see the full error message
+            <Box w="60%" style={styles.values}>
+              // @ts-expect-error TS(2322): Type '{ children: any[]; style: any; }' is not ass... Remove this comment to see the full error message
+              <Text style={styles.values}>
+                {farmlandData?.plantingYear} (ano)
+              </Text>
+            </Box>
+          </Stack>
+          <CustomDivider marginVertical="1" thickness={1} bg="grey" />
+          <Stack direction="row" w="100%" my="1">
+            <Box w="40%">
+              // @ts-expect-error TS(2322): Type '{ children: string; style: any; }' is not as... Remove this comment to see the full error message
+              <Text style={styles.keys}>Culturas consociadas:</Text>
+            </Box>
+            // @ts-expect-error TS(2322): Type '{ children: any; w: "60%"; style: any; }' is... Remove this comment to see the full error message
+            <Box w="60%" style={styles.values}>
+              {farmlandData?.consociatedCrops?.length > 0 &&
+                farmlandData?.consociatedCrops?.map((crop: any) => {
+                  return (
+                    // @ts-expect-error TS(2322): Type '{ children: any; key: any; style: any; }' is... Remove this comment to see the full error message
+                    <Text key={crop} style={styles.values}>
+                      {crop}
+                    </Text>
+                  );
+                })}
+            </Box>
+          </Stack>
+          <CustomDivider marginVertical="1" thickness={1} bg="grey" />
+          <Stack direction="row" w="100%" my="1">
+            <Box w="40%">
+              // @ts-expect-error TS(2322): Type '{ children: string; style: any; }' is not as... Remove this comment to see the full error message
+              <Text style={styles.keys}>Cajueiros:</Text>
+            </Box>
+            // @ts-expect-error TS(2322): Type '{ children: Element; w: "60%"; style: any; }... Remove this comment to see the full error message
+            <Box w="60%" style={styles.values}>
+              // @ts-expect-error TS(2322): Type '{ children: any[]; style: any; }' is not ass... Remove this comment to see the full error message
+              <Text style={styles.values}>{farmlandData?.trees} árvores</Text>
+            </Box>
+          </Stack>
+          <CustomDivider marginVertical="1" thickness={1} bg="grey" />
 
-            <Stack direction="row" w="100%" my="1">
-              <Box w="40%">
-                <Text style={styles.keys}>Área:</Text>
-              </Box>
-              <Box w="60%" style={styles.values}>
-                <Text style={styles.values}>
-                  {farmlandData?.totalArea} hectares (total)
-                </Text>
-                <Text style={styles.values}>
-                  {farmlandData?.usedArea} hectares (aproveitada)
-                </Text>
-              </Box>
-            </Stack>
-            <CustomDivider marginVertical="1" thickness={1} bg="grey" />
+          <Stack direction="row" w="100%" my="1">
+            <Box w="40%">
+              // @ts-expect-error TS(2322): Type '{ children: string; style: any; }' is not as... Remove this comment to see the full error message
+              <Text style={styles.keys}>Área:</Text>
+            </Box>
+            // @ts-expect-error TS(2322): Type '{ children: Element[]; w: "60%"; style: any;... Remove this comment to see the full error message
+            <Box w="60%" style={styles.values}>
+              // @ts-expect-error TS(2322): Type '{ children: any[]; style: any; }' is not ass... Remove this comment to see the full error message
+              <Text style={styles.values}>
+                {farmlandData?.totalArea} hectares (total)
+              </Text>
+              // @ts-expect-error TS(2322): Type '{ children: any[]; style: any; }' is not ass... Remove this comment to see the full error message
+              <Text style={styles.values}>
+                {farmlandData?.usedArea} hectares (aproveitada)
+              </Text>
+            </Box>
+          </Stack>
+          <CustomDivider marginVertical="1" thickness={1} bg="grey" />
 
-            <Stack direction="row" w="100%" my="1">
-              <Box w="40%">
-                <Text style={styles.keys}>Compasso:</Text>
+          <Stack direction="row" w="100%" my="1">
+            <Box w="40%">
+              // @ts-expect-error TS(2322): Type '{ children: string; style: any; }' is not as... Remove this comment to see the full error message
+              <Text style={styles.keys}>Compasso:</Text>
+            </Box>
+            <Box w="60%">
+              <Box>
+                // @ts-expect-error TS(2322): Type '{ children: any; style: any; }' is not assig... Remove this comment to see the full error message
+                <Text style={styles.values}>
+                  {farmlandData?.density?.mode}
+                </Text>
+                {farmlandData?.density?.mode === "Regular" && (
+                  <>
+                    // @ts-expect-error TS(2322): Type '{ children: string; style: any; }' is not as... Remove this comment to see the full error message
+                    <Text style={styles.values}>
+                      {farmlandData?.density?.length + " (comprimento)"}
+                    </Text>
+                    // @ts-expect-error TS(2322): Type '{ children: string; style: any; }' is not as... Remove this comment to see the full error message
+                    <Text style={styles.values}>
+                      {farmlandData?.density?.width + " (largura)"}
+                    </Text>
+                  </>
+                )}
               </Box>
-              <Box w="60%">
-                <Box>
-                  <Text style={styles.values}>
-                    {farmlandData?.density?.mode}
-                  </Text>
-                  {farmlandData?.density?.mode === "Regular" && (
-                    <>
-                      <Text style={styles.values}>
-                        {farmlandData?.density?.length + " (comprimento)"}
-                      </Text>
-                      <Text style={styles.values}>
-                        {farmlandData?.density?.width + " (largura)"}
-                      </Text>
-                    </>
+            </Box>
+          </Stack>
+          <CustomDivider marginVertical="1" thickness={1} bg="grey" />
+          <Stack direction="row" w="100%" my="1">
+            <Box w="40%">
+              // @ts-expect-error TS(2322): Type '{ children: string; style: any; }' is not as... Remove this comment to see the full error message
+              <Text style={styles.keys}>Tipo de plantas:</Text>
+            </Box>
+            <Box w="60%">
+              <Box>
+                // @ts-expect-error TS(2322): Type '{ children: any; style: any; }' is not assig... Remove this comment to see the full error message
+                <Box style={styles.values}>
+                  // @ts-expect-error TS(2322): Type '{ children: any; key: any; style: any; }' is... Remove this comment to see the full error message
+                  {farmlandData.plantTypes?.plantType?.map((p: any) => <Text key={p} style={styles.values}>
+                    {p}
+                  </Text>)}
+                </Box>
+                {farmlandData.plantTypes?.plantType?.some((el: any) => el.includes("enxer"),
+                ) && (
+                    <Box>
+                      {farmlandData.plantTypes?.clones?.map((clone: any) => <Text
+                        key={clone}
+                        // @ts-expect-error TS(2322): Type '{ children: any[]; key: any; style: any[]; }... Remove this comment to see the full error message
+                        style={[styles.values, { paddingLeft: 10 }]}
+                      >
+                        - {clone}
+                      </Text>)}
+                    </Box>
                   )}
-                </Box>
               </Box>
-            </Stack>
-            <CustomDivider marginVertical="1" thickness={1} bg="grey" />
-            <Stack direction="row" w="100%" my="1">
-              <Box w="40%">
-                <Text style={styles.keys}>Tipo de plantas:</Text>
-              </Box>
-              <Box w="60%">
-                <Box>
-                  <Box style={styles.values}>
-                    {farmlandData.plantTypes?.plantType?.map((p) => (
-                      <Text key={p} style={styles.values}>
-                        {p}
-                      </Text>
-                    ))}
-                  </Box>
-                  {farmlandData.plantTypes?.plantType?.some((el) =>
-                    el.includes("enxer"),
-                  ) && (
-                      <Box>
-                        {farmlandData.plantTypes?.clones?.map((clone) => (
-                          <Text
-                            key={clone}
-                            style={[styles.values, { paddingLeft: 10 }]}
-                          >
-                            - {clone}
-                          </Text>
-                        ))}
-                      </Box>
-                    )}
-                </Box>
-              </Box>
-            </Stack>
-            <CustomDivider marginVertical="1" thickness={1} bg="grey" />
-            <Center w="100%">
-              <Button
-                onPress={() => {
-                  try {
-                    onAddFarmland(farmlandData, realm);
-                    setModalVisible(false);
-                    setIsCoordinatesModalVisible(true);
-                  } catch (error) {
-                    throw new Error("Failed to register Farmland", {
-                      cause: error,
-                    });
-                  } finally {
-                    setPlantingYear("");
-                    setDescription("");
-                    setConsociatedCrops([]);
-                    setClones([]);
-                    setTrees("");
-                    setUsedArea("");
-                    setTotalArea("");
-                    setDensityLength("");
-                    setDensityWidth("");
-                    setPlantTypes([]);
-                    setDensityMode("");
-                  }
-                }}
-                type="outline"
-                title="Salvar Dados"
-                containerStyle={{
-                  width: "100%",
-                }}
-              />
-            </Center>
-          </Box>
-        </ScrollView>
-      </Modal>
-    </>
-  );
+            </Box>
+          </Stack>
+          <CustomDivider marginVertical="1" thickness={1} bg="grey" />
+          <Center w="100%">
+            <Button
+              // @ts-expect-error TS(2322): Type '{ onPress: () => void; type: "outline"; titl... Remove this comment to see the full error message
+              onPress={() => {
+                try {
+                  onAddFarmland(farmlandData, realm);
+                  setModalVisible(false);
+                  setIsCoordinatesModalVisible(true);
+                } catch (error) {
+                  throw new Error("Failed to register Farmland", {
+                    // @ts-expect-error TS(2322): Type 'unknown' is not assignable to type 'Error | ... Remove this comment to see the full error message
+                    cause: error,
+                  });
+                } finally {
+                  setPlantingYear("");
+                  setDescription("");
+                  setConsociatedCrops([]);
+                  setClones([]);
+                  setTrees("");
+                  setUsedArea("");
+                  setTotalArea("");
+                  setDensityLength("");
+                  setDensityWidth("");
+                  setPlantTypes([]);
+                  setDensityMode("");
+                }
+              }}
+              type="outline"
+              title="Salvar Dados"
+              containerStyle={{
+                width: "100%",
+              }}
+            />
+          </Center>
+        </Box>
+      </ScrollView>
+    </Modal>
+  </>;
 }
 
 // export default FarmlandModal;

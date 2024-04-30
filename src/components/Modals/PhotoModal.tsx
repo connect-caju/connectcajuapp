@@ -15,6 +15,7 @@ import {
   Image,
   Linking,
   StyleSheet,
+// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 } from "react-native"
 import { launchCamera, launchImageLibrary } from "react-native-image-picker"
 import { Camera, useCameraDevices } from "react-native-vision-camera"
@@ -35,8 +36,8 @@ function PhotoModal({
   userRole,
   setLoadingActivityIndicator,
   loadingActivitiyIndicator,
-  launchNativeImageLibrary,
-}) {
+  launchNativeImageLibrary
+}: any) {
   const navigation = useNavigation()
   const user = useUser()
   const customUserData = user?.customData
@@ -54,16 +55,21 @@ function PhotoModal({
         path: "images",
       },
     }
+    // @ts-expect-error TS(2345): Argument of type '{ includeBase64: boolean; storag... Remove this comment to see the full error message
     launchCamera(options, (response) => {
       //   console.log('Response = ', response);
 
       if (response.didCancel) {
+        // @ts-expect-error TS(2584): Cannot find name 'console'. Do you need to change ... Remove this comment to see the full error message
         console.log("User cancelled image picker")
       } else if (response.errorCode) {
+        // @ts-expect-error TS(2584): Cannot find name 'console'. Do you need to change ... Remove this comment to see the full error message
         console.log("ImagePicker Error: ", response.errorMessage)
       } else {
+        // @ts-expect-error TS(2339): Property 'uri' does not exist on type 'ImagePicker... Remove this comment to see the full error message
         const source = { uri: response.uri }
         const imageString =
+          // @ts-expect-error TS(2532): Object is possibly 'undefined'.
           "data:image/jpeg;base64," + response.assets[0].base64
 
         if (photoOwnerType !== "Usuário") {
@@ -77,14 +83,17 @@ function PhotoModal({
         setIsPhotoModalVisible(false)
 
         if (photoOwnerType === "Grupo") {
+          // @ts-expect-error TS(2345): Argument of type 'string' is not assignable to par... Remove this comment to see the full error message
           navigation.navigate("Group", {
             ownerId: photoOwner?._id,
           })
         } else if (photoOwnerType === "Indivíduo") {
+          // @ts-expect-error TS(2345): Argument of type 'string' is not assignable to par... Remove this comment to see the full error message
           navigation.navigate("Farmer", {
             ownerId: photoOwner?._id,
           })
         } else if (photoOwnerType === "Instituição") {
+          // @ts-expect-error TS(2345): Argument of type 'string' is not assignable to par... Remove this comment to see the full error message
           navigation.navigate("Institution", {
             ownerId: photoOwner?._id,
           })
@@ -97,20 +106,23 @@ function PhotoModal({
   }
 
   const deletePhoto = useCallback(
-    (photoOwner, realm) => {
+    (photoOwner: any, realm: any) => {
       realm.write(() => {
         photoOwner.image = ""
       })
 
       if (photoOwnerType === "Grupo") {
+        // @ts-expect-error TS(2345): Argument of type 'string' is not assignable to par... Remove this comment to see the full error message
         navigation.navigate("Group", {
           ownerId: photoOwner?._id,
         })
       } else if (photoOwnerType === "Indivíduo") {
+        // @ts-expect-error TS(2345): Argument of type 'string' is not assignable to par... Remove this comment to see the full error message
         navigation.navigate("Farmer", {
           ownerId: photoOwner?._id,
         })
       } else if (photoOwnerType === "Instituição") {
+        // @ts-expect-error TS(2345): Argument of type 'string' is not assignable to par... Remove this comment to see the full error message
         navigation.navigate("Institution", {
           ownerId: photoOwner?._id,
         })
@@ -204,6 +216,7 @@ function PhotoModal({
         }}
       >
         <Box
+          // @ts-expect-error TS(2322): Type '{ children: Element; style: { position: stri... Remove this comment to see the full error message
           style={{
             position: "absolute",
             top: -20,
@@ -216,14 +229,17 @@ function PhotoModal({
             onPress={() => {
               setIsPhotoModalVisible(false)
               if (photoOwnerType === "Grupo") {
+                // @ts-expect-error TS(2345): Argument of type 'string' is not assignable to par... Remove this comment to see the full error message
                 navigation.navigate("Group", {
                   ownerId: photoOwner?._id,
                 })
               } else if (photoOwnerType === "Indivíduo") {
+                // @ts-expect-error TS(2345): Argument of type 'string' is not assignable to par... Remove this comment to see the full error message
                 navigation.navigate("Farmer", {
                   ownerId: photoOwner?._id,
                 })
               } else if (photoOwnerType === "Instituição") {
+                // @ts-expect-error TS(2345): Argument of type 'string' is not assignable to par... Remove this comment to see the full error message
                 navigation.navigate("Institution", {
                   ownerId: photoOwner?._id,
                 })
@@ -248,6 +264,7 @@ function PhotoModal({
                 </Box> */}
 
         <Box
+          // @ts-expect-error TS(2322): Type '{ children: Element; style: { flex: number; ... Remove this comment to see the full error message
           style={{
             flex: 1,
             height: "50%",
@@ -281,6 +298,7 @@ function PhotoModal({
             direction="column"
             space={4}
             // py="6"
+            // @ts-expect-error TS(2322): Type '{ children: Element; direction: "column"; sp... Remove this comment to see the full error message
             mh="5"
             w="100%"
             style={{
@@ -325,6 +343,7 @@ function PhotoModal({
                   <TouchableOpacity
                     onPress={() => {
                       // launchNativeCamera();
+                      // @ts-expect-error TS(2304): Cannot find name 'setShowCamera'.
                       setShowCamera(true)
                     }}
                     disabled={

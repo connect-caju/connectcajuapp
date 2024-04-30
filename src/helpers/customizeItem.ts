@@ -14,7 +14,7 @@ import { calculateFarmlandUsedArea } from "./calculateFarmlandUsedArea";
 const { useRealm } = realmContext;
 
 // get the long and lat proprieties from the point object
-const getGeolocation = (point) => {
+const getGeolocation = (point: any) => {
   return {
     latitude: point?.latitude,
     longitude: point?.longitude,
@@ -24,23 +24,24 @@ const getGeolocation = (point) => {
 
 
 export const customizeItem = (
-  farmersList,
-  farmlandsList,
-  serviceProviders,
-  customUserData,
-  flag,
+  farmersList: any,
+  farmlandsList: any,
+  serviceProviders: any,
+  customUserData: any,
+  flag: any,
 ) => {
   let farmersIds = [];
   let groupsIds = [];
   let institutionsIds = [];
 
   return farmersList
-    ?.map((item, index) => {
+    // @ts-expect-error TS(7030): Not all code paths return a value.
+    ?.map((item: any, index: any) => {
       const farmlands = farmlandsList?.filter(
-        (farmland) => farmland.farmerId === item._id,
+        (farmland: any) => farmland.farmerId === item._id,
       );
       const isServiceProvider = serviceProviders?.filter(
-        (provider) => provider?.actorId === item?._id,
+        (provider: any) => provider?.actorId === item?._id,
       );
       const { assets } = item;
       let newItem = {};
@@ -171,7 +172,7 @@ export const customizeItem = (
       }
     })
     .sort(
-      (item1, item2) =>
+      (item1: any, item2: any) =>
         new Date(item2?.sortingKey).getTime() -
         new Date(item1?.sortingKey).getTime(),
     );
