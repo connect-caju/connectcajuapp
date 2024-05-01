@@ -1,9 +1,4 @@
-/* eslint-disable prettier/prettier */
-/* eslint-disable react-native/no-inline-styles */
-/* eslint-disable prettier/prettier */
-/* eslint-disable prettier/prettier */
 
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { Text, SafeAreaView, ScrollView, TextInput, View } from "react-native";
 import React, { useState, useEffect } from "react";
 import {
@@ -328,8 +323,6 @@ export default function InstitutionFarmerForm({
               <FormControl.Label>Posto Adm.</FormControl.Label>
               <Select
                 selectedValue={institutionAdminPost}
-
-                // @ts-expect-error TS(2322): Type '{ children: any; selectedValue: any; accessi... Remove this comment to see the full error message
                 accessibilityLabel="posto administrativo"
                 placeholder="Escolha posto administrativo"
                 minHeight={55}

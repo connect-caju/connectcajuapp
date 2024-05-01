@@ -8,6 +8,13 @@ import {
   CheckIcon,
   Center,
 } from "native-base";
+import {
+  SelectDragIndicator,
+  SelectIcon,
+  SelectInput,
+  SelectItem,
+  SelectTrigger,
+} from "@gluestack-ui/themed";
 import { Icon, CheckBox } from "@rneui/themed";
 import DatePicker from "react-native-date-picker";
 import FontAwesomeIcon from "react-native-vector-icons/FontAwesome";
@@ -37,7 +44,11 @@ import {
   RadioGroupLabel,
 } from "../../../components/RadioGroup";
 import { AvatarImage } from "../../../components/Avatar";
-import { Camera } from "lucide-react-native";
+import { Camera, ChevronDown, ChevronDownIcon } from "lucide-react-native";
+import { SelectPortal } from "@gluestack-ui/themed";
+import { SelectBackdrop } from "@gluestack-ui/themed";
+import { SelectContent } from "@gluestack-ui/themed";
+import { SelectDragIndicatorWrapper } from "@gluestack-ui/themed";
 // const {useRealm} = realmContext;
 
 export default function IndividualFarmerForm({
@@ -119,7 +130,6 @@ export default function IndividualFarmerForm({
     <View className="px-3 my-3">
       <View className="w-full">
         <FormControl isRequired isInvalid={"isSprayingAgent" in errors}>
-
           <FormControl.Label>
             <Text
               style={{
@@ -431,7 +441,6 @@ export default function IndividualFarmerForm({
               </View>
             </View>
 
-           
             {"gender" in errors ? (
               <FormControl.ErrorMessage
                 leftIcon={<Icon name="error-outline" size={16} color="red" />}
@@ -481,124 +490,126 @@ export default function IndividualFarmerForm({
         <Text style={styles.formSectionDescription}>Endereço e Contacto</Text>
       </Center>
 
-      <View className="flex flex-row mx-3 w-full gap-2 justify-center items-center">
-        <View className="flex-1">
-          <FormControl
-            isRequired
-            my="3"
-            isInvalid={"addressAdminPost" in errors}
+      <View className="">
+        <FormControl isRequired my="1" isInvalid={"addressAdminPost" in errors}>
+          <FormControl.Label>Posto Adm.</FormControl.Label>
+          <Select
+            selectedValue={addressAdminPost}
+            accessibilityLabel="posto administrativo"
+            placeholder="Escolha posto administrativo"
+            minHeight={50}
+            _selectedItem={{
+              bg: "gray.200",
+              fontSize: "4xl",
+              endIcon: <CheckIcon size="5" />,
+            }}
+            dropdownCloseIcon={
+              <Icon
+                name="arrow-drop-down"
+                // size={35}
+                color={COLORS.main}
+                onPress={() => setAddressAdminPost("")}
+              />
+              // addressAdminPost ? (
+              // ) : (
+              //   <Icon
+              //     // size={45}
+              //     name="arrow-drop-down"
+              //     color="#005000"
+              //   />
+              // )
+            }
+            mt={1}
+            onValueChange={(newAdminPost) => {
+              setErrors((prev: any) => ({
+                ...prev,
+                institutionAdminPost: "",
+              }));
+              setAddressAdminPost(newAdminPost);
+            }}
           >
-            <FormControl.Label>Posto Adm.</FormControl.Label>
-            <Picker 
-              selectedValue={addressAdminPost}
-              onValueChange={(newAdminPost) => {
-                setErrors((prev: any) => ({
-                  ...prev,
-                  addressAdminPost: "",
-                }));
-                setAddressAdminPost(newAdminPost);
-              }}
-           
+            {selectedAddressAdminPosts?.map((adminPost: any, index: any) => (
+              <Select.Item key={index} label={adminPost} value={adminPost} />
+            ))}
+          </Select>
+          {"addressAdminPost" in errors ? (
+            <FormControl.ErrorMessage
+              leftIcon={<Icon name="error-outline" size={16} color="red" />}
+              _text={{ fontSize: "xs" }}
+            >
+              {errors?.addressAdminPost}
+            </FormControl.ErrorMessage>
+          ) : (
+            <FormControl.HelperText />
+          )}
+        </FormControl>
+      </View>
+      <View className="">
+        <FormControl isRequired my="1">
+          <FormControl.Label>Localidade</FormControl.Label>
 
+          <Select
+            selectedValue={addressVillage}
+            accessibilityLabel="Escolha uma localidade"
+            placeholder="Escolha uma localidade"
+            minHeight={50}
+            _selectedItem={{
+              bg: "gray.200",
+              fontSize: "4xl",
+              endIcon: <CheckIcon size="5" />,
+            }}
+            dropdownCloseIcon={
+              <Icon
+              name="arrow-drop-down"
+              // size={35}
+              color={COLORS.main}
+              onPress={() => setAddressVillage("")}
             />
-            {/* <Select
-              selectedValue={addressAdminPost}
-              // @ts-expect-error TS(2322): Type '{ children: any; selectedValue: any; accessi... Remove this comment to see the full error message
-              accessibilityLabel="Escolha sua província"
-              placeholder="Escolha sua província"
-              minHeight={55}
-              _selectedItem={{
-                bg: "teal.600",
-                fontSize: "lg",
-                endIcon: <CheckIcon size="5" />,
-              }}
-              dropdownCloseIcon={
-                addressAdminPost ? (
-                  <Icon
-                    name="close"
-                    size={20}
-                    color="grey"
-                    onPress={() => setAddressAdminPost("")}
-                  />
-                ) : (
-                  <Icon
-                    // size={45}
-                    name="arrow-drop-down"
-                    color={COLORS.main}
-                  />
-                )
-              }
-              mt={1}
-              onValueChange={(newAdminPost) => {
-                setErrors((prev: any) => ({
-                  ...prev,
-                  addressAdminPost: "",
-                }));
-                setAddressAdminPost(newAdminPost);
-              }}
-            >
-              {selectedAddressAdminPosts?.map((adminPost: any, index: any) => (
-                <Select.Item key={index} label={adminPost} value={adminPost} />
-              ))}
-            </Select> */}
-            {"addressAdminPost" in errors ? (
-              <FormControl.ErrorMessage
-                leftIcon={<Icon name="error-outline" size={16} color="red" />}
-                _text={{ fontSize: "xs" }}
-              >
-                {errors?.addressAdminPost}
-              </FormControl.ErrorMessage>
-            ) : (
-              <FormControl.HelperText />
-            )}
-          </FormControl>
-        </View>
-        <View className="flex-1">
-          <FormControl isRequired my="3">
-            <FormControl.Label>Localidade</FormControl.Label>
-            <Select
-              selectedValue={addressVillage}
-              // @ts-expect-error TS(2322): Type '{ children: any[]; selectedValue: any; acces... Remove this comment to see the full error message
-              accessibilityLabel="Escolha uma localidade"
-              placeholder="Escolha uma localidade"
-              minHeight={55}
-              _selectedItem={{
-                bg: "teal.600",
-                fontSize: "lg",
-                endIcon: <CheckIcon size="5" />,
-              }}
-              dropdownCloseIcon={
-                addressVillage ? (
-                  <Icon
-                    name="close"
-                    size={20}
-                    color="grey"
-                    onPress={() => setAddressVillage("")}
-                  />
-                ) : (
-                  <Icon
-                    // size={45}
-                    name="arrow-drop-down"
-                    color={COLORS.main}
-                  />
-                )
-              }
-              mt={1}
-              onValueChange={(newVillage) => setAddressVillage(newVillage)}
-            >
-              {villages[addressAdminPost]?.map((village: any, index: any) => (
-                <Select.Item key={index} label={village} value={village} />
-              ))}
-            </Select>
-            <FormControl.ErrorMessage>{""}</FormControl.ErrorMessage>
-          </FormControl>
-        </View>
+              // addressVillage ? (
+              //   <Icon
+              //     name="close"
+              //     size={15}
+              //     color="grey"
+              //     onPress={() => setAddressVillage("")}
+              //   />
+              // ) : (
+              //   <Icon
+              //     // size={45}
+              //     name="arrow-drop-down"
+              //     color={COLORS.main}
+              //   />
+              // )
+            }
+            mt={1}
+            onValueChange={(newVillage) => setAddressVillage(newVillage)}
+          >
+            {villages[addressAdminPost]?.map((village: any, index: any) => (
+              <Select.Item key={index} label={village} value={village} />
+            ))}
+          </Select>
+
+          <FormControl.ErrorMessage>{""}</FormControl.ErrorMessage>
+        </FormControl>
       </View>
 
-      <Stack direction="row" mx="3" w="100%">
-        <View w="50%" px="1">
+      <View className="flex flex-row mx-3 w-full gap-2">
+        <View className="flex-1">
           <FormControl my="1" isInvalid={"primaryPhone" in errors}>
-            <FormControl.Label>Telemóvel</FormControl.Label>
+            <Input 
+              label="Telemóvel"
+              placeholder="Telemóvel"
+              keyboardType="phone-pad"
+              value={primaryPhone}
+              onChangeText={(newPhone: any) => {
+                setErrors((prev: any) => ({
+                  ...prev,
+                  primaryPhone: "",
+                }));
+                setPrimaryPhone(newPhone);
+              }}
+              className="text-center"
+            />
+            {/* <FormControl.Label>Telemóvel</FormControl.Label>
             <CustomInput
               width="100%"
               type="telephoneNumber"
@@ -615,7 +626,7 @@ export default function IndividualFarmerForm({
               InputLeftElement={
                 <Icon name="phone" color="grey" size={20} type="material" />
               }
-            />
+            /> */}
             {"primaryPhone" in errors ? (
               <FormControl.ErrorMessage
                 leftIcon={<Icon name="error-outline" size={16} color="red" />}
@@ -628,9 +639,23 @@ export default function IndividualFarmerForm({
             )}
           </FormControl>
         </View>
-        <View w="50%" px="1">
+        <View className="flex-1">
           <FormControl my="1" isInvalid={"secondaryPhone" in errors}>
-            <FormControl.Label>Tel. Alternativo</FormControl.Label>
+            <Input 
+              label="Telemóvel Alternativo"
+              placeholder="Telemóvel"
+              keyboardType="phone-pad"
+              value={secondaryPhone}
+              onChangeText={(newPhone: any) => {
+                setErrors((prev: any) => ({
+                  ...prev,
+                  secondaryPhone: "",
+                }));
+                setSecondaryPhone(newPhone);
+              }}
+              className="text-center"
+            />
+            {/* <FormControl.Label>Tel. Alternativo</FormControl.Label>
             <CustomInput
               width="100%"
               type="telephoneNumber"
@@ -647,7 +672,7 @@ export default function IndividualFarmerForm({
               InputLeftElement={
                 <Icon name="phone" color="grey" size={20} type="material" />
               }
-            />
+            /> */}
             {"secondaryPhone" in errors ? (
               <FormControl.ErrorMessage
                 leftIcon={<Icon name="error-outline" size={16} color="red" />}
@@ -660,7 +685,7 @@ export default function IndividualFarmerForm({
             )}
           </FormControl>
         </View>
-      </Stack>
+      </View>
 
       {/* <CustomDivider marginVertical="2" thickness={2} bg={COLORS.main} /> */}
 

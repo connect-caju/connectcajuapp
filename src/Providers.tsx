@@ -33,6 +33,9 @@ import ClientResetModal from "./components/Modals/ClientResetModal";
 import { setCustomText } from "react-native-global-props";
 import { useDeviceContext } from "twrnc";
 import tw from "./lib/tailwind";
+import { GluestackUIProvider } from "@gluestack-ui/themed";
+
+import { config } from "@gluestack-ui/config"
 
 export default function Providers({ children }: {children: React.ReactNode}) {
   // allowing prefixes to twrnc (dark, focus, screen breakpoints, etc)
@@ -62,6 +65,8 @@ export default function Providers({ children }: {children: React.ReactNode}) {
 
   return (
       <SafeAreaProvider>
+         <GluestackUIProvider config={config}>
+
         <GestureHandlerRootView style={{ flex: 1 }}>
           <NativeBaseProvider theme={nbTheme}>
             <ThemeProvider theme={elementTheme}>
@@ -91,13 +96,14 @@ export default function Providers({ children }: {children: React.ReactNode}) {
           isVisible={isVisible}
           isManualResetConfirmed={isManualResetConfirmed}
           setIsManualResetConfirmed={setIsManualResetConfirmed}
-        />
-      )}
+          />
+        )}
       {/* 
         The Toast component is used here so to make it usable anywhere within the whole app
         The Toast component helps show in an toasting message that disappears by its own some seconds later.
-    */}
+      */}
       <Toast config={toastConfig} />
+      </GluestackUIProvider>
       </SafeAreaProvider>
   );
 }
