@@ -8,12 +8,7 @@ import {
   SafeAreaView,
   TouchableOpacity,
 } from "react-native";
-import {
-  Box,
-  Center,
-  FormControl,
-  Stack,
-} from "native-base";
+import { Box, Center, FormControl, Stack } from "native-base";
 import {
   MultipleSelectList,
   SelectList,
@@ -35,6 +30,7 @@ import { errorMessages } from "../../consts/errorMessages";
 import { KeyboardAwareScrollView } from "react-native-keyboard-tools";
 import PrimaryButton from "../Buttons/PrimaryButton";
 import { backgroundStyle } from "../../styles/globals";
+import { Input } from "../../../components/Input";
 const { useRealm, useQuery, useObject } = realmContext;
 
 export default function FarmlandBlockRegistration({
@@ -94,7 +90,7 @@ export default function FarmlandBlockRegistration({
   setShowCancelButton,
   showConfirmButton,
   setShowConfirmButton,
-  ownerImage
+  ownerImage,
 }: any) {
   const realm = useRealm();
   const foundFarmland = realm.objectForPrimaryKey("Farmland", farmlandId);
@@ -151,8 +147,10 @@ export default function FarmlandBlockRegistration({
     const filteredPlantTypes = plantTypes.filter(
       (plantType: any) => !plantType.includes("enxer"),
     );
+
     if (
-      plantTypes.filter((plantType: any) => plantType.includes("enxer")).length > 0
+      plantTypes.filter((plantType: any) => plantType.includes("enxer"))
+        .length > 0
     ) {
       selectedClones = clones
         ?.filter((clone: any) => clone !== "Outro")
@@ -166,7 +164,7 @@ export default function FarmlandBlockRegistration({
     }
     let normalizedSameTypeTrees = mergedSameTypeTrees?.map((treeType: any) => ({
       treeType,
-      trees: ""
+      trees: "",
     }));
     setSameTypeTreesList(normalizedSameTypeTrees);
   }, [clones, plantTypes]);
@@ -185,16 +183,14 @@ export default function FarmlandBlockRegistration({
       <SafeAreaView
         style={{
           flex: 1,
-
         }}
-        onTouchCancel={
-          () => { }
-        }
+        onTouchCancel={() => {}}
       >
         <Animated.View
           style={{
             paddingHorizontal: 10,
             minHeight: "100%",
+
             opacity: scale?.interpolate({
               inputRange: [0, 1],
               outputRange: [0, 1],
@@ -279,16 +275,16 @@ export default function FarmlandBlockRegistration({
             }}
           />
 
-          <View style={{
-                textAlign: "center",
-                color: COLORS.black,
-                fontSize: 24,
-                fontFamily: "JosefinSans-Bold",
-                width: "100%",
-              }}>
-            <Text>
-              Parcela {foundFarmland?.blocks?.length + 1}
-            </Text>
+          <View
+            style={{
+              textAlign: "center",
+              color: COLORS.black,
+              fontSize: 24,
+              fontFamily: "JosefinSans-Bold",
+              width: "100%",
+            }}
+          >
+            <Text>Parcela {foundFarmland?.blocks?.length + 1}</Text>
           </View>
           <View
             style={{
@@ -314,7 +310,7 @@ export default function FarmlandBlockRegistration({
             decelerationRate={"normal"}
             fadingEdgeLength={2}
             style={{}}
-           showsVerticalScrollIndicator={false}
+            showsVerticalScrollIndicator={false}
           >
             <View
               style={{
@@ -377,78 +373,73 @@ export default function FarmlandBlockRegistration({
                   </Text>
                 </View>
               </View>
-                <View 
-                className="w-full"
+              <View className="w-full">
+                <FormControl
+                  isRequired
+                  my="1"
+                  isInvalid={"plantingYear" in errors}
                 >
-                  <FormControl
-                    isRequired
-                    my="1"
-                    isInvalid={"plantingYear" in errors}
-                  >
-                    <FormControl.Label>Ano de plantio</FormControl.Label>
+                  <FormControl.Label>Ano de plantio</FormControl.Label>
 
-                    <SelectList
-
-                      // @ts-expect-error TS(2769): No overload matches this call.
-                      data={() => getFullYears2(70)}
-                      setSelected={(newYear: any) => {
-                        setErrors((prev: any) => ({
-                          ...prev,
-                          plantingYear: ""
-                        }));
-                        setPlantingYear(newYear);
-                      }}
-                      save="value"
-                      placeholder="Escolher ano"
-                      searchPlaceholder="Procurar ano"
-                      maxHeight={400}
-                      fontFamily="JosefinSans-Regular"
-                      notFoundText="Ano não encontrado"
-                      dropdownTextStyles={{
-                        fontSize: 16,
-                        color: COLORS.black,
-                        padding: 5,
-                      }}
-                      arrowicon={
-                        <Icon
-                          // size={35}
-                          name="arrow-drop-down"
-                          color={COLORS.main}
-                        />
+                  <SelectList
+                    // @ts-expect-error TS(2769): No overload matches this call.
+                    data={() => getFullYears2(70)}
+                    setSelected={(newYear: any) => {
+                      setErrors((prev: any) => ({
+                        ...prev,
+                        plantingYear: "",
+                      }));
+                      setPlantingYear(newYear);
+                    }}
+                    save="value"
+                    placeholder="Escolher ano"
+                    searchPlaceholder="Procurar ano"
+                    maxHeight={400}
+                    fontFamily="JosefinSans-Regular"
+                    notFoundText="Ano não encontrado"
+                    dropdownTextStyles={{
+                      fontSize: 16,
+                      color: COLORS.black,
+                      padding: 5,
+                    }}
+                    arrowicon={
+                      <Icon
+                        // size={35}
+                        name="arrow-drop-down"
+                        color={COLORS.main}
+                      />
+                    }
+                    closeicon={
+                      <Icon name="close" size={20} color={COLORS.grey} />
+                    }
+                    inputStyles={{
+                      fontSize: 15,
+                      color: plantingYear ? COLORS.black : COLORS.grey,
+                    }}
+                    boxStyles={{
+                      minHeight: 55,
+                      borderRadius: 5,
+                      borderColor: COLORS.lightgrey,
+                      marginTop: 5,
+                    }}
+                  />
+                  {"plantingYear" in errors ? (
+                    <FormControl.ErrorMessage
+                      leftIcon={
+                        <Icon name="error-outline" size={16} color="red" />
                       }
-                      closeicon={
-                        <Icon name="close" size={20} color={COLORS.grey} />
-                      }
-                      inputStyles={{
-                        fontSize: 15,
-                        color: plantingYear ? COLORS.black : COLORS.grey,
-                      }}
-                      boxStyles={{
-                        minHeight: 55,
-                        borderRadius: 5,
-                        borderColor: COLORS.lightgrey,
-                        marginTop: 5,
-                      }}
-                    />
-                    {"plantingYear" in errors ? (
-                      <FormControl.ErrorMessage
-                        leftIcon={
-                          <Icon name="error-outline" size={16} color="red" />
-                        }
-                        _text={{ fontSize: "xs" }}
-                      >
-                        {errors?.plantingYear}
-                      </FormControl.ErrorMessage>
-                    ) : (
-                      <FormControl.HelperText></FormControl.HelperText>
-                    )}
-                  </FormControl>
-                </View>
-             <View>
-                <View 
-                className="flex flex-row gap-2 items-center justify-center w-full"
-                >
-                  <View style={{ width: "48%"}}>
+                      _text={{ fontSize: "xs" }}
+                    >
+                      {errors?.plantingYear}
+                    </FormControl.ErrorMessage>
+                  ) : (
+                    <FormControl.HelperText></FormControl.HelperText>
+                  )}
+                </FormControl>
+              </View>
+              <View>
+                <View className="flex flex-row gap-2 items-center justify-center w-full">
+                  <View style={{ width: "48%" }}>
                     <FormControl
                       isRequired
                       my="2"
@@ -466,7 +457,7 @@ export default function FarmlandBlockRegistration({
                             ...prev,
                             blockTrees: null,
                             usedArea: null,
-                            treeDensity: null
+                            treeDensity: null,
                           }));
                           setUsedArea(newNumber);
                         }}
@@ -475,12 +466,9 @@ export default function FarmlandBlockRegistration({
                   </View>
 
                   <View
-
-                 
-                 
                     style={{
                       justifyContent: "flex-end",
-                      width: "48%"
+                      width: "48%",
                     }}
                   >
                     <FormControl
@@ -500,7 +488,7 @@ export default function FarmlandBlockRegistration({
                             ...prev,
                             blockTrees: null,
                             usedArea: null,
-                            treeDensity: null
+                            treeDensity: null,
                           }));
                           setBlockTrees(newNumber);
                         }}
@@ -511,7 +499,6 @@ export default function FarmlandBlockRegistration({
 
                 {errors?.blockTrees && errors?.usedArea && (
                   <View
-
                     style={{
                       backgroundColor: COLORS.danger,
                     }}
@@ -598,10 +585,9 @@ export default function FarmlandBlockRegistration({
               </View>
 
               <View
-             
-
                 style={{
-                  marginTop: errors?.usedArea && errors?.blockTrees ? 0 : 0, width: "100%"
+                  marginTop: errors?.usedArea && errors?.blockTrees ? 0 : 0,
+                  width: "100%",
                 }}
               >
                 <FormControl
@@ -621,10 +607,7 @@ export default function FarmlandBlockRegistration({
                       Compasso
                     </Text>
                   </FormControl.Label>
-                  <View 
-                  className="flex flex-row gap-2 justify-between w-full"
-                  
-                  >
+                  <View className="flex flex-row gap-2 justify-between w-full">
                     <View w="50%" px="1">
                       <CheckBox
                         center
@@ -698,7 +681,6 @@ export default function FarmlandBlockRegistration({
                             iconStyle={{ marginRight: 1 }}
                           />
                         }
-
                         // @ts-expect-error TS(2322): Type '{ center: true; fontFamily: string; containe... Remove this comment to see the full error message
                         onPress={() => {
                           setIsDensityModeIrregular(true);
@@ -729,19 +711,17 @@ export default function FarmlandBlockRegistration({
               </View>
 
               {isDensityModeRegular && (
-                <View className="w-full flex flex-row">
-                  <View className="flex-1">
+                <View className="w-full flex flex-row justify-center items-center">
+                  <View className="w-2/5">
                     <FormControl
                       my="1"
                       isRequired
                       isInvalid={"density" in errors}
                     >
-                      <FormControl.Label>Comprimento</FormControl.Label>
-                      <CustomInput
-                        width="100%"
-                        textAlign="center"
-                        keyboardType="numeric"
+                      <Input
                         placeholder="Comprimento"
+                        keyboardType="numeric"
+                        className="text-center"
                         value={densityLength}
                         onChangeText={(newNumber: any) => {
                           setErrors((prev: any) => ({
@@ -749,7 +729,7 @@ export default function FarmlandBlockRegistration({
                             density: "",
                             blockTrees: null,
                             usedArea: null,
-                            treeDensity: null
+                            treeDensity: null,
                           }));
                           setDensityLength(newNumber);
                         }}
@@ -769,9 +749,7 @@ export default function FarmlandBlockRegistration({
                       )}
                     </FormControl>
                   </View>
-                  <View
-                     className="mx-2 flex items-center justify-center"
-                  >
+                  <View className="w-1/5 flex items-center justify-center">
                     <Text
                       style={{
                         fontSize: 20,
@@ -780,18 +758,16 @@ export default function FarmlandBlockRegistration({
                       X
                     </Text>
                   </View>
-                  <View className="flex-1">
+                  <View className="w-2/5">
                     <FormControl
                       my="1"
                       isRequired
                       isInvalid={"density" in errors}
                     >
-                      <FormControl.Label>Largura</FormControl.Label>
-                      <CustomInput
-                        width="100%"
-                        keyboardType="numeric"
-                        textAlign="center"
+                      <Input
                         placeholder="Largura"
+                        keyboardType="numeric"
+                        className="text-center "
                         value={densityWidth}
                         onChangeText={(newNumber: any) => {
                           setErrors((prev: any) => ({
@@ -799,7 +775,7 @@ export default function FarmlandBlockRegistration({
                             density: "",
                             blockTrees: null,
                             usedArea: null,
-                            treeDensity: null
+                            treeDensity: null,
                           }));
                           setDensityWidth(newNumber);
                         }}
@@ -828,7 +804,8 @@ export default function FarmlandBlockRegistration({
                   setSelected={(type: any) => {
                     setErrors((prev: any) => ({
                       ...prev,
-                      plantTypes: ""
+                      plantTypes: "",
+                      sameTypeTrees: "",
                     }));
                     setPlantTypes(type);
                   }}
@@ -892,9 +869,11 @@ export default function FarmlandBlockRegistration({
                       setSelected={(type: any) => {
                         setErrors((prev: any) => ({
                           ...prev,
-                          clones: ""
+                          clones: "",
+                          sameTypeTrees: "",
                         }));
                         setClones(type);
+                        console.log("type", type);
                       }}
                       data={cloneList}
                       notFoundText={"Clone não encontrado"}
@@ -947,34 +926,24 @@ export default function FarmlandBlockRegistration({
                   </FormControl>
 
                   {clones?.find((clone: any) => clone === "Outro") && (
-                    <View
- 
-                      alignItems={"center"}
-                      style={{
-                        flexDirection: "row",
-                        display: "flex",
-                        alignItems: "center",
-                        width: "100%"
-                      }}
-                    >
-                      <View w="70%">
+                    <View className="flex flex-row w-full justify-between items-center  py-1">
+                      <View className="flex-1 pr-6">
                         <FormControl my="1" isInvalid={"addedClone" in errors}>
-                          <FormControl.Label>
-                            Adiciona novo clone
-                          </FormControl.Label>
-                          <CustomInput
-                            width="100%"
-                            type="text"
+                          <Input
+                            label="Adiciona novo clone"
                             placeholder="Clone não econtrado na lista"
+                            className="w-full"
                             value={addedClone}
                             onChangeText={(newClone: any) => {
                               setErrors({
                                 ...errors,
                                 addedClone: "",
+                                sameTypeTrees: "",
                               });
                               setAddedClone(newClone);
                             }}
                           />
+
                           {"addedClone" in errors ? (
                             <FormControl.ErrorMessage
                               leftIcon={
@@ -993,156 +962,117 @@ export default function FarmlandBlockRegistration({
                           )}
                         </FormControl>
                       </View>
-                      <View
-                        style={{
-                          justifyContent: "center",
-                          alignItems: "center",
-                          // backgroundColor: 'red',
-                          position: "relative",
-                          bottom: -5,
-                          left: 0,
-                        }}
-                      >
-                        <TouchableOpacity
-                          style={{
-                            justifyContent: "center",
-                            alignItems: "center",
-                            marginHorizontal: 10,
-                            marginTop: 10,
-                            padding: 5,
-                            borderRadius: 100,
-                            backgroundColor: COLORS.main,
-                            borderColor: COLORS.main,
-                            borderWidth: 1,
-                          }}
-                          onPress={() => {
-                            if (addedClone) {
-                              setClones((prev: any) => [...prev, addedClone]);
+                      <View className="flex flex-row items-end h-full pb-1">
 
-                              setAddedClone("");
-                            } else {
-                              setErrors({
-                                ...errors,
-                                addedClone: "Indica novo clone",
-                              });
-                            }
-                          }}
+                      <TouchableOpacity
+                      className="p-2 rounded-full flex items-end "
+                      style={{
+                          backgroundColor: COLORS.main,
+                        }}
+                        onPress={() => {
+                          if (addedClone) {
+                            setClones((prev: any) => [...prev, addedClone]);
+                            
+                            setAddedClone("");
+                          } else {
+                            setErrors({
+                              ...errors,
+                              addedClone: "Indica novo clone",
+                            });
+                          }
+                        }}
                         >
-                          <Icon
-                            name="arrow-downward"
-                            size={35}
-                            color={COLORS.ghostwhite}
+                        <Icon
+                          name="add"
+                          size={35}
+                          color={COLORS.ghostwhite}
                           />
-                        </TouchableOpacity>
-                      </View>
-                      <View w="15%"></View>
+                      </TouchableOpacity>
+                          </View>
                     </View>
                   )}
                 </>
               )}
-
               {plantTypes.length > 0 && sameTypeTreesList.length > 0 && (
-                <View w="100%" my="5">
-                  {errors?.sameTypeTrees && (
-                    <View
-
-
-                      style={{
-                        flexDirection: "row",
-                        paddingHorizontal: 10,
-                      }}
-                    >
-                      <Icon name="error-outline" size={26} color="red" />
-                      <Text
-                        style={{
-                          color: COLORS.red,
-                          fontSize: 14,
-                          fontFamily: "JosefinSans-Regular",
-                          paddingLeft: 5,
-                          marginLeft: 5,
-                        }}
-                      >
-                        {errors?.sameTypeTrees}
-                      </Text>
+                <FormControl
+                  isRequired
+                  mt="1"
+                  mb="6"
+                  isInvalid={"sameTypeTrees" in errors}
+                >
+                  <FormControl.Label>
+                    Quantos cajueiros são de...
+                  </FormControl.Label>
+                  {plantTypes.length > 0 && sameTypeTreesList.length > 0 && (
+                    <View w="100%" my="5">
+                      {sameTypeTreesList?.map(
+                        (sameTypeTree: any, index: any) => (
+                          <View
+                            className="flex flex-row w-[100%] justify-between py-1"
+                            key={index}
+                          >
+                            <View className="flex flex-row items-center">
+                              <Text
+                                style={{
+                                  fontSize: 16,
+                                  fontFamily: "JosefinSans-Regular",
+                                  color: COLORS.grey,
+                                  textAlign: "left",
+                                }}
+                              >
+                                <Icon
+                                  name="arrow-forward"
+                                  color={COLORS.grey}
+                                  size={10}
+                                />{" "}
+                                {sameTypeTree?.treeType}
+                              </Text>
+                            </View>
+                            <Input
+                              keyboardType="numeric"
+                              placeholder="Cajueiros"
+                              className="text-center"
+                              value={sameTypeTree?.trees}
+                              onChangeText={(newTrees: any) => {
+                                setErrors((prev: any) => ({
+                                  ...prev,
+                                  sameTypeTrees: "",
+                                }));
+                                setSameTypeTreesList(
+                                  sameTypeTreesList.map((object: any) => {
+                                    if (
+                                      object?.treeType ===
+                                      sameTypeTree?.treeType
+                                    ) {
+                                      object.trees = newTrees;
+                                    }
+                                    return object;
+                                  }),
+                                );
+                              }}
+                            />
+                          </View>
+                        ),
+                      )}
                     </View>
                   )}
+                  {"sameTypeTrees" in errors ? (
 
-                
-                    {/* <View className="w-[100%] flex flex-row justify-between ">
-                
-                        <Text
-                          style={{
-                            color: COLORS.main,
-                            fontSize: 16,
-                            fontFamily: "JosefinSans-Bold",
-                          }}
-                          >
-                          Tipos de plantas
-                        </Text>
- 
-                
-                        <Text
-                          style={{
-                            color: COLORS.main,
-                            fontSize: 16,
-                            fontFamily: "JosefinSans-Bold",
-                          }}
-                          >
-                          Cajueiros
-                        </Text>
-            
-                   
-                          </View> */}
-                  
+                    <FormControl.ErrorMessage
+                      leftIcon={
+                        <Icon name="error-outline" size={16} color="red" />
+                      }
+                      _text={{ fontSize: "xs" }}
+                    >
+                    
+                      {errors?.sameTypeTrees}
 
-                  {sameTypeTreesList?.map((sameTypeTree: any, index: any) => (
-                    <View className="flex flex-row justify-between" key={index}>
-                      
-
-                          <Text
-                            style={{
-                              fontSize: 16,
-                              fontFamily: "JosefinSans-Regular",
-                              color: COLORS.grey,
-                              textAlign: "left"
-                            }}
-                          >
-                            <Icon
-                              name="arrow-forward"
-                              color={COLORS.grey}
-                              size={10}
-                            />{" "}
-                            {sameTypeTree?.treeType}
-                          </Text>
-                      
-                          <CustomInput
-                            width="20%"
-                            textAlign="center"
-                            keyboardType="numeric"
-                            placeholder="Cajueiros"
-                            value={sameTypeTree?.trees}
-                            onChangeText={(newTrees: any) => {
-                              setErrors((prev: any) => ({
-                                ...prev,
-                                sameTypeTrees: ""
-                              }));
-                              setSameTypeTreesList(
-                                sameTypeTreesList.map((object: any) => {
-                                  if (
-                                    object?.treeType === sameTypeTree?.treeType
-                                  ) {
-                                    object.trees = newTrees;
-                                  }
-                                  return object;
-                                }),
-                              );
-                            }}
-                          />
-                      </View>
- 
-                  ))}
-                </View>
+                    
+                    </FormControl.ErrorMessage>
+                  ) : null}
+                </FormControl>
               )}
+
               <View
                 style={{
                   width: "100%",

@@ -16,7 +16,7 @@ const validateFarmlandData = (
     plantTypes,
 
     // farmer,
-    clones
+    clones,
   }: any,
   errors: any,
   setErrors: any,
@@ -27,17 +27,17 @@ const validateFarmlandData = (
   const retrievedTreesNumber = trees ? parseInt(trees) : "";
   const retrievedUsedArea = usedArea ? parseFloat(usedArea) : "";
   const retrievedTotalArea = !totalArea
-  ? ""
-  : !isNaN(totalArea)
-  ? Number(parseFloat(totalArea).toFixed(2))
-  : "";
+    ? ""
+    : !isNaN(totalArea)
+    ? Number(parseFloat(totalArea).toFixed(2))
+    : "";
   const retrievedDensityMode = densityMode?.trim();
   const retrievedDensityLength = densityLength ? parseInt(densityLength) : 0;
   const retrievedDensityWidth = densityWidth ? parseInt(densityWidth) : 0;
   const retrievedPlantTypes = [...plantTypes];
   const retrievedClones = [...clones];
   // const retrievedFarmerId = farmer._id;
-  
+
   if (!retrievedPlantingYear) {
     setErrors({ ...errors, plantingYear: "Selecciona ano de plantio" });
     return false;
@@ -78,7 +78,6 @@ const validateFarmlandData = (
     return false;
   }
 
-
   // @ts-expect-error TS(2367): This condition will always return 'false' since th... Remove this comment to see the full error message
   if (!retrievedTotalArea || retrievedTotalArea === "") {
     setErrors({ ...errors, totalArea: "Área total." });
@@ -92,9 +91,7 @@ const validateFarmlandData = (
 
   if (
     retrievedDensityMode === "Regular" &&
-
-    // @ts-expect-error TS(2367): This condition will always return 'false' since th... Remove this comment to see the full error message
-    (retrievedDensityLength === "" || retrievedDensityWidth === "")
+    (!retrievedDensityLength || !retrievedDensityWidth)
   ) {
     setErrors({ ...errors, densityMode: "Indica comprimento e largura." });
     return false;

@@ -1,6 +1,3 @@
-/* eslint-disable linebreak-style */
-/* eslint-disable react/prop-types */
-/* eslint-disable prettier/prettier */
 import {
   Text,
   ScrollView,
@@ -11,7 +8,6 @@ import {
   Pressable,
   Image,
   View,
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 } from "react-native";
 import React, { useEffect, useState, useCallback, useRef, } from "react";
 import { Icon, Chip } from "@rneui/themed";
@@ -38,9 +34,6 @@ import SuccessAlert from "../../components/Alerts/SuccessAlert";
 import COLORS from "../../consts/colors";
 import validateFarmlandMainData from "../../helpers/validateFarmlandMainData";
 import { assetTypes } from "../../consts/assetTypes";
-
-
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'uuid... Remove this comment to see the full error message
 import { v4 as uuidv4 } from "uuid";
 
 
@@ -152,8 +145,6 @@ export default function FarmlandRegistration({
 
   useEffect(() => {
     if (successLottieVisible) {
-
-      // @ts-expect-error TS(2304): Cannot find name 'setTimeout'.
       setTimeout(() => {
         setSuccessLottieVisible(false);
       }, 3000);
@@ -238,7 +229,6 @@ export default function FarmlandRegistration({
         addInvalidationMessage(farmlandId, invalidationMessage, realm);
       } catch (error) {
 
-        // @ts-expect-error TS(2584): Cannot find name 'console'. Do you need to change ... Remove this comment to see the full error message
         console.log("could not add invalidation message:", { cause: error });
       }
     },
@@ -395,6 +385,7 @@ export default function FarmlandRegistration({
     (block: any, farmlandId: any, realm: any) => {
       const farmland = realm.objectForPrimaryKey(resourceTypes.farmland, farmlandId);
       realm.write(() => {
+       
         farmland?.blocks?.push(block);
         if (
           farmland?.trees ===

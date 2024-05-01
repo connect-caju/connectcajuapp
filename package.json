@@ -79,6 +79,7 @@
     "realm": "^11.3.1",
     "realm-flipper-plugin-device": "^1.1.0",
     "styled-components": "^6.0.0-rc.3",
+    "tailwind-merge": "^2.3.0",
     "twrnc": "^3.6.5",
     "uuid": "^9.0.0"
   },
