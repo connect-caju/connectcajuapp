@@ -1,4 +1,4 @@
-const clones = [
+export const clones = [
   "Desconhecido",
   " 1.3",
   "1.5R",
@@ -72,4 +72,10 @@ const cloneList = clones.map((clone, index) => ({
   value: `${clone}`,
 }));
 
+export const cloneList2 = clones.map((clone, index) => ({
+  id: `${clone}`,
+  name: `${clone}`,
+}));
+
 export default cloneList;
+

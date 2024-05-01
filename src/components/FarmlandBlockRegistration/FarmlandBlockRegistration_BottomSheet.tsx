@@ -1,7 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react"
-
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
-import { View, Text, StyleSheet, ScrollView } from "react-native"
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from "react-native"
 import {
   Box,
   FormControl,
@@ -10,45 +8,24 @@ import {
   CheckIcon,
   Center,
   Radio,
+  
 } from "native-base"
 import {
   MultipleSelectList,
   SelectList,
 } from "react-native-dropdown-select-list"
 import {
-  widthPercentageToDP as wp,
-  heightPercentageToDP as hp,
-  listenOrientationChange as lor,
-  removeOrientationListener as rol,
-} from "react-native-responsive-screen"
-
-import {
   responsiveFontSize,
-  responsiveScreenFontSize,
-  responsiveHeight,
-  responsiveWidth,
-  responsiveScreenHeight,
-  responsiveScreenWidth,
-  useDimensionsChange,
-} from "react-native-responsive-dimensions"
 
+} from "react-native-responsive-dimensions"
 import { Overlay, Icon, Button, CheckBox } from "@rneui/base"
 import COLORS from "../../consts/colors"
 import { getFullYears, getFullYears2 } from "../../helpers/dates"
 import { plantingTypes } from "../../consts/plantingTypes"
 import cloneList from "../../consts/clones"
 import { CustomInput } from "../Inputs/CustomInput"
-
-
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'uuid... Remove this comment to see the full error message
 import { v4 as uuidv4 } from "uuid"
-
-// import { useUser } from '@realm/react';
-
 import { realmContext } from "../../models/realmContext"
-
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
-import { TouchableOpacity } from "react-native"
 import validateBlockData from "../../helpers/validateBlockData"
 import AwesomeAlert from "react-native-awesome-alerts"
 import { errorMessages } from "../../consts/errorMessages"
@@ -192,26 +169,7 @@ export default function FarmlandBlockRegistration({
 
   return (
     <BottomSheetModalProvider>
-      <View
-      //   overlayStyle={{
-      //       backgroundColor: COLORS.ghostwhite,
-      //       width: '95%',
-      //       maxHeight: '95%',
-      //       borderRadius: 10,
-      //       paddingBottom: 5,
-      //   }}
-      //     isVisible={isOverlayVisible}
-      //     onBackdropPress={()=>{
-
-      //         turnOffOverlay();
-
-      //         if (treeRedFlag || areaRedFlag){
-      //             setTreeRedFlag(false);
-      //             setAreaRedFlag(false);
-      //         }
-
-      //     }}
-      >
+      <View>
         <AwesomeAlert
           show={alert}
           titleStyle={{
@@ -307,8 +265,6 @@ export default function FarmlandBlockRegistration({
                 fontFamily: "JosefinSans-Bold",
               }}
             >
-              // @ts-expect-error TS(2339): Property 'blocks' does not exist on type 'Object<u... Remove this comment to see the full error message
-              // @ts-expect-error TS(2339): Property 'blocks' does not exist on type 'Object<u... Remove this comment to see the full error message
               Parcela {foundFarmland?.blocks?.length + 1}
             </Text>
           </Box>
@@ -423,41 +379,7 @@ export default function FarmlandBlockRegistration({
                     }}
                   />
 
-                  {/* <Select
-                                        selectedValue={plantingYear}
-                                        accessibilityLabel="Ano de plantio"
-                                        placeholder="Escolha o ano"
-                                        minHeight={55}
-                                        _selectedItem={{
-                                            bg: 'teal.600',
-                                            fontSize: 'lg',
-                                            endIcon: <CheckIcon size="5" />,
-                                        }}
-                                        dropdownCloseIcon={plantingYear 
-                                                ? <Icon 
-                                                    name="close" 
-                                                    size={20} 
-                                                    color="grey" 
-                                                    onPress={()=>setPlantingYear('')} 
-                                                /> 
-                                                : <Icon 
-                                                    size={40} 
-                                                    name="arrow-drop-down" 
-                                                    color={COLORS.main} 
-                                                />
-                                            }
-                                        mt={1}
-                                        onValueChange={newYear => {
-                                            setErrors((prev)=>({...prev, plantingYear: ''}));
-                                            setPlantingYear(newYear);
-                                        }}
-                                    >
-                                        {
-                                            getFullYears(100)?.map((year, index)=>(
-                                                <Select.Item key={index} label={`${year}`} value={year} />
-                                            ))
-                                        }
-                                    </Select> */}
+                
                   {"plantingYear" in errors ? (
                     <FormControl.ErrorMessage
                       leftIcon={
@@ -474,10 +396,6 @@ export default function FarmlandBlockRegistration({
               </Box>
               <Box w="10%"></Box>
             </Stack>
-
-            // @ts-expect-error TS(2304): Cannot find name 'children'.
-            // @ts-expect-error TS(2322): Type '{ children: any[]; style: {}; }' is not assi... Remove this comment to see the full error message
-            // @ts-expect-error TS(2322): Type '{ children: any[]; style: {}; }' is not assi... Remove this comment to see the full error message
             <Box style={{}}>
               <Stack direction="row" w="100%" space={2}>
                 <Box w={"48%"}>
@@ -504,12 +422,6 @@ export default function FarmlandBlockRegistration({
                       }}
                     />
 
-                    {/* { ('usedArea' in errors)
-                        ? <FormControl.ErrorMessage 
-                        leftIcon={<Icon name="error-outline" size={16} color="red" />}
-                        _text={{ fontSize: 'xs'}}>{errors?.usedArea}</FormControl.ErrorMessage> 
-                        : <FormControl.HelperText>{errors?.blockTrees && <Text></Text>}</FormControl.HelperText>
-                        } */}
                   </FormControl>
                 </Box>
 
@@ -543,14 +455,6 @@ export default function FarmlandBlockRegistration({
                         setBlockTrees(newNumber)
                       }}
                     />
-
-                    {/* {
-                        ('blockTrees' in errors) 
-                        ? <FormControl.ErrorMessage 
-                        leftIcon={<Icon name="error-outline" size={16} color="red" />}
-                        _text={{ fontSize: 'xs'}}>{errors?.blockTrees}</FormControl.ErrorMessage> 
-                        : <FormControl.HelperText>{errors?.usedArea && <Text></Text>}</FormControl.HelperText>
-                    } */}
                   </FormControl>
                 </Box>
               </Stack>
@@ -613,12 +517,9 @@ export default function FarmlandBlockRegistration({
 
               {errors?.blockTrees && !errors?.usedArea && (
                 <Box
-                //     style={{
-                //         backgroundColor: COLORS.danger,
-                //         // marginTop: -30,
-                //     }}
+
                 >
-                  {/* <Text style={{ fontSize: 14, color: COLORS.ghostwhite, padding: 6, }}> <Icon name="error-outline" size={20} color={COLORS.ghostwhite} /> {errors?.usedArea}</Text>        */}
+
                   <Text style={{ fontSize: 14, color: COLORS.red, padding: 6 }}>
                     {" "}
                     <Icon
@@ -628,16 +529,13 @@ export default function FarmlandBlockRegistration({
                     />{" "}
                     {errors?.blockTrees}
                   </Text>
-                  {/* <Text style={{ fontSize: 14, color: COLORS.ghostwhite, padding: 6, }}> <Icon name="error-outline" size={20} color={COLORS.ghostwhite} /> {errors?.treeDensity}</Text>         */}
+
                 </Box>
               )}
 
               {!errors?.blockTrees && errors?.usedArea && (
                 <Box
-                //     style={{
-                //         backgroundColor: COLORS.danger,
-                //         // marginTop: -30,
-                //     }}
+
                 >
                   <Text style={{ fontSize: 14, color: COLORS.red, padding: 6 }}>
                     {" "}
@@ -648,23 +546,10 @@ export default function FarmlandBlockRegistration({
                     />{" "}
                     {errors?.usedArea}
                   </Text>
-                  {/* <Text style={{ fontSize: 14, color: COLORS.ghostwhite, padding: 6, }}> <Icon name="error-outline" size={20} color={COLORS.ghostwhite} /> {errors?.blockTrees}</Text>        */}
-                  {/* <Text style={{ fontSize: 14, color: COLORS.ghostwhite, padding: 6, }}> <Icon name="error-outline" size={20} color={COLORS.ghostwhite} /> {errors?.treeDensity}</Text>         */}
+
                 </Box>
               )}
 
-              {/* {
-                    (errors?.blockTrees && errors?.usedArea) &&
-                    <Box
-                        style={{
-                            backgroundColor: COLORS.danger,
-                        }}
-                    >
-                        <Text style={{ fontSize: 14, color: COLORS.ghostwhite, padding: 6, }}> <Icon name="error-outline" size={20} color={COLORS.ghostwhite} /> {errors?.usedArea}</Text>       
-                        <Text style={{ fontSize: 14, color: COLORS.ghostwhite, padding: 6, }}> <Icon name="error-outline" size={20} color={COLORS.ghostwhite} /> {errors?.blockTrees}</Text>       
-                        <Text style={{ fontSize: 14, color: COLORS.ghostwhite, padding: 6, }}> <Icon name="error-outline" size={20} color={COLORS.ghostwhite} /> {errors?.treeDensity}</Text>        
-                    </Box>
-                }  */}
             </Box>
 
             <Box
@@ -1233,66 +1118,7 @@ export default function FarmlandBlockRegistration({
                       </Stack>
                     </Box>
                   ))
-                  //     :
-                  //     sameTypeTreesList?.length === 1 ?
-                  //      <Box
-                  //         w="100%"
-                  //         key={index}
-                  //         mb="1"
-                  //     >
-                  //     <Stack
-                  //         direction="row"
-                  //         w="100%"
-                  //         space={2}
-                  //         // mt="1"
-                  //     >
-                  //         <Box w="65%"
-                  //             style={{
-                  //                 justifyContent: 'center',
-                  //             }}
-                  //         >
-                  //             <Text
-                  //                 style={{
-                  //                     fontSize: 16,
-                  //                     fontFamily: 'JosefinSans-Regular',
-                  //                     color: COLORS.grey,
-                  //                 }}
-                  //             >
-                  //                 <Icon name="arrow-forward" color={COLORS.grey} size={10} /> {sameTypeTreesList[0]?.treeType}
-                  //             </Text>
-                  //         </Box>
-                  //         <Box w="35%">
-                  //         <Text
-                  //             style={{
-                  //                 fontSize: 16,
-                  //                 fontFamily: 'JosefinSans-Regular',
-                  //                 color: COLORS.grey,
-                  //             }}
-                  //         >
-                  //             {sameTypeTreesList[0]?.trees}
-                  //             </Text>
-                  //             {/* <CustomInput
-                  //                 width="90%"
-                  //                 textAlign="center"
-                  //                 keyboardType="numeric"
-                  //                 placeholder="Cajueiros"
-                  //                 value={sameTypeTree?.trees}
-                  //                 onChangeText={newTrees=>{
-                  //                     setErrors(prev=>({...prev, sameTypeTrees: ''}));
-                  //                     setSameTypeTreesList(sameTypeTreesList.map((object)=>{
-                  //                         if (object?.treeType === sameTypeTree?.treeType){
-                  //                             object.trees = newTrees;
-                  //                         }
-                  //                         return object;
-                  //                     }));
-
-                  //                 }}
-                  //             /> */}
-                  //         </Box>
-                  //     </Stack>
-                  // </Box>
-                  // :
-                  // <></>
+                  
                 }
               </Box>
             )}

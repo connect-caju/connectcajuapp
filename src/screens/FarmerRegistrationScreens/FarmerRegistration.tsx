@@ -1,8 +1,3 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable linebreak-style */
-/* eslint-disable prettier/prettier */
-
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { Text, SafeAreaView, Pressable, View, TouchableOpacity } from "react-native";
 import React, { useState, useEffect } from "react";
 import { Box, Stack, Center } from "native-base";
@@ -48,7 +43,7 @@ export default function FarmerRegistration({
   const exportedFarmerType = route.params?.farmerType || "";
 
   const realm = useRealm();
-  const [gender, setGender] = useState("");
+  const [gender, setGender] = useState<{ label: string; value: string }>();
   const [familySize, setFamilySize] = useState("");
 
   // address

@@ -9,19 +9,12 @@ import {
   Image,
   View,
 } from "react-native";
-import React, { useEffect, useState, useCallback, useRef, } from "react";
+import React, { useEffect, useState, useCallback, useRef } from "react";
 import { Icon, Chip } from "@rneui/themed";
-import {
-  Box,
-  FormControl,
-  Stack,
-  Center,
-} from "native-base";
+import { Box, FormControl, Stack, Center } from "native-base";
 import { MultipleSelectList } from "react-native-dropdown-select-list";
 import AwesomeAlert from "react-native-awesome-alerts";
-import Animated, {
-  SlideInLeft,
-} from "react-native-reanimated";
+import Animated, { SlideInLeft } from "react-native-reanimated";
 
 import CustomActivityIndicator from "../../components/ActivityIndicator/CustomActivityIndicator";
 import styles from "./styles";
@@ -35,7 +28,6 @@ import COLORS from "../../consts/colors";
 import validateFarmlandMainData from "../../helpers/validateFarmlandMainData";
 import { assetTypes } from "../../consts/assetTypes";
 import { v4 as uuidv4 } from "uuid";
-
 
 import { categorizeFarmer } from "../../helpers/categorizeFarmer";
 import FarmlandBlockRegistration from "../../components/FarmlandBlockRegistration/FarmlandBlockRegistration";
@@ -54,14 +46,11 @@ import { farmerTypes } from "../../consts/farmerTypes";
 import { resourceTypes } from "../../consts/resourceTypes";
 import { farmlandOwners } from "../../consts/farmlandOwners";
 import { backgroundStyle } from "../../styles/globals";
-const { useRealm, useQuery, } = realmContext;
+const { useRealm, useQuery } = realmContext;
 
 const farmlandResourceMessage = "farmlandResourceMessage";
 
-export default function FarmlandRegistration({
-  route,
-  navigation
-}: any) {
+export default function FarmlandRegistration({ route, navigation }: any) {
   const realm = useRealm();
   const user = useUser();
   const customUserData = user?.customData;
@@ -74,7 +63,10 @@ export default function FarmlandRegistration({
     "userId == $0",
     customUserData?.userId,
   )[0];
-  const farmland = realm.objectForPrimaryKey(resourceTypes.farmland, farmlandId);
+  const farmland = realm.objectForPrimaryKey(
+    resourceTypes.farmland,
+    farmlandId,
+  );
 
   // extract farmland owner id, name from the previous screen
   const { ownerId, ownerName, flag, ownerImage, ownerAddress } = route.params;
@@ -104,8 +96,8 @@ export default function FarmlandRegistration({
   const [usedArea, setUsedArea] = useState("");
   const [densityWidth, setDensityWidth] = useState("");
   const [densityLength, setDensityLength] = useState("");
-  const [plantTypes, setPlantTypes] = useState([]);
-  const [clones, setClones] = useState([]);
+  const [plantTypes, setPlantTypes] = useState<{id: string, name: string}[]>([]);
+  const [clones, setClones] = useState<{id: string, name: string}[]>([]);
   const [isDensityModeIrregular, setIsDensityModeIrregular] = useState(false);
   const [isDensityModeRegular, setIsDensityModeRegular] = useState(false);
   const [sameTypeTreesList, setSameTypeTreesList] = useState([]);
@@ -216,7 +208,10 @@ export default function FarmlandRegistration({
 
   const invalidateFarmland = useCallback(
     (farmlandId: any, invalidationMessage: any, realm: any) => {
-      const foundFarmland = realm.objectForPrimaryKey(resourceTypes.farmland, farmlandId);
+      const foundFarmland = realm.objectForPrimaryKey(
+        resourceTypes.farmland,
+        farmlandId,
+      );
 
       realm.write(() => {
         if (foundFarmland) {
@@ -228,7 +223,6 @@ export default function FarmlandRegistration({
       try {
         addInvalidationMessage(farmlandId, invalidationMessage, realm);
       } catch (error) {
-
         console.log("could not add invalidation message:", { cause: error });
       }
     },
@@ -245,13 +239,16 @@ export default function FarmlandRegistration({
       };
 
       realm.write(async () => {
-        const newResourceMessage = await realm.create(resourceTypes.invalidationMotive, {
-          _id: uuidv4(),
-          resourceId: farmlandId,
-          resourceName: resourceTypes.farmland,
-          messages: [newMessageObject],
-          createdAt: new Date(),
-        });
+        const newResourceMessage = await realm.create(
+          resourceTypes.invalidationMotive,
+          {
+            _id: uuidv4(),
+            resourceId: farmlandId,
+            resourceName: resourceTypes.farmland,
+            messages: [newMessageObject],
+            createdAt: new Date(),
+          },
+        );
       });
     },
     [realm, farmlandId],
@@ -271,7 +268,10 @@ export default function FarmlandRegistration({
 
   const deleteBlock = useCallback(
     (farmlandId: any, realm: any) => {
-      const foundFarmland = realm.objectForPrimaryKey(resourceTypes.farmland, farmlandId);
+      const foundFarmland = realm.objectForPrimaryKey(
+        resourceTypes.farmland,
+        farmlandId,
+      );
 
       realm.write(() => {
         foundFarmland.blocks.pop();
@@ -283,7 +283,10 @@ export default function FarmlandRegistration({
   );
 
   const checkBlockConformity = (farmlandId: any, realm: any) => {
-    const farmland = realm.objectForPrimaryKey(resourceTypes.farmland, farmlandId);
+    const farmland = realm.objectForPrimaryKey(
+      resourceTypes.farmland,
+      farmlandId,
+    );
 
     const blocksTrees = farmland?.blocks
       ?.map((block: any) => parseInt(block?.trees))
@@ -383,13 +386,14 @@ export default function FarmlandRegistration({
 
   const onAddBlock = useCallback(
     (block: any, farmlandId: any, realm: any) => {
-      const farmland = realm.objectForPrimaryKey(resourceTypes.farmland, farmlandId);
+      const farmland = realm.objectForPrimaryKey(
+        resourceTypes.farmland,
+        farmlandId,
+      );
       realm.write(() => {
-       
         farmland?.blocks?.push(block);
         if (
-          farmland?.trees ===
-          farmland?.blocks
+          farmland?.trees === farmland?.blocks
             ?.map((block: any) => block.trees)
             ?.reduce((acc: any, el: any) => acc + el, 0)
         ) {
@@ -444,7 +448,6 @@ export default function FarmlandRegistration({
   };
 
   const onAddFarmland = useCallback(
-
     // @ts-expect-error TS(7030): Not all code paths return a value.
     (farmlandMainData: any, realm: any) => {
       const { description, consociatedCrops, trees, totalArea } =
@@ -602,10 +605,8 @@ export default function FarmlandRegistration({
       // update user stat (1 more farmland registered by the user)
       if (currentUserStat) {
         realm.write(() => {
-
           // @ts-expect-error TS(2339): Property 'registeredFarmlands' does not exist on t... Remove this comment to see the full error message
           currentUserStat.registeredFarmlands =
-
             // @ts-expect-error TS(2339): Property 'registeredFarmlands' does not exist on t... Remove this comment to see the full error message
             currentUserStat.registeredFarmlands + 1;
         });
@@ -626,7 +627,7 @@ export default function FarmlandRegistration({
     [realm, farmland],
   );
 
-  useEffect(() => { }, [ownerId, farmlandId]);
+  useEffect(() => {}, [ownerId, farmlandId]);
 
   useEffect(() => {
     setLoadingActivityIndicator(true);
@@ -643,12 +644,8 @@ export default function FarmlandRegistration({
   };
 
   return (
-    <SafeAreaView
-      className={`flex flex-1 mb-10 ${backgroundStyle}`}
-    >
-      <Animated.View
-        entering={SlideInLeft.duration(600)}
-      >
+    <SafeAreaView className={`flex flex-1 mb-10 ${backgroundStyle}`}>
+      <Animated.View entering={SlideInLeft.duration(600)}>
         <AwesomeAlert
           show={errorAlert}
           showProgress={false}
@@ -709,7 +706,7 @@ export default function FarmlandRegistration({
           cancelButtonColor={COLORS.danger}
           confirmButtonColor={
             logFlag?.includes("inconsistencies") ||
-              logFlag?.includes("no blocks")
+            logFlag?.includes("no blocks")
               ? COLORS.main
               : COLORS.main
           }
@@ -722,7 +719,6 @@ export default function FarmlandRegistration({
                 invalidateFarmland(farmlandId, invalidationMessage, realm);
                 navigateBack();
               } catch (error) {
-
                 console.log("could not finish invalidation task: ", {
                   cause: error,
                 });
@@ -738,7 +734,6 @@ export default function FarmlandRegistration({
         <Box
           w="100%"
           px="3"
-
           // @ts-expect-error TS(2322): Type '{ children: Element[]; w: "100%"; px: "3"; s... Remove this comment to see the full error message
           style={{
             backgroundColor: COLORS.fourth,
@@ -794,22 +789,19 @@ export default function FarmlandRegistration({
             paddingBottom: 60,
           }}
         >
-
-          <View style={{
-            elevation: 1,
-            borderWidth: 1,
-            paddingVertical: 5,
-            borderColor: COLORS.lightgrey,
-            backgroundColor: "transparent",
-            flexDirection: "row",
-            paddingBottom: 1,
-
-          }} >
+          <View
+            style={{
+              elevation: 1,
+              borderWidth: 1,
+              paddingVertical: 5,
+              borderColor: COLORS.lightgrey,
+              backgroundColor: "transparent",
+              flexDirection: "row",
+              paddingBottom: 1,
+            }}
+          >
             <Box w="3%"></Box>
             <View
-           
-
-
               style={{
                 flexDirection: "row",
                 minHeight: 80,
@@ -834,7 +826,6 @@ export default function FarmlandRegistration({
                 />
               )}
               <Box
-
                 // @ts-expect-error TS(2322): Type '{ children: Element[]; style: { justifyConte... Remove this comment to see the full error message
                 style={{
                   justifyContent: "flex-end",
@@ -877,7 +868,6 @@ export default function FarmlandRegistration({
           <Box
             w="100%"
             p="4"
-
             // @ts-expect-error TS(2322): Type '{ children: Element[]; w: "100%"; p: "4"; st... Remove this comment to see the full error message
             style={{
               flexDirection: "row",
@@ -901,7 +891,6 @@ export default function FarmlandRegistration({
               )}
             </Box>
             <Center
-
               // @ts-expect-error TS(2322): Type '{ children: Element; style: { borderRadius: ... Remove this comment to see the full error message
               style={{
                 borderRadius: 5,
@@ -909,7 +898,11 @@ export default function FarmlandRegistration({
                 padding: 5,
               }}
             >
-              <FontAwesomeIcon icon={faTree} size={30} color={COLORS.lightestgrey} />
+              <FontAwesomeIcon
+                icon={faTree}
+                size={30}
+                color={COLORS.lightestgrey}
+              />
             </Center>
           </Box>
 
@@ -941,7 +934,6 @@ export default function FarmlandRegistration({
                       }
                       _text={{ fontSize: "xs" }}
                     >
-
                       {errors?.description}
                     </FormControl.ErrorMessage>
                   ) : (
@@ -958,7 +950,10 @@ export default function FarmlandRegistration({
                     <FormControl.Label>Culturas consociadas</FormControl.Label>
                     <MultipleSelectList
                       setSelected={(crop: any) => {
-                        setErrors((prev) => ({ ...prev, consociatedCrops: "" }));
+                        setErrors((prev) => ({
+                          ...prev,
+                          consociatedCrops: "",
+                        }));
                         setConsociatedCrops(crop);
                       }}
                       data={crops}
@@ -966,10 +961,7 @@ export default function FarmlandRegistration({
                       maxHeight={400}
                       save="value"
                       arrowicon={
-                        <Icon
-                          name="arrow-drop-down"
-                          color={COLORS.main}
-                        />
+                        <Icon name="arrow-drop-down" color={COLORS.main} />
                       }
                       closeicon={
                         <Icon name="close" size={20} color={COLORS.grey} />
@@ -1016,7 +1008,6 @@ export default function FarmlandRegistration({
                   {/* show all the newCrops that are typed by the user */}
                   {otherConsociatedCrops.length > 0 && (
                     <Box
-
                       // @ts-expect-error TS(2322): Type '{ children: Element[]; style: { flexDirectio... Remove this comment to see the full error message
                       style={{
                         flexDirection: "row",
@@ -1028,7 +1019,6 @@ export default function FarmlandRegistration({
                     >
                       <Box
                         w="90%"
-
                         // @ts-expect-error TS(2322): Type '{ children: Element; w: "90%"; style: { padd... Remove this comment to see the full error message
                         style={{
                           padding: 5,
@@ -1049,7 +1039,6 @@ export default function FarmlandRegistration({
                       </Box>
                       <Box
                         w="10%"
-
                         // @ts-expect-error TS(2322): Type '{ children: Element; w: "10%"; style: { alig... Remove this comment to see the full error message
                         style={{
                           alignItems: "flex-end",
@@ -1074,7 +1063,6 @@ export default function FarmlandRegistration({
 
                   {/* Show this only when the user chooses 'Outras' option in the consociatedCrops */}
                   {consociatedCrops?.find((crop) => crop === "Outras") && (
-
                     // @ts-expect-error TS(2322): Type '{ children: Element; style: {}; }' is not as... Remove this comment to see the full error message
                     <Box style={{}}>
                       <Stack direction="row" w="100%" space={2}>
@@ -1092,7 +1080,6 @@ export default function FarmlandRegistration({
                               keyboardType="default"
                               textAlign="center"
                               placeholder="Outra cultura"
-
                               // @ts-expect-error TS(2339): Property 'newCrop' does not exist on type '{}'.
                               borderColor={errors?.newCrop ? "red" : ""}
                               value={newCrop}
@@ -1113,7 +1100,6 @@ export default function FarmlandRegistration({
                                 }
                                 _text={{ fontSize: "xs" }}
                               >
-
                                 {errors?.newCrop}
                               </FormControl.ErrorMessage>
                             ) : (
@@ -1124,7 +1110,6 @@ export default function FarmlandRegistration({
 
                         <Box
                           w="20%"
-
                           // @ts-expect-error TS(2322): Type '{ children: Element; w: "20%"; style: { just... Remove this comment to see the full error message
                           style={{
                             justifyContent: "center",
@@ -1140,13 +1125,11 @@ export default function FarmlandRegistration({
                                 newCrop !== "" &&
                                 !otherConsociatedCrops?.find(
                                   (crop) =>
-
                                     // @ts-expect-error TS(2339): Property 'toLowerCase' does not exist on type 'nev... Remove this comment to see the full error message
                                     crop?.toLowerCase() ===
                                     newCrop?.toLowerCase(),
                                 )
                               ) {
-
                                 // @ts-expect-error TS(2345): Argument of type '(prev: never[]) => string[]' is ... Remove this comment to see the full error message
                                 setOtherConsociatedCrops((prev) => [
                                   ...prev,
@@ -1207,7 +1190,6 @@ export default function FarmlandRegistration({
                               }
                               _text={{ fontSize: "xs" }}
                             >
-
                               {errors?.totalArea}
                             </FormControl.ErrorMessage>
                           ) : (
@@ -1253,7 +1235,6 @@ export default function FarmlandRegistration({
                               }
                               _text={{ fontSize: "xs" }}
                             >
-                              
                               {errors?.trees}
                             </FormControl.ErrorMessage>
                           ) : (
@@ -1272,7 +1253,6 @@ export default function FarmlandRegistration({
             <>
               <Box
                 w="100%"
-
                 // @ts-expect-error TS(2322): Type '{ children: Element[]; w: "100%"; style: { p... Remove this comment to see the full error message
                 style={{
                   padding: 20,
@@ -1289,7 +1269,6 @@ export default function FarmlandRegistration({
                     Área Total
                   </Text>
                   <Chip
-
                     // @ts-expect-error TS(2339): Property 'totalArea' does not exist on type 'Objec... Remove this comment to see the full error message
                     title={`${Number(farmland?.totalArea.toFixed(1))} hectares`}
                     titleStyle={{
@@ -1315,7 +1294,6 @@ export default function FarmlandRegistration({
                     Cajueiros
                   </Text>
                   <Chip
-
                     // @ts-expect-error TS(2339): Property 'trees' does not exist on type 'Object<un... Remove this comment to see the full error message
                     title={`${farmland?.trees} árvores`}
                     titleStyle={{
@@ -1341,7 +1319,6 @@ export default function FarmlandRegistration({
                     Consociação
                   </Text>
                   <Chip
-
                     // @ts-expect-error TS(2339): Property 'consociatedCrops' does not exist on type... Remove this comment to see the full error message
                     title={farmland?.consociatedCrops?.join("; ")}
                     titleStyle={{
@@ -1358,195 +1335,210 @@ export default function FarmlandRegistration({
               </Box>
 
               {farmland?.blocks?.length > 0 &&
-
                 // @ts-expect-error TS(2339): Property 'blocks' does not exist on type 'Object<u... Remove this comment to see the full error message
-                normalizeBlockList(farmland?.blocks)?.map((block: any, index: any) => {
-                  return (
-                    <Box
-                      key={index}
-
-                      // @ts-expect-error TS(2322): Type '{ children: Element[]; key: any; style: { fl... Remove this comment to see the full error message
-                      style={{
-                        flex: 1,
-                        margin: 10,
-                      }}
-                    >
+                normalizeBlockList(farmland?.blocks)?.map(
+                  (block: any, index: any) => {
+                    return (
                       <Box
-                        w="100%"
-
-                        // @ts-expect-error TS(2322): Type '{ children: Element[]; w: "100%"; style: { b... Remove this comment to see the full error message
+                        key={index}
+                        // @ts-expect-error TS(2322): Type '{ children: Element[]; key: any; style: { fl... Remove this comment to see the full error message
                         style={{
-                          backgroundColor: COLORS.dark,
-                          borderWidth: 1,
-                          borderColor: COLORS.dark,
-                          borderTopEndRadius: 8,
-                          borderTopStartRadius: 8,
-                          paddingVertical: 3,
-                          // paddingHorizontal: 6,
-                          flexDirection: "row",
-
+                          flex: 1,
+                          margin: 10,
                         }}
                       >
                         <Box
-                          w="85%"
-
-                          // @ts-expect-error TS(2322): Type '{ children: Element; w: "85%"; style: { padd... Remove this comment to see the full error message
+                          w="100%"
+                          // @ts-expect-error TS(2322): Type '{ children: Element[]; w: "100%"; style: { b... Remove this comment to see the full error message
                           style={{
-                            paddingLeft: 10,
-                            justifyContent: "center",
+                            backgroundColor: COLORS.dark,
+                            borderWidth: 1,
+                            borderColor: COLORS.dark,
+                            borderTopEndRadius: 8,
+                            borderTopStartRadius: 8,
+                            paddingVertical: 3,
+                            // paddingHorizontal: 6,
+                            flexDirection: "row",
                           }}
                         >
-                          <Text
+                          <Box
+                            w="85%"
+                            // @ts-expect-error TS(2322): Type '{ children: Element; w: "85%"; style: { padd... Remove this comment to see the full error message
                             style={{
-                              color: COLORS.ghostwhite,
-                              fontFamily: "JosefinSans-Bold",
-                              fontSize: 15,
-                            }}
-                            numberOfLines={1}
-                            ellipsizeMode="head"
-                          >
-                            Parcela {index + 1} ({block?.plantingYear})
-                          </Text>
-                        </Box>
-
-                        <Box w="15%">
-                          <TouchableOpacity
-                            disabled={
-
-                              // @ts-expect-error TS(2339): Property 'blocks' does not exist on type 'Object<u... Remove this comment to see the full error message
-                              block?.position === farmland?.blocks?.length - 1
-                                ? false
-                                : true
-                            }
-                            onPress={() => {
-                              setAreaFlag(
-                                (prev) => prev - parseFloat(block?.usedArea),
-                              );
-                              setTreesFlag(
-                                (prev) => prev - parseInt(block?.trees),
-                              );
-
-                              setIsDeleteBlockOn(true);
+                              paddingLeft: 10,
+                              justifyContent: "center",
                             }}
                           >
-                            <Icon
-                              name={
-                                block?.position ===
+                            <Text
+                              style={{
+                                color: COLORS.ghostwhite,
+                                fontFamily: "JosefinSans-Bold",
+                                fontSize: 15,
+                              }}
+                              numberOfLines={1}
+                              ellipsizeMode="head"
+                            >
+                              Parcela {index + 1} ({block?.plantingYear})
+                            </Text>
+                          </Box>
 
+                          <Box w="15%">
+                            <TouchableOpacity
+                              disabled={
+                                // @ts-expect-error TS(2339): Property 'blocks' does not exist on type 'Object<u... Remove this comment to see the full error message
+                                block?.position === farmland?.blocks?.length - 1
+                                  ? false
+                                  : true
+                              }
+                              onPress={() => {
+                                setAreaFlag(
+                                  (prev) => prev - parseFloat(block?.usedArea),
+                                );
+                                setTreesFlag(
+                                  (prev) => prev - parseInt(block?.trees),
+                                );
+
+                                setIsDeleteBlockOn(true);
+                              }}
+                            >
+                              <Icon
+                                name={
+                                  block?.position ===
                                   // @ts-expect-error TS(2339): Property 'blocks' does not exist on type 'Object<u... Remove this comment to see the full error message
                                   farmland?.blocks?.length - 1
-                                  ? "delete-forever"
-                                  : "check-circle"
-                              }
-                              size={25}
-                              color={
-                                block?.position ===
-
+                                    ? "delete-forever"
+                                    : "check-circle"
+                                }
+                                size={25}
+                                color={
+                                  block?.position ===
                                   // @ts-expect-error TS(2339): Property 'blocks' does not exist on type 'Object<u... Remove this comment to see the full error message
                                   farmland?.blocks?.length - 1
-                                  ? COLORS.ghostwhite
-                                  : COLORS.ghostwhite
-                              }
-                            />
-                          </TouchableOpacity>
+                                    ? COLORS.ghostwhite
+                                    : COLORS.ghostwhite
+                                }
+                              />
+                            </TouchableOpacity>
+                          </Box>
+                          <Box w="5%"></Box>
                         </Box>
-                        <Box w="5%"></Box>
+                        <Box
+                          // @ts-expect-error TS(2322): Type '{ children: any[]; style: { borderWidth: num... Remove this comment to see the full error message
+                          style={{
+                            borderWidth: 1,
+                            borderColor: COLORS.dark,
+                          }}
+                        >
+                          <Box w="100%">
+                            <Stack direction="row" w="100%" space={1} my="3">
+                              <Box w="50%" alignItems={"center"}>
+                                <Text
+                                  style={{
+                                    color: COLORS.black,
+                                    fontFamily: "JosefinSans-Bold",
+                                    fontSize: 14,
+                                  }}
+                                >
+                                  Área (hectares)
+                                </Text>
+                                <Text
+                                  style={{
+                                    textAlign: "center",
+                                    color: COLORS.grey,
+                                  }}
+                                >
+                                  ({Number(block?.usedArea.toFixed(1))})
+                                </Text>
+                              </Box>
+                              <Box w="50%" alignItems={"center"}>
+                                <Text
+                                  style={{
+                                    color: COLORS.black,
+                                    fontFamily: "JosefinSans-Bold",
+                                    fontSize: 14,
+                                  }}
+                                >
+                                  Cajueiros (árvores)
+                                </Text>
+                                <Text
+                                  style={{
+                                    textAlign: "center",
+                                    color: COLORS.grey,
+                                  }}
+                                >
+                                  ({block?.trees})
+                                </Text>
+                              </Box>
+                            </Stack>
+                          </Box>
+                          <Box w="100%">
+                            <Stack direction="row" w="100%" space={1} my="3">
+                              <Box w="50%" alignItems={"center"}>
+                                <Text
+                                  style={{
+                                    color: COLORS.black,
+                                    fontFamily: "JosefinSans-Bold",
+                                    fontSize: 14,
+                                  }}
+                                >
+                                  Compasso (metros)
+                                </Text>
+                                <Text
+                                  style={{
+                                    textAlign: "center",
+                                    color: COLORS.grey,
+                                  }}
+                                >
+                                  {block?.density?.mode === "Regular"
+                                    ? `(${block?.density?.mode}: ${block?.density?.length}x${block?.density?.width})`
+                                    : `(${block?.density?.mode})`}
+                                </Text>
+                              </Box>
+                              <Box w="50%" alignItems={"center"}>
+                                <Text
+                                  style={{
+                                    color: COLORS.black,
+                                    fontFamily: "JosefinSans-Bold",
+                                    fontSize: 14,
+                                  }}
+                                >
+                                  Tipo de plantas
+                                </Text>
+                                <Text
+                                  style={{
+                                    textAlign: "center",
+                                    color: COLORS.grey,
+                                  }}
+                                >
+                                  ({block?.plantTypes?.plantType?.join("; ")})
+                                </Text>
+                                <Text
+                                  style={{
+                                    textAlign: "center",
+                                    color: COLORS.grey,
+                                  }}
+                                >
+                                  {block?.plantTypes?.plantType?.some(
+                                    (plant: any) => plant?.includes("enxert"),
+                                  )
+                                    ? `(clones: ${block?.plantTypes?.clones?.join(
+                                        "; ",
+                                      )})`
+                                    : ""}
+                                </Text>
+                              </Box>
+                            </Stack>
+                          </Box>
+                        </Box>
                       </Box>
-                      <Box
-
-                        // @ts-expect-error TS(2322): Type '{ children: any[]; style: { borderWidth: num... Remove this comment to see the full error message
-                        style={{
-                          borderWidth: 1,
-                          borderColor: COLORS.dark,
-                        }}
-                      >
-                        <Box w="100%">
-                          <Stack direction="row" w="100%" space={1} my="3">
-                            <Box w="50%" alignItems={"center"}>
-                              <Text
-                                style={{
-                                  color: COLORS.black,
-                                  fontFamily: "JosefinSans-Bold",
-                                  fontSize: 14,
-                                }}
-                              >
-                                Área (hectares)
-                              </Text>
-                              <Text style={{ textAlign: "center", color: COLORS.grey, }}>
-                                ({Number(block?.usedArea.toFixed(1))})
-                              </Text>
-                            </Box>
-                            <Box w="50%" alignItems={"center"}>
-                              <Text
-                                style={{
-                                  color: COLORS.black,
-                                  fontFamily: "JosefinSans-Bold",
-                                  fontSize: 14,
-                                }}
-                              >
-                                Cajueiros (árvores)
-                              </Text>
-                              <Text style={{ textAlign: "center", color: COLORS.grey, }}>
-                                ({block?.trees})
-                              </Text>
-                            </Box>
-                          </Stack>
-                        </Box>
-                        <Box w="100%">
-                          <Stack direction="row" w="100%" space={1} my="3">
-                            <Box w="50%" alignItems={"center"}>
-                              <Text
-                                style={{
-                                  color: COLORS.black,
-                                  fontFamily: "JosefinSans-Bold",
-                                  fontSize: 14,
-                                }}
-                              >
-                                Compasso (metros)
-                              </Text>
-                              <Text
-                                style={{
-                                  textAlign: "center", color: COLORS.grey,
-                                }}
-                              >
-                                {block?.density?.mode === "Regular"
-                                  ? `(${block?.density?.mode}: ${block?.density?.length}x${block?.density?.width})`
-                                  : `(${block?.density?.mode})`}
-                              </Text>
-                            </Box>
-                            <Box w="50%" alignItems={"center"}>
-                              <Text
-                                style={{
-                                  color: COLORS.black,
-                                  fontFamily: "JosefinSans-Bold",
-                                  fontSize: 14,
-                                }}
-                              >
-                                Tipo de plantas
-                              </Text>
-                              <Text style={{ textAlign: "center", color: COLORS.grey, }}>
-                                ({block?.plantTypes?.plantType?.join("; ")})
-                              </Text>
-                              <Text style={{ textAlign: "center", color: COLORS.grey, }}>
-                                {block?.plantTypes?.plantType?.some((plant: any) => plant?.includes("enxert"),
-                                )
-                                  ? `(clones: ${block?.plantTypes?.clones?.join(
-                                    "; ",
-                                  )})`
-                                  : ""}
-                              </Text>
-                            </Box>
-                          </Stack>
-                        </Box>
-                      </Box>
-                    </Box>
-                  );
-                })}
+                    );
+                  },
+                )}
             </>
           )}
           {farmland?.blocks?.length > 0 ? (
             <>
-              {(farmland && farmland?.blocks) && (
+              {farmland && farmland?.blocks && (
                 <Text
                   style={{
                     fontSize: 12,
@@ -1567,7 +1559,6 @@ export default function FarmlandRegistration({
                   flexDirection: "row",
                   justifyContent: "space-between",
                   margin: 10,
-
                 }}
               >
                 <TouchableOpacity
@@ -1585,7 +1576,6 @@ export default function FarmlandRegistration({
                     height: 45,
                   }}
                 >
-
                   <Text
                     style={{
                       fontSize: 13,
@@ -1632,13 +1622,11 @@ export default function FarmlandRegistration({
                     Adicionar Parcela
                   </Text>
                 </TouchableOpacity>
-
               </View>
             </>
-          )
-            :
+          ) : (
             <>
-              {(farmland && farmland?.blocks) && (
+              {farmland && farmland?.blocks && (
                 <Text
                   style={{
                     fontSize: 12,
@@ -1649,7 +1637,6 @@ export default function FarmlandRegistration({
                     marginVertical: 5,
                   }}
                 >
-
                   {ordinalNumberings[farmland?.blocks?.length + 1]} parcela.
                 </Text>
               )}
@@ -1685,8 +1672,7 @@ export default function FarmlandRegistration({
                 </Text>
               </TouchableOpacity>
             </>
-
-          }
+          )}
 
           <FarmlandBlockRegistration
             isOverlayVisible={isOverlayVisible}
@@ -1742,7 +1728,6 @@ export default function FarmlandRegistration({
             showConfirmButton={showConfirmButton}
             setShowConfirmButton={setShowConfirmButton}
             ownerImage={ownerImage}
-
           />
 
           {successLottieVisible && (

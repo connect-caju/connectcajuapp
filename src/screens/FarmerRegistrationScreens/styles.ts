@@ -1,6 +1,4 @@
-/* eslint-disable prettier/prettier */
 
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { StyleSheet } from "react-native";
 import COLORS from "../../consts/colors";
 
@@ -29,15 +27,15 @@ const styles = StyleSheet.create({
   },
   secondDescription: {
     textAlign: "center",
-    fontFamily: "JosefinSans-Italic",
-    color: "#005000",
+    // fontFamily: "JosefinSans-Italic",
+    color: COLORS.black,
     fontSize: 18,
     lineHeight: 30,
   },
   formSectionDescription: {
     textAlign: "center",
-    fontFamily: "JosefinSans-Italic",
-    color: "#005000",
+    // fontFamily: "JosefinSans-Italic",
+    color: COLORS.black,
     fontSize: 16,
     paddingVertical: 10,
   },

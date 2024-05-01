@@ -1,9 +1,7 @@
 
-// @ts-expect-error TS(2307): Cannot find module 'lucide-react-native' or its co... Remove this comment to see the full error message
 import { Circle, CircleDot } from 'lucide-react-native';
 import { createContext, useContext, useState } from 'react';
 
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { Text, TouchableOpacity, useColorScheme } from 'react-native';
 
 import { cn } from '../lib/utils';

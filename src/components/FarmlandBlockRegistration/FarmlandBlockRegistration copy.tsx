@@ -1,10 +1,4 @@
-import React, {
-  useState,
-  useEffect,
-  useCallback,
-  SetStateAction,
-  Dispatch,
-} from "react";
+import React, { useState, useEffect, useCallback, SetStateAction, Dispatch } from "react";
 import {
   View,
   Text,
@@ -13,23 +7,23 @@ import {
   Animated,
   SafeAreaView,
   TouchableOpacity,
-  ScrollView,
-  StyleSheet,
-  FlatList,
 } from "react-native";
 import { Box, Center, FormControl, Stack } from "native-base";
 import {
   MultipleSelectList,
   SelectList,
 } from "react-native-dropdown-select-list";
-import Icon from "react-native-vector-icons/MaterialIcons";
-import FontAwesomeIcon from "react-native-vector-icons/FontAwesome";
+import Icon  from 'react-native-vector-icons/MaterialIcons';
 
-import { Icon as RNEIcon, Button, CheckBox } from "@rneui/themed";
+// import Animated, { FadeInLeft, SlideInUp } from "react-native-reanimated";
+
+import { responsiveFontSize } from "react-native-responsive-dimensions";
+
+import { Icon as RNEIcon, Button, CheckBox } from "@rneui/base";
 import COLORS from "../../consts/colors";
 import { getFullYears, getFullYears2 } from "../../helpers/dates";
 import { plantingTypes, plantingTypes2 } from "../../consts/plantingTypes";
-import cloneList, { cloneList2 } from "../../consts/clones";
+import cloneList from "../../consts/clones";
 import { CustomInput } from "../Inputs/CustomInput";
 import { realmContext } from "../../models/realmContext";
 import validateBlockData from "../../helpers/validateBlockData";
@@ -108,6 +102,7 @@ export default function FarmlandBlockRegistration({
   const [addBlockIsOn, setAddBlockIsOn] = useState(false);
   const [treeRedFlag, setTreeRedFlag] = useState(false);
   const [areaRedFlag, setAreaRedFlag] = useState(false);
+  const [selectedPlantingTypes, setSelectedPlantingTypes] = useState([]);
 
   // ---------------------------------------------
 
@@ -206,7 +201,7 @@ export default function FarmlandBlockRegistration({
             }),
             transform: [{ scale }],
           }}
-          // className={`${backgroundStyle}`}
+          className={`${backgroundStyle}`}
         >
           <AwesomeAlert
             show={alert}
@@ -406,10 +401,9 @@ export default function FarmlandBlockRegistration({
                     maxHeight={400}
                     fontFamily="JosefinSans-Regular"
                     notFoundText="Ano não encontrado"
-                    // className="text-red-500"
                     dropdownTextStyles={{
-                      fontSize: 18,
-                      // color: COLORS.black,
+                      fontSize: 16,
+                      color: COLORS.black,
                       padding: 5,
                     }}
                     arrowicon={
@@ -424,7 +418,7 @@ export default function FarmlandBlockRegistration({
                     }
                     inputStyles={{
                       fontSize: 15,
-                      // color: plantingYear ? COLORS.black : COLORS.grey,
+                      color: plantingYear ? COLORS.black : COLORS.grey,
                     }}
                     boxStyles={{
                       minHeight: 55,
@@ -455,24 +449,7 @@ export default function FarmlandBlockRegistration({
                       my="2"
                       isInvalid={"usedArea" in errors}
                     >
-                      <Input 
-                        placeholder="Hectares"
-                        label="Área Aproveitada"
-                        keyboardType="numeric"
-                        className="text-center border-gray-300"
-                        onChangeText={(newNumber: any) => {
-                          setErrors((prev: any) => ({
-                            ...prev,
-                            blockTrees: null,
-                            usedArea: null,
-                            treeDensity: null,
-                          }));
-                          setUsedArea(newNumber);
-                        }}
-                        value={usedArea}
-                        
-                      />
-                      {/* <FormControl.Label>Área Aproveitada</FormControl.Label>
+                      <FormControl.Label>Área Aproveitada</FormControl.Label>
                       <CustomInput
                         width="100%"
                         keyboardType="numeric"
@@ -488,7 +465,7 @@ export default function FarmlandBlockRegistration({
                           }));
                           setUsedArea(newNumber);
                         }}
-                      /> */}
+                      />
                     </FormControl>
                   </View>
 
@@ -503,23 +480,7 @@ export default function FarmlandBlockRegistration({
                       my="2"
                       isInvalid={"blockTrees" in errors}
                     >
-                      <Input
-                        placeholder="Cajueiros"
-                        value={blockTrees}
-                        label="N° de Cajueiros"
-                        keyboardType="numeric"
-                        className="text-center border-gray-300"
-                        onChangeText={(newNumber: any) => {
-                          setErrors((prev: any) => ({
-                            ...prev,
-                            blockTrees: null,
-                            usedArea: null,
-                            treeDensity: null,
-                          }));
-                          setBlockTrees(newNumber);
-                        }}
-                      />
-                      {/* <FormControl.Label>N° de Cajueiros</FormControl.Label>
+                      <FormControl.Label>N° de Cajueiros</FormControl.Label>
                       <CustomInput
                         width="100%"
                         keyboardType="numeric"
@@ -535,7 +496,7 @@ export default function FarmlandBlockRegistration({
                           }));
                           setBlockTrees(newNumber);
                         }}
-                      /> */}
+                      />
                     </FormControl>
                   </View>
                 </View>
@@ -661,7 +622,7 @@ export default function FarmlandBlockRegistration({
                         textStyle={{
                           fontWeight: "120",
                           color: isDensityModeRegular
-                            ? COLORS.grey
+                            ? COLORS.main
                             : COLORS.grey,
                         }}
                         title="Regular"
@@ -669,14 +630,14 @@ export default function FarmlandBlockRegistration({
                         checkedIcon={
                           <RNEIcon
                             name="check-box"
-                            color={COLORS.grey}
+                            color={COLORS.main}
                             size={30}
                             iconStyle={{ marginRight: 1 }}
                           />
                         }
                         uncheckedIcon={
                           <RNEIcon
-                            name="crop-square"
+                            name="radio-button-unchecked"
                             color={COLORS.grey}
                             size={30}
                             iconStyle={{ marginRight: 1 }}
@@ -703,7 +664,7 @@ export default function FarmlandBlockRegistration({
                         textStyle={{
                           fontWeight: "120",
                           color: isDensityModeIrregular
-                            ? COLORS.grey
+                            ? COLORS.main
                             : COLORS.grey,
                         }}
                         title="Irregular"
@@ -711,14 +672,14 @@ export default function FarmlandBlockRegistration({
                         checkedIcon={
                           <RNEIcon
                             name="check-box"
-                            color={COLORS.grey}
+                            color={COLORS.main}
                             size={30}
                             iconStyle={{ marginRight: 1 }}
                           />
                         }
                         uncheckedIcon={
                           <RNEIcon
-                            name="crop-square"
+                            name="radio-button-unchecked"
                             color={COLORS.grey}
                             size={30}
                             iconStyle={{ marginRight: 1 }}
@@ -781,11 +742,7 @@ export default function FarmlandBlockRegistration({
                       {"density" in errors ? (
                         <FormControl.ErrorMessage
                           leftIcon={
-                            <RNEIcon
-                              name="error-outline"
-                              size={16}
-                              color="red"
-                            />
+                            <RNEIcon name="error-outline" size={16} color="red" />
                           }
                           _text={{ fontSize: "xs" }}
                         >
@@ -831,11 +788,7 @@ export default function FarmlandBlockRegistration({
                       {"density" in errors ? (
                         <FormControl.ErrorMessage
                           leftIcon={
-                            <RNEIcon
-                              name="error-outline"
-                              size={16}
-                              color="red"
-                            />
+                            <RNEIcon name="error-outline" size={16} color="red" />
                           }
                           _text={{ fontSize: "xs" }}
                         >
@@ -855,86 +808,56 @@ export default function FarmlandBlockRegistration({
                   items={plantingTypes2}
                   IconRenderer={Icon}
                   uniqueKey="id"
-                  subKey="subitems"
-                  onSelectedItemsChange={setPlantTypes}
-                  selectedItems={plantTypes}
-                  selectText="Seleccionar tipo de plantas"
-                  selectedText="Seleccionados"
-                  searchPlaceholderText="Tipo de plantas"
-                  modalAnimationType="slide"
-                  expandDropDowns={true}
-                  // showCancelButton
-                  modalWithSafeAreaView
-                  confirmText="Confirmar"
-                  noResultsComponent={() => (
-                    <View className="h-full w-full flex items-center justify-center">
-                      <Text className="text-center text-[18px]">
-                        Opah! Nada encontrado 😔
-                      </Text>
-                    </View>
-                  )}
-                  selectToggleIconComponent={
-                    <RNEIcon
-                      // size={35}
-                      name="arrow-drop-down"
-                      color={COLORS.main}
-                    />
-                  }
-                  dropDownToggleIconUpComponent={
-                    <RNEIcon
-                      size={35}
-                      name="arrow-drop-up"
-                      color={COLORS.main}
-                    />
-                  }
-                  dropDownToggleIconDownComponent={
-                    <RNEIcon
-                      size={35}
-                      name="arrow-drop-down"
-                      color={COLORS.main}
-                    />
-                  }
-                  cancelIconComponent={
-                    <FontAwesomeIcon name="times-circle-o" size={28} />
-                  }
-                  selectedIconComponent={
-                    <FontAwesomeIcon name="check-square-o" size={20} />
-                  }
-                  unselectedIconComponent={
-                    <FontAwesomeIcon name="square-o" size={20} />
-                  }
-                  styles={styles.multiselect}
-                  subItemsFlatListProps={
-                    {
-                      // nestedScrollEnabled: true,
-                      // keyboardShouldPersistTaps: "always",
-                      // keyboardDismissMode: "on-drag",
-                      // showsVerticalScrollIndicator: false,
-                    }
-                  }
-                  itemsFlatListProps={{
-                    nestedScrollEnabled: true,
-                    keyboardShouldPersistTaps: "always",
-                    keyboardDismissMode: "on-drag",
-                    showsVerticalScrollIndicator: false,
-                  }}
-                  onCancel={() => {
-                    setErrors((prev: any) => ({
-                      ...prev,
-                      plantTypes: "",
-                      sameTypeTrees: "",
-                    }));
-                    // setPlantTypes(type);
-                  }}
-                  onConfirm={() => {
-                    setErrors((prev: any) => ({
-                      ...prev,
-                      plantTypes: "",
-                      sameTypeTrees: "",
-                    }));
-                    // setPlantTypes(type);
-                  }}
+                  onSelectedItemsChange={setSelectedPlantingTypes}
+                  selectedItems={selectedPlantingTypes}
                 />
+                {/* <MultipleSelectList
+                  setSelected={(type: any) => {
+                    setErrors((prev: any) => ({
+                      ...prev,
+                      plantTypes: "",
+                      sameTypeTrees: "",
+                    }));
+                    setPlantTypes(type);
+                  }}
+                  data={plantingTypes}
+                  notFoundText={"Tipo de planta não encontrado"}
+                  placeholder="Tipo de plantas"
+                  searchPlaceholder="Seleccionar tipo de plantas"
+                  save="value"
+                  label="Tipo de plantas"
+                  badgeStyles={{
+                    backgroundColor: COLORS.main,
+                  }}
+                  badgeTextStyles={{
+                    fontSize: 16,
+                  }}
+                  arrowicon={
+                    <RNEIcon
+                      // size={45}
+                      name="arrow-drop-down"
+                      color={COLORS.main}
+                    />
+                  }
+                  closeicon={
+                    <RNEIcon name="close" size={20} color={COLORS.grey} />
+                  }
+                  fontFamily="JosefinSans-Regular"
+                  dropdownTextStyles={{
+                    fontSize: 16,
+                    color: COLORS.black,
+                    padding: 5,
+                  }}
+                  inputStyles={{
+                    fontSize: 16,
+                    color: "#A8A8A8",
+                  }}
+                  boxStyles={{
+                    minHeight: 55,
+                    borderRadius: 5,
+                    borderColor: COLORS.lightgrey,
+                  }}
+                /> */}
                 {"plantTypes" in errors ? (
                   <FormControl.ErrorMessage
                     leftIcon={
@@ -953,53 +876,7 @@ export default function FarmlandBlockRegistration({
                 <>
                   <FormControl my="1" isRequired isInvalid={"clones" in errors}>
                     <FormControl.Label>Clones</FormControl.Label>
-                    <SectionedMultiSelect
-                      items={cloneList2}
-                      IconRenderer={Icon}
-                      uniqueKey="id"
-                      onSelectedItemsChange={setClones}
-                      selectedItems={clones}
-                      selectText="Seleccionar clones"
-                      selectedText="Seleccionados"
-                      searchPlaceholderText="Clones"
-                      modalAnimationType="slide"
-                      expandDropDowns={true}
-                      // showCancelButton
-                      modalWithSafeAreaView
-                      confirmText="Confirmar"
-                      selectToggleIconComponent={
-                        <RNEIcon
-                          // size={35}
-                          name="arrow-drop-down"
-                          color={COLORS.main}
-                        />
-                      }
-                      // cancelIconComponent={
-                      //   <FontAwesomeIcon name="times-circle-o" size={28} />
-                      // }
-                      selectedIconComponent={
-                        <FontAwesomeIcon name="check-square-o" size={20} />
-                      }
-                      unselectedIconComponent={
-                        <FontAwesomeIcon name="square-o" size={20} />
-                      }
-                      styles={styles.multiselect}
-                      onConfirm={() => {
-                        setErrors((prev: any) => ({
-                          ...prev,
-                          clones: "",
-                          sameTypeTrees: "",
-                        }));
-                      }}
-                      onCancel={() => {
-                        setErrors((prev: any) => ({
-                          ...prev,
-                          clones: "",
-                          sameTypeTrees: "",
-                        }));
-                      }}
-                    />
-                    {/* <MultipleSelectList
+                    <MultipleSelectList
                       setSelected={(type: any) => {
                         setErrors((prev: any) => ({
                           ...prev,
@@ -1046,7 +923,7 @@ export default function FarmlandBlockRegistration({
                         borderRadius: 5,
                         borderColor: COLORS.lightgrey,
                       }}
-                    /> */}
+                    />
                     {"clones" in errors ? (
                       <FormControl.ErrorMessage
                         leftIcon={
@@ -1265,57 +1142,3 @@ export default function FarmlandBlockRegistration({
     </Modal>
   );
 }
-
-const styles = StyleSheet.create({
-  multiselect: {
-    selectToggle: {
-      paddingVertical: 16,
-      borderRadius: 5,
-      borderWidth: 1,
-      borderBottomWidth: 1,
-      borderColor: COLORS.lightgrey,
-      paddingHorizontal: 20,
-      marginBottom: 5,
-    },
-    chipsWrapper: {
-      paddingHorizontal: 20,
-      borderBottomRadius: 5,
-    },
-
-    item: {
-      // Style for each item
-      paddingVertical: 16,
-      paddingHorizontal: 15,
-      // backgroundColor: "#fff",
-    },
-    itemText: {
-      // Style for the item text
-      fontSize: 18,
-      color: "#333",
-      fontWeight: "normal",
-    },
-    selectedItemText: {
-      // Style for the selected item text
-      fontWeight: "bold",
-    },
-    selectedItem: {
-      backgroundColor: COLORS.lightestgrey,
-    },
-    button: {
-      backgroundColor: COLORS.main,
-      paddingVertical: 10,
-      // width: "45%",
-      // marginLeft: 5,
-      // borderTopLeftRadius: 10,
-    },
-    cancelButton: {
-      // backgroundColor: "transparent",
-      // borderRadius: 10,
-      // width: "20%",
-      // marginRight: 5,
-    },
-    subItem: {
-      paddingVertical: 10,
-    },
-  },
-});

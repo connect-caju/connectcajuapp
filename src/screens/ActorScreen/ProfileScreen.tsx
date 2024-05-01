@@ -1,6 +1,3 @@
-/* eslint-disable linebreak-style */
-/* eslint-disable react/prop-types */
-/* eslint-disable prettier/prettier */
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import {
   View,
@@ -12,7 +9,6 @@ import {
   Dimensions,
   Easing,
   Animated as NativeAnimated,
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 } from "react-native";
 import COLORS from "../../consts/colors";
 import Animated, {
@@ -486,14 +482,6 @@ const ProfileScreen = ({
         snapPoints={snapPoints}
         onChange={() => { }}
         backgroundStyle={tailwind`bg-neutral-100`}
-        style={{
-          // borderTopColor: COLORS.lightgrey,
-          // borderTopWidth: 2,
-          // borderTopLeftRadius: 18,
-          // borderTopRightRadius: 18,
-          // elevation: 5,
-          // opacity: 1,
-        }}
       >
         <Pressable
           onPress={handleDismissModalPress}
