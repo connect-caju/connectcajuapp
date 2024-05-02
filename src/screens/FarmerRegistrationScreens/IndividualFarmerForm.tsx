@@ -8,15 +8,15 @@ import {
   CheckIcon,
   Center,
 } from "native-base";
-import {
-  SelectDragIndicator,
-  SelectIcon,
-  SelectInput,
-  SelectItem,
-  SelectTrigger,
-} from "@gluestack-ui/themed";
+// import {
+//   SelectDragIndicator,
+//   SelectIcon,
+//   SelectInput,
+//   SelectItem,
+//   SelectTrigger,
+// } from "@gluestack-ui/themed";
 import { Icon, CheckBox } from "@rneui/themed";
-import DatePicker from "react-native-date-picker";
+// import DatePicker from "react-native-date-picker";
 import FontAwesomeIcon from "react-native-vector-icons/FontAwesome";
 import { pt, registerTranslation } from "react-native-paper-dates";
 registerTranslation("pt", pt);
@@ -38,17 +38,18 @@ import countries3 from "../../consts/countries3";
 import { dateLimits } from "../../helpers/dates";
 import { Input } from "../../../components/Input";
 import { Picker } from "@react-native-picker/picker";
-import {
-  RadioGroup,
-  RadioGroupItem,
-  RadioGroupLabel,
-} from "../../../components/RadioGroup";
-import { AvatarImage } from "../../../components/Avatar";
-import { Camera, ChevronDown, ChevronDownIcon } from "lucide-react-native";
-import { SelectPortal } from "@gluestack-ui/themed";
-import { SelectBackdrop } from "@gluestack-ui/themed";
-import { SelectContent } from "@gluestack-ui/themed";
-import { SelectDragIndicatorWrapper } from "@gluestack-ui/themed";
+// import DateTimePicker from '@react-native-community/datetimepicker';
+// import {
+//   RadioGroup,
+//   RadioGroupItem,
+//   RadioGroupLabel,
+// } from "../../../components/RadioGroup";
+// import { AvatarImage } from "../../../components/Avatar";
+// import { Camera, ChevronDown, ChevronDownIcon, Phone } from "lucide-react-native";
+// import { SelectPortal } from "@gluestack-ui/themed";
+// import { SelectBackdrop } from "@gluestack-ui/themed";
+// import { SelectContent } from "@gluestack-ui/themed";
+// import { SelectDragIndicatorWrapper } from "@gluestack-ui/themed";
 // const {useRealm} = realmContext;
 
 export default function IndividualFarmerForm({
@@ -684,6 +685,7 @@ export default function IndividualFarmerForm({
               <FormControl.HelperText />
             )}
           </FormControl>
+          
         </View>
       </View>
 
@@ -693,14 +695,13 @@ export default function IndividualFarmerForm({
         <Text style={styles.formSectionDescription}>Dados de Nascimento</Text>
       </Center>
 
-      <Stack direction="row" mx="3" my="2" w="100%">
         <View w="50%" px="1" pt="1">
           <FormControl isRequired isInvalid={"birthDate" in errors}>
             <FormControl.Label>Data de Nasc.</FormControl.Label>
-            <View>
+
+            {/* <View>
               <Pressable onPress={() => setOpenDatePicker(true)}>
                 <View
-                  // @ts-expect-error TS(2322): Type '{ children: Element[]; style: { borderColor:... Remove this comment to see the full error message
                   style={{
                     borderColor: COLORS.lightgrey,
                     borderWidth: 1,
@@ -726,8 +727,8 @@ export default function IndividualFarmerForm({
                   <Icon name="date-range" size={30} color={COLORS.main} />
                 </View>
               </Pressable>
-            </View>
-            <DatePicker
+            </View> */}
+            {/* <DatePicker
               modal
               // textColor={COLORS.main}
               maximumDate={new Date(dateLimits.maximumDate)}
@@ -746,7 +747,7 @@ export default function IndividualFarmerForm({
               onCancel={() => {
                 setOpenDatePicker(false);
               }}
-            />
+            /> */}
 
             {"birthDate" in errors && (
               <FormControl.ErrorMessage
@@ -813,7 +814,6 @@ export default function IndividualFarmerForm({
             )}
           </FormControl>
         </View>
-      </Stack>
 
       {!birthProvince?.includes("Cidade") &&
         !birthProvince?.includes("País Estrangeiro") && (

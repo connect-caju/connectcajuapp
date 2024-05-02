@@ -449,11 +449,17 @@ export default function FarmerRegistration({
           </Stack>
         </Box>
       </Box>
+      {/* Radio Buttons allowing to choose the farmerType */}
+      <FarmerTypeRadioButtons
+        farmerType={farmerType}
+        setFarmerType={setFarmerType}
+      />
       <KeyboardAwareScrollView
         decelerationRate={"normal"}
         fadingEdgeLength={2}
         keyboardDismissMode="on-drag"
         keyboardShouldPersistTaps="handled"
+        showsVerticalScrollIndicator={false}
       >
         {/* Data collecting form description */}
         <View
@@ -466,11 +472,6 @@ export default function FarmerRegistration({
           }}
         >
 
-          {/* Radio Buttons allowing to choose the farmerType */}
-          <FarmerTypeRadioButtons
-            farmerType={farmerType}
-            setFarmerType={setFarmerType}
-          />
         </View>
         {/* Data collecting form  */}
         {loadingActivitiyIndicator && (

@@ -65,7 +65,7 @@ export default function Providers({ children }: {children: React.ReactNode}) {
 
   return (
       <SafeAreaProvider>
-         <GluestackUIProvider config={config}>
+         {/* <GluestackUIProvider config={config}> */}
 
         <GestureHandlerRootView style={{ flex: 1 }}>
           <NativeBaseProvider theme={nbTheme}>
@@ -103,7 +103,7 @@ export default function Providers({ children }: {children: React.ReactNode}) {
         The Toast component helps show in an toasting message that disappears by its own some seconds later.
       */}
       <Toast config={toastConfig} />
-      </GluestackUIProvider>
+      {/* </GluestackUIProvider> */}
       </SafeAreaProvider>
   );
 }
