@@ -38,19 +38,8 @@ import countries3 from "../../consts/countries3";
 import { dateLimits } from "../../helpers/dates";
 import { Input } from "../../../components/Input";
 import { Picker } from "@react-native-picker/picker";
-// import DateTimePicker from '@react-native-community/datetimepicker';
-// import {
-//   RadioGroup,
-//   RadioGroupItem,
-//   RadioGroupLabel,
-// } from "../../../components/RadioGroup";
-// import { AvatarImage } from "../../../components/Avatar";
-// import { Camera, ChevronDown, ChevronDownIcon, Phone } from "lucide-react-native";
-// import { SelectPortal } from "@gluestack-ui/themed";
-// import { SelectBackdrop } from "@gluestack-ui/themed";
-// import { SelectContent } from "@gluestack-ui/themed";
-// import { SelectDragIndicatorWrapper } from "@gluestack-ui/themed";
-// const {useRealm} = realmContext;
+import DatePicker from "../../components/DatePicker/DatePicker";
+import countries2 from "../../consts/countries2";
 
 export default function IndividualFarmerForm({
   route,
@@ -102,46 +91,15 @@ export default function IndividualFarmerForm({
   const [isWoman, setIsWoman] = useState(false);
   const [isTransgender, setIsTransgender] = useState(false);
 
-  const onDismissSingle = useCallback(() => {
-    setOpenDatePicker(false);
-  }, [setOpenDatePicker]);
 
-  const handleBirthDate = (date: any) => {
-    setOpenDatePicker(false);
-    setBirthDate(date);
-    setErrors((prev: any) => ({
-      ...prev,
-      birthDate: "",
-    }));
-  };
 
-  const onConfirmSingle = useCallback(
-    (params: any) => {
-      setOpenDatePicker(false);
-      setBirthDate(params?.date);
-      setErrors((prev: any) => ({
-        ...prev,
-        birthDate: "",
-      }));
-    },
-    [setOpenDatePicker, setBirthDate],
-  );
 
   return (
-    <View className="px-3 my-3">
+    <View className="px-3 pt-6">
       <View className="w-full">
         <FormControl isRequired isInvalid={"isSprayingAgent" in errors}>
           <FormControl.Label>
-            <Text
-              style={{
-                fontSize: 16,
-                // fontFamily: "JosefinSans-Regular",
-                color: errors?.isSprayingAgent ? COLORS.red : COLORS.black,
-                paddingLeft: 15,
-              }}
-            >
               É Provedor de Serviços de Pulverização?
-            </Text>
           </FormControl.Label>
           <View className="flex flex-row mx-3 w-full justify-between gap-2 ">
             <View className="flex-1 justify-start">
@@ -455,12 +413,12 @@ export default function IndividualFarmerForm({
           </FormControl>
         </View>
       </View>
-
-      {/* <View>
-        <View className="flex-1">
+      
+        <View className="w-1/2">
           <FormControl isRequired isInvalid={"familySize" in errors}>
+            <FormControl.Label>Agregado Familiar</FormControl.Label>
             <Input
-              label="Agregado Familiar"
+              // label="Agregado Familiar"
               onChangeText={(newSize: any) => {
                 setErrors((prev: any) => ({
                   ...prev,
@@ -469,7 +427,7 @@ export default function IndividualFarmerForm({
                 setFamilySize(newSize);
               }}
               value={familySize}
-              placeholder="Agregado"
+              placeholder="Agregado Familiar"
               keyboardType="numeric"
               className="text-center"
             />
@@ -485,11 +443,11 @@ export default function IndividualFarmerForm({
             )}
           </FormControl>
         </View>
-      </View> */}
 
-      <Center>
+
+      <View className="my-3">
         <Text style={styles.formSectionDescription}>Endereço e Contacto</Text>
-      </Center>
+      </View>
 
       <View className="">
         <FormControl isRequired my="1" isInvalid={"addressAdminPost" in errors}>
@@ -561,11 +519,11 @@ export default function IndividualFarmerForm({
             }}
             dropdownCloseIcon={
               <Icon
-              name="arrow-drop-down"
-              // size={35}
-              color={COLORS.main}
-              onPress={() => setAddressVillage("")}
-            />
+                name="arrow-drop-down"
+                // size={35}
+                color={COLORS.main}
+                onPress={() => setAddressVillage("")}
+              />
               // addressVillage ? (
               //   <Icon
               //     name="close"
@@ -596,8 +554,9 @@ export default function IndividualFarmerForm({
       <View className="flex flex-row mx-3 w-full gap-2">
         <View className="flex-1">
           <FormControl my="1" isInvalid={"primaryPhone" in errors}>
-            <Input 
-              label="Telemóvel"
+            <FormControl.Label>Telemóvel</FormControl.Label>
+            <Input
+              // label="Telemóvel"
               placeholder="Telemóvel"
               keyboardType="phone-pad"
               value={primaryPhone}
@@ -642,8 +601,9 @@ export default function IndividualFarmerForm({
         </View>
         <View className="flex-1">
           <FormControl my="1" isInvalid={"secondaryPhone" in errors}>
-            <Input 
-              label="Telemóvel Alternativo"
+            <FormControl.Label>Telemóvel Alternativo</FormControl.Label>
+            <Input
+              // label="Telemóvel Alternativo"
               placeholder="Telemóvel"
               keyboardType="phone-pad"
               value={secondaryPhone}
@@ -685,346 +645,351 @@ export default function IndividualFarmerForm({
               <FormControl.HelperText />
             )}
           </FormControl>
-          
         </View>
       </View>
 
       {/* <CustomDivider marginVertical="2" thickness={2} bg={COLORS.main} /> */}
 
-      <Center>
+      <View className="py-3">
         <Text style={styles.formSectionDescription}>Dados de Nascimento</Text>
-      </Center>
+      </View>
 
-        <View w="50%" px="1" pt="1">
-          <FormControl isRequired isInvalid={"birthDate" in errors}>
-            <FormControl.Label>Data de Nasc.</FormControl.Label>
+      <View className="py-3 mx-3 ">
+        <FormControl isRequired isInvalid={"birthDate" in errors}>
+          <FormControl.Label>Data de Nascimento</FormControl.Label>
+          <Pressable
+            onPress={() => setOpenDatePicker(true)}
+            className="flex flex-row gap-2 mt-1 items-center max-w-[200px] shadow-md border border-gray-300 rounded-md p-1 "
+          >
+            <FontAwesomeIcon name="calendar" size={30} color={COLORS.grey} />
+            <Text className="text-center text-[16px] ">
+              {birthDate
+                ? `${birthDate.getDate()}/${
+                    birthDate.getMonth() + 1
+                  }/${birthDate.getFullYear()}`
+                : "Data de Nascimento"}
+            </Text>
+            <View className="absolute right-0 ">
+              <Icon
+                // size={45}
+                name="arrow-drop-down"
+                color={COLORS.main}
+              />
+            </View>
+          </Pressable>
 
-            {/* <View>
-              <Pressable onPress={() => setOpenDatePicker(true)}>
-                <View
-                  style={{
-                    borderColor: COLORS.lightgrey,
-                    borderWidth: 1,
-                    borderRadius: 3,
-                    height: 55,
-                    flexDirection: "row",
-                    alignItems: "center",
-                    justifyContent: "space-around",
-                  }}
-                >
-                  <Text
-                    style={{
-                      fontFamily: "JosefinSans-Regular",
-                      fontSize: 14,
-                    }}
-                  >
-                    {birthDate
-                      ? `${birthDate.getDate()}/${
-                          birthDate.getMonth() + 1
-                        }/${birthDate.getFullYear()}`
-                      : "Data de nascimento"}
-                  </Text>
-                  <Icon name="date-range" size={30} color={COLORS.main} />
-                </View>
-              </Pressable>
-            </View> */}
-            {/* <DatePicker
-              modal
-              // textColor={COLORS.main}
-              maximumDate={new Date(dateLimits.maximumDate)}
-              minimumDate={new Date(dateLimits.minimumDate)}
-              title={"Data de Nascimento"}
-              confirmText="Confirmar"
-              cancelText="Cancelar"
-              mode="date"
-              locale="pt-PT"
-              open={openDatePicker}
-              date={birthDate}
-              onDateChange={setBirthDate}
-              onConfirm={(date) => {
-                handleBirthDate(date);
-              }}
-              onCancel={() => {
-                setOpenDatePicker(false);
-              }}
-            /> */}
+          <DatePicker
+            date={birthDate}
+            setDate={setBirthDate}
+            open={openDatePicker}
+            setOpen={setOpenDatePicker}
+          />
 
-            {"birthDate" in errors && (
-              <FormControl.ErrorMessage
-                leftIcon={<Icon name="error-outline" size={16} color="red" />}
-                _text={{ fontSize: "xs" }}
-              >
-                {errors?.birthDate}
-              </FormControl.ErrorMessage>
-            )}
-          </FormControl>
-        </View>
-
-        <View w="50%" px="1">
-          <FormControl isRequired isInvalid={"birthProvince" in errors}>
-            <FormControl.Label>Província</FormControl.Label>
-
-            <Select
-              selectedValue={birthProvince}
-              // @ts-expect-error TS(2322): Type '{ children: Element[]; selectedValue: any; a... Remove this comment to see the full error message
-              accessibilityLabel="Escolha uma província"
-              placeholder="Escolha uma província"
-              minHeight={55}
-              _selectedItem={{
-                bg: "teal.600",
-                fontSize: "lg",
-                endIcon: <CheckIcon size="5" />,
-              }}
-              dropdownCloseIcon={
-                birthProvince ? (
-                  <Icon
-                    name="close"
-                    size={20}
-                    color="grey"
-                    onPress={() => setBirthProvince("")}
-                  />
-                ) : (
-                  <Icon
-                    // size={45}
-                    name="arrow-drop-down"
-                    color={COLORS.main}
-                  />
-                )
-              }
-              mt={1}
-              onValueChange={(newProvince) => {
-                setErrors((prev: any) => ({
-                  ...prev,
-                  birthProvince: "",
-                }));
-                setBirthProvince(newProvince);
-              }}
+          {"birthDate" in errors && (
+            <FormControl.ErrorMessage
+              leftIcon={<Icon name="error-outline" size={16} color="red" />}
+              _text={{ fontSize: "xs" }}
             >
-              {provinces?.map((province, index) => (
-                <Select.Item key={index} label={province} value={province} />
-              ))}
-            </Select>
-            {"birthProvince" in errors && (
-              <FormControl.ErrorMessage
-                leftIcon={<Icon name="error-outline" size={16} color="red" />}
-                _text={{ fontSize: "xs" }}
-              >
-                {errors?.birthProvince}
-              </FormControl.ErrorMessage>
-            )}
-          </FormControl>
-        </View>
+              {errors?.birthDate}
+            </FormControl.ErrorMessage>
+          )}
+        </FormControl>
+      </View>
 
-      {!birthProvince?.includes("Cidade") &&
-        !birthProvince?.includes("País Estrangeiro") && (
-          <Stack direction="row" mx="3" my="2" w="100%">
-            <View w="50%" px="1">
-              <FormControl
-                isRequired
-                my="1"
-                isInvalid={"birthDistrict" in errors}
-              >
-                <FormControl.Label>
-                  {birthProvince === "País Estrangeiro" ? "País" : "Distrito"}
-                </FormControl.Label>
-                <Select
-                  selectedValue={birthDistrict}
-                  // @ts-expect-error TS(2322): Type '{ children: any; selectedValue: any; accessi... Remove this comment to see the full error message
-                  accessibilityLabel="Escolha um distrito"
-                  placeholder={
-                    birthProvince?.includes("Estrangeiro")
-                      ? "Escolha um país"
-                      : "Escolha um distrito"
-                  }
-                  minHeight={55}
-                  _selectedItem={{
-                    bg: "teal.600",
-                    fontSize: "lg",
-                    endIcon: <CheckIcon size="5" />,
-                  }}
-                  dropdownCloseIcon={
-                    birthDistrict ? (
-                      <Icon
-                        name="close"
-                        size={20}
-                        color="grey"
-                        onPress={() => setBirthDistrict("")}
-                      />
-                    ) : (
+      <View w="50%" px="1">
+        <FormControl isRequired isInvalid={"birthProvince" in errors}>
+          <FormControl.Label>Província/País de Nascimento</FormControl.Label>
+
+          <Select
+            selectedValue={birthProvince}
+            // @ts-expect-error TS(2322): Type '{ children: Element[]; selectedValue: any; a... Remove this comment to see the full error message
+            accessibilityLabel="Escolha uma província"
+            placeholder="Escolha uma província"
+            minHeight={50}
+            _selectedItem={{
+              bg: "gray.200",
+              fontSize: "4xl",
+              endIcon: <CheckIcon size="5" />,
+            }}
+            dropdownCloseIcon={
+              <Icon
+                // size={45}
+                name="arrow-drop-down"
+                color={COLORS.main}
+              />
+              // birthProvince ? (
+              //   <Icon
+              //     name="close"
+              //     size={20}
+              //     color="grey"
+              //     onPress={() => setBirthProvince("")}
+              //   />
+              // ) : (
+              //   <Icon
+              //     // size={45}
+              //     name="arrow-drop-down"
+              //     color={COLORS.main}
+              //   />
+              // )
+            }
+            mt={1}
+            onValueChange={(newProvince) => {
+              setErrors((prev: any) => ({
+                ...prev,
+                birthProvince: "",
+              }));
+              setBirthProvince(newProvince);
+            }}
+          >
+            {provinces?.map((province, index) => (
+              <Select.Item key={index} label={province} value={province} />
+            ))}
+          </Select>
+          {"birthProvince" in errors && (
+            <FormControl.ErrorMessage
+              leftIcon={<Icon name="error-outline" size={16} color="red" />}
+              _text={{ fontSize: "xs" }}
+            >
+              {errors?.birthProvince}
+            </FormControl.ErrorMessage>
+          )}
+        </FormControl>
+      </View>
+
+      <View className="flex items-center justify-center ">
+        {!birthProvince?.includes("Cidade") &&
+          !birthProvince?.includes("País Estrangeiro") && (
+            <View className="flex flex-col mx-3 my-3 w-full">
+              <View className="">
+                <FormControl
+                  isRequired
+                  my="1"
+                  isInvalid={"birthDistrict" in errors}
+                >
+                  <FormControl.Label>
+                    {birthProvince === "País Estrangeiro" ? "País" : "Distrito"}
+                  </FormControl.Label>
+                  <Select
+                    selectedValue={birthDistrict}
+                    // @ts-expect-error TS(2322): Type '{ children: any; selectedValue: any; accessi... Remove this comment to see the full error message
+                    accessibilityLabel="Escolha um distrito"
+                    placeholder={
+                      birthProvince?.includes("Estrangeiro")
+                        ? "Escolha um país"
+                        : "Escolha um distrito"
+                    }
+                    minHeight={50}
+                    _selectedItem={{
+                      bg: "gray.200",
+                      fontSize: "4xl",
+                      endIcon: <CheckIcon size="5" />,
+                    }}
+                    dropdownCloseIcon={
                       <Icon
                         // size={45}
                         name="arrow-drop-down"
                         color={COLORS.main}
                       />
-                    )
-                  }
-                  mt={1}
-                  onValueChange={(newDistrict) => {
-                    setErrors((prev: any) => ({
-                      ...prev,
-                      birthDistrict: "",
-                    }));
-                    setBirthDistrict(newDistrict);
-                  }}
-                >
-                  {birthProvince === "País Estrangeiro"
-                    ? countries3?.map((country, index) => (
-                        <Select.Item
-                          key={index}
-                          // @ts-expect-error TS(2322): Type '{ key: string; value: string; }' is not assi... Remove this comment to see the full error message
-                          label={country}
-                          // @ts-expect-error TS(2322): Type '{ key: string; value: string; }' is not assi... Remove this comment to see the full error message
-                          value={country}
-                        />
-                      ))
-                    : // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-                      districts[birthProvince]?.map(
-                        (district: any, index: any) => (
+                      // birthDistrict ? (
+                      //   <Icon
+                      //     name="close"
+                      //     size={20}
+                      //     color="grey"
+                      //     onPress={() => setBirthDistrict("")}
+                      //   />
+                      // ) : (
+                      //   <Icon
+                      //     // size={45}
+                      //     name="arrow-drop-down"
+                      //     color={COLORS.main}
+                      //   />
+                      // )
+                    }
+                    mt={1}
+                    onValueChange={(newDistrict) => {
+                      setErrors((prev: any) => ({
+                        ...prev,
+                        birthDistrict: "",
+                      }));
+                      setBirthDistrict(newDistrict);
+                    }}
+                  >
+                    {birthProvince === "País Estrangeiro"
+                      ? countries3?.map((country, index) => (
                           <Select.Item
                             key={index}
-                            label={district}
-                            value={district}
+                            // @ts-expect-error TS(2322): Type '{ key: string; value: string; }' is not assi... Remove this comment to see the full error message
+                            label={country}
+                            // @ts-expect-error TS(2322): Type '{ key: string; value: string; }' is not assi... Remove this comment to see the full error message
+                            value={country}
                           />
-                        ),
-                      )}
-                </Select>
+                        ))
+                      : // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
+                        districts[birthProvince]?.map(
+                          (district: any, index: any) => (
+                            <Select.Item
+                              key={index}
+                              label={district}
+                              value={district}
+                            />
+                          ),
+                        )}
+                  </Select>
 
-                {"birthDistrict" in errors ? (
-                  <FormControl.ErrorMessage
-                    leftIcon={
-                      <Icon name="error-outline" size={16} color="grey" />
-                    }
-                    _text={{ fontSize: "xs" }}
-                  >
-                    {errors?.birthDistrict}
-                  </FormControl.ErrorMessage>
-                ) : (
-                  <FormControl.HelperText />
-                )}
-              </FormControl>
-            </View>
-            <View w="50%" px="1">
-              {!birthProvince?.includes("Estrangeiro") &&
-                !birthDistrict?.includes("Cidade") &&
-                !birthProvince?.includes("Maputo") && (
-                  <FormControl
-                    isRequired
-                    my="1"
-                    isInvalid={"birthAdminPost" in errors}
-                  >
-                    <FormControl.Label>Posto Adm.</FormControl.Label>
-                    <Select
-                      selectedValue={birthProvince ? birthAdminPost : ""}
-                      // @ts-expect-error TS(2322): Type '{ children: any[]; selectedValue: any; acces... Remove this comment to see the full error message
-                      accessibilityLabel="Escolha um posto administrativo"
-                      placeholder="Escolha um posto administrativo"
-                      minHeight={55}
-                      _selectedItem={{
-                        bg: "teal.600",
-                        fontSize: "lg",
-                        endIcon: <CheckIcon size="5" />,
-                      }}
-                      dropdownCloseIcon={
-                        birthAdminPost ? (
-                          <Icon
-                            name="close"
-                            size={20}
-                            color="grey"
-                            onPress={() => setBirthAdminPost("")}
-                          />
-                        ) : (
+                  {"birthDistrict" in errors ? (
+                    <FormControl.ErrorMessage
+                      leftIcon={
+                        <Icon name="error-outline" size={16} color="grey" />
+                      }
+                      _text={{ fontSize: "xs" }}
+                    >
+                      {errors?.birthDistrict}
+                    </FormControl.ErrorMessage>
+                  ) : (
+                    <FormControl.HelperText />
+                  )}
+                </FormControl>
+              </View>
+              <View className="">
+                {!birthProvince?.includes("Estrangeiro") &&
+                  !birthDistrict?.includes("Cidade") &&
+                  !birthProvince?.includes("Maputo") && (
+                    <FormControl
+                      isRequired
+                      my="1"
+                      isInvalid={"birthAdminPost" in errors}
+                    >
+                      <FormControl.Label>Posto Adm.</FormControl.Label>
+                      <Select
+                        selectedValue={birthProvince ? birthAdminPost : ""}
+                        // @ts-expect-error TS(2322): Type '{ children: any[]; selectedValue: any; acces... Remove this comment to see the full error message
+                        accessibilityLabel="Escolha um posto administrativo"
+                        placeholder="Escolha um posto administrativo"
+                        minHeight={50}
+                        _selectedItem={{
+                          bg: "gray.200",
+                          fontSize: "4xl",
+                          endIcon: <CheckIcon size="5" />,
+                        }}
+                        dropdownCloseIcon={
                           <Icon
                             // size={45}
                             name="arrow-drop-down"
                             color={COLORS.main}
                           />
-                        )
-                      }
-                      mt={1}
-                      onValueChange={(newAdminPost) => {
-                        setErrors((prev: any) => ({
-                          ...prev,
-                          birthAdminPost: "",
-                        }));
-                        setBirthAdminPost(newAdminPost);
-                      }}
-                    >
-                      {administrativePosts[birthDistrict]?.map(
-                        (adminPost: any, index: any) => (
-                          <Select.Item
-                            key={index}
-                            label={adminPost}
-                            value={adminPost}
-                          />
-                        ),
-                      )}
-                    </Select>
-                    {"birthAdminPost" in errors && (
-                      <FormControl.ErrorMessage
-                        leftIcon={
-                          <Icon name="error-outline" size={16} color="red" />
+                          // birthAdminPost ? (
+                          //   <Icon
+                          //     name="close"
+                          //     size={20}
+                          //     color="grey"
+                          //     onPress={() => setBirthAdminPost("")}
+                          //   />
+                          // ) : (
+                          //   <Icon
+                          //     // size={45}
+                          //     name="arrow-drop-down"
+                          //     color={COLORS.main}
+                          //   />
+                          // )
                         }
-                        _text={{ fontSize: "xs" }}
+                        mt={1}
+                        onValueChange={(newAdminPost) => {
+                          setErrors((prev: any) => ({
+                            ...prev,
+                            birthAdminPost: "",
+                          }));
+                          setBirthAdminPost(newAdminPost);
+                        }}
                       >
-                        {errors?.birthAdminPost}
-                      </FormControl.ErrorMessage>
-                    )}
-                  </FormControl>
-                )}
+                        {administrativePosts[birthDistrict]?.map(
+                          (adminPost: any, index: any) => (
+                            <Select.Item
+                              key={index}
+                              label={adminPost}
+                              value={adminPost}
+                            />
+                          ),
+                        )}
+                      </Select>
+                      {"birthAdminPost" in errors && (
+                        <FormControl.ErrorMessage
+                          leftIcon={
+                            <Icon name="error-outline" size={16} color="red" />
+                          }
+                          _text={{ fontSize: "xs" }}
+                        >
+                          {errors?.birthAdminPost}
+                        </FormControl.ErrorMessage>
+                      )}
+                    </FormControl>
+                  )}
+              </View>
             </View>
-          </Stack>
-        )}
+          )}
+      </View>
 
-      {birthProvince?.includes("País Estrangeiro") && (
-        <Stack direction="row" mx="3" my="2" w="100%">
-          <View w="100%" px="1">
+      <View className="flex items-center justify-center">
+        {birthProvince?.includes("País Estrangeiro") && (
+          <View className="w-full">
             <FormControl
               isRequired
               my="1"
               isInvalid={"birthDistrict" in errors}
             >
               <FormControl.Label>
-                {birthProvince === "País Estrangeiro" ? "País" : "Distrito"}
+                {birthProvince === "País Estrangeiro"
+                  ? "País de Nascimento"
+                  : "Distrito de Nascimento"}
               </FormControl.Label>
-              <SelectList
-                setSelected={(newDistrict: any) => {
+              <Select
+                selectedValue={birthDistrict}
+                // @ts-expect-error TS(2322): Type '{ children: any[]; selectedValue: any; acces... Remove this comment to see the full error message
+                accessibilityLabel="Seleccionar país"
+                placeholder="Seleccionar país"
+                minHeight={50}
+                _selectedItem={{
+                  bg: "gray.200",
+                  fontSize: "4xl",
+                  endIcon: <CheckIcon size="5" />,
+                }}
+                dropdownCloseIcon={
+                  <Icon
+                    // size={45}
+                    name="arrow-drop-down"
+                    color={COLORS.main}
+                  />
+                  // birthAdminPost ? (
+                  //   <Icon
+                  //     name="close"
+                  //     size={20}
+                  //     color="grey"
+                  //     onPress={() => setBirthAdminPost("")}
+                  //   />
+                  // ) : (
+                  //   <Icon
+                  //     // size={45}
+                  //     name="arrow-drop-down"
+                  //     color={COLORS.main}
+                  //   />
+                  // )
+                }
+                mt={1}
+                onValueChange={(newDistrict: any) => {
                   setErrors((prev: any) => ({
                     ...prev,
                     birthDistrict: "",
                   }));
                   setBirthDistrict(newDistrict);
                 }}
-                data={countries3}
-                save="value"
-                placeholder="Seleccionar país"
-                searchPlaceholder="Procurar país"
-                maxHeight={400}
-                fontFamily="JosefinSans-Regular"
-                notFoundText="País não encontrado"
-                dropdownItemStyles={{}}
-                dropdownTextStyles={{
-                  fontSize: 16,
-                  color: COLORS.black,
-                  padding: 5,
-                }}
-                arrowicon={
-                  <Icon
-                    // size={45}
-                    name="arrow-drop-down"
-                    color={COLORS.main}
+              >
+                {countries2?.map((country: any, index: any) => (
+                  <Select.Item
+                    key={index}
+                    label={country.label}
+                    value={country.value}
                   />
-                }
-                closeicon={<Icon name="close" size={20} color={COLORS.grey} />}
-                inputStyles={{
-                  fontSize: 15,
-                  color: birthDistrict ? COLORS.black : COLORS.grey,
-                }}
-                boxStyles={{
-                  minHeight: 55,
-                  borderRadius: 5,
-                  borderColor: COLORS.lightgrey,
-                }}
-              />
+                ))}
+              </Select>
 
               {"birthDistrict" in errors && (
                 <FormControl.ErrorMessage
@@ -1038,19 +1003,21 @@ export default function IndividualFarmerForm({
               )}
             </FormControl>
           </View>
-        </Stack>
-      )}
+        )}
+      </View>
 
       {/* <CustomDivider marginVertical="2" thickness={2} bg={COLORS.main} /> */}
 
-      <Center>
+      <View className="my-3">
         <Text style={styles.formSectionDescription}>
           Documentos de Identificação
         </Text>
-      </Center>
+      </View>
 
-      <Stack direction="row" mx="3" w="100%">
-        <View w="50%" px="1">
+     
+        <View className="flex flex-row gap-2 justify-center items-center">
+          <View className="flex-1">
+
           <FormControl my="2" isRequired isInvalid={"docType" in errors}>
             <FormControl.Label>Tipo</FormControl.Label>
             <Select
@@ -1058,27 +1025,32 @@ export default function IndividualFarmerForm({
               // @ts-expect-error TS(2322): Type '{ children: Element[]; selectedValue: any; a... Remove this comment to see the full error message
               accessibilityLabel="Tipo de doc."
               placeholder="Tipo de documento"
-              minHeight={55}
+              minHeight={50}
               _selectedItem={{
-                bg: "teal.600",
-                fontSize: "lg",
+                bg: "gray.200",
+                fontSize: "4xl",
                 endIcon: <CheckIcon size="5" />,
               }}
               dropdownCloseIcon={
-                docType ? (
-                  <Icon
-                    name="close"
-                    size={20}
-                    color="grey"
-                    onPress={() => setDocType("")}
-                  />
-                ) : (
-                  <Icon
-                    // size={45}
-                    name="arrow-drop-down"
-                    color={COLORS.main}
-                  />
-                )
+                <Icon
+                // size={45}
+                name="arrow-drop-down"
+                color={COLORS.main}
+                />
+                // docType ? (
+                //   <Icon
+                //     name="close"
+                //     size={20}
+                //     color="grey"
+                //     onPress={() => setDocType("")}
+                //   />
+                // ) : (
+                  //   <Icon
+                //     // size={45}
+                //     name="arrow-drop-down"
+                //     color={COLORS.main}
+                //   />
+                // )
               }
               mt={1}
               onValueChange={(newDocType) => {
@@ -1089,32 +1061,28 @@ export default function IndividualFarmerForm({
                 }));
                 setDocType(newDocType);
               }}
-            >
+              >
               {idDocTypes?.map((docType) => (
                 <Select.Item key={docType} label={docType} value={docType} />
               ))}
             </Select>
             {"docType" in errors && (
               <FormControl.ErrorMessage
-                leftIcon={<Icon name="error-outline" size={16} color="red" />}
-                _text={{ fontSize: "xs" }}
+              leftIcon={<Icon name="error-outline" size={16} color="red" />}
+              _text={{ fontSize: "xs" }}
               >
                 {errors?.docType}
               </FormControl.ErrorMessage>
             )}
           </FormControl>
-        </View>
-        <View w="50%" px="1">
-          <FormControl my="3" isInvalid={"docNumber" in errors}>
+            </View>
+        
+        <View className="flex-1" >
+          <FormControl my="2" isInvalid={"docNumber" in errors}>
             <FormControl.Label>Número</FormControl.Label>
-            <CustomInput
-              width="100%"
-              type="text"
-              isDisabled={
-                docType === "Não tem" || docType === "" ? true : false
-              }
+            <Input 
               value={docNumber}
-              placeholder="Número do Documento"
+              placeholder="Número do documento"
               onChangeText={(newDocNumber: any) => {
                 setErrors((prev: any) => ({
                   ...prev,
@@ -1122,7 +1090,11 @@ export default function IndividualFarmerForm({
                 }));
                 setDocNumber(newDocNumber);
               }}
+              className="text-center"
+              
+
             />
+            
             {"docNumber" in errors && (
               <FormControl.ErrorMessage
                 leftIcon={<Icon name="error-outline" size={16} color="red" />}
@@ -1133,18 +1105,14 @@ export default function IndividualFarmerForm({
             )}
           </FormControl>
         </View>
-      </Stack>
-
-      <Stack direction="row" mx="3" w="100%">
-        <View w="50%" px="1">
+        </View>
+    
+        <View className="" >
           <FormControl isInvalid={"nuit" in errors}>
             <FormControl.Label>NUIT</FormControl.Label>
-            <CustomInput
-              width="100%"
-              type="number"
-              placeholder="NUIT"
+            <Input 
               value={nuit}
-              keyboardType="numeric"
+              placeholder="NUIT"
               onChangeText={(newNuit: any) => {
                 setErrors((prev: any) => ({
                   ...prev,
@@ -1152,7 +1120,11 @@ export default function IndividualFarmerForm({
                 }));
                 setNuit(newNuit);
               }}
+              className="text-center"
+              keyboardType="numeric"
+
             />
+            
             {"nuit" in errors && (
               <FormControl.ErrorMessage
                 leftIcon={<Icon name="error-outline" size={16} color="red" />}
@@ -1163,35 +1135,24 @@ export default function IndividualFarmerForm({
             )}
           </FormControl>
         </View>
-        <View w="50%" px="1" />
-      </Stack>
 
-      {/* Organization */}
+      <View className="my-3">
+        <Text style={styles.formSectionDescription}>Adesão à Cooperativa</Text>
+      </View>
 
-      {/* <CustomDivider marginVertical="2" thickness={2} bg={COLORS.main} /> */}
-
-      <Center>
-        <Text style={styles.formSectionDescription}>Organização</Text>
-      </Center>
-
-      <View w="100%" py="2">
+      <View className="w-full" >
         <FormControl isRequired isInvalid={"isGroupMember" in errors}>
           <FormControl.Label>
-            <Text
-              style={{
-                fontSize: 15,
-                fontFamily: "JosefinSans-Regular",
-                color: errors?.isGroupMember ? COLORS.red : COLORS.grey,
-                paddingLeft: 15,
-                lineHeight: 25,
-              }}
-            >
-              Pertence a alguma organização (Associação, Cooperativa, EMC, ou
-              Grupo)?
-            </Text>
+              É membro de uma cooperativa?
           </FormControl.Label>
 
-          <Stack direction="row" mx="3" w="100%">
+
+
+
+
+          
+
+          {/* <Stack direction="row" mx="3" w="100%">
             <View w="50%">
               <CheckBox
                 center
@@ -1236,6 +1197,7 @@ export default function IndividualFarmerForm({
                 }}
               />
             </View>
+            
             <View w="50%">
               <CheckBox
                 center
@@ -1280,7 +1242,101 @@ export default function IndividualFarmerForm({
                 }}
               />
             </View>
-          </Stack>
+          </Stack> */}
+
+
+<View className="flex flex-row mx-3 w-full justify-between gap-2">
+            <View className="flex-1 justify-start">
+              <CheckBox
+                fontFamily="JosefinSans-Regular"
+                containerStyle={{
+                  backgroundColor: "transparent",
+                }}
+                textStyle={{
+                  fontWeight: "100",
+                  fontSize: 18,
+                  color: isGroupMember
+                    ? COLORS.grey
+                    : errors?.isGroupMember
+                    ? COLORS.red
+                    : COLORS.grey,
+                }}
+                title="Sim"
+                checked={isGroupMember}
+                checkedIcon={
+                  <Icon
+                    name="check-box"
+                    color={COLORS.grey}
+                    size={35}
+                    iconStyle={{}}
+                  />
+                }
+                uncheckedIcon={
+                  <Icon
+                    name="crop-square"
+                    color={errors?.isGroupMember ? COLORS.red : COLORS.grey}
+                    size={35}
+                    iconStyle={{}}
+                  />
+                }
+                // @ts-expect-error TS(2322): Type '{ center: true; fontFamily: string; containe... Remove this comment to see the full error message
+                onPress={() => {
+                  setIsNotGroupMember(false);
+                  setIsGroupMember(true);
+                  setErrors({
+                    ...errors,
+                    isGroupMember: "",
+                  });
+                }}
+              />
+            </View>
+            <View className="flex-1 justify-end">
+              <CheckBox
+                fontFamily="JosefinSans-Regular"
+                containerStyle={{
+                  backgroundColor: "transparent",
+                }}
+                textStyle={{
+                  fontWeight: "100",
+                  fontSize: 18,
+                  color: isNotGroupMember
+                    ? COLORS.grey
+                    : errors?.isGroupMember
+                    ? COLORS.red
+                    : COLORS.grey,
+                }}
+                title="Não"
+                checked={isNotGroupMember}
+                checkedIcon={
+                  <Icon
+                    name="check-box"
+                    color={COLORS.grey}
+                    size={35}
+                    iconStyle={{}}
+                  />
+                }
+                uncheckedIcon={
+                  <Icon
+                    name="crop-square"
+                    color={errors?.isGroupMember ? COLORS.red : COLORS.grey}
+                    size={35}
+                    iconStyle={{}}
+                  />
+                }
+                // @ts-expect-error TS(2322): Type '{ center: true; fontFamily: string; containe... Remove this comment to see the full error message
+                onPress={() => {
+                  setIsNotGroupMember(true);
+                  setIsGroupMember(false);
+                  setErrors({
+                    ...errors,
+                    isGroupMember: "",
+                  });
+                }}
+              />
+            </View>
+          </View>
+
+
           {"isGroupMember" in errors ? (
             <FormControl.ErrorMessage
               leftIcon={<Icon name="error-outline" size={16} color="red" />}

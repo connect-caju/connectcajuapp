@@ -201,6 +201,6 @@ const countries2 = [
   { label: "Vanuatu", value: "Vanuatu" },
   { label: "Vaticano", value: "Vaticano" },
   { label: "Venezuela", value: "Venezuela" },
-  { key: "Vietname", value: "Vietname" },
+  { label: "Vietname", value: "Vietname" },
 ];
 export default countries2;

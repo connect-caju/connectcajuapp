@@ -155,6 +155,9 @@ export default function FarmerRegistration({
         isGroupMember,
         isNotGroupMember,
       };
+
+      // console.log("farmerData", farmerData);
+
       if (!validateIndividualFarmerData(farmerData, errors, setErrors)) {
         setErrorAlert(true);
         return;
@@ -461,18 +464,7 @@ export default function FarmerRegistration({
         keyboardShouldPersistTaps="handled"
         showsVerticalScrollIndicator={false}
       >
-        {/* Data collecting form description */}
-        <View
-          style={{
-            elevation: 1,
-            borderWidth: 1,
-            borderColor: COLORS.lightgrey,
-            backgroundColor: "transparent",
 
-          }}
-        >
-
-        </View>
         {/* Data collecting form  */}
         {loadingActivitiyIndicator && (
           <CustomActivityIndicator
