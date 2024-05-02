@@ -1,7 +1,6 @@
 import { View, Text, SafeAreaView, ScrollView, Image, Pressable, TouchableOpacity } from "react-native";
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Animated, { Layout, SlideInLeft, SlideInRight, SlideOutLeft, SlideOutRight } from "react-native-reanimated";
-import { backgroundStyle } from "../../styles/globals";
 import COLORS from "../../consts/colors";
 import tailwind from "twrnc";
 import {
@@ -21,12 +20,9 @@ import AwesomeAlert from "react-native-awesome-alerts";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faArrowLeft, faBook, faClose, faCog, faEnvelope, faFileEdit, faHome, faMailBulk, faMessage, faPhone, faSignOut, faUser, faUserCircle, faVoicemail } from "@fortawesome/free-solid-svg-icons";
 import UserGoalEdit from "../../components/UserGoalEdit/UserGoalEdit";
-import { faBlackTie } from "@fortawesome/free-brands-svg-icons";
 import AppearanceMode from "../../components/Modals/AppearanceMode";
 import { useColorScheme } from "nativewind";
-// import tw from "../../lib/tailwind";
 import tw from "twrnc";
-// import { useColorScheme } from "react-native";
 const { useRealm, useQuery } = realmContext;
 
 const UserProfileScreen = ({
@@ -36,8 +32,6 @@ const UserProfileScreen = ({
   const realm = useRealm();
   const user = useUser();
   const customUserData = user?.customData;
-  // console.log(customUserData);
-  // const [isUserProfileVisible, setIsUserProfileVisible] = useState(false);
   const [isGoalUpdateVisible, setIsGoalUpdateVisible] = useState(false);
   const [isAppearanceModeModalVisible, setIsAppearanceModeModalVisible] = useState(false);
   const bottomSheetRef = useRef(null);
@@ -131,11 +125,6 @@ const UserProfileScreen = ({
       return;
     }
   };
-
-
-  // @ts-expect-error TS(2584): Cannot find name 'console'. Do you need to change ... Remove this comment to see the full error message
-  console.log(colorScheme);
-
 
   return (
     <BottomSheetModalProvider>

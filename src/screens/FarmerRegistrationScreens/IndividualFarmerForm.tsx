@@ -8,21 +8,10 @@ import {
   CheckIcon,
   Center,
 } from "native-base";
-// import {
-//   SelectDragIndicator,
-//   SelectIcon,
-//   SelectInput,
-//   SelectItem,
-//   SelectTrigger,
-// } from "@gluestack-ui/themed";
 import { Icon, CheckBox } from "@rneui/themed";
-// import DatePicker from "react-native-date-picker";
 import FontAwesomeIcon from "react-native-vector-icons/FontAwesome";
 import { pt, registerTranslation } from "react-native-paper-dates";
 registerTranslation("pt", pt);
-
-import { SelectList } from "react-native-dropdown-select-list";
-import { CustomInput } from "../../components/Inputs/CustomInput";
 import administrativePosts from "../../consts/administrativePosts";
 import provinces from "../../consts/provinces";
 
@@ -32,15 +21,14 @@ import idDocTypes from "../../consts/idDocTypes";
 import styles from "./styles";
 
 import COLORS from "../../consts/colors";
-
-// import {realmContext} from '../../models/realmContext';
 import countries3 from "../../consts/countries3";
-import { dateLimits } from "../../helpers/dates";
 import { Input } from "../../../components/Input";
-import { Picker } from "@react-native-picker/picker";
 import DatePicker from "../../components/DatePicker/DatePicker";
 import countries2 from "../../consts/countries2";
 import { cn } from "../../../lib/utils";
+import { useColorScheme } from "nativewind";
+import InputLabel from "../../components/InputLabel/InputLabel";
+import InputCheckBox from "../../components/InputCheckBox/InputCheckBox";
 
 export default function IndividualFarmerForm({
   route,
@@ -91,55 +79,19 @@ export default function IndividualFarmerForm({
   const [isMan, setIsMan] = useState(false);
   const [isWoman, setIsWoman] = useState(false);
   const [isTransgender, setIsTransgender] = useState(false);
+  const { colorScheme } = useColorScheme();
 
   return (
     <View className="px-3 pt-6">
       <View className="w-full ">
         <FormControl isRequired isInvalid={"isSprayingAgent" in errors}>
-          <FormControl.Label
-            _text={{
-              color: COLORS.black,
-              fontSize: 16,
-              fontFamily: "JosefinSans-Regular",
-            }}
-          >
-            É Provedor de Serviços de Pulverização?
-          </FormControl.Label>
+          <InputLabel label="É Provedor de Serviços de Pulverização?" />
           <View className="flex flex-row mx-3 w-full justify-between gap-2 ">
             <View className="flex-1 justify-start">
-              <CheckBox
-                fontFamily="JosefinSans-Regular"
-                containerStyle={{
-                  backgroundColor: "transparent",
-                }}
-                textStyle={{
-                  fontWeight: "100",
-                  fontSize: 18,
-                  color: isSprayingAgent
-                    ? COLORS.main
-                    : errors?.isSprayingAgent
-                    ? COLORS.red
-                    : COLORS.black,
-                }}
+              <InputCheckBox
                 title="Sim"
-                checked={isSprayingAgent}
-                checkedIcon={
-                  <Icon
-                    name="check-box"
-                    color={COLORS.main}
-                    size={35}
-                    iconStyle={{}}
-                  />
-                }
-                uncheckedIcon={
-                  <Icon
-                    name="crop-square"
-                    color={errors?.isSprayingAgent ? COLORS.red : COLORS.black}
-                    size={35}
-                    iconStyle={{}}
-                  />
-                }
-                // @ts-expect-error TS(2322): Type '{ center: true; fontFamily: string; containe... Remove this comment to see the full error message
+                isChecked={isSprayingAgent}
+                errorProperty={errors?.isSprayingAgent}
                 onPress={() => {
                   setIsNotSprayingAgent(false);
                   setIsSprayingAgent(true);
@@ -151,39 +103,10 @@ export default function IndividualFarmerForm({
               />
             </View>
             <View className="flex-1 justify-end">
-              <CheckBox
-                fontFamily="JosefinSans-Regular"
-                containerStyle={{
-                  backgroundColor: "transparent",
-                }}
-                textStyle={{
-                  fontWeight: "100",
-                  fontSize: 18,
-                  color: isNotSprayingAgent
-                    ? COLORS.main
-                    : errors?.isSprayingAgent
-                    ? COLORS.red
-                    : COLORS.black,
-                }}
+              <InputCheckBox
                 title="Não"
-                checked={isNotSprayingAgent}
-                checkedIcon={
-                  <Icon
-                    name="check-box"
-                    color={COLORS.main}
-                    size={35}
-                    iconStyle={{}}
-                  />
-                }
-                uncheckedIcon={
-                  <Icon
-                    name="crop-square"
-                    color={errors?.isSprayingAgent ? COLORS.red : COLORS.black}
-                    size={35}
-                    iconStyle={{}}
-                  />
-                }
-                // @ts-expect-error TS(2322): Type '{ center: true; fontFamily: string; containe... Remove this comment to see the full error message
+                isChecked={isNotSprayingAgent}
+                errorProperty={errors?.isSprayingAgent}
                 onPress={() => {
                   setIsNotSprayingAgent(true);
                   setIsSprayingAgent(false);
@@ -208,17 +131,8 @@ export default function IndividualFarmerForm({
 
       <View className="flex justify-center items-center">
         <FormControl isRequired my="0" isInvalid={"surname" in errors}>
-          <FormControl.Label
-            _text={{
-              color: COLORS.black,
-              fontSize: 16,
-              fontFamily: "JosefinSans-Regular",
-            }}
-          >
-            Apelido
-          </FormControl.Label>
+          <InputLabel label="Apelido" />
           <Input
-            // label="Apelido"
             onChangeText={(newSurname: any) => {
               setErrors((prev: any) => ({
                 ...prev,
@@ -244,15 +158,7 @@ export default function IndividualFarmerForm({
       </View>
       <View className="flex justify-center items-center">
         <FormControl isRequired my="1" isInvalid={"otherNames" in errors}>
-          <FormControl.Label
-            _text={{
-              color: COLORS.black,
-              fontSize: 16,
-              fontFamily: "JosefinSans-Regular",
-            }}
-          >
-            Outros Nomes
-          </FormControl.Label>
+          <InputLabel label="Outros Nomes" />
           <Input
             // label="Outros Nomes"
             onChangeText={(newNames: any) => {
@@ -281,65 +187,33 @@ export default function IndividualFarmerForm({
       <View className="flex flex-row justify-center items-center">
         <View className="flex-1">
           <FormControl isRequired my="1" isInvalid={"gender" in errors}>
-            <FormControl.Label
-              _text={{
-                color: COLORS.black,
-                fontSize: 16,
-                fontFamily: "JosefinSans-Regular",
-              }}
-            >
-              Género
-            </FormControl.Label>
-
+            <InputLabel label="Gênero" />
             <View className="flex flex-row justify-between ">
               <View className="flex flex-row">
-                <CheckBox
-                  checked={isMan}
+                <InputCheckBox
+                  // title="Não"
+                  isChecked={isMan}
+                  errorProperty={errors?.gender}
                   onPress={() => {
                     setIsMan(true);
                     setIsWoman(false);
                     setIsTransgender(false);
                     setGender("Masculino");
+                    setErrors({
+                      ...errors,
+                      gender: "",
+                    });
                   }}
-                  fontFamily="JosefinSans-Regular"
-                  containerStyle={{
-                    backgroundColor: "transparent",
-                  }}
-                  textStyle={{
-                    fontWeight: "100",
-                    fontSize: 18,
-                    color: isMan
-                      ? COLORS.main
-                      : errors?.gender
-                      ? COLORS.red
-                      : COLORS.black,
-                  }}
-                  // checkedColor="grey"
-                  checkedIcon={
-                    <Icon
-                      name="check-box"
-                      color={COLORS.main}
-                      size={30}
-                      iconStyle={{}}
-                    />
-                  }
-                  uncheckedIcon={
-                    <Icon
-                      name="crop-square"
-                      color={errors?.gender ? COLORS.red : COLORS.black}
-                      size={30}
-                      iconStyle={{}}
-                    />
-                  }
                 />
+
                 <View className="flex flex-col items-center -ml-4">
                   <FontAwesomeIcon
                     name="male"
-                    color={isMan ? COLORS.main : COLORS.black}
+                    color={isMan ? COLORS.main : colorScheme === "dark" ? COLORS.white : COLORS.black}
                     size={30}
                   />
                   <Text
-                    className={cn("text-black text-xs", {
+                    className={cn("text-black dark:text-white text-xs", {
                       "text-green-700": isMan,
                     })}
                   >
@@ -348,53 +222,30 @@ export default function IndividualFarmerForm({
                 </View>
               </View>
               <View className="flex flex-row">
-                <CheckBox
-                  checked={isWoman}
-                  fontFamily="JosefinSans-Regular"
-                  containerStyle={{
-                    backgroundColor: "transparent",
-                  }}
-                  textStyle={{
-                    fontWeight: "100",
-                    fontSize: 18,
-                    color: isWoman
-                      ? COLORS.main
-                      : errors?.gender
-                      ? COLORS.red
-                      : COLORS.black,
-                  }}
+                <InputCheckBox
+                  // title="Não"
+                  isChecked={isWoman}
+                  errorProperty={errors?.gender}
                   onPress={() => {
                     setIsWoman(true);
                     setIsTransgender(false);
                     setIsMan(false);
                     setGender("Feminino");
+                    setErrors({
+                      ...errors,
+                      gender: "",
+                    });
                   }}
-                  // checkedColor="grey"
-                  checkedIcon={
-                    <Icon
-                      name="check-box"
-                      color={COLORS.main}
-                      size={30}
-                      iconStyle={{}}
-                    />
-                  }
-                  uncheckedIcon={
-                    <Icon
-                      name="crop-square"
-                      color={errors?.gender ? COLORS.red : COLORS.black}
-                      size={30}
-                      iconStyle={{}}
-                    />
-                  }
                 />
+
                 <View className="flex flex-col items-center -ml-4">
                   <FontAwesomeIcon
                     name="female"
-                    color={isWoman ? COLORS.main : COLORS.black}
+                    color={isWoman ?  COLORS.main : colorScheme === "dark" ? COLORS.white : COLORS.black}
                     size={30}
                   />
                   <Text
-                    className={cn("text-black text-xs", {
+                    className={cn("text-black dark:text-white text-xs", {
                       "text-green-700": isWoman,
                     })}
                   >
@@ -403,53 +254,30 @@ export default function IndividualFarmerForm({
                 </View>
               </View>
               <View className="flex flex-row">
-                <CheckBox
-                  checked={isTransgender}
-                  fontFamily="JosefinSans-Regular"
-                  containerStyle={{
-                    backgroundColor: "transparent",
-                  }}
-                  textStyle={{
-                    fontWeight: "100",
-                    fontSize: 18,
-                    color: isTransgender
-                      ? COLORS.main
-                      : errors?.gender
-                      ? COLORS.red
-                      : COLORS.black,
-                  }}
+                <InputCheckBox
+                  // title=""
+                  isChecked={isTransgender}
+                  errorProperty={errors?.gender}
                   onPress={() => {
                     setIsTransgender(true);
                     setIsWoman(false);
                     setIsMan(false);
                     setGender("Outro");
+                    setErrors({
+                      ...errors,
+                      gender: "",
+                    });
                   }}
-                  checkedColor="grey"
-                  checkedIcon={
-                    <Icon
-                      name="check-box"
-                      color={COLORS.main}
-                      size={30}
-                      iconStyle={{}}
-                    />
-                  }
-                  uncheckedIcon={
-                    <Icon
-                      name="crop-square"
-                      color={errors?.gender ? COLORS.red : COLORS.black}
-                      size={30}
-                      iconStyle={{}}
-                    />
-                  }
                 />
+
                 <View className="flex flex-col items-center -ml-4">
                   <FontAwesomeIcon
                     name="transgender-alt"
-                    color={isTransgender ? COLORS.main : COLORS.black}
+                    color={isTransgender ?  COLORS.main : colorScheme === "dark" ? COLORS.white : COLORS.black}
                     size={30}
                   />
                   <Text
-                    className={cn("text-black text-xs", {
+                    className={cn("text-black text-xs dark:text-white", {
                       "text-green-700": isTransgender,
                     })}
                   >
@@ -475,15 +303,7 @@ export default function IndividualFarmerForm({
 
       <View className="w-1/2">
         <FormControl isRequired isInvalid={"familySize" in errors}>
-          <FormControl.Label
-            _text={{
-              color: COLORS.black,
-              fontSize: 16,
-              fontFamily: "JosefinSans-Regular",
-            }}
-          >
-            Agregado Familiar
-          </FormControl.Label>
+          <InputLabel label="Agregado Familiar" />
           <Input
             // label="Agregado Familiar"
             onChangeText={(newSize: any) => {
@@ -517,15 +337,7 @@ export default function IndividualFarmerForm({
 
       <View className="">
         <FormControl isRequired my="1" isInvalid={"addressAdminPost" in errors}>
-          <FormControl.Label
-            _text={{
-              color: COLORS.black,
-              fontSize: 16,
-              fontFamily: "JosefinSans-Regular",
-            }}
-          >
-            Posto Administrativo
-          </FormControl.Label>
+          <InputLabel label="Posto Administrativo" />
           <Select
             selectedValue={addressAdminPost}
             accessibilityLabel="posto administrativo"
@@ -579,16 +391,7 @@ export default function IndividualFarmerForm({
       </View>
       <View className="">
         <FormControl isRequired my="1">
-          <FormControl.Label
-            _text={{
-              color: COLORS.black,
-              fontSize: 16,
-              fontFamily: "JosefinSans-Regular",
-            }}
-          >
-            Localidade
-          </FormControl.Label>
-
+          <InputLabel label="Localidade" />
           <Select
             selectedValue={addressVillage}
             accessibilityLabel="Escolha uma localidade"
@@ -636,15 +439,7 @@ export default function IndividualFarmerForm({
       <View className="flex flex-row mx-3 w-full gap-2">
         <View className="flex-1">
           <FormControl my="1" isInvalid={"primaryPhone" in errors}>
-            <FormControl.Label
-              _text={{
-                color: COLORS.black,
-                fontSize: 16,
-                fontFamily: "JosefinSans-Regular",
-              }}
-            >
-              Telemóvel
-            </FormControl.Label>
+            <InputLabel label="Telemóvel" />
             <Input
               // label="Telemóvel"
               placeholder="Telemóvel"
@@ -691,15 +486,7 @@ export default function IndividualFarmerForm({
         </View>
         <View className="flex-1">
           <FormControl my="1" isInvalid={"secondaryPhone" in errors}>
-            <FormControl.Label
-              _text={{
-                color: COLORS.black,
-                fontSize: 16,
-                fontFamily: "JosefinSans-Regular",
-              }}
-            >
-              Telemóvel Alternativo
-            </FormControl.Label>
+            <InputLabel label="Telemóvel Alternativo" />
             <Input
               // label="Telemóvel Alternativo"
               placeholder="Telemóvel"
@@ -754,15 +541,7 @@ export default function IndividualFarmerForm({
 
       <View className="py-3 mx-3 ">
         <FormControl isRequired isInvalid={"birthDate" in errors}>
-          <FormControl.Label
-            _text={{
-              color: COLORS.black,
-              fontSize: 16,
-              fontFamily: "JosefinSans-Regular",
-            }}
-          >
-            Data de Nascimento
-          </FormControl.Label>
+          <InputLabel label="Data de Nascimento" />
           <Pressable
             onPress={() => setOpenDatePicker(true)}
             className="flex flex-row gap-2 mt-1 items-center max-w-[200px] shadow-md border border-gray-300 rounded-md p-1 "
@@ -804,16 +583,7 @@ export default function IndividualFarmerForm({
 
       <View w="50%" px="1">
         <FormControl isRequired isInvalid={"birthProvince" in errors}>
-          <FormControl.Label
-            _text={{
-              color: COLORS.black,
-              fontSize: 16,
-              fontFamily: "JosefinSans-Regular",
-            }}
-          >
-            Província/País de Nascimento
-          </FormControl.Label>
-
+          <InputLabel label="Província/País de Nascimento" />
           <Select
             selectedValue={birthProvince}
             // @ts-expect-error TS(2322): Type '{ children: Element[]; selectedValue: any; a... Remove this comment to see the full error message
@@ -880,15 +650,11 @@ export default function IndividualFarmerForm({
                   my="1"
                   isInvalid={"birthDistrict" in errors}
                 >
-                  <FormControl.Label
-                    _text={{
-                      color: COLORS.black,
-                      fontSize: 16,
-                      fontFamily: "JosefinSans-Regular",
-                    }}
-                  >
-                    {birthProvince === "País Estrangeiro" ? "País" : "Distrito"}
-                  </FormControl.Label>
+                  <InputLabel
+                    label={
+                      birthProvince === "País Estrangeiro" ? "País" : "Distrito"
+                    }
+                  />
                   <Select
                     selectedValue={birthDistrict}
                     // @ts-expect-error TS(2322): Type '{ children: any; selectedValue: any; accessi... Remove this comment to see the full error message
@@ -979,15 +745,7 @@ export default function IndividualFarmerForm({
                       my="1"
                       isInvalid={"birthAdminPost" in errors}
                     >
-                      <FormControl.Label
-                        _text={{
-                          color: COLORS.black,
-                          fontSize: 16,
-                          fontFamily: "JosefinSans-Regular",
-                        }}
-                      >
-                        Posto Administrativo
-                      </FormControl.Label>
+                      <InputLabel label=" Posto Administrativo" />
                       <Select
                         selectedValue={birthProvince ? birthAdminPost : ""}
                         // @ts-expect-error TS(2322): Type '{ children: any[]; selectedValue: any; acces... Remove this comment to see the full error message
@@ -1064,17 +822,13 @@ export default function IndividualFarmerForm({
               my="1"
               isInvalid={"birthDistrict" in errors}
             >
-              <FormControl.Label
-                _text={{
-                  color: COLORS.black,
-                  fontSize: 16,
-                  fontFamily: "JosefinSans-Regular",
-                }}
-              >
-                {birthProvince === "País Estrangeiro"
-                  ? "País de Nascimento"
-                  : "Distrito de Nascimento"}
-              </FormControl.Label>
+              <InputLabel
+                label={
+                  birthProvince === "País Estrangeiro"
+                    ? "País de Nascimento"
+                    : "Distrito de Nascimento"
+                }
+              />
               <Select
                 selectedValue={birthDistrict}
                 // @ts-expect-error TS(2322): Type '{ children: any[]; selectedValue: any; acces... Remove this comment to see the full error message
@@ -1151,15 +905,7 @@ export default function IndividualFarmerForm({
       <View className="flex flex-row gap-2 justify-center items-center">
         <View className="flex-1">
           <FormControl my="2" isRequired isInvalid={"docType" in errors}>
-            <FormControl.Label
-              _text={{
-                color: COLORS.black,
-                fontSize: 16,
-                fontFamily: "JosefinSans-Regular",
-              }}
-            >
-              Tipo de Documento
-            </FormControl.Label>
+            <InputLabel label="Tipo de Documento" />
             <Select
               selectedValue={docType}
               // @ts-expect-error TS(2322): Type '{ children: Element[]; selectedValue: any; a... Remove this comment to see the full error message
@@ -1219,15 +965,7 @@ export default function IndividualFarmerForm({
 
         <View className="flex-1">
           <FormControl my="2" isInvalid={"docNumber" in errors}>
-            <FormControl.Label
-              _text={{
-                color: COLORS.black,
-                fontSize: 16,
-                fontFamily: "JosefinSans-Regular",
-              }}
-            >
-              Número de Documento
-            </FormControl.Label>
+            <InputLabel label="Número de Documento" />
             <Input
               value={docNumber}
               placeholder="Número do documento"
@@ -1255,15 +993,7 @@ export default function IndividualFarmerForm({
 
       <View className="">
         <FormControl isInvalid={"nuit" in errors}>
-          <FormControl.Label
-            _text={{
-              color: COLORS.black,
-              fontSize: 16,
-              fontFamily: "JosefinSans-Regular",
-            }}
-          >
-            NUIT
-          </FormControl.Label>
+          <InputLabel label="NUIT" />
           <Input
             value={nuit}
             placeholder="NUIT"
@@ -1295,52 +1025,14 @@ export default function IndividualFarmerForm({
 
       <View className="w-full">
         <FormControl isRequired isInvalid={"isGroupMember" in errors}>
-          <FormControl.Label
-            _text={{
-              color: COLORS.black,
-              fontSize: 16,
-              fontFamily: "JosefinSans-Regular",
-            }}
-          >
-            É membro de uma cooperativa?
-          </FormControl.Label>
+          <InputLabel label=" É membro de uma cooperativa?" />
 
-         
           <View className="flex flex-row mx-3 w-full justify-between gap-2">
             <View className="flex-1 justify-start">
-              <CheckBox
-                fontFamily="JosefinSans-Regular"
-                containerStyle={{
-                  backgroundColor: "transparent",
-                }}
-                textStyle={{
-                  fontWeight: "100",
-                  fontSize: 18,
-                  color: isGroupMember
-                    ? COLORS.main
-                    : errors?.isGroupMember
-                    ? COLORS.red
-                    : COLORS.black,
-                }}
+              <InputCheckBox
                 title="Sim"
-                checked={isGroupMember}
-                checkedIcon={
-                  <Icon
-                    name="check-box"
-                    color={COLORS.main}
-                    size={35}
-                    iconStyle={{}}
-                  />
-                }
-                uncheckedIcon={
-                  <Icon
-                    name="crop-square"
-                    color={errors?.isGroupMember ? COLORS.red : COLORS.black}
-                    size={35}
-                    iconStyle={{}}
-                  />
-                }
-                // @ts-expect-error TS(2322): Type '{ center: true; fontFamily: string; containe... Remove this comment to see the full error message
+                isChecked={isGroupMember}
+                errorProperty={errors?.isGroupMember}
                 onPress={() => {
                   setIsNotGroupMember(false);
                   setIsGroupMember(true);
@@ -1352,39 +1044,10 @@ export default function IndividualFarmerForm({
               />
             </View>
             <View className="flex-1 justify-end">
-              <CheckBox
-                fontFamily="JosefinSans-Regular"
-                containerStyle={{
-                  backgroundColor: "transparent",
-                }}
-                textStyle={{
-                  fontWeight: "100",
-                  fontSize: 18,
-                  color: isNotGroupMember
-                    ? COLORS.main
-                    : errors?.isGroupMember
-                    ? COLORS.red
-                    : COLORS.black,
-                }}
+              <InputCheckBox
                 title="Não"
-                checked={isNotGroupMember}
-                checkedIcon={
-                  <Icon
-                    name="check-box"
-                    color={COLORS.main}
-                    size={35}
-                    iconStyle={{}}
-                  />
-                }
-                uncheckedIcon={
-                  <Icon
-                    name="crop-square"
-                    color={errors?.isGroupMember ? COLORS.red : COLORS.black}
-                    size={35}
-                    iconStyle={{}}
-                  />
-                }
-                // @ts-expect-error TS(2322): Type '{ center: true; fontFamily: string; containe... Remove this comment to see the full error message
+                isChecked={isNotGroupMember}
+                errorProperty={errors?.isGroupMember}
                 onPress={() => {
                   setIsNotGroupMember(true);
                   setIsGroupMember(false);
