@@ -4,6 +4,9 @@ import { Box, Stack, Center } from "native-base";
 import { Icon, Button } from "@rneui/themed";
 import AwesomeAlert from "react-native-awesome-alerts";
 import { KeyboardAwareScrollView } from "react-native-keyboard-tools";
+import FeatherIcon from "react-native-vector-icons/Feather";
+
+
 import administrativePosts from "../../consts/administrativePosts";
 import styles from "./styles";
 import IndividualModal from "../../components/Modals/IndividualModal";
@@ -447,7 +450,7 @@ export default function FarmerRegistration({
                 right: 0,
                 top: 4,
               }}>
-              <Icon name="app-registration" size={40} color={COLORS.grey} />
+              <FeatherIcon name="edit" size={30} color={COLORS.black} />
             </Box>
           </Stack>
         </Box>

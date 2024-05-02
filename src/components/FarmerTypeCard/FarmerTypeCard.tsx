@@ -1,14 +1,12 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable prettier/prettier */
-/* eslint-disable linebreak-style */
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+
+
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import { Icon } from "@rneui/themed";
-
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { View, Text, TouchableOpacity } from "react-native";
 import COLORS from "../../consts/colors";
+import MaterialIcon from "react-native-vector-icons/MaterialCommunityIcons";
+import FontAwesomeIcon from "react-native-vector-icons/FontAwesome";
 
 export function FarmerTypeCard({
   route,
@@ -60,13 +58,13 @@ export function FarmerTypeCard({
               elevation: 8,
               display: pop ? "none" : "flex",
             }}
-            className="bg-[#EBEBE4] dark:bg-gray-800"
+            className="bg-white border-4 dark:bg-gray-800"
           >
-            <FontAwesomeIcon
-              icon={item?.icon}
+            {/* <FontAwesomeIcon
+              name={item?.icon}
               size={40}
               color={item?.iconColor}
-            />
+            /> */}
           </View>
         </View>
 
@@ -91,10 +89,10 @@ export function FarmerTypeCard({
             >
               <Text
                 style={{
-                  fontSize: 22,
+                  fontSize: 30,
                   fontFamily: "JosefinSans-Bold",
                   textAlign: "right",
-                  color: !pop ? item?.color : COLORS.lightgrey,
+                  // color: !pop ? item?.color : COLORS.lightgrey,
                 }}
                 numberOfLines={2}
                 ellipsizeMode={"tail"}

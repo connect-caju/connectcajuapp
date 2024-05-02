@@ -1,7 +1,3 @@
-/* eslint-disable linebreak-style */
-/* eslint-disable react/prop-types */
-/* eslint-disable prettier/prettier */
-/* eslint-disable prettier/prettier */
 import {
   FlatList,
   InteractionManager,
@@ -9,23 +5,23 @@ import {
   Text,
   View,
   TouchableOpacity,
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
+  ScrollView,
 } from "react-native";
 import React, { useEffect, useState } from "react";
-import { Icon } from "@rneui/themed";
-import { Box, Pressable } from "native-base";
-import { useFocusEffect } from "@react-navigation/native";
+import { Box, Pressable,  } from "native-base";
+import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import {
   faPeopleGroup,
   faInstitution,
   faPerson,
   faBell,
+  faDollarSign,
+  faMoneyCheckDollar,
 } from "@fortawesome/free-solid-svg-icons";
+import { Icon } from "@rneui/themed";
 
-import {
-  heightPercentageToDP as hp,
-} from "react-native-responsive-screen";
 
+import { heightPercentageToDP as hp } from "react-native-responsive-screen";
 
 import CustomActivityIndicator from "../../components/ActivityIndicator/CustomActivityIndicator";
 import { customizeItem } from "../../helpers/customizeItem";
@@ -47,46 +43,43 @@ const provincialStats = "provincialStats";
 const farmersTypes = [
   {
     farmerType: "Indivíduo",
-    icon: faPerson,
+    // icon: faPerson,
     description:
-      "Produtores singulares categorizados em familiares e comerciais.",
-    title: "Produtores Singulares",
-    iconColor: COLORS.main,
-    borderColor: COLORS.darkyGreen,
-    color: COLORS.main,
+      "Produtores de caju, categorizados em familiares e comerciais.",
+    title: "Produtores",
+    // iconColor: COLORS.main,
+    // borderColor: COLORS.darkyGreen,
+    // color: COLORS.main,
   },
   {
     farmerType: "Grupo",
-    icon: faPeopleGroup,
-    description: "Cooperativas, Associações, Grupos de produtores e EMC.",
-    title: "Organizações de Produtores",
-    iconColor: COLORS.main,
-    borderColor: COLORS.darkyGreen,
-    color: COLORS.main,
+    // icon: "dollar",
+    description:
+      "Comerciantes de castanha e seus derivados, categorizados em primários, intermédios e finais.",
+    title: "Comerciantes",
+    // iconColor: COLORS.main,
+    // borderColor: COLORS.darkyGreen,
+    // color: COLORS.main,
   },
   {
     farmerType: "Instituição",
-    icon: faInstitution,
-    description: "Instituições (públicas e privadas) produtoras de caju.",
-    title: "Produtores Institucionais",
-    iconColor: COLORS.main,
-    borderColor: COLORS.darkyGreen,
-    color: COLORS.main,
+    // icon: faInstitution,
+    description:
+      "Cooperativas e outras formas de organização de actores da cadeia de valor caju.",
+    title: "Cooperativas",
+    // iconColor: COLORS.main,
+    // borderColor: COLORS.darkyGreen,
+    // color: COLORS.main,
   },
-
 ];
 
-export default function FarmersScreen({
-  route,
-  navigation
-}: any) {
+export default function FarmersScreen({ route, navigation }: any) {
   const realm = useRealm();
   const user = useUser();
   let customUserData = user.customData;
 
   // controlling farmers regristration button animations
   const [pop, setPop] = useState(false);
-
 
   const farmers = realm
     .objects("Actor")
@@ -112,9 +105,7 @@ export default function FarmersScreen({
   const [fetchedInstitutions, setFetchedInstitutions] = useState([]);
   const [refresh, setRefresh] = useState(false);
 
-
   const districts = Array.from(
-
     // @ts-expect-error TS(2339): Property 'userDistrict' does not exist on type 'Ob... Remove this comment to see the full error message
     new Set(stats.map((stat) => stat?.userDistrict)),
   ).filter((district) => district !== "NA");
@@ -149,7 +140,6 @@ export default function FarmersScreen({
     "Instituição",
   );
 
-
   // @ts-expect-error TS(2339): Property 'userDistrict' does not exist on type 'Ob... Remove this comment to see the full error message
   const filteredStats = stats?.filter((stat) => stat.userDistrict !== "NA");
   // ------------------------------------------------------
@@ -168,7 +158,9 @@ export default function FarmersScreen({
     for (let i = 0; i < districts.length; i++) {
       const district = districts[i];
       let newObject = {};
-      const usersStats = stats.filter((stat: any) => stat.userDistrict === district);
+      const usersStats = stats.filter(
+        (stat: any) => stat.userDistrict === district,
+      );
 
       // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       newObject["title"] = `${district}`;
@@ -198,13 +190,12 @@ export default function FarmersScreen({
   }
   if (farmersList.length > 0) {
     farmersList = farmersList?.sort(
-
       // @ts-expect-error TS(2362): The left-hand side of an arithmetic operation must... Remove this comment to see the full error message
       (a: any, b: any) => new Date(b?.createdAt) - new Date(a?.createdAt),
     );
   }
 
-  useEffect(() => { }, [refresh]);
+  useEffect(() => {}, [refresh]);
 
   useEffect(() => {
     if (
@@ -254,11 +245,8 @@ export default function FarmersScreen({
     );
   }
 
-
   return (
-    <SafeAreaView
-      className={`flex flex-1 pb-40 ${backgroundStyle}`}
-    >
+    <SafeAreaView className={`flex flex-1 pb-40 ${backgroundStyle}`}>
       {/*
       Show this if the user is a field agent only
     */}
@@ -268,19 +256,19 @@ export default function FarmersScreen({
           <View
             style={{
               opacity: pop ? 0.2 : 1,
-
             }}
           >
             <View
-              className={"bg-[#EBEBE4] dark:bg-gray-800 p-2 h-20 justify-center"}
+              className={
+                "bg-[#EBEBE4] dark:bg-gray-800 p-2 h-20 justify-center"
+              }
             >
               <View
                 style={{
-                  width: "80%"
+                  width: "80%",
                 }}
               >
                 <Pressable
-
                   // @ts-expect-error TS(2322): Type '{ children: Element; onPress: () => void; }'... Remove this comment to see the full error message
                   onPress={() => {
                     setRefresh(!refresh);
@@ -309,11 +297,9 @@ export default function FarmersScreen({
                   top: 20,
                 }}
               >
-                {!pop &&
-                  <View
-                    className="justify-center rounded-full bg-gray-400 dark:bg-gray-500 p-2"
-                  >
-                    <TouchableOpacity disabled={pop} onPress={() => { }}>
+                {!pop && (
+                  <View className="justify-center rounded-full bg-gray-400 dark:bg-gray-500 p-2">
+                    <TouchableOpacity disabled={pop} onPress={() => {}}>
                       <View
                         style={{
                           width: 10,
@@ -326,16 +312,18 @@ export default function FarmersScreen({
                           zIndex: 1,
                         }}
                       />
-                      <FontAwesomeIcon icon={faBell} size={20} color={COLORS.lightestgrey} />
+                      <FontAwesomeIcon
+                        icon={faBell}
+                        size={20}
+                        color={COLORS.lightestgrey}
+                      />
                     </TouchableOpacity>
                   </View>
-                }
+                )}
               </View>
             </View>
-
             {
               <Box
-
                 // @ts-expect-error TS(2322): Type '{ children: Element; style: { justifyContent... Remove this comment to see the full error message
                 style={{
                   // display: pop ? "none" : "flex",
@@ -349,7 +337,6 @@ export default function FarmersScreen({
                   horizontal={false}
                   StickyHeaderComponent={() => (
                     <Box
-
                       // @ts-expect-error TS(2322): Type '{ style: { height: number; justifyContent: s... Remove this comment to see the full error message
                       style={{
                         height: hp("10%"),
@@ -363,10 +350,10 @@ export default function FarmersScreen({
                   keyExtractor={keyExtractor}
                   // onEndReached={handleEndReached}
                   onEndReachedThreshold={0.1}
-                  ItemSeparatorComponent={() => <CustomDivider thickness={1} bg={COLORS.lightestgrey} />}
-                  renderItem={({
-                    item
-                  }: any) => {
+                  ItemSeparatorComponent={() => (
+                    <CustomDivider thickness={1} bg={COLORS.lightestgrey} />
+                  )}
+                  renderItem={({ item }: any) => {
                     if (item?.farmerType === "Grupo") {
                       item["total"] = groups?.length;
                     } else if (item?.farmerType === "Indivíduo") {
@@ -374,12 +361,13 @@ export default function FarmersScreen({
                     } else if (item?.farmerType === "Instituição") {
                       item["total"] = institutions?.length;
                     }
-                    return <FarmerTypeCard route={route} item={item} pop={pop} />;
+                    return (
+                      <FarmerTypeCard route={route} item={item} pop={pop} />
+                    );
                   }}
                   ListFooterComponent={() => {
                     return (
                       <Box
-
                         // @ts-expect-error TS(2322): Type '{ children: Element; style: { paddingBottom:... Remove this comment to see the full error message
                         style={{
                           paddingBottom: 100,
@@ -395,20 +383,16 @@ export default function FarmersScreen({
           </View>
         )}
 
-      {
-        customUserData?.role !== roles.provincialManager &&
-        customUserData?.role !== roles.ampcmSupervisor &&
-        (
-
+      {customUserData?.role !== roles.provincialManager &&
+        customUserData?.role !== roles.ampcmSupervisor && (
           <RegistrationButton
             customUserData={customUserData}
             pop={pop}
             setPop={setPop}
-            navigation={navigation} route={route} />
-
-        )
-      }
-
+            navigation={navigation}
+            route={route}
+          />
+        )}
     </SafeAreaView>
   );
 }

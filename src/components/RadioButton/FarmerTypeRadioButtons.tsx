@@ -94,7 +94,7 @@ const FarmerTypeRadioButtons = ({
               <FontAwesomeIcon
                 icon={item.iconName} size={20} color={((focusedOption === item.focusedOption) || (farmerType === item.farmerType))
                   ? COLORS.ghostwhite
-                  : COLORS.grey}
+                  : COLORS.black}
               />
               <Text
                 style={{
@@ -103,7 +103,7 @@ const FarmerTypeRadioButtons = ({
                   color:
                     ((focusedOption === item.focusedOption) || (farmerType === item.farmerType))
                       ? COLORS.ghostwhite
-                      : COLORS.grey,
+                      : COLORS.black,
                   fontFamily: "JosefinSans-Bold",
                   textAlign: "center",
                 }}

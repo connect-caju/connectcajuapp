@@ -1,12 +1,9 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable linebreak-style */
-/* eslint-disable prettier/prettier */
+
 import {
     View,
     Animated,
     TouchableOpacity,
     Text,
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 } from "react-native";
 import React, { useState, useEffect } from "react";
 import { Icon } from "@rneui/themed";
@@ -14,7 +11,9 @@ import {
     faPeopleGroup,
     faInstitution,
     faPerson,
+    faCartPlus,
 } from "@fortawesome/free-solid-svg-icons";
+import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import COLORS from "../../consts/colors";
@@ -117,7 +116,7 @@ const RegistrationButton = ({
                         // color: COLORS.grey,
                     }}
                     className="text-gray-600 font-bold"
-                    >Singular</Text>}
+                    >Produtor</Text>}
                     <FontAwesomeIcon icon={faPerson} size={30} color={COLORS.main} />
                 </TouchableOpacity>
             </Animated.View>
@@ -152,8 +151,8 @@ const RegistrationButton = ({
                         // fontFamily: "Roboto-Bold",
                     }}
                     className="text-gray-600 font-bold"
-                    >Organização</Text>}
-                    <FontAwesomeIcon icon={faPeopleGroup} size={30} color={COLORS.main} />
+                    >Comerciante</Text>}
+                    <MaterialIcons name={"monetization-on"} size={30} color={COLORS.main} />
                 </TouchableOpacity>
             </Animated.View>
             <Animated.View
@@ -187,7 +186,7 @@ const RegistrationButton = ({
                         // color: COLORS.grey,
                     }}
                     className="text-gray-600 font-bold"
-                    >Instituição</Text>}
+                    >Cooperativa</Text>}
                     <FontAwesomeIcon icon={faInstitution} size={30} color={COLORS.main} />
                 </TouchableOpacity>
             </Animated.View >
