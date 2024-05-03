@@ -143,6 +143,7 @@ export default function IndividualFarmerForm({
             value={surname}
             placeholder="Apelido"
             className=""
+            autoCapitalize="words"
           />
           {"surname" in errors ? (
             <FormControl.ErrorMessage
@@ -160,7 +161,7 @@ export default function IndividualFarmerForm({
         <FormControl isRequired my="1" isInvalid={"otherNames" in errors}>
           <InputLabel label="Outros Nomes" />
           <Input
-            // label="Outros Nomes"
+            autoCapitalize="words"
             onChangeText={(newNames: any) => {
               setErrors((prev: any) => ({
                 ...prev,
@@ -209,7 +210,13 @@ export default function IndividualFarmerForm({
                 <View className="flex flex-col items-center -ml-4">
                   <FontAwesomeIcon
                     name="male"
-                    color={isMan ? COLORS.main : colorScheme === "dark" ? COLORS.white : COLORS.black}
+                    color={
+                      isMan
+                        ? COLORS.main
+                        : colorScheme === "dark"
+                        ? COLORS.white
+                        : COLORS.black
+                    }
                     size={30}
                   />
                   <Text
@@ -241,7 +248,13 @@ export default function IndividualFarmerForm({
                 <View className="flex flex-col items-center -ml-4">
                   <FontAwesomeIcon
                     name="female"
-                    color={isWoman ?  COLORS.main : colorScheme === "dark" ? COLORS.white : COLORS.black}
+                    color={
+                      isWoman
+                        ? COLORS.main
+                        : colorScheme === "dark"
+                        ? COLORS.white
+                        : COLORS.black
+                    }
                     size={30}
                   />
                   <Text
@@ -273,7 +286,13 @@ export default function IndividualFarmerForm({
                 <View className="flex flex-col items-center -ml-4">
                   <FontAwesomeIcon
                     name="transgender-alt"
-                    color={isTransgender ?  COLORS.main : colorScheme === "dark" ? COLORS.white : COLORS.black}
+                    color={
+                      isTransgender
+                        ? COLORS.main
+                        : colorScheme === "dark"
+                        ? COLORS.white
+                        : COLORS.black
+                    }
                     size={30}
                   />
                   <Text
@@ -340,7 +359,6 @@ export default function IndividualFarmerForm({
           <InputLabel label="Posto Administrativo" />
           <Select
             selectedValue={addressAdminPost}
-            accessibilityLabel="posto administrativo"
             placeholder="Escolha posto administrativo"
             minHeight={50}
             _selectedItem={{
@@ -355,14 +373,6 @@ export default function IndividualFarmerForm({
                 color={COLORS.main}
                 onPress={() => setAddressAdminPost("")}
               />
-              // addressAdminPost ? (
-              // ) : (
-              //   <Icon
-              //     // size={45}
-              //     name="arrow-drop-down"
-              //     color="#005000"
-              //   />
-              // )
             }
             mt={1}
             onValueChange={(newAdminPost) => {
@@ -394,7 +404,6 @@ export default function IndividualFarmerForm({
           <InputLabel label="Localidade" />
           <Select
             selectedValue={addressVillage}
-            accessibilityLabel="Escolha uma localidade"
             placeholder="Escolha uma localidade"
             minHeight={50}
             _selectedItem={{
@@ -409,20 +418,6 @@ export default function IndividualFarmerForm({
                 color={COLORS.main}
                 onPress={() => setAddressVillage("")}
               />
-              // addressVillage ? (
-              //   <Icon
-              //     name="close"
-              //     size={15}
-              //     color="grey"
-              //     onPress={() => setAddressVillage("")}
-              //   />
-              // ) : (
-              //   <Icon
-              //     // size={45}
-              //     name="arrow-drop-down"
-              //     color={COLORS.main}
-              //   />
-              // )
             }
             mt={1}
             onValueChange={(newVillage) => setAddressVillage(newVillage)}
@@ -454,24 +449,7 @@ export default function IndividualFarmerForm({
               }}
               className="text-center"
             />
-            {/* <FormControl.Label>Telemóvel</FormControl.Label>
-            <CustomInput
-              width="100%"
-              type="telephoneNumber"
-              placeholder="Telemóvel"
-              keyboardType="phone-pad"
-              value={primaryPhone}
-              onChangeText={(newPhone: any) => {
-                setErrors((prev: any) => ({
-                  ...prev,
-                  primaryPhone: "",
-                }));
-                setPrimaryPhone(newPhone);
-              }}
-              InputLeftElement={
-                <Icon name="phone" color="grey" size={20} type="material" />
-              }
-            /> */}
+
             {"primaryPhone" in errors ? (
               <FormControl.ErrorMessage
                 leftIcon={<Icon name="error-outline" size={16} color="red" />}
@@ -501,24 +479,7 @@ export default function IndividualFarmerForm({
               }}
               className="text-center"
             />
-            {/* <FormControl.Label>Tel. Alternativo</FormControl.Label>
-            <CustomInput
-              width="100%"
-              type="telephoneNumber"
-              placeholder="Telemóvel"
-              keyboardType="phone-pad"
-              value={secondaryPhone}
-              onChangeText={(newPhone: any) => {
-                setErrors((prev: any) => ({
-                  ...prev,
-                  secondaryPhone: "",
-                }));
-                setSecondaryPhone(newPhone);
-              }}
-              InputLeftElement={
-                <Icon name="phone" color="grey" size={20} type="material" />
-              }
-            /> */}
+
             {"secondaryPhone" in errors ? (
               <FormControl.ErrorMessage
                 leftIcon={<Icon name="error-outline" size={16} color="red" />}
@@ -532,8 +493,6 @@ export default function IndividualFarmerForm({
           </FormControl>
         </View>
       </View>
-
-      {/* <CustomDivider marginVertical="2" thickness={2} bg={COLORS.main} /> */}
 
       <View className="py-3">
         <Text style={styles.formSectionDescription}>Dados de Nascimento</Text>
@@ -586,8 +545,6 @@ export default function IndividualFarmerForm({
           <InputLabel label="Província/País de Nascimento" />
           <Select
             selectedValue={birthProvince}
-            // @ts-expect-error TS(2322): Type '{ children: Element[]; selectedValue: any; a... Remove this comment to see the full error message
-            accessibilityLabel="Escolha uma província"
             placeholder="Escolha uma província"
             minHeight={50}
             _selectedItem={{
@@ -596,25 +553,7 @@ export default function IndividualFarmerForm({
               endIcon: <CheckIcon size="5" />,
             }}
             dropdownCloseIcon={
-              <Icon
-                // size={45}
-                name="arrow-drop-down"
-                color={COLORS.main}
-              />
-              // birthProvince ? (
-              //   <Icon
-              //     name="close"
-              //     size={20}
-              //     color="grey"
-              //     onPress={() => setBirthProvince("")}
-              //   />
-              // ) : (
-              //   <Icon
-              //     // size={45}
-              //     name="arrow-drop-down"
-              //     color={COLORS.main}
-              //   />
-              // )
+              <Icon name="arrow-drop-down" color={COLORS.main} />
             }
             mt={1}
             onValueChange={(newProvince) => {
@@ -657,8 +596,6 @@ export default function IndividualFarmerForm({
                   />
                   <Select
                     selectedValue={birthDistrict}
-                    // @ts-expect-error TS(2322): Type '{ children: any; selectedValue: any; accessi... Remove this comment to see the full error message
-                    accessibilityLabel="Escolha um distrito"
                     placeholder={
                       birthProvince?.includes("Estrangeiro")
                         ? "Escolha um país"
@@ -676,20 +613,6 @@ export default function IndividualFarmerForm({
                         name="arrow-drop-down"
                         color={COLORS.main}
                       />
-                      // birthDistrict ? (
-                      //   <Icon
-                      //     name="close"
-                      //     size={20}
-                      //     color="grey"
-                      //     onPress={() => setBirthDistrict("")}
-                      //   />
-                      // ) : (
-                      //   <Icon
-                      //     // size={45}
-                      //     name="arrow-drop-down"
-                      //     color={COLORS.main}
-                      //   />
-                      // )
                     }
                     mt={1}
                     onValueChange={(newDistrict) => {
@@ -748,8 +671,6 @@ export default function IndividualFarmerForm({
                       <InputLabel label=" Posto Administrativo" />
                       <Select
                         selectedValue={birthProvince ? birthAdminPost : ""}
-                        // @ts-expect-error TS(2322): Type '{ children: any[]; selectedValue: any; acces... Remove this comment to see the full error message
-                        accessibilityLabel="Escolha um posto administrativo"
                         placeholder="Escolha um posto administrativo"
                         minHeight={50}
                         _selectedItem={{
@@ -763,20 +684,6 @@ export default function IndividualFarmerForm({
                             name="arrow-drop-down"
                             color={COLORS.main}
                           />
-                          // birthAdminPost ? (
-                          //   <Icon
-                          //     name="close"
-                          //     size={20}
-                          //     color="grey"
-                          //     onPress={() => setBirthAdminPost("")}
-                          //   />
-                          // ) : (
-                          //   <Icon
-                          //     // size={45}
-                          //     name="arrow-drop-down"
-                          //     color={COLORS.main}
-                          //   />
-                          // )
                         }
                         mt={1}
                         onValueChange={(newAdminPost) => {
@@ -831,8 +738,6 @@ export default function IndividualFarmerForm({
               />
               <Select
                 selectedValue={birthDistrict}
-                // @ts-expect-error TS(2322): Type '{ children: any[]; selectedValue: any; acces... Remove this comment to see the full error message
-                accessibilityLabel="Seleccionar país"
                 placeholder="Seleccionar país"
                 minHeight={50}
                 _selectedItem={{
@@ -846,20 +751,6 @@ export default function IndividualFarmerForm({
                     name="arrow-drop-down"
                     color={COLORS.main}
                   />
-                  // birthAdminPost ? (
-                  //   <Icon
-                  //     name="close"
-                  //     size={20}
-                  //     color="grey"
-                  //     onPress={() => setBirthAdminPost("")}
-                  //   />
-                  // ) : (
-                  //   <Icon
-                  //     // size={45}
-                  //     name="arrow-drop-down"
-                  //     color={COLORS.main}
-                  //   />
-                  // )
                 }
                 mt={1}
                 onValueChange={(newDistrict: any) => {
@@ -894,8 +785,6 @@ export default function IndividualFarmerForm({
         )}
       </View>
 
-      {/* <CustomDivider marginVertical="2" thickness={2} bg={COLORS.main} /> */}
-
       <View className="my-3">
         <Text style={styles.formSectionDescription}>
           Documentos de Identificação
@@ -908,8 +797,6 @@ export default function IndividualFarmerForm({
             <InputLabel label="Tipo de Documento" />
             <Select
               selectedValue={docType}
-              // @ts-expect-error TS(2322): Type '{ children: Element[]; selectedValue: any; a... Remove this comment to see the full error message
-              accessibilityLabel="Tipo de doc."
               placeholder="Tipo de documento"
               minHeight={50}
               _selectedItem={{
@@ -923,20 +810,6 @@ export default function IndividualFarmerForm({
                   name="arrow-drop-down"
                   color={COLORS.main}
                 />
-                // docType ? (
-                //   <Icon
-                //     name="close"
-                //     size={20}
-                //     color="grey"
-                //     onPress={() => setDocType("")}
-                //   />
-                // ) : (
-                //   <Icon
-                //     // size={45}
-                //     name="arrow-drop-down"
-                //     color={COLORS.main}
-                //   />
-                // )
               }
               mt={1}
               onValueChange={(newDocType) => {
@@ -967,6 +840,7 @@ export default function IndividualFarmerForm({
           <FormControl my="2" isInvalid={"docNumber" in errors}>
             <InputLabel label="Número de Documento" />
             <Input
+              autoCapitalize="characters"
               value={docNumber}
               placeholder="Número do documento"
               onChangeText={(newDocNumber: any) => {

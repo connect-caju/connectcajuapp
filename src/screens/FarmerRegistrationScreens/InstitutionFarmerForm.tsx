@@ -10,23 +10,20 @@ import {
   Radio,
 } from "native-base";
 import { Icon, Button, CheckBox } from "@rneui/themed";
-import { Datepicker } from "@ui-kitten/components";
-import AwesomeAlert from "react-native-awesome-alerts";
-
 import { CustomInput } from "../../components/Inputs/CustomInput";
 import villages from "../../consts/villages";
-import CustomActivityIndicator from "../../components/ActivityIndicator/CustomActivityIndicator";
 import {
   groups,
   institutions,
   privateInstitutions,
   publicInstitutions,
 } from "../../consts/farmerTypes";
+import { Input } from "../../../components/Input";
 
 import { realmContext } from "../../models/realmContext";
-import COLORS from "../../consts/colors";
 import InputCheckBox from "../../components/InputCheckBox/InputCheckBox";
 import InputLabel from "../../components/InputLabel/InputLabel";
+import styles from "./styles";
 const { useRealm } = realmContext;
 
 export default function InstitutionFarmerForm({
@@ -79,7 +76,7 @@ export default function InstitutionFarmerForm({
               <InputCheckBox
                 title="Privada"
                 isChecked={isPrivateInstitution}
-                errorProperty={errors.isInstitutionPrivate}
+                errorProperty={errors?.isPrivateInstitution}
                 onPress={() => {
                   setIsInstitutionPrivate(true);
                   setIsInstitutionPublic(false);
@@ -96,7 +93,7 @@ export default function InstitutionFarmerForm({
               <InputCheckBox
                 title="Pública"
                 isChecked={isInstitutionPublic}
-                errorProperty={errors?.isInstitutionPrivate}
+                errorProperty={errors?.isPrivateInstitution}
                 onPress={() => {
                   setIsInstitutionPrivate(false);
                   setIsInstitutionPublic(true);
@@ -124,38 +121,27 @@ export default function InstitutionFarmerForm({
         </FormControl>
       </View>
 
-      <View className="flex flex-row gap-2 justify-center w-full">
+      <View className="flex flex-col justify-center w-full">
         <View className="flex-1">
           <FormControl
             isRequired
-            my="3"
+            my="1"
             isInvalid={"institutionType" in errors}
           >
-            <FormControl.Label>Tipo de Instituição</FormControl.Label>
+            <InputLabel label="Tipo de Instituicação" />
             <Select
-              isDisabled={
-                !isInstitutionPrivate && !isInstitutionPublic ? true : false
-              }
+              // isDisabled={
+              //   !isInstitutionPrivate && !isInstitutionPublic ? true : false
+              // }
               selectedValue={institutionType}
-              // @ts-expect-error TS(2322): Type '{ children: any[]; isDisabled: boolean; sele... Remove this comment to see the full error message
-              accessibilityLabel="Tipo de Instituição"
               placeholder={"Escolha uma instituição"}
-              minHeight={55}
+              minHeight={50}
               dropdownCloseIcon={
-                institutionType ? (
-                  <Icon
-                    name="close"
-                    size={20}
-                    color="grey"
-                    onPress={() => setInstitutionType("")}
-                  />
-                ) : (
-                  <Icon
-                    // size={45}
-                    name="arrow-drop-down"
-                    color="#005000"
-                  />
-                )
+                <Icon
+                // size={45}
+                name="arrow-drop-down"
+                color="#005000"
+              />
               }
               _selectedItem={{
                 bg: "gray.200",
@@ -204,15 +190,11 @@ export default function InstitutionFarmerForm({
         <View className="flex-1">
           <FormControl
             isRequired
-            my="4"
+            my="1"
             isInvalid={"institutionName" in errors}
           >
-            <FormControl.Label>Nome</FormControl.Label>
-            <CustomInput
-              width="100%"
-              isDisabled={institutionType === "" ? true : false}
-              autoCapitalize="words"
-              placeholder="Nome da Instituição"
+            <InputLabel label="Nome da Instituição" />
+            <Input 
               value={institutionName}
               onChangeText={(newInstitutionName: any) => {
                 setErrors((prev: any) => ({
@@ -221,7 +203,9 @@ export default function InstitutionFarmerForm({
                 }));
                 setInstitutionName(newInstitutionName);
               }}
+              placeholder="Nome da Instituição"
             />
+           
             {"institutionName" in errors ? (
               <FormControl.ErrorMessage
                 leftIcon={<Icon name="error-outline" size={16} color="red" />}
@@ -236,6 +220,10 @@ export default function InstitutionFarmerForm({
         </View>
       </View>
 
+      <View className="my-3">
+        <Text style={styles.formSectionDescription}>Endereço e Contacto</Text>
+      </View>
+
       <View className="flex flex-row gap-2 justify-center w-full">
         <View className="flex-1">
           <FormControl
@@ -243,32 +231,22 @@ export default function InstitutionFarmerForm({
             my="2"
             isInvalid={"institutionAdminPost" in errors}
           >
-            <FormControl.Label>Posto Adm.</FormControl.Label>
+            <InputLabel label="Posto Adm." />
             <Select
               selectedValue={institutionAdminPost}
-              accessibilityLabel="posto administrativo"
               placeholder="Escolha posto administrativo"
-              minHeight={55}
+              minHeight={50}
               _selectedItem={{
                 bg: "gray.200",
                 fontSize: "4xl",
                 endIcon: <CheckIcon size="5" />,
               }}
               dropdownCloseIcon={
-                institutionAdminPost ? (
-                  <Icon
-                    name="close"
-                    size={20}
-                    color="grey"
-                    onPress={() => setInstitutionAdminPost("")}
-                  />
-                ) : (
-                  <Icon
-                    // size={45}
-                    name="arrow-drop-down"
-                    color="#005000"
-                  />
-                )
+                <Icon
+                // size={45}
+                name="arrow-drop-down"
+                color="#005000"
+              />
               }
               mt={1}
               onValueChange={(newAdminPost) => {
@@ -297,33 +275,23 @@ export default function InstitutionFarmerForm({
         </View>
         <View className="flex-1">
           <FormControl isRequired my="2">
-            <FormControl.Label>Localidade</FormControl.Label>
+            <InputLabel label="Localidade" />
             <Select
               selectedValue={institutionVillage}
-              // @ts-expect-error TS(2322): Type '{ children: any[]; selectedValue: any; acces... Remove this comment to see the full error message
-              accessibilityLabel="Escolha uma localidade"
               placeholder="Escolha uma localidade"
-              minHeight={55}
+              minHeight={50}
               _selectedItem={{
-                bg: "teal.600",
-                fontSize: "lg",
+                bg: "gray.200",
+                fontSize: "4xl",
                 endIcon: <CheckIcon size="5" />,
               }}
               dropdownCloseIcon={
-                institutionVillage ? (
-                  <Icon
-                    name="close"
-                    size={20}
-                    color="grey"
-                    onPress={() => setInstitutionVillage("")}
-                  />
-                ) : (
-                  <Icon
-                    // size={45}
-                    name="arrow-drop-down"
-                    color="#005000"
-                  />
-                )
+                <Icon
+                // size={45}
+                name="arrow-drop-down"
+                color="#005000"
+              />
+                
               }
               mt={1}
               onValueChange={(newVillage) => setInstitutionVillage(newVillage)}
@@ -344,21 +312,21 @@ export default function InstitutionFarmerForm({
         my="1"
         isInvalid={"institutionManagerName" in errors}
       >
-        <FormControl.Label>Nome do Representante</FormControl.Label>
-        <CustomInput
-          width="100%"
-          type="text"
+        <InputLabel label="Nome do Responsável" />
+        <Input 
           autoCapitalize="words"
-          placeholder="Nome completo do representante"
           value={institutionManagerName}
           onChangeText={(newManagerName: any) => {
             setErrors((prev: any) => ({
               ...prev,
               institutionManagerName: "",
-            }));
+            }))
             setInstitutionManagerName(newManagerName);
           }}
+          placeholder="Nome completo do responsável"
+
         />
+
         {"institutionManagerName" in errors ? (
           <FormControl.ErrorMessage
             leftIcon={<Icon name="error-outline" size={16} color="red" />}
@@ -371,27 +339,24 @@ export default function InstitutionFarmerForm({
         )}
       </FormControl>
 
-      <Stack direction="row" mx="3" w="100%">
-        <Box w="50%" px="1" my="2">
+      <View className="flex flex-row w-full gap-2" >
+        <View className="flex-1" >
           <FormControl isInvalid={"institutionManagerPhone" in errors}>
-            <FormControl.Label>Tel. do Responsável</FormControl.Label>
-            <CustomInput
-              width="100%"
-              type="telephoneNumber"
-              placeholder="Telemóvel"
+            <InputLabel label="Tel. do Responsável" />
+            <Input 
               keyboardType="phone-pad"
               value={institutionManagerPhone}
               onChangeText={(newManagerPhone: any) => {
                 setErrors((prev: any) => ({
                   ...prev,
                   institutionManagerPhone: "",
-                }));
+                }))
                 setInstitutionManagerPhone(newManagerPhone);
               }}
-              InputLeftElement={
-                <Icon name="phone" color="grey" size={25} type="material" />
-              }
+              placeholder="Telemóvel do responsável"
+              className="text-center"
             />
+
             {"institutionManagerPhone" in errors ? (
               <FormControl.ErrorMessage
                 leftIcon={<Icon name="error-outline" size={16} color="red" />}
@@ -403,16 +368,13 @@ export default function InstitutionFarmerForm({
               <FormControl.HelperText></FormControl.HelperText>
             )}
           </FormControl>
-        </Box>
-        <Box w="50%" px="1" my="2">
+        </View>
+        <View className="flex-1">
           <FormControl isInvalid={"institutionNuit" in errors}>
-            <FormControl.Label>NUIT da Instituição</FormControl.Label>
-            <CustomInput
-              width="100%"
-              type="number"
-              placeholder="NUIT"
-              value={institutionNuit}
+            <InputLabel label="NUIT da Instituição" />
+            <Input 
               keyboardType="numeric"
+              value={institutionNuit}
               onChangeText={(newNuit: any) => {
                 setErrors((prev: any) => ({
                   ...prev,
@@ -420,7 +382,10 @@ export default function InstitutionFarmerForm({
                 }));
                 setInstitutionNuit(newNuit);
               }}
+              placeholder="NUIT"
+              className="text-center"
             />
+            
             {"institutionNuit" in errors ? (
               <FormControl.ErrorMessage
                 leftIcon={<Icon name="error-outline" size={16} color="red" />}
@@ -432,20 +397,17 @@ export default function InstitutionFarmerForm({
               <FormControl.HelperText></FormControl.HelperText>
             )}
           </FormControl>
-        </Box>
-      </Stack>
+        </View>
+      </View>
       {(institutionType.includes("Empresa") ||
         institutionType?.includes("Outr") ||
         institutionType?.includes("ONG")) && (
-        <Stack direction="row" mx="3" w="100%">
-          <Box w="50%" px="1" my="2">
+        <View direction="row" mx="3" w="100%">
+          <View w="50%" px="1" my="2">
             <FormControl isInvalid={"institutionManagerPhone" in errors}>
-              <FormControl.Label>N°. de Alvará</FormControl.Label>
-              <CustomInput
-                width="100%"
-                type="text"
-                placeholder="Alvará"
-                // keyboardType="numeric"
+              <InputLabel label="N°. de Alvará" />
+              <Input
+                autoCapitalize="characters"
                 value={institutionLicence}
                 onChangeText={(newLicence: any) => {
                   setErrors((prev: any) => ({
@@ -454,7 +416,10 @@ export default function InstitutionFarmerForm({
                   }));
                   setInstitutionLicence(newLicence);
                 }}
+                placeholder="Alvará"
+                className="text-center"
               />
+              
               {"institutionLicence" in errors ? (
                 <FormControl.ErrorMessage
                   leftIcon={<Icon name="error-outline" size={16} color="red" />}
@@ -466,9 +431,8 @@ export default function InstitutionFarmerForm({
                 <FormControl.HelperText></FormControl.HelperText>
               )}
             </FormControl>
-          </Box>
-          <Box w="50%" px="1" my="2"></Box>
-        </Stack>
+          </View>
+        </View>
       )}
     </View>
   );

@@ -159,7 +159,7 @@ export default function FarmerRegistration({
         isNotGroupMember,
       };
 
-      // console.log("farmerData", farmerData);
+      console.log("farmerData", farmerData);
 
       if (!validateIndividualFarmerData(farmerData, errors, setErrors)) {
         setErrorAlert(true);
@@ -249,6 +249,8 @@ export default function FarmerRegistration({
         isPrivateInstitution,
         institutionLicence,
       };
+
+     
       if (!validateInstitutionFarmerData(farmerData, errors, setErrors)) {
         setErrorAlert(true);
         return;
@@ -604,7 +606,7 @@ export default function FarmerRegistration({
           )}
 
           <Center
-            mb="15"
+            my="15"
             w="94%"
           >
             {farmerType !== "" ? (
