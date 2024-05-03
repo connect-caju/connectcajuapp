@@ -32,6 +32,13 @@ const UserProfileScreen = ({
   const realm = useRealm();
   const user = useUser();
   const customUserData = user?.customData;
+
+  // terminate session if user has no customUserData
+  if (!customUserData){
+    user?.logOut();
+    return ;
+  }
+
   const [isGoalUpdateVisible, setIsGoalUpdateVisible] = useState(false);
   const [isAppearanceModeModalVisible, setIsAppearanceModeModalVisible] = useState(false);
   const bottomSheetRef = useRef(null);
@@ -73,9 +80,6 @@ const UserProfileScreen = ({
 
 
   }, [themeMode]);
-
-  // console.log("colorscheme:", colorScheme);
-
 
 
   // on user registration
@@ -222,7 +226,7 @@ const UserProfileScreen = ({
               className="text-xs font-normal text-center text-gray-500"
             >
               (
-              {customUserData?.role?.includes(roles.coopManager)
+              {(customUserData?.role as string)?.includes(roles.coopManager)
                 ? roles.coopManager
                 : customUserData?.role}
               )
@@ -240,7 +244,7 @@ const UserProfileScreen = ({
                 size={20}
                 color={COLORS.grey}
               />
-              {roles.haveReadAndWritePermissions.some(role => role.includes(customUserData?.role)) &&
+              {roles.haveReadAndWritePermissions.some(role => role.includes(customUserData?.role as string)) &&
                 <Text
                   className="text-xs font-normal text-gray-500 text-center"
                 >
@@ -248,7 +252,7 @@ const UserProfileScreen = ({
                 </Text>
               }
 
-              {!roles.haveReadAndWritePermissions.some(role => role.includes(customUserData?.role)) &&
+              {!roles.haveReadAndWritePermissions.some(role => role.includes(customUserData?.role as string)) &&
                 <Text
                   className="text-xs font-normal text-gray-500 text-center"
                 >
@@ -303,7 +307,7 @@ const UserProfileScreen = ({
             </TouchableOpacity>
 
 
-            {(customUserData?.role.includes(roles.provincialManager) ||
+            {((customUserData?.role as string).includes(roles.provincialManager) ||
 
               // @ts-expect-error TS(2571): Object is of type 'unknown'.
               customUserData?.email.includes("connectcaju2023")) && (

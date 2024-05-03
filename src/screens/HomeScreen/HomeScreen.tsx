@@ -7,29 +7,17 @@ import {
   TouchableOpacity,
 } from "react-native";
 import React, { useCallback, useState, useEffect } from "react";
-import { Box, Stack, Center } from "native-base";
 import { Icon } from "@rneui/themed";
 import { useFocusEffect } from "@react-navigation/native";
-import {
-  widthPercentageToDP as wp,
-} from "react-native-responsive-screen";
-
-import { responsiveFontSize } from "react-native-responsive-dimensions";
-
-
 import COLORS from "../../consts/colors";
 import CustomActivityIndicator from "../../components/ActivityIndicator/CustomActivityIndicator";
 import { months } from "../../helpers/dates";
-import CustomDivider from "../../components/Divider/CustomDivider";
-import UserGoalEdit from "../../components/UserGoalEdit/UserGoalEdit";
 import { roles } from "../../consts/roles";
 import UserProfile from "../../components/UserProfile/UserProfile";
 import { getPercentage, getPercentage2 } from "../../helpers/getPercentage";
 
 import ProvincialManager from "./ProvincialManager";
 import UserPerformanceItem from "../../components/UserPerformanceItem/UserPerformanceItem";
-import { backgroundStyle } from "../../styles/globals";
-
 import { useUser } from "@realm/react";
 import { realmContext } from "../../models/realmContext";
 const { useRealm, useQuery } = realmContext;
@@ -42,13 +30,16 @@ const userStats = "userStats";
 // @ts-expect-error TS(7005): Variable 'realm' implicitly has an 'any' type.
 export let realm;
 
-export default function HomeScreen({
-  route,
-  navigation
-}: any) {
+export default function HomeScreen({ route, navigation }: any) {
   realm = useRealm();
   const user = useUser();
-  const customUserData = user?.customData;
+  const customUserData  = user?.customData;
+
+  // terminate session if user has no customUserData
+  if (!customUserData) {
+    user?.logOut();
+    return ;
+  }
 
   const [isPerformanceButtonActive, setIsPerformanceButtonActive] =
     useState(false);
@@ -63,10 +54,8 @@ export default function HomeScreen({
     `userProvince == "${customUserData?.userProvince}" && userDistrict != "NA"`,
   );
 
-
   // --------------------------------------------------------
   const districts = Array.from(
-
     // @ts-expect-error TS(2339): Property 'userDistrict' does not exist on type 'Ob... Remove this comment to see the full error message
     new Set(provincialUserStats.map((stat) => stat?.userDistrict)),
   );
@@ -77,7 +66,6 @@ export default function HomeScreen({
   // get extract stats from whole province
   const tWholeProvince = provincialUserStats?.map((stat) => {
     return {
-
       // @ts-expect-error TS(2339): Property 'targetFarmers' does not exist on type 'O... Remove this comment to see the full error message
       tFarmers: stat.targetFarmers,
 
@@ -88,7 +76,6 @@ export default function HomeScreen({
 
   const rWholeProvince = provincialUserStats?.map((stat) => {
     return {
-
       // @ts-expect-error TS(2339): Property 'registeredFarmers' does not exist on typ... Remove this comment to see the full error message
       rFarmers: stat.registeredFarmers,
 
@@ -114,23 +101,18 @@ export default function HomeScreen({
     .map((stat) => stat.rFarmlands)
     .reduce((ac, cur) => ac + cur, 0);
 
-
-
   // ----------------------------------------------------------------
   //  extract stats from whole district
   const tWholeDistrict = provincialUserStats
     ?.filter(
       (stat) =>
-
         // @ts-expect-error TS(2339): Property 'userDistrict' does not exist on type 'Ob... Remove this comment to see the full error message
         stat.userDistrict === customUserData?.userDistrict &&
-
         // @ts-expect-error TS(2339): Property 'userDistrict' does not exist on type 'Ob... Remove this comment to see the full error message
         stat.userDistrict !== "NA",
     )
     ?.map((stat) => {
       return {
-
         // @ts-expect-error TS(2339): Property 'targetFarmers' does not exist on type 'O... Remove this comment to see the full error message
         tFarmers: stat.targetFarmers,
 
@@ -142,16 +124,13 @@ export default function HomeScreen({
   const rWholeDistrict = provincialUserStats
     ?.filter(
       (stat) =>
-
         // @ts-expect-error TS(2339): Property 'userDistrict' does not exist on type 'Ob... Remove this comment to see the full error message
         stat.userDistrict === customUserData?.userDistrict &&
-
         // @ts-expect-error TS(2339): Property 'userDistrict' does not exist on type 'Ob... Remove this comment to see the full error message
         stat.userDistrict !== "NA",
     )
     ?.map((stat) => {
       return {
-
         // @ts-expect-error TS(2339): Property 'registeredFarmers' does not exist on typ... Remove this comment to see the full error message
         rFarmers: stat.registeredFarmers,
 
@@ -186,7 +165,6 @@ export default function HomeScreen({
     ?.filter((stat) => stat.userId === customUserData?.userId)
     ?.map((stat) => {
       return {
-
         // @ts-expect-error TS(2339): Property 'targetFarmers' does not exist on type 'O... Remove this comment to see the full error message
         tFarmers: stat.targetFarmers,
 
@@ -201,7 +179,6 @@ export default function HomeScreen({
     ?.filter((stat) => stat.userId === customUserData?.userId)
     ?.map((stat) => {
       return {
-
         // @ts-expect-error TS(2339): Property 'registeredFarmers' does not exist on typ... Remove this comment to see the full error message
         rFarmers: stat.registeredFarmers,
 
@@ -241,10 +218,8 @@ export default function HomeScreen({
     });
 
     if (
-
       // @ts-expect-error TS(2571): Object is of type 'unknown'.
       customUserData?.role?.includes(roles.provincialManager) ||
-
       // @ts-expect-error TS(2571): Object is of type 'unknown'.
       customUserData?.role?.includes(roles.ampcmSupervisor)
     ) {
@@ -284,7 +259,6 @@ export default function HomeScreen({
           // { name: districtInstitutionFarmers },
         );
       });
-
 
       realm.subscriptions.update((mutableSubs: any) => {
         mutableSubs.add(
@@ -348,78 +322,44 @@ export default function HomeScreen({
     );
   }
 
-
   const handleUserProfileNavigation = () => {
     navigation.navigate("UserProfile", {
       customUserData: JSON.stringify(customUserData),
     });
   };
 
-
-
   return (
-    <SafeAreaView
-      className={`${backgroundStyle} flex-1`}
-    >
-      <View
-        className={"w-full light:bg-[#EBEBE4]"}
-      >
-        <Box
+    <SafeAreaView className="flex-1">
 
-          // @ts-expect-error TS(2322): Type '{ children: Element; style: { paddingVertica... Remove this comment to see the full error message
-          style={{
-            paddingVertical: 10,
-            paddingHorizontal: 5,
+      <View className="flex flex-row justify-between m-3">
+        <View w="40%" alignItems={"center"}>
+          <Image
+            style={{ width: 55, height: 55, borderRadius: 100 }}
+            source={require("../../../assets/images/iamLogo2.png")}
+          />
+          <Text className="text-center text-green-600 font-bold text-sm dark:text-gray-600">
+            IAM, IP
+          </Text>
+        </View>
+
+        <TouchableOpacity
+          onPress={() => {
+            // setIsUserProfileVisible((prev) => !prev);
+            handleUserProfileNavigation();
           }}
+          className="-mt-1"
         >
-          <Stack
-            direction="row"
-            w="100%"
-          >
-            <Box w="40%" alignItems={"center"}>
-              <Image
-                style={{ width: 55, height: 55, borderRadius: 100 }}
-
-                // @ts-expect-error TS(2591): Cannot find name 'require'. Do you need to install... Remove this comment to see the full error message
-                source={require("../../../assets/images/iamLogo2.png")}
-              />
-              <Text
-                className="text-center text-green-600 font-bold text-sm dark:text-gray-600"
-              >
-                IAM, IP
-              </Text>
-            </Box>
-            <Box w="20%"></Box>
-            <Box w="40%" alignItems={"center"}>
-              <TouchableOpacity
-                onPress={() => {
-                  // setIsUserProfileVisible((prev) => !prev);
-                  handleUserProfileNavigation();
-                }}
-                className="-mt-1"
-              >
-                <Icon
-                  name="account-circle"
-                  color={COLORS.main}
-                  size={60}
-                />
-                <Text
-                  className="text-center text-gray-600 font-normal text-sm -mt-1"
-                >
-                  {customUserData?.name?.split(" ")[0]}
-                </Text>
-              </TouchableOpacity>
-            </Box>
-          </Stack>
-        </Box>
+          <Icon name="account-circle" color={COLORS.main} size={60} />
+          <Text className="text-center text-gray-600 font-normal text-sm -mt-1">
+            {(customUserData?.name as string)?.split(" ")[0]}
+          </Text>
+        </TouchableOpacity>
       </View>
 
-      {/* Province users and districts */}
-      {!isFieldAgent && customUserData?.role === roles.provincialManager && (
+      {/* Branch office manager */}
+      {/* {!isFieldAgent && customUserData?.role === roles.provincialManager && ( */}
         <>
-          <Text
-            className="text-xl pt-4 text-center text-gray-400"
-          >
+          <Text className="text-xl pt-4 text-center text-gray-400">
             {customUserData?.userProvince}
           </Text>
           <ProvincialManager
@@ -431,155 +371,150 @@ export default function HomeScreen({
             pFarmlandsPercentage={getPercentage(rpFarmlands, tpFarmlands)}
             tpFarmers={tpFarmers}
             tpFarmlands={tpFarmlands}
-
           />
         </>
-      )}
+      {/* )} */}
 
-      {isFieldAgent && (
+      {isFieldAgent && false && (
         <>
-          <View
-            className="w-full rounded-t-2xl shadow-md light:bg-neutral-100 px-2 my-6 mx-2 self-center overflow-y-scroll"
-          >
-            <Box
-
-              // @ts-expect-error TS(2322): Type '{ children: Element[]; className: string; }'... Remove this comment to see the full error message
-              className="bg-green-600 dark:bg-gray-800 w-full items-center  rounded-t-2xl"
+          <View className="w-full rounded-t-2xl shadow-md light:bg-neutral-100 px-2 my-6 mx-2 self-center overflow-y-scroll">
+            <View
+              className="bg-green-700 dark:bg-gray-800 w-full items-center  rounded-t-2xl"
             >
-              <Text
-                className="text-gray-600 text-xl py-4 font-bold"
-              >
+              <Text className="text-white text-xl py-4 font-bold">
                 Desempenho
               </Text>
-              <View
-                className="w-full flex-row justify-between self-center"
-              >
+              <View className="w-full flex-row justify-between self-center">
                 <TouchableOpacity
-                  className={`w-1/2 sm:w-1/3 rounded-t-2xl border-t-2 border-r-2 border-l-2 border-gray-300 dark:border-gray-600 py-2 ${!isPerformanceButtonActive ? "dark:bg-gray-900" : "bg-white dark:bg-gray-800"}`}
+                  className={`w-1/2 sm:w-1/3 rounded-t-2xl border-t-2 border-r-2 border-l-2 border-gray-300 dark:border-gray-600 py-2 ${
+                    !isPerformanceButtonActive
+                      ? "dark:bg-gray-900"
+                      : "bg-white dark:bg-gray-800"
+                  }`}
                   onPress={() => {
                     setIsPerformanceButtonActive((prev) => !prev);
                   }}
                 >
                   <Text
-                    className={`text-center font-bold text-sm ${!isPerformanceButtonActive ? "text-green-700" : "text-gray-600"}`}
+                    className={`text-center font-bold text-sm ${
+                      !isPerformanceButtonActive
+                        ? "text-white"
+                        : "text-black"
+                    }`}
                   >
                     Produtores
                   </Text>
                 </TouchableOpacity>
                 <TouchableOpacity
-                  className={`w-1/2 sm:w-1/3 rounded-t-2xl border-t-2 border-r-2 border-l-2 border-gray-300 dark:border-gray-600 py-2 ${!isPerformanceButtonActive ? "bg-white dark:bg-gray-800" : "dark:bg-gray-900"}`}
+                  className={`w-1/2 sm:w-1/3 rounded-t-2xl border-t-2 border-r-2 border-l-2 border-gray-300 dark:border-gray-600 py-2 ${
+                    !isPerformanceButtonActive
+                      ? "bg-white dark:bg-gray-800 "
+                      : "dark:bg-gray-900 "
+                  }`}
                   onPress={() => {
                     setIsPerformanceButtonActive((prev) => !prev);
                   }}
                 >
                   <Text
-                    className={`text-center font-bold text-sm ${!isPerformanceButtonActive ? "text-gray-600" : "text-green-700"}`}
+                    className={`text-center font-bold text-sm ${
+                      !isPerformanceButtonActive
+                        ? "text-black"
+                        : "text-white"
+                    }`}
                   >
                     Pomares
                   </Text>
                 </TouchableOpacity>
               </View>
-            </Box>
+            </View>
+
+
             {!isPerformanceButtonActive && (
 
-              // @ts-expect-error TS(2322): Type '{ children: Element[]; direction: "column"; ... Remove this comment to see the full error message
-              <Stack direction="column" w="100%" pt="4" className="border-gray-300 border-x-2 border-b-2 bg-white dark:bg-gray-900 dark:border-x-2 dark:border-x-gray-600 dark:border-b-2 dark:border-b-gray-600 pb-2 rounded-b-lg">
-                <Stack direction="row">
-                  <Box w="50%">
+              <View
+                className="flex flex-col pt-4 border-gray-300 border-x-2 border-b-2 bg-white dark:bg-gray-900 dark:border-x-2 dark:border-x-gray-600 dark:border-b-2 dark:border-b-gray-600 pb-2 rounded-b-lg"
+              >
+                <View className="flex flex-row">
+                  <View className="w-1/2">
                     <Text
                       className={"font-bold text-sm text-center text-gray-600"}
                     >
                       Realização
                     </Text>
-                    <Text
-                      className="font-normal text-xs text-center text-slate-600"
-                    >
+                    <Text className="font-normal text-xs text-center text-slate-600">
                       Até {months[new Date().getMonth()]}{" "}
                       {new Date().getFullYear()}
                     </Text>
-                  </Box>
-                  <Box w="50%">
+                  </View>
+                  <View className="w-1/2" >
                     <Text
                       className={"font-bold text-sm text-center text-gray-600"}
                     >
                       Meta
                     </Text>
-                    <Text
-                      className="font-normal text-xs text-center text-gray-600"
-                    >
+                    <Text className="font-normal text-xs text-center text-gray-600">
                       Até Dezembro {new Date().getFullYear()}
                     </Text>
-                  </Box>
-                </Stack>
-                {/* <CustomDivider bg={COLORS.lightestgrey} /> */}
+                  </View>
+                </View>
+
                 <UserPerformanceItem
                   achieved={rpFarmers}
                   target={tpFarmers}
                   bgColor={COLORS.lightdanger}
                   label={`Provincial (${customUserData?.userProvince})`}
                 />
-                {/* <CustomDivider bg={COLORS.lightestgrey} /> */}
+
                 <UserPerformanceItem
                   achieved={rdFarmers}
                   target={tdFarmers}
                   bgColor={COLORS.lightdanger}
                   label={`Distrital (${customUserData?.userDistrict})`}
-
                 />
 
-                {/* <CustomDivider bg={COLORS.lightestgrey} /> */}
                 <UserPerformanceItem
                   achieved={ruFarmers}
                   target={tuFarmers}
                   bgColor={COLORS.lightdanger}
                   label={`Individual (${customUserData?.name})`}
                 />
-              </Stack>
+              </View>
             )}
 
             {isPerformanceButtonActive && (
-
-              // @ts-expect-error TS(2322): Type '{ children: Element[]; direction: "column"; ... Remove this comment to see the full error message
-              <Stack direction="column" w="100%" pt="4" className="border-gray-300 border-x-2 border-b-2 bg-white dark:bg-gray-900 dark:border-x-2 dark:border-x-gray-600 dark:border-b-2 dark:border-b-gray-600 pb-2 rounded-b-lg">
-                <Stack direction="row">
-                  <Box w="50%">
+              <View
+                className="flex flex-col pt-4 border-gray-300 border-x-2 border-b-2 bg-white dark:bg-gray-900 dark:border-x-2 dark:border-x-gray-600 dark:border-b-2 dark:border-b-gray-600 pb-2 rounded-b-lg"
+              >
+                <View className="flex flex-row">
+                  <View className="w-1/2" >
                     <Text
                       className={"font-bold text-sm text-center text-gray-600"}
-
                     >
                       Realização
                     </Text>
-                    <Text
-                      className="font-normal text-xs text-center text-slate-600"
-                    >
+                    <Text className="font-normal text-xs text-center text-slate-600">
                       Até {months[new Date().getMonth()]}{" "}
                       {new Date().getFullYear()}
                     </Text>
-                  </Box>
-                  <Box w="50%">
+                  </View>
+                  <View className="w-1/2" >
                     <Text
                       className={"font-bold text-sm text-center text-gray-600"}
-
                     >
                       Meta
                     </Text>
-                    <Text
-                      className="font-normal text-xs text-center text-gray-600"
-
-                    >
+                    <Text className="font-normal text-xs text-center text-gray-600">
                       Até Dezembro {new Date().getFullYear()}
                     </Text>
-                  </Box>
-                </Stack>
-                {/* <CustomDivider bg={COLORS.lightestgrey} /> */}
+                  </View>
+                </View>
+
                 <UserPerformanceItem
                   achieved={rpFarmlands}
                   target={tpFarmlands}
                   bgColor={COLORS.danger}
                   label={`Provincial (${customUserData?.userProvince})`}
                 />
-
-                {/* <CustomDivider bg={COLORS.lightestgrey} /> */}
 
                 <UserPerformanceItem
                   achieved={rdFarmlands}
@@ -588,15 +523,13 @@ export default function HomeScreen({
                   label={`Distrital (${customUserData?.userDistrict})`}
                 />
 
-                {/* <CustomDivider bg={COLORS.lightestgrey} /> */}
                 <UserPerformanceItem
                   achieved={ruFarmlands}
                   target={tuFarmlands}
                   bgColor={COLORS.danger}
                   label={`Individual (${customUserData?.name})`}
                 />
-
-              </Stack>
+              </View>
             )}
           </View>
         </>

@@ -1,24 +1,9 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable linebreak-style */
-/* eslint-disable prettier/prettier */
-
-// @ts-expect-error TS(2305): Module '"react"' has no exported member 'Image'.
-import React, { useState, Image, SafeAreaView, TouchableOpacity } from "react";
-
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
-import { View, Text } from "react-native";
+import React, { useState, } from "react";
+import { ScrollView, View, Text } from "react-native";
 import COLORS from "../../consts/colors";
-import { Box, Center, Stack } from "native-base";
-import { Icon } from "@rneui/base";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faUserGroup } from "@fortawesome/free-solid-svg-icons";
-import { ProgressChart } from "react-native-chart-kit";
-
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { Dimensions } from "react-native";
-
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
-import { ScrollView } from "react-native";
 
 import { useUser } from "@realm/react";
 import { realmContext } from "../../models/realmContext";
@@ -54,13 +39,13 @@ const ProvincialManager = ({
                     className="w-20 h-12 justify-end items-center bg-slate-400 rounded-t-lg"
                 >
                     <View
-                        className="absolute -top-9 rounded-full p-2 bg-slate-400 border-white border-2"
+                        className="absolute -top-9 rounded-full p-2 bg-slate-400  border-2"
                     >
                         <FontAwesomeIcon icon={faUserGroup} color={COLORS.white} size={30} />
                     </View>
 
                     <Text
-                        className="text-white text-2xl py-1 font-normal"
+                        className="text-2xl py-1 font-normal"
                     >{provincialUserStats?.length}</Text>
 
                 </View>
@@ -68,13 +53,13 @@ const ProvincialManager = ({
                     className="w-20 h-7 justify-center items-center bg-slate-500"
                 >
                     <Text
-                        className="text-white text-base font-semibold"
+                        className=" text-base font-semibold"
                     >Usuários</Text>
                 </View>
             </View>
 
             <Text
-                className="font-semibold text-slate-400 text-lg"
+                className="font-semibold  text-lg"
             >Realização</Text>
 
             <View
@@ -85,9 +70,8 @@ const ProvincialManager = ({
                     paddingVertical: 10,
                 }}
             >
-                // @ts-expect-error TS(2769): No overload matches this call.
-                // @ts-expect-error TS(2769): No overload matches this call.
-                <LinearGradient colors={["#909A90", "#398093"]} style={{
+
+                <View  style={{
                     flex: 1,
                     paddingLeft: 15,
                     paddingRight: 15,
@@ -97,21 +81,19 @@ const ProvincialManager = ({
                     // marginHorizontal: 5,
                 }}>
                     <Text
-                        className="font-normal text-lg text-white text-center"
+                        className="font-normal text-lg  text-center"
                     >Produtores</Text>
                     <Text
-                        className="font-normal text-xl text-white text-center"
+                        className="font-normal text-xltext-center"
                     v>{pFarmersPercentage}</Text>
-                </LinearGradient>
+                </View>
                 <View
                     style={{
                         width: 6,
                     }}
                 />
 
-                // @ts-expect-error TS(2769): No overload matches this call.
-                // @ts-expect-error TS(2769): No overload matches this call.
-                <LinearGradient colors={["#909A90", "#398093"]} style={{
+                <View style={{
                     flex: 1,
                     paddingLeft: 15,
                     paddingRight: 15,
@@ -120,16 +102,16 @@ const ProvincialManager = ({
                     width: width / 2,
                 }}>
                     <Text
-                        className="font-normal text-lg text-white text-center"
+                        className="font-normal text-lg  text-center"
                     >Pomares</Text>
                     <Text
-                        className="font-normal text-xl text-white text-center"
+                        className="font-normal text-xl  text-center"
                     >{pFarmlandsPercentage}</Text>
-                </LinearGradient>
+                </View>
             </View>
 
             <Text
-                className="font-semibold text-slate-400 text-lg"
+                className="font-semibold  text-lg"
             >Metas</Text>
             <View
                 style={{
@@ -139,9 +121,7 @@ const ProvincialManager = ({
                     paddingVertical: 10,
                 }}
             >
-                // @ts-expect-error TS(2769): No overload matches this call.
-                // @ts-expect-error TS(2769): No overload matches this call.
-                <LinearGradient colors={["#4D5F4D", "#799AA3"]} style={{
+                <View style={{
                     flex: 1,
                     paddingLeft: 15,
                     paddingRight: 15,
@@ -151,21 +131,19 @@ const ProvincialManager = ({
                     // marginHorizontal: 5,
                 }}>
                     <Text
-                        className="font-normal text-lg text-white text-center"
+                        className="font-normal text-lg text-center"
                     >Produtores</Text>
                     <Text
-                        className="font-normal text-xl text-white text-center"
+                        className="font-normal text-xl text-center"
                     >{tpFarmers}</Text>
-                </LinearGradient>
+                </View>
                 <View
                     style={{
                         width: 6,
                     }}
                 />
 
-                // @ts-expect-error TS(2769): No overload matches this call.
-                // @ts-expect-error TS(2769): No overload matches this call.
-                <LinearGradient colors={["#4D5F4D", "#799AA3"]} style={{
+                <View  style={{
                     flex: 1,
                     paddingLeft: 15,
                     paddingRight: 15,
@@ -175,12 +153,12 @@ const ProvincialManager = ({
                     // marginHorizontal: 5,
                 }}>
                     <Text
-                        className="font-normal text-lg text-white text-center"
+                        className="font-normal text-lg  text-center"
                     >Pomares</Text>
                     <Text
-                        className="font-normal text-xl text-white text-center"
+                        className="font-normal text-xl  text-center"
                     >{tpFarmlands}</Text>
-                </LinearGradient>
+                </View>
             </View>
 
 

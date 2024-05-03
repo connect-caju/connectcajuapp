@@ -7,12 +7,14 @@ import Providers from "./Providers";
 export default function App() {
 
   useEffect(() => {
-    SplashScreen.hide(); //hides the splash screen on app load.
+    setTimeout(()=>{
+      SplashScreen.hide(); //hides the splash screen on app load.
+    }, 3000)
   }, []);
 
   return (
     <>
-      <StatusBar barStyle="dark-content" backgroundColor="#EBEBE4" />
+      <StatusBar barStyle="dark-content"  />
       <Providers>
         <AppTabs />
       </Providers>

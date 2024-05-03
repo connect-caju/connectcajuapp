@@ -81,7 +81,11 @@ export const getFullYears2 = (count = 20) => {
   return years;
 };
 
-export const months = {
+interface MonthKey {
+  [key: string]: string;
+}
+
+export const months: MonthKey = {
   0: "Janeiro",
   1: "Fevereiro",
   2: "Março",

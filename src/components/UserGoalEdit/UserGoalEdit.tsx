@@ -1,8 +1,5 @@
-/* eslint-disable linebreak-style */
-/* eslint-disable prettier/prettier */
-import React, { useState, useEffect, useCallback } from "react";
 
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
+import React, { useState, useEffect, useCallback } from "react";
 import { View, Text, StyleSheet, ScrollView, Pressable } from "react-native";
 import { Overlay, Icon, Button } from "@rneui/base";
 import {
@@ -18,8 +15,6 @@ import {
   widthPercentageToDP as wp,
 } from "react-native-responsive-screen";
 
-
-// import CustomActivityIndicator from "../ActivityIndicator/CustomActivityIndicator";
 import COLORS from "../../consts/colors";
 import districts from "../../consts/districts";
 
@@ -27,8 +22,6 @@ import { secrets } from "../../secrets";
 import { useUser } from "@realm/react";
 import UserItem from "../UserItem/UserItem";
 import { useFocusEffect } from "@react-navigation/native";
-
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { InteractionManager } from "react-native";
 import { errorMessages } from "../../consts/errorMessages";
 import GoalSetting from "../LottieComponents/GoalSetting";
@@ -236,8 +229,6 @@ export default function UserGoalEdit({
                   <Select
                     selectedValue={district}
 
-                    // @ts-expect-error TS(2322): Type '{ children: Element[]; selectedValue: string... Remove this comment to see the full error message
-                    accessibilityLabel="Escolha distrito"
                     placeholder="Escolha distrito"
                     _selectedItem={{
                       bg: "teal.600",
@@ -317,10 +308,6 @@ export default function UserGoalEdit({
 
           {district && districtalUsers.length > 0 && (
             <Box
-              // style={{
-              //   flex: 1,
-              //   width: "100%",
-              // }}
 
               // @ts-expect-error TS(2322): Type '{ children: Element[]; className: string; }'... Remove this comment to see the full error message
               className="flex flex-1 w-full"

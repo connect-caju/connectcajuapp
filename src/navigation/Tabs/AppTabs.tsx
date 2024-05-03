@@ -32,12 +32,8 @@ export default function AppTabs() {
   const colorScheme = useColorScheme();
 
   return (
-    <>
-      <StatusBar barStyle="dark-content" backgroundColor="#EBEBE4" className="bg-[#EBEBE4] dark:bg-gray-900" />
+ 
       <NavigationContainer
-        // theme={colorScheme === "dark" ? DarkTheme : DefaultTheme}
-       
-
       >
         <Tab.Navigator
           initialRouteName="HomeStack"
@@ -143,6 +139,6 @@ export default function AppTabs() {
            /> */}
         </Tab.Navigator>
       </NavigationContainer>
-    </>
+
   );
 }
