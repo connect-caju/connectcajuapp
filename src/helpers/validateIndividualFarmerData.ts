@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import { assetTypes } from "../consts/assetTypes";
 import categories from "../consts/categories";
 import { capitalize } from "./capitalize";
@@ -123,19 +122,8 @@ const validateIndividualFarmerData = (
   }
 
 
-  // @ts-expect-error TS(2584): Cannot find name 'console'. Do you need to change ... Remove this comment to see the full error message
-  console.log("comparing dates:");
-
-  // @ts-expect-error TS(2584): Cannot find name 'console'. Do you need to change ... Remove this comment to see the full error message
-  console.log("date1:", retrievedBirthDate);
-
-  // @ts-expect-error TS(2584): Cannot find name 'console'. Do you need to change ... Remove this comment to see the full error message
-  console.log("date2:", new Date(dateLimits.maximumDate));
-
   if (retrievedBirthDate.toString() === new Date(dateLimits.maximumDate).toString()) {
 
-    // @ts-expect-error TS(2584): Cannot find name 'console'. Do you need to change ... Remove this comment to see the full error message
-    console.log("they are same");
     setErrors({ ...errors, birthDate: "Data de nascimento." });
     return false;
   }
@@ -197,20 +185,6 @@ const validateIndividualFarmerData = (
     });
     return false;
   }
-
-  // if ((retrievedSecondaryPhone === 0) && retrievedSecondaryPhone !== 0 &&
-  //     (
-  //     !Number.isInteger(parseInt(retrievedSecondaryPhone))  ||
-  //     retrievedSecondaryPhone?.toString().length !== 9       ||
-  //     parseInt(retrievedSecondaryPhone?.toString()[0]) !== 8 ||
-  //     [2,3,4,5,6,7].indexOf(parseInt(retrievedSecondaryPhone?.toString()[1])) < 0
-  //     )
-  // ){
-  //     setErrors({ ...errors,
-  //         secondaryPhone: 'Número de telefone inválido.',
-  //     });
-  //     return false;
-  // }
 
   if (!retrievedBirthProvince) {
     setErrors({

@@ -1,16 +1,11 @@
-import {
-  Text,
-  SafeAreaView,
-  Pressable,
-  View,
-  TouchableOpacity,
-} from "react-native";
+import { Text, SafeAreaView, Pressable, View, TouchableOpacity } from "react-native";
 import React, { useState, useEffect } from "react";
 import { Box, Stack, Center } from "native-base";
 import { Icon, Button } from "@rneui/themed";
 import AwesomeAlert from "react-native-awesome-alerts";
 import { KeyboardAwareScrollView } from "react-native-keyboard-tools";
 import FeatherIcon from "react-native-vector-icons/Feather";
+
 
 import administrativePosts from "../../consts/administrativePosts";
 import styles from "./styles";
@@ -33,37 +28,57 @@ import IndividualFarmerForm from "./IndividualFarmerForm";
 import InstitutionFarmerForm from "./InstitutionFarmerForm";
 import GroupFarmerForm from "./GroupFarmerForm";
 import COLORS from "../../consts/colors";
+
+import { realmContext } from "../../models/realmContext";
 import { generateUniqueNumber } from "../../helpers/generateUniqueNumber";
 import { dateLimits } from "../../helpers/dates";
 import { farmerTypes } from "../../consts/farmerTypes";
 import PrimaryButton from "../../components/Buttons/PrimaryButton";
 import { backgroundStyle } from "../../styles/globals";
-import { ActorFormData, useActorStore } from "../../app/stores/actorStore";
-
-
-
-import { realmContext } from "../../models/realmContext";
 const { useRealm } = realmContext;
 
-export default function FarmerRegistration({ route, navigation }: any) {
+export default function FarmerRegistration({
+  route,
+  navigation
+}: any) {
+
   const customUserData = route.params.customUserData;
-  const { actorData, updateActorField, validateActorForm } = useActorStore();
   const exportedFarmerType = route.params?.farmerType || "";
 
   const realm = useRealm();
+  const [gender, setGender] = useState<{ label: string; value: string }>();
+  const [familySize, setFamilySize] = useState("");
 
   // address
-  const [selectedAddressAdminPosts, setSelectedAddressAdminPosts] = useState(
-    [],
-  );
+  const [selectedAddressAdminPosts, setSelectedAddressAdminPosts] = useState([]);
+  const [addressAdminPost, setAddressAdminPost] = useState("");
+  const [addressVillage, setAddressVillage] = useState("");
 
-
+  // birth place
+  const [birthProvince, setBirthProvince] = useState("");
+  const [birthDistrict, setBirthDistrict] = useState("");
+  const [birthAdminPost, setBirthAdminPost] = useState("");
 
   // handle modal view
   const [modalVisible, setModalVisible] = useState(false);
   const [isDuplicateModalVisible, setIsDuplicateModalVisible] = useState(false);
 
   const [errorAlert, setErrorAlert] = useState(false);
+
+  const [birthDate, setBirthDate] = useState(new Date(dateLimits.maximumDate));
+
+  const [docType, setDocType] = useState("");
+  const [docNumber, setDocNumber] = useState("");
+
+  const [isSprayingAgent, setIsSprayingAgent] = useState(false);
+  const [isNotSprayingAgent, setIsNotSprayingAgent] = useState(false);
+  const [surname, setSurname] = useState("");
+  const [otherNames, setOtherNames] = useState("");
+  const [primaryPhone, setPrimaryPhone] = useState(null);
+  const [secondaryPhone, setSecondaryPhone] = useState(null);
+  const [nuit, setNuit] = useState(null);
+  const [isGroupMember, setIsGroupMember] = useState(false);
+  const [isNotGroupMember, setIsNotGroupMember] = useState(false);
 
   const [errors, setErrors] = useState({});
   const [farmerData, setFarmerData] = useState({});
@@ -111,92 +126,113 @@ export default function FarmerRegistration({ route, navigation }: any) {
 
   const [farmerItem, setFarmerItem] = useState({});
 
+
   const [actor, setActor] = useState();
   const [actorCategory, setActorCategory] = useState();
 
   const addFarmer = (farmerType: any, realm: any, isAllowed = false) => {
-    let retrievedActorData: ActorFormData;
-    let retrievedFarmerData;
     let farmerData;
+    let retrievedFarmerData;
 
     if (farmerType === farmerTypes.farmer) {
-        updateActorField("addressProvince", customUserData?.userProvince);
-        updateActorField("addressDistrict", customUserData?.userDistrict);
+      farmerData = {
+        isSprayingAgent,
+        isNotSprayingAgent,
+        surname,
+        otherNames,
+        gender,
+        familySize,
+        birthDate,
+        birthProvince,
+        birthDistrict,
+        birthAdminPost,
+        addressProvince: customUserData?.userProvince,
+        addressDistrict: customUserData?.userDistrict,
+        addressAdminPost,
+        addressVillage,
+        primaryPhone,
+        secondaryPhone,
+        docType,
+        docNumber,
+        nuit,
+        isGroupMember,
+        isNotGroupMember,
+      };
 
-        console.log("formData In the Validation Scope", actorData);
+      console.log("farmerData", farmerData);
 
-
-       
-      
-
-
-      // if (!validateIndividualFarmerData(farmerData, errors, setErrors)) {
-      //   setErrorAlert(true);
-      //   return;
-      // }
-      // retrievedFarmerData = validateIndividualFarmerData(
-      //   farmerData,
-      //   errors,
-      //   setErrors,
-      // );
+      if (!validateIndividualFarmerData(farmerData, errors, setErrors)) {
+        setErrorAlert(true);
+        return;
+      }
+      retrievedFarmerData = validateIndividualFarmerData(
+        farmerData,
+        errors,
+        setErrors,
+      );
 
       // generate actor identifier
-      // let identifier = generateUniqueNumber(
-      //   // @ts-expect-error TS(2339): Property 'address' does not exist on type 'boolean... Remove this comment to see the full error message
-      //   retrievedFarmerData.address,
-      //   farmerTypes.farmer,
-      // );
-      // let foundIdentierMatches = realm
-      //   .objects("Actor")
-      //   .filtered("identifier == $0", identifier);
+      let identifier = generateUniqueNumber(
+
+        // @ts-expect-error TS(2339): Property 'address' does not exist on type 'boolean... Remove this comment to see the full error message
+        retrievedFarmerData.address,
+        farmerTypes.farmer,
+      );
+      let foundIdentierMatches = realm
+        .objects("Actor")
+        .filtered("identifier == $0", identifier);
 
       // keep checking until no match is found
-      // while (foundIdentierMatches?.length > 0) {
-      //   identifier = generateUniqueNumber(
-      //     // @ts-expect-error TS(2339): Property 'address' does not exist on type 'boolean... Remove this comment to see the full error message
-      //     retrievedFarmerData.address,
-      //     farmerTypes.farmer,
-      //   );
-      //   foundIdentierMatches = realm
-      //     .objects("Actor")
-      //     .filtered("identifier == $0", identifier);
-      // }
+      while (foundIdentierMatches?.length > 0) {
+        identifier = generateUniqueNumber(
+
+          // @ts-expect-error TS(2339): Property 'address' does not exist on type 'boolean... Remove this comment to see the full error message
+          retrievedFarmerData.address,
+          farmerTypes.farmer,
+        );
+        foundIdentierMatches = realm
+          .objects("Actor")
+          .filtered("identifier == $0", identifier);
+      }
 
 
-      // retrievedFarmerData["identifier"] = identifier;
+      // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
+      retrievedFarmerData["identifier"] = identifier;
 
-      // setFarmerData(retrievedFarmerData);
+      setFarmerData(retrievedFarmerData);
 
       // not allowed if the user decided to proceed
       // on with registration after the alert on suspecious duplicates
-      // if (!isAllowed) {
-        // const uaidData = {
-        //   // @ts-expect-error TS(2339): Property 'names' does not exist on type 'boolean |... Remove this comment to see the full error message
-        //   names: retrievedFarmerData.names,
+      if (!isAllowed) {
+        const uaidData = {
 
-        //   // @ts-expect-error TS(2339): Property 'birthDate' does not exist on type 'boole... Remove this comment to see the full error message
-        //   birthDate: retrievedFarmerData.birthDate,
+          // @ts-expect-error TS(2339): Property 'names' does not exist on type 'boolean |... Remove this comment to see the full error message
+          names: retrievedFarmerData.names,
 
-        //   // @ts-expect-error TS(2339): Property 'birthPlace' does not exist on type 'bool... Remove this comment to see the full error message
-        //   birthPlace: retrievedFarmerData.birthPlace,
+          // @ts-expect-error TS(2339): Property 'birthDate' does not exist on type 'boole... Remove this comment to see the full error message
+          birthDate: retrievedFarmerData.birthDate,
 
-        //   // @ts-expect-error TS(2339): Property 'address' does not exist on type 'boolean... Remove this comment to see the full error message
-        //   address: retrievedFarmerData.address,
-        // };
+          // @ts-expect-error TS(2339): Property 'birthPlace' does not exist on type 'bool... Remove this comment to see the full error message
+          birthPlace: retrievedFarmerData.birthPlace,
 
-        // const uaid = generateUAID(uaidData);
-        // let suspected = realm.objects("Actor").filtered("uaid == $0", uaid);
+          // @ts-expect-error TS(2339): Property 'address' does not exist on type 'boolean... Remove this comment to see the full error message
+          address: retrievedFarmerData.address,
+        };
+
+
+        const uaid = generateUAID(uaidData);
+        let suspected = realm.objects("Actor").filtered("uaid == $0", uaid);
         // let foundSuspects = realm.objects('Actor').filtered(`otherNames`)
 
         // get more evidence on the duplication attempt
-        // suspected = detectDuplicates(retrievedFarmerData, suspected);
-        // if (suspected.length > 0) {
-        //   setSuspectedDuplicates(suspected);
-        //   // setDuplicatesAlert(true);
-        //   setIsDuplicateModalVisible(true);
-        //   return;
-        // }
-      // }
+        suspected = detectDuplicates(retrievedFarmerData, suspected);
+        if (suspected.length > 0) {
+          setSuspectedDuplicates(suspected);
+          // setDuplicatesAlert(true);
+          setIsDuplicateModalVisible(true);
+          return;
+        }
+      }
     } else if (farmerType === farmerTypes.institution) {
       farmerData = {
         isInstitutionPrivate,
@@ -214,6 +250,7 @@ export default function FarmerRegistration({ route, navigation }: any) {
         institutionLicence,
       };
 
+     
       if (!validateInstitutionFarmerData(farmerData, errors, setErrors)) {
         setErrorAlert(true);
         return;
@@ -226,6 +263,7 @@ export default function FarmerRegistration({ route, navigation }: any) {
 
       // generate actor identifier
       let identifier = generateUniqueNumber(
+
         // @ts-expect-error TS(2339): Property 'address' does not exist on type 'boolean... Remove this comment to see the full error message
         retrievedFarmerData.address,
         farmerTypes.institution,
@@ -237,6 +275,7 @@ export default function FarmerRegistration({ route, navigation }: any) {
       // keep checking until no match is found
       while (foundIdentierMatches?.length > 0) {
         identifier = generateUniqueNumber(
+
           // @ts-expect-error TS(2339): Property 'address' does not exist on type 'boolean... Remove this comment to see the full error message
           retrievedFarmerData.address,
           farmerTypes.institution,
@@ -245,6 +284,7 @@ export default function FarmerRegistration({ route, navigation }: any) {
           .objects("Institution")
           .filtered("identifier == $0", identifier);
       }
+
 
       // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       retrievedFarmerData["identifier"] = identifier;
@@ -271,6 +311,7 @@ export default function FarmerRegistration({ route, navigation }: any) {
         groupDistrict: customUserData?.userDistrict,
         groupAdminPost,
         groupVillage,
+
       };
 
       // @ts-expect-error TS(2554): Expected 3 arguments, but got 4.
@@ -289,6 +330,7 @@ export default function FarmerRegistration({ route, navigation }: any) {
 
       // generate actor identifier
       let identifier = generateUniqueNumber(
+
         // @ts-expect-error TS(2339): Property 'address' does not exist on type 'boolean... Remove this comment to see the full error message
         retrievedFarmerData.address,
         farmerTypes.group,
@@ -300,10 +342,8 @@ export default function FarmerRegistration({ route, navigation }: any) {
       // keep checking until no match is found
       while (foundIdentierMatches?.length > 0) {
 
-        // identifier = generateUniqueNumber(
-        //   retrievedFarmerData.address,
-        //   farmerTypes.group,
-        // );
+        // @ts-expect-error TS(2339): Property 'address' does not exist on type 'boolean... Remove this comment to see the full error message
+        identifier = generateUniqueNumber(retrievedFarmerData.address, farmerTypes.group);
         foundIdentierMatches = realm
           .objects("Group")
           .filtered("identifier == $0", identifier);
@@ -324,23 +364,20 @@ export default function FarmerRegistration({ route, navigation }: any) {
       // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       setSelectedAddressAdminPosts(administrativePosts[userDistrict]);
     }
-    if (!actorData?.birthProvince) {
-      updateActorField("birthDistrict", "");
-      updateActorField("birthAdminPost", "");
+    if (!birthProvince) {
+      setBirthDistrict("");
+      setBirthAdminPost("");
     }
-    if (!actorData?.birthDistrict) {
-      updateActorField("birthAdminPost", "");
+    if (!birthDistrict) {
+      setBirthAdminPost("");
     }
-  }, [customUserData, actorData.birthDistrict, actorData.birthProvince ]);
+  }, [customUserData, birthProvince, birthDistrict, birthAdminPost]);
 
   useEffect(() => {
     setLoadingActivityIndicator(true);
+
   }, [navigation, farmerType]);
 
-  useEffect(()=>{
-    updateActorField("addressProvince", customUserData?.userProvince);
-    updateActorField("addressDistrict", customUserData?.userDistrict);
-  }, [])
 
   return (
     <SafeAreaView
@@ -350,6 +387,7 @@ export default function FarmerRegistration({ route, navigation }: any) {
         bg={COLORS.fourth}
         w="100%"
         px="3"
+
         // @ts-expect-error TS(2322): Type '{ children: Element[]; bg: string; w: "100%"... Remove this comment to see the full error message
         style={{
           borderBottomWidth: 2,
@@ -374,7 +412,7 @@ export default function FarmerRegistration({ route, navigation }: any) {
           }}
         />
 
-        <Box>
+        <Box >
           <Stack direction="row">
             <Box>
               <Pressable
@@ -387,7 +425,11 @@ export default function FarmerRegistration({ route, navigation }: any) {
                 }}
                 onPress={() => navigation.goBack()}
               >
-                <Icon name="arrow-back" color={COLORS.black} size={30} />
+                <Icon
+                  name="arrow-back"
+                  color={COLORS.black}
+                  size={30}
+                />
               </Pressable>
             </Box>
             <Box w="100%" alignItems={"center"} pt="1" pb="3">
@@ -403,13 +445,13 @@ export default function FarmerRegistration({ route, navigation }: any) {
               </Text>
             </Box>
             <Box
+
               // @ts-expect-error TS(2322): Type '{ children: Element; style: { position: stri... Remove this comment to see the full error message
               style={{
                 position: "absolute",
                 right: 0,
                 top: 4,
-              }}
-            >
+              }}>
               <FeatherIcon name="edit" size={30} color={COLORS.black} />
             </Box>
           </Stack>
@@ -427,6 +469,7 @@ export default function FarmerRegistration({ route, navigation }: any) {
         keyboardShouldPersistTaps="handled"
         showsVerticalScrollIndicator={false}
       >
+
         {/* Data collecting form  */}
         {loadingActivitiyIndicator && (
           <CustomActivityIndicator
@@ -438,8 +481,52 @@ export default function FarmerRegistration({ route, navigation }: any) {
         <Box alignItems={"center"}>
           {farmerType === farmerTypes.farmer && (
             <IndividualFarmerForm
+              gender={gender}
+              setGender={setGender}
+              familySize={familySize}
+              setFamilySize={setFamilySize}
               selectedAddressAdminPosts={selectedAddressAdminPosts}
               setSelectedAddressAdminPosts={setSelectedAddressAdminPosts}
+              addressVillage={addressVillage}
+              setAddressVillage={setAddressVillage}
+              addressAdminPost={addressAdminPost}
+              setAddressAdminPost={setAddressAdminPost}
+              birthProvince={birthProvince}
+              setBirthProvince={setBirthProvince}
+              birthDistrict={birthDistrict}
+              setBirthDistrict={setBirthDistrict}
+              birthAdminPost={birthAdminPost}
+              setBirthAdminPost={setBirthAdminPost}
+              birthDate={birthDate}
+              setBirthDate={setBirthDate}
+              errorAlert={errorAlert}
+              setErrorAlert={setErrorAlert}
+              setModalVisible={setModalVisible}
+              // setDuplicatesAlert={setDuplicatesAlert}
+              docType={docType}
+              setDocType={setDocType}
+              docNumber={docNumber}
+              setDocNumber={setDocNumber}
+              isSprayingAgent={isSprayingAgent}
+              isNotSprayingAgent={isNotSprayingAgent}
+              setIsSprayingAgent={setIsSprayingAgent}
+              setIsNotSprayingAgent={setIsNotSprayingAgent}
+              surname={surname}
+              setSurname={setSurname}
+              otherNames={otherNames}
+              setOtherNames={setOtherNames}
+              primaryPhone={primaryPhone}
+              setPrimaryPhone={setPrimaryPhone}
+              secondaryPhone={secondaryPhone}
+              setSecondaryPhone={setSecondaryPhone}
+              nuit={nuit}
+              setNuit={setNuit}
+              isGroupMember={isGroupMember}
+              isNotGroupMember={isNotGroupMember}
+              setIsGroupMember={setIsGroupMember}
+              setIsNotGroupMember={setIsNotGroupMember}
+              errors={errors}
+              setErrors={setErrors}
             />
           )}
 
@@ -468,7 +555,7 @@ export default function FarmerRegistration({ route, navigation }: any) {
               errors={errors}
               setErrors={setErrors}
               // setAddressAdminPosts={setAddressAdminPosts}
-              // addressAdminPost={addressAdminPost}
+              addressAdminPost={addressAdminPost}
               selectedAddressAdminPosts={selectedAddressAdminPosts}
               setSelectedAddressAdminPosts={setSelectedAddressAdminPosts}
               isInstitutionPrivate={isInstitutionPrivate}
@@ -504,7 +591,7 @@ export default function FarmerRegistration({ route, navigation }: any) {
               setErrors={setErrors}
               selectedAddressAdminPosts={selectedAddressAdminPosts}
               setSelectedAddressAdminPosts={setSelectedAddressAdminPosts}
-              // addressAdminPost={addressAdminPost}
+              addressAdminPost={addressAdminPost}
               groupGoals={groupGoals}
               setGroupGoals={setGroupGoals}
               groupCreationYear={groupCreationYear}
@@ -518,24 +605,19 @@ export default function FarmerRegistration({ route, navigation }: any) {
             />
           )}
 
-          <Center my="15" w="94%">
+          <Center
+            my="15"
+            w="94%"
+          >
             {farmerType !== "" ? (
               <PrimaryButton
-                onPress={() => {
-                  if (farmerType?.includes(farmerTypes.farmer)) {
-                    // navigation.navigate("IndividualFarmerDataForm", {
-                    //   farmerData,
-                    //   farmerType,
-                    //   setFarmerType,
-                    // });
-                    validateActorForm();
-                  }
-                  
-                }}
+                onPress={() => addFarmer(farmerType, realm)}
                 title="Pré-visualizar dados"
               />
             ) : (
-              <Center mt="45">
+              <Center
+                mt="45"
+              >
                 <TickComponent />
                 <View
                   style={{
@@ -544,11 +626,10 @@ export default function FarmerRegistration({ route, navigation }: any) {
                     width: 250,
                   }}
                 >
-                  {farmerType.length === 0 && (
-                    <Text style={styles.description}>
-                      Seleccione o tipo de produtor que pretendes registar
-                    </Text>
-                  )}
+                  {farmerType.length === 0 && <Text style={styles.description}>
+                    Seleccione o tipo de produtor que pretendes registar
+                  </Text>}
+
                 </View>
               </Center>
             )}
@@ -562,24 +643,24 @@ export default function FarmerRegistration({ route, navigation }: any) {
                 farmerData={farmerData}
                 farmerType={farmerType}
                 setFarmerType={setFarmerType}
-                // setSurname={setSurname}
-                // setOtherNames={setOtherNames}
-                // setIsSprayingAgent={setIsSprayingAgent}
-                // setGender={setGender}
-                // setFamilySize={setFamilySize}
-                // setAddressVillage={setAddressVillage}
-                // setAddressAdminPost={setAddressAdminPost}
-                // setPrimaryPhone={setPrimaryPhone}
-                // setSecondaryPhone={setSecondaryPhone}
-                // setBirthProvince={setBirthProvince}
-                // setBirthDistrict={setBirthDistrict}
-                // setBirthAdminPost={setBirthAdminPost}
-                // setBirthDate={setBirthDate}
-                // setDocType={setDocType}
-                // setDocNumber={setDocNumber}
-                // setNuit={setNuit}
-                // setIsGroupMember={setIsGroupMember}
-                // isGroupMember={isGroupMember}
+                setSurname={setSurname}
+                setOtherNames={setOtherNames}
+                setIsSprayingAgent={setIsSprayingAgent}
+                setGender={setGender}
+                setFamilySize={setFamilySize}
+                setAddressVillage={setAddressVillage}
+                setAddressAdminPost={setAddressAdminPost}
+                setPrimaryPhone={setPrimaryPhone}
+                setSecondaryPhone={setSecondaryPhone}
+                setBirthProvince={setBirthProvince}
+                setBirthDistrict={setBirthDistrict}
+                setBirthAdminPost={setBirthAdminPost}
+                setBirthDate={setBirthDate}
+                setDocType={setDocType}
+                setDocNumber={setDocNumber}
+                setNuit={setNuit}
+                setIsGroupMember={setIsGroupMember}
+                isGroupMember={isGroupMember}
                 setFarmerItem={setFarmerItem}
                 farmerItem={farmerItem}
                 setIsCoordinatesModalVisible={setIsCoordinatesModalVisible}

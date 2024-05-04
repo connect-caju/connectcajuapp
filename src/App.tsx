@@ -9,7 +9,7 @@ export default function App() {
   useEffect(() => {
     setTimeout(()=>{
       SplashScreen.hide(); //hides the splash screen on app load.
-    }, 3000)
+    }, 2000)
   }, []);
 
   return (

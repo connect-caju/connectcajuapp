@@ -3,7 +3,11 @@
 /* eslint-disable quotes */
 /* eslint-disable prettier/prettier */
 
-const districts = {
+type DistrictsProps = {
+  [key: string]: string[];
+}
+
+const districts: DistrictsProps = {
   Niassa: [
     "Chimbunila",
     "Cuamba",

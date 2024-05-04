@@ -1,20 +1,22 @@
 import React, { useState } from "react";
 import DatePicker from "react-native-date-picker";
 import { dateLimits } from "../../helpers/dates";
+import { useActorStore } from "../../app/stores/actorStore";
 
 interface MyDatePickerProps {
-  date: Date;
-  setDate: (date: Date) => void;
+  // date: Date;
+  // setDate: (date: Date) => void;
   open: boolean;
   setOpen: (open: boolean) => void;
 }
 export default function MyDatePicker({
-  date,
-  setDate,
+  // date,
+  // setDate,
   open,
   setOpen,
 }: MyDatePickerProps) {
   const [state, setState] = useState("idle");
+  const {updateActorField, actorData }  = useActorStore();
 
   return (
     <DatePicker
@@ -23,7 +25,8 @@ export default function MyDatePicker({
       open={open}
       onConfirm={(date) => {
         setOpen(false);
-        setDate(date);
+        // setDate(date);
+        updateActorField("birthDate", date);
       }}
       onCancel={() => {
         setOpen(false);
@@ -31,8 +34,10 @@ export default function MyDatePicker({
       maximumDate={new Date(dateLimits.maximumDate)}
       minimumDate={new Date(dateLimits.minimumDate)}
       mode="date"
-      date={date}
-      onDateChange={setDate}
+      date={actorData.birthDate}
+      onDateChange={(newDate) => {
+        updateActorField("birthDate", newDate);
+      }}
       locale="pt"
       title="Data de Nascimento"
       confirmText="Confirmar"

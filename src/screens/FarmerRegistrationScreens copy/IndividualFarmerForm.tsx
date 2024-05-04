@@ -29,10 +29,51 @@ import { cn } from "../../../lib/utils";
 import { useColorScheme } from "nativewind";
 import InputLabel from "../../components/InputLabel/InputLabel";
 import InputCheckBox from "../../components/InputCheckBox/InputCheckBox";
-import { useActorStore } from "../../app/stores/actorStore";
 
 export default function IndividualFarmerForm({
+  route,
+  navigation,
+  gender,
+  setGender,
+  familySize,
+  setFamilySize,
   selectedAddressAdminPosts,
+  addressVillage,
+  setAddressVillage,
+  addressAdminPost,
+  setAddressAdminPost,
+  birthProvince,
+  setBirthProvince,
+  birthDistrict,
+  setBirthDistrict,
+  birthAdminPost,
+  setBirthAdminPost,
+  birthDate,
+  setBirthDate,
+  docType,
+  setDocType,
+  docNumber,
+  setDocNumber,
+  isSprayingAgent,
+  setIsSprayingAgent,
+  isNotSprayingAgent,
+  setIsNotSprayingAgent,
+  surname,
+  setSurname,
+  otherNames,
+  setOtherNames,
+  primaryPhone,
+  setPrimaryPhone,
+  secondaryPhone,
+  setSecondaryPhone,
+  nuit,
+  setNuit,
+  isGroupMember,
+  setIsGroupMember,
+  isNotGroupMember,
+  setIsNotGroupMember,
+  errors,
+  setErrors,
 }: any) {
   const [openDatePicker, setOpenDatePicker] = useState(false);
   const [isMan, setIsMan] = useState(false);
@@ -40,24 +81,22 @@ export default function IndividualFarmerForm({
   const [isTransgender, setIsTransgender] = useState(false);
   const { colorScheme } = useColorScheme();
 
-  const { actorData, setActorData, updateActorField, resetActorForm, validateActorForm, submitActorForm,  } = useActorStore();
-
   return (
     <View className="px-3 pt-6 justify-center w-full">
       <View className="w-full ">
-        <FormControl isRequired isInvalid={"isSprayingAgent" in actorData.errors}>
+        <FormControl isRequired isInvalid={"isSprayingAgent" in errors}>
           <InputLabel label="É Provedor de Serviços de Pulverização?" />
           <View className="flex flex-row mx-3 w-full justify-between gap-2 ">
             <View className="flex-1 justify-start">
               <InputCheckBox
                 title="Sim"
-                isChecked={actorData?.isSprayingAgent}
-                errorProperty={actorData?.errors?.isSprayingAgent}
+                isChecked={isSprayingAgent}
+                errorProperty={errors?.isSprayingAgent}
                 onPress={() => {
-                  updateActorField("isSprayingAgent", true);
-                  updateActorField("isNotSprayingAgent", false);
-                  updateActorField("errors", {
-                    ...actorData.errors,
+                  setIsNotSprayingAgent(false);
+                  setIsSprayingAgent(true);
+                  setErrors({
+                    ...errors,
                     isSprayingAgent: "",
                   });
                 }}
@@ -66,52 +105,52 @@ export default function IndividualFarmerForm({
             <View className="flex-1 justify-end">
               <InputCheckBox
                 title="Não"
-                isChecked={actorData?.isSprayingAgent}
-                errorProperty={actorData.errors.isSprayingAgent}
+                isChecked={isNotSprayingAgent}
+                errorProperty={errors?.isSprayingAgent}
                 onPress={() => {
-                  updateActorField("isNotSprayingAgent", true);
-                  updateActorField("isSprayingAgent", false);
-                  updateActorField("errors", {
-                    ...actorData.errors,
+                  setIsNotSprayingAgent(true);
+                  setIsSprayingAgent(false);
+                  setErrors({
+                    ...errors,
                     isSprayingAgent: "",
                   });
                 }}
               />
             </View>
           </View>
-          {"isSprayingAgent" in actorData.errors && (
+          {"isSprayingAgent" in errors && (
             <FormControl.ErrorMessage
               leftIcon={<Icon name="error-outline" size={16} color="red" />}
               _text={{ fontSize: "xs" }}
             >
-              {actorData.errors.isSprayingAgent}
+              {}
             </FormControl.ErrorMessage>
           )}
         </FormControl>
       </View>
 
       <View className="flex justify-center items-center">
-        <FormControl isRequired my="0" isInvalid={"surname" in actorData.errors}>
+        <FormControl isRequired my="0" isInvalid={"surname" in errors}>
           <InputLabel label="Apelido" />
           <Input
             onChangeText={(newSurname: any) => {
-              updateActorField("surname", newSurname);
-              updateActorField("errors", {
-                ...actorData.errors,
+              setErrors((prev: any) => ({
+                ...prev,
                 surname: "",
-              });
+              }));
+              setSurname(newSurname);
             }}
-            value={actorData?.surname}
+            value={surname}
             placeholder="Apelido"
             className=""
             autoCapitalize="words"
           />
-          {"surname" in actorData.errors ? (
+          {"surname" in errors ? (
             <FormControl.ErrorMessage
               leftIcon={<Icon name="error-outline" size={16} color="red" />}
               _text={{ fontSize: "xs" }}
             >
-              {actorData.errors.surname}
+              {errors?.surname}
             </FormControl.ErrorMessage>
           ) : (
             <FormControl.HelperText />
@@ -119,26 +158,26 @@ export default function IndividualFarmerForm({
         </FormControl>
       </View>
       <View className="flex justify-center items-center">
-        <FormControl isRequired my="1" isInvalid={"otherNames" in actorData.errors}>
+        <FormControl isRequired my="1" isInvalid={"otherNames" in errors}>
           <InputLabel label="Outros Nomes" />
           <Input
             autoCapitalize="words"
             onChangeText={(newNames: any) => {
-              updateActorField("otherNames", newNames);
-              updateActorField("errors", {
-                ...actorData.errors,
+              setErrors((prev: any) => ({
+                ...prev,
                 otherNames: "",
-              })
+              }));
+              setOtherNames(newNames);
             }}
-            value={actorData.otherNames}
+            value={otherNames}
             placeholder="Outros nomes"
           />
-          {"otherNames" in actorData.errors ? (
+          {"otherNames" in errors ? (
             <FormControl.ErrorMessage
               leftIcon={<Icon name="error-outline" size={16} color="red" />}
               _text={{ fontSize: "xs" }}
             >
-              {actorData.errors.otherNames}
+              {errors?.otherNames}
             </FormControl.ErrorMessage>
           ) : (
             <FormControl.HelperText />
@@ -148,23 +187,23 @@ export default function IndividualFarmerForm({
 
       <View className="flex flex-row justify-center items-center">
         <View className="flex-1">
-          <FormControl isRequired my="1" isInvalid={"gender" in actorData.errors}>
+          <FormControl isRequired my="1" isInvalid={"gender" in errors}>
             <InputLabel label="Gênero" />
             <View className="flex flex-row justify-between ">
               <View className="flex flex-row">
                 <InputCheckBox
                   // title="Não"
                   isChecked={isMan}
-                  errorProperty={actorData?.errors?.gender}
+                  errorProperty={errors?.gender}
                   onPress={() => {
                     setIsMan(true);
                     setIsWoman(false);
                     setIsTransgender(false);
-                    updateActorField("gender", "Masculino");
-                    updateActorField("errors", {
-                      ...actorData.errors,
+                    setGender("Masculino");
+                    setErrors({
+                      ...errors,
                       gender: "",
-                    })
+                    });
                   }}
                 />
 
@@ -193,17 +232,16 @@ export default function IndividualFarmerForm({
                 <InputCheckBox
                   // title="Não"
                   isChecked={isWoman}
-                  errorProperty={actorData?.errors?.gender}
+                  errorProperty={errors?.gender}
                   onPress={() => {
                     setIsWoman(true);
                     setIsTransgender(false);
                     setIsMan(false);
-                    // setGender("Feminino");
-                    updateActorField("gender", "Feminino");
-                    updateActorField("errors", {
-                      ...actorData.errors,
+                    setGender("Feminino");
+                    setErrors({
+                      ...errors,
                       gender: "",
-                    })
+                    });
                   }}
                 />
 
@@ -232,16 +270,16 @@ export default function IndividualFarmerForm({
                 <InputCheckBox
                   // title=""
                   isChecked={isTransgender}
-                  errorProperty={actorData?.errors?.gender}
+                  errorProperty={errors?.gender}
                   onPress={() => {
                     setIsTransgender(true);
                     setIsWoman(false);
                     setIsMan(false);
-                    updateActorField("gender", "Outro");
-                    updateActorField("errors", {
-                      ...actorData.errors,
+                    setGender("Outro");
+                    setErrors({
+                      ...errors,
                       gender: "",
-                    })
+                    });
                   }}
                 />
 
@@ -268,12 +306,12 @@ export default function IndividualFarmerForm({
               </View>
             </View>
 
-            {"gender" in actorData.errors ? (
+            {"gender" in errors ? (
               <FormControl.ErrorMessage
                 leftIcon={<Icon name="error-outline" size={16} color="red" />}
                 _text={{ fontSize: "xs" }}
               >
-                {actorData.errors.gender}
+                {errors?.gender}
               </FormControl.ErrorMessage>
             ) : (
               <FormControl.HelperText />
@@ -283,30 +321,28 @@ export default function IndividualFarmerForm({
       </View>
 
       <View className="w-1/2">
-        <FormControl isRequired isInvalid={"familySize" in actorData.errors}>
+        <FormControl isRequired isInvalid={"familySize" in errors}>
           <InputLabel label="Agregado Familiar" />
           <Input
             // label="Agregado Familiar"
             onChangeText={(newSize: any) => {
-              
-              updateActorField("errors", {
-                ...actorData.errors,
+              setErrors((prev: any) => ({
+                ...prev,
                 familySize: "",
-              })
-
-              updateActorField("familySize", newSize);
+              }));
+              setFamilySize(newSize);
             }}
-            value={actorData?.familySize}
+            value={familySize}
             placeholder="Agregado Familiar"
             keyboardType="numeric"
             className="text-center"
           />
-          {"familySize" in actorData.errors ? (
+          {"familySize" in errors ? (
             <FormControl.ErrorMessage
               leftIcon={<Icon name="error-outline" size={16} color="red" />}
               _text={{ fontSize: "xs" }}
             >
-              {actorData.errors.familySize}
+              {errors?.familySize}
             </FormControl.ErrorMessage>
           ) : (
             <FormControl.HelperText />
@@ -319,10 +355,10 @@ export default function IndividualFarmerForm({
       </View>
 
       <View className="">
-        <FormControl isRequired my="1" isInvalid={"addressAdminPost" in actorData.errors}>
+        <FormControl isRequired my="1" isInvalid={"addressAdminPost" in errors}>
           <InputLabel label="Posto Administrativo" />
           <Select
-            selectedValue={actorData?.addressAdminPost}
+            selectedValue={addressAdminPost}
             placeholder="Escolha posto administrativo"
             minHeight={50}
             _selectedItem={{
@@ -335,30 +371,28 @@ export default function IndividualFarmerForm({
                 name="arrow-drop-down"
                 // size={35}
                 color={COLORS.main}
-                onPress={() => {
-                  updateActorField("addressAdminPost", "");
-                }}
+                onPress={() => setAddressAdminPost("")}
               />
             }
             mt={1}
             onValueChange={(newAdminPost) => {
-              updateActorField("errors", {
-                ...actorData.errors,
-                addressAdminPost: "",
-              })
-              updateActorField("addressAdminPost", newAdminPost);
+              setErrors((prev: any) => ({
+                ...prev,
+                institutionAdminPost: "",
+              }));
+              setAddressAdminPost(newAdminPost);
             }}
           >
             {selectedAddressAdminPosts?.map((adminPost: any, index: any) => (
               <Select.Item key={index} label={adminPost} value={adminPost} />
             ))}
           </Select>
-          {"addressAdminPost" in actorData.errors ? (
+          {"addressAdminPost" in errors ? (
             <FormControl.ErrorMessage
               leftIcon={<Icon name="error-outline" size={16} color="red" />}
               _text={{ fontSize: "xs" }}
             >
-              {actorData.errors.addressAdminPost}
+              {errors?.addressAdminPost}
             </FormControl.ErrorMessage>
           ) : (
             <FormControl.HelperText />
@@ -369,7 +403,7 @@ export default function IndividualFarmerForm({
         <FormControl isRequired my="1">
           <InputLabel label="Localidade" />
           <Select
-            selectedValue={actorData?.addressVillage}
+            selectedValue={addressVillage}
             placeholder="Escolha uma localidade"
             minHeight={50}
             _selectedItem={{
@@ -382,17 +416,13 @@ export default function IndividualFarmerForm({
                 name="arrow-drop-down"
                 // size={35}
                 color={COLORS.main}
-                onPress={() => {
-                  updateActorField("addressVillage", "");
-                }}
+                onPress={() => setAddressVillage("")}
               />
             }
             mt={1}
-            onValueChange={(newVillage) => {
-              updateActorField("addressVillage", newVillage);
-            }}
+            onValueChange={(newVillage) => setAddressVillage(newVillage)}
           >
-            {actorData?.addressAdminPost && villages[actorData?.addressAdminPost]?.map((village: any, index: any) => (
+            {villages[addressAdminPost]?.map((village: any, index: any) => (
               <Select.Item key={index} label={village} value={village} />
             ))}
           </Select>
@@ -403,30 +433,29 @@ export default function IndividualFarmerForm({
 
       <View className="flex flex-row w-full space-x-2 ">
         <View className="flex-1">
-          <FormControl my="1" isInvalid={"primaryPhone" in actorData.errors}>
+          <FormControl my="1" isInvalid={"primaryPhone" in errors}>
             <InputLabel label="Telemóvel" />
             <Input
               // label="Telemóvel"
               placeholder="Telemóvel"
               keyboardType="phone-pad"
-              value={actorData?.primaryPhone}
+              value={primaryPhone}
               onChangeText={(newPhone: any) => {
-
-                updateActorField("errors", {
-                  ...actorData.errors,
+                setErrors((prev: any) => ({
+                  ...prev,
                   primaryPhone: "",
-                })
-                updateActorField("primaryPhone", newPhone);
+                }));
+                setPrimaryPhone(newPhone);
               }}
               className="text-center"
             />
 
-            {"primaryPhone" in actorData.errors ? (
+            {"primaryPhone" in errors ? (
               <FormControl.ErrorMessage
                 leftIcon={<Icon name="error-outline" size={16} color="red" />}
                 _text={{ fontSize: "xs" }}
               >
-                {actorData.errors.primaryPhone}
+                {errors?.primaryPhone}
               </FormControl.ErrorMessage>
             ) : (
               <FormControl.HelperText />
@@ -434,29 +463,29 @@ export default function IndividualFarmerForm({
           </FormControl>
         </View>
         <View className="flex-1">
-          <FormControl my="1" isInvalid={"secondaryPhone" in actorData.errors}>
+          <FormControl my="1" isInvalid={"secondaryPhone" in errors}>
             <InputLabel label="Telemóvel Alternativo" />
             <Input
               // label="Telemóvel Alternativo"
               placeholder="Telemóvel"
               keyboardType="phone-pad"
-              value={actorData?.secondaryPhone}
+              value={secondaryPhone}
               onChangeText={(newPhone: any) => {
-                updateActorField("errors", {
-                  ...actorData.errors,
+                setErrors((prev: any) => ({
+                  ...prev,
                   secondaryPhone: "",
-                })
-                updateActorField("secondaryPhone", newPhone);
+                }));
+                setSecondaryPhone(newPhone);
               }}
               className="text-center"
             />
 
-            {"secondaryPhone" in actorData.errors ? (
+            {"secondaryPhone" in errors ? (
               <FormControl.ErrorMessage
                 leftIcon={<Icon name="error-outline" size={16} color="red" />}
                 _text={{ fontSize: "xs" }}
               >
-                {actorData.errors.secondaryPhone}
+                {errors?.secondaryPhone}
               </FormControl.ErrorMessage>
             ) : (
               <FormControl.HelperText />
@@ -470,7 +499,7 @@ export default function IndividualFarmerForm({
       </View>
 
       <View className="py-3 ">
-        <FormControl isRequired isInvalid={"birthDate" in actorData.errors}>
+        <FormControl isRequired isInvalid={"birthDate" in errors}>
           <InputLabel label="Data de Nascimento" />
           <Pressable
             onPress={() => setOpenDatePicker(true)}
@@ -478,10 +507,10 @@ export default function IndividualFarmerForm({
           >
             <FontAwesomeIcon name="calendar" size={30} color={COLORS.black} />
             <Text className="text-center text-[14px] ">
-              {actorData?.birthDate
-                ? `${actorData?.birthDate.getDate()}/${
-                  actorData?.birthDate.getMonth() + 1
-                  }/${actorData?.birthDate.getFullYear()}`
+              {birthDate
+                ? `${birthDate.getDate()}/${
+                    birthDate.getMonth() + 1
+                  }/${birthDate.getFullYear()}`
                 : "Data"}
             </Text>
             <View className="absolute right-0 ">
@@ -494,26 +523,28 @@ export default function IndividualFarmerForm({
           </Pressable>
 
           <DatePicker
+            date={birthDate}
+            setDate={setBirthDate}
             open={openDatePicker}
             setOpen={setOpenDatePicker}
           />
 
-          {"birthDate" in actorData.errors && (
+          {"birthDate" in errors && (
             <FormControl.ErrorMessage
               leftIcon={<Icon name="error-outline" size={16} color="red" />}
               _text={{ fontSize: "xs" }}
             >
-              {actorData.errors.birthDate}
+              {errors?.birthDate}
             </FormControl.ErrorMessage>
           )}
         </FormControl>
       </View>
 
       <View w="50%" px="1">
-        <FormControl isRequired isInvalid={"birthProvince" in actorData.errors}>
+        <FormControl isRequired isInvalid={"birthProvince" in errors}>
           <InputLabel label="Província/País de Nascimento" />
           <Select
-            selectedValue={actorData.birthProvince}
+            selectedValue={birthProvince}
             placeholder="Escolha uma província"
             minHeight={50}
             _selectedItem={{
@@ -526,47 +557,47 @@ export default function IndividualFarmerForm({
             }
             mt={1}
             onValueChange={(newProvince) => {
-              updateActorField("errors", {
-                ...actorData.errors,
+              setErrors((prev: any) => ({
+                ...prev,
                 birthProvince: "",
-              })
-              updateActorField("birthProvince", newProvince);
+              }));
+              setBirthProvince(newProvince);
             }}
           >
             {provinces?.map((province, index) => (
               <Select.Item key={index} label={province} value={province} />
             ))}
           </Select>
-          {"birthProvince" in actorData.errors && (
+          {"birthProvince" in errors && (
             <FormControl.ErrorMessage
               leftIcon={<Icon name="error-outline" size={16} color="red" />}
               _text={{ fontSize: "xs" }}
             >
-              {actorData.errors.birthProvince}
+              {errors?.birthProvince}
             </FormControl.ErrorMessage>
           )}
         </FormControl>
       </View>
 
       <View className="flex items-center justify-center ">
-        {!actorData?.birthProvince?.includes("Cidade") &&
-          !actorData?.birthProvince?.includes("País Estrangeiro") && (
+        {!birthProvince?.includes("Cidade") &&
+          !birthProvince?.includes("País Estrangeiro") && (
             <View className="flex flex-col mx-3 my-3 w-full">
               <View className="">
                 <FormControl
                   isRequired
                   my="1"
-                  isInvalid={"birthDistrict" in actorData.errors}
+                  isInvalid={"birthDistrict" in errors}
                 >
                   <InputLabel
                     label={
-                      actorData.birthProvince === "País Estrangeiro" ? "País" : "Distrito"
+                      birthProvince === "País Estrangeiro" ? "País" : "Distrito"
                     }
                   />
                   <Select
-                    selectedValue={actorData.birthDistrict}
+                    selectedValue={birthDistrict}
                     placeholder={
-                      actorData.birthProvince?.includes("Estrangeiro")
+                      birthProvince?.includes("Estrangeiro")
                         ? "Escolha um país"
                         : "Escolha um distrito"
                     }
@@ -585,23 +616,25 @@ export default function IndividualFarmerForm({
                     }
                     mt={1}
                     onValueChange={(newDistrict) => {
-                      updateActorField("errors", {
-                        ...actorData.errors,
+                      setErrors((prev: any) => ({
+                        ...prev,
                         birthDistrict: "",
-                      })
-                      updateActorField("birthDistrict", newDistrict);
+                      }));
+                      setBirthDistrict(newDistrict);
                     }}
                   >
-                    {actorData.birthProvince === "País Estrangeiro"
+                    {birthProvince === "País Estrangeiro"
                       ? countries3?.map((country, index) => (
                           <Select.Item
                             key={index}
-                            label={country.value}
-                            value={country.value}
+                            // @ts-expect-error TS(2322): Type '{ key: string; value: string; }' is not assi... Remove this comment to see the full error message
+                            label={country}
+                            // @ts-expect-error TS(2322): Type '{ key: string; value: string; }' is not assi... Remove this comment to see the full error message
+                            value={country}
                           />
                         ))
-                      : 
-                        districts[actorData.birthProvince]?.map(
+                      : // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
+                        districts[birthProvince]?.map(
                           (district: any, index: any) => (
                             <Select.Item
                               key={index}
@@ -612,14 +645,14 @@ export default function IndividualFarmerForm({
                         )}
                   </Select>
 
-                  {"birthDistrict" in actorData.errors ? (
+                  {"birthDistrict" in errors ? (
                     <FormControl.ErrorMessage
                       leftIcon={
                         <Icon name="error-outline" size={16} color="grey" />
                       }
                       _text={{ fontSize: "xs" }}
                     >
-                      {actorData.errors.birthDistrict}
+                      {errors?.birthDistrict}
                     </FormControl.ErrorMessage>
                   ) : (
                     <FormControl.HelperText />
@@ -627,17 +660,17 @@ export default function IndividualFarmerForm({
                 </FormControl>
               </View>
               <View className="">
-                {!actorData?.birthProvince?.includes("Estrangeiro") &&
-                  !actorData?.birthDistrict?.includes("Cidade") &&
-                  !actorData?.birthProvince?.includes("Maputo") && (
+                {!birthProvince?.includes("Estrangeiro") &&
+                  !birthDistrict?.includes("Cidade") &&
+                  !birthProvince?.includes("Maputo") && (
                     <FormControl
                       isRequired
                       my="1"
-                      isInvalid={"birthAdminPost" in actorData.errors}
+                      isInvalid={"birthAdminPost" in errors}
                     >
                       <InputLabel label=" Posto Administrativo" />
                       <Select
-                        selectedValue={actorData.birthAdminPost ? actorData.birthAdminPost : ""}
+                        selectedValue={birthProvince ? birthAdminPost : ""}
                         placeholder="Escolha um posto administrativo"
                         minHeight={50}
                         _selectedItem={{
@@ -654,14 +687,14 @@ export default function IndividualFarmerForm({
                         }
                         mt={1}
                         onValueChange={(newAdminPost) => {
-                          updateActorField("errors", {
-                            ...actorData.errors,
+                          setErrors((prev: any) => ({
+                            ...prev,
                             birthAdminPost: "",
-                          })
-                          updateActorField("birthAdminPost", newAdminPost);
+                          }));
+                          setBirthAdminPost(newAdminPost);
                         }}
                       >
-                        {administrativePosts[actorData.birthDistrict]?.map(
+                        {administrativePosts[birthDistrict]?.map(
                           (adminPost: any, index: any) => (
                             <Select.Item
                               key={index}
@@ -671,14 +704,14 @@ export default function IndividualFarmerForm({
                           ),
                         )}
                       </Select>
-                      {"birthAdminPost" in actorData.errors && (
+                      {"birthAdminPost" in errors && (
                         <FormControl.ErrorMessage
                           leftIcon={
                             <Icon name="error-outline" size={16} color="red" />
                           }
                           _text={{ fontSize: "xs" }}
                         >
-                          {actorData.errors?.birthAdminPost}
+                          {errors?.birthAdminPost}
                         </FormControl.ErrorMessage>
                       )}
                     </FormControl>
@@ -689,22 +722,22 @@ export default function IndividualFarmerForm({
       </View>
 
       <View className="flex items-center justify-center">
-        {actorData?.birthProvince?.includes("País Estrangeiro") && (
+        {birthProvince?.includes("País Estrangeiro") && (
           <View className="w-full">
             <FormControl
               isRequired
               my="1"
-              isInvalid={"birthDistrict" in actorData.errors}
+              isInvalid={"birthDistrict" in errors}
             >
               <InputLabel
                 label={
-                  actorData.birthProvince === "País Estrangeiro"
+                  birthProvince === "País Estrangeiro"
                     ? "País de Nascimento"
                     : "Distrito de Nascimento"
                 }
               />
               <Select
-                selectedValue={actorData.birthDistrict}
+                selectedValue={birthDistrict}
                 placeholder="Seleccionar país"
                 minHeight={50}
                 _selectedItem={{
@@ -721,11 +754,11 @@ export default function IndividualFarmerForm({
                 }
                 mt={1}
                 onValueChange={(newDistrict: any) => {
-                  updateActorField("errors", {
-                    ...actorData.errors,
+                  setErrors((prev: any) => ({
+                    ...prev,
                     birthDistrict: "",
-                  })
-                  updateActorField("birthDistrict", newDistrict);
+                  }));
+                  setBirthDistrict(newDistrict);
                 }}
               >
                 {countries2?.map((country: any, index: any) => (
@@ -737,14 +770,14 @@ export default function IndividualFarmerForm({
                 ))}
               </Select>
 
-              {"birthDistrict" in actorData.errors && (
+              {"birthDistrict" in errors && (
                 <FormControl.ErrorMessage
                   leftIcon={
                     <Icon name="error-outline" size={16} color={COLORS.red} />
                   }
                   _text={{ fontSize: "xs" }}
                 >
-                  {actorData.errors?.birthDistrict}
+                  {errors?.birthDistrict}
                 </FormControl.ErrorMessage>
               )}
             </FormControl>
@@ -760,10 +793,10 @@ export default function IndividualFarmerForm({
 
       <View className="flex flex-row justify-center items-center space-x-2">
         <View className="flex-1">
-          <FormControl my="2" isRequired isInvalid={"docType" in actorData.errors}>
+          <FormControl my="2" isRequired isInvalid={"docType" in errors}>
             <InputLabel label="Tipo de Documento" />
             <Select
-              selectedValue={actorData.docType}
+              selectedValue={docType}
               placeholder="Tipo de documento"
               minHeight={50}
               _selectedItem={{
@@ -780,51 +813,52 @@ export default function IndividualFarmerForm({
               }
               mt={1}
               onValueChange={(newDocType) => {
-                updateActorField("errors", {
-                  ...actorData.errors,
+                setErrors((prev: any) => ({
+                  ...prev,
                   docType: "",
-                })
-                updateActorField("docType", newDocType);
+                  docNumber: "",
+                }));
+                setDocType(newDocType);
               }}
             >
               {idDocTypes?.map((docType) => (
                 <Select.Item key={docType} label={docType} value={docType} />
               ))}
             </Select>
-            {"docType" in actorData.errors && (
+            {"docType" in errors && (
               <FormControl.ErrorMessage
                 leftIcon={<Icon name="error-outline" size={16} color="red" />}
                 _text={{ fontSize: "xs" }}
               >
-                {actorData.errors?.docType}
+                {errors?.docType}
               </FormControl.ErrorMessage>
             )}
           </FormControl>
         </View>
 
         <View className="flex-1">
-          <FormControl my="2" isInvalid={"docNumber" in actorData.errors}>
+          <FormControl my="2" isInvalid={"docNumber" in errors}>
             <InputLabel label="Número de Documento" />
             <Input
               autoCapitalize="characters"
-              value={actorData.docNumber}
+              value={docNumber}
               placeholder="Número do documento"
               onChangeText={(newDocNumber: any) => {
-                updateActorField("errors", {
-                  ...actorData.errors,
+                setErrors((prev: any) => ({
+                  ...prev,
                   docNumber: "",
-                })
-                updateActorField("docNumber", newDocNumber);
+                }));
+                setDocNumber(newDocNumber);
               }}
               className="text-center"
             />
 
-            {"docNumber" in actorData.errors && (
+            {"docNumber" in errors && (
               <FormControl.ErrorMessage
                 leftIcon={<Icon name="error-outline" size={16} color="red" />}
                 _text={{ fontSize: "xs" }}
               >
-                {actorData.errors?.docNumber}
+                {errors?.docNumber}
               </FormControl.ErrorMessage>
             )}
           </FormControl>
@@ -832,28 +866,28 @@ export default function IndividualFarmerForm({
       </View>
 
       <View className="">
-        <FormControl isInvalid={"nuit" in actorData.errors}>
+        <FormControl isInvalid={"nuit" in errors}>
           <InputLabel label="NUIT" />
           <Input
-            value={actorData.nuit}
+            value={nuit}
             placeholder="NUIT"
             onChangeText={(newNuit: any) => {
-              updateActorField("errors", {
-                ...actorData.errors,
-                docNumber: "",
-              })
-              updateActorField("nuit", newNuit);
+              setErrors((prev: any) => ({
+                ...prev,
+                nuit: "",
+              }));
+              setNuit(newNuit);
             }}
             className="text-center"
             keyboardType="numeric"
           />
 
-          {"nuit" in actorData.errors && (
+          {"nuit" in errors && (
             <FormControl.ErrorMessage
               leftIcon={<Icon name="error-outline" size={16} color="red" />}
               _text={{ fontSize: "xs" }}
             >
-              {actorData.errors?.nuit}
+              {errors?.nuit}
             </FormControl.ErrorMessage>
           )}
         </FormControl>
@@ -864,48 +898,48 @@ export default function IndividualFarmerForm({
       </View>
 
       <View className="w-full">
-        <FormControl isRequired isInvalid={"isGroupMember" in actorData.errors}>
+        <FormControl isRequired isInvalid={"isGroupMember" in errors}>
           <InputLabel label=" É membro de uma cooperativa?" />
 
           <View className="flex flex-row mx-3 w-full justify-between gap-2">
             <View className="flex-1 justify-start">
               <InputCheckBox
                 title="Sim"
-                isChecked={actorData.isGroupMember}
-                errorProperty={actorData.errors?.isGroupMember}
+                isChecked={isGroupMember}
+                errorProperty={errors?.isGroupMember}
                 onPress={() => {
-                  updateActorField("errors", {
-                    ...actorData.errors,
+                  setIsNotGroupMember(false);
+                  setIsGroupMember(true);
+                  setErrors({
+                    ...errors,
                     isGroupMember: "",
-                  })
-                  updateActorField("isGroupMember", true);
-                  updateActorField("isNotGroupMember", false);
+                  });
                 }}
               />
             </View>
             <View className="flex-1 justify-end">
               <InputCheckBox
                 title="Não"
-                isChecked={actorData.isNotGroupMember}
-                errorProperty={actorData.errors.isGroupMember}
+                isChecked={isNotGroupMember}
+                errorProperty={errors?.isGroupMember}
                 onPress={() => {
-                  updateActorField("isNotGroupMember", true);
-                  updateActorField("isGroupMember", false);
-                  updateActorField("errors", {
-                    ...actorData.errors,
+                  setIsNotGroupMember(true);
+                  setIsGroupMember(false);
+                  setErrors({
+                    ...errors,
                     isGroupMember: "",
-                  })
+                  });
                 }}
               />
             </View>
           </View>
 
-          {"isGroupMember" in actorData.errors ? (
+          {"isGroupMember" in errors ? (
             <FormControl.ErrorMessage
               leftIcon={<Icon name="error-outline" size={16} color="red" />}
               _text={{ fontSize: "xs" }}
             >
-              {actorData.errors?.isGroupMember}
+              {}
             </FormControl.ErrorMessage>
           ) : (
             <FormControl.HelperText />
