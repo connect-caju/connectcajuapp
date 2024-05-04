@@ -1,11 +1,8 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable prettier/prettier */
-/* eslint-disable linebreak-style */
+
 import {
     View,
     TouchableOpacity,
     TextInput,
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 } from "react-native";
 import {
     Box,
@@ -14,16 +11,12 @@ import {
 import React, { useState, useCallback } from "react";
 import { Icon } from "@rneui/base";
 import COLORS from "../../consts/colors";
-
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'uuid... Remove this comment to see the full error message
 import { v4 as uuidv4 } from "uuid";
 import validateInvalidationMessage from "../../helpers/validateInvalidationMessage";
 
 import { useUser } from "@realm/react";
 import { realmContext } from "../../models/realmContext";
 import { useEffect } from "react";
-
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { Text } from "react-native";
 import { resourceValidation } from "../../consts/resourceValidation";
 import { roles } from "../../consts/roles";
@@ -113,12 +106,6 @@ const InvalidationMessage = ({
                 <>
                     {roles.haveReadAndWritePermissions.some(role => role === customUserData?.role) && (
                         <Text
-                            style={{
-                                // textAlign: "left",
-                                // color: COLORS.danger,
-                                // fontSize: 14,
-                                // fontFamily: "JosefinSans-Bold",
-                            }}
                             className="text-left text-gray-400 text-sm font-bold"
                         >
                             Motivo de indeferimento
@@ -142,13 +129,7 @@ const InvalidationMessage = ({
                             >
 
                                 <Text
-                                    // style={{
-                                    //     textAlign: "left",
-                                    //     fontSize: 12,
-                                    //     color: COLORS.grey,
-                                    //     marginBottom: -5,
-                                    //     paddingLeft: 15,
-                                    // }}
+
                                     className="text-lef text-sm text-gray-400 -mb-2 pl-4"
                                 >
                                     {motive?.ownerName.split(" ")[0]}
@@ -171,13 +152,6 @@ const InvalidationMessage = ({
                                     className="bg-gray-100"
                                 >
                                     <Text
-                                        // style={{
-                                        //     fontSize: 16,
-                                        //     fontFamily: "JosefinSans-Regular",
-                                        //     color: COLORS.white,
-                                        //     textAlign: "left",
-                                        //     lineHeight: 18,
-                                        // }}
                                         className="text-sm font-normal text-gray-500 text-left"
                                         >
                                         {motive.message
@@ -229,18 +203,10 @@ const InvalidationMessage = ({
                                     margin: 5,
                                     maxWidth: "80%",
                                     minWidth: "10%",
-                                    // alignSelf: roles.haveReadAndWritePermissions.some(role => role === customUserData.role) ? "flex-end" : "flex-start",
                                 }}
                                 className="bg-gray-100"
                             >
                                 <Text
-                                    style={{
-                                        // fontSize: 16,
-                                        // fontFamily: "JosefinSans-Regular",
-                                        // color: COLORS.white,
-                                        // textAlign: "left",
-                                        // lineHeight: 18,
-                                    }}
                                     className="text-sm font-normal text-gray-500 text-left"
                                 >
                                     {errorMessages.automaticInvalidationMessage.invalidationMessage}
@@ -310,8 +276,6 @@ const InvalidationMessage = ({
                                 }
                                 _text={{ fontSize: "xs" }}
                             >
-                                // @ts-expect-error TS(2339): Property 'invalidationMessage' does not exist on t... Remove this comment to see the full error message
-                                // @ts-expect-error TS(2339): Property 'invalidationMessage' does not exist on t... Remove this comment to see the full error message
                                 {errors?.invalidationMessage}
                             </FormControl.ErrorMessage>
                         )}
@@ -340,8 +304,6 @@ const InvalidationMessage = ({
                                 try {
                                     addMessage(realm, resource?._id, message);
                                 } catch (error) {
-
-                                    // @ts-expect-error TS(2584): Cannot find name 'console'. Do you need to change ... Remove this comment to see the full error message
                                     console.log(
                                         "Failed to add invalidation message",
                                     );

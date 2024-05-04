@@ -27,7 +27,6 @@ export default function MyDatePicker({
       }}
       onCancel={() => {
         setOpen(false);
-        // setDate(dateLimits);
       }}
       maximumDate={new Date(dateLimits.maximumDate)}
       minimumDate={new Date(dateLimits.minimumDate)}

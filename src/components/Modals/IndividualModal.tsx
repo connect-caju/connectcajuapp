@@ -181,7 +181,6 @@ export default function IndividualModal({
           addSprayingServiceProvider(actor, realm);
         } catch (error) {
 
-          // @ts-expect-error TS(2584): Cannot find name 'console'. Do you need to change ... Remove this comment to see the full error message
           console.log("Could not save actor as spraying service provider:", {
             cause: error,
           });
@@ -192,8 +191,6 @@ export default function IndividualModal({
         try {
           addActorMembership(actor, realm);
         } catch (error) {
-
-          // @ts-expect-error TS(2584): Cannot find name 'console'. Do you need to change ... Remove this comment to see the full error message
           console.log("Could not save actor as member of an organization:", {
             cause: error,
           });

@@ -18,7 +18,7 @@ import {
   SelectList,
 } from "react-native-dropdown-select-list";
 
-import { Overlay, Icon, Button, CheckView } from "@rneui/base";
+import { Overlay, Icon, Button,} from "@rneui/base";
 import COLORS from "../../consts/colors";
 import { getFullYears2 } from "../../helpers/dates";
 import { plantingTypes } from "../../consts/plantingTypes";
@@ -31,9 +31,7 @@ import { errorMessages } from "../../consts/errorMessages";
 import { useUser } from "@realm/react";
 import { realmContext } from "../../models/realmContext";
 import { resourceValidation } from "../../consts/resourceValidation";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import PrimaryButton from "../Buttons/PrimaryButton";
-import { backgroundStyle } from "../../styles/globals";
 const { useRealm, useQuery, useObject } = realmContext;
 
 export default function NewFarmlandBlock({

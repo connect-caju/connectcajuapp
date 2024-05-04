@@ -1,13 +1,7 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable linebreak-style */
-/* eslint-disable prettier/prettier */
-/* eslint-disable react-native/no-inline-styles */
-/* eslint-disable prettier/prettier */
 
 import React, { useCallback, useEffect, useState } from "react";
 import { Text, Stack, Box, Center, Divider } from "native-base";
 
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { ScrollView, Pressable, View, TouchableOpacity } from "react-native";
 import { Button, Icon } from "@rneui/themed";
 import CustomDivider from "../Divider/CustomDivider";
@@ -16,24 +10,14 @@ import Modal from "react-native-modal";
 
 import "react-native-get-random-values";
 
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'uuid... Remove this comment to see the full error message
 import { v4 as uuidv4 } from "uuid";
-import Realm from "realm";
 
-import SuccessModal from "./SuccessModal";
-
-// @ts-expect-error TS(2307): Cannot find module '../../helpers/generateUUID' or... Remove this comment to see the full error message
-import { generateUUID } from "../../helpers/generateUUID";
-import { generateFormattedDate } from "../../helpers/generateFormattedDate";
-import { generateFormattedAdminPost } from "../../helpers/generateFormattedAdminPost";
-import { generateFormattedSurname } from "../../helpers/generateFormattedSurname";
 import { useNavigation } from "@react-navigation/native";
-import { user } from "../../consts/user";
+
 
 import { realmContext } from "../../models/realmContext";
 import COLORS from "../../consts/colors";
 import { groupAffiliationStatus } from "../../consts/groupAffiliationStatus";
-import { generateUniqueNumber } from "../../helpers/generateUniqueNumber";
 import PrimaryButton from "../Buttons/PrimaryButton";
 const { useRealm, useObject, useQuery } = realmContext;
 

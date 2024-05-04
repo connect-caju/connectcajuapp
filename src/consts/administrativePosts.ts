@@ -1,8 +1,9 @@
-/* eslint-disable prettier/prettier */
-/* eslint-disable quotes */
-/* eslint-disable prettier/prettier */
 
-const administrativePosts = {
+type AdminPostProps = {
+  [key: string]: string[];
+}
+
+const administrativePosts: AdminPostProps = {
   // Niassa
   Chimbunila: ["Chimbunila (Sede)", "Lione", "Mussa"],
   Cuamba: ["Cuamba (Sede)", "Etatara", "Lurio (de Cuamba)", "Mepica"],
@@ -392,7 +393,7 @@ const administrativePosts = {
   // Tete
   Angónia: ["Domue", "Ulongoe (Sede)"],
   "Cahora-Bassa": ["Chintholo", "Chitima (Sede)", "Songo"],
-  Changara: ["Chioco", , "Luenha (Sede)"],
+  Changara: ["Chioco", "Luenha (Sede)"],
   Chifunde: ["Chifunde (Sede)", "Mualadzi", "N'Sadzu"],
   Chiuta: ["Kazula", "Manje (Sede)"],
   Dôa: ["Chueza", "Dôa (Sede)"],

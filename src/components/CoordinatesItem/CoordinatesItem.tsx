@@ -6,18 +6,12 @@ import {
   ScrollView,
   TouchableOpacity,
   Pressable,
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 } from "react-native";
 import { Stack, Box, Center } from "native-base";
 import { Icon } from "@rneui/base";
 import AwesomeAlert from "react-native-awesome-alerts";
 
-import CustomDivider from "../Divider/CustomDivider";
-
 import { realmContext } from "../../models/realmContext";
-
-// @ts-expect-error TS(2305): Module '"../../helpers/updateCoordinates"' has no ... Remove this comment to see the full error message
-import { updateCoordinates } from "../../helpers/updateCoordinates";
 import COLORS from "../../consts/colors";
 const { useRealm, useObject, useQuery } = realmContext;
 

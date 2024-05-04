@@ -1,8 +1,3 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable linebreak-style */
-/* eslint-disable prettier/prettier */
-
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { TouchableOpacity, View, Text } from "react-native";
 import React, { useState, useEffect } from "react";
 import { Avatar, Icon } from "@rneui/themed";
@@ -11,12 +6,8 @@ import {
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 
-import {
-  responsiveFontSize,
-} from "react-native-responsive-dimensions";
 
 import { Box, Center, Stack } from "native-base";
-import { getInitials } from "../../helpers/getInitials";
 import { useNavigation } from "@react-navigation/native";
 import COLORS from "../../consts/colors";
 import { resourceValidation } from "../../consts/resourceValidation";

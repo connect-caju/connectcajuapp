@@ -1,5 +1,4 @@
-/* eslint-disable linebreak-style */
-/* eslint-disable prettier/prettier */
+
 const COLORS = {
   main: "#008000",
   second: "#005000",

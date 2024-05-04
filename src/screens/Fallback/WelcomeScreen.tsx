@@ -1,4 +1,3 @@
-
 import {
   Pressable,
   SafeAreaView,
@@ -8,6 +7,7 @@ import {
   StatusBar,
   TextInput,
   TouchableOpacity,
+  ScrollView,
 } from "react-native";
 import React, { useEffect, useState, useCallback } from "react";
 import { Button, Icon, BottomSheet } from "@rneui/themed";
@@ -18,7 +18,6 @@ import {
   Center,
   Select,
   CheckIcon,
-  ScrollView,
 } from "native-base";
 import AwesomeAlert from "react-native-awesome-alerts";
 import {
@@ -90,36 +89,30 @@ export default function WelcomeScreen() {
   const app = useApp();
 
   // on user login
-  const onLogin = useCallback(async (email: any, password: any) => {
+  const onLogin = useCallback(
+    async (email: any, password: any) => {
+      try {
+        let hashedPassword = password;
+        if (!app?.currentUser) {
+          const creds = Realm.Credentials.emailPassword(
+            email,
+            // password,
+            hashedPassword,
+          );
+          await app?.logIn(creds);
+        }
+        return app.currentUser;
+      } catch (error) {
+        setAlert(true);
 
-    // try {
-    // } catch (error) {
-    //   console.log("Could not encrypt password:", { cause: error })
-    // }
-    // setSigningInInProgress(true);
-    try {
-      let hashedPassword = password;
-      if (!app?.currentUser) {
-        // const salt = await BcryptReactNative.getSalt(10);
-        // hashedPassword = await BcryptReactNative.hash(salt, hashedPassword);
-        // console.log("hashed:", hashedPassword);
-        const creds = Realm.Credentials.emailPassword(
-          email,
-          // password,
-          hashedPassword
-        );
-        await app?.logIn(creds);
+        // @ts-expect-error TS(2345): Argument of type 'unknown' is not assignable to pa... Remove this comment to see the full error message
+        setErrorFlag(error);
+        return;
       }
-      return app.currentUser;
-    } catch (error) {
-      setAlert(true);
-
-      // @ts-expect-error TS(2345): Argument of type 'unknown' is not assignable to pa... Remove this comment to see the full error message
-      setErrorFlag(error);
-      return;
-    }
-    // setSigningInInProgress(false);
-  }, [app, email, password]);
+      // setSigningInInProgress(false);
+    },
+    [app, email, password],
+  );
 
   // on user registration
   const onSignUp = useCallback(
@@ -154,7 +147,6 @@ export default function WelcomeScreen() {
 
       // extract validated user data
       const {
-
         // @ts-expect-error TS(2339): Property 'name' does not exist on type 'false | { ... Remove this comment to see the full error message
         name,
 
@@ -220,6 +212,8 @@ export default function WelcomeScreen() {
       } catch (error) {
         setAlert(true);
         console.log("error: ", { cause: error });
+        // @ts-expect-error TS(2345): Argument of type 'unknown' is not assignable to pa... Remove this comment to see the full error message
+
         setErrorFlag(error);
         return;
       }
@@ -231,10 +225,8 @@ export default function WelcomeScreen() {
   useEffect(() => {
     if (
       alert &&
-
       // @ts-expect-error TS(2339): Property 'toString' does not exist on type 'never'... Remove this comment to see the full error message
       (errorFlag?.toString()?.includes(errorMessages.signIn.logUsernameFlag) ||
-
         // @ts-expect-error TS(2339): Property 'toString' does not exist on type 'never'... Remove this comment to see the full error message
         errorFlag?.toString()?.includes(errorMessages.signIn.logPasswordFlag))
     ) {
@@ -246,7 +238,6 @@ export default function WelcomeScreen() {
       setCancelText(errorMessages.signIn.cancelText);
     } else if (
       alert &&
-
       // @ts-expect-error TS(2339): Property 'toString' does not exist on type 'never'... Remove this comment to see the full error message
       errorFlag?.toString()?.includes(errorMessages.network.logFlag)
     ) {
@@ -258,7 +249,6 @@ export default function WelcomeScreen() {
       setCancelText(errorMessages.network.cancelText);
     } else if (
       alert &&
-
       // @ts-expect-error TS(2339): Property 'toString' does not exist on type 'never'... Remove this comment to see the full error message
       errorFlag?.toString()?.includes(errorMessages.signUp.logFlag)
     ) {
@@ -280,7 +270,6 @@ export default function WelcomeScreen() {
 
   useEffect(() => {
     if (userProvince) {
-
       // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       setSelectedDistricts(districts[userProvince]);
     }
@@ -297,447 +286,319 @@ export default function WelcomeScreen() {
 
   //   console.log('Welcome Component: app is shifting from background to foreground and vice-versa');
 
-  return <>
-    <StatusBar style="auto" />
-    <SafeAreaView style={styles.loginContainer}>
-      <View
-        style={{
-          width: "100%",
-          borderBottomWidth: 1,
-          borderRightWidth: 1,
-          borderLeftWidth: 1,
-          borderColor: "#EBEBE4",
-          backgroundColor: "#EBEBE4",
-          borderBottomLeftRadius: wp("15%"),
-          borderBottomRightRadius: wp("15%"),
-          shadowColor: COLORS.main,
-          shadowOffset: {},
-        }}
-      >
-        <Box>
-          <Center w="100%" py="3">
-            <Image
-              style={{
-                width: 60,
-                height: 60,
-                borderRadius: 100,
-              }}
-              source={require("../../../assets/images/iamLogo2.png")}
-            />
-            <Text
-              style={{
-                color: COLORS.main,
-                fontSize: responsiveFontSize(2.5),
-                fontFamily: "JosefinSans-Bold",
-                textAlign: "center",
-              }}
-            >
-              IAM, IP
-            </Text>
-          </Center>
-        </Box>
-      </View>
-
-      <ScrollView
-        contentContainerStyle={{
-          minHeight: "100%",
-        }}
-      >
-        <Box my="6" pl="4">
-          {isLoggingIn ? (
-            <Box>
-              <Text style={styles.signInTitle}>Connect Caju</Text>
-            </Box>
-          ) : (
-            <Box
-              style={{
-                flexDirection: "row",
-              }}
-            >
-              <Icon
-                name="account-circle"
-                size={wp("10%")}
-                color={COLORS.main}
+  return (
+    <>
+      <StatusBar style="auto" />
+      <SafeAreaView style={styles.loginContainer}>
+        <View
+          style={{
+            width: "100%",
+            borderBottomWidth: 1,
+            borderRightWidth: 1,
+            borderLeftWidth: 1,
+            borderColor: "#EBEBE4",
+            backgroundColor: "#EBEBE4",
+            borderBottomLeftRadius: wp("15%"),
+            borderBottomRightRadius: wp("15%"),
+            shadowColor: COLORS.main,
+            shadowOffset: {},
+          }}
+        >
+          <Box>
+            <Center w="100%" py="3">
+              <Image
+                style={{
+                  width: 60,
+                  height: 60,
+                  borderRadius: 100,
+                }}
+                source={require("../../../assets/images/iamLogo2.png")}
               />
               <Text
                 style={{
-                  fontSize: responsiveFontSize(2.5),
                   color: COLORS.main,
+                  fontSize: responsiveFontSize(2.5),
                   fontFamily: "JosefinSans-Bold",
-                  paddingHorizontal: 10,
+                  textAlign: "center",
                 }}
               >
-                Novo usuário
+                IAM, IP
               </Text>
-            </Box>
-          )}
-        </Box>
+            </Center>
+          </Box>
+        </View>
 
-        <AwesomeAlert
-          show={alert}
-          showProgress={false}
-          title={titleAlert}
-          message={messageAlert}
-          closeOnTouchOutside={false}
-          closeOnHardwareBackPress={false}
-          showCancelButton={showCancelButton}
-          showConfirmButton={showConfirmButton}
-          cancelText={cancelText}
-          confirmText={confirmText}
-          cancelButtonColor={COLORS.danger}
-          confirmButtonColor={COLORS.main}
-          onCancelPressed={() => {
-            setAlert(false);
-            setErrorFlag(null);
-          }}
-          onConfirmPressed={() => {
-            setAlert(false);
-            if (isLoggingIn) {
-              // setIsLoggingIn(false);
-            } else if (passwordConfirm) {
-              //
-            } else {
-              setIsLoggingIn(true);
-              setEmail("");
-              setPassword("");
-            }
-            setErrorFlag(null);
-          }}
-        />
-
-        {/*------------------------------------
-        Data form (for signing in and up)
-      */}
-        <View
-          style={{
-            // flex: 1,
-            alignItems: "center",
-            justifyContent: "center",
-            width: "100%",
-            marginBottom: hp("10%"),
-            paddingTop: hp("5%"),
+        <ScrollView
+          contentContainerStyle={{
+            minHeight: "100%",
           }}
         >
-          <Stack space={1} w="90%" mx="auto">
-            {!isLoggingIn && (
-              <FormControl isRequired my="3" isInvalid={"name" in errors}>
-                <FormControl.Label>Nome Completo</FormControl.Label>
-                <CustomInput
-                  width="100%"
-                  autoFocus={!isLoggingIn ? false : false}
-                  placeholder="Nome completo"
-                  value={name}
-                  type="text"
-                  autoCapitalize="words"
-                  onChangeText={(newName: any) => {
-                    setErrors((prev) => ({ ...prev, name: "" }));
-                    setName(newName);
-                  }}
-                />
-                {"name" in errors ? (
-                  <FormControl.ErrorMessage
-                    leftIcon={
-                      <Icon name="error-outline" size={16} color="red" />
-                    }
-                    _text={{ fontSize: "xs" }}
-                  >
-                    {errors?.name}
-                  </FormControl.ErrorMessage>
-                ) : (
-                  <FormControl.HelperText></FormControl.HelperText>
-                )}
-              </FormControl>
-            )}
-
-            <FormControl isRequired isInvalid={"email" in errors}>
-              <FormControl.Label>{"Endereço Electrónico"}</FormControl.Label>
-              <CustomInput
-                width="100%"
-                placeholder={"Endereço Electrónico"}
-                type={"emailAddress"}
-                keyboardType={"email-address"}
-                value={email}
-                onChangeText={(value: any) => {
-                  setErrors((prev) => ({ ...prev, email: "" }));
-                  setEmail(value?.toLowerCase()?.trim());
+          <Box my="6" pl="4">
+            {isLoggingIn ? (
+              <Box>
+                <Text style={styles.signInTitle}>Connect Caju</Text>
+              </Box>
+            ) : (
+              <View
+                style={{
+                  flexDirection: "row",
                 }}
-                InputLeftElement={
-                  <Icon
-                    name="email"
-                    color="grey"
-                    style={{ paddingLeft: 3 }}
-                  />
-                }
-              />
-              {"email" in errors ? (
-                <FormControl.ErrorMessage
-                  leftIcon={
-                    <Icon name="error-outline" size={16} color="red" />
-                  }
-                  _text={{ fontSize: "xs" }}
+              >
+                <Icon
+                  name="account-circle"
+                  size={wp("10%")}
+                  color={COLORS.main}
+                />
+                <Text
+                  style={{
+                    fontSize: responsiveFontSize(2.5),
+                    color: COLORS.main,
+                    fontFamily: "JosefinSans-Bold",
+                    paddingHorizontal: 10,
+                  }}
                 >
-                  {errors?.email}
-                </FormControl.ErrorMessage>
-              ) : (
-                <FormControl.HelperText></FormControl.HelperText>
+                  Novo usuário
+                </Text>
+              </View>
+            )}
+          </Box>
+
+          <AwesomeAlert
+            show={alert}
+            showProgress={false}
+            title={titleAlert}
+            message={messageAlert}
+            closeOnTouchOutside={false}
+            closeOnHardwareBackPress={false}
+            showCancelButton={showCancelButton}
+            showConfirmButton={showConfirmButton}
+            cancelText={cancelText}
+            confirmText={confirmText}
+            cancelButtonColor={COLORS.danger}
+            confirmButtonColor={COLORS.main}
+            onCancelPressed={() => {
+              setAlert(false);
+              setErrorFlag(null);
+            }}
+            onConfirmPressed={() => {
+              setAlert(false);
+              if (isLoggingIn) {
+                // setIsLoggingIn(false);
+              } else if (passwordConfirm) {
+                //
+              } else {
+                setIsLoggingIn(true);
+                setEmail("");
+                setPassword("");
+              }
+              setErrorFlag(null);
+            }}
+          />
+
+          {/*------------------------------------
+        Data form (for signing in and up)
+      */}
+          <View
+            style={{
+              // flex: 1,
+              alignItems: "center",
+              justifyContent: "center",
+              width: "100%",
+              marginBottom: hp("10%"),
+              paddingTop: hp("5%"),
+            }}
+          >
+            <Stack space={1} w="90%" mx="auto">
+              {!isLoggingIn && (
+                <FormControl isRequired my="3" isInvalid={"name" in errors}>
+                  <FormControl.Label>Nome Completo</FormControl.Label>
+                  <CustomInput
+                    width="100%"
+                    autoFocus={!isLoggingIn ? false : false}
+                    placeholder="Nome completo"
+                    value={name}
+                    type="text"
+                    autoCapitalize="words"
+                    onChangeText={(newName: any) => {
+                      setErrors((prev) => ({ ...prev, name: "" }));
+                      setName(newName);
+                    }}
+                  />
+                  {"name" in errors ? (
+                    <FormControl.ErrorMessage
+                      leftIcon={
+                        <Icon name="error-outline" size={16} color="red" />
+                      }
+                      _text={{ fontSize: "xs" }}
+                    >
+                      {errors?.name}
+                    </FormControl.ErrorMessage>
+                  ) : (
+                    <FormControl.HelperText></FormControl.HelperText>
+                  )}
+                </FormControl>
               )}
-            </FormControl>
-            {isLoggingIn && (
-              <FormControl isRequired isInvalid={"password" in errors}>
-                <FormControl.Label>Senha</FormControl.Label>
+
+              <FormControl isRequired isInvalid={"email" in errors}>
+                <FormControl.Label>{"Endereço Electrónico"}</FormControl.Label>
                 <CustomInput
                   width="100%"
-                  placeholder="Senha"
-                  secureTextEntry={!showPassword ? true : false}
-                  value={password}
-                  onChangeText={(newPassword: any) => {
-                    setErrors((prev) => ({ ...prev, password: "" }));
-                    setPassword(newPassword);
+                  placeholder={"Endereço Electrónico"}
+                  type={"emailAddress"}
+                  keyboardType={"email-address"}
+                  value={email}
+                  onChangeText={(value: any) => {
+                    setErrors((prev) => ({ ...prev, email: "" }));
+                    setEmail(value?.toLowerCase()?.trim());
                   }}
-                  InputRightElement={
+                  InputLeftElement={
                     <Icon
-                      name={showPassword ? "visibility" : "visibility-off"}
-                      color={COLORS.grey}
-                      size={20}
-                      style={{ paddingRight: 5 }}
-                      type="material"
-                      onPress={() => setShowPassword((prev) => !prev)}
+                      name="email"
+                      color="grey"
+                      style={{ paddingLeft: 3 }}
                     />
                   }
                 />
-                {"password" in errors ? (
+                {"email" in errors ? (
                   <FormControl.ErrorMessage
                     leftIcon={
                       <Icon name="error-outline" size={16} color="red" />
                     }
                     _text={{ fontSize: "xs" }}
                   >
-                    {errors?.password}
+                    {errors?.email}
                   </FormControl.ErrorMessage>
                 ) : (
                   <FormControl.HelperText></FormControl.HelperText>
                 )}
               </FormControl>
-            )}
-            {!isLoggingIn && (
-              <Stack direction="row" w="100%" space={1}>
-                <Box w="50%">
-                  <FormControl
-                    isRequired
-                    my="3"
-                    isInvalid={"password" in errors}
-                  >
-                    <FormControl.Label>Senha</FormControl.Label>
-                    <CustomInput
-                      width="100%"
-                      placeholder="Senha"
-                      secureTextEntry={!showPassword ? true : false}
-                      value={password}
-                      onChangeText={(newPassword: any) => {
-                        setErrors((prev) => ({ ...prev, password: "" }));
-                        setPassword(newPassword);
-                      }}
-                      InputRightElement={
-                        <Icon
-                          name={
-                            showPassword ? "visibility" : "visibility-off"
-                          }
-                          color="grey"
-                          size={20}
-                          style={{ paddingRight: 5 }}
-                          type="material"
-                          onPress={() => setShowPassword((prev) => !prev)}
-                        />
+              {isLoggingIn && (
+                <FormControl isRequired isInvalid={"password" in errors}>
+                  <FormControl.Label>Senha</FormControl.Label>
+                  <CustomInput
+                    width="100%"
+                    placeholder="Senha"
+                    secureTextEntry={!showPassword ? true : false}
+                    value={password}
+                    onChangeText={(newPassword: any) => {
+                      setErrors((prev) => ({ ...prev, password: "" }));
+                      setPassword(newPassword);
+                    }}
+                    InputRightElement={
+                      <Icon
+                        name={showPassword ? "visibility" : "visibility-off"}
+                        color={COLORS.grey}
+                        size={20}
+                        style={{ paddingRight: 5 }}
+                        type="material"
+                        onPress={() => setShowPassword((prev) => !prev)}
+                      />
+                    }
+                  />
+                  {"password" in errors ? (
+                    <FormControl.ErrorMessage
+                      leftIcon={
+                        <Icon name="error-outline" size={16} color="red" />
                       }
-                    />
-                    {"password" in errors ? (
-                      <FormControl.ErrorMessage
-                        leftIcon={
-                          <Icon name="error-outline" size={16} color="red" />
-                        }
-                        _text={{ fontSize: "xs" }}
-                      >
-                        {errors?.password}
-                      </FormControl.ErrorMessage>
-                    ) : (
-                      <FormControl.HelperText></FormControl.HelperText>
-                    )}
-                  </FormControl>
-                </Box>
-
-                <Box w="50%">
-                  <FormControl
-                    isRequired
-                    my="3"
-                    isInvalid={"passwordConfirm" in errors}
-                  >
-                    <FormControl.Label>Confirmar Senha</FormControl.Label>
-                    <CustomInput
-                      width="100%"
-                      placeholder="Confirmar senha"
-                      secureTextEntry={!showPasswordConfirm ? true : false}
-                      value={passwordConfirm}
-                      onChangeText={(newPasswordConfirm: any) => {
-                        setErrors((prev) => ({
-                          ...prev,
-                          passwordConfirm: "",
-                        }));
-                        setPasswordConfirm(newPasswordConfirm);
-                      }}
-                      InputRightElement={
-                        <Icon
-                          name={
-                            showPasswordConfirm
-                              ? "visibility"
-                              : "visibility-off"
-                          }
-                          color={COLORS.grey}
-                          size={20}
-                          style={{ paddingRight: 5 }}
-                          type="material"
-                          onPress={() =>
-                            setShowPasswordConfirm((prev) => !prev)
-                          }
-                        />
-                      }
-                    />
-                    {"passwordConfirm" in errors ? (
-                      <FormControl.ErrorMessage
-                        leftIcon={
-                          <Icon name="error-outline" size={16} color="red" />
-                        }
-                        _text={{ fontSize: "xs" }}
-                      >
-                        {errors?.passwordConfirm}
-                      </FormControl.ErrorMessage>
-                    ) : (
-                      <FormControl.HelperText></FormControl.HelperText>
-                    )}
-                  </FormControl>
-                </Box>
-              </Stack>
-            )}
-            {!isLoggingIn && (
-              <Stack direction="row" w="100%" space={1}>
-                <Box w="100%">
-                  <FormControl
-                    isRequired
-                    my="3"
-                    isInvalid={"phone" in errors}
-                  >
-                    <FormControl.Label>Telemóvel</FormControl.Label>
-                    <CustomInput
-                      width="100%"
-                      type="telephoneNumber"
-                      placeholder="Telemóvel"
-                      keyboardType="phone-pad"
-                      value={phone}
-                      onChangeText={(newPhone: any) => {
-                        setErrors((prev) => ({ ...prev, phone: "" }));
-                        setPhone(newPhone);
-                      }}
-                      InputLeftElement={
-                        <Icon
-                          name="phone"
-                          color={COLORS.grey}
-                          size={30}
-                          type="material"
-                          onPress={() =>
-                            setShowPasswordConfirm((prev) => !prev)
-                          }
-                        />
-                      }
-                    />
-                    {"phone" in errors ? (
-                      <FormControl.ErrorMessage
-                        leftIcon={
-                          <Icon name="error-outline" size={16} color="red" />
-                        }
-                        _text={{ fontSize: "xs" }}
-                      >
-                        {errors?.phone}
-                      </FormControl.ErrorMessage>
-                    ) : (
-                      <FormControl.HelperText></FormControl.HelperText>
-                    )}
-                  </FormControl>
-                </Box>
-              </Stack>
-            )}
-            {!isLoggingIn && (
-              <>
-                <Stack direction="row" w="100%">
-                  <Box w="100%">
+                      _text={{ fontSize: "xs" }}
+                    >
+                      {errors?.password}
+                    </FormControl.ErrorMessage>
+                  ) : (
+                    <FormControl.HelperText></FormControl.HelperText>
+                  )}
+                </FormControl>
+              )}
+              {!isLoggingIn && (
+                <Stack direction="row" w="100%" space={1}>
+                  <Box w="50%">
                     <FormControl
                       isRequired
                       my="3"
-                      isInvalid={"role" in errors}
+                      isInvalid={"password" in errors}
                     >
-                      <FormControl.Label>Perfil</FormControl.Label>
-                      <Select
-                        selectedValue={role}
-
-                        // @ts-expect-error TS(2322): Type '{ children: Element[]; selectedValue: string... Remove this comment to see the full error message
-                        accessibilityLabel="Escolha seu perfil"
-                        placeholder="Escolha seu perfil"
-                        _selectedItem={{
-                          bg: "teal.600",
-                          fontSize: "lg",
-                          endIcon: <CheckIcon size="5" />,
+                      <FormControl.Label>Senha</FormControl.Label>
+                      <CustomInput
+                        width="100%"
+                        placeholder="Senha"
+                        secureTextEntry={!showPassword ? true : false}
+                        value={password}
+                        onChangeText={(newPassword: any) => {
+                          setErrors((prev) => ({ ...prev, password: "" }));
+                          setPassword(newPassword);
                         }}
-                        dropdownCloseIcon={
-                          role ? (
-                            <Icon
-                              name="close"
-                              size={25}
-                              color="grey"
-                              onPress={() => {
-                                setRole("");
-                              }}
-                            />
-                          ) : (
-                            <Icon
-                              size={25}
-                              name="arrow-drop-down"
-                              color="#005000"
-                            />
-                          )
+                        InputRightElement={
+                          <Icon
+                            name={
+                              showPassword ? "visibility" : "visibility-off"
+                            }
+                            color="grey"
+                            size={20}
+                            style={{ paddingRight: 5 }}
+                            type="material"
+                            onPress={() => setShowPassword((prev) => !prev)}
+                          />
                         }
-                        mt={1}
-                        onValueChange={(newRole) => {
-                          setErrors((prev) => ({ ...prev, role: "" }));
-                          setRole(newRole);
-                        }}
-                      >
-                        <Select.Item
-                          label={roles.fieldAgent}
-                          value={roles.fieldAgent}
-                        />
-                        <Select.Item
-                          label={roles.provincialManager}
-                          value={roles.provincialManager}
-                        />
-                        <Select.Item
-                          label={roles.coopManager}
-                          value={roles.coopManager}
-                        />
-                        <Select.Item
-                          label={roles.ampcmSupervisor}
-                          value={roles.ampcmSupervisor}
-                        />
-                      </Select>
-                      {"role" in errors ? (
+                      />
+                      {"password" in errors ? (
                         <FormControl.ErrorMessage
                           leftIcon={
-                            <Icon
-                              name="error-outline"
-                              size={16}
-                              color="red"
-                            />
+                            <Icon name="error-outline" size={16} color="red" />
                           }
                           _text={{ fontSize: "xs" }}
                         >
-                          {errors?.role}
+                          {errors?.password}
+                        </FormControl.ErrorMessage>
+                      ) : (
+                        <FormControl.HelperText></FormControl.HelperText>
+                      )}
+                    </FormControl>
+                  </Box>
+
+                  <Box w="50%">
+                    <FormControl
+                      isRequired
+                      my="3"
+                      isInvalid={"passwordConfirm" in errors}
+                    >
+                      <FormControl.Label>Confirmar Senha</FormControl.Label>
+                      <CustomInput
+                        width="100%"
+                        placeholder="Confirmar senha"
+                        secureTextEntry={!showPasswordConfirm ? true : false}
+                        value={passwordConfirm}
+                        onChangeText={(newPasswordConfirm: any) => {
+                          setErrors((prev) => ({
+                            ...prev,
+                            passwordConfirm: "",
+                          }));
+                          setPasswordConfirm(newPasswordConfirm);
+                        }}
+                        InputRightElement={
+                          <Icon
+                            name={
+                              showPasswordConfirm
+                                ? "visibility"
+                                : "visibility-off"
+                            }
+                            color={COLORS.grey}
+                            size={20}
+                            style={{ paddingRight: 5 }}
+                            type="material"
+                            onPress={() =>
+                              setShowPasswordConfirm((prev) => !prev)
+                            }
+                          />
+                        }
+                      />
+                      {"passwordConfirm" in errors ? (
+                        <FormControl.ErrorMessage
+                          leftIcon={
+                            <Icon name="error-outline" size={16} color="red" />
+                          }
+                          _text={{ fontSize: "xs" }}
+                        >
+                          {errors?.passwordConfirm}
                         </FormControl.ErrorMessage>
                       ) : (
                         <FormControl.HelperText></FormControl.HelperText>
@@ -745,116 +606,83 @@ export default function WelcomeScreen() {
                     </FormControl>
                   </Box>
                 </Stack>
-
-                <Stack
-                  direction="row"
-                  w="100%"
-                  space={role.includes(roles.provincialManager) ? 0 : 1}
-                >
-                  <Box
-                    w={
-                      role.includes(roles.provincialManager) ? "100%" : "50%"
-                    }
-                  >
+              )}
+              {!isLoggingIn && (
+                <Stack direction="row" w="100%" space={1}>
+                  <Box w="100%">
                     <FormControl
                       isRequired
                       my="3"
-                      isInvalid={"userProvince" in errors}
+                      isInvalid={"phone" in errors}
                     >
-                      <FormControl.Label>Província</FormControl.Label>
-                      <Select
-                        selectedValue={userProvince}
-
-                        // @ts-expect-error TS(2322): Type '{ children: Element[]; selectedValue: string... Remove this comment to see the full error message
-                        accessibilityLabel="Escolha sua província"
-                        placeholder="Escolha sua província"
-                        _selectedItem={{
-                          bg: "teal.600",
-                          fontSize: "lg",
-                          endIcon: <CheckIcon size="5" />,
+                      <FormControl.Label>Telemóvel</FormControl.Label>
+                      <CustomInput
+                        width="100%"
+                        type="telephoneNumber"
+                        placeholder="Telemóvel"
+                        keyboardType="phone-pad"
+                        value={phone}
+                        onChangeText={(newPhone: any) => {
+                          setErrors((prev) => ({ ...prev, phone: "" }));
+                          setPhone(newPhone);
                         }}
-                        dropdownCloseIcon={
-                          userProvince ? (
-                            <Icon
-                              name="close"
-                              size={25}
-                              color="grey"
-                              onPress={() => {
-                                if (!role.includes(roles.provincialManager)) {
-                                  setUserDistrict("");
-                                }
-                                setUserProvince("");
-                              }}
-                            />
-                          ) : (
-                            <Icon
-                              size={25}
-                              name="arrow-drop-down"
-                              color="#005000"
-                            />
-                          )
+                        InputLeftElement={
+                          <Icon
+                            name="phone"
+                            color={COLORS.grey}
+                            size={30}
+                            type="material"
+                            onPress={() =>
+                              setShowPasswordConfirm((prev) => !prev)
+                            }
+                          />
                         }
-                        mt={1}
-                        onValueChange={(newProvince) => {
-                          setErrors((prev) => ({ ...prev, userProvince: "" }));
-                          if (!role.includes(roles.provincialManager)) {
-                            setUserDistrict("");
-                          }
-                          setUserProvince(newProvince);
-                        }}
-                      >
-                        <Select.Item
-                          label="Cabo Delgado"
-                          value="Cabo Delgado"
-                        />
-                        <Select.Item label="Nampula" value="Nampula" />
-                        <Select.Item label="Niassa" value="Niassa" />
-                        <Select.Item label="Zambézia" value="Zambézia" />
-                      </Select>
-                      {"userProvince" in errors ? (
+                      />
+                      {"phone" in errors ? (
                         <FormControl.ErrorMessage
                           leftIcon={
-                            <Icon
-                              name="error-outline"
-                              size={16}
-                              color="red"
-                            />
+                            <Icon name="error-outline" size={16} color="red" />
                           }
                           _text={{ fontSize: "xs" }}
                         >
-                          {errors?.userProvince}
+                          {errors?.phone}
                         </FormControl.ErrorMessage>
                       ) : (
                         <FormControl.HelperText></FormControl.HelperText>
                       )}
                     </FormControl>
                   </Box>
-                  {!role.includes(roles.provincialManager) && (
-                    <Box w="50%">
+                </Stack>
+              )}
+              {!isLoggingIn && (
+                <>
+                  <Stack direction="row" w="100%">
+                    <Box w="100%">
                       <FormControl
                         isRequired
                         my="3"
-                        isInvalid={"userDistrict" in errors}
+                        isInvalid={"role" in errors}
                       >
-                        <FormControl.Label>Distrito</FormControl.Label>
+                        <FormControl.Label>Perfil</FormControl.Label>
                         <Select
-                          selectedValue={userDistrict}
-
+                          selectedValue={role}
                           // @ts-expect-error TS(2322): Type '{ children: Element[]; selectedValue: string... Remove this comment to see the full error message
-                          accessibilityLabel="Escolha seu distrito"
-                          placeholder="Escolha seu distrito"
+                          accessibilityLabel="Escolha seu perfil"
+                          placeholder="Escolha seu perfil"
                           _selectedItem={{
                             bg: "teal.600",
                             fontSize: "lg",
                             endIcon: <CheckIcon size="5" />,
                           }}
                           dropdownCloseIcon={
-                            userDistrict ? (
+                            role ? (
                               <Icon
                                 name="close"
                                 size={25}
                                 color="grey"
-                                onPress={() => setUserDistrict("")}
+                                onPress={() => {
+                                  setRole("");
+                                }}
                               />
                             ) : (
                               <Icon
@@ -865,23 +693,29 @@ export default function WelcomeScreen() {
                             )
                           }
                           mt={1}
-                          onValueChange={(newDistrict) => {
-                            setErrors((prev) => ({
-                              ...prev,
-                              userDistrict: "",
-                            }));
-                            setUserDistrict(newDistrict);
+                          onValueChange={(newRole) => {
+                            setErrors((prev) => ({ ...prev, role: "" }));
+                            setRole(newRole);
                           }}
                         >
-                          {selectedDistricts?.map((district, index) => (
-                            <Select.Item
-                              key={index}
-                              label={district}
-                              value={district}
-                            />
-                          ))}
+                          <Select.Item
+                            label={roles.fieldAgent}
+                            value={roles.fieldAgent}
+                          />
+                          <Select.Item
+                            label={roles.provincialManager}
+                            value={roles.provincialManager}
+                          />
+                          <Select.Item
+                            label={roles.coopManager}
+                            value={roles.coopManager}
+                          />
+                          <Select.Item
+                            label={roles.ampcmSupervisor}
+                            value={roles.ampcmSupervisor}
+                          />
                         </Select>
-                        {"userDistrict" in errors ? (
+                        {"role" in errors ? (
                           <FormControl.ErrorMessage
                             leftIcon={
                               <Icon
@@ -892,283 +726,443 @@ export default function WelcomeScreen() {
                             }
                             _text={{ fontSize: "xs" }}
                           >
-                            {errors?.userDistrict}
+                            {errors?.role}
                           </FormControl.ErrorMessage>
                         ) : (
                           <FormControl.HelperText></FormControl.HelperText>
                         )}
                       </FormControl>
                     </Box>
-                  )}
-                </Stack>
-              </>
-            )}
+                  </Stack>
 
-            {role.includes(roles.coopManager) &&
-              userDistrict &&
-              !isLoggingIn && (
-                <Stack direction="row" w="100%">
-                  <Box w="100%">
-                    <FormControl
-                      isRequired
-                      my="3"
-                      isInvalid={"coop" in errors}
+                  <Stack
+                    direction="row"
+                    w="100%"
+                    space={role.includes(roles.provincialManager) ? 0 : 1}
+                  >
+                    <Box
+                      w={
+                        role.includes(roles.provincialManager) ? "100%" : "50%"
+                      }
                     >
-                      <FormControl.Label>Nome da Entidade</FormControl.Label>
-                      <Select
-                        selectedValue={coop}
-
-                        // @ts-expect-error TS(2322): Type '{ children: any[]; selectedValue: string; ac... Remove this comment to see the full error message
-                        accessibilityLabel="Escolha sua entidade"
-                        placeholder="Escolha sua entidade"
-                        _selectedItem={{
-                          bg: "teal.600",
-                          fontSize: "lg",
-                          endIcon: <CheckIcon size="5" />,
-                        }}
-                        dropdownCloseIcon={
-                          coop ? (
-                            <Icon
-                              name="close"
-                              size={25}
-                              color="grey"
-                              onPress={() => {
-                                setCoop("");
-                              }}
-                            />
-                          ) : (
-                            <Icon
-                              size={25}
-                              name="arrow-drop-down"
-                              color="#005000"
-                            />
-                          )
-                        }
-                        mt={1}
-                        onValueChange={(newCoop) => {
-                          setErrors((prev) => ({ ...prev, coop: "" }));
-                          setCoop(newCoop);
-                        }}
+                      <FormControl
+                        isRequired
+                        my="3"
+                        isInvalid={"userProvince" in errors}
                       >
-                        {cooperatives[userDistrict]?.map((coop: any, index: any) => (
-                          <Select.Item key={coop} label={coop} value={coop} />
-                        ))}
-                      </Select>
-                      {"coop" in errors ? (
-                        <FormControl.ErrorMessage
-                          leftIcon={
-                            <Icon
-                              name="error-outline"
-                              size={16}
-                              color="red"
-                            />
+                        <FormControl.Label>Província</FormControl.Label>
+                        <Select
+                          selectedValue={userProvince}
+                          // @ts-expect-error TS(2322): Type '{ children: Element[]; selectedValue: string... Remove this comment to see the full error message
+                          accessibilityLabel="Escolha sua província"
+                          placeholder="Escolha sua província"
+                          _selectedItem={{
+                            bg: "teal.600",
+                            fontSize: "lg",
+                            endIcon: <CheckIcon size="5" />,
+                          }}
+                          dropdownCloseIcon={
+                            userProvince ? (
+                              <Icon
+                                name="close"
+                                size={25}
+                                color="grey"
+                                onPress={() => {
+                                  if (!role.includes(roles.provincialManager)) {
+                                    setUserDistrict("");
+                                  }
+                                  setUserProvince("");
+                                }}
+                              />
+                            ) : (
+                              <Icon
+                                size={25}
+                                name="arrow-drop-down"
+                                color="#005000"
+                              />
+                            )
                           }
-                          _text={{ fontSize: "xs" }}
+                          mt={1}
+                          onValueChange={(newProvince) => {
+                            setErrors((prev) => ({
+                              ...prev,
+                              userProvince: "",
+                            }));
+                            if (!role.includes(roles.provincialManager)) {
+                              setUserDistrict("");
+                            }
+                            setUserProvince(newProvince);
+                          }}
                         >
-                          {errors?.coop}
-                        </FormControl.ErrorMessage>
-                      ) : (
-                        <FormControl.HelperText></FormControl.HelperText>
-                      )}
-                    </FormControl>
-                  </Box>
-                </Stack>
+                          <Select.Item
+                            label="Cabo Delgado"
+                            value="Cabo Delgado"
+                          />
+                          <Select.Item label="Nampula" value="Nampula" />
+                          <Select.Item label="Niassa" value="Niassa" />
+                          <Select.Item label="Zambézia" value="Zambézia" />
+                        </Select>
+                        {"userProvince" in errors ? (
+                          <FormControl.ErrorMessage
+                            leftIcon={
+                              <Icon
+                                name="error-outline"
+                                size={16}
+                                color="red"
+                              />
+                            }
+                            _text={{ fontSize: "xs" }}
+                          >
+                            {errors?.userProvince}
+                          </FormControl.ErrorMessage>
+                        ) : (
+                          <FormControl.HelperText></FormControl.HelperText>
+                        )}
+                      </FormControl>
+                    </Box>
+                    {!role.includes(roles.provincialManager) && (
+                      <Box w="50%">
+                        <FormControl
+                          isRequired
+                          my="3"
+                          isInvalid={"userDistrict" in errors}
+                        >
+                          <FormControl.Label>Distrito</FormControl.Label>
+                          <Select
+                            selectedValue={userDistrict}
+                            // @ts-expect-error TS(2322): Type '{ children: Element[]; selectedValue: string... Remove this comment to see the full error message
+                            accessibilityLabel="Escolha seu distrito"
+                            placeholder="Escolha seu distrito"
+                            _selectedItem={{
+                              bg: "teal.600",
+                              fontSize: "lg",
+                              endIcon: <CheckIcon size="5" />,
+                            }}
+                            dropdownCloseIcon={
+                              userDistrict ? (
+                                <Icon
+                                  name="close"
+                                  size={25}
+                                  color="grey"
+                                  onPress={() => setUserDistrict("")}
+                                />
+                              ) : (
+                                <Icon
+                                  size={25}
+                                  name="arrow-drop-down"
+                                  color="#005000"
+                                />
+                              )
+                            }
+                            mt={1}
+                            onValueChange={(newDistrict) => {
+                              setErrors((prev) => ({
+                                ...prev,
+                                userDistrict: "",
+                              }));
+                              setUserDistrict(newDistrict);
+                            }}
+                          >
+                            {selectedDistricts?.map((district, index) => (
+                              <Select.Item
+                                key={index}
+                                label={district}
+                                value={district}
+                              />
+                            ))}
+                          </Select>
+                          {"userDistrict" in errors ? (
+                            <FormControl.ErrorMessage
+                              leftIcon={
+                                <Icon
+                                  name="error-outline"
+                                  size={16}
+                                  color="red"
+                                />
+                              }
+                              _text={{ fontSize: "xs" }}
+                            >
+                              {errors?.userDistrict}
+                            </FormControl.ErrorMessage>
+                          ) : (
+                            <FormControl.HelperText></FormControl.HelperText>
+                          )}
+                        </FormControl>
+                      </Box>
+                    )}
+                  </Stack>
+                </>
               )}
 
-            <Center w="100%" py="8">
-              <PrimaryButton  
-                onPress={async () => {
-                  setSigningInInProgress(true);
-                  if (isLoggingIn) {
-                    await onLogin(email, password);
-                  } else {
-                    await onSignUp(
-                      name,
-                      email,
-                      password,
-                      passwordConfirm,
-                      phone,
-                      role,
-                      userDistrict,
-                      userProvince,
-                      coop,
-                    );
-                  }
-                  setSigningInInProgress(false);
-                }}
-                disabled={(!email || !password || signingInInProgress) ? true : false}
-                title={isLoggingIn ? "Entrar" : "Registar-se"}
-              />
-             
-            </Center>
-          </Stack>
+              {role.includes(roles.coopManager) &&
+                userDistrict &&
+                !isLoggingIn && (
+                  <Stack direction="row" w="100%">
+                    <Box w="100%">
+                      <FormControl
+                        isRequired
+                        my="3"
+                        isInvalid={"coop" in errors}
+                      >
+                        <FormControl.Label>Nome da Entidade</FormControl.Label>
+                        <Select
+                          selectedValue={coop}
+                          // @ts-expect-error TS(2322): Type '{ children: any[]; selectedValue: string; ac... Remove this comment to see the full error message
+                          accessibilityLabel="Escolha sua entidade"
+                          placeholder="Escolha sua entidade"
+                          _selectedItem={{
+                            bg: "teal.600",
+                            fontSize: "lg",
+                            endIcon: <CheckIcon size="5" />,
+                          }}
+                          dropdownCloseIcon={
+                            coop ? (
+                              <Icon
+                                name="close"
+                                size={25}
+                                color="grey"
+                                onPress={() => {
+                                  setCoop("");
+                                }}
+                              />
+                            ) : (
+                              <Icon
+                                size={25}
+                                name="arrow-drop-down"
+                                color="#005000"
+                              />
+                            )
+                          }
+                          mt={1}
+                          onValueChange={(newCoop) => {
+                            setErrors((prev) => ({ ...prev, coop: "" }));
+                            setCoop(newCoop);
+                          }}
+                        >
+                          {cooperatives[userDistrict]?.map(
+                            (coop: any, index: any) => (
+                              <Select.Item
+                                key={coop}
+                                label={coop}
+                                value={coop}
+                              />
+                            ),
+                          )}
+                        </Select>
+                        {"coop" in errors ? (
+                          <FormControl.ErrorMessage
+                            leftIcon={
+                              <Icon
+                                name="error-outline"
+                                size={16}
+                                color="red"
+                              />
+                            }
+                            _text={{ fontSize: "xs" }}
+                          >
+                            {errors?.coop}
+                          </FormControl.ErrorMessage>
+                        ) : (
+                          <FormControl.HelperText></FormControl.HelperText>
+                        )}
+                      </FormControl>
+                    </Box>
+                  </Stack>
+                )}
 
-          <Stack w="100%" direction="row" pb="8">
-            {isLoggingIn && (
-              <Box alignItems="center" w="100%" pt="-3">
-                <Box
-
-                  // @ts-expect-error TS(2322): Type '{ children: Element; style: { paddingTop: nu... Remove this comment to see the full error message
-                  style={{
-                    paddingTop: 10,
-                    paddingBottom: 20,
-                  }}
-                >
-                  <Pressable
-                    disabled
-                    onPress={
-                      // toggleBottomSheet
-                      () => { }
+              <Center w="100%" py="8">
+                <PrimaryButton
+                  onPress={async () => {
+                    setSigningInInProgress(true);
+                    if (isLoggingIn) {
+                      await onLogin(email, password);
+                    } else {
+                      await onSignUp(
+                        name,
+                        email,
+                        password,
+                        passwordConfirm,
+                        phone,
+                        role,
+                        userDistrict,
+                        userProvince,
+                        coop,
+                      );
                     }
-                  >
-                    <Text
-                      style={{
-                        fontFamily: "JosefinSans-Regular",
-                        color: COLORS.grey,
-                      }}
-                    >
-                      Esqueceu senha?
-                    </Text>
-                  </Pressable>
-                </Box>
-
-                <Box
-                  px={5}
-
-                  // @ts-expect-error TS(2322): Type '{ children: Element[]; px: number; style: { ... Remove this comment to see the full error message
-                  style={{
-                    flexDirection: "row",
+                    setSigningInInProgress(false);
                   }}
-                >
-                  <Text
+                  disabled={
+                    !email || !password || signingInInProgress ? true : false
+                  }
+                  title={isLoggingIn ? "Entrar" : "Registar-se"}
+                />
+              </Center>
+            </Stack>
+
+            <Stack w="100%" direction="row" pb="8">
+              {isLoggingIn && (
+                <Box alignItems="center" w="100%" pt="-3">
+                  <Box
+                    // @ts-expect-error TS(2322): Type '{ children: Element; style: { paddingTop: nu... Remove this comment to see the full error message
                     style={{
-                      textAlign: "center",
-                      fontSize: 16,
-                      color: COLORS.grey,
-                      fontFamily: "JosefinSans-Regular",
-                      marginHorizontal: 5,
+                      paddingTop: 10,
+                      paddingBottom: 20,
                     }}
                   >
-                    Ainda não tem conta?
-                  </Text>
-                  <Pressable
-                    onPress={() => {
-                      setLoadingActivityIndicator(true);
-                      setIsLoggingIn((prevState) => !prevState);
+                    <Pressable
+                      disabled
+                      onPress={
+                        // toggleBottomSheet
+                        () => {}
+                      }
+                    >
+                      <Text
+                        style={{
+                          fontFamily: "JosefinSans-Regular",
+                          color: COLORS.grey,
+                        }}
+                      >
+                        Esqueceu senha?
+                      </Text>
+                    </Pressable>
+                  </Box>
+
+                  <Box
+                    px={5}
+                    // @ts-expect-error TS(2322): Type '{ children: Element[]; px: number; style: { ... Remove this comment to see the full error message
+                    style={{
+                      flexDirection: "row",
                     }}
                   >
                     <Text
                       style={{
                         textAlign: "center",
                         fontSize: 16,
-                        color: COLORS.main,
+                        color: COLORS.grey,
                         fontFamily: "JosefinSans-Regular",
                         marginHorizontal: 5,
                       }}
                     >
-                      Criar conta
+                      Ainda não tem conta?
                     </Text>
-                  </Pressable>
+                    <Pressable
+                      onPress={() => {
+                        setLoadingActivityIndicator(true);
+                        setIsLoggingIn((prevState) => !prevState);
+                      }}
+                    >
+                      <Text
+                        style={{
+                          textAlign: "center",
+                          fontSize: 16,
+                          color: COLORS.main,
+                          fontFamily: "JosefinSans-Regular",
+                          marginHorizontal: 5,
+                        }}
+                      >
+                        Criar conta
+                      </Text>
+                    </Pressable>
+                  </Box>
                 </Box>
-              </Box>
-            )}
+              )}
 
-            {!isLoggingIn && (
-              <Box alignItems="center" w="100%" pt="-3">
-                <Box
-                  px={5}
-
-                  // @ts-expect-error TS(2322): Type '{ children: Element[]; px: number; style: { ... Remove this comment to see the full error message
-                  style={{
-                    flexDirection: "row",
-                  }}
-                >
-                  <Text
+              {!isLoggingIn && (
+                <Box alignItems="center" w="100%" pt="-3">
+                  <Box
+                    px={5}
+                    // @ts-expect-error TS(2322): Type '{ children: Element[]; px: number; style: { ... Remove this comment to see the full error message
                     style={{
-                      textAlign: "center",
-                      fontSize: 16,
-                      color: COLORS.grey,
-                      fontFamily: "JosefinSans-Regular",
-                      marginHorizontal: 5,
-                    }}
-                  >
-                    Já tem conta?
-                  </Text>
-                  <Pressable
-                    onPress={() => {
-                      setLoadingActivityIndicator(true);
-                      setIsLoggingIn((prevState) => !prevState);
+                      flexDirection: "row",
                     }}
                   >
                     <Text
                       style={{
                         textAlign: "center",
                         fontSize: 16,
-                        color: COLORS.main,
+                        color: COLORS.grey,
                         fontFamily: "JosefinSans-Regular",
-                        textDecoration: "underline",
+                        marginHorizontal: 5,
                       }}
                     >
-                      Fazer Login
+                      Já tem conta?
                     </Text>
-                  </Pressable>
+                    <Pressable
+                      onPress={() => {
+                        setLoadingActivityIndicator(true);
+                        setIsLoggingIn((prevState) => !prevState);
+                      }}
+                    >
+                      <Text
+                        style={{
+                          textAlign: "center",
+                          fontSize: 16,
+                          color: COLORS.main,
+                          fontFamily: "JosefinSans-Regular",
+                          textDecoration: "underline",
+                        }}
+                      >
+                        Fazer Login
+                      </Text>
+                    </Pressable>
+                  </Box>
                 </Box>
-              </Box>
-            )}
-          </Stack>
-        </View>
-      </ScrollView>
+              )}
+            </Stack>
+          </View>
+        </ScrollView>
 
-      <BottomSheet
-        isVisible={bottomSheetVisible}
-        onBackdropPress={toggleBottomSheet}
-        containerStyle={
-          {
-            // backgroundColor: COLORS.fourth,
-            // height: "50%",
+        <BottomSheet
+          isVisible={bottomSheetVisible}
+          onBackdropPress={toggleBottomSheet}
+          containerStyle={
+            {
+              // backgroundColor: COLORS.fourth,
+              // height: "50%",
+            }
           }
-        }
-      >
-        <View
-          style={{
-            backgroundColor: COLORS.fourth,
-            paddingVertical: 20,
-            paddingHorizontal: 10,
-            height: 250,
-          }}
         >
-          {/* <OTPInputField /> */}
-          <Text
-            style={{
-              fontSize: 18,
-              color: COLORS.grey,
-              fontFamily: "JosefinSans-Regular",
-              paddingBottom: 20,
-            }}
-          >
-            Número de telefone
-          </Text>
           <View
             style={{
-              paddingVertical: 10,
-              justifyContent: "center",
-              alignItems: "center",
+              backgroundColor: COLORS.fourth,
+              paddingVertical: 20,
+              paddingHorizontal: 10,
+              height: 250,
             }}
           >
-            <TextInput
+            {/* <OTPInputField /> */}
+            <Text
               style={{
-                borderWidth: 1,
-                borderColor: COLORS.fourth,
-                width: 300,
-                borderRadius: 5,
-                backgroundColor: COLORS.ghostwhite,
+                fontSize: 18,
+                color: COLORS.grey,
+                fontFamily: "JosefinSans-Regular",
+                paddingBottom: 20,
               }}
+            >
+              Número de telefone
+            </Text>
+            <View
+              style={{
+                paddingVertical: 10,
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <TextInput
+                style={{
+                  borderWidth: 1,
+                  borderColor: COLORS.fourth,
+                  width: 300,
+                  borderRadius: 5,
+                  backgroundColor: COLORS.ghostwhite,
+                }}
 
-            // onFocus={}
-            />
+                // onFocus={}
+              />
+            </View>
           </View>
-        </View>
-      </BottomSheet>
-    </SafeAreaView>
-  </>;
+        </BottomSheet>
+      </SafeAreaView>
+    </>
+  );
 }

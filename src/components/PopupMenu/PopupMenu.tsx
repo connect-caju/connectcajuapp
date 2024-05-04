@@ -9,19 +9,13 @@ import {
   TouchableOpacity,
   Modal,
   SafeAreaView,
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
+
 } from "react-native"
-import { Stack, Box, Center } from "native-base"
-import CustomDivider from "../Divider/CustomDivider"
+
 
 import { useRef, useState } from "react"
-import { useNavigation } from "@react-navigation/native"
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome"
-import {
-  faEllipsisVertical,
-  faEye,
-  faPeopleGroup,
-} from "@fortawesome/free-solid-svg-icons"
+
+
 import COLORS from "../../consts/colors"
 
 export function PopupMenu({

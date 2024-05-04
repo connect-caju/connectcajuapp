@@ -1,8 +1,3 @@
-/* eslint-disable prettier/prettier */
-/* eslint-disable quotes */
-/* eslint-disable prettier/prettier */
-
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
@@ -33,9 +28,7 @@ const styles = StyleSheet.create({
     color: "red",
   },
   icon: {
-    // position: 'absolute',
-    // right: 3,
-    // bottom: 5,
+
   },
 });
 

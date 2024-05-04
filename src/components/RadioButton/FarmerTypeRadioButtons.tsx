@@ -55,11 +55,6 @@ const FarmerTypeRadioButtons = ({ farmerType, setFarmerType }: any) => {
 
   return (
     <View
-      // style={{
-      //   marginVertical: 10,
-      //   flexDirection: "row",
-      //   justifyContent: "space-around",
-      // }}
       className="my-4 flex flex-row justify-around"
     >
       <FlatList

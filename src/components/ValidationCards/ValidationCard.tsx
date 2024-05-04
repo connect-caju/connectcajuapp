@@ -1,18 +1,8 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable linebreak-style */
-/* eslint-disable prettier/prettier */
 
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
-import { View, Text, Pressable, } from "react-native";
+import { View, Text, Pressable, ScrollView, Dimensions } from "react-native";
 import React, { useState, } from "react";
 import Modal from "react-native-modal";
 import COLORS from "../../consts/colors";
-
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
-import { Dimensions } from "react-native";
-
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
-import { ScrollView } from "react-native";
 import { Icon } from "@rneui/base";
 import tw from "twrnc";
 
@@ -117,11 +107,7 @@ const ValidationCard = ({
                     className="h-20 p-2 bg-[#EBEBE4] dark:bg-gray-800"
                 >
                     <Text
-                        style={{
-                            // fontSize: 18,
-                            // color: COLORS.black,
-                            // fontFamily: "JosefinSans-Bold",
-                        }}
+
                         className="font-semibold text-gray-500 text-lg"
                     >
                         Conferir Registo

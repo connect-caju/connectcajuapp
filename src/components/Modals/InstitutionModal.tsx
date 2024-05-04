@@ -10,21 +10,10 @@ import styles from "./styles";
 
 import "react-native-get-random-values";
 import { v4 as uuidv4 } from "uuid";
-import Realm from "realm";
-
-import SuccessModal from "./SuccessModal";
-
-// @ts-expect-error TS(2307): Cannot find module '../../helpers/generateUUID' or... Remove this comment to see the full error message
-import { generateUUID } from "../../helpers/generateUUID";
-import { generateFormattedDate } from "../../helpers/generateFormattedDate";
-import { generateFormattedAdminPost } from "../../helpers/generateFormattedAdminPost";
-import { generateFormattedSurname } from "../../helpers/generateFormattedSurname";
 import { useNavigation } from "@react-navigation/native";
-import { user } from "../../consts/user";
 
 import { realmContext } from "../../models/realmContext";
 import COLORS from "../../consts/colors";
-import { generateUniqueNumber } from "../../helpers/generateUniqueNumber";
 import PrimaryButton from "../Buttons/PrimaryButton";
 const { useRealm, useObject, useQuery } = realmContext;
 
@@ -126,11 +115,8 @@ export default function InstitutionModal({
   );
 
   return (
-    // <View>
+
     <Modal
-      // visible={modalVisible}
-      // onRequestClose={() => setModalVisible(false)}
-      // animationType="slide"
       isVisible={modalVisible}
       supportedOrientations={["portrait", "landscape"]}
       propagateSwipe
@@ -138,7 +124,6 @@ export default function InstitutionModal({
       animationInTiming={600}
       animationOut={"zoomOut"}
       swipeDirection={["left", "right"]}
-      // animationOutTiming={600}
       hideModalContentWhileAnimating={true}
       swipeThreshold={1000}
     >
@@ -201,10 +186,7 @@ export default function InstitutionModal({
               //   cancelText="No, cancel"
               confirmText="   OK!   "
               confirmButtonColor="#005000"
-              //   onCancelPressed={() => {
-              //     setGeoAlert(false);
-              //   }}
-              onConfirmPressed={() => {
+                onConfirmPressed={() => {
                 setSuccessAlert(false);
               }}
             />

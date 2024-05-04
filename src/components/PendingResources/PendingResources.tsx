@@ -1,18 +1,11 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable linebreak-style */
-/* eslint-disable prettier/prettier */
 
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { View, Text, TextInput } from "react-native";
 import React, { useEffect, useCallback, useMemo, useRef, } from "react";
 
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { FlatList } from "react-native";
-import COLORS from "../../consts/colors";
 import InfoIcon from "../LottieComponents/InfoIcon";
 import { customizeItem } from "../../helpers/customizeItem";
 import { farmerTypes } from "../../consts/farmerTypes";
-import PendingFarmerItem from "./PendingItem";
 import { resourceValidation } from "../../consts/resourceValidation";
 
 import { realmContext } from "../../models/realmContext";

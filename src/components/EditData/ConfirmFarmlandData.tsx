@@ -243,24 +243,7 @@ const ConfirmFarmlandData = ({
 
           }}
         >
-          {/* <View
-            style={{
-              width: "100%",
-              // backgroundColor: COLORS.main,
-            }}
-          >
-            <Text
-              style={{
-                textAlign: "center",
-                color: COLORS.black,
-                fontSize: 16,
-                paddingVertical: 5,
-                fontFamily: "JosefinSans-Bold",
-              }}
-            >
-              {ownerName}
-            </Text>
-          </View> */}
+      
           <View
             style={{
               backgroundColor: COLORS.main,
@@ -291,7 +274,6 @@ const ConfirmFarmlandData = ({
               // @ts-expect-error TS(2322): Type '{ children: Element[]; style: { paddingBotto... Remove this comment to see the full error message
               style={{
                 paddingBottom: 30,
-                // alignItems: 'center',
               }}
             >
               <Text
@@ -2303,8 +2285,6 @@ const ConfirmFarmlandData = ({
                 resourceName,
               );
             } catch (error) {
-
-              // @ts-expect-error TS(2584): Cannot find name 'console'. Do you need to change ... Remove this comment to see the full error message
               console.log("Could not update data", { cause: error });
             } finally {
               setIsConfirmDataVisible(false);
@@ -2316,21 +2296,5 @@ const ConfirmFarmlandData = ({
   );
 };
 
-const styles = StyleSheet.create({
-  button: {
-    margin: 10,
-  },
-  textPrimary: {
-    marginVertical: 20,
-    textAlign: "center",
-    fontSize: 20,
-  },
-  textSecondary: {
-    marginBottom: 10,
-    textAlign: "center",
-    //   color: 'ghostwhite',
-    fontSize: 17,
-  },
-});
 
 export default ConfirmFarmlandData;

@@ -5,7 +5,6 @@ import {
   ScrollView,
   TouchableWithoutFeedback,
   Keyboard,
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 } from "react-native"
 import COLORS from "../../consts/colors"
 

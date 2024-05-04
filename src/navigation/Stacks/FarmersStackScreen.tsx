@@ -1,6 +1,3 @@
-/* eslint-disable linebreak-style */
-/* eslint-disable prettier/prettier */
-/* eslint-disable prettier/prettier */
 
 import React, { useState, useEffect, } from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -49,8 +46,6 @@ export default function FarmersStackScreen({
       <FarmersStack.Screen name="FarmerForm1" component={FarmerRegistration} />
       <FarmersStack.Screen
         name="FarmlandForm1"
-
-        // @ts-expect-error TS(2322): Type '({ route, navigation }: any) => Element | un... Remove this comment to see the full error message
         component={FarmlandRegistration}
       />
       <FarmersStack.Screen

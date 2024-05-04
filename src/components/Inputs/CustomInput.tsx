@@ -1,6 +1,3 @@
-/* eslint-disable prettier/prettier */
-/* eslint-disable no-unused-vars */
-/* eslint-disable prettier/prettier */
 
 import React from "react"
 import {
@@ -9,9 +6,8 @@ import {
   TextInput,
   StyleSheet,
   TouchableOpacity,
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
+
 } from "react-native"
-// import { Icon } from '@rneui/themed';
 import { Input, Box, Stack } from "native-base"
 
 import styles from "./styles"

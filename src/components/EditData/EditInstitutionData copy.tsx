@@ -6,7 +6,6 @@ import {
   ScrollView,
   TextInput,
   View,
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 } from "react-native"
 import { Overlay, Icon, Button, CheckBox } from "@rneui/base"
 import {
@@ -19,18 +18,7 @@ import {
   Radio,
 } from "native-base"
 
-
-// @ts-expect-error TS(2307): Cannot find module './ConfirmDataCopy' or its corr... Remove this comment to see the full error message
-import ConfirmData from "./ConfirmDataCopy"
 import COLORS from "../../consts/colors"
-import CustomActivityIndicator from "../ActivityIndicator/CustomActivityIndicator"
-
-import administrativePosts from "../../consts/administrativePosts"
-import provinces from "../../consts/provinces"
-import districts from "../../consts/districts"
-import villages from "../../consts/villages"
-import countries from "../../consts/countries"
-import idDocTypes from "../../consts/idDocTypes"
 import { CustomInput } from "../Inputs/CustomInput"
 import validateInstitutionEditedData from "../../helpers/validateInstitutionEditedData"
 
@@ -250,13 +238,6 @@ const EditInstitutionData = ({
           fadingEdgeLength={2}
           keyboardDismissMode="on-drag"
           keyboardShouldPersistTaps="handled"
-          style={
-            {
-              // flex: 1,
-              // minHeight: '100%',
-              // marginVertical: 10,
-            }
-          }
         >
           {dataToBeUpdated === "institutionManager" &&
             resourceName === "Institution" && (
@@ -288,8 +269,6 @@ const EditInstitutionData = ({
                       }
                       _text={{ fontSize: "xs" }}
                     >
-                      // @ts-expect-error TS(2339): Property 'institutionManagerName' does not exist o... Remove this comment to see the full error message
-                      // @ts-expect-error TS(2339): Property 'institutionManagerName' does not exist o... Remove this comment to see the full error message
                       {errors?.institutionManagerName}
                     </FormControl.ErrorMessage>
                   ) : (
@@ -335,8 +314,6 @@ const EditInstitutionData = ({
                       }
                       _text={{ fontSize: "xs" }}
                     >
-                      // @ts-expect-error TS(2339): Property 'institutionManagerPhone' does not exist ... Remove this comment to see the full error message
-                      // @ts-expect-error TS(2339): Property 'institutionManagerPhone' does not exist ... Remove this comment to see the full error message
                       {errors?.institutionManagerPhone}
                     </FormControl.ErrorMessage>
                   ) : (
@@ -373,8 +350,6 @@ const EditInstitutionData = ({
                       }
                       _text={{ fontSize: "xs" }}
                     >
-                      // @ts-expect-error TS(2339): Property 'institutionNuit' does not exist on type ... Remove this comment to see the full error message
-                      // @ts-expect-error TS(2339): Property 'institutionNuit' does not exist on type ... Remove this comment to see the full error message
                       {errors?.institutionNuit}
                     </FormControl.ErrorMessage>
                   ) : (
@@ -408,8 +383,6 @@ const EditInstitutionData = ({
                       }
                       _text={{ fontSize: "xs" }}
                     >
-                      // @ts-expect-error TS(2339): Property 'institutionLicence' does not exist on ty... Remove this comment to see the full error message
-                      // @ts-expect-error TS(2339): Property 'institutionLicence' does not exist on ty... Remove this comment to see the full error message
                       {errors?.institutionLicence}
                     </FormControl.ErrorMessage>
                   ) : (

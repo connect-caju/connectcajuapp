@@ -1,8 +1,3 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable prettier/prettier */
-/* eslint-disable linebreak-style */
-
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { View, Text, Image, } from "react-native";
 import React from "react";
 import CustomDivider from "../Divider/CustomDivider";
@@ -37,8 +32,6 @@ const FarmlandDetails = ({
                         height: 150,
                         resizeMode: "cover",
                     }}
-
-                    // @ts-expect-error TS(2591): Cannot find name 'require'. Do you need to install... Remove this comment to see the full error message
                     source={require("../../../assets/images/plot1.jpg")}
                 />
                 <View
@@ -135,20 +128,6 @@ const FarmlandDetails = ({
                         <Text>{resource?.description}</Text>
                     </Box>
                     <View style={{ width: 10, }} />
-                    {/* <Box
-                        w="45%"
-                        style={{
-                            justifyContent: "flex-start",
-                        }}
-                    >
-                        <Text
-                            style={{
-                                fontFamily: "JosefinSans-Bold",
-                                color: COLORS.black,
-                            }}
-                        >Posto Administrativo:</Text>
-                        <Text>{resource?.address?.adminPost}</Text>
-                    </Box> */}
                 </Box>
             </View>
 
@@ -391,20 +370,6 @@ const FarmlandDetails = ({
                         <Text>{resource?.consociatedCrops.join("; ")}</Text>
                     </Box>
                     <View style={{ width: 10, }} />
-                    {/* <Box
-                        w="45%"
-                        style={{
-                            justifyContent: "flex-start",
-                        }}
-                    >
-                        <Text
-                            style={{
-                                fontFamily: "JosefinSans-Bold",
-                                color: COLORS.black,
-                            }}
-                        >Área Aproveitada:</Text>
-                        <Text>{calculateFarmlandUsedArea(resource)} hectares</Text>
-                    </Box> */}
                 </Box>
             </View>
             <CustomDivider />

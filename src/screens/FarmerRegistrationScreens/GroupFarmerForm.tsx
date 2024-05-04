@@ -1,13 +1,10 @@
 import { Text, SafeAreaView, ScrollView, TextInput, View } from "react-native";
 import React, { useState, useEffect } from "react";
 import {
-  Box,
+
   FormControl,
-  Stack,
   Select,
   CheckIcon,
-  Center,
-  Radio,
 } from "native-base";
 import { Icon, Button, CheckBox } from "@rneui/themed";
 import {
@@ -21,7 +18,6 @@ import CustomDivider from "../../components/Divider/CustomDivider";
 import styles from "./styles";
 
 import {
-  fullYears,
   getFullYears,
   getFullYears2,
   localeDateService,
@@ -576,8 +572,8 @@ export default function GroupFarmerForm({
             </View>
           </View>
 
-          <View className="flex flex-row w-full items-center justify-center ">
-            <View className="w-1/2 mr-1">
+          <View className="flex flex-row w-full space-x-2 justify-center ">
+            <View className="w-1/2">
               <FormControl
                 my="1"
                 isInvalid={
@@ -616,8 +612,9 @@ export default function GroupFarmerForm({
               </FormControl>
             </View>
 
-            <View className="w-1/2 ml-1">
+            <View className="w-1/2">
               <FormControl
+              my="1"
                 isInvalid={
                   groupLegalStatus === groupAffiliationStatus.affiliated &&
                   "groupNuel" in errors
@@ -662,8 +659,8 @@ export default function GroupFarmerForm({
         <Text style={styles.formSectionDescription}>Endereço e Contacto</Text>
       </View>
 
-      <View className="flex flex-row w-full justify-center items-center">
-        <View className="w-1/2 mr-1">
+      <View className="flex flex-row w-full justify-center space-x-2">
+        <View className="w-1/2">
           <FormControl isRequired my="1" isInvalid={"groupAdminPost" in errors}>
             <InputLabel label="Posto Administrativo" />
             <Select
@@ -708,7 +705,7 @@ export default function GroupFarmerForm({
           </FormControl>
         </View>
         
-        <View className="w-1/2 ml-1">
+        <View className="w-1/2">
           <FormControl isRequired my="1">
             <InputLabel 
               label="Localidade"

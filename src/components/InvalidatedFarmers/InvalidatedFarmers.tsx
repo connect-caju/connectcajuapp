@@ -1,22 +1,13 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable linebreak-style */
-/* eslint-disable prettier/prettier */
 
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { View, Text } from "react-native";
 import React, { useEffect } from "react";
 import { realmContext } from "../../models/realmContext";
 import { useUser } from "@realm/react";
 import { customizeItem } from "../../helpers/customizeItem";
-
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { FlatList } from "react-native";
 import GroupItem from "../GroupItem/GroupItem";
 import FarmerItem from "../FarmerItem/FarmerItem";
 import InstitutionItem from "../InstitutionItem/InstitutionItem";
-import COLORS from "../../consts/colors";
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { faCheck, faCheckCircle, faInfo, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import InfoIcon from "../LottieComponents/InfoIcon";
 import Info from "../Info/Info";
 const { useRealm } = realmContext;

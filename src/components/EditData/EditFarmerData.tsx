@@ -470,8 +470,6 @@ const EditFarmerData = ({
                             }
                             _text={{ fontSize: "xs" }}
                           >
-                            // @ts-expect-error TS(2339): Property 'docType' does not exist on type '{}'.
-                            // @ts-expect-error TS(2339): Property 'docType' does not exist on type '{}'.
                             {errors?.docType}
                           </FormControl.ErrorMessage>
                         ) : (
@@ -520,8 +518,6 @@ const EditFarmerData = ({
                               }
                               _text={{ fontSize: "xs" }}
                             >
-                              // @ts-expect-error TS(2339): Property 'docNumber' does not exist on type '{}'.
-                              // @ts-expect-error TS(2339): Property 'docNumber' does not exist on type '{}'.
                               {errors?.docNumber}
                             </FormControl.ErrorMessage>
                           ) : (
@@ -564,8 +560,6 @@ const EditFarmerData = ({
                             }
                             _text={{ fontSize: "xs" }}
                           >
-                            // @ts-expect-error TS(2339): Property 'nuit' does not exist on type '{}'.
-                            // @ts-expect-error TS(2339): Property 'nuit' does not exist on type '{}'.
                             {errors?.nuit}
                           </FormControl.ErrorMessage>
                         ) : (
@@ -629,8 +623,6 @@ const EditFarmerData = ({
                           }
                           _text={{ fontSize: "xs" }}
                         >
-                          // @ts-expect-error TS(2339): Property 'primaryPhone' does not exist on type '{}... Remove this comment to see the full error message
-                          // @ts-expect-error TS(2339): Property 'primaryPhone' does not exist on type '{}... Remove this comment to see the full error message
                           {errors?.primaryPhone}
                         </FormControl.ErrorMessage>
                       ) : (
@@ -691,8 +683,7 @@ const EditFarmerData = ({
                           }
                           _text={{ fontSize: "xs" }}
                         >
-                          // @ts-expect-error TS(2339): Property 'secondaryPhone' does not exist on type '... Remove this comment to see the full error message
-                          // @ts-expect-error TS(2339): Property 'secondaryPhone' does not exist on type '... Remove this comment to see the full error message
+
                           {errors?.secondaryPhone}
                         </FormControl.ErrorMessage>
                       ) : (
@@ -771,8 +762,6 @@ const EditFarmerData = ({
                           }));
                         }}
                       >
-                        // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-                        // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
                         {administrativePosts[address?.addressDistrict]?.map(
                           (adminPost: any, index: any) => (
                             <Select.Item
@@ -790,8 +779,6 @@ const EditFarmerData = ({
                           }
                           _text={{ fontSize: "xs" }}
                         >
-                          // @ts-expect-error TS(2339): Property 'addressAdminPost' does not exist on type... Remove this comment to see the full error message
-                          // @ts-expect-error TS(2339): Property 'addressAdminPost' does not exist on type... Remove this comment to see the full error message
                           {errors?.addressAdminPost}
                         </FormControl.ErrorMessage>
                       ) : (
@@ -856,8 +843,6 @@ const EditFarmerData = ({
                           }));
                         }}
                       >
-                        // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-                        // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
                         {villages[address?.addressAdminPost]?.map(
                           (village: any, index: any) => (
                             <Select.Item
@@ -875,8 +860,6 @@ const EditFarmerData = ({
                           }
                           _text={{ fontSize: "xs" }}
                         >
-                          // @ts-expect-error TS(2339): Property 'addressVillage' does not exist on type '... Remove this comment to see the full error message
-                          // @ts-expect-error TS(2339): Property 'addressVillage' does not exist on type '... Remove this comment to see the full error message
                           {errors?.addressVillage}
                         </FormControl.ErrorMessage>
                       ) : (

@@ -6,7 +6,6 @@ import {
   ScrollView,
   TextInput,
   View,
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 } from "react-native"
 import { Overlay, Icon, Button, CheckBox } from "@rneui/base"
 import {
@@ -23,16 +22,7 @@ import {
   SelectList,
 } from "react-native-dropdown-select-list"
 
-import ConfirmData from "./ConfirmData"
 import COLORS from "../../consts/colors"
-import CustomActivityIndicator from "../ActivityIndicator/CustomActivityIndicator"
-
-import administrativePosts from "../../consts/administrativePosts"
-import provinces from "../../consts/provinces"
-import districts from "../../consts/districts"
-import villages from "../../consts/villages"
-import countries from "../../consts/countries"
-import idDocTypes from "../../consts/idDocTypes"
 import { CustomInput } from "../Inputs/CustomInput"
 import {
 
@@ -161,15 +151,6 @@ const EditGroupData = ({
       setOldGroupGoals(resource?.assets?.map((asset: any) => asset.subcategory))
     }
 
-    // if (dataToBeUpdated === 'groupManager' && resourceName === 'Group'){
-    //     setGroupManagerName(resource?.manager.fullname);
-    //     setGroupManagerPhone(resource?.manager.phone);
-    //     setOverlayTitle('Actualizar Contacto.');
-
-    //     setOldGroupManagerName(resource?.manager.fullname);
-    //     setOldGroupManagerPhone(resource?.manager.phone);
-    // }
-
     if (dataToBeUpdated === "groupMembers" && resourceName === "Group") {
       setIsGroupActive(resource?.operationalStatus ? true : false)
       setIsGroupInactive(!resource?.operationalStatus ? true : false)
@@ -236,9 +217,6 @@ const EditGroupData = ({
         groupWomenNumber,
         oldGroupWomenNumber,
 
-        // user chaning group contact
-        // groupManagerName, oldGroupManagerName,
-        // groupManagerPhone, oldGroupManagerPhone,
       },
       errors,
       setErrors,
@@ -509,32 +487,7 @@ const EditGroupData = ({
                   }}
                 />
 
-                {/* <Select
-                selectedValue={groupType}
-                accessibilityLabel="Grupo"
-                placeholder="Tipo de organização "
-                minHeight={55}
-                _selectedItem={{
-                    bg: 'teal.600',
-                    fontSize: 'lg',
-                    endIcon: <CheckIcon size="5" />,
-                }}
-                mt={1}
-                dropdownCloseIcon={groupType 
-                                    ? <Icon name="close" size={25} color="grey" onPress={()=>setGroupType('')} /> 
-                                    : <Icon size={45} name="arrow-drop-down" color={COLORS.pantone} />
-                                }
-                onValueChange={newGroupType => {
-                    setErrors((prev)=>({...prev, groupType: ''}));
-                    setGroupType(newGroupType)
-                }}
-            >
-                {
-                    groups?.map((group, index)=>(
-                    <Select.Item key={index} label={group} value={group} />
-                ))  
-                }
-            </Select> */}
+  
                 {"groupType" in errors ? (
                   <FormControl.ErrorMessage
                     leftIcon={
@@ -542,8 +495,6 @@ const EditGroupData = ({
                     }
                     _text={{ fontSize: "xs" }}
                   >
-                    // @ts-expect-error TS(2339): Property 'groupType' does not exist on type '{}'.
-                    // @ts-expect-error TS(2339): Property 'groupType' does not exist on type '{}'.
                     {errors?.groupType}
                   </FormControl.ErrorMessage>
                 ) : (
@@ -571,8 +522,6 @@ const EditGroupData = ({
                     }
                     _text={{ fontSize: "xs" }}
                   >
-                    // @ts-expect-error TS(2339): Property 'groupName' does not exist on type '{}'.
-                    // @ts-expect-error TS(2339): Property 'groupName' does not exist on type '{}'.
                     {errors?.groupName}
                   </FormControl.ErrorMessage>
                 ) : (
@@ -632,8 +581,6 @@ const EditGroupData = ({
                     }
                     _text={{ fontSize: "xs" }}
                   >
-                    // @ts-expect-error TS(2339): Property 'groupGoals' does not exist on type '{}'.
-                    // @ts-expect-error TS(2339): Property 'groupGoals' does not exist on type '{}'.
                     {errors?.groupGoals}
                   </FormControl.ErrorMessage>
                 ) : (
@@ -696,8 +643,6 @@ const EditGroupData = ({
                     }
                     _text={{ fontSize: "xs" }}
                   >
-                    // @ts-expect-error TS(2339): Property 'groupCreationYear' does not exist on typ... Remove this comment to see the full error message
-                    // @ts-expect-error TS(2339): Property 'groupCreationYear' does not exist on typ... Remove this comment to see the full error message
                     {errors?.groupCreationYear}
                   </FormControl.ErrorMessage>
                 ) : (
@@ -769,8 +714,6 @@ const EditGroupData = ({
                     }
                     _text={{ fontSize: "xs" }}
                   >
-                    // @ts-expect-error TS(2339): Property 'groupLegalStatus' does not exist on type... Remove this comment to see the full error message
-                    // @ts-expect-error TS(2339): Property 'groupLegalStatus' does not exist on type... Remove this comment to see the full error message
                     {errors?.groupLegalStatus}
                   </FormControl.ErrorMessage>
                 ) : (
@@ -838,8 +781,6 @@ const EditGroupData = ({
                         }
                         _text={{ fontSize: "xs" }}
                       >
-                        // @ts-expect-error TS(2339): Property 'groupAffiliationYear' does not exist on ... Remove this comment to see the full error message
-                        // @ts-expect-error TS(2339): Property 'groupAffiliationYear' does not exist on ... Remove this comment to see the full error message
                         {errors?.groupAffiliationYear}
                       </FormControl.ErrorMessage>
                     ) : (
@@ -874,8 +815,6 @@ const EditGroupData = ({
                         }
                         _text={{ fontSize: "xs" }}
                       >
-                        // @ts-expect-error TS(2339): Property 'groupOperatingLicence' does not exist on... Remove this comment to see the full error message
-                        // @ts-expect-error TS(2339): Property 'groupOperatingLicence' does not exist on... Remove this comment to see the full error message
                         {errors?.groupOperatingLicence}
                       </FormControl.ErrorMessage>
                     ) : (
@@ -904,8 +843,6 @@ const EditGroupData = ({
                         }
                         _text={{ fontSize: "xs" }}
                       >
-                        // @ts-expect-error TS(2339): Property 'groupNuit' does not exist on type '{}'.
-                        // @ts-expect-error TS(2339): Property 'groupNuit' does not exist on type '{}'.
                         {errors?.groupNuit}
                       </FormControl.ErrorMessage>
                     ) : (
@@ -1019,8 +956,6 @@ const EditGroupData = ({
                     }
                     _text={{ fontSize: "xs" }}
                   >
-                    // @ts-expect-error TS(2339): Property 'operationalStatus' does not exist on typ... Remove this comment to see the full error message
-                    // @ts-expect-error TS(2339): Property 'operationalStatus' does not exist on typ... Remove this comment to see the full error message
                     {errors?.operationalStatus}
                   </FormControl.ErrorMessage>
                 ) : (
@@ -1054,8 +989,6 @@ const EditGroupData = ({
                     }
                     _text={{ fontSize: "xs" }}
                   >
-                    // @ts-expect-error TS(2339): Property 'groupMembersNumber' does not exist on ty... Remove this comment to see the full error message
-                    // @ts-expect-error TS(2339): Property 'groupMembersNumber' does not exist on ty... Remove this comment to see the full error message
                     {errors?.groupMembersNumber}
                   </FormControl.ErrorMessage>
                 ) : (
@@ -1085,8 +1018,6 @@ const EditGroupData = ({
                     }
                     _text={{ fontSize: "xs" }}
                   >
-                    // @ts-expect-error TS(2339): Property 'groupWomenNumber' does not exist on type... Remove this comment to see the full error message
-                    // @ts-expect-error TS(2339): Property 'groupWomenNumber' does not exist on type... Remove this comment to see the full error message
                     {errors?.groupWomenNumber}
                   </FormControl.ErrorMessage>
                 ) : (
@@ -1096,61 +1027,7 @@ const EditGroupData = ({
             </Stack>
           )}
 
-          {
-            //     (dataToBeUpdated === 'groupManager' && resourceName === 'Group') &&
-            //     <Stack direction="column">
-            //       <FormControl isRequired my="1" isInvalid={'groupManagerName' in errors}>
-            //         <FormControl.Label>Nome do Presidente</FormControl.Label>
-            //         <CustomInput
-            //             width="100%"
-            //             type="text"
-            //             autoCapitalize="words"
-            //             placeholder="Nome completo do Presidente"
-            //             value={groupManagerName}
-            //             onChangeText={newManagerName=>{
-            //                 setErrors(prev=>({...prev, groupManagerName: ''}))
-            //                 setGroupManagerName(newManagerName)
-            //             }}
-            //         />
-            //         {
-            //         'groupManagerName' in errors
-            //         ? <FormControl.ErrorMessage
-            //         leftIcon={<Icon name="error-outline" size={16} color="red" />}
-            //         _text={{ fontSize: 'xs'}}>{errors?.groupManagerName}</FormControl.ErrorMessage>
-            //         : <FormControl.HelperText></FormControl.HelperText>
-            //         }
-            //     </FormControl>
-            //     <FormControl  isInvalid={'groupManagerPhone' in errors}>
-            //         <FormControl.Label>Telemóvel do Presidente</FormControl.Label>
-            //         <CustomInput
-            //             width="100%"
-            //             type="telephoneNumber"
-            //             placeholder={groupManagerPhone ? groupManagerPhone.toString() : 'Nenhum'}
-            //             keyboardType="numeric"
-            //             value={groupManagerPhone ? groupManagerPhone?.toString() : ''}
-            //             onChangeText={newManagerPhone=>{
-            //                 setErrors((prev)=>({...prev, groupManagerPhone: ''}))
-            //                 setGroupManagerPhone(newManagerPhone);
-            //             }}
-            //             InputLeftElement={
-            //                 <Icon
-            //                     name="phone"
-            //                     color="grey"
-            //                     size={25}
-            //                     type="material"
-            //                 />
-            //             }
-            //         />
-            //         {
-            //         'groupManagerPhone' in errors
-            //         ? <FormControl.ErrorMessage
-            //         leftIcon={<Icon name="error-outline" size={16} color="red" />}
-            //         _text={{ fontSize: 'xs'}}>{errors?.groupManagerPhone}</FormControl.ErrorMessage>
-            //         : <FormControl.HelperText></FormControl.HelperText>
-            //         }
-            //     </FormControl>
-            // </Stack>
-          }
+      
 
           <Button
             title="Confirmar Dados"

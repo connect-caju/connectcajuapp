@@ -1,6 +1,3 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable linebreak-style */
-/* eslint-disable prettier/prettier */
 import React, { useEffect, useState } from "react";
 import {
   View,
@@ -9,9 +6,8 @@ import {
   FlatList,
   TouchableOpacity,
   TextInput,
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
+  Pressable,
 } from "react-native";
-import { Box, Center, Pressable, Stack } from "native-base";
 
 import {
   widthPercentageToDP as wp,
@@ -30,9 +26,6 @@ import { roles } from "../../consts/roles";
 import { Icon } from "@rneui/base";
 import {
   faEllipsisVertical,
-  // faInstitution,
-  // faPeopleGroup,
-  // faPerson,
   faSearch,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
@@ -74,10 +67,7 @@ const filterByCriteria = [
   },
 ];
 
-const FarmersListScreen = ({
-  route,
-  navigation
-}: any) => {
+const FarmersListScreen = ({ route, navigation }: any) => {
   const realm = useRealm();
   const user = useUser();
   let customUserData = user.customData;
@@ -172,7 +162,6 @@ const FarmersListScreen = ({
   const [searchQuery, setSearchQuery] = useState("");
   const [foundFarmersList, setFoundFarmersList] = useState([]);
 
-
   // // This state will be used to toggle between showing all items and only showing the current user's items
   // // This is initialized based on which subscription is already active
 
@@ -251,7 +240,10 @@ const FarmersListScreen = ({
             { name: districtInstitutionFarmers },
           );
         });
-      } else if (farmerType === farmerTypes.institution && focusedOption === 2) {
+      } else if (
+        farmerType === farmerTypes.institution &&
+        focusedOption === 2
+      ) {
         realm.subscriptions.update((mutableSubs) => {
           mutableSubs.removeByName(invalidatedInstitutionFarmers);
           mutableSubs.add(
@@ -259,7 +251,10 @@ const FarmersListScreen = ({
             { name: invalidatedInstitutionFarmers },
           );
         });
-      } else if (farmerType === farmerTypes.institution && focusedOption === 3) {
+      } else if (
+        farmerType === farmerTypes.institution &&
+        focusedOption === 3
+      ) {
         realm.subscriptions.update((mutableSubs) => {
           mutableSubs.removeByName(districtInstitutionFarmers);
           mutableSubs.add(
@@ -318,7 +313,9 @@ const FarmersListScreen = ({
       setFoundFarmersList(
         farmersRegisteredByUser.filter((item: any) => {
           if (farmerType?.includes(farmerTypes.farmer)) {
-            return item.name?.toLowerCase()?.includes(searchQuery.toLowerCase());
+            return item.name
+              ?.toLowerCase()
+              ?.includes(searchQuery.toLowerCase());
           } else if (farmerType?.includes(farmerTypes.group)) {
             return (
               item.name?.toLowerCase()?.includes(searchQuery.toLowerCase()) ||
@@ -341,8 +338,6 @@ const FarmersListScreen = ({
   const handleEndReached = () => {
     if (!isEndReached && !isLoading) {
       setIsLoading(true);
-
-      // @ts-expect-error TS(2304): Cannot find name 'setTimeout'.
       setTimeout(() => {
         setIsLoading(false);
       }, 2000);
@@ -388,9 +383,7 @@ const FarmersListScreen = ({
                 alignItems: "center",
               }}
             >
-              <View
-                style={{ }}
-              >
+              <View style={{}}>
                 <Text
                   style={{
                     fontFamily: "JosefinSans-Bold",
@@ -401,8 +394,8 @@ const FarmersListScreen = ({
                   {farmerType === farmerTypes.group
                     ? "Organizações"
                     : farmerType === farmerTypes.farmer
-                      ? "Produtores"
-                      : "Instituições"}{" "}
+                    ? "Produtores"
+                    : "Instituições"}{" "}
                 </Text>
               </View>
               <View
@@ -425,10 +418,7 @@ const FarmersListScreen = ({
                     icon={faSearch}
                     size={25}
                     color={COLORS.black}
-
-                    // @ts-expect-error TS(2322): Type '{ icon: IconDefinition; size: number; color:... Remove this comment to see the full error message
-                    fade
-                  />
+                     />
                 </TouchableOpacity>
                 <View style={{ width: 6 }} />
                 <TouchableOpacity
@@ -439,16 +429,12 @@ const FarmersListScreen = ({
                     backgroundColor: COLORS.lightgrey,
                     padding: 6,
                   }}
-                  onPress={() => {
-                  }}
+                  onPress={() => {}}
                 >
                   <FontAwesomeIcon
                     icon={faEllipsisVertical}
                     size={25}
                     color={COLORS.black}
-
-                    // @ts-expect-error TS(2322): Type '{ icon: IconDefinition; size: number; color:... Remove this comment to see the full error message
-                    fade
                   />
                 </TouchableOpacity>
               </View>
@@ -456,11 +442,10 @@ const FarmersListScreen = ({
             <CustomDivider thickness={1} color={COLORS.lightgrey} />
           </>
         ) : (
-          <Stack direction="row" w="100%">
-            <Center w="10%">
+          <View className="w-full">
+            <View >
               <Pressable
 
-                // @ts-expect-error TS(2322): Type '{ children: Element; onPress: () => void; st... Remove this comment to see the full error message
                 onPress={() => {
                   if (isSearching) {
                     setIsSearching(false);
@@ -481,15 +466,9 @@ const FarmersListScreen = ({
                   size={wp("8%")}
                 />
               </Pressable>
-            </Center>
-            <Box
-              w="90%"
-
-              // @ts-expect-error TS(2322): Type '{ children: Element; w: "90%"; style: { alig... Remove this comment to see the full error message
-              style={{
-                alignItems: "center",
-                justifyContent: "center",
-              }}
+            </View>
+            <View
+              className="flex flex-1 justify-center items-center"
             >
               <TextInput
                 autoFocus={isSearching ? true : false}
@@ -508,14 +487,12 @@ const FarmersListScreen = ({
                   borderColor: COLORS.white,
                 }}
                 value={searchQuery}
-                onFocus={() => {
-                }}
-                onEndEditing={() => {
-                }}
+                onFocus={() => {}}
+                onEndEditing={() => {}}
                 onChangeText={(text: any) => setSearchQuery(text)}
               />
-            </Box>
-          </Stack>
+            </View>
+          </View>
         )}
 
         {!isSearching && (
@@ -534,9 +511,7 @@ const FarmersListScreen = ({
               // ListHeaderComponent={<View style={{ width: 6, }} />}
               snapToInterval={86}
               decelerationRate="fast"
-              renderItem={({
-                item
-              }: any) => {
+              renderItem={({ item }: any) => {
                 return (
                   <TouchableOpacity
                     style={{
@@ -581,40 +556,24 @@ const FarmersListScreen = ({
       </View>
 
       {farmersRegisteredByUser?.length > 0 && searchQuery.length === 0 ? (
-        <Box
-          alignItems="stretch"
-          w="100%"
-
-          // @ts-expect-error TS(2322): Type '{ children: Element; alignItems: "stretch"; ... Remove this comment to see the full error message
-          style={{
-            marginVertical: 7,
-            // marginTop: 10,
-          }}
-        >
+        <View className="my-6">
           <FlatList
             StickyHeaderComponent={() => (
-              <Box
-
-                // @ts-expect-error TS(2322): Type '{ children: never[]; style: { height: number... Remove this comment to see the full error message
+              <View
                 style={{
                   height: hp("10%"),
                   justifyContent: "center",
                   alignItems: "center",
                 }}
-              >
-                {/* <Text>Hello! Here is the sticky header!</Text> */}
-              </Box>
+              />
             )}
             stickyHeaderHiddenOnScroll={true}
             data={farmersRegisteredByUser}
             keyExtractor={keyExtractor}
             onEndReached={handleEndReached}
             onEndReachedThreshold={0.1}
-
             // @ts-expect-error TS(7030): Not all code paths return a value.
-            renderItem={({
-              item
-            }: any) => {
+            renderItem={({ item }: any) => {
               // add all the IDs to each item to allow swiping between screens...
               // when the user open any item from the list
               item.farmersIDs = farmersIDs;
@@ -636,132 +595,94 @@ const FarmersListScreen = ({
             ListFooterComponent={() => {
               if (!isEndReached) {
                 return (
-                  <Box
-
-                    // @ts-expect-error TS(2322): Type '{ style: { backgroundColor: string; paddingB... Remove this comment to see the full error message
+                  <View
                     style={{
                       // height: 10,
                       backgroundColor: COLORS.ghostwhite,
                       paddingBottom: 15,
                       marginBottom: 100,
                     }}
-                  ></Box>
+                  />
                 );
               }
               return null;
             }}
           />
-        </Box>
-      ) :
-        isSearching && searchQuery.length > 0 ? (
-          <Box
-            alignItems="stretch"
-            w="100%"
-
-            // @ts-expect-error TS(2322): Type '{ children: Element; alignItems: "stretch"; ... Remove this comment to see the full error message
-            style={{
-              marginVertical: 7,
-              // marginTop: 10,
-            }}
-          >
-            <FlatList
-              StickyHeaderComponent={() => (
-                <Box
-
-                  // @ts-expect-error TS(2322): Type '{ children: never[]; style: { height: number... Remove this comment to see the full error message
-                  style={{
-                    height: hp("10%"),
-                    justifyContent: "center",
-                    alignItems: "center",
-                  }}
-                >
-                  {/* <Text>Hello! Here is the sticky header!</Text> */}
-                </Box>
-              )}
-              stickyHeaderHiddenOnScroll={true}
-              data={foundFarmersList}
-              keyExtractor={keyExtractor}
-              onEndReached={handleEndReached}
-              onEndReachedThreshold={0.1}
-
-              // @ts-expect-error TS(7030): Not all code paths return a value.
-              renderItem={({
-                item
-              }: any) => {
-                if (item.flag === farmerTypes.group) {
-                  return <GroupItem route={route} item={item} />;
-                } else if (item.flag === farmerTypes.farmer) {
-                  return (
-                    <FarmerItem
-                      route={route}
-                      navigation={navigation}
-                      item={item}
-                    />
-                  );
-                } else if (item.flag === farmerTypes.institution) {
-                  return <InstitutionItem route={route} item={item} />;
-                }
-              }}
-              ListFooterComponent={() => {
-                if (!isEndReached) {
-                  return (
-                    <Box
-
-                      // @ts-expect-error TS(2322): Type '{ style: { backgroundColor: string; paddingB... Remove this comment to see the full error message
-                      style={{
-                        // height: 10,
-                        backgroundColor: COLORS.ghostwhite,
-                        paddingBottom: 15,
-                        marginBottom: 100,
-                      }}
-                    ></Box>
-                  );
-                }
-                return null;
-              }}
-            />
-          </Box>
-        ) : (
-          <Box
-
-            // @ts-expect-error TS(2322): Type '{ children: Element; style: { justifyContent... Remove this comment to see the full error message
-            style={{
-              justifyContent: "center",
-              alignItems: "center",
-              height: "100%",
-            }}
-          >
-            <Text
-              style={{
-                color: COLORS.grey,
-                fontSize: 16,
-                fontFamily: "JosefinSans-Bold",
-                marginHorizontal: 40,
-                lineHeight: 22,
-                textAlign: "center",
-              }}
-            >
-              Nenhum registo de
-              {farmerType === farmerTypes.group
-                ? " organizações"
-                : farmerType === farmerTypes.farmer
-                  ? " produtores"
-                  : " instituições"}{" "}
-              foi encontrado!
-            </Text>
-          </Box>
-        )}
-
-      {foundFarmersList.length === 0 && searchQuery.length > 0 && (
-        <Box
-
-          // @ts-expect-error TS(2322): Type '{ children: Element; style: { justifyContent... Remove this comment to see the full error message
+        </View>
+      ) : isSearching && searchQuery.length > 0 ? (
+        <View
+          alignItems="stretch"
+          w="100%"
           style={{
-            justifyContent: "center",
-            alignItems: "center",
-            //  height: '50%',
+            marginVertical: 7,
+            // marginTop: 10,
           }}
         >
+          <FlatList
+            StickyHeaderComponent={() => (
+              <View
+                style={{
+                  height: hp("10%"),
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+              </View>
+            )}
+            stickyHeaderHiddenOnScroll={true}
+            data={foundFarmersList}
+            keyExtractor={keyExtractor}
+            onEndReached={handleEndReached}
+            onEndReachedThreshold={0.1}
+            // @ts-expect-error TS(7030): Not all code paths return a value.
+            renderItem={({ item }: any) => {
+              if (item.flag === farmerTypes.group) {
+                return <GroupItem route={route} item={item} />;
+              } else if (item.flag === farmerTypes.farmer) {
+                return (
+                  <FarmerItem
+                    route={route}
+                    navigation={navigation}
+                    item={item}
+                  />
+                );
+              } else if (item.flag === farmerTypes.institution) {
+                return <InstitutionItem route={route} item={item} />;
+              }
+            }}
+            ListFooterComponent={() => {
+              if (!isEndReached) {
+                return (
+                  <View
+                    style={{
+                      // height: 10,
+                      backgroundColor: COLORS.ghostwhite,
+                      paddingBottom: 15,
+                      marginBottom: 100,
+                    }}
+                  ></View>
+                );
+              }
+              return null;
+            }}
+          />
+        </View>
+      ) : (
+        <View className="flex justify-center items-center h-full">
+          <Text className="text-black text-center leading-6 mx-10 text-xl">
+            Nenhum registo de
+            {farmerType === farmerTypes.group
+              ? " organizações"
+              : farmerType === farmerTypes.farmer
+              ? " produtores"
+              : " instituições"}{" "}
+            foi encontrado!
+          </Text>
+        </View>
+      )}
+
+      {foundFarmersList.length === 0 && searchQuery.length > 0 && (
+        <View className="flex justify-center items-center h-full">
           <Text
             style={{
               color: COLORS.grey,
@@ -776,11 +697,11 @@ const FarmersListScreen = ({
             {farmerType === farmerTypes.group
               ? " organizações"
               : farmerType === farmerTypes.farmer
-                ? " produtores"
-                : " instituições"}{" "}
+              ? " produtores"
+              : " instituições"}{" "}
             foi encontrado!
           </Text>
-        </Box>
+        </View>
       )}
     </SafeAreaView>
   );

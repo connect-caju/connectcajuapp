@@ -7,26 +7,14 @@ import {
   Image,
   TouchableOpacity,
   StyleSheet,
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 } from "react-native"
 import React, { useCallback, useState, useEffect, useRef } from "react"
 import { Box, Stack, Center } from "native-base"
 import { Icon, Overlay } from "@rneui/themed"
 import { useFocusEffect } from "@react-navigation/native"
-// import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
-
 import COLORS from "../../consts/colors"
 import CustomActivityIndicator from "../../components/ActivityIndicator/CustomActivityIndicator"
-import { months } from "../../helpers/dates"
-import CustomDivider from "../../components/Divider/CustomDivider"
-import PhotoModal from "../Modals/PhotoModal"
-import { roles } from "../../consts/roles"
-import { secrets } from "../../secrets"
-import { errorMessages } from "../../consts/errorMessages"
-
-import AwesomeAlert from "react-native-awesome-alerts"
 import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps"
-import Geocoder from "react-native-geocoding"
 
 import { useUser, useApp } from "@realm/react"
 import { realmContext } from "../../models/realmContext"
@@ -36,11 +24,6 @@ const styles = StyleSheet.create({
   container: {
     ...StyleSheet.absoluteFillObject,
     flex: 1,
-    // backgroundColor: COLORS.black,
-    // height: '80%',
-    // width: '100%',
-    // justifyContent: 'flex-end',
-    // alignItems: 'center',
   },
   map: {
     ...StyleSheet.absoluteFillObject,
@@ -230,15 +213,7 @@ export default function MapModal({
   const realm = useRealm()
   const mapRef = useRef()
 
-  //-----------------------------------------------------
-  const [titleAlert, setTitleAlert] = useState("")
-  const [messageAlert, setMessageAlert] = useState("")
-  const [showCancelButton, setShowCancelButton] = useState(false)
-  const [showConfirmButton, setShowConfirmButtom] = useState(false)
-  const [confirmText, setConfirmText] = useState("")
-  const [cancelText, setCancelText] = useState("")
-  const [alert, setAlert] = useState(false)
-  // ----------------------------------------------------
+
 
   const [loadingActivitiyIndicator, setLoadingActivityIndicator] =
     useState(false)

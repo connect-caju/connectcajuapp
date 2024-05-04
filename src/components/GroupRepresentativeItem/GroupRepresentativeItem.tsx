@@ -1,8 +1,3 @@
-/* eslint-disable linebreak-style */
-/* eslint-disable react/prop-types */
-/* eslint-disable prettier/prettier */
-/* eslint-disable react-native/no-inline-styles */
-/* eslint-disable prettier/prettier */
 import {
   FlatList,
   InteractionManager,
@@ -18,32 +13,12 @@ import {
   SectionList,
   ActivityIndicator,
   Platform,
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 } from "react-native";
 import React, { useEffect, useRef, useState, useCallback } from "react";
 import { ListItem, Avatar, Icon, SearchBar } from "@rneui/themed";
 import { Box, Center, Pressable, Stack } from "native-base";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
-
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'uuid... Remove this comment to see the full error message
 import { v4 as uuidv4 } from "uuid";
-
-import {
-  widthPercentageToDP as wp,
-  heightPercentageToDP as hp,
-  listenOrientationChange as lor,
-  removeOrientationListener as rol,
-} from "react-native-responsive-screen";
-
-import {
-  responsiveFontSize,
-  responsiveScreenFontSize,
-  responsiveHeight,
-  responsiveWidth,
-  responsiveScreenHeight,
-  responsiveScreenWidth,
-  useDimensionsChange,
-} from "react-native-responsive-dimensions";
 import Animated, {
   Layout,
   LightSpeedInLeft,
@@ -51,7 +26,6 @@ import Animated, {
 } from "react-native-reanimated";
 import Toast from "react-native-toast-message";
 
-// import CustomActivityIndicator from '../../components/ActivityIndicator/CustomActivityIndicator';
 import COLORS from "../../consts/colors";
 
 import { realmContext } from "../../models/realmContext";

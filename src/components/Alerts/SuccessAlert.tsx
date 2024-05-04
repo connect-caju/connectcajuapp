@@ -1,12 +1,7 @@
-/* eslint-disable linebreak-style */
-/* eslint-disable react/prop-types */
-/* eslint-disable prettier/prettier */
 import { useNavigation } from "@react-navigation/native";
 import { Center, Alert, Stack, Box } from "native-base";
 import React, { useState } from "react";
 import { Icon, CheckBox } from "@rneui/themed";
-
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { Button, Text, View, Pressable, TouchableOpacity } from "react-native";
 import COLORS from "../../consts/colors";
 import Modal from "react-native-modal";

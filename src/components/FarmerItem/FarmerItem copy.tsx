@@ -1,5 +1,3 @@
-
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { TouchableOpacity, View, Text } from "react-native"
 import React, { useState, useEffect } from "react"
 import { Icon, Avatar } from "@rneui/themed"
@@ -12,12 +10,6 @@ import {
 
 import {
   responsiveFontSize,
-  responsiveScreenFontSize,
-  responsiveHeight,
-  responsiveWidth,
-  responsiveScreenHeight,
-  responsiveScreenWidth,
-  useDimensionsChange,
 } from "react-native-responsive-dimensions"
 import Animated, {
   Layout,
@@ -32,11 +24,10 @@ import COLORS from "../../consts/colors"
 import { months } from "../../helpers/dates"
 import { resourceValidation } from "../../consts/resourceValidation"
 
-import { useUser } from "@realm/react"
+
 import { realmContext } from "../../models/realmContext"
 const { useRealm, useQuery, useObject } = realmContext
 
-const subScribedFarmlands = "subScribedFarmlands"
 
 const FarmerItem = ({
   item,
@@ -45,8 +36,6 @@ const FarmerItem = ({
 }: any) => {
   const navigation = useNavigation()
   const [farmlandStatus, setFarmlandStatus] = useState("")
-
-  //  console.log("IDs: ", item.farmersIDs);
 
   useEffect(() => {
     if (item?.farmlandsList?.length > 0) {
@@ -66,15 +55,12 @@ const FarmerItem = ({
         setFarmlandStatus(resourceValidation.status.validated)
       }
     } else {
-      // setFarmlandStatus(resourceValidation.status.invalidated);
     }
   }, [item])
 
   return (
     <Animated.View
-      // entering={LightSpeedInLeft}
       exiting={LightSpeedOutRight}
-      // layout={Layout.springify()}
       style={{
         paddingHorizontal: 10,
         marginVertical: hp("1%"),
@@ -92,10 +78,6 @@ const FarmerItem = ({
           width: 0,
           height: 3,
         },
-        // shadowOpacity: 0.27,
-        // shadowRadius: 4.65,
-
-        // elevation: 3,
       }}
     >
       <Box

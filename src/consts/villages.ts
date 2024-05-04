@@ -1,6 +1,10 @@
 /* eslint-disable prettier/prettier */
 
-const villages = {
+type VillageProps = {
+  [key: string]: string[];
+}
+
+const villages: VillageProps = {
   // Cabo Delgado
   "Ancuabe (Sede)": ["Ancuabe (Sede)", "Gihote", "Nacuale"],
   Metoro: ["Metoro (Sede)", "Salaue"],

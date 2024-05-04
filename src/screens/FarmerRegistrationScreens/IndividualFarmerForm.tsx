@@ -82,7 +82,7 @@ export default function IndividualFarmerForm({
   const { colorScheme } = useColorScheme();
 
   return (
-    <View className="px-3 pt-6">
+    <View className="px-3 pt-6 justify-center w-full">
       <View className="w-full ">
         <FormControl isRequired isInvalid={"isSprayingAgent" in errors}>
           <InputLabel label="É Provedor de Serviços de Pulverização?" />
@@ -431,7 +431,7 @@ export default function IndividualFarmerForm({
         </FormControl>
       </View>
 
-      <View className="flex flex-row mx-3 w-full gap-2">
+      <View className="flex flex-row w-full space-x-2 ">
         <View className="flex-1">
           <FormControl my="1" isInvalid={"primaryPhone" in errors}>
             <InputLabel label="Telemóvel" />
@@ -498,20 +498,20 @@ export default function IndividualFarmerForm({
         <Text style={styles.formSectionDescription}>Dados de Nascimento</Text>
       </View>
 
-      <View className="py-3 mx-3 ">
+      <View className="py-3 ">
         <FormControl isRequired isInvalid={"birthDate" in errors}>
           <InputLabel label="Data de Nascimento" />
           <Pressable
             onPress={() => setOpenDatePicker(true)}
-            className="flex flex-row gap-2 mt-1 items-center max-w-[200px] shadow-md border border-gray-300 rounded-md p-1 "
+            className="flex flex-row h-[50px] mt-1 items-center w-1/2 shadow-md border border-gray-300 rounded-md p-1 space-x-2"
           >
-            <FontAwesomeIcon name="calendar" size={30} color={COLORS.grey} />
-            <Text className="text-center text-[16px] ">
+            <FontAwesomeIcon name="calendar" size={30} color={COLORS.black} />
+            <Text className="text-center text-[14px] ">
               {birthDate
                 ? `${birthDate.getDate()}/${
                     birthDate.getMonth() + 1
                   }/${birthDate.getFullYear()}`
-                : "Data de Nascimento"}
+                : "Data"}
             </Text>
             <View className="absolute right-0 ">
               <Icon
@@ -791,7 +791,7 @@ export default function IndividualFarmerForm({
         </Text>
       </View>
 
-      <View className="flex flex-row gap-2 justify-center items-center">
+      <View className="flex flex-row justify-center items-center space-x-2">
         <View className="flex-1">
           <FormControl my="2" isRequired isInvalid={"docType" in errors}>
             <InputLabel label="Tipo de Documento" />

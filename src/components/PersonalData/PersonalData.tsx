@@ -12,7 +12,9 @@ import {
   SafeAreaView,
   FlatList,
   useNativeDriver,
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
+  Platform,
+  StatusBar,
+
 } from "react-native"
 import { Box, FormControl, Stack } from "native-base"
 import { Divider, Icon } from "@rneui/base"
@@ -21,18 +23,13 @@ import {
   CollapseHeader,
   CollapseBody,
   AccordionList,
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'acco... Remove this comment to see the full error message
+
 } from "accordion-collapse-react-native"
 
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'uuid... Remove this comment to see the full error message
+
 import { v4 as uuidv4 } from "uuid"
 import { useFocusEffect } from "@react-navigation/native"
-import {
-  Menu,
-  MenuOptions,
-  MenuOption,
-  MenuTrigger,
-} from "react-native-popup-menu"
+
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -42,24 +39,10 @@ import {
 
 import {
   responsiveFontSize,
-  responsiveScreenFontSize,
-  responsiveHeight,
-  responsiveWidth,
-  responsiveScreenHeight,
-  responsiveScreenWidth,
-  useDimensionsChange,
+
 } from "react-native-responsive-dimensions"
-import Tooltip from "react-native-walkthrough-tooltip"
 
-import CustomDivider from "../../components/Divider/CustomDivider"
-import COLORS from "../../consts/colors"
-import EditFarmerData from "../EditData/EditFarmerData"
-import { errorMessages } from "../../consts/errorMessages"
-import { roles } from "../../consts/roles"
 
-// @ts-expect-error TS(2307): Cannot find module '../EditData/ConfirmDataCopy' o... Remove this comment to see the full error message
-import ConfirmData from "../EditData/ConfirmDataCopy"
-import { useNavigation } from "@react-navigation/native"
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome"
 import {
   faEllipsisVertical,
@@ -74,13 +57,16 @@ import { resourceValidation } from "../../consts/resourceValidation"
 import validateInvalidationMessage from "../../helpers/validateInvalidationMessage"
 import CustomActivityIndicator from "../ActivityIndicator/CustomActivityIndicator"
 import { PopupMenu } from "../PopupMenu/PopupMenu"
+import COLORS from "../../consts/colors"
+import CustomDivider from "../Divider/CustomDivider"
+import { roles } from "../../consts/roles"
+import Tooltip from "react-native-walkthrough-tooltip"
+import { errorMessages } from "../../consts/errorMessages"
+import EditFarmerData from "../EditData/EditFarmerData"
+import ConfirmData from "../EditData/ConfirmData"
 
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
-import { Platform } from "react-native"
 
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
-import { StatusBar } from "react-native"
-import BottomSheet from "../EditData/EditDataBottomSheet"
+
 const { useRealm, useQuery, useObject } = realmContext
 
 const resourceMessage = "resourceMessage"
@@ -181,17 +167,7 @@ const PersonalData = ({
   const [isEllipsisVisible, setIsEllipsisVisible] = useState(false)
   // ---------------------------------------------------------------
 
-  // const bottomSheetRef = useRef(null);
-  // const onScrollToBottomSheet = useCallback(()=>{
-  //     const isActive = bottomSheetRef?.current?.isActive();
-  //     if (isActive) {
-  //         bottomSheetRef?.current?.scrollTo(0);
 
-  //     }
-  //     else {
-  //         bottomSheetRef?.current?.scrollTo(-200);
-  //     }
-  // }, [])
 
   // ---------------------------------------------------
   const validationAction = (realm: any, resourceId: any, flag: any) => {
@@ -262,14 +238,11 @@ const PersonalData = ({
       )
     })
 
-
-    // @ts-expect-error TS(2304): Cannot find name 'setInterval'.
     const interval = setInterval(() => {
       setAutoRefresh(!autoRefresh)
     }, 2000)
 
 
-    // @ts-expect-error TS(2304): Cannot find name 'clearInterval'.
     clearInterval(interval)
   }, [realm, user, message, invalidationMotives, autoRefresh, isCollapseOn])
 
@@ -284,18 +257,6 @@ const PersonalData = ({
       return () => task.cancel()
     }, []),
   )
-
-  // Animate by resizing EditFarmerData Component
-  // const resizeBox = (to)=>{
-  //     to === 1 && setIsOverlayVisible(true);
-  //     Animated.timing(scale, {
-  //         toValue: to,
-  //         useNativeDriver: true,
-  //         duration: 400,
-  //         easing: Easing.linear,
-  //     }).start(()=> to === 0 && setIsOverlayVisible(false));
-
-  // }
 
   if (loadingActivitiyIndicator) {
     return (
@@ -514,24 +475,7 @@ const PersonalData = ({
               {/* <Box w="25%"></Box> */}
               <Box w="10%">
                 {
-                  // customUserData?.role !== roles.provincialManager &&
-                  //         <TouchableOpacity
-                  //             disabled={farmer?.status === resourceValidation.status.validated ? true : false}
-                  //             style={{
-                  //             }}
-                  //             onPress={
-                  //                 ()=>{
-                  //                     setIsOverlayVisible(!isOverlayVisible);
-                  //                 }
-                  //             }
-                  //         >
-                  //             <Icon
-                  //                 // name="home"
-                  //                 name="edit"
-                  //                 size={20}
-                  //                 color={farmer?.status === resourceValidation.status.validated ? COLORS.lightgrey : farmer?.status === resourceValidation.status.invalidated ? COLORS.red : COLORS.main }
-                  //                 />
-                  //         </TouchableOpacity>
+
                 }
               </Box>
             </Stack>
@@ -945,24 +889,6 @@ const PersonalData = ({
                     </Text>
                   )}
 
-                {/* <Text 
-                  style={{
-                      color: 'grey',
-                      fontSize: 14,
-                      fontFamily: 'JosefinSans-Regular',
-                  }}  
-              >
-                  {farmer?.contact?.primaryPhone !== 0 ? farmer?.contact?.primaryPhone : 'Nenhum'} 
-              </Text>
-              <Text 
-                  style={{
-                      color: 'grey',
-                      fontSize: 14,
-                      fontFamily: 'JosefinSans-Regular',
-                  }}  
-                  >
-                  {farmer?.contact?.secondaryPhone !== 0 ? farmer?.contact?.secondaryPhone: 'Nenhum'} 
-              </Text>     */}
               </Box>
             </Stack>
           </Stack>
@@ -1248,8 +1174,6 @@ const PersonalData = ({
                       >
                         <TouchableOpacity
                           onPress={() => {
-
-                            // @ts-expect-error TS(2345): Argument of type 'string' is not assignable to par... Remove this comment to see the full error message
                             navigation.navigate("Membership", {
                               resourceName: "Farmer",
                               resourceId: farmer._id,
@@ -1297,8 +1221,6 @@ const PersonalData = ({
                       >
                         <TouchableOpacity
                           onPress={() => {
-
-                            // @ts-expect-error TS(2345): Argument of type 'string' is not assignable to par... Remove this comment to see the full error message
                             navigation.navigate("FarmerGroups", {
                               farmerId: farmer._id,
                             })
@@ -1342,8 +1264,6 @@ const PersonalData = ({
               )}
             </Box>
           </Stack>
-          // @ts-expect-error TS(2339): Property 'membership' does not exist on type 'Obje... Remove this comment to see the full error message
-          // @ts-expect-error TS(2339): Property 'membership' does not exist on type 'Obje... Remove this comment to see the full error message
           {member && member?.membership?.length === 0 && (
             <>
               <Stack w="100%" direction="row">
@@ -1386,9 +1306,6 @@ const PersonalData = ({
               </Box>
             </>
           )}
-
-          // @ts-expect-error TS(2339): Property 'membership' does not exist on type 'Obje... Remove this comment to see the full error message
-          // @ts-expect-error TS(2339): Property 'membership' does not exist on type 'Obje... Remove this comment to see the full error message
           {member && member?.membership?.length > 0 && (
             <Box pb="4">
               <Stack w="100%" direction="row">
@@ -1411,11 +1328,9 @@ const PersonalData = ({
                       fontFamily: "JosefinSans-Regular",
                     }}
                   >
-                    // @ts-expect-error TS(2339): Property 'membership' does not exist on type 'Obje... Remove this comment to see the full error message
-                    // @ts-expect-error TS(2339): Property 'membership' does not exist on type 'Obje... Remove this comment to see the full error message
+
                     {member?.membership?.length}{" "}
-                    // @ts-expect-error TS(2339): Property 'membership' does not exist on type 'Obje... Remove this comment to see the full error message
-                    // @ts-expect-error TS(2339): Property 'membership' does not exist on type 'Obje... Remove this comment to see the full error message
+
                     {member?.membership?.length == 1
                       ? "organização"
                       : "organizações"}
@@ -1426,10 +1341,6 @@ const PersonalData = ({
           )}
 
           <CustomDivider />
-
-          // @ts-expect-error TS(2304): Cannot find name 'children'.
-          // @ts-expect-error TS(2322): Type '{ children: any[]; direction: "column"; w: "... Remove this comment to see the full error message
-          // @ts-expect-error TS(2322): Type '{ children: any[]; direction: "column"; w: "... Remove this comment to see the full error message
           <Stack direction="column" w="100%" style={{ paddingTop: 5 }}>
             <Box w="100%">
               <Text
@@ -1517,13 +1428,7 @@ const PersonalData = ({
                   Motivo da invalidação
                 </Text>
               )}
-              {/* <Box 
-      // w="100%"
-      style={{
-          // alignItems: 'center',
-          paddingTop: 5,
-      }}
-  > */}
+
               {invalidationMotives?.length > 0 ? (
                 invalidationMotives?.length > 0 &&
 
@@ -1577,8 +1482,7 @@ const PersonalData = ({
                 ))
               ) : (
                 <Box
-                  // key={index}
-
+           
                   // @ts-expect-error TS(2322): Type '{ children: Element[]; style: { flexGrow: nu... Remove this comment to see the full error message
                   style={{
                     flexGrow: 1,
@@ -1665,8 +1569,6 @@ const PersonalData = ({
                           }
                           _text={{ fontSize: "xs" }}
                         >
-                          // @ts-expect-error TS(2339): Property 'invalidationMessage' does not exist on t... Remove this comment to see the full error message
-                          // @ts-expect-error TS(2339): Property 'invalidationMessage' does not exist on t... Remove this comment to see the full error message
                           {errors?.invalidationMessage}
                         </FormControl.ErrorMessage>
                       ) : (
@@ -1705,8 +1607,6 @@ const PersonalData = ({
                             try {
                               addMessage(realm, farmer?._id, message)
                             } catch (error) {
-
-                              // @ts-expect-error TS(2584): Cannot find name 'console'. Do you need to change ... Remove this comment to see the full error message
                               console.log(
                                 "Failed to add invalidation message",
                               )
@@ -1911,8 +1811,7 @@ const PersonalData = ({
 
         {isConfirmDataVisible && (
           <ConfirmData
-            // setIsOverlayVisible={setIsOverlayVisible}
-            // isConfirmDataVisible={isConfirmDataVisible}
+
             setIsConfirmDataVisible={setIsConfirmDataVisible}
             ownerName={
               farmer?.names?.otherNames + " " + farmer?.names?.surname
@@ -1925,7 +1824,6 @@ const PersonalData = ({
           />
         )}
 
-        {/* <BottomSheet ref={bottomSheetRef} /> */}
       </CollapseBody>
     </Collapse>
   </>;

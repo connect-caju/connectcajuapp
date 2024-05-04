@@ -224,8 +224,8 @@ export default function InstitutionFarmerForm({
         <Text style={styles.formSectionDescription}>Endereço e Contacto</Text>
       </View>
 
-      <View className="flex flex-row gap-2 justify-center w-full">
-        <View className="flex-1">
+      <View className="flex flex-row justify-center w-full">
+        <View className="flex-1 mr-1">
           <FormControl
             isRequired
             my="2"
@@ -273,7 +273,7 @@ export default function InstitutionFarmerForm({
             )}
           </FormControl>
         </View>
-        <View className="flex-1">
+        <View className="flex-1 ml-1">
           <FormControl isRequired my="2">
             <InputLabel label="Localidade" />
             <Select
@@ -339,8 +339,8 @@ export default function InstitutionFarmerForm({
         )}
       </FormControl>
 
-      <View className="flex flex-row w-full gap-2" >
-        <View className="flex-1" >
+      <View className="flex flex-row w-full" >
+        <View className="flex-1 mr-1" >
           <FormControl isInvalid={"institutionManagerPhone" in errors}>
             <InputLabel label="Tel. do Responsável" />
             <Input 
@@ -369,7 +369,7 @@ export default function InstitutionFarmerForm({
             )}
           </FormControl>
         </View>
-        <View className="flex-1">
+        <View className="flex-1 ml-1">
           <FormControl isInvalid={"institutionNuit" in errors}>
             <InputLabel label="NUIT da Instituição" />
             <Input 

@@ -19,7 +19,7 @@ import {
 } from "react-native";
 import { Box, Center, FormControl, Stack } from "native-base";
 import {
-  MultipleSelectList,
+
   SelectList,
 } from "react-native-dropdown-select-list";
 import Icon from "react-native-vector-icons/MaterialIcons";
@@ -27,20 +27,25 @@ import FontAwesomeIcon from "react-native-vector-icons/FontAwesome";
 
 import { Icon as RNEIcon, Button, CheckBox } from "@rneui/themed";
 import COLORS from "../../consts/colors";
-import { getFullYears, getFullYears2 } from "../../helpers/dates";
-import { plantingTypes, plantingTypes2 } from "../../consts/plantingTypes";
-import cloneList, { cloneList2 } from "../../consts/clones";
-import { CustomInput } from "../Inputs/CustomInput";
+import { getFullYears2 } from "../../helpers/dates";
+import {  plantingTypes2 } from "../../consts/plantingTypes";
+import  { cloneList2 } from "../../consts/clones";
 import { realmContext } from "../../models/realmContext";
 import validateBlockData from "../../helpers/validateBlockData";
 import AwesomeAlert from "react-native-awesome-alerts";
 import { errorMessages } from "../../consts/errorMessages";
-import { KeyboardAwareScrollView } from "react-native-keyboard-tools";
-import PrimaryButton from "../Buttons/PrimaryButton";
-import { backgroundStyle } from "../../styles/globals";
 import { Input } from "../../../components/Input";
 import SectionedMultiSelect from "react-native-sectioned-multi-select";
+import PrimaryButton from "../Buttons/PrimaryButton";
 const { useRealm, useQuery, useObject } = realmContext;
+
+const NoResult = () => (
+  <View className="h-full w-full flex items-center justify-center">
+    <Text className="text-center text-[18px]">
+      Opah! Nada encontrado 😔
+    </Text>
+  </View>
+)
 
 export default function FarmlandBlockRegistration({
   customUserData,
@@ -472,23 +477,7 @@ export default function FarmlandBlockRegistration({
                         value={usedArea}
                         
                       />
-                      {/* <FormControl.Label>Área Aproveitada</FormControl.Label>
-                      <CustomInput
-                        width="100%"
-                        keyboardType="numeric"
-                        textAlign="center"
-                        placeholder="Hectares"
-                        value={usedArea}
-                        onChangeText={(newNumber: any) => {
-                          setErrors((prev: any) => ({
-                            ...prev,
-                            blockTrees: null,
-                            usedArea: null,
-                            treeDensity: null,
-                          }));
-                          setUsedArea(newNumber);
-                        }}
-                      /> */}
+                      
                     </FormControl>
                   </View>
 
@@ -519,23 +508,7 @@ export default function FarmlandBlockRegistration({
                           setBlockTrees(newNumber);
                         }}
                       />
-                      {/* <FormControl.Label>N° de Cajueiros</FormControl.Label>
-                      <CustomInput
-                        width="100%"
-                        keyboardType="numeric"
-                        textAlign="center"
-                        placeholder="Cajueiros"
-                        value={blockTrees}
-                        onChangeText={(newNumber: any) => {
-                          setErrors((prev: any) => ({
-                            ...prev,
-                            blockTrees: null,
-                            usedArea: null,
-                            treeDensity: null,
-                          }));
-                          setBlockTrees(newNumber);
-                        }}
-                      /> */}
+                     
                     </FormControl>
                   </View>
                 </View>
@@ -853,7 +826,7 @@ export default function FarmlandBlockRegistration({
                 <FormControl.Label>Tipo de plantas</FormControl.Label>
                 <SectionedMultiSelect
                   items={plantingTypes2}
-                  IconRenderer={Icon}
+                  IconRenderer={<Icon name="add" />}
                   uniqueKey="id"
                   subKey="subitems"
                   onSelectedItemsChange={setPlantTypes}
@@ -866,13 +839,7 @@ export default function FarmlandBlockRegistration({
                   // showCancelButton
                   modalWithSafeAreaView
                   confirmText="Confirmar"
-                  noResultsComponent={() => (
-                    <View className="h-full w-full flex items-center justify-center">
-                      <Text className="text-center text-[18px]">
-                        Opah! Nada encontrado 😔
-                      </Text>
-                    </View>
-                  )}
+                  noResultsComponent={<NoResult />}
                   selectToggleIconComponent={
                     <RNEIcon
                       // size={35}
@@ -904,14 +871,6 @@ export default function FarmlandBlockRegistration({
                     <FontAwesomeIcon name="square-o" size={20} />
                   }
                   styles={styles.multiselect}
-                  subItemsFlatListProps={
-                    {
-                      // nestedScrollEnabled: true,
-                      // keyboardShouldPersistTaps: "always",
-                      // keyboardDismissMode: "on-drag",
-                      // showsVerticalScrollIndicator: false,
-                    }
-                  }
                   itemsFlatListProps={{
                     nestedScrollEnabled: true,
                     keyboardShouldPersistTaps: "always",
@@ -955,7 +914,7 @@ export default function FarmlandBlockRegistration({
                     <FormControl.Label>Clones</FormControl.Label>
                     <SectionedMultiSelect
                       items={cloneList2}
-                      IconRenderer={Icon}
+                      IconRenderer={<Icon name="add" />}
                       uniqueKey="id"
                       onSelectedItemsChange={setClones}
                       selectedItems={clones}
@@ -974,9 +933,7 @@ export default function FarmlandBlockRegistration({
                           color={COLORS.main}
                         />
                       }
-                      // cancelIconComponent={
-                      //   <FontAwesomeIcon name="times-circle-o" size={28} />
-                      // }
+                      noResultsComponent={<NoResult />}
                       selectedIconComponent={
                         <FontAwesomeIcon name="check-square-o" size={20} />
                       }
@@ -999,54 +956,7 @@ export default function FarmlandBlockRegistration({
                         }));
                       }}
                     />
-                    {/* <MultipleSelectList
-                      setSelected={(type: any) => {
-                        setErrors((prev: any) => ({
-                          ...prev,
-                          clones: "",
-                          sameTypeTrees: "",
-                        }));
-                        setClones(type);
-                        console.log("type", type);
-                      }}
-                      data={cloneList}
-                      notFoundText={"Clone não encontrado"}
-                      placeholder="clones"
-                      searchPlaceholder="Seleccionar tipo de plantas"
-                      save="value"
-                      label="Clones"
-                      badgeStyles={{
-                        backgroundColor: COLORS.main,
-                      }}
-                      badgeTextStyles={{
-                        fontSize: 16,
-                      }}
-                      arrowicon={
-                        <RNEIcon
-                          // size={45}
-                          name="arrow-drop-down"
-                          color={COLORS.main}
-                        />
-                      }
-                      closeicon={
-                        <RNEIcon name="close" size={20} color={COLORS.grey} />
-                      }
-                      fontFamily="JosefinSans-Regular"
-                      dropdownTextStyles={{
-                        fontSize: 16,
-                        color: COLORS.black,
-                        padding: 5,
-                      }}
-                      inputStyles={{
-                        fontSize: 16,
-                        color: "#A8A8A8",
-                      }}
-                      boxStyles={{
-                        minHeight: 55,
-                        borderRadius: 5,
-                        borderColor: COLORS.lightgrey,
-                      }}
-                    /> */}
+                    
                     {"clones" in errors ? (
                       <FormControl.ErrorMessage
                         leftIcon={

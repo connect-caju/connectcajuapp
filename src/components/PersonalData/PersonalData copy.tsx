@@ -9,7 +9,7 @@ import {
   InteractionManager,
   SafeAreaView,
   FlatList,
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
+
 } from "react-native"
 import { Box, FormControl, Stack } from "native-base"
 import { Divider, Icon } from "@rneui/base"
@@ -18,10 +18,8 @@ import {
   CollapseHeader,
   CollapseBody,
   AccordionList,
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'acco... Remove this comment to see the full error message
 } from "accordion-collapse-react-native"
 
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'uuid... Remove this comment to see the full error message
 import { v4 as uuidv4 } from "uuid"
 import { useFocusEffect } from "@react-navigation/native"
 import {
@@ -33,20 +31,12 @@ import {
 
 import {
   responsiveFontSize,
-  responsiveScreenFontSize,
-  responsiveHeight,
-  responsiveWidth,
-  responsiveScreenHeight,
-  responsiveScreenWidth,
-  useDimensionsChange,
 } from "react-native-responsive-dimensions"
 import Tooltip from "react-native-walkthrough-tooltip"
 
 import CustomDivider from "../../components/Divider/CustomDivider"
 import COLORS from "../../consts/colors"
 
-// @ts-expect-error TS(2307): Cannot find module '../EditData/EditData' or its c... Remove this comment to see the full error message
-import EditData from "../EditData/EditData"
 import EditFarmerData from "../EditData/EditFarmerData"
 import { errorMessages } from "../../consts/errorMessages"
 import { roles } from "../../consts/roles"
@@ -225,14 +215,10 @@ const PersonalData = ({
       )
     })
 
-
-    // @ts-expect-error TS(2304): Cannot find name 'setInterval'.
     const interval = setInterval(() => {
       setAutoRefresh(!autoRefresh)
     }, 2000)
 
-
-    // @ts-expect-error TS(2304): Cannot find name 'clearInterval'.
     clearInterval(interval)
   }, [realm, user, message, invalidationMotives, autoRefresh, isCollapseOn])
 
@@ -262,11 +248,10 @@ const PersonalData = ({
       show={alert}
       titleStyle={{
         fontSize: 18,
-        // paddingVertical: 15,
-        // color: COLORS.ghostwhite,
+
         fontWeight: "bold",
         marginBottom: 5,
-        // backgroundColor: COLORS.main,
+
         width: "100%",
         textAlign: "center",
       }}
@@ -465,24 +450,7 @@ const PersonalData = ({
               {/* <Box w="25%"></Box> */}
               <Box w="10%">
                 {
-                  // customUserData?.role !== roles.provincialManager &&
-                  //         <TouchableOpacity
-                  //             disabled={farmer?.status === resourceValidation.status.validated ? true : false}
-                  //             style={{
-                  //             }}
-                  //             onPress={
-                  //                 ()=>{
-                  //                     setIsOverlayVisible(!isOverlayVisible);
-                  //                 }
-                  //             }
-                  //         >
-                  //             <Icon
-                  //                 // name="home"
-                  //                 name="edit"
-                  //                 size={20}
-                  //                 color={farmer?.status === resourceValidation.status.validated ? COLORS.lightgrey : farmer?.status === resourceValidation.status.invalidated ? COLORS.red : COLORS.main }
-                  //                 />
-                  //         </TouchableOpacity>
+
                 }
               </Box>
             </Stack>
@@ -887,24 +855,7 @@ const PersonalData = ({
                     </Text>
                   )}
 
-                {/* <Text 
-                  style={{
-                      color: 'grey',
-                      fontSize: 14,
-                      fontFamily: 'JosefinSans-Regular',
-                  }}  
-              >
-                  {farmer?.contact?.primaryPhone !== 0 ? farmer?.contact?.primaryPhone : 'Nenhum'} 
-              </Text>
-              <Text 
-                  style={{
-                      color: 'grey',
-                      fontSize: 14,
-                      fontFamily: 'JosefinSans-Regular',
-                  }}  
-                  >
-                  {farmer?.contact?.secondaryPhone !== 0 ? farmer?.contact?.secondaryPhone: 'Nenhum'} 
-              </Text>     */}
+
               </Box>
             </Stack>
           </Stack>
@@ -1293,8 +1244,7 @@ const PersonalData = ({
               )}
             </Box>
           </Stack>
-          // @ts-expect-error TS(2339): Property 'membership' does not exist on type 'Obje... Remove this comment to see the full error message
-          // @ts-expect-error TS(2339): Property 'membership' does not exist on type 'Obje... Remove this comment to see the full error message
+
           {member && member?.membership?.length === 0 && (
             <>
               <Stack w="100%" direction="row">
@@ -1338,8 +1288,7 @@ const PersonalData = ({
             </>
           )}
 
-          // @ts-expect-error TS(2339): Property 'membership' does not exist on type 'Obje... Remove this comment to see the full error message
-          // @ts-expect-error TS(2339): Property 'membership' does not exist on type 'Obje... Remove this comment to see the full error message
+
           {member && member?.membership?.length > 0 && (
             <Box pb="4">
               <Stack w="100%" direction="row">
@@ -1362,11 +1311,9 @@ const PersonalData = ({
                       fontFamily: "JosefinSans-Regular",
                     }}
                   >
-                    // @ts-expect-error TS(2339): Property 'membership' does not exist on type 'Obje... Remove this comment to see the full error message
-                    // @ts-expect-error TS(2339): Property 'membership' does not exist on type 'Obje... Remove this comment to see the full error message
+
                     {member?.membership?.length}{" "}
-                    // @ts-expect-error TS(2339): Property 'membership' does not exist on type 'Obje... Remove this comment to see the full error message
-                    // @ts-expect-error TS(2339): Property 'membership' does not exist on type 'Obje... Remove this comment to see the full error message
+
                     {member?.membership?.length == 1
                       ? "organização"
                       : "organizações"}
@@ -1378,9 +1325,7 @@ const PersonalData = ({
 
           <CustomDivider />
 
-          // @ts-expect-error TS(2304): Cannot find name 'children'.
-          // @ts-expect-error TS(2322): Type '{ children: any[]; direction: "column"; w: "... Remove this comment to see the full error message
-          // @ts-expect-error TS(2322): Type '{ children: any[]; direction: "column"; w: "... Remove this comment to see the full error message
+
           <Stack direction="column" w="100%" style={{ paddingTop: 5 }}>
             <Box w="100%">
               <Text
@@ -1468,13 +1413,7 @@ const PersonalData = ({
                   Motivo da invalidação
                 </Text>
               )}
-              {/* <Box 
-      // w="100%"
-      style={{
-          // alignItems: 'center',
-          paddingTop: 5,
-      }}
-  > */}
+
               {invalidationMotives?.length > 0 ? (
                 invalidationMotives?.length > 0 &&
 
@@ -1616,8 +1555,6 @@ const PersonalData = ({
                           }
                           _text={{ fontSize: "xs" }}
                         >
-                          // @ts-expect-error TS(2339): Property 'invalidationMessage' does not exist on t... Remove this comment to see the full error message
-                          // @ts-expect-error TS(2339): Property 'invalidationMessage' does not exist on t... Remove this comment to see the full error message
                           {errors?.invalidationMessage}
                         </FormControl.ErrorMessage>
                       ) : (
@@ -1656,8 +1593,6 @@ const PersonalData = ({
                             try {
                               addMessage(realm, farmer?._id, message)
                             } catch (error) {
-
-                              // @ts-expect-error TS(2584): Cannot find name 'console'. Do you need to change ... Remove this comment to see the full error message
                               console.log(
                                 "Failed to add invalidation message",
                               )
@@ -1860,8 +1795,6 @@ const PersonalData = ({
 
         {isConfirmDataVisible && (
           <ConfirmData
-            // setIsOverlayVisible={setIsOverlayVisible}
-            // isConfirmDataVisible={isConfirmDataVisible}
             setIsConfirmDataVisible={setIsConfirmDataVisible}
             ownerName={
               farmer?.names?.otherNames + " " + farmer?.names?.surname

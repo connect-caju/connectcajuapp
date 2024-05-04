@@ -1,5 +1,4 @@
 
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { View, Text, Pressable, Animated } from "react-native"
 import React, { useRef, useState } from "react"
 import LottieView from "lottie-react-native"
@@ -25,8 +24,6 @@ export function SuccessLottie({
     handleAdd()
 
     if (successLottieVisible) {
-
-      // @ts-expect-error TS(2304): Cannot find name 'setTimeout'.
       setTimeout(() => {
         setSuccessLottieVisible(false)
       }, 3000)
@@ -38,10 +35,6 @@ export function SuccessLottie({
       fullScreen
       overlayStyle={{
         backgroundColor: COLORS.ghostwhite,
-        // width: '100%',
-        // height: '100%',
-        // borderRadius: 10,
-        // paddingBottom: 50,
       }}
       isVisible={successLottieVisible}
       onBackdropPress={() => {
@@ -49,8 +42,6 @@ export function SuccessLottie({
       }}
     >
       <LottieView
-
-        // @ts-expect-error TS(2591): Cannot find name 'require'. Do you need to install... Remove this comment to see the full error message
         source={require("../../../assets/lottie/success.json")}
         progress={progress}
       />

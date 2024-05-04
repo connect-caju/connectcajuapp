@@ -1,6 +1,3 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable prettier/prettier */
-/* eslint-disable linebreak-style */
 import React, { useState, useEffect, useCallback } from "react";
 import {
   Text,
@@ -9,7 +6,6 @@ import {
   ScrollView,
   TextInput,
   View,
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 } from "react-native";
 import { Overlay, Icon, Button, CheckBox } from "@rneui/base";
 import {
@@ -552,8 +548,6 @@ const EditGroupData = ({
                         }
                         _text={{ fontSize: "xs" }}
                       >
-                        // @ts-expect-error TS(2339): Property 'groupType' does not exist on type '{}'.
-                        // @ts-expect-error TS(2339): Property 'groupType' does not exist on type '{}'.
                         {errors?.groupType}
                       </FormControl.ErrorMessage>
                     ) : (
@@ -585,8 +579,6 @@ const EditGroupData = ({
                         }
                         _text={{ fontSize: "xs" }}
                       >
-                        // @ts-expect-error TS(2339): Property 'groupName' does not exist on type '{}'.
-                        // @ts-expect-error TS(2339): Property 'groupName' does not exist on type '{}'.
                         {errors?.groupName}
                       </FormControl.ErrorMessage>
                     ) : (
@@ -646,8 +638,6 @@ const EditGroupData = ({
                         }
                         _text={{ fontSize: "xs" }}
                       >
-                        // @ts-expect-error TS(2339): Property 'groupGoals' does not exist on type '{}'.
-                        // @ts-expect-error TS(2339): Property 'groupGoals' does not exist on type '{}'.
                         {errors?.groupGoals}
                       </FormControl.ErrorMessage>
                     ) : (
@@ -731,81 +721,12 @@ const EditGroupData = ({
                           }
                           _text={{ fontSize: "xs" }}
                         >
-                          // @ts-expect-error TS(2339): Property 'groupCreationYear' does not exist on typ... Remove this comment to see the full error message
-                          // @ts-expect-error TS(2339): Property 'groupCreationYear' does not exist on typ... Remove this comment to see the full error message
                           {errors?.groupCreationYear}
                         </FormControl.ErrorMessage>
                       ) : (
                         <FormControl.HelperText></FormControl.HelperText>
                       )}
                     </FormControl>
-
-
-
-
-                    {/* <FormControl
-                      isRequired
-                      my="1"
-                      isInvalid={"groupCreationYear" in errors}
-                    >
-                      <FormControl.Label>Ano de criação</FormControl.Label>
-                      <Select
-                        selectedValue={groupCreationYear}
-                        accessibilityLabel="Escolha o ano"
-                        placeholder="Escolha o ano"
-                        minHeight={55}
-                        _selectedItem={{
-                          bg: "teal.600",
-                          fontSize: "lg",
-                          endIcon: <CheckIcon size="5" />,
-                        }}
-                        dropdownCloseIcon={
-                          groupCreationYear ? (
-                            <Icon
-                              name="close"
-                              size={15}
-                              color="grey"
-                              onPress={() => setGroupCreationYear("")}
-                            />
-                          ) : (
-                            <Icon
-                              // size={45}
-                              name="arrow-drop-down"
-                              color={COLORS.main}
-                            />
-                          )
-                        }
-                        mt={1}
-                        onValueChange={(newYear) => {
-                          setErrors((prev) => ({
-                            ...prev,
-                            groupCreationYear: "",
-                          }));
-                          setGroupCreationYear(newYear);
-                        }}
-                      >
-                        {getFullYears()?.map((year, index) => (
-                          <Select.Item
-                            key={index}
-                            label={`${year}`}
-                            value={year}
-                          />
-                        ))}
-                      </Select>
-                      {"groupCreationYear" in errors ? (
-                        <FormControl.ErrorMessage
-                          leftIcon={
-                            <Icon name="error-outline" size={16} color="red" />
-                          }
-                          _text={{ fontSize: "xs" }}
-                        >
-                          {errors?.groupCreationYear}
-                        </FormControl.ErrorMessage>
-                      ) : (
-                        <FormControl.HelperText></FormControl.HelperText>
-                      )}
-                    </FormControl> */}
-
 
 
                     <FormControl
@@ -874,84 +795,12 @@ const EditGroupData = ({
                           }
                           _text={{ fontSize: "xs" }}
                         >
-                          // @ts-expect-error TS(2339): Property 'groupLegalStatus' does not exist on type... Remove this comment to see the full error message
-                          // @ts-expect-error TS(2339): Property 'groupLegalStatus' does not exist on type... Remove this comment to see the full error message
                           {errors?.groupLegalStatus}
                         </FormControl.ErrorMessage>
                       ) : (
                         <FormControl.HelperText></FormControl.HelperText>
                       )}
                     </FormControl>
-
-
-                    {/* <FormControl
-                      isRequired
-                      my="1"
-                      isInvalid={"groupLegalStatus" in errors}
-                    >
-                      <FormControl.Label>Situação Legal</FormControl.Label>
-                      <Select
-                        selectedValue={groupLegalStatus}
-                        accessibilityLabel="Escolha a situação"
-                        placeholder="Escolha a situação"
-                        minHeight={55}
-                        _selectedItem={{
-                          bg: "teal.600",
-                          fontSize: "lg",
-                          endIcon: <CheckIcon size="5" />,
-                        }}
-                        dropdownCloseIcon={
-                          groupLegalStatus ? (
-                            <Icon
-                              name="close"
-                              size={15}
-                              color="grey"
-                              onPress={() => setGroupLegalStatus("")}
-                            />
-                          ) : (
-                            <Icon
-                              // size={45}
-                              name="arrow-drop-down"
-                              color={COLORS.main}
-                            />
-                          )
-                        }
-                        mt={1}
-                        onValueChange={(status) => {
-                          setErrors((prev) => ({
-                            ...prev,
-                            groupCreationYear: "",
-                            groupLegalStatus: "",
-                          }));
-                          setGroupLegalStatus(status);
-                        }}
-                      >
-                        <Select.Item
-                          label={groupAffiliationStatus.notAffiliated}
-                          value={groupAffiliationStatus.notAffiliated}
-                        />
-                        <Select.Item
-                          label={groupAffiliationStatus.pendingAffiliation}
-                          value={groupAffiliationStatus.pendingAffiliation}
-                        />
-                        <Select.Item
-                          label={groupAffiliationStatus.affiliated}
-                          value={groupAffiliationStatus.affiliated}
-                        />
-                      </Select>
-                      {"groupLegalStatus" in errors ? (
-                        <FormControl.ErrorMessage
-                          leftIcon={
-                            <Icon name="error-outline" size={16} color="red" />
-                          }
-                          _text={{ fontSize: "xs" }}
-                        >
-                          {errors?.groupLegalStatus}
-                        </FormControl.ErrorMessage>
-                      ) : (
-                        <FormControl.HelperText></FormControl.HelperText>
-                      )}
-                    </FormControl> */}
 
                     {groupLegalStatus === groupAffiliationStatus.affiliated && (
                       <>
@@ -1023,84 +872,12 @@ const EditGroupData = ({
                               }
                               _text={{ fontSize: "xs" }}
                             >
-                              // @ts-expect-error TS(2339): Property 'groupAffiliationYear' does not exist on ... Remove this comment to see the full error message
-                              // @ts-expect-error TS(2339): Property 'groupAffiliationYear' does not exist on ... Remove this comment to see the full error message
                               {errors?.groupAffiliationYear}
                             </FormControl.ErrorMessage>
                           ) : (
                             <FormControl.HelperText></FormControl.HelperText>
                           )}
                         </FormControl>
-
-
-                        {/* <FormControl
-                          isRequired
-                          my="1"
-                          isInvalid={"groupAffiliationYear" in errors}
-                        >
-                          <FormControl.Label>
-                            Ano de legalização
-                          </FormControl.Label>
-                          <Select
-                            selectedValue={groupAffiliationYear}
-                            accessibilityLabel="Escolha o ano"
-                            placeholder="Escolha o ano"
-                            minHeight={55}
-                            _selectedItem={{
-                              bg: "teal.600",
-                              fontSize: "lg",
-                              endIcon: <CheckIcon size="5" />,
-                            }}
-                            dropdownCloseIcon={
-                              groupAffiliationYear ? (
-                                <Icon
-                                  name="close"
-                                  size={15}
-                                  color="grey"
-                                  onPress={() => setGroupAffiliationYear("")}
-                                />
-                              ) : (
-                                <Icon
-                                  // size={45}
-                                  name="arrow-drop-down"
-                                  color={COLORS.main}
-                                />
-                              )
-                            }
-                            mt={1}
-                            onValueChange={(newYear) => {
-                              setErrors((prev) => ({
-                                ...prev,
-                                groupAffiliationYear: "",
-                              }));
-                              setGroupAffiliationYear(newYear);
-                            }}
-                          >
-                            {getFullYears()?.map((year, index) => (
-                              <Select.Item
-                                key={index}
-                                label={`${year}`}
-                                value={year}
-                              />
-                            ))}
-                          </Select>
-                          {"groupAffiliationYear" in errors ? (
-                            <FormControl.ErrorMessage
-                              leftIcon={
-                                <Icon
-                                  name="error-outline"
-                                  size={16}
-                                  color="red"
-                                />
-                              }
-                              _text={{ fontSize: "xs" }}
-                            >
-                              {errors?.groupAffiliationYear}
-                            </FormControl.ErrorMessage>
-                          ) : (
-                            <FormControl.HelperText></FormControl.HelperText>
-                          )}
-                        </FormControl> */}
 
                         <FormControl
                           isInvalid={"groupOperatingLicence" in errors}
@@ -1133,8 +910,6 @@ const EditGroupData = ({
                               }
                               _text={{ fontSize: "xs" }}
                             >
-                              // @ts-expect-error TS(2339): Property 'groupOperatingLicence' does not exist on... Remove this comment to see the full error message
-                              // @ts-expect-error TS(2339): Property 'groupOperatingLicence' does not exist on... Remove this comment to see the full error message
                               {errors?.groupOperatingLicence}
                             </FormControl.ErrorMessage>
                           ) : (
@@ -1172,9 +947,7 @@ const EditGroupData = ({
                               }
                               _text={{ fontSize: "xs" }}
                             >
-                              // @ts-expect-error TS(2339): Property 'groupNuit' does not exist on type '{}'.
-                              // @ts-expect-error TS(2339): Property 'groupNuit' does not exist on type '{}'.
-                              {errors?.groupNuit}
+                               {errors?.groupNuit}
                             </FormControl.ErrorMessage>
                           ) : (
                             <FormControl.HelperText></FormControl.HelperText>
@@ -1212,8 +985,6 @@ const EditGroupData = ({
                               }
                               _text={{ fontSize: "xs" }}
                             >
-                              // @ts-expect-error TS(2339): Property 'groupNuel' does not exist on type '{}'.
-                              // @ts-expect-error TS(2339): Property 'groupNuel' does not exist on type '{}'.
                               {errors?.groupNuel}
                             </FormControl.ErrorMessage>
                           ) : (
@@ -1330,8 +1101,6 @@ const EditGroupData = ({
                           }
                           _text={{ fontSize: "xs" }}
                         >
-                          // @ts-expect-error TS(2339): Property 'operationalStatus' does not exist on typ... Remove this comment to see the full error message
-                          // @ts-expect-error TS(2339): Property 'operationalStatus' does not exist on typ... Remove this comment to see the full error message
                           {errors?.operationalStatus}
                         </FormControl.ErrorMessage>
                       ) : (
@@ -1370,8 +1139,6 @@ const EditGroupData = ({
                           }
                           _text={{ fontSize: "xs" }}
                         >
-                          // @ts-expect-error TS(2339): Property 'groupMembersNumber' does not exist on ty... Remove this comment to see the full error message
-                          // @ts-expect-error TS(2339): Property 'groupMembersNumber' does not exist on ty... Remove this comment to see the full error message
                           {errors?.groupMembersNumber}
                         </FormControl.ErrorMessage>
                       ) : (
@@ -1409,9 +1176,7 @@ const EditGroupData = ({
                           }
                           _text={{ fontSize: "xs" }}
                         >
-                          // @ts-expect-error TS(2339): Property 'groupWomenNumber' does not exist on type... Remove this comment to see the full error message
-                          // @ts-expect-error TS(2339): Property 'groupWomenNumber' does not exist on type... Remove this comment to see the full error message
-                          {errors?.groupWomenNumber}
+                            {errors?.groupWomenNumber}
                         </FormControl.ErrorMessage>
                       ) : (
                         <FormControl.HelperText></FormControl.HelperText>

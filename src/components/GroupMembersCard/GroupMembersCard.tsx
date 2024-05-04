@@ -1,6 +1,3 @@
-/* eslint-disable linebreak-style */
-/* eslint-disable react/prop-types */
-/* eslint-disable prettier/prettier */
 import {
   faBirthdayCake,
   faCheck,
@@ -23,19 +20,13 @@ import {
   Animated as NativeAnimated,
   Easing,
   useNativeDriverr,
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 } from "react-native";
 import Animated, { BounceIn } from "react-native-reanimated";
-import CustomDivider from "../Divider/CustomDivider";
 import COLORS from "../../consts/colors";
-import { bottomSheetFlags } from "../../consts/bottomSheetFlags";
-import { calculateAge } from "../../helpers/dates";
 import { useIsFocused, useNavigation } from "@react-navigation/native";
 
-import { useUser } from "@realm/react";
 import { realmContext } from "../../models/realmContext";
 import GroupMemberItem from "../GroupMemberItem/GroupMemberItem";
-import { customizeItem } from "../../helpers/customizeItem";
 import { roles } from "../../consts/roles";
 const { useRealm, useQuery, useObject } = realmContext;
 
@@ -181,14 +172,7 @@ export default function GroupMembersCard({
                 borderRadius: 120,
               }}
               onPress={() => {
-                // navigation.navigate('FarmlandForm1', {
-                //   ownerId: farmer._id,
-                //   ownerName: `${farmer?.names?.otherNames} ${farmer?.names?.surname}`,
-                //   ownerImage: farmer?.image || '',
-                //   ownerAddress: farmer?.address,
-                //   flag: 'Indivíduo',
-                // })
-                // setRefresh(!refresh);
+
               }}
             >
               <Icon

@@ -1,8 +1,3 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable prettier/prettier */
-/* eslint-disable linebreak-style */
-
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { View, Text, Image, } from "react-native";
 import React from "react";
 import CustomDivider from "../Divider/CustomDivider";
@@ -19,9 +14,6 @@ const GroupDetails = ({
     manager
 }: any) => {
 
-
-    // @ts-expect-error TS(2584): Cannot find name 'console'. Do you need to change ... Remove this comment to see the full error message
-    console.log("resourceManager: ", manager);
     return (
         <View>
             <View
@@ -89,7 +81,6 @@ const GroupDetails = ({
                             }}
                         />
                     ) : (
-                        // <Icon name="account-circle" size={60} color={COLORS.grey} />
                         <View
                             style={{
                                 borderRadius: 50,
@@ -137,20 +128,6 @@ const GroupDetails = ({
                         >{resource?.manager ? `${manager?.names?.otherNames} ${manager?.names.surname}` : "Nenhum"}</Text>
                     </Box>
                     <View style={{ width: 10, }} />
-                    {/* <Box
-                        w="45%"
-                        style={{
-                            justifyContent: "flex-start",
-                        }}
-                    >
-                        <Text
-                            style={{
-                                fontFamily: "JosefinSans-Bold",
-                                color: COLORS.black,
-                            }}
-                        >Posto Administrativo:</Text>
-                        <Text>{resource?.address?.adminPost}</Text>
-                    </Box> */}
                 </Box>
             </View>
 
@@ -404,24 +381,6 @@ const GroupDetails = ({
                         </Text>
                     </Box>
                     <View style={{ width: 10, }} />
-                    {/* <Box
-                        w="45%"
-                        style={{
-                            justifyContent: "flex-start",
-                        }}
-                    >
-                        <Text
-                            style={{
-                                fontFamily: "JosefinSans-Bold",
-                                color: COLORS.black,
-                            }}
-                        >NUIT:</Text>
-                        <Text
-                            style={{
-                                color: resource?.idDocument?.nuit ? COLORS.grey : COLORS.danger,
-                            }}
-                        >{resource?.idDocument?.nuit ? resource?.idDocument?.nuit : "Nenhum"}</Text>
-                    </Box> */}
                 </Box>
             </View>
             <CustomDivider />

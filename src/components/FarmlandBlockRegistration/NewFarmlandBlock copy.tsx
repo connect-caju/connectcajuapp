@@ -5,35 +5,19 @@ import {
   Box,
   FormControl,
   Stack,
-  Select,
-  CheckIcon,
-  Center,
-  Radio,
 } from "native-base"
 import {
   MultipleSelectList,
   SelectList,
 } from "react-native-dropdown-select-list"
-import {
-  widthPercentageToDP as wp,
-  heightPercentageToDP as hp,
-  listenOrientationChange as lor,
-  removeOrientationListener as rol,
-} from "react-native-responsive-screen"
 
 import {
   responsiveFontSize,
-  responsiveScreenFontSize,
-  responsiveHeight,
-  responsiveWidth,
-  responsiveScreenHeight,
-  responsiveScreenWidth,
-  useDimensionsChange,
 } from "react-native-responsive-dimensions"
 
 import { Overlay, Icon, Button, CheckBox } from "@rneui/base"
 import COLORS from "../../consts/colors"
-import { getFullYears, getFullYears2 } from "../../helpers/dates"
+import {  getFullYears2 } from "../../helpers/dates"
 import { plantingTypes } from "../../consts/plantingTypes"
 import cloneList from "../../consts/clones"
 import { CustomInput } from "../Inputs/CustomInput"
@@ -46,7 +30,6 @@ import { errorMessages } from "../../consts/errorMessages"
 import { useUser } from "@realm/react"
 import { realmContext } from "../../models/realmContext"
 import { resourceValidation } from "../../consts/resourceValidation"
-import DangerAlert from "../LottieComponents/DangerAlert"
 const { useRealm, useQuery, useObject } = realmContext
 
 export default function NewFarmlandBlock({
@@ -199,11 +182,11 @@ export default function NewFarmlandBlock({
 
     // find out the remaing area
     if (isNewBlockVisible) {
-      const totalArea = farmland?.totalArea
-      const blocksAreas = farmland?.blocks
+      const totalArea: number = farmland?.totalArea
+      const blocksAreas: number = farmland?.blocks
         ?.map((block: any) => block?.usedArea)
         ?.reduce((acc: any, el: any) => acc + el, 0)
-      const remainingArea = totalArea - blocksAreas
+      const remainingArea : number = totalArea - blocksAreas
 
       // @ts-expect-error TS(2345): Argument of type 'number' is not assignable to par... Remove this comment to see the full error message
       setRemainingArea(remainingArea)
@@ -260,7 +243,7 @@ export default function NewFarmlandBlock({
       }}
     >
 
-      {remainingArea <= 0.1 && (
+      {remainingArea && remainingArea <= 0.1 && (
         <View
           style={{
             width: "100%",
@@ -382,7 +365,7 @@ export default function NewFarmlandBlock({
         </View>
       )}
 
-      {remainingArea > 0.1 && (
+      {remainingArea && remainingArea > 0.1 && (
         <>
           <AwesomeAlert
             show={alert}
@@ -468,7 +451,6 @@ export default function NewFarmlandBlock({
             }}
           >
             <Box w="90%">
-              {/* { remainingArea > 0.1 &&  */}
               <Text
                 style={{
                   textAlign: "center",

@@ -1,12 +1,6 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable linebreak-style */
-/* eslint-disable prettier/prettier */
-
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { View, Text } from "react-native";
 import React from "react";
 import { Box, Stack } from "native-base";
-import COLORS from "../../consts/colors";
 import { resourceValidation } from "../../consts/resourceValidation";
 
 const ResourceSignature = ({

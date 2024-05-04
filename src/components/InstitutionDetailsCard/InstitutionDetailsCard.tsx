@@ -1,6 +1,4 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable linebreak-style */
-/* eslint-disable prettier/prettier */
+
 import {
   faEllipsisVertical,
   faHome,
@@ -12,14 +10,11 @@ import { Icon } from "@rneui/base";
 import { Stack, Box, Center } from "native-base";
 
 import React from "react";
-
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { View, Text, TouchableOpacity } from "react-native";
 import Animated from "react-native-reanimated";
 import CustomDivider from "../Divider/CustomDivider";
 import COLORS from "../../consts/colors";
 import { roles } from "../../consts/roles";
-import ValidationOptions from "../ValidationOptions/ValidationOptions";
 import { resourceValidation } from "../../consts/resourceValidation";
 import { resourceTypes } from "../../consts/resourceTypes";
 import { useState } from "react";
@@ -252,11 +247,6 @@ export default function InstitutionDetailsCard({
                 }}
               >
                 <FontAwesomeIcon
-                  style={
-                    {
-                      // alignSelf: 'center',
-                    }
-                  }
                   icon={faIdCard}
                   size={20}
                   color={COLORS.grey}
@@ -348,7 +338,6 @@ export default function InstitutionDetailsCard({
 
       {/* type and send messages (motives) of invalidation */}
       {farmer?.status === resourceValidation.status.invalidated &&
-        // roles.haveReadAndValidatePermissions.some(role => role === customUserData?.role) && 
         (
           <InvalidationMessage
             resource={farmer}
@@ -356,17 +345,6 @@ export default function InstitutionDetailsCard({
           />
         )}
 
-      {/* {roles.haveReadAndValidatePermissions.some(role => role === customUserData?.role) &&
-        farmer?.status === resourceValidation.status.pending && (
-          <ValidationOptions
-            resource={farmer}
-            resourceType={resourceTypes.institution}
-            customUserData={customUserData}
-            realm={realm}
-            alert={alert}
-            setAlert={setAlert}
-          />
-        )} */}
     </Animated.View>
   );
 }

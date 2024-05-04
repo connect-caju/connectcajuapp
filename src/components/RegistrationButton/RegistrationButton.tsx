@@ -147,8 +147,6 @@ const RegistrationButton = ({
                     {pop && <Text style={{
                         fontSize: 16,
                         marginRight: 10,
-                        // color: COLORS.grey,
-                        // fontFamily: "Roboto-Bold",
                     }}
                     className="text-gray-600 font-bold"
                     >Comerciante</Text>}
@@ -182,8 +180,6 @@ const RegistrationButton = ({
                     {pop && <Text style={{
                         fontSize: 16,
                         marginRight: 10,
-                        // fontFamily: "Roboto-Bold",
-                        // color: COLORS.grey,
                     }}
                     className="text-gray-600 font-bold"
                     >Cooperativa</Text>}
@@ -233,9 +229,6 @@ const RegistrationButton = ({
                         position: "absolute",
                         bottom: 10,
                         right: 35,
-                        // fontSize: 12,
-                        // fontFamily: "JosefinSans-BoldItalic",
-                        // color: COLORS.grey,
                     }}
                     className="font-bold italic text-gray-600 text-sm"
                 >

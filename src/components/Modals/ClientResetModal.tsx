@@ -1,24 +1,9 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { Text, Stack, Box, Center, Divider } from "native-base";
-
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { ScrollView, Pressable, View, TouchableOpacity } from "react-native";
-import { Button, Icon } from "@rneui/themed";
-import CustomDivider from "../Divider/CustomDivider";
-import styles from "./styles";
 import Modal from "react-native-modal";
 
 import "react-native-get-random-values";
-
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'uuid... Remove this comment to see the full error message
-import { v4 as uuidv4 } from "uuid";
-import Realm from "realm";
-
-import SuccessModal from "./SuccessModal";
-
-import { useNavigation } from "@react-navigation/native";
-import { user } from "../../consts/user";
-
 import { realmContext } from "../../models/realmContext";
 import COLORS from "../../consts/colors";
 const { useRealm, useObject, useQuery } = realmContext;

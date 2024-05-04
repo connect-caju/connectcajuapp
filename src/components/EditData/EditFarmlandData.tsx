@@ -14,10 +14,6 @@ import {
   Box,
   FormControl,
   Stack,
-  Select,
-  CheckIcon,
-  Center,
-  Radio,
 } from "native-base";
 import {
   MultipleSelectList,
@@ -681,41 +677,7 @@ const EditFarmlandData = ({
                           }}
                         />
 
-                        {/* <Select
-                                    selectedValue={plantingYear}
-                                    accessibilityLabel="Ano de plantio"
-                                        placeholder="Escolha o ano"
-                                    minHeight={55}
-                                    _selectedItem={{
-                                        bg: 'teal.600',
-                                        fontSize: 'lg',
-                                        endIcon: <CheckIcon size="5" />,
-                                    }}
-                                    dropdownCloseIcon={plantingYear 
-                                            ? <Icon 
-                                                name="close" 
-                                                size={25} 
-                                                color="grey" 
-                                                onPress={()=>setPlantingYear('')} 
-                                            /> 
-                                            : <Icon 
-                                                size={40} 
-                                                name="arrow-drop-down" 
-                                                color={COLORS.main} 
-                                            />
-                                        }
-                                    mt={1}
-                                    onValueChange={newYear => {
-                                        setErrors((prev)=>({...prev, plantingYear: ''}));
-                                        setPlantingYear(newYear);
-                                    }}
-                                >
-                                    {
-                                        getFullYears(100)?.map((year, index)=>(
-                                            <Select.Item key={index} label={`${year}`} value={year} />
-                                        ))
-                                    }
-                                </Select> */}
+                    
                         {"plantingYear" in errors ? (
                           <FormControl.ErrorMessage
                             leftIcon={
@@ -727,8 +689,6 @@ const EditFarmlandData = ({
                             }
                             _text={{ fontSize: "xs" }}
                           >
-                            // @ts-expect-error TS(2339): Property 'plantingYear' does not exist on type '{}... Remove this comment to see the full error message
-                            // @ts-expect-error TS(2339): Property 'plantingYear' does not exist on type '{}... Remove this comment to see the full error message
                             {errors?.plantingYear}
                           </FormControl.ErrorMessage>
                         ) : (
@@ -769,8 +729,6 @@ const EditFarmlandData = ({
                         }
                         _text={{ fontSize: "xs" }}
                       >
-                        // @ts-expect-error TS(2339): Property 'usedArea' does not exist on type '{}'.
-                        // @ts-expect-error TS(2339): Property 'usedArea' does not exist on type '{}'.
                         {errors?.usedArea}
                       </FormControl.ErrorMessage>
                     ) : (
@@ -814,8 +772,6 @@ const EditFarmlandData = ({
                         }
                         _text={{ fontSize: "xs", paddingRight: 10 }}
                       >
-                        // @ts-expect-error TS(2339): Property 'blockTrees' does not exist on type '{}'.
-                        // @ts-expect-error TS(2339): Property 'blockTrees' does not exist on type '{}'.
                         {errors?.blockTrees}
                       </FormControl.ErrorMessage>
                     ) : (
@@ -945,8 +901,6 @@ const EditFarmlandData = ({
                         }
                         _text={{ fontSize: "xs" }}
                       >
-                        // @ts-expect-error TS(2339): Property 'densityMode' does not exist on type '{}'... Remove this comment to see the full error message
-                        // @ts-expect-error TS(2339): Property 'densityMode' does not exist on type '{}'... Remove this comment to see the full error message
                         {errors?.densityMode}
                       </FormControl.ErrorMessage>
                     ) : (
@@ -994,8 +948,6 @@ const EditFarmlandData = ({
                               }
                               _text={{ fontSize: "xs" }}
                             >
-                              // @ts-expect-error TS(2339): Property 'density' does not exist on type '{}'.
-                              // @ts-expect-error TS(2339): Property 'density' does not exist on type '{}'.
                               {errors?.density}
                             </FormControl.ErrorMessage>
                           ) : (
@@ -1056,8 +1008,6 @@ const EditFarmlandData = ({
                               }
                               _text={{ fontSize: "xs" }}
                             >
-                              // @ts-expect-error TS(2339): Property 'density' does not exist on type '{}'.
-                              // @ts-expect-error TS(2339): Property 'density' does not exist on type '{}'.
                               {errors?.density}
                             </FormControl.ErrorMessage>
                           ) : (
@@ -1152,8 +1102,6 @@ const EditFarmlandData = ({
                       }
                       _text={{ fontSize: "xs" }}
                     >
-                      // @ts-expect-error TS(2339): Property 'plantTypes' does not exist on type '{}'.
-                      // @ts-expect-error TS(2339): Property 'plantTypes' does not exist on type '{}'.
                       {errors?.plantTypes}
                     </FormControl.ErrorMessage>
                   ) : (
@@ -1214,8 +1162,6 @@ const EditFarmlandData = ({
                           }
                           _text={{ fontSize: "xs" }}
                         >
-                          // @ts-expect-error TS(2339): Property 'clones' does not exist on type '{}'.
-                          // @ts-expect-error TS(2339): Property 'clones' does not exist on type '{}'.
                           {errors?.clones}
                         </FormControl.ErrorMessage>
                       ) : (
@@ -1260,8 +1206,6 @@ const EditFarmlandData = ({
                               }
                               _text={{ fontSize: "xs" }}
                             >
-                              // @ts-expect-error TS(2339): Property 'addedClone' does not exist on type '{}'.
-                              // @ts-expect-error TS(2339): Property 'addedClone' does not exist on type '{}'.
                               {errors?.addedClone}
                             </FormControl.ErrorMessage>
                           ) : (
@@ -1270,9 +1214,7 @@ const EditFarmlandData = ({
                         </FormControl>
                       </Box>
                       <Box
-                        // w="15%"
-
-                        // @ts-expect-error TS(2322): Type '{ children: Element; style: { justifyContent... Remove this comment to see the full error message
+                                         // @ts-expect-error TS(2322): Type '{ children: Element; style: { justifyContent... Remove this comment to see the full error message
                         style={{
                           justifyContent: "center",
                           alignItems: "center",

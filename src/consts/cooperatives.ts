@@ -1,4 +1,9 @@
-export const cooperatives = {
+
+type CooperativeProps = {
+ [key: string]: string[];
+}
+
+export const cooperatives : CooperativeProps = {
   // Niassa
   Chimbunila: ["AMPCM"],
   Cuamba: ["AMPCM"],

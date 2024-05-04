@@ -7,7 +7,6 @@ import {
   Image,
   TouchableOpacity,
   ScrollView,
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 } from "react-native"
 import React, { useCallback, useState, useEffect, useRef } from "react"
 import { Box, Stack, Center } from "native-base"
@@ -15,24 +14,6 @@ import { Icon, Overlay } from "@rneui/themed"
 import { useFocusEffect } from "@react-navigation/native"
 import KeyboardAvoidingWrapper from "../KeyboardAvoidingWrapper/KeyboardAvoidingWrapper"
 import COLORS from "../../consts/colors"
-
-// const CodeInputSection = ({ })=>{
-
-//     return (
-//         <View
-//             style={{
-//                 flexDirection: 'row',
-//                 padding: 10,
-//                 justifyContent: 'center',
-//                 alignItems: 'center',
-//             }}
-//         >
-//             <TextInput
-//                 ref={textInput}
-//             />
-//         </View>
-//     )
-// }
 
 const CodeInputField = ({
   code,
@@ -71,10 +52,7 @@ const CodeInputField = ({
         keyboardType="number-pad"
         returnKeyType="done"
         maxLength={maxCodeLength}
-        // textContentType='oneTimeCode'
-        // setPinReady={setPinReady}
-        // setCode={setCode}
-        // maxCodeLength={maxCodeLength}
+
       />
     </View>
   )
@@ -106,12 +84,7 @@ export default function OtpVerification({
       isVisible={isOTPVisible}
       onBackdropPress={toggleOverlay}
     >
-      {/* <KeyboardAvoidingWrapper
-        style={{
-            // minHeight: '100%',
-           
-        }}
-    > */}
+
       <View
         style={{
           flex: 2,
@@ -174,8 +147,7 @@ export default function OtpVerification({
           flex: 2,
           justifyContent: "center",
           alignItems: "center",
-          // height: '100%',
-          // backgroundColor: 'red',
+
         }}
       >
         <CodeInputField
@@ -191,13 +163,10 @@ export default function OtpVerification({
           flex: 1,
           justifyContent: "center",
           alignItems: "center",
-          // height: '100%',
-          // backgroundColor: 'red',
+
         }}
       >
-        {/* <Text>OTP OtpVerification</Text> */}
       </View>
-      {/* </KeyboardAvoidingWrapper> */}
     </Overlay>
   )
 }

@@ -1,9 +1,5 @@
 import React, { useEffect, useState, useRef, useCallback } from "react"
-
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { View, StyleSheet, Text, TouchableOpacity } from "react-native"
-import { Camera, useCameraDevices } from "react-native-vision-camera"
-import Animated from "react-native-reanimated"
 import { Divider, Icon, Avatar, BottomSheet } from "@rneui/base"
 import COLORS from "../../consts/colors"
 import { useNavigation } from "@react-navigation/native"
@@ -12,7 +8,6 @@ export default function PhotoBottomSheet({
   ownerType,
   ownerId,
   farmersIDs,
-  setIsPhotoModalVisible,
   launchNativeImageLibrary
 }: any) {
   const navigation = useNavigation()

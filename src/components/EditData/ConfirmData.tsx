@@ -242,8 +242,6 @@ const ConfirmData = ({
   // SuccesLottie effect
   useEffect(() => {
     if (successLottieVisible) {
-
-      // @ts-expect-error TS(2304): Cannot find name 'setTimeout'.
       setTimeout(() => {
         setSuccessLottieVisible(false);
       }, 3000);
@@ -2525,8 +2523,6 @@ const ConfirmData = ({
                     resourceName,
                   );
                 } catch (error) {
-
-                  // @ts-expect-error TS(2584): Cannot find name 'console'. Do you need to change ... Remove this comment to see the full error message
                   console.log("Could not update data", { cause: error });
                 } finally {
                   setIsConfirmDataVisible(false);
@@ -2540,21 +2536,5 @@ const ConfirmData = ({
   );
 };
 
-const styles = StyleSheet.create({
-  button: {
-    margin: 10,
-  },
-  textPrimary: {
-    marginVertical: 20,
-    textAlign: "center",
-    fontSize: 20,
-  },
-  textSecondary: {
-    marginBottom: 10,
-    textAlign: "center",
-    //   color: 'ghostwhite',
-    fontSize: 17,
-  },
-});
 
 export default ConfirmData;

@@ -1,30 +1,11 @@
 
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { TouchableOpacity, View, Text } from "react-native"
 import React, { useState } from "react"
 import { Icon, Avatar } from "@rneui/themed"
-import {
-  widthPercentageToDP as wp,
-  heightPercentageToDP as hp,
-  listenOrientationChange as lor,
-  removeOrientationListener as rol,
-} from "react-native-responsive-screen"
-
-import {
-  responsiveFontSize,
-  responsiveScreenFontSize,
-  responsiveHeight,
-  responsiveWidth,
-  responsiveScreenHeight,
-  responsiveScreenWidth,
-  useDimensionsChange,
-} from "react-native-responsive-dimensions"
 
 import { Box, Center, Stack } from "native-base"
-import { getInitials } from "../../helpers/getInitials"
 import { useNavigation } from "@react-navigation/native"
 import COLORS from "../../consts/colors"
-import { months } from "../../helpers/dates"
 import { resourceValidation } from "../../consts/resourceValidation"
 import { getPlantingYears } from "../../helpers/getPlantingYears"
 
@@ -162,4 +143,3 @@ export default function FarmlandItem({
   )
 }
 
-// export default FarmerItem

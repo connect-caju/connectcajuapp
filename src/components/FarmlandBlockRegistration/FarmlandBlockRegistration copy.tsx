@@ -14,11 +14,6 @@ import {
   SelectList,
 } from "react-native-dropdown-select-list";
 import Icon  from 'react-native-vector-icons/MaterialIcons';
-
-// import Animated, { FadeInLeft, SlideInUp } from "react-native-reanimated";
-
-import { responsiveFontSize } from "react-native-responsive-dimensions";
-
 import { Icon as RNEIcon, Button, CheckBox } from "@rneui/base";
 import COLORS from "../../consts/colors";
 import { getFullYears, getFullYears2 } from "../../helpers/dates";
@@ -29,7 +24,6 @@ import { realmContext } from "../../models/realmContext";
 import validateBlockData from "../../helpers/validateBlockData";
 import AwesomeAlert from "react-native-awesome-alerts";
 import { errorMessages } from "../../consts/errorMessages";
-import { KeyboardAwareScrollView } from "react-native-keyboard-tools";
 import PrimaryButton from "../Buttons/PrimaryButton";
 import { backgroundStyle } from "../../styles/globals";
 import { Input } from "../../../components/Input";
@@ -811,53 +805,7 @@ export default function FarmlandBlockRegistration({
                   onSelectedItemsChange={setSelectedPlantingTypes}
                   selectedItems={selectedPlantingTypes}
                 />
-                {/* <MultipleSelectList
-                  setSelected={(type: any) => {
-                    setErrors((prev: any) => ({
-                      ...prev,
-                      plantTypes: "",
-                      sameTypeTrees: "",
-                    }));
-                    setPlantTypes(type);
-                  }}
-                  data={plantingTypes}
-                  notFoundText={"Tipo de planta não encontrado"}
-                  placeholder="Tipo de plantas"
-                  searchPlaceholder="Seleccionar tipo de plantas"
-                  save="value"
-                  label="Tipo de plantas"
-                  badgeStyles={{
-                    backgroundColor: COLORS.main,
-                  }}
-                  badgeTextStyles={{
-                    fontSize: 16,
-                  }}
-                  arrowicon={
-                    <RNEIcon
-                      // size={45}
-                      name="arrow-drop-down"
-                      color={COLORS.main}
-                    />
-                  }
-                  closeicon={
-                    <RNEIcon name="close" size={20} color={COLORS.grey} />
-                  }
-                  fontFamily="JosefinSans-Regular"
-                  dropdownTextStyles={{
-                    fontSize: 16,
-                    color: COLORS.black,
-                    padding: 5,
-                  }}
-                  inputStyles={{
-                    fontSize: 16,
-                    color: "#A8A8A8",
-                  }}
-                  boxStyles={{
-                    minHeight: 55,
-                    borderRadius: 5,
-                    borderColor: COLORS.lightgrey,
-                  }}
-                /> */}
+                
                 {"plantTypes" in errors ? (
                   <FormControl.ErrorMessage
                     leftIcon={

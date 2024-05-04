@@ -1,8 +1,6 @@
 
 // @ts-expect-error TS(2307): Cannot find module 'class-variance-authority' or i... Remove this comment to see the full error message
 import { type VariantProps, cva } from 'class-variance-authority';
-
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { Text, TouchableOpacity } from 'react-native';
 
 import { cn } from '../lib/utils';
@@ -71,6 +69,7 @@ function Button({
       className={cn(buttonVariants({ variant, size, className }))}
       {...props}
     >
+      {props.children}
       <Text
         className={cn(
           buttonTextVariants({ variant, size, className: labelClasses })

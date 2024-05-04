@@ -1,8 +1,4 @@
-/* eslint-disable linebreak-style */
-/* eslint-disable prettier/prettier */
 import React from "react";
-
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { StatusBar, useColorScheme } from "react-native";
 import { DarkTheme, DefaultTheme, NavigationContainer, getFocusedRouteNameFromRoute } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -58,7 +54,6 @@ export default function AppTabs() {
               fontFamily: "JosefinSans-Bold",
             },
           })}
-          // className="bg-[#EBEBE4] dark:bg-slate-900"
         >
           <Tab.Screen
             options={{
@@ -126,17 +121,7 @@ export default function AppTabs() {
                 component={UsersStackScreen}
               />
           }
-          {/* <Tab.Screen
-            options={{
-              tabBarIcon: (tabInfo)=><Icon 
-                        name="search" 
-                        color={tabInfo.focused ? COLORS.main: COLORS.grey} 
-                        size={50} />,
-              tabBarLabel: 'Pesquisa',
-            }}
-            name="Search"
-            component={SearchScreen}
-           /> */}
+
         </Tab.Navigator>
       </NavigationContainer>
 

@@ -357,7 +357,7 @@ export default function HomeScreen({ route, navigation }: any) {
       </View>
 
       {/* Branch office manager */}
-      {/* {!isFieldAgent && customUserData?.role === roles.provincialManager && ( */}
+      {!isFieldAgent && customUserData?.role === roles.provincialManager && (
         <>
           <Text className="text-xl pt-4 text-center text-gray-400">
             {customUserData?.userProvince}
@@ -373,9 +373,9 @@ export default function HomeScreen({ route, navigation }: any) {
             tpFarmlands={tpFarmlands}
           />
         </>
-      {/* )} */}
+      )}
 
-      {isFieldAgent && false && (
+      {isFieldAgent && (
         <>
           <View className="w-full rounded-t-2xl shadow-md light:bg-neutral-100 px-2 my-6 mx-2 self-center overflow-y-scroll">
             <View

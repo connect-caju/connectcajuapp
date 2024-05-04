@@ -1,21 +1,14 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable linebreak-style */
-/* eslint-disable prettier/prettier */
 
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { View, Text } from "react-native";
 import React, { useEffect } from "react";
 import { realmContext } from "../../models/realmContext";
 
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { FlatList } from "react-native";
 import COLORS from "../../consts/colors";
 import InfoIcon from "../LottieComponents/InfoIcon";
 import { customizeItem } from "../../helpers/customizeItem";
 import { farmerTypes } from "../../consts/farmerTypes";
 
-// @ts-expect-error TS(2307): Cannot find module './PendingFarmerItem' or its co... Remove this comment to see the full error message
-import PendingFarmerItem from "./PendingFarmerItem";
 import { resourceValidation } from "../../consts/resourceValidation";
 import PendingInstitutionItem from "./PendingInstitutionItem";
 const { useRealm } = realmContext;

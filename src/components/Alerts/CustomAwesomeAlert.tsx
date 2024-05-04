@@ -1,6 +1,4 @@
 import React from "react"
-
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { View } from "react-native"
 import AwesomeAlert from "react-native-awesome-alerts"
 

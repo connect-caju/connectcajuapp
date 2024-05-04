@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import React, { useState, useEffect, useRef } from "react";
 import {
   View,
@@ -7,7 +6,7 @@ import {
   Animated,
   Image,
   TouchableOpacity,
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
+
 } from "react-native";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faCheck, faRemove } from "@fortawesome/free-solid-svg-icons";
@@ -91,7 +90,6 @@ export default function GroupMemberItem({
           }}
         >
           <FontAwesomeIcon icon={faRemove} size={15} color={COLORS.danger} />
-          {/* <FontAwesomeIcon icon={faCheck} size={15} color={COLORS.danger} /> */}
         </View>
       )}
     </Animated.View>

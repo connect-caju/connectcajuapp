@@ -2,18 +2,15 @@ import React from "react"
 import {
   Alert,
   Collapse,
-  Button,
+
   VStack,
   HStack,
   IconButton,
   CloseIcon,
   Box,
   Text,
-  Center,
-  NativeBaseProvider,
-} from "native-base"
 
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
+} from "native-base"
 import { Pressable } from "react-native"
 import COLORS from "../../consts/colors"
 

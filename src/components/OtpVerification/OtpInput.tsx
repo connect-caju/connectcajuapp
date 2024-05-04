@@ -1,8 +1,6 @@
 import React, { useRef, forwardRef } from "react"
 
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { View, TextInput, Pressable, Text } from "react-native"
-import TextInputHidden from "./TextInputHidden"
 import COLORS from "../../consts/colors"
 
 export default function OtpInput({

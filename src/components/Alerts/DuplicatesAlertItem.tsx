@@ -1,24 +1,10 @@
 import React, { useState, useEffect } from "react"
 import { Button, Box, Center } from "native-base"
-
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { View, Text, Image, Dimensions, TouchableOpacity } from "react-native"
-import { Icon, CheckBox, Avatar } from "@rneui/themed"
+import { Icon, } from "@rneui/themed"
 import {
-  faAdd,
-  faBirthdayCake,
-  faCircleUser,
-  faEllipsisVertical,
+   faBirthdayCake,
   faHome,
-  faIdCard,
-  faInstitution,
-  faLocation,
-  faLocationPin,
-  faMapLocation,
-  faMapPin,
-  faPeopleGroup,
-  faPerson,
-  faUser,
 } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome"
 

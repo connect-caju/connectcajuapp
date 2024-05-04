@@ -10,9 +10,8 @@ import {
   TextInput,
   View,
   TouchableOpacity,
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 } from "react-native"
-import { Overlay, Icon, Button, CheckBox } from "@rneui/base"
+import { Overlay, Icon, Button,  } from "@rneui/base"
 import {
   Box,
   FormControl,
@@ -24,24 +23,18 @@ import {
 } from "native-base"
 
 
-// @ts-expect-error TS(2307): Cannot find module '../EditData/ConfirmDataCopy' o... Remove this comment to see the full error message
-import ConfirmData from "../EditData/ConfirmDataCopy"
-import COLORS from "../../consts/colors"
-import CustomActivityIndicator from "../ActivityIndicator/CustomActivityIndicator"
 
+import COLORS from "../../consts/colors"
 import administrativePosts from "../../consts/administrativePosts"
-import provinces from "../../consts/provinces"
-import districts from "../../consts/districts"
+
 import villages from "../../consts/villages"
-import countries from "../../consts/countries"
 import idDocTypes from "../../consts/idDocTypes"
 import { CustomInput } from "../Inputs/CustomInput"
 import validateFarmerEditedData from "../../helpers/validateFarmerEditedData"
 
 import { useUser } from "@realm/react"
 import { realmContext } from "../../models/realmContext"
-import { useRef } from "react"
-import { far } from "@fortawesome/free-regular-svg-icons"
+
 const { useRealm } = realmContext
 
 export default function EditFarmerDetails({
@@ -314,11 +307,8 @@ export default function EditFarmerDetails({
         borderTopEndRadius: 30,
         borderLeftWidth: 2,
         borderRightWidth: 2,
-        // borderTopLeftRadius: 30,
-        // borderTopRightRadius: 30,
         maxHeight: "80%",
-        // opacity: scale?.interpolate({ inputRange: [0, 1], outputRange: [0, 1]}),
-        // transform: [{scale}],
+
       }}
     >
       <View
@@ -432,8 +422,6 @@ export default function EditFarmerDetails({
                     }
                     _text={{ fontSize: "xs" }}
                   >
-                    // @ts-expect-error TS(2339): Property 'docType' does not exist on type '{}'.
-                    // @ts-expect-error TS(2339): Property 'docType' does not exist on type '{}'.
                     {errors?.docType}
                   </FormControl.ErrorMessage>
                 ) : (
@@ -476,8 +464,6 @@ export default function EditFarmerDetails({
                       }
                       _text={{ fontSize: "xs" }}
                     >
-                      // @ts-expect-error TS(2339): Property 'docNumber' does not exist on type '{}'.
-                      // @ts-expect-error TS(2339): Property 'docNumber' does not exist on type '{}'.
                       {errors?.docNumber}
                     </FormControl.ErrorMessage>
                   ) : (
@@ -514,8 +500,6 @@ export default function EditFarmerDetails({
                     }
                     _text={{ fontSize: "xs" }}
                   >
-                    // @ts-expect-error TS(2339): Property 'nuit' does not exist on type '{}'.
-                    // @ts-expect-error TS(2339): Property 'nuit' does not exist on type '{}'.
                     {errors?.nuit}
                   </FormControl.ErrorMessage>
                 ) : (
@@ -572,8 +556,6 @@ export default function EditFarmerDetails({
                     }
                     _text={{ fontSize: "xs" }}
                   >
-                    // @ts-expect-error TS(2339): Property 'primaryPhone' does not exist on type '{}... Remove this comment to see the full error message
-                    // @ts-expect-error TS(2339): Property 'primaryPhone' does not exist on type '{}... Remove this comment to see the full error message
                     {errors?.primaryPhone}
                   </FormControl.ErrorMessage>
                 ) : (
@@ -623,8 +605,6 @@ export default function EditFarmerDetails({
                     }
                     _text={{ fontSize: "xs" }}
                   >
-                    // @ts-expect-error TS(2339): Property 'secondaryPhone' does not exist on type '... Remove this comment to see the full error message
-                    // @ts-expect-error TS(2339): Property 'secondaryPhone' does not exist on type '... Remove this comment to see the full error message
                     {errors?.secondaryPhone}
                   </FormControl.ErrorMessage>
                 ) : (
@@ -686,8 +666,6 @@ export default function EditFarmerDetails({
                     }))
                   }}
                 >
-                  // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-                  // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
                   {administrativePosts[address?.addressDistrict]?.map(
                     (adminPost: any, index: any) => (
                       <Select.Item
@@ -705,8 +683,6 @@ export default function EditFarmerDetails({
                     }
                     _text={{ fontSize: "xs" }}
                   >
-                    // @ts-expect-error TS(2339): Property 'addressAdminPost' does not exist on type... Remove this comment to see the full error message
-                    // @ts-expect-error TS(2339): Property 'addressAdminPost' does not exist on type... Remove this comment to see the full error message
                     {errors?.addressAdminPost}
                   </FormControl.ErrorMessage>
                 ) : (
@@ -754,8 +730,6 @@ export default function EditFarmerDetails({
                     }))
                   }}
                 >
-                  // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-                  // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
                   {villages[address?.addressAdminPost]?.map(
                     (village: any, index: any) => (
                       <Select.Item

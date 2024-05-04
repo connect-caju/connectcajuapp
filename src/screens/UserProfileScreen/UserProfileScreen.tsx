@@ -1,13 +1,32 @@
-import { View, Text, SafeAreaView, ScrollView, Image, Pressable, TouchableOpacity } from "react-native";
-import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import Animated, { Layout, SlideInLeft, SlideInRight, SlideOutLeft, SlideOutRight } from "react-native-reanimated";
+import {
+  View,
+  Text,
+  SafeAreaView,
+  ScrollView,
+  Image,
+  Pressable,
+  TouchableOpacity,
+} from "react-native";
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
+import Animated, {
+  Layout,
+  SlideInLeft,
+  SlideInRight,
+  SlideOutLeft,
+  SlideOutRight,
+} from "react-native-reanimated";
 import COLORS from "../../consts/colors";
 import tailwind from "twrnc";
 import {
   BottomSheetModal,
   BottomSheetModalProvider,
 } from "@gorhom/bottom-sheet";
-
 
 import { useUser } from "@realm/react";
 import { realmContext } from "../../models/realmContext";
@@ -18,31 +37,43 @@ import { errorMessages } from "../../consts/errorMessages";
 import { secrets } from "../../secrets";
 import AwesomeAlert from "react-native-awesome-alerts";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { faArrowLeft, faBook, faClose, faCog, faEnvelope, faFileEdit, faHome, faMailBulk, faMessage, faPhone, faSignOut, faUser, faUserCircle, faVoicemail } from "@fortawesome/free-solid-svg-icons";
+import {
+  faArrowLeft,
+  faBook,
+  faClose,
+  faCog,
+  faEnvelope,
+  faFileEdit,
+  faHome,
+  faMailBulk,
+  faMessage,
+  faPhone,
+  faSignOut,
+  faUser,
+  faUserCircle,
+  faVoicemail,
+} from "@fortawesome/free-solid-svg-icons";
 import UserGoalEdit from "../../components/UserGoalEdit/UserGoalEdit";
 import AppearanceMode from "../../components/Modals/AppearanceMode";
 import { useColorScheme } from "nativewind";
 import tw from "twrnc";
 const { useRealm, useQuery } = realmContext;
 
-const UserProfileScreen = ({
-  route,
-  navigation
-}: any) => {
+const UserProfileScreen = ({ route, navigation }: any) => {
   const realm = useRealm();
   const user = useUser();
   const customUserData = user?.customData;
 
   // terminate session if user has no customUserData
-  if (!customUserData){
+  if (!customUserData) {
     user?.logOut();
-    return ;
+    return;
   }
 
   const [isGoalUpdateVisible, setIsGoalUpdateVisible] = useState(false);
-  const [isAppearanceModeModalVisible, setIsAppearanceModeModalVisible] = useState(false);
+  const [isAppearanceModeModalVisible, setIsAppearanceModeModalVisible] =
+    useState(false);
   const bottomSheetRef = useRef(null);
-
 
   // const [isPhotoModalVisible, setIsPhotoModalVisible] = useState(false);
   const [isAddPhoto, setIsAddPhoto] = useState(false);
@@ -60,27 +91,21 @@ const UserProfileScreen = ({
   const [themeMode, setThemeMode] = useState("");
   const { colorScheme, toggleColorScheme } = useColorScheme();
 
-  const snapPoints = useMemo(() => ["25%", "40%", "60",], []);
+  const snapPoints = useMemo(() => ["25%", "40%", "60"], []);
 
   const handlePresentModalPress = useCallback(() => {
-
     // @ts-expect-error TS(2339): Property 'present' does not exist on type 'never'.
     bottomSheetRef?.current?.present();
   }, []);
 
   const handleDismissModalPress = useCallback(() => {
-
     // @ts-expect-error TS(2339): Property 'dismiss' does not exist on type 'never'.
     bottomSheetRef?.current?.dismiss();
     // setPresentGroupMemberOptions(false);
     // setPresentFarmlandMenu(false);
   }, []);
 
-  useEffect(() => {
-
-
-  }, [themeMode]);
-
+  useEffect(() => {}, [themeMode]);
 
   // on user registration
   const updateUserImage = async (userId: any, imageString: any) => {
@@ -132,9 +157,7 @@ const UserProfileScreen = ({
 
   return (
     <BottomSheetModalProvider>
-      <SafeAreaView
-        className={"flex flex-1 bg-neutral-100 dark:bg-gray-900"}
-      >
+      <SafeAreaView className={"flex flex-1 bg-neutral-100 dark:bg-gray-900"}>
         {/* <Text>Hello 1</Text> */}
         <AwesomeAlert
           show={alert}
@@ -169,9 +192,8 @@ const UserProfileScreen = ({
           exiting={SlideOutLeft.duration(600)}
           // layout={Layout}
           style={tailwind`flex-1 p-4`}
-
         >
-          <Pressable onPress={() => navigation.goBack()} >
+          <Pressable onPress={() => navigation.goBack()}>
             <FontAwesomeIcon icon={faArrowLeft} size={20} color={COLORS.grey} />
           </Pressable>
 
@@ -183,9 +205,7 @@ const UserProfileScreen = ({
                 setTitleAlert(errorMessages.addPhoto.title);
                 setMessageAlert(errorMessages.addPhoto.message);
                 setShowCancelButton(errorMessages.addPhoto.showCancelButton);
-                setShowConfirmButtom(
-                  errorMessages.addPhoto.showConfirmButton,
-                );
+                setShowConfirmButtom(errorMessages.addPhoto.showConfirmButton);
                 setCancelText(errorMessages.addPhoto.cancelText);
                 setConfirmText(errorMessages.addPhoto.confirmText);
                 setAlert(true);
@@ -203,7 +223,6 @@ const UserProfileScreen = ({
                     borderRadius: 120,
                   }}
                 />
-
               )}
 
               {!customUserData?.image && (
@@ -217,14 +236,10 @@ const UserProfileScreen = ({
             </TouchableOpacity>
           </View>
           <View>
-            <Text
-              className="text-xl font-semibold text-gray-600 text-center"
-            >
+            <Text className="text-xl font-semibold text-gray-600 text-center">
               {customUserData?.name}
             </Text>
-            <Text
-              className="text-xs font-normal text-center text-gray-500"
-            >
+            <Text className="text-xs font-normal text-center text-gray-500">
               (
               {(customUserData?.role as string)?.includes(roles.coopManager)
                 ? roles.coopManager
@@ -236,114 +251,102 @@ const UserProfileScreen = ({
           {/* <View className="mx-auto"> */}
 
           <View className="flex flex-row flex-wrap gap-3 justify-between items-center my-5">
-            <View
-              className="flex flex-col justify-between my-1 items-center"
-            >
-              <FontAwesomeIcon
-                icon={faHome}
-                size={20}
-                color={COLORS.grey}
-              />
-              {roles.haveReadAndWritePermissions.some(role => role.includes(customUserData?.role as string)) &&
-                <Text
-                  className="text-xs font-normal text-gray-500 text-center"
-                >
+            <View className="flex flex-col justify-between my-1 items-center">
+              <FontAwesomeIcon icon={faHome} size={20} color={COLORS.grey} />
+              {roles.haveReadAndWritePermissions.some((role) =>
+                role.includes(customUserData?.role as string),
+              ) && (
+                <Text className="text-xs font-normal text-gray-500 text-center">
                   {customUserData?.userDistrict}
                 </Text>
-              }
+              )}
 
-              {!roles.haveReadAndWritePermissions.some(role => role.includes(customUserData?.role as string)) &&
-                <Text
-                  className="text-xs font-normal text-gray-500 text-center"
-                >
+              {!roles.haveReadAndWritePermissions.some((role) =>
+                role.includes(customUserData?.role as string),
+              ) && (
+                <Text className="text-xs font-normal text-gray-500 text-center">
                   {customUserData?.userProvince}
                 </Text>
-              }
+              )}
             </View>
 
-            <View
-              className="flex flex-col justify-between my-1 items-center"
-            >
-              <FontAwesomeIcon
-                icon={faPhone}
-                size={20}
-                color={COLORS.grey}
-              />
+            <View className="flex flex-col justify-between my-1 items-center">
+              <FontAwesomeIcon icon={faPhone} size={20} color={COLORS.grey} />
 
-              <Text
-                className="text-xs font-normal text-gray-500"
-              >{customUserData?.phone}</Text>
+              <Text className="text-xs font-normal text-gray-500">
+                {customUserData?.phone}
+              </Text>
             </View>
 
-            <View
-              className="flex flex-col justify-between my-1 items-center"
-            >
+            <View className="flex flex-col justify-between my-1 items-center">
               <FontAwesomeIcon
                 icon={faEnvelope}
                 size={20}
                 color={COLORS.grey}
               />
-              <Text
-                className="text-xs font-normal text-gray-500"
-              >{customUserData?.email}</Text>
+              <Text className="text-xs font-normal text-gray-500">
+                {customUserData?.email}
+              </Text>
             </View>
           </View>
-          {/* </View> */}
 
           <CustomDivider />
 
-          <View
-            className="py-6 gap-2"
-          >
-            <TouchableOpacity disabled onPress={() => { }}
+          <View className="py-6 gap-2">
+            <TouchableOpacity
+              disabled
+              onPress={() => {}}
               className="flex flex-row gap-2 disabled:text-gray-300"
             >
-              <FontAwesomeIcon icon={faBook} size={20} color={COLORS.lightestgrey} />
-              <Text
-                className="text-gray-500 text-sm font-normal"
-              >
+              <FontAwesomeIcon
+                icon={faBook}
+                size={20}
+                color={COLORS.lightestgrey}
+              />
+              <Text className="text-gray-500 text-sm font-normal">
                 Manual de usuários
               </Text>
             </TouchableOpacity>
 
+            {
+              // ((customUserData?.role as string).includes(roles.provincialManager) ||
 
-            {((customUserData?.role as string).includes(roles.provincialManager) ||
-
-              // @ts-expect-error TS(2571): Object is of type 'unknown'.
-              customUserData?.email.includes("connectcaju2023")) && (
+              //   (customUserData?.email as string).includes("connectcaju2023")) || true &&
+              false && (
                 <TouchableOpacity
                   onPress={() => {
-                    setIsGoalUpdateVisible(true);
+                    // setIsGoalUpdateVisible(true);
+                    navigation.navigate("UserRecords", {});
                   }}
                   className="rounded-md flex flex-row gap-2 border-gray-500"
                 >
-                  <FontAwesomeIcon icon={faFileEdit} size={20} color={COLORS.main} />
-                  <Text
-                    className="text-green-700 text-sm font-normal"
-                  >
+                  <FontAwesomeIcon
+                    icon={faFileEdit}
+                    size={20}
+                    color={COLORS.main}
+                  />
+                  <Text className="text-green-700 text-sm font-normal">
                     Actualizar metas
                   </Text>
                 </TouchableOpacity>
-              )}
+              )
+            }
           </View>
           <View className="flex-1 justify-end pb-2 gap-2">
-
-            <TouchableOpacity
-              onPress={() => {
-                // user?.logOut();
-                handlePresentModalPress();
-
-
-              }}
-              className="rounded-md flex flex-row self-start gap-2"
-            >
-              <FontAwesomeIcon icon={faCog} size={20} color={COLORS.grey} />
-              <Text
-                className="text-slate-500 text-md font-normal"
+            {false && (
+              <TouchableOpacity
+                onPress={() => {
+                  // user?.logOut();
+                  handlePresentModalPress();
+                }}
+                className="rounded-md flex flex-row self-start gap-2"
               >
-                Definições
-              </Text>
-            </TouchableOpacity>
+                <FontAwesomeIcon icon={faCog} size={20} color={COLORS.grey} />
+                <Text className="text-slate-500 text-md font-normal">
+                  Definições
+                </Text>
+              </TouchableOpacity>
+            )}
 
             <TouchableOpacity
               onPress={() => {
@@ -351,11 +354,8 @@ const UserProfileScreen = ({
               }}
               className="rounded-md flex flex-row self-start gap-2"
             >
-
               <FontAwesomeIcon icon={faSignOut} size={20} color={COLORS.grey} />
-              <Text
-                className="text-slate-500 text-md font-normal rounded-"
-              >
+              <Text className="text-slate-500 text-md font-normal rounded-">
                 Terminar sessão
               </Text>
             </TouchableOpacity>
@@ -364,7 +364,7 @@ const UserProfileScreen = ({
             ref={bottomSheetRef}
             index={1}
             snapPoints={snapPoints}
-            onChange={() => { }}
+            onChange={() => {}}
             backgroundStyle={tw`bg-neutral-100 flex-1 border-t border-gray-300 rounded-t-md dark:bg-gray-900`}
           >
             <Pressable
@@ -376,13 +376,14 @@ const UserProfileScreen = ({
                 top: -15,
                 right: 3,
               }}
-
             >
               <FontAwesomeIcon icon={faClose} size={20} color={COLORS.grey} />
             </Pressable>
 
             <View className="p-4">
-              <Text className="text-gray-600 text-base font-semibold mb-3">Exibição</Text>
+              <Text className="text-gray-600 text-base font-semibold mb-3">
+                Exibição
+              </Text>
 
               <TouchableOpacity
                 onPress={() => {
@@ -393,19 +394,23 @@ const UserProfileScreen = ({
               >
                 <View className="flex flex-row items-center">
                   <Text className="text-gray-500 text-lg w-12">☀</Text>
-                  <Text className="text-gray-600 text-sm font-normal w-20">Fundo</Text>
+                  <Text className="text-gray-600 text-sm font-normal w-20">
+                    Fundo
+                  </Text>
                 </View>
-                <Text className="pl-12 text-xs -mt-1 text-gray-500">Branco (por padrão)</Text>
+                <Text className="pl-12 text-xs -mt-1 text-gray-500">
+                  Branco (por padrão)
+                </Text>
               </TouchableOpacity>
-
             </View>
-
 
             <Pressable
               onPress={handleDismissModalPress}
               className="justify-end flex-1 items-center pb-4"
             >
-              <Text className="text-ms font-normal text-gray-600 underline">Cancelar</Text>
+              <Text className="text-ms font-normal text-gray-600 underline">
+                Cancelar
+              </Text>
             </Pressable>
           </BottomSheetModal>
         </Animated.View>

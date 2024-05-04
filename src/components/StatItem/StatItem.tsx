@@ -1,8 +1,3 @@
-/* eslint-disable linebreak-style */
-/* eslint-disable react/prop-types */
-/* eslint-disable prettier/prettier */
-
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { TouchableOpacity, View, Text } from "react-native";
 import React from "react";
 import { Avatar } from "@rneui/themed";
@@ -78,4 +73,3 @@ export default function StatItem({
   );
 }
 
-// export default StatItem;

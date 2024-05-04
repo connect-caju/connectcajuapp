@@ -1,11 +1,10 @@
-/* eslint-disable prettier/prettier */
+
 import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import HomeScreen from "../../screens/HomeScreen/HomeScreen";
 import UserProfileScreen from "../../screens/UserProfileScreen/UserProfileScreen";
-// import { THEME_COLORS } from "../../util/styles";
-// import { useColorScheme } from "react-native";
+import UserRecordsScreen from "../../screens/UserRecord/UserRecordsScreen";
 
 const HomeStack = createNativeStackNavigator();
 
@@ -34,10 +33,13 @@ export default function HomeStackScreen() {
         component={HomeScreen}
       />
       <HomeStack.Screen
-          // options={{ title: 'Registo de Pomar'}}
           name="UserProfile"
           component={UserProfileScreen}
         />
+      <HomeStack.Screen 
+        name="UserRecords"
+        component={UserRecordsScreen}
+      />
     </HomeStack.Navigator>
   );
 }

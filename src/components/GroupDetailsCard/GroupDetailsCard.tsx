@@ -1,6 +1,4 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable prettier/prettier */
-/* eslint-disable linebreak-style */
+
 import {
   faBirthdayCake,
   faEllipsisVertical,
@@ -17,14 +15,12 @@ import { Stack, Box, Center } from "native-base";
 
 import React from "react";
 
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { View, Text, TouchableOpacity, Image } from "react-native";
 import Animated from "react-native-reanimated";
 import CustomDivider from "../Divider/CustomDivider";
 import COLORS from "../../consts/colors";
 import { groupAffiliationStatus } from "../../consts/groupAffiliationStatus";
 import { roles } from "../../consts/roles";
-import ValidationOptions from "../ValidationOptions/ValidationOptions";
 import { resourceTypes } from "../../consts/resourceTypes";
 import { resourceValidation } from "../../consts/resourceValidation";
 import { useState } from "react";
@@ -45,17 +41,7 @@ export default function GroupDetailsCard({
 
   return (
     <Animated.View
-      // entering={BounceIn.duration(1000)}
-      // style={{
-      //   width: "100%",
-      //   borderRadius: 15,
-      //   padding: 8,
-      //   borderColor: COLORS.dark,
-      //   backgroundColor: COLORS.ghostwhite,
-      //   marginVertical: 10,
-      //   elevation: 3,
-      //   opacity: 1,
-      // }}
+
       className="bg-white p-2 my-2 shadow-sm shadow-slate-100"
     >
       {/* Resource Status Icon (Validated, Invalidated, Pendind) */}
@@ -737,7 +723,6 @@ export default function GroupDetailsCard({
 
       {/* type and send messages (motives) of invalidation */}
       {farmer?.status === resourceValidation.status.invalidated &&
-        // roles.haveReadAndValidatePermissions.some(role => role === customUserData?.role) && 
         (
           <InvalidationMessage
             resource={farmer}
@@ -746,17 +731,6 @@ export default function GroupDetailsCard({
         )}
 
 
-      {/* {roles.haveReadAndValidatePermissions.some(role => role === customUserData?.role) &&
-        farmer?.status === resourceValidation.status.pending && (
-          <ValidationOptions
-            resource={farmer}
-            resourceType={resourceTypes.group}
-            customUserData={customUserData}
-            realm={realm}
-            alert={alert}
-            setAlert={setAlert}
-          />
-        )} */}
     </Animated.View >
   );
 }

@@ -1,8 +1,3 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable prettier/prettier */
-/* eslint-disable linebreak-style */
-
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { View, Text } from "react-native";
 import React from "react";
 import COLORS from "../../consts/colors";
@@ -17,10 +12,6 @@ const ResourceStatusIcon = ({
             style={{
                 justifyContent: "space-around",
                 alignItems: "center",
-                // position: "absolute",
-                // top: 4,
-                // right: 4,
-                // zIndex: 1,
                 flexDirection: "row",
                 borderColor:
                     resource?.status === resourceValidation.status.pending

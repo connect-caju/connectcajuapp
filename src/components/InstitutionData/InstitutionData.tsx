@@ -6,7 +6,8 @@ import {
   TextInput,
   SafeAreaView,
   FlatList,
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
+  TouchableOpacity,
+
 } from "react-native"
 import {
   Box,
@@ -33,7 +34,6 @@ import {
 // @ts-expect-error TS(7016): Could not find a declaration file for module 'acco... Remove this comment to see the full error message
 } from "accordion-collapse-react-native"
 
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'uuid... Remove this comment to see the full error message
 import { v4 as uuidv4 } from "uuid"
 import {
   widthPercentageToDP as wp,
@@ -43,19 +43,10 @@ import {
 } from "react-native-responsive-screen"
 import {
   responsiveFontSize,
-  responsiveScreenFontSize,
-  responsiveHeight,
-  responsiveWidth,
-  responsiveScreenHeight,
-  responsiveScreenWidth,
-  useDimensionsChange,
 } from "react-native-responsive-dimensions"
 
 import CustomDivider from "../../components/Divider/CustomDivider"
 import COLORS from "../../consts/colors"
-
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
-import { TouchableOpacity } from "react-native"
 
 import EditInstitutionData from "../EditData/EditInstitutionData"
 
@@ -204,15 +195,9 @@ const InstitutionData = ({
         { name: institutionResourceMessage },
       )
     })
-
-
-    // @ts-expect-error TS(2304): Cannot find name 'setInterval'.
     const interval = setInterval(() => {
       setAutoRefresh(!autoRefresh)
     }, 2000)
-
-
-    // @ts-expect-error TS(2304): Cannot find name 'clearInterval'.
     clearInterval(interval)
   }, [realm, user, message, invalidationMotives, autoRefresh, isCollapseOn])
 
@@ -602,26 +587,7 @@ const InstitutionData = ({
               </Box>
               {/* <Box w="5%"></Box> */}
               <Box w="10%">
-                {/* {           
-          customUserData?.role !== roles.provincialManager && 
-          <TouchableOpacity
-                  disabled={farmer?.status === resourceValidation.status.validated ? true : false}
-                  style={{
-                  }}
-                  onPress={
-                      ()=>{
-                          
-                      }
-                  }
-              >
-                  <Icon 
-                      // name="home" 
-                      name="edit" 
-                      size={20} 
-                      color={farmer?.status === resourceValidation.status.validated ? COLORS.lightgrey : farmer?.status === resourceValidation.status.invalidated ? COLORS.red : COLORS.main } 
-                  />
-              </TouchableOpacity>
-          } */}
+               
               </Box>
             </Stack>
 
@@ -944,11 +910,7 @@ const InstitutionData = ({
           </Stack>
 
           <CustomDivider />
-
-          // @ts-expect-error TS(2304): Cannot find name 'children'.
-          // @ts-expect-error TS(2322): Type '{ children: (false | Element)[]; direction: ... Remove this comment to see the full error message
-          // @ts-expect-error TS(2322): Type '{ children: (false | Element)[]; direction: ... Remove this comment to see the full error message
-          <Stack direction="column" w="100%" style={{ paddingTop: 5 }}>
+          <Stack direction="column" w="100%">
             <Box w="100%">
               <Text
                 style={{
@@ -1035,13 +997,7 @@ const InstitutionData = ({
                   Motivo da invalidação
                 </Text>
               )}
-              {/* <Box 
-      // w="100%"
-      style={{
-          // alignItems: 'center',
-          paddingTop: 5,
-      }}
-  > */}
+
               {invalidationMotives?.length > 0 ? (
                 invalidationMotives?.length > 0 &&
 
@@ -1090,13 +1046,10 @@ const InstitutionData = ({
                       {new Date(motive?.createdAt).getMonth() + 1}-
                       {new Date(motive?.createdAt).getFullYear()})
                     </Text>
-                    {/* </Box> */}
                   </Box>
                 ))
               ) : (
                 <Box
-                  // key={index}
-
                   // @ts-expect-error TS(2322): Type '{ children: Element[]; style: { flexGrow: nu... Remove this comment to see the full error message
                   style={{
                     flexGrow: 1,
@@ -1183,8 +1136,6 @@ const InstitutionData = ({
                           }
                           _text={{ fontSize: "xs" }}
                         >
-                          // @ts-expect-error TS(2339): Property 'invalidationMessage' does not exist on t... Remove this comment to see the full error message
-                          // @ts-expect-error TS(2339): Property 'invalidationMessage' does not exist on t... Remove this comment to see the full error message
                           {errors?.invalidationMessage}
                         </FormControl.ErrorMessage>
                       ) : (
@@ -1224,7 +1175,6 @@ const InstitutionData = ({
                               addMessage(realm, farmer?._id, message)
                             } catch (error) {
 
-                              // @ts-expect-error TS(2584): Cannot find name 'console'. Do you need to change ... Remove this comment to see the full error message
                               console.log(
                                 "Failed to add invalidation message",
                               )

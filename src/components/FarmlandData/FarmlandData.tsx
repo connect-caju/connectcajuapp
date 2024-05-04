@@ -1,6 +1,3 @@
-/* eslint-disable linebreak-style */
-/* eslint-disable react/prop-types */
-/* eslint-disable prettier/prettier */
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import {
   View,
@@ -8,7 +5,6 @@ import {
   TouchableOpacity,
   Animated,
   Easing,
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 } from "react-native";
 import {
   Box,
@@ -19,12 +15,7 @@ import {
   Collapse,
   CollapseHeader,
   CollapseBody,
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'acco... Remove this comment to see the full error message
 } from "accordion-collapse-react-native";
-import {
-  widthPercentageToDP as wp,
-  heightPercentageToDP as hp,
-} from "react-native-responsive-screen";
 
 import {
   responsiveFontSize,
@@ -58,13 +49,10 @@ import {
 import tw from "twrnc";
 
 import { SuccessLottie } from "../LottieComponents/SuccessLottie";
-import ValidationOptions from "../ValidationOptions/ValidationOptions";
 import InvalidationMessage from "../InvalidationMessage/InvalidationMessage";
 import ResourceSignature from "../ResourceSignature/ResourceSignature";
 import ResourceStatusIcon from "../ResourceStatusIcon/ResourceStatusIcon";
-import LinearGradient from "react-native-linear-gradient";
 import InfoIcon from "../LottieComponents/InfoIcon";
-import { backgroundStyle } from "../../styles/globals";
 
 const { useRealm, useQuery, useObject } = realmContext;
 
@@ -182,15 +170,9 @@ const FarmlandData = ({
         // { name: farmlandResourceMessage },
       );
     });
-
-
-    // @ts-expect-error TS(2304): Cannot find name 'setInterval'.
     const interval = setInterval(() => {
       setAutoRefresh(!autoRefresh);
     }, 2000);
-
-
-    // @ts-expect-error TS(2304): Cannot find name 'clearInterval'.
     clearInterval(interval);
   }, [
     realm,

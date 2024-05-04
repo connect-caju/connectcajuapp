@@ -1,6 +1,3 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable prettier/prettier */
-/* eslint-disable linebreak-style */
 import {
   faBirthdayCake,
   faEllipsisVertical,
@@ -13,16 +10,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { Icon } from "@rneui/base";
 import React from "react";
 
-// @ts-expect-error TS(7016): Could not find a declaration file for module 'reac... Remove this comment to see the full error message
 import { View, Text, TouchableOpacity } from "react-native";
 import Animated from "react-native-reanimated";
-import CustomDivider from "../Divider/CustomDivider";
 import COLORS from "../../consts/colors";
-import { bottomSheetFlags } from "../../consts/bottomSheetFlags";
-import { calculateAge } from "../../helpers/dates";
 import { roles } from "../../consts/roles";
 import { resourceValidation } from "../../consts/resourceValidation";
-import ValidationOptions from "../ValidationOptions/ValidationOptions";
 import { resourceTypes } from "../../consts/resourceTypes";
 import { useState } from "react";
 import InvalidationMessage from "../InvalidationMessage/InvalidationMessage";
@@ -193,21 +185,6 @@ export default function FarmerDetailsCard({
             resourceType={resourceTypes.actor}
           />
         )}
-
-      {/* Validation options: to validate or invalidate resource  */}
-      {/* {roles.haveReadAndValidatePermissions.some(role => role === customUserData?.role) &&
-        farmer?.status === resourceValidation.status.pending && (
-          <ValidationOptions
-            resource={farmer}
-            resourceType={resourceTypes.actor}
-            customUserData={customUserData}
-            realm={realm}
-            alert={alert}
-            setAlert={setAlert}
-          />
-        )} */}
-
-
 
     </Animated.View>
   );

@@ -4,10 +4,6 @@ import {
   Box,
   FormControl,
   Stack,
-  Select,
-  CheckIcon,
-  Center,
-  Radio,
   
 } from "native-base"
 import {
@@ -24,7 +20,6 @@ import { getFullYears, getFullYears2 } from "../../helpers/dates"
 import { plantingTypes } from "../../consts/plantingTypes"
 import cloneList from "../../consts/clones"
 import { CustomInput } from "../Inputs/CustomInput"
-import { v4 as uuidv4 } from "uuid"
 import { realmContext } from "../../models/realmContext"
 import validateBlockData from "../../helpers/validateBlockData"
 import AwesomeAlert from "react-native-awesome-alerts"

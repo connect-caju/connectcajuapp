@@ -1,12 +1,9 @@
 
-
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import { Icon } from "@rneui/themed";
 import { View, Text, TouchableOpacity } from "react-native";
 import COLORS from "../../consts/colors";
-import MaterialIcon from "react-native-vector-icons/MaterialCommunityIcons";
-import FontAwesomeIcon from "react-native-vector-icons/FontAwesome";
 
 export function FarmerTypeCard({
   route,
@@ -24,11 +21,6 @@ export function FarmerTypeCard({
         navigation.navigate("FarmersListLayout", {
           farmerType: item?.farmerType,
         });
-      }}
-      style={{
-        // alignItems: "center",
-        // justifyContent: "center",
-        // width: "100%",
       }}
       className="justify-center items-center"
     >
@@ -60,11 +52,6 @@ export function FarmerTypeCard({
             }}
             className="bg-white border-4 dark:bg-gray-800"
           >
-            {/* <FontAwesomeIcon
-              name={item?.icon}
-              size={40}
-              color={item?.iconColor}
-            /> */}
           </View>
         </View>
 
@@ -101,12 +88,6 @@ export function FarmerTypeCard({
               </Text>
 
               <Text
-                style={{
-                  // fontSize: 14,
-                  // fontFamily: "JosefinSans-Italic",
-                  // textAlign: "left",
-                  // color: COLORS.grey,
-                }}
                 className="text-gray-600 text-left italic font-normal text-sm"
                 numberOfLines={2}
                 ellipsizeMode={"tail"}

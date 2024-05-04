@@ -224,14 +224,10 @@ const GroupData = ({
   )
 
   useEffect(() => {
-
-    // @ts-expect-error TS(2304): Cannot find name 'setInterval'.
     const interval = setInterval(() => {
       setAutoRefresh(!autoRefresh)
     }, 1000)
 
-
-    // @ts-expect-error TS(2304): Cannot find name 'clearInterval'.
     clearInterval(interval)
   }, [navigation])
 
@@ -245,15 +241,9 @@ const GroupData = ({
         { name: groupResourceMessage },
       )
     })
-
-
-    // @ts-expect-error TS(2304): Cannot find name 'setInterval'.
     const interval = setInterval(() => {
       setAutoRefresh(!autoRefresh)
     }, 2000)
-
-
-    // @ts-expect-error TS(2304): Cannot find name 'clearInterval'.
     clearInterval(interval)
   }, [realm, user, message, invalidationMotives, autoRefresh, isCollapseOn])
 
@@ -679,15 +669,6 @@ const GroupData = ({
                             <TouchableOpacity
                               disabled={farmer?.manager ? false : true}
                               onPress={() => {
-                                // navigation.navigate('GroupMembers', {
-                                //     groupId: farmer._id,
-                                // });
-
-                                // navigation.navigate('GroupRepresentative', {
-                                //     groupId: farmer?._id,
-                                //     district: farmer?.address?.district
-                                // });
-
                                 handleDeleteRepresentative(farmer)
 
                                 setManagerEllipsisVisible(false)
@@ -761,28 +742,6 @@ const GroupData = ({
                       </TouchableOpacity>
                     </Tooltip>
                   )
-                  // <TouchableOpacity
-                  //         disabled={farmer?.status === resourceValidation.status.validated ? true : false}
-                  //         style={{
-                  //         }}
-                  //         onPress={
-                  //             ()=>{
-                  //                 // setIsOverlayVisible(!isOverlayVisible);
-                  //                 // setDataToBeUpdated('groupManager');
-                  //                 navigation.navigate('GroupRepresentative', {
-                  //                     groupId: farmer?._id,
-                  //                     district: farmer?.address?.district
-                  //                 });
-
-                  //             }
-                  //         }
-                  //     >
-                  //         <Icon
-                  //             name="edit"
-                  //             size={20}
-                  //             color={farmer?.status === resourceValidation.status.validated ? COLORS.lightgrey : farmer?.status === resourceValidation.status.invalidated ? COLORS.red : COLORS.pantone }
-                  //         />
-                  //     </TouchableOpacity>
                 }
               </Box>
             </Stack>
@@ -893,26 +852,7 @@ const GroupData = ({
                     </Text>
                   )}
 
-                {/* {   ((!farmer?.manager?.phone) || (farmer?.manager?.phone === 0)) &&
-               <Text style={{
-                      color: COLORS.grey,
-                      fontSize: 14,
-                      fontFamily: 'JosefinSans-Regular',
-                  }}
-                  >
-                      (Nenhum)
-                  </Text>
-}
-{ ((farmer?.manager?.phone) || (farmer?.manager?.phone !== 0))  &&
-              <Text style={{
-                  color: COLORS.grey,
-                  fontSize: 14,
-                  // paddingLeft: 10,
-                  fontFamily: 'JosefinSans-Regular',
-              }}>
-                  {farmer?.manager?.phone}
-              </Text>
-} */}
+                
               </Box>
             </Stack>
           </Stack>
@@ -931,7 +871,7 @@ const GroupData = ({
                   Membros
                 </Text>
               </Box>
-              {/* <Box w="25%"></Box> */}
+             
               <Box w="10%">
                 {
                   customUserData?.role !== roles.provincialManager && (
@@ -1069,29 +1009,6 @@ const GroupData = ({
                       </TouchableOpacity>
                     </Tooltip>
                   )
-
-                  // <TouchableOpacity
-                  //     disabled={farmer?.status === resourceValidation.status.validated ? true : false}
-                  //     style={{
-                  //     }}
-                  //     onPress={
-                  //         ()=>{
-                  //             setIsOverlayVisible(!isOverlayVisible);
-                  //             setDataToBeUpdated('groupMembers');
-                  //         }
-                  //     }
-                  // >
-
-                  // <Box>
-                  //     <FontAwesomeIcon
-                  //         icon={faEllipsisVertical}
-                  //         size={20}
-                  //         color={farmer?.status === resourceValidation.status.validated ? COLORS.lightgrey : farmer?.status === resourceValidation.status.invalidated ? COLORS.red : COLORS.pantone }
-                  //         fade
-                  //     />
-
-                  // </Box>
-                  // </TouchableOpacity>
                 }
               </Box>
             </Stack>
@@ -1610,11 +1527,7 @@ const GroupData = ({
           </Stack>
 
           <CustomDivider />
-
-          // @ts-expect-error TS(2304): Cannot find name 'children'.
-          // @ts-expect-error TS(2322): Type '{ children: (false | Element)[]; direction: ... Remove this comment to see the full error message
-          // @ts-expect-error TS(2322): Type '{ children: (false | Element)[]; direction: ... Remove this comment to see the full error message
-          <Stack direction="column" w="100%" style={{ paddingTop: 5 }}>
+          <Stack direction="column" w="100%">
             <Box w="100%">
               <Text
                 style={{
@@ -1841,9 +1754,7 @@ const GroupData = ({
                           }
                           _text={{ fontSize: "xs" }}
                         >
-                          // @ts-expect-error TS(2339): Property 'invalidationMessage' does not exist on t... Remove this comment to see the full error message
-                          // @ts-expect-error TS(2339): Property 'invalidationMessage' does not exist on t... Remove this comment to see the full error message
-                          {errors?.invalidationMessage}
+                            {errors?.invalidationMessage}
                         </FormControl.ErrorMessage>
                       ) : (
                         <FormControl.HelperText></FormControl.HelperText>
@@ -1881,8 +1792,6 @@ const GroupData = ({
                             try {
                               addMessage(realm, farmer?._id, message)
                             } catch (error) {
-
-                              // @ts-expect-error TS(2584): Cannot find name 'console'. Do you need to change ... Remove this comment to see the full error message
                               console.log(
                                 "Failed to add invalidation message",
                               )
@@ -2038,11 +1947,6 @@ const GroupData = ({
             oldDataObject={oldDataObject}
             setNewDataObject={setNewDataObject}
             setOldDataObject={setOldDataObject}
-            // the institution manager personal data
-            // groupManagerPhone={groupManagerPhone}
-            // setGroupManagerPhone={setGroupManagerPhone}
-            // groupManagerName={groupManagerName}
-            // setGroupManagerName={setGroupManagerName}
             oldGroupManagerPhone={oldGroupManagerPhone}
             setOldGroupManagerPhone={setOldGroupManagerPhone}
             oldGroupManagerName={oldGroupManagerName}
