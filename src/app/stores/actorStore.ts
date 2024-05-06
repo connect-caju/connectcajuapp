@@ -2,136 +2,98 @@ import { create } from "zustand";
 import { devtools, persist } from "zustand/middleware";
 import type {} from "@redux-devtools/extension"; // required for devtools typing
 import { dateLimits } from "../../helpers/dates";
-import { validateActorForm } from "../../helpers/validateActorForm";
+import { validateActorData } from "../../helpers/validateActorData";
+import Realm from "realm";
+import {
+  Address,
+  Assets,
+  Contact,
+  Coordinates,
+  ErrorType,
+  IdDocument,
+  Names,
+  UserDetails,
+} from "../../lib/types";
+import { generateUAID } from "../../helpers/generateUAID";
+import { buildActorObject } from "../../helpers/buildActorObject";
 
-type Assets = {
-  category?: string;
-  subcategory?: string;
-  assetType: string;
-  assets: string[];
-};
-
-type Names = {
-  surname: string;
-  otherNames: string;
-};
-type Address = {
-  province: string;
-  district?: string;
-  adminPost?: string;
-  village?: string;
-};
-
-type Contact = {
-  primaryPhone?: number;
-  secondaryPhone?: number;
-  email?: string;
-};
-
-type IdDocument = {
-  docType?: string;
-  docNumber?: string;
-  nuit?: number;
-};
-
-export type ActorSchema = {
+export type ActorFormDataTypes = {
+  isSprayingAgent: "Sim" | "Não" | undefined;
   names: Names;
-  uaid: string;
-  identifier?: string;
-  gender: string;
-  familySize: number;
-  birthDate: Date;
-  birthPlace: Address;
+  gender: "Masculino" | "Feminino" | "Outro" | undefined;
+  familySize: number | undefined;
   address: Address;
+  birthPlace: Address;
   contact: Contact;
-  idDocument: IdDocument;
-  image?: string;
-  assets: Assets;
-
-  userDistrict?: string;
-  userProvince?: string;
-  userId: string;
-  userName?: string;
-};
-
-export type ErrorType = {
-  [key: string]: string;
-};
-
-export type ActorFormData = {
-  isSprayingAgent: boolean;
-  isNotSprayingAgent: boolean;
-  surname: string;
-  otherNames: string;
-  gender: string;
-  familySize: string;
-  addressVillage?: string;
-  addressAdminPost?: string;
-  addressDistrict: string;
-  addressProvince: string;
-  birthVillage?: string;
-  birthAdminPost?: string;
-  birthDistrict: string;
-  birthProvince: string;
-  primaryPhone?: string;
-  secondaryPhone?: string;
-  // email?: string;
   birthDate: Date;
-  docType?: string;
-  docNumber?: string;
-  nuit?: string;
-  image?: string;
-  uaid: string;
-  identifier?: string;
-  isGroupMember: boolean;
-  isNotGroupMember: boolean;
-
+  idDocument: IdDocument;
+  isGroupMember: "Sim" | "Não" | undefined;
   errors: ErrorType;
 };
 
 type ActorFormStore = {
-  actorData: ActorFormData;
-  setActorData: (data: ActorFormData) => void;
+  actorData: ActorFormDataTypes;
+  setActorData: (data: ActorFormDataTypes) => void;
   updateActorField: (
-    field: keyof ActorFormData,
-    value: string | number | Date | boolean | ErrorType,
+    field: keyof ActorFormDataTypes,
+    value:
+      | string
+      | number
+      | Date
+      | boolean
+      | ErrorType
+      | Address
+      | IdDocument
+      | Names
+      | Contact,
   ) => void;
   resetActorForm: () => void;
   validateActorForm: () => boolean;
-  submitActorForm: () => Promise<void>;
+  submitActorForm: (
+    realm: Realm,
+    actorData: ActorFormDataTypes,
+    userDetails: UserDetails,
+    callback: (object: Realm.Object) => void,
+  ) => Promise<void>;
+};
+
+const initialFormState = {
+  isSprayingAgent: undefined,
+  names: {
+    surname: "",
+    otherNames: "",
+  },
+  gender: undefined,
+  familySize: undefined,
+  address: {
+    province: "",
+    district: "",
+    adminPost: "",
+    village: "",
+  },
+  birthPlace: {
+    province: "",
+    district: "",
+    adminPost: "",
+    village: "",
+  },
+  birthDate: new Date(dateLimits.maximumDate),
+  contact: {
+    primaryPhone: undefined,
+    secondaryPhone: undefined,
+  },
+  idDocument: {
+    nuit: undefined,
+    docNumber: "",
+    docType: "",
+  },
+  isGroupMember: undefined,
+
+  errors: {},
 };
 
 export const useActorStore = create<ActorFormStore>((set, get) => ({
-  actorData: {
-    isSprayingAgent: false,
-    isNotSprayingAgent: false,
-    surname: "",
-    otherNames: "",
-    gender: "",
-    familySize: "",
-    addressDistrict: "",
-    addressProvince: "",
-    addressAdminPost: "",
-    addressVillage: "",
-    birthDistrict: "",
-    birthProvince: "",
-    birthAdminPost: "",
-    birthVillage: "",
-    primaryPhone: "",
-    secondaryPhone: "",
-    // email: "",
-    birthDate: new Date(),
-    docNumber: "",
-    docType: "",
-    image: "",
-    nuit: "",
-    uaid: "",
-    identifier: "",
-    isGroupMember: false,
-    isNotGroupMember: false,
-
-    errors: {},
-  },
+  actorData: initialFormState,
 
   setActorData: (data) => set({ actorData: data }),
   updateActorField: (field, value) =>
@@ -143,56 +105,52 @@ export const useActorStore = create<ActorFormStore>((set, get) => ({
     })),
   resetActorForm: () =>
     set({
-      actorData: {
-        isSprayingAgent: false,
-        isNotSprayingAgent: false,
-        surname: "",
-        otherNames: "",
-        gender: "",
-        familySize: "",
-        addressDistrict: "",
-        addressProvince: "",
-        addressAdminPost: "",
-        addressVillage: "",
-        birthDistrict: "",
-        birthProvince: "",
-        birthAdminPost: "",
-        birthVillage: "",
-        primaryPhone: "",
-        secondaryPhone: "",
-        // email: "",
-        birthDate: new Date(dateLimits.maximumDate),
-        docNumber: "",
-        docType: "",
-        image: "",
-        nuit: "",
-        uaid: "",
-        identifier: "",
-        isGroupMember: false,
-        isNotGroupMember: false,
-        errors: {},
-      },
+      actorData: initialFormState,
     }),
   validateActorForm: () => {
     const actorData = get().actorData;
     const updateActorField = get().updateActorField;
-
-    const result = validateActorForm(actorData);
+    const result = validateActorData(actorData);
     if (Object.keys(result.errorMessages).length > 0) {
-      updateActorField("errors", result.errorMessages)
+      updateActorField("errors", result.errorMessages);
       return false;
     }
     return result.isValid;
   },
 
-  submitActorForm: async () => {
-    const actorData = get().actorData;
-    const isValid = get().validateActorForm();
-    if (isValid) {
-      try {
-      } catch (error) {
-        console.log(error);
-      }
-    }
+  submitActorForm: async (
+    realm: Realm,
+    actorData: ActorFormDataTypes,
+    userDatails: UserDetails,
+    callback: (actor: Realm.Object) => void,
+  ) => {
+    // saving the actor to the Realm
+
+
+    const builtActorData = buildActorObject(actorData, userDatails);
+
+    // 1. generating the uaid (unique actor identifier)
+
+    // 2. saving the actor data to the Realm
+    realm.write(async () => {
+      const newActor = await realm.create("Actor", builtActorData);
+
+      // 3. accessing the savedActor data for further use in the component
+      callback(newActor);
+    });
+
+    // // 4. in case this actor is a spraying services provider
+    // if (get().actorData.isSprayingAgent) {
+    //   const sprayerAgentObject = {
+    //     _id: uuidv4(),
+    //   };
+    // }
+
+    // // 5. in case this actor is a member of an organization
+    // if (get().actorData.isGroupMember) {
+    // }
+
+
+
   },
 }));

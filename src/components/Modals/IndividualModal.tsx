@@ -9,12 +9,12 @@ import "react-native-get-random-values";
 import { v4 as uuidv4 } from "uuid";
 
 import { generateUAID } from "../../helpers/generateUAID";
-
-import { realmContext } from "../../models/realmContext";
 import { useEffect } from "react";
 import COLORS from "../../consts/colors";
 import { dateLimits } from "../../helpers/dates";
 import PrimaryButton from "../Buttons/PrimaryButton";
+
+import { realmContext } from "../../models/realmContext";
 const { useRealm, useQuery, useObject } = realmContext;
 
 export default function IndividualModal({
@@ -247,7 +247,9 @@ export default function IndividualModal({
             />
           </View>
         </View>
-        <ScrollView>
+        <ScrollView
+          
+        >
           <View
             flex={1}
             onStartShouldSetResponder={() => true}

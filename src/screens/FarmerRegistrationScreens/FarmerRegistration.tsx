@@ -38,9 +38,7 @@ import { dateLimits } from "../../helpers/dates";
 import { farmerTypes } from "../../consts/farmerTypes";
 import PrimaryButton from "../../components/Buttons/PrimaryButton";
 import { backgroundStyle } from "../../styles/globals";
-import { ActorFormData, useActorStore } from "../../app/stores/actorStore";
-
-
+import { useActorStore } from "../../app/stores/actorStore";
 
 import { realmContext } from "../../models/realmContext";
 const { useRealm } = realmContext;
@@ -56,8 +54,6 @@ export default function FarmerRegistration({ route, navigation }: any) {
   const [selectedAddressAdminPosts, setSelectedAddressAdminPosts] = useState(
     [],
   );
-
-
 
   // handle modal view
   const [modalVisible, setModalVisible] = useState(false);
@@ -114,209 +110,7 @@ export default function FarmerRegistration({ route, navigation }: any) {
   const [actor, setActor] = useState();
   const [actorCategory, setActorCategory] = useState();
 
-  const addFarmer = (farmerType: any, realm: any, isAllowed = false) => {
-    let retrievedActorData: ActorFormData;
-    let retrievedFarmerData;
-    let farmerData;
-
-    if (farmerType === farmerTypes.farmer) {
-        updateActorField("addressProvince", customUserData?.userProvince);
-        updateActorField("addressDistrict", customUserData?.userDistrict);
-
-        console.log("formData In the Validation Scope", actorData);
-
-
-       
-      
-
-
-      // if (!validateIndividualFarmerData(farmerData, errors, setErrors)) {
-      //   setErrorAlert(true);
-      //   return;
-      // }
-      // retrievedFarmerData = validateIndividualFarmerData(
-      //   farmerData,
-      //   errors,
-      //   setErrors,
-      // );
-
-      // generate actor identifier
-      // let identifier = generateUniqueNumber(
-      //   // @ts-expect-error TS(2339): Property 'address' does not exist on type 'boolean... Remove this comment to see the full error message
-      //   retrievedFarmerData.address,
-      //   farmerTypes.farmer,
-      // );
-      // let foundIdentierMatches = realm
-      //   .objects("Actor")
-      //   .filtered("identifier == $0", identifier);
-
-      // keep checking until no match is found
-      // while (foundIdentierMatches?.length > 0) {
-      //   identifier = generateUniqueNumber(
-      //     // @ts-expect-error TS(2339): Property 'address' does not exist on type 'boolean... Remove this comment to see the full error message
-      //     retrievedFarmerData.address,
-      //     farmerTypes.farmer,
-      //   );
-      //   foundIdentierMatches = realm
-      //     .objects("Actor")
-      //     .filtered("identifier == $0", identifier);
-      // }
-
-
-      // retrievedFarmerData["identifier"] = identifier;
-
-      // setFarmerData(retrievedFarmerData);
-
-      // not allowed if the user decided to proceed
-      // on with registration after the alert on suspecious duplicates
-      // if (!isAllowed) {
-        // const uaidData = {
-        //   // @ts-expect-error TS(2339): Property 'names' does not exist on type 'boolean |... Remove this comment to see the full error message
-        //   names: retrievedFarmerData.names,
-
-        //   // @ts-expect-error TS(2339): Property 'birthDate' does not exist on type 'boole... Remove this comment to see the full error message
-        //   birthDate: retrievedFarmerData.birthDate,
-
-        //   // @ts-expect-error TS(2339): Property 'birthPlace' does not exist on type 'bool... Remove this comment to see the full error message
-        //   birthPlace: retrievedFarmerData.birthPlace,
-
-        //   // @ts-expect-error TS(2339): Property 'address' does not exist on type 'boolean... Remove this comment to see the full error message
-        //   address: retrievedFarmerData.address,
-        // };
-
-        // const uaid = generateUAID(uaidData);
-        // let suspected = realm.objects("Actor").filtered("uaid == $0", uaid);
-        // let foundSuspects = realm.objects('Actor').filtered(`otherNames`)
-
-        // get more evidence on the duplication attempt
-        // suspected = detectDuplicates(retrievedFarmerData, suspected);
-        // if (suspected.length > 0) {
-        //   setSuspectedDuplicates(suspected);
-        //   // setDuplicatesAlert(true);
-        //   setIsDuplicateModalVisible(true);
-        //   return;
-        // }
-      // }
-    } else if (farmerType === farmerTypes.institution) {
-      farmerData = {
-        isInstitutionPrivate,
-        isInstitutionPublic,
-        institutionType,
-        institutionName,
-        institutionAdminPost,
-        institutionProvince: customUserData?.userProvince,
-        institutionDistrict: customUserData?.userDistrict,
-        institutionVillage,
-        institutionManagerName,
-        institutionManagerPhone,
-        institutionNuit,
-        isPrivateInstitution,
-        institutionLicence,
-      };
-
-      if (!validateInstitutionFarmerData(farmerData, errors, setErrors)) {
-        setErrorAlert(true);
-        return;
-      }
-      retrievedFarmerData = validateInstitutionFarmerData(
-        farmerData,
-        errors,
-        setErrors,
-      );
-
-      // generate actor identifier
-      let identifier = generateUniqueNumber(
-        // @ts-expect-error TS(2339): Property 'address' does not exist on type 'boolean... Remove this comment to see the full error message
-        retrievedFarmerData.address,
-        farmerTypes.institution,
-      );
-      let foundIdentierMatches = realm
-        .objects("Institution")
-        .filtered("identifier == $0", identifier);
-
-      // keep checking until no match is found
-      while (foundIdentierMatches?.length > 0) {
-        identifier = generateUniqueNumber(
-          // @ts-expect-error TS(2339): Property 'address' does not exist on type 'boolean... Remove this comment to see the full error message
-          retrievedFarmerData.address,
-          farmerTypes.institution,
-        );
-        foundIdentierMatches = realm
-          .objects("Institution")
-          .filtered("identifier == $0", identifier);
-      }
-
-      // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-      retrievedFarmerData["identifier"] = identifier;
-
-      setFarmerData(retrievedFarmerData);
-
-      setFarmerData(retrievedFarmerData);
-    } else if (farmerType === farmerTypes.group) {
-      farmerData = {
-        isGroupActive,
-        isGroupInactive,
-        groupType,
-        groupName,
-        groupGoals,
-        groupMembersNumber,
-        groupWomenNumber,
-        groupLegalStatus,
-        groupCreationYear,
-        groupAffiliationYear,
-        groupOperatingLicence,
-        groupNuel,
-        groupNuit,
-        groupProvince: customUserData?.userProvince,
-        groupDistrict: customUserData?.userDistrict,
-        groupAdminPost,
-        groupVillage,
-      };
-
-      // @ts-expect-error TS(2554): Expected 3 arguments, but got 4.
-      if (!validateGroupFarmerData(farmerData, errors, setErrors, farmerType)) {
-        setErrorAlert(true);
-        return;
-      }
-      retrievedFarmerData = validateGroupFarmerData(
-        farmerData,
-        errors,
-        setErrors,
-
-        // @ts-expect-error TS(2554): Expected 3 arguments, but got 4.
-        farmerType,
-      );
-
-      // generate actor identifier
-      let identifier = generateUniqueNumber(
-        // @ts-expect-error TS(2339): Property 'address' does not exist on type 'boolean... Remove this comment to see the full error message
-        retrievedFarmerData.address,
-        farmerTypes.group,
-      );
-      let foundIdentierMatches = realm
-        .objects("Group")
-        .filtered("identifier == $0", identifier);
-
-      // keep checking until no match is found
-      while (foundIdentierMatches?.length > 0) {
-
-        // identifier = generateUniqueNumber(
-        //   retrievedFarmerData.address,
-        //   farmerTypes.group,
-        // );
-        foundIdentierMatches = realm
-          .objects("Group")
-          .filtered("identifier == $0", identifier);
-      }
-
-      // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-      retrievedFarmerData["identifier"] = identifier;
-
-      setFarmerData(retrievedFarmerData);
-    }
-    setModalVisible(true);
-  };
-
+  
   useEffect(() => {
     if (customUserData && customUserData.userDistrict) {
       const { userDistrict } = customUserData;
@@ -324,23 +118,38 @@ export default function FarmerRegistration({ route, navigation }: any) {
       // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
       setSelectedAddressAdminPosts(administrativePosts[userDistrict]);
     }
-    if (!actorData?.birthProvince) {
-      updateActorField("birthDistrict", "");
-      updateActorField("birthAdminPost", "");
+    if (!actorData?.birthPlace.province) {
+      updateActorField("birthPlace", {
+        ...actorData.birthPlace,
+        district: "",
+      });
+      updateActorField("birthPlace", {
+        ...actorData.birthPlace,
+        adminPost: "",
+      });
     }
-    if (!actorData?.birthDistrict) {
-      updateActorField("birthAdminPost", "");
+    if (!actorData?.birthPlace.district) {
+      updateActorField("birthPlace", {
+        ...actorData.birthPlace,
+        adminPost: "",
+      });
     }
-  }, [customUserData, actorData.birthDistrict, actorData.birthProvince ]);
+  }, [customUserData, actorData?.birthPlace.district, actorData?.birthPlace.province]);
 
   useEffect(() => {
     setLoadingActivityIndicator(true);
   }, [navigation, farmerType]);
 
-  useEffect(()=>{
-    updateActorField("addressProvince", customUserData?.userProvince);
-    updateActorField("addressDistrict", customUserData?.userDistrict);
-  }, [])
+  useEffect(() => {
+    updateActorField("address", {
+      ...actorData.address,
+      province: customUserData?.userProvince
+    });
+    updateActorField("address", {
+      ...actorData.address,
+      district: customUserData?.userDistrict
+    });
+  }, []);
 
   return (
     <SafeAreaView
@@ -523,14 +332,15 @@ export default function FarmerRegistration({ route, navigation }: any) {
               <PrimaryButton
                 onPress={() => {
                   if (farmerType?.includes(farmerTypes.farmer)) {
-                    // navigation.navigate("IndividualFarmerDataForm", {
-                    //   farmerData,
-                    //   farmerType,
-                    //   setFarmerType,
-                    // });
-                    validateActorForm();
+                    if (!validateActorForm()) {
+                      setErrorAlert(true);
+                      return;
+                    }
                   }
-                  
+                  navigation.navigate("FormDataPreview", {
+                    farmerData: farmerData,
+                    farmerType: farmerType,
+                  });
                 }}
                 title="Pré-visualizar dados"
               />

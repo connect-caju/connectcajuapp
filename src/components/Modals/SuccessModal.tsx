@@ -42,7 +42,6 @@ export default function SuccessModal({
             alignItems: "center",
           }}
         >
-          {/* <LottieProcessCompletedButton /> */}
           <Icon name="check-circle" size={100} color={COLORS.main} />
           <View
             style={{

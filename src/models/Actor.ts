@@ -4,10 +4,36 @@
  */
 
 import { Realm } from "@realm/react"
+import { ObjectSchema } from "realm"
+import { ActorType, Address, Assets, Contact, Coordinates, IdDocument, Names } from "../lib/types";
 
-export class Actor extends Realm.Object {
+export class Actor extends Realm.Object<ActorType> {
+  _id!: string;
+  names!: Names;
+  uaid!: string;
+  identifier?: string;
+  gender!: string;
+  familySize!: number;
+  birthDate!: Date;
+  birthPlace!: Address;
+  address!: Address;
+  geolocation?: Coordinates;
+  assets!: Assets[];
+  contact?: Contact;
+  idDocument?: IdDocument;
+  image!: string;
+  userDistrict?: string;
+  userProvice?: string;
+  userId!: string;
+  userName?: string;
+  status!: string;
+  checkedBy?: string;
+  modifiedBy?: string;
+  createdAt!: Date;
+  modifiedAt!: Date;
 
-  static schema = {
+
+  static schema: ObjectSchema = {
     name: "Actor",
     primaryKey: "_id",
     properties: {

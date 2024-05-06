@@ -1,6 +1,8 @@
-
-import React, { useState, useEffect, } from "react";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import React, { useState, useEffect } from "react";
+import {
+  createNativeStackNavigator,
+  NativeStackScreenProps,
+} from "@react-navigation/native-stack";
 
 import FarmersScreen from "../../screens/FarmersScreen/FarmersScreen";
 import FarmerRegistration from "../../screens/FarmerRegistrationScreens/FarmerRegistration";
@@ -13,19 +15,34 @@ import GroupRepresentativeScreen from "../../screens/GroupRepresentantiveScreen/
 import GroupMembersScreen from "../../screens/GroupMembersScreen/GroupMembersScreen";
 import FarmerGroupsScreen from "../../screens/FarmerGroupsScreen/FarmerGroupsScreen";
 import CameraScreen from "../../screens/CameraScreen/CameraScreen";
-import ProfileScreen from "../../screens/ActorScreen/ProfileScreen";
 import FarmersListLayout from "../../screens/FarmersListLayout/FarmersListLayout";
 import FarmersSearchScreen from "../../screens/FarmersSearchScreen/FarmersSearchScreen";
+import FormDataPreview from "../../screens/FormDataPreview/FormDataPreview";
+import ProfileScreen from "../../screens/ActorScreen/ProfileScreen";
 
-const FarmersStack = createNativeStackNavigator();
+export type FarmersStackParamList = {
+  Farmers: undefined;
+  Profile: {
+    actorId: string;
+  };
+  FormDataPreview: undefined;
+  FarmerForm1: undefined;
+  FarmlandForm1: undefined;
+  FarmlandAreaAudit: undefined;
+  Geolocation: undefined;
+  Membership: undefined;
+  GroupRepresentative: undefined;
+  GroupMembers: undefined;
+  FarmerGroups: undefined;
+  Camera: undefined;
+  UserStat: undefined;
+  FarmersListLayout: undefined;
+  FarmersSearch: undefined;
+};
 
+const FarmersStack = createNativeStackNavigator<FarmersStackParamList>();
 
-export default function FarmersStackScreen({
-  route,
-  navigation
-}: any) {
-
-
+export default function FarmersStackScreen({ route, navigation }: any) {
   return (
     <FarmersStack.Navigator
       screenOptions={{
@@ -61,10 +78,17 @@ export default function FarmersStackScreen({
       />
       <FarmersStack.Screen name="GroupMembers" component={GroupMembersScreen} />
       <FarmersStack.Screen name="FarmerGroups" component={FarmerGroupsScreen} />
-      <FarmersStack.Screen name="FarmersListLayout" component={FarmersListLayout} />
+      <FarmersStack.Screen
+        name="FarmersListLayout"
+        component={FarmersListLayout}
+      />
       <FarmersStack.Screen name="Camera" component={CameraScreen} />
       <FarmersStack.Screen name="Profile" component={ProfileScreen} />
-      <FarmersStack.Screen name="FarmersSearch" component={FarmersSearchScreen} />
+      <FarmersStack.Screen
+        name="FarmersSearch"
+        component={FarmersSearchScreen}
+      />
+      <FarmersStack.Screen name="FormDataPreview" component={FormDataPreview} />
     </FarmersStack.Navigator>
   );
 }

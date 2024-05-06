@@ -41,7 +41,6 @@ function SuccessAlert({
         navigation.navigate("Profile", {
           ownerId: farmerItem.ownerId,
           farmerType: farmerItem.flag,
-          farmersIDs: [],
         });
       }
     } else if (flag === "farmland") {

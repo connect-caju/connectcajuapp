@@ -1,10 +1,10 @@
-/* eslint-disable prettier/prettier */
-/* eslint-disable no-trailing-spaces */
-/* eslint-disable quotes */
-/* eslint-disable prettier/prettier */
+type DistrictCodesProps = {
+ [key: string]:string
+ }
 
-const districtCodes = {
-  Niassa: {
+export const districtCodes: DistrictCodesProps = {
+
+    // Niassa
     Chimbunila: "10",
     Cuamba: "11",
     Lago: "12",
@@ -21,10 +21,8 @@ const districtCodes = {
     "N'gauma": "23",
     Nipepe: "24",
     Sanga: "25",
-  },
-  // ],
 
-  Nampula: {
+  // Nampula
     Angoche: "50",
     Eráti: "51",
     "Ilha de Moçambique": "52",
@@ -46,13 +44,11 @@ const districtCodes = {
     "Nacala-a-Velha": "68",
     Nacarôa: "69",
     Nampula: "70",
-    // "Nampula (Cidade)",
     Rapale: "71",
     Ribáuè: "72",
-  },
-  // ],
 
-  "Cabo Delgado": {
+
+  // "Cabo Delgado"
     Ancuabe: "30",
     Balama: "31",
     Chiúre: "32",
@@ -70,10 +66,8 @@ const districtCodes = {
     Palma: "44",
     "Pemba (Cidade)": "45",
     Quissanga: "46",
-  },
-  // ],
 
-  Zambézia: {
+  // Zambézia
     "Alto Molócuè": "70",
     Chinde: "81",
     Derre: "82",
@@ -96,8 +90,7 @@ const districtCodes = {
     Nicoadala: "99",
     Pebane: "00",
     "Quelimane (Cidade)": "01",
-  },
-  // ],
+
 
   // // Tete: [
   //   "Angónia",
@@ -202,9 +195,9 @@ const districtCodes = {
   //   "Muanza",
   //   "Nhamatanda",
   // // ],
-};
+}
 
-export default districtCodes;
+
 
 // const adminPostCEP = {
 

@@ -1,11 +1,17 @@
 import { ceps } from "../consts/ceps"
+import { Names, Address } from "../lib/types"
 // import { generateUniqueNumber } from './generateUniqueNumber';
 
+type Props = {
+  names: Names,
+  birthDate: Date,
+  birthPlace: Address,
+}
 export const generateUAID = ({
   names,
   birthDate,
   birthPlace
-}: any) => {
+}: Props) => {
   const fNameInitials = names.otherNames?.slice(0, 2).toLowerCase()
   const lNameInitials = names.surname?.slice(0, 2).toLowerCase()
   const date = new Date(birthDate).valueOf()

@@ -3,6 +3,7 @@ import React, { useState, useCallback, useEffect } from "react";
 import { Icon, CheckBox } from "@rneui/themed";
 import COLORS from "../../consts/colors";
 import { useColorScheme } from "nativewind";
+import { cn } from "../../../lib/utils";
 
 interface InputCheckBoxProps {
   isChecked: boolean;

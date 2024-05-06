@@ -159,7 +159,6 @@ export default function FarmerRegistration({
         isNotGroupMember,
       };
 
-      console.log("farmerData", farmerData);
 
       if (!validateIndividualFarmerData(farmerData, errors, setErrors)) {
         setErrorAlert(true);

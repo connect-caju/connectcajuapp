@@ -1,5 +1,7 @@
 import { NativeDateService } from "@ui-kitten/components";
 import React, { useState, useEffect } from "react";
+import { FormatDateOptions, FormatOptions } from "date-fns";
+
 
 const i18n = {
   dayNames: {
@@ -113,4 +115,34 @@ export function calculateAge(dateOfBirth: any) {
   } else {
     return yearsDiff;
   }
+}
+
+export function calculateAge2(birthDate: Date) {
+  // Convert birth date string to a Date object
+  const birthDateObj = new Date(birthDate);
+
+  // Get the current date
+  const today = new Date();
+
+  // Calculate the difference in years
+  let age = today.getFullYear() - birthDateObj.getFullYear();
+
+  // If the birth date hasn't occurred yet this year, subtract one from the age
+  const monthDiff = today.getMonth() - birthDateObj.getMonth();
+  if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDateObj.getDate())) {
+    age--;
+  }
+
+  return age;
+}
+
+export const dateFormatter = (date: Date)=>{
+  
+  const ptBRDateFormatter = new Intl.DateTimeFormat('pt-BR', {
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric'
+  });
+  const formattedDate = ptBRDateFormatter.format(date);
+  return formattedDate;
 }

@@ -1,10 +1,11 @@
 import { actorCategory } from "../consts/actorCategories"
-import districtCodes from "../consts/districtCodes"
+import { districtCodes } from "../consts/districtCodes"
 
-export const generateUniqueNumber = (address: any, category: any) => {
 
-  // @ts-expect-error TS(7053): Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-  let addressCode = districtCodes[address?.province][address?.district]
+
+export const generateUniqueNumber = (district: string, category: string) => {
+
+  let addressCode = districtCodes[district]
 
   let timestamp = JSON.stringify(Date.now()).substr(-5, 5)
   let random = JSON.stringify(Math.floor(Math.random() * 900000000 + 100000000))
@@ -30,7 +31,8 @@ export const generateUniqueNumber = (address: any, category: any) => {
     identifier = `${categoryNumber}${addressCode}${uniqueNumber}`
   }
 
-  //  console.log('identifier:', identifier);
 
   return identifier
 }
+
+
