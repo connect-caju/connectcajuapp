@@ -31,9 +31,13 @@ import InputLabel from "../../components/InputLabel/InputLabel";
 import InputCheckBox from "../../components/InputCheckBox/InputCheckBox";
 import { useActorStore } from "../../app/stores/actorStore";
 
+interface Props  {
+  selectedAddressAdminPosts: string[];
+}
+
 export default function IndividualFarmerForm({
   selectedAddressAdminPosts,
-}: any) {
+}: Props) {
   const [openDatePicker, setOpenDatePicker] = useState(false);
   const { colorScheme } = useColorScheme();
   const { actorData, updateActorField, resetActorForm } = useActorStore();

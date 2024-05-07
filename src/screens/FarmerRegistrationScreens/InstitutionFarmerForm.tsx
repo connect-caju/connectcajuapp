@@ -24,43 +24,22 @@ import { realmContext } from "../../models/realmContext";
 import InputCheckBox from "../../components/InputCheckBox/InputCheckBox";
 import InputLabel from "../../components/InputLabel/InputLabel";
 import styles from "./styles";
+import { useInstitutionStore } from "../../app/stores/institutionStore";
 const { useRealm } = realmContext;
 
+interface Props {
+  selectedAddressAdminPosts: string[];
+}
+
 export default function InstitutionFarmerForm({
-  route,
-  navigation,
-  institutionType,
-  setInstitutionType,
-  institutionName,
-  setInstitutionName,
-  institutionManagerName,
-  setInstitutionManagerName,
-  institutionManagerPhone,
-  setInstitutionManagerPhone,
-  institutionAdminPost,
-  setInstitutionAdminPost,
-  institutionVillage,
-  setInstitutionVillage,
-  institutionNuit,
-  setInstitutionNuit,
-  isPrivateInstitution,
-  setIsPrivateInstitution,
-  institutionLicence,
-  setInstitutionLicence,
-  errors,
-  setErrors,
   selectedAddressAdminPosts,
-  setSelectedAddressAdminPosts,
-  isInstitutionPrivate,
-  isInstitutionPublic,
-  setIsInstitutionPrivate,
-  setIsInstitutionPublic,
-}: any) {
+}: Props) {
+  const { institutionData, updateInstitutionField, resetInstitutionForm } =
+    useInstitutionStore();
+
   useEffect(() => {
-    if (institutionType === "") {
-      setInstitutionName("");
-    }
-  }, [institutionType]);
+    resetInstitutionForm();
+  }, []);
 
   return (
     <View className="px-3 pt-6 w-full">
@@ -68,23 +47,20 @@ export default function InstitutionFarmerForm({
         <FormControl
           isRequired
           my="1"
-          isInvalid={"isPrivateInstitution" in errors}
+          isInvalid={"isPrivate" in institutionData?.errors}
         >
           <InputLabel label="Esta instituição é..." />
           <View className="flex flex-row w-full justify-between gap-2 ">
             <View className="flex-1 justify-start">
               <InputCheckBox
                 title="Privada"
-                isChecked={isPrivateInstitution}
-                errorProperty={errors?.isPrivateInstitution}
+                isChecked={institutionData.isPrivate === "Sim" ? true : false}
+                errorProperty={institutionData?.errors?.isPrivateInstitution}
                 onPress={() => {
-                  setIsInstitutionPrivate(true);
-                  setIsInstitutionPublic(false);
-                  setIsPrivateInstitution(true);
-                  setInstitutionType("");
-                  setErrors({
-                    ...errors,
-                    isPrivateInstitution: "",
+                  updateInstitutionField("isPrivate", "Sim");
+                  updateInstitutionField("errors", {
+                    ...institutionData?.errors,
+                    isPrivate: "",
                   });
                 }}
               />
@@ -92,28 +68,24 @@ export default function InstitutionFarmerForm({
             <View className="flex-1 justify-end">
               <InputCheckBox
                 title="Pública"
-                isChecked={isInstitutionPublic}
-                errorProperty={errors?.isPrivateInstitution}
+                isChecked={institutionData.isPrivate === "Não" ? true : false}
+                errorProperty={institutionData?.errors?.isPrivateInstitution}
                 onPress={() => {
-                  setIsInstitutionPrivate(false);
-                  setIsInstitutionPublic(true);
-                  setIsPrivateInstitution(false);
-                  setInstitutionType("");
-                  setInstitutionLicence("");
-                  setErrors({
-                    ...errors,
-                    isPrivateInstitution: "",
+                  updateInstitutionField("isPrivate", "Não");
+                  updateInstitutionField("errors", {
+                    ...institutionData?.errors,
+                    isPrivate: "",
                   });
                 }}
               />
             </View>
           </View>
-          {"isPrivateInstitution" in errors ? (
+          {"isPrivate" in institutionData?.errors ? (
             <FormControl.ErrorMessage
               leftIcon={<Icon name="error-outline" size={16} color="red" />}
               _text={{ fontSize: "xs" }}
             >
-              {}
+              {institutionData?.errors.isPrivate}
             </FormControl.ErrorMessage>
           ) : (
             <FormControl.HelperText></FormControl.HelperText>
@@ -126,22 +98,19 @@ export default function InstitutionFarmerForm({
           <FormControl
             isRequired
             my="1"
-            isInvalid={"institutionType" in errors}
+            isInvalid={"type" in institutionData?.errors}
           >
             <InputLabel label="Tipo de Instituicação" />
             <Select
-              // isDisabled={
-              //   !isInstitutionPrivate && !isInstitutionPublic ? true : false
-              // }
-              selectedValue={institutionType}
+              selectedValue={institutionData.type}
               placeholder={"Escolha uma instituição"}
               minHeight={50}
               dropdownCloseIcon={
                 <Icon
-                // size={45}
-                name="arrow-drop-down"
-                color="#005000"
-              />
+                  // size={45}
+                  name="arrow-drop-down"
+                  color="#005000"
+                />
               }
               _selectedItem={{
                 bg: "gray.200",
@@ -150,14 +119,15 @@ export default function InstitutionFarmerForm({
               }}
               mt={1}
               onValueChange={(newInstitutionType) => {
-                setErrors((prev: any) => ({
-                  ...prev,
-                  institutionType: "",
-                }));
-                setInstitutionType(newInstitutionType);
+                updateInstitutionField("type", newInstitutionType);
+                updateInstitutionField("errors", {
+                  ...institutionData.errors,
+                  type: "",
+                  isPrivate: "",
+                })
               }}
             >
-              {isPrivateInstitution &&
+              {institutionData.isPrivate === "Sim" &&
                 privateInstitutions?.map((institution, index) => (
                   <Select.Item
                     key={index}
@@ -165,7 +135,7 @@ export default function InstitutionFarmerForm({
                     value={institution}
                   />
                 ))}
-              {!isPrivateInstitution &&
+              {institutionData.isPrivate === "Não" &&
                 publicInstitutions?.map((institution, index) => (
                   <Select.Item
                     key={index}
@@ -175,12 +145,12 @@ export default function InstitutionFarmerForm({
                 ))}
             </Select>
 
-            {"institutionType" in errors ? (
+            {"type" in institutionData?.errors ? (
               <FormControl.ErrorMessage
                 leftIcon={<Icon name="error-outline" size={16} color="red" />}
                 _text={{ fontSize: "xs" }}
               >
-                {errors?.institutionType}
+                {institutionData?.errors?.type}
               </FormControl.ErrorMessage>
             ) : (
               <FormControl.HelperText></FormControl.HelperText>
@@ -191,27 +161,27 @@ export default function InstitutionFarmerForm({
           <FormControl
             isRequired
             my="1"
-            isInvalid={"institutionName" in errors}
+            isInvalid={"name" in institutionData?.errors}
           >
             <InputLabel label="Nome da Instituição" />
-            <Input 
-              value={institutionName}
-              onChangeText={(newInstitutionName: any) => {
-                setErrors((prev: any) => ({
-                  ...prev,
-                  institutionName: "",
-                }));
-                setInstitutionName(newInstitutionName);
+            <Input
+              value={institutionData.name}
+              onChangeText={(newInstitutionName: string) => {
+                updateInstitutionField("errors", {
+                  ...institutionData?.errors,
+                  name: "",
+                });
+                updateInstitutionField("name", newInstitutionName);
               }}
               placeholder="Nome da Instituição"
             />
-           
-            {"institutionName" in errors ? (
+
+            {"name" in institutionData?.errors ? (
               <FormControl.ErrorMessage
                 leftIcon={<Icon name="error-outline" size={16} color="red" />}
                 _text={{ fontSize: "xs" }}
               >
-                {errors?.institutionName}
+                {institutionData?.errors?.name}
               </FormControl.ErrorMessage>
             ) : (
               <FormControl.HelperText></FormControl.HelperText>
@@ -229,11 +199,11 @@ export default function InstitutionFarmerForm({
           <FormControl
             isRequired
             my="2"
-            isInvalid={"institutionAdminPost" in errors}
+            isInvalid={"adminPost" in institutionData?.errors}
           >
             <InputLabel label="Posto Adm." />
             <Select
-              selectedValue={institutionAdminPost}
+              selectedValue={institutionData.address.adminPost}
               placeholder="Escolha posto administrativo"
               minHeight={50}
               _selectedItem={{
@@ -243,30 +213,33 @@ export default function InstitutionFarmerForm({
               }}
               dropdownCloseIcon={
                 <Icon
-                // size={45}
-                name="arrow-drop-down"
-                color="#005000"
-              />
+                  // size={45}
+                  name="arrow-drop-down"
+                  color="#005000"
+                />
               }
               mt={1}
               onValueChange={(newAdminPost) => {
-                setErrors((prev: any) => ({
-                  ...prev,
-                  institutionAdminPost: "",
-                }));
-                setInstitutionAdminPost(newAdminPost);
+                updateInstitutionField("address", {
+                  ...institutionData.address,
+                  adminPost: newAdminPost,
+                });
               }}
             >
-              {selectedAddressAdminPosts?.map((adminPost: any, index: any) => (
-                <Select.Item key={index} label={adminPost} value={adminPost} />
+              {selectedAddressAdminPosts?.map((adminPost: string) => (
+                <Select.Item
+                  key={adminPost}
+                  label={adminPost}
+                  value={adminPost}
+                />
               ))}
             </Select>
-            {"institutionAdminPost" in errors ? (
+            {"adminPost" in institutionData?.errors ? (
               <FormControl.ErrorMessage
                 leftIcon={<Icon name="error-outline" size={16} color="red" />}
                 _text={{ fontSize: "xs" }}
               >
-                {errors?.institutionAdminPost}
+                {institutionData?.errors?.adminPost}
               </FormControl.ErrorMessage>
             ) : (
               <FormControl.HelperText></FormControl.HelperText>
@@ -277,7 +250,7 @@ export default function InstitutionFarmerForm({
           <FormControl isRequired my="2">
             <InputLabel label="Localidade" />
             <Select
-              selectedValue={institutionVillage}
+              selectedValue={institutionData.address.village}
               placeholder="Escolha uma localidade"
               minHeight={50}
               _selectedItem={{
@@ -287,17 +260,21 @@ export default function InstitutionFarmerForm({
               }}
               dropdownCloseIcon={
                 <Icon
-                // size={45}
-                name="arrow-drop-down"
-                color="#005000"
-              />
-                
+                  // size={45}
+                  name="arrow-drop-down"
+                  color="#005000"
+                />
               }
               mt={1}
-              onValueChange={(newVillage) => setInstitutionVillage(newVillage)}
+              onValueChange={(newVillage) => {
+                updateInstitutionField("address", {
+                  ...institutionData.address,
+                  village: newVillage,
+                });
+              }}
             >
-              {villages[institutionAdminPost]?.map(
-                (village: any, index: any) => (
+              {institutionData.address.adminPost && villages[institutionData.address.adminPost]?.map(
+                (village: string, index: number) => (
                   <Select.Item key={index} label={village} value={village} />
                 ),
               )}
@@ -310,59 +287,66 @@ export default function InstitutionFarmerForm({
       <FormControl
         isRequired
         my="1"
-        isInvalid={"institutionManagerName" in errors}
+        isInvalid={"managerName" in institutionData?.errors}
       >
         <InputLabel label="Nome do Responsável" />
-        <Input 
+        <Input
           autoCapitalize="words"
-          value={institutionManagerName}
-          onChangeText={(newManagerName: any) => {
-            setErrors((prev: any) => ({
-              ...prev,
-              institutionManagerName: "",
-            }))
-            setInstitutionManagerName(newManagerName);
+          value={institutionData.manager.fullname}
+          onChangeText={(newManagerName: string) => {
+            updateInstitutionField("manager", {
+              ...institutionData.manager,
+              fullname: newManagerName,
+            });
+            updateInstitutionField("errors", {
+              ...institutionData.errors,
+              managerName: "",
+            });
           }}
           placeholder="Nome completo do responsável"
-
         />
 
-        {"institutionManagerName" in errors ? (
+        {"managerName" in institutionData?.errors ? (
           <FormControl.ErrorMessage
             leftIcon={<Icon name="error-outline" size={16} color="red" />}
             _text={{ fontSize: "xs" }}
           >
-            {errors?.institutionManagerName}
+            {institutionData?.errors?.managerName}
           </FormControl.ErrorMessage>
         ) : (
           <FormControl.HelperText></FormControl.HelperText>
         )}
       </FormControl>
 
-      <View className="flex flex-row w-full" >
-        <View className="flex-1 mr-1" >
-          <FormControl isInvalid={"institutionManagerPhone" in errors}>
+      <View className="flex flex-row w-full">
+        <View className="flex-1 mr-1">
+          <FormControl
+            isInvalid={"phone" in institutionData?.errors}
+          >
             <InputLabel label="Tel. do Responsável" />
-            <Input 
+            <Input
               keyboardType="phone-pad"
-              value={institutionManagerPhone}
-              onChangeText={(newManagerPhone: any) => {
-                setErrors((prev: any) => ({
-                  ...prev,
-                  institutionManagerPhone: "",
-                }))
-                setInstitutionManagerPhone(newManagerPhone);
+              value={institutionData.manager.phone}
+              onChangeText={(newManagerPhone: string) => {
+                updateInstitutionField("manager", {
+                  ...institutionData.manager,
+                  phone: newManagerPhone,
+                });
+                updateInstitutionField("errors", {
+                  ...institutionData.errors,
+                  phone: "",
+                })
               }}
               placeholder="Telemóvel do responsável"
               className="text-center"
             />
 
-            {"institutionManagerPhone" in errors ? (
+            {"phone" in institutionData?.errors ? (
               <FormControl.ErrorMessage
                 leftIcon={<Icon name="error-outline" size={16} color="red" />}
                 _text={{ fontSize: "xs" }}
               >
-                {errors?.institutionManagerPhone}
+                {institutionData?.errors?.phone}
               </FormControl.ErrorMessage>
             ) : (
               <FormControl.HelperText></FormControl.HelperText>
@@ -370,28 +354,28 @@ export default function InstitutionFarmerForm({
           </FormControl>
         </View>
         <View className="flex-1 ml-1">
-          <FormControl isInvalid={"institutionNuit" in errors}>
+          <FormControl isInvalid={"nuit" in institutionData?.errors}>
             <InputLabel label="NUIT da Instituição" />
-            <Input 
+            <Input
               keyboardType="numeric"
-              value={institutionNuit}
-              onChangeText={(newNuit: any) => {
-                setErrors((prev: any) => ({
-                  ...prev,
-                  institutionNuit: "",
-                }));
-                setInstitutionNuit(newNuit);
+              value={institutionData.nuit}
+              onChangeText={(newNuit: number) => {
+                updateInstitutionField("nuit", newNuit);
+                updateInstitutionField("errors", {
+                  ...institutionData.errors,
+                  nuit: "",
+                });
               }}
               placeholder="NUIT"
               className="text-center"
             />
-            
-            {"institutionNuit" in errors ? (
+
+            {"nuit" in institutionData?.errors ? (
               <FormControl.ErrorMessage
                 leftIcon={<Icon name="error-outline" size={16} color="red" />}
                 _text={{ fontSize: "xs" }}
               >
-                {errors?.institutionNuit}
+                {institutionData?.errors?.nuit}
               </FormControl.ErrorMessage>
             ) : (
               <FormControl.HelperText></FormControl.HelperText>
@@ -399,33 +383,35 @@ export default function InstitutionFarmerForm({
           </FormControl>
         </View>
       </View>
-      {(institutionType.includes("Empresa") ||
-        institutionType?.includes("Outr") ||
-        institutionType?.includes("ONG")) && (
+      {(institutionData.type.includes("Empresa") ||
+        institutionData.type?.includes("Outr") ||
+        institutionData.type?.includes("ONG")) && (
         <View direction="row" mx="3" w="100%">
           <View w="50%" px="1" my="2">
-            <FormControl isInvalid={"institutionManagerPhone" in errors}>
+            <FormControl
+              isInvalid={"licence" in institutionData?.errors}
+            >
               <InputLabel label="N°. de Alvará" />
               <Input
                 autoCapitalize="characters"
-                value={institutionLicence}
-                onChangeText={(newLicence: any) => {
-                  setErrors((prev: any) => ({
-                    ...prev,
-                    institutionLicence: "",
-                  }));
-                  setInstitutionLicence(newLicence);
+                value={institutionData.licence}
+                onChangeText={(newLicence: string) => {
+                  updateInstitutionField("licence", newLicence);
+                  updateInstitutionField("errors", {
+                    ...institutionData.errors,
+                    licence: "",
+                  })
                 }}
                 placeholder="Alvará"
                 className="text-center"
               />
-              
-              {"institutionLicence" in errors ? (
+
+              {"licence" in institutionData?.errors ? (
                 <FormControl.ErrorMessage
                   leftIcon={<Icon name="error-outline" size={16} color="red" />}
                   _text={{ fontSize: "xs" }}
                 >
-                  {errors?.institutionLicence}
+                  {institutionData.errors?.licence}
                 </FormControl.ErrorMessage>
               ) : (
                 <FormControl.HelperText></FormControl.HelperText>

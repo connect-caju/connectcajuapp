@@ -67,6 +67,11 @@ export type Assets = {
     latitude?: number;
     longitude?: number;  
   }
+
+  export type Manager = {
+    fullname: string;
+    phone?: number;
+  }
   
 
   export type UserDetails = {

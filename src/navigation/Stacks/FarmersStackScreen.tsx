@@ -17,15 +17,21 @@ import FarmerGroupsScreen from "../../screens/FarmerGroupsScreen/FarmerGroupsScr
 import CameraScreen from "../../screens/CameraScreen/CameraScreen";
 import FarmersListLayout from "../../screens/FarmersListLayout/FarmersListLayout";
 import FarmersSearchScreen from "../../screens/FarmersSearchScreen/FarmersSearchScreen";
-import FormDataPreview from "../../screens/FormDataPreview/FormDataPreview";
-import ProfileScreen from "../../screens/ActorScreen/ProfileScreen";
+import ActorFormDataPreview from "../../screens/FormDataPreview/ActorFormDataPreview";
+import InstitutionFormDataPreview from "../../screens/FormDataPreview/InstitutionFormDataPreview";
+import ActorDashboard from "../../screens/ActorDashboards/ActorDashboard";
+import InstitutionDashboard from "../../screens/ActorDashboards/InstitutionDashboard";
 
 export type FarmersStackParamList = {
   Farmers: undefined;
-  Profile: {
+  ActorDashboard: {
     actorId: string;
   };
-  FormDataPreview: undefined;
+  InstitutionDashboard: {
+    institutionId: string;
+  };
+  ActorFormDataPreview: undefined;
+  InstitutionFormDataPreview: undefined;
   FarmerForm1: undefined;
   FarmlandForm1: undefined;
   FarmlandAreaAudit: undefined;
@@ -59,6 +65,8 @@ export default function FarmersStackScreen({ route, navigation }: any) {
       }}
       initialRouteName={"Farmers"}
     >
+      <FarmersStack.Screen name="ActorDashboard" component={ActorDashboard} />
+      <FarmersStack.Screen name="InstitutionDashboard" component={InstitutionDashboard} />
       <FarmersStack.Screen name={"Farmers"} component={FarmersScreen} />
       <FarmersStack.Screen name="FarmerForm1" component={FarmerRegistration} />
       <FarmersStack.Screen
@@ -83,12 +91,12 @@ export default function FarmersStackScreen({ route, navigation }: any) {
         component={FarmersListLayout}
       />
       <FarmersStack.Screen name="Camera" component={CameraScreen} />
-      <FarmersStack.Screen name="Profile" component={ProfileScreen} />
       <FarmersStack.Screen
         name="FarmersSearch"
         component={FarmersSearchScreen}
       />
-      <FarmersStack.Screen name="FormDataPreview" component={FormDataPreview} />
+      <FarmersStack.Screen name="ActorFormDataPreview" component={ActorFormDataPreview} />
+      <FarmersStack.Screen name="InstitutionFormDataPreview" component={InstitutionFormDataPreview} />
     </FarmersStack.Navigator>
   );
 }

@@ -34,9 +34,9 @@ import { buildActorObject } from "../../helpers/buildActorObject";
 import { UserDetails } from "../../lib/types";
 const { useRealm, useQuery, useObject } = realmContext;
 
-type Props = NativeStackScreenProps<FarmersStackParamList, "FormDataPreview">;
+type Props = NativeStackScreenProps<FarmersStackParamList, "ActorFormDataPreview">;
 
-export default function FormDataPreview({ route, navigation }: Props) {
+export default function ActorFormDataPreview({ route, navigation }: Props) {
   const realm = useRealm();
   const { actorData, submitActorForm } = useActorStore();
 
@@ -171,12 +171,11 @@ export default function FormDataPreview({ route, navigation }: Props) {
       updateUserStats(realm);
       setActorId(JSON.parse(JSON.stringify(actor))._id);
     }
-
   }, [realm, actor]);
 
   useEffect(() => {
     if (actorId) {
-      navigation.navigate("Profile", {
+      navigation.navigate("ActorDashboard", {
         actorId,
       });
       setActorId("");
@@ -228,13 +227,13 @@ export default function FormDataPreview({ route, navigation }: Props) {
           </View>
 
           <View className="flex flex-row justify-between items-center space-x-2 w-full">
-            <View className="flex-1 justify-start flex-wrap">
-              <Text className="text-lg text-black font-bold dark:text-white">
+            <View className="flex-1 justify-start ">
+              <Text className="text-lg text-black font-bold dark:text-white leading-5">
                 {builtActorData?.names?.surname}
               </Text>
             </View>
-            <View className="flex-1 justify-start flex-wrap">
-              <Text className="text-lg text-black font-bold dark:text-white">
+            <View className="flex-1 justify-start">
+              <Text className="text-lg text-black font-bold dark:text-white leading-5">
                 {builtActorData?.names?.otherNames}
               </Text>
             </View>
@@ -385,7 +384,21 @@ export default function FormDataPreview({ route, navigation }: Props) {
           </Text>
 
           <View className="flex-1 flex-col justify-center items-end">
-            {!builtActorData.birthPlace?.province?.includes("Estrangeiro") ? (
+            {!builtActorData.birthPlace?.province?.includes("Estrangeiro") &&
+              !builtActorData.birthPlace?.province?.includes("Cidade") && (
+                <View className="flex flex-col items-end justify-center">
+                  <Text className="text-lg text-black  dark:text-white">
+                    {builtActorData.birthPlace?.province}
+                  </Text>
+                  <Text className="text-lg text-black  dark:text-white">
+                    {builtActorData.birthPlace?.district}
+                  </Text>
+                  <Text className="text-lg text-black  dark:text-white">
+                    {builtActorData.birthPlace?.adminPost}
+                  </Text>
+                </View>
+              )}
+            {builtActorData.birthPlace?.province?.includes("Estrangeiro") && (
               <View className="flex flex-col items-end justify-center">
                 <Text className="text-lg text-black  dark:text-white">
                   {builtActorData.birthPlace?.province}
@@ -393,14 +406,13 @@ export default function FormDataPreview({ route, navigation }: Props) {
                 <Text className="text-lg text-black  dark:text-white">
                   {builtActorData.birthPlace?.district}
                 </Text>
-                <Text className="text-lg text-black  dark:text-white">
-                  {builtActorData.birthPlace?.adminPost}
-                </Text>
               </View>
-            ) : (
+            )}
+
+            {builtActorData.birthPlace?.province?.includes("Cidade") && (
               <View className="flex flex-col items-end justify-center">
                 <Text className="text-lg text-black  dark:text-white">
-                  {builtActorData.birthPlace?.district}
+                  {builtActorData.birthPlace?.province}
                 </Text>
               </View>
             )}

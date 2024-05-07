@@ -16,16 +16,10 @@ import administrativePosts from "../../consts/administrativePosts";
 import styles from "./styles";
 import IndividualModal from "../../components/Modals/IndividualModal";
 import CustomActivityIndicator from "../../components/ActivityIndicator/CustomActivityIndicator";
-import validateIndividualFarmerData from "../../helpers/validateIndividualFarmerData";
-import validateInstitutionFarmerData from "../../helpers/validateInstitutionFarmerData";
-import validateGroupFarmerData from "../../helpers/validateGroupFarmerData";
 import TickComponent from "../../components/LottieComponents/TickComponent";
 import GroupModal from "../../components/Modals/GroupModal";
 import InstitutionModal from "../../components/Modals/InstitutionModal";
-
-import { generateUAID } from "../../helpers/generateUAID";
 import DuplicatesAlert from "../../components/Alerts/DuplicatesAlert";
-import { detectDuplicates } from "../../helpers/detectDuplicates";
 import FarmerTypeRadioButtons from "../../components/RadioButton/FarmerTypeRadioButtons";
 import SuccessAlert from "../../components/Alerts/SuccessAlert";
 
@@ -33,19 +27,19 @@ import IndividualFarmerForm from "./IndividualFarmerForm";
 import InstitutionFarmerForm from "./InstitutionFarmerForm";
 import GroupFarmerForm from "./GroupFarmerForm";
 import COLORS from "../../consts/colors";
-import { generateUniqueNumber } from "../../helpers/generateUniqueNumber";
-import { dateLimits } from "../../helpers/dates";
 import { farmerTypes } from "../../consts/farmerTypes";
 import PrimaryButton from "../../components/Buttons/PrimaryButton";
 import { backgroundStyle } from "../../styles/globals";
 import { useActorStore } from "../../app/stores/actorStore";
 
 import { realmContext } from "../../models/realmContext";
+import { useInstitutionStore } from "../../app/stores/institutionStore";
 const { useRealm } = realmContext;
 
 export default function FarmerRegistration({ route, navigation }: any) {
   const customUserData = route.params.customUserData;
   const { actorData, updateActorField, validateActorForm } = useActorStore();
+  const { institutionData, updateInstitutionField, validateInstitutionForm } = useInstitutionStore();
   const exportedFarmerType = route.params?.farmerType || "";
 
   const realm = useRealm();
@@ -83,18 +77,6 @@ export default function FarmerRegistration({ route, navigation }: any) {
   const [isGroupActive, setIsGroupActive] = useState(false);
   const [isGroupInactive, setIsGroupInactive] = useState(false);
 
-  // Instution states
-  const [institutionType, setInstitutionType] = useState("");
-  const [institutionName, setInstitutionName] = useState("");
-  const [institutionManagerName, setInstitutionManagerName] = useState("");
-  const [institutionManagerPhone, setInstitutionManagerPhone] = useState("");
-  const [institutionAdminPost, setInstitutionAdminPost] = useState("");
-  const [institutionVillage, setInstitutionVillage] = useState("");
-  const [institutionNuit, setInstitutionNuit] = useState("");
-  const [isPrivateInstitution, setIsPrivateInstitution] = useState(false);
-  const [institutionLicence, setInstitutionLicence] = useState("");
-  const [isInstitutionPublic, setIsInstitutionPublic] = useState(false);
-  const [isInstitutionPrivate, setIsInstitutionPrivate] = useState(false);
 
   // -------------------------------------------------------------
   const [loadingActivitiyIndicator, setLoadingActivityIndicator] =
@@ -110,7 +92,6 @@ export default function FarmerRegistration({ route, navigation }: any) {
   const [actor, setActor] = useState();
   const [actorCategory, setActorCategory] = useState();
 
-  
   useEffect(() => {
     if (customUserData && customUserData.userDistrict) {
       const { userDistrict } = customUserData;
@@ -134,7 +115,11 @@ export default function FarmerRegistration({ route, navigation }: any) {
         adminPost: "",
       });
     }
-  }, [customUserData, actorData?.birthPlace.district, actorData?.birthPlace.province]);
+  }, [
+    customUserData,
+    actorData?.birthPlace.district,
+    actorData?.birthPlace.province,
+  ]);
 
   useEffect(() => {
     setLoadingActivityIndicator(true);
@@ -143,11 +128,11 @@ export default function FarmerRegistration({ route, navigation }: any) {
   useEffect(() => {
     updateActorField("address", {
       ...actorData.address,
-      province: customUserData?.userProvince
+      province: customUserData?.userProvince,
     });
     updateActorField("address", {
       ...actorData.address,
-      district: customUserData?.userDistrict
+      district: customUserData?.userDistrict,
     });
   }, []);
 
@@ -248,7 +233,6 @@ export default function FarmerRegistration({ route, navigation }: any) {
           {farmerType === farmerTypes.farmer && (
             <IndividualFarmerForm
               selectedAddressAdminPosts={selectedAddressAdminPosts}
-              setSelectedAddressAdminPosts={setSelectedAddressAdminPosts}
             />
           )}
 
@@ -256,34 +240,7 @@ export default function FarmerRegistration({ route, navigation }: any) {
 
           {farmerType === farmerTypes.institution && (
             <InstitutionFarmerForm
-              institutionType={institutionType}
-              setInstitutionType={setInstitutionType}
-              institutionName={institutionName}
-              setInstitutionName={setInstitutionName}
-              institutionManagerName={institutionManagerName}
-              setInstitutionManagerName={setInstitutionManagerName}
-              institutionManagerPhone={institutionManagerPhone}
-              setInstitutionManagerPhone={setInstitutionManagerPhone}
-              institutionAdminPost={institutionAdminPost}
-              setInstitutionAdminPost={setInstitutionAdminPost}
-              institutionVillage={institutionVillage}
-              setInstitutionVillage={setInstitutionVillage}
-              institutionNuit={institutionNuit}
-              setInstitutionNuit={setInstitutionNuit}
-              isPrivateInstitution={isPrivateInstitution}
-              setIsPrivateInstitution={setIsPrivateInstitution}
-              institutionLicence={institutionLicence}
-              setInstitutionLicence={setInstitutionLicence}
-              errors={errors}
-              setErrors={setErrors}
-              // setAddressAdminPosts={setAddressAdminPosts}
-              // addressAdminPost={addressAdminPost}
               selectedAddressAdminPosts={selectedAddressAdminPosts}
-              setSelectedAddressAdminPosts={setSelectedAddressAdminPosts}
-              isInstitutionPrivate={isInstitutionPrivate}
-              isInstitutionPublic={isInstitutionPublic}
-              setIsInstitutionPrivate={setIsInstitutionPrivate}
-              setIsInstitutionPublic={setIsInstitutionPublic}
             />
           )}
 
@@ -337,7 +294,13 @@ export default function FarmerRegistration({ route, navigation }: any) {
                       return;
                     }
                   }
-                  navigation.navigate("FormDataPreview", {
+                  else if (farmerType?.includes(farmerTypes.institution)){
+                    if (!validateInstitutionForm()){
+                      setErrorAlert(true);
+                      return ;
+                    }
+                  }
+                  navigation.navigate("ActorFormDataPreview", {
                     farmerData: farmerData,
                     farmerType: farmerType,
                   });
@@ -429,14 +392,14 @@ export default function FarmerRegistration({ route, navigation }: any) {
                 farmerData={farmerData}
                 farmerType={farmerType}
                 setFarmerType={setFarmerType}
-                setInstitutionType={setInstitutionType}
-                setInstitutionName={setInstitutionName}
-                setInstitutionAdminPost={setInstitutionAdminPost}
-                setInstitutionVillage={setInstitutionVillage}
-                setInstitutionManagerName={setInstitutionManagerName}
-                setInstitutionManagerPhone={setInstitutionManagerPhone}
-                setInstitutionNuit={setInstitutionNuit}
-                setIsPrivateInstitution={setIsPrivateInstitution}
+                // setInstitutionType={setInstitutionType}
+                // setInstitutionName={setInstitutionName}
+                // setInstitutionAdminPost={setInstitutionAdminPost}
+                // setInstitutionVillage={setInstitutionVillage}
+                // setInstitutionManagerName={setInstitutionManagerName}
+                // setInstitutionManagerPhone={setInstitutionManagerPhone}
+                // setInstitutionNuit={setInstitutionNuit}
+                // setIsPrivateInstitution={setIsPrivateInstitution}
                 setFarmerItem={setFarmerItem}
                 farmerItem={farmerItem}
                 setIsCoordinatesModalVisible={setIsCoordinatesModalVisible}
