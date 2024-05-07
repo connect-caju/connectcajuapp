@@ -5,6 +5,7 @@ import { dateLimits } from "../../helpers/dates";
 import { validateActorData } from "../../helpers/validateActorData";
 import Realm from "realm";
 import {
+  ActorFormDataTypes,
   Address,
   Assets,
   Contact,
@@ -17,19 +18,6 @@ import {
 import { generateUAID } from "../../helpers/generateUAID";
 import { buildActorObject } from "../../helpers/buildActorObject";
 
-export type ActorFormDataTypes = {
-  isSprayingAgent: "Sim" | "Não" | undefined;
-  names: Names;
-  gender: "Masculino" | "Feminino" | "Outro" | undefined;
-  familySize: number | undefined;
-  address: Address;
-  birthPlace: Address;
-  contact: Contact;
-  birthDate: Date;
-  idDocument: IdDocument;
-  isGroupMember: "Sim" | "Não" | undefined;
-  errors: ErrorType;
-};
 
 type ActorFormStore = {
   actorData: ActorFormDataTypes;

@@ -7,25 +7,13 @@ import {
   Assets,
   Coordinates,
   ErrorType,
+  InstitutionFormDataTypes,
   Manager,
   UserDetails,
 } from "../../lib/types";
-import { generateUAID } from "../../helpers/generateUAID";
-import { buildActorObject } from "../../helpers/buildActorObject";
 import { validateInstitutionData } from "../../helpers/validateInstitutionData";
 import { buildInstitutionObject } from "../../helpers/buildInstitutionObject";
 
-export type InstitutionFormDataTypes = {
-  isPrivate: "Sim" | "Não" | undefined;
-  type: string;
-  name: string;
-  address: Address;
-  manager: Manager;
-  nuit?: number;
-  licence?: string;
-
-  errors: ErrorType;
-};
 
 type InstitutionFormStore = {
   institutionData: InstitutionFormDataTypes;
@@ -100,29 +88,14 @@ export const useInstitutionStore = create<InstitutionFormStore>((set, get) => ({
     userDatails: UserDetails,
     callback: (actor: Realm.Object) => void,
   ) => {
-    // saving the actor to the Realm
-
+    // get the formatted data
     const builtInstitutionData = buildInstitutionObject(institutionData, userDatails);
 
-    // 1. generating the uaid (unique actor identifier)
-
-    // 2. saving the actor data to the Realm
+    // 1. save the institution data to the Realm
     realm.write(async () => {
       const newActor = await realm.create("Institution", builtInstitutionData);
-
-      // 3. accessing the savedActor data for further use in the component
       callback(newActor);
     });
 
-    // // 4. in case this actor is a spraying services provider
-    // if (get().institutionData.isSprayingAgent) {
-    //   const sprayerAgentObject = {
-    //     _id: uuidv4(),
-    //   };
-    // }
-
-    // // 5. in case this actor is a member of an organization
-    // if (get().institutionData.isGroupMember) {
-    // }
   },
 }));

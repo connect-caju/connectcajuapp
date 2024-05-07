@@ -9,7 +9,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
-import { ActorFormDataTypes, useActorStore } from "../../app/stores/actorStore";
+import { useActorStore } from "../../app/stores/actorStore";
 import { Switch } from "../../../components/Switch";
 import COLORS from "../../consts/colors";
 import { capitalize } from "../../helpers/capitalize";
@@ -21,6 +21,7 @@ import {
   faArrowLeft,
   faArrowRight,
   faBell,
+  faChevronCircleLeft,
   faChevronCircleRight,
 } from "@fortawesome/free-solid-svg-icons";
 
@@ -31,7 +32,7 @@ import { realmContext } from "../../models/realmContext";
 import { useUser } from "@realm/react";
 import { FarmersStackParamList } from "../../navigation/Stacks/FarmersStackScreen";
 import { buildActorObject } from "../../helpers/buildActorObject";
-import { UserDetails } from "../../lib/types";
+import { ActorFormDataTypes, CombinedPartialsUserActor, RealmActorObject, UserDetails } from "../../lib/types";
 const { useRealm, useQuery, useObject } = realmContext;
 
 type Props = NativeStackScreenProps<FarmersStackParamList, "ActorFormDataPreview">;
@@ -43,6 +44,7 @@ export default function ActorFormDataPreview({ route, navigation }: Props) {
   const [showFloatingButton, setShowFloatingButton] = useState(true);
   const [actor, setActor] = useState<Realm.Object>();
   const [actorId, setActorId] = useState<string>();
+  const [formattedData, setFormattedData] = useState<ActorFormDataTypes>()
 
   const user = useUser();
   const customUserData = user?.customData;
@@ -52,7 +54,6 @@ export default function ActorFormDataPreview({ route, navigation }: Props) {
     userDistrict: customUserData?.userDistrict,
     userProvince: customUserData?.userProvince,
   } as UserDetails;
-  const builtActorData = buildActorObject(actorData, userDetails);
 
   const handleScrollBeginDrag = () => {
     setShowFloatingButton(false);
@@ -168,9 +169,10 @@ export default function ActorFormDataPreview({ route, navigation }: Props) {
         }
       }
 
-      updateUserStats(realm);
       setActorId(JSON.parse(JSON.stringify(actor))._id);
+      updateUserStats(realm);
     }
+  
   }, [realm, actor]);
 
   useEffect(() => {
@@ -181,7 +183,14 @@ export default function ActorFormDataPreview({ route, navigation }: Props) {
       setActorId("");
       setActor(undefined);
     }
-  }, [actorId]);
+
+  }, [ actorId ]);
+
+  useEffect(()=>{
+    setFormattedData(actorData)
+  }, [])
+
+
 
   return (
     <SafeAreaProvider>
@@ -229,12 +238,12 @@ export default function ActorFormDataPreview({ route, navigation }: Props) {
           <View className="flex flex-row justify-between items-center space-x-2 w-full">
             <View className="flex-1 justify-start ">
               <Text className="text-lg text-black font-bold dark:text-white leading-5">
-                {builtActorData?.names?.surname}
+                {formattedData?.names?.surname}
               </Text>
             </View>
             <View className="flex-1 justify-start">
               <Text className="text-lg text-black font-bold dark:text-white leading-5">
-                {builtActorData?.names?.otherNames}
+                {formattedData?.names?.otherNames}
               </Text>
             </View>
           </View>
@@ -292,7 +301,7 @@ export default function ActorFormDataPreview({ route, navigation }: Props) {
             </Text>
 
             <Text className="text-lg font-bold text-black dark:text-white">
-              {calculateAge2(builtActorData?.birthDate)} anos
+              {calculateAge2(formattedData?.birthDate as Date)} anos
             </Text>
           </View>
 
@@ -302,9 +311,9 @@ export default function ActorFormDataPreview({ route, navigation }: Props) {
             </Text>
 
             <Text className="text-lg font-bold text-black dark:text-white">
-              {builtActorData.gender === "Masculino"
+              {formattedData?.gender === "Masculino"
                 ? "Homem"
-                : builtActorData.gender === "Feminino"
+                : formattedData?.gender === "Feminino"
                 ? "Mulher"
                 : "Outro"}
             </Text>
@@ -315,7 +324,7 @@ export default function ActorFormDataPreview({ route, navigation }: Props) {
               Agregado
             </Text>
             <Text className="text-lg font-bold text-black dark:text-white">
-              {builtActorData?.familySize}
+              {formattedData?.familySize}
             </Text>
           </View>
         </View>
@@ -325,26 +334,26 @@ export default function ActorFormDataPreview({ route, navigation }: Props) {
             Contatos
           </Text>
           <View>
-            {builtActorData?.contact?.primaryPhone &&
-            builtActorData?.contact?.secondaryPhone ? (
+            {formattedData?.contact?.primaryPhone &&
+            formattedData?.contact?.secondaryPhone ? (
               <View className="flex flex-row justify-between items-center space-x-2 flex-wrap">
                 <Text className="text-lg text-black font-bold dark:text-white tracking-widest">
-                  {builtActorData?.contact?.primaryPhone}
+                  {formattedData?.contact?.primaryPhone}
                 </Text>
                 <Text className="text-lg text-black font-bold dark:text-white tracking-widest">
-                  {builtActorData?.contact?.secondaryPhone}
+                  {formattedData?.contact?.secondaryPhone}
                 </Text>
               </View>
-            ) : builtActorData?.contact?.primaryPhone ? (
+            ) : formattedData?.contact?.primaryPhone ? (
               <View className="flex flex-row justify-start">
                 <Text className="text-lg text-black font-bold dark:text-white tracking-widest">
-                  {builtActorData?.contact?.primaryPhone}
+                  {formattedData?.contact?.primaryPhone}
                 </Text>
               </View>
-            ) : builtActorData?.contact?.secondaryPhone ? (
+            ) : formattedData?.contact?.secondaryPhone ? (
               <View className="flex flex-row justify-end">
                 <Text className="text-lg text-black font-bold dark:text-white tracking-widest">
-                  {builtActorData?.contact?.secondaryPhone}
+                  {formattedData?.contact?.secondaryPhone}
                 </Text>
               </View>
             ) : (
@@ -365,14 +374,14 @@ export default function ActorFormDataPreview({ route, navigation }: Props) {
 
           <View className="flex-1 flex-col justify-center items-end">
             <Text className="text-lg text-black dark:text-white">
-              {builtActorData?.address?.district}
+              {formattedData?.address?.district}
             </Text>
             <Text className="text-lg text-black  dark:text-white">
-              {builtActorData?.address?.adminPost}
+              {formattedData?.address?.adminPost}
             </Text>
             <Text className="text-lg text-black  dark:text-white">
-              {builtActorData.address?.village &&
-                builtActorData.address?.village}
+              {formattedData?.address?.village &&
+                formattedData?.address?.village}
             </Text>
           </View>
         </View>
@@ -384,35 +393,35 @@ export default function ActorFormDataPreview({ route, navigation }: Props) {
           </Text>
 
           <View className="flex-1 flex-col justify-center items-end">
-            {!builtActorData.birthPlace?.province?.includes("Estrangeiro") &&
-              !builtActorData.birthPlace?.province?.includes("Cidade") && (
+            {!formattedData?.birthPlace?.province?.includes("Estrangeiro") &&
+              !formattedData?.birthPlace?.province?.includes("Cidade") && (
                 <View className="flex flex-col items-end justify-center">
                   <Text className="text-lg text-black  dark:text-white">
-                    {builtActorData.birthPlace?.province}
+                    {formattedData?.birthPlace?.province}
                   </Text>
                   <Text className="text-lg text-black  dark:text-white">
-                    {builtActorData.birthPlace?.district}
+                    {formattedData?.birthPlace?.district}
                   </Text>
                   <Text className="text-lg text-black  dark:text-white">
-                    {builtActorData.birthPlace?.adminPost}
+                    {formattedData?.birthPlace?.adminPost}
                   </Text>
                 </View>
               )}
-            {builtActorData.birthPlace?.province?.includes("Estrangeiro") && (
+            {formattedData?.birthPlace?.province?.includes("Estrangeiro") && (
               <View className="flex flex-col items-end justify-center">
                 <Text className="text-lg text-black  dark:text-white">
-                  {builtActorData.birthPlace?.province}
+                  {formattedData.birthPlace?.province}
                 </Text>
                 <Text className="text-lg text-black  dark:text-white">
-                  {builtActorData.birthPlace?.district}
+                  {formattedData.birthPlace?.district}
                 </Text>
               </View>
             )}
 
-            {builtActorData.birthPlace?.province?.includes("Cidade") && (
+            {formattedData?.birthPlace?.province?.includes("Cidade") && (
               <View className="flex flex-col items-end justify-center">
                 <Text className="text-lg text-black  dark:text-white">
-                  {builtActorData.birthPlace?.province}
+                  {formattedData.birthPlace?.province}
                 </Text>
               </View>
             )}
@@ -426,14 +435,14 @@ export default function ActorFormDataPreview({ route, navigation }: Props) {
           </Text>
 
           <View className="flex flex-col justify-end items-end">
-            {builtActorData.idDocument?.docType &&
-            !builtActorData.idDocument?.docType.includes("Não") ? (
+            {formattedData?.idDocument?.docType &&
+            !formattedData.idDocument?.docType.includes("Não") ? (
               <Text className="text-sm italic text-black  dark:text-white">
-                {builtActorData.idDocument?.docType}:{" "}
-                {builtActorData.idDocument?.docNumber}
+                {formattedData.idDocument?.docType}:{" "}
+                {formattedData.idDocument?.docNumber}
               </Text>
-            ) : builtActorData.idDocument?.docType &&
-              builtActorData.idDocument?.docType.includes("Não") ? (
+            ) : formattedData?.idDocument?.docType &&
+              formattedData.idDocument?.docType.includes("Não") ? (
               <Text className="text-sm italic text-black  dark:text-white">
                 Não tem documento de identificação
               </Text>
@@ -442,9 +451,9 @@ export default function ActorFormDataPreview({ route, navigation }: Props) {
                 Não tem documento de identificação
               </Text>
             )}
-            {builtActorData.idDocument?.nuit ? (
+            {formattedData?.idDocument?.nuit ? (
               <Text className="text-sm italic text-black  dark:text-white">
-                NUIT: {builtActorData.idDocument?.nuit}
+                NUIT: {formattedData.idDocument?.nuit}
               </Text>
             ) : (
               <Text className="text-sm italic text-black  dark:text-white">
@@ -454,7 +463,8 @@ export default function ActorFormDataPreview({ route, navigation }: Props) {
           </View>
         </View>
 
-        <View>
+      </ScrollView>
+        <View className="px-3 py-3">
           <PrimaryButton
             onPress={async () => {
               try {
@@ -470,14 +480,13 @@ export default function ActorFormDataPreview({ route, navigation }: Props) {
         </View>
 
         <StatusBar backgroundColor="transparent" />
-      </ScrollView>
       {showFloatingButton && (
         <TouchableOpacity
           onPress={() => navigation.goBack()}
-          className="absolute bottom-20 right-5 opacity-80  rounded-full p-3 bg-[#008000] z-[100]"
+          className="absolute bottom-20 left-5 opacity-80  rounded-full p-3 bg-[#008000] z-[100]"
         >
           <FontAwesomeIcon
-            icon={faChevronCircleRight}
+            icon={faChevronCircleLeft}
             size={25}
             color={COLORS.white}
           />

@@ -39,12 +39,10 @@ const { useRealm } = realmContext;
 export default function FarmerRegistration({ route, navigation }: any) {
   const customUserData = route.params.customUserData;
   const { actorData, updateActorField, validateActorForm } = useActorStore();
-  const { institutionData, updateInstitutionField, validateInstitutionForm } = useInstitutionStore();
-  const exportedFarmerType = route.params?.farmerType || "";
+  const validateInstitutionForm = useInstitutionStore().validateInstitutionForm;
+  const exportedFarmerType = route.params?.farmerType;
 
-  const realm = useRealm();
-
-  // address
+   // address
   const [selectedAddressAdminPosts, setSelectedAddressAdminPosts] = useState(
     [],
   );
@@ -56,7 +54,6 @@ export default function FarmerRegistration({ route, navigation }: any) {
   const [errorAlert, setErrorAlert] = useState(false);
 
   const [errors, setErrors] = useState({});
-  const [farmerData, setFarmerData] = useState({});
 
   const [farmerType, setFarmerType] = useState(exportedFarmerType);
 
@@ -77,20 +74,28 @@ export default function FarmerRegistration({ route, navigation }: any) {
   const [isGroupActive, setIsGroupActive] = useState(false);
   const [isGroupInactive, setIsGroupInactive] = useState(false);
 
-
   // -------------------------------------------------------------
   const [loadingActivitiyIndicator, setLoadingActivityIndicator] =
-    useState(false);
-  const [isCoordinatesModalVisible, setIsCoordinatesModalVisible] =
     useState(false);
 
   // farmers suspected duplicates
   const [suspectedDuplicates, setSuspectedDuplicates] = useState([]);
 
-  const [farmerItem, setFarmerItem] = useState({});
-
-  const [actor, setActor] = useState();
-  const [actorCategory, setActorCategory] = useState();
+  const handleSubmitFormData = () => {
+    if (farmerType?.includes(farmerTypes.farmer)) {
+      if (!validateActorForm()) {
+        setErrorAlert(true);
+        return;
+      }
+      navigation.navigate("ActorFormDataPreview");
+    } else if (farmerType?.includes(farmerTypes.institution)) {
+      if (!validateInstitutionForm()) {
+        setErrorAlert(true);
+        return;
+      }
+      navigation.navigate("InstitutionFormDataPreview");
+    }
+  };
 
   useEffect(() => {
     if (customUserData && customUserData.userDistrict) {
@@ -137,21 +142,8 @@ export default function FarmerRegistration({ route, navigation }: any) {
   }, []);
 
   return (
-    <SafeAreaView
-      className={`flex flex-1 flex-col justify-center mb-10 ${backgroundStyle}`}
-    >
-      <Box
-        bg={COLORS.fourth}
-        w="100%"
-        px="3"
-        // @ts-expect-error TS(2322): Type '{ children: Element[]; bg: string; w: "100%"... Remove this comment to see the full error message
-        style={{
-          borderBottomWidth: 2,
-          borderLeftWidth: 2,
-          borderRightWidth: 2,
-          borderColor: COLORS.fourth,
-        }}
-      >
+    <SafeAreaView className={`flex flex-1 flex-col justify-center`}>
+      <View className="border-b-2 border-b-gray-100 px-3 bg-white dark:bg-black min-h-[50px]">
         <AwesomeAlert
           show={errorAlert}
           showProgress={false}
@@ -168,60 +160,41 @@ export default function FarmerRegistration({ route, navigation }: any) {
           }}
         />
 
-        <Box>
-          <Stack direction="row">
-            <Box>
-              <Pressable
-                style={{
-                  position: "absolute",
-                  left: 0,
-                  top: 4,
-                  flexDirection: "row",
-                  alignItems: "center",
-                }}
-                onPress={() => navigation.goBack()}
-              >
-                <Icon name="arrow-back" color={COLORS.black} size={30} />
-              </Pressable>
-            </Box>
-            <Box w="100%" alignItems={"center"} pt="1" pb="3">
-              <Text
-                style={{
-                  textAlign: "center",
-                  fontFamily: "JosefinSans-Bold",
-                  fontSize: 24,
-                  color: COLORS.black,
-                }}
-              >
+        <View>
+          <View className="flex flex-row">
+            <Pressable
+              className="absolute left-1 top-2 flex flex-row items-center"
+              onPress={() => navigation.goBack()}
+            >
+              <Icon name="arrow-back" color={COLORS.black} size={30} />
+            </Pressable>
+
+            <View className="flex justify-center items-center py-2 w-full">
+              <Text className="text-black dark:text-black font-bold text-xl">
                 Registo
               </Text>
-            </Box>
-            <Box
-              // @ts-expect-error TS(2322): Type '{ children: Element; style: { position: stri... Remove this comment to see the full error message
-              style={{
-                position: "absolute",
-                right: 0,
-                top: 4,
-              }}
-            >
-              <FeatherIcon name="edit" size={30} color={COLORS.black} />
-            </Box>
-          </Stack>
-        </Box>
-      </Box>
-      {/* Radio Buttons allowing to choose the farmerType */}
-      <FarmerTypeRadioButtons
-        farmerType={farmerType}
-        setFarmerType={setFarmerType}
-      />
+            </View>
+          </View>
+        </View>
+        {/* Radio Buttons allowing to choose the farmerType */}
+        <FarmerTypeRadioButtons
+          farmerType={farmerType}
+          setFarmerType={setFarmerType}
+        />
+      </View>
+
       <KeyboardAwareScrollView
         decelerationRate={"normal"}
         fadingEdgeLength={2}
         keyboardDismissMode="on-drag"
         keyboardShouldPersistTaps="handled"
         showsVerticalScrollIndicator={false}
+        scrollEventThrottle={16}
+        contentContainerStyle={{
+          paddingBottom: 60,
+        }}
+        className="px-3 pt-10  flex flex-1"
       >
-        {/* Data collecting form  */}
         {loadingActivitiyIndicator && (
           <CustomActivityIndicator
             loadingActivitiyIndicator={loadingActivitiyIndicator}
@@ -229,21 +202,23 @@ export default function FarmerRegistration({ route, navigation }: any) {
           />
         )}
 
+        {/* Data collecting form  */}
         <Box alignItems={"center"}>
+          {/* Individual Actor data collecting form */}
           {farmerType === farmerTypes.farmer && (
             <IndividualFarmerForm
               selectedAddressAdminPosts={selectedAddressAdminPosts}
             />
           )}
 
-          {/* Group data collecting form */}
-
+          {/* Institution data collecting form */}
           {farmerType === farmerTypes.institution && (
             <InstitutionFarmerForm
               selectedAddressAdminPosts={selectedAddressAdminPosts}
             />
           )}
 
+          {/* Cooperative data collecting form */}
           {farmerType === farmerTypes.group && (
             <GroupFarmerForm
               groupType={groupType}
@@ -287,24 +262,7 @@ export default function FarmerRegistration({ route, navigation }: any) {
           <Center my="15" w="94%">
             {farmerType !== "" ? (
               <PrimaryButton
-                onPress={() => {
-                  if (farmerType?.includes(farmerTypes.farmer)) {
-                    if (!validateActorForm()) {
-                      setErrorAlert(true);
-                      return;
-                    }
-                  }
-                  else if (farmerType?.includes(farmerTypes.institution)){
-                    if (!validateInstitutionForm()){
-                      setErrorAlert(true);
-                      return ;
-                    }
-                  }
-                  navigation.navigate("ActorFormDataPreview", {
-                    farmerData: farmerData,
-                    farmerType: farmerType,
-                  });
-                }}
+                onPress={handleSubmitFormData}
                 title="Pré-visualizar dados"
               />
             ) : (
@@ -326,94 +284,8 @@ export default function FarmerRegistration({ route, navigation }: any) {
               </Center>
             )}
           </Center>
-
-          <Center flex={1} px="3">
-            {farmerType?.includes(farmerTypes.farmer) && (
-              <IndividualModal
-                modalVisible={modalVisible}
-                setModalVisible={setModalVisible}
-                farmerData={farmerData}
-                farmerType={farmerType}
-                setFarmerType={setFarmerType}
-                // setSurname={setSurname}
-                // setOtherNames={setOtherNames}
-                // setIsSprayingAgent={setIsSprayingAgent}
-                // setGender={setGender}
-                // setFamilySize={setFamilySize}
-                // setAddressVillage={setAddressVillage}
-                // setAddressAdminPost={setAddressAdminPost}
-                // setPrimaryPhone={setPrimaryPhone}
-                // setSecondaryPhone={setSecondaryPhone}
-                // setBirthProvince={setBirthProvince}
-                // setBirthDistrict={setBirthDistrict}
-                // setBirthAdminPost={setBirthAdminPost}
-                // setBirthDate={setBirthDate}
-                // setDocType={setDocType}
-                // setDocNumber={setDocNumber}
-                // setNuit={setNuit}
-                // setIsGroupMember={setIsGroupMember}
-                // isGroupMember={isGroupMember}
-                setFarmerItem={setFarmerItem}
-                farmerItem={farmerItem}
-                setIsCoordinatesModalVisible={setIsCoordinatesModalVisible}
-                customUserData={customUserData}
-                setActor={setActor}
-                actor={actor}
-                actorCategory={actorCategory}
-                setActorCategory={setActorCategory}
-              />
-            )}
-            {farmerType?.includes(farmerTypes.group) && (
-              <GroupModal
-                modalVisible={modalVisible}
-                setModalVisible={setModalVisible}
-                farmerData={farmerData}
-                farmerType={farmerType}
-                setFarmerType={setFarmerType}
-                setGroupType={setGroupType}
-                setGroupName={setGroupName}
-                setGroupAffiliationYear={setGroupAffiliationYear}
-                setGroupAdminPost={setGroupAdminPost}
-                setGroupVillage={setGroupVillage}
-                setGroupOperatingLicence={setGroupOperatingLicence}
-                setGroupNuit={setGroupNuit}
-                setGroupMembersNumber={setGroupMembersNumber}
-                setGroupWomenNumber={setGroupWomenNumber}
-                setFarmerItem={setFarmerItem}
-                farmerItem={farmerItem}
-                setIsCoordinatesModalVisible={setIsCoordinatesModalVisible}
-                customUserData={customUserData}
-              />
-            )}
-            {farmerType?.includes(farmerTypes.institution) && (
-              <InstitutionModal
-                modalVisible={modalVisible}
-                setModalVisible={setModalVisible}
-                farmerData={farmerData}
-                farmerType={farmerType}
-                setFarmerType={setFarmerType}
-                // setInstitutionType={setInstitutionType}
-                // setInstitutionName={setInstitutionName}
-                // setInstitutionAdminPost={setInstitutionAdminPost}
-                // setInstitutionVillage={setInstitutionVillage}
-                // setInstitutionManagerName={setInstitutionManagerName}
-                // setInstitutionManagerPhone={setInstitutionManagerPhone}
-                // setInstitutionNuit={setInstitutionNuit}
-                // setIsPrivateInstitution={setIsPrivateInstitution}
-                setFarmerItem={setFarmerItem}
-                farmerItem={farmerItem}
-                setIsCoordinatesModalVisible={setIsCoordinatesModalVisible}
-                customUserData={customUserData}
-              />
-            )}
-          </Center>
           <Box>
-            <SuccessAlert
-              isCoordinatesModalVisible={isCoordinatesModalVisible}
-              setIsCoordinatesModalVisible={setIsCoordinatesModalVisible}
-              farmerItem={farmerItem}
-              flag={"farmer"}
-            />
+
             <DuplicatesAlert
               suspectedDuplicates={suspectedDuplicates}
               setModalVisible={setModalVisible}
@@ -422,7 +294,6 @@ export default function FarmerRegistration({ route, navigation }: any) {
             />
           </Box>
         </Box>
-        {/* </ScrollView> */}
       </KeyboardAwareScrollView>
     </SafeAreaView>
   );

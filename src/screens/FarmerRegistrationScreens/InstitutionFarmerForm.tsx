@@ -204,7 +204,7 @@ export default function InstitutionFarmerForm({
             <InputLabel label="Posto Adm." />
             <Select
               selectedValue={institutionData.address.adminPost}
-              placeholder="Escolha posto administrativo"
+              placeholder="Posto Administrativo"
               minHeight={50}
               _selectedItem={{
                 bg: "gray.200",
@@ -223,6 +223,10 @@ export default function InstitutionFarmerForm({
                 updateInstitutionField("address", {
                   ...institutionData.address,
                   adminPost: newAdminPost,
+                });
+                updateInstitutionField("errors", {
+                  ...institutionData.errors,
+                  adminPost: "",
                 });
               }}
             >
@@ -251,7 +255,7 @@ export default function InstitutionFarmerForm({
             <InputLabel label="Localidade" />
             <Select
               selectedValue={institutionData.address.village}
-              placeholder="Escolha uma localidade"
+              placeholder="Localidade"
               minHeight={50}
               _selectedItem={{
                 bg: "gray.200",
@@ -318,7 +322,7 @@ export default function InstitutionFarmerForm({
         )}
       </FormControl>
 
-      <View className="flex flex-row w-full">
+      <View className="flex flex-row w-full my-2">
         <View className="flex-1 mr-1">
           <FormControl
             isInvalid={"phone" in institutionData?.errors}
@@ -386,8 +390,8 @@ export default function InstitutionFarmerForm({
       {(institutionData.type.includes("Empresa") ||
         institutionData.type?.includes("Outr") ||
         institutionData.type?.includes("ONG")) && (
-        <View direction="row" mx="3" w="100%">
-          <View w="50%" px="1" my="2">
+        <View >
+          
             <FormControl
               isInvalid={"licence" in institutionData?.errors}
             >
@@ -417,7 +421,7 @@ export default function InstitutionFarmerForm({
                 <FormControl.HelperText></FormControl.HelperText>
               )}
             </FormControl>
-          </View>
+          
         </View>
       )}
     </View>
