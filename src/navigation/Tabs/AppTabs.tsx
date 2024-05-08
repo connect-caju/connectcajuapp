@@ -8,6 +8,7 @@ import {
 } from "@react-navigation/native";
 
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons"
 import Octicons from "react-native-vector-icons/Octicons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
@@ -57,15 +58,27 @@ export default function AppTabs() {
           tabBarLabelStyle: {
             color: colorScheme === "dark" ? "#ffffff" : COLORS.grey,
             fontSize: 12,
-            fontWeight: "bold"
+            fontWeight: "bold",
           },
         })}
       >
         <Tab.Screen
           options={{
             tabBarIcon: (tabInfo) => (
-              <MaterialIcons
-                name="dashboard"
+              tabInfo.focused ? <MaterialCommunityIcons
+              name="view-grid"
+              size={30}
+              color={
+                tabInfo.focused
+                  ? COLORS.main
+                  : colorScheme === "dark"
+                  ? COLORS.white
+                  : COLORS.black
+              }
+            />
+            :
+              <MaterialCommunityIcons
+                name="view-grid-outline"
                 size={30}
                 color={
                   tabInfo.focused
@@ -84,19 +97,32 @@ export default function AppTabs() {
 
         <Tab.Screen
           options={({ route }) => ({
-            tabBarIcon: (tabInfo) => (
-              <Octicons
-                name="diff-added"
-                color={
-                  tabInfo.focused
-                    ? COLORS.main
-                    : colorScheme === "dark"
-                    ? COLORS.white
-                    : COLORS.black
-                }
-                size={30}
-              />
-            ),
+            tabBarIcon: (tabInfo) =>
+              tabInfo.focused ? (
+                <MaterialIcons
+                  name="add-box"
+                  size={35}
+                  color={
+                    tabInfo.focused
+                      ? COLORS.main
+                      : colorScheme === "dark"
+                      ? COLORS.white
+                      : COLORS.black
+                  }
+                />
+              ) : (
+                <Octicons
+                  name="diff-added"
+                  color={
+                    tabInfo.focused
+                      ? COLORS.main
+                      : colorScheme === "dark"
+                      ? COLORS.white
+                      : COLORS.black
+                  }
+                  size={30}
+                />
+              ),
             tabBarLabel: "Registo",
 
             tabBarStyle: ((route) => {
@@ -127,7 +153,7 @@ export default function AppTabs() {
                 }
               />
             ),
-            tabBarLabel: "Comercial",
+            tabBarLabel: "Monitoria",
 
             tabBarStyle: ((route) => {
               const routeName = getFocusedRouteNameFromRoute(route) ?? "";

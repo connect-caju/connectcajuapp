@@ -37,7 +37,7 @@ type InstitutionFormStore = {
   ) => Promise<void>;
 };
 
-const initialFormState = {
+const initialFormState : InstitutionFormDataTypes = {
   isPrivate: undefined,
   type: "",
   name: "",

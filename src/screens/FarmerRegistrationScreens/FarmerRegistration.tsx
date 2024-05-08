@@ -34,12 +34,14 @@ import { useActorStore } from "../../app/stores/actorStore";
 
 import { realmContext } from "../../models/realmContext";
 import { useInstitutionStore } from "../../app/stores/institutionStore";
+import { useCoopStore } from "../../app/stores/coopStore";
 const { useRealm } = realmContext;
 
 export default function FarmerRegistration({ route, navigation }: any) {
   const customUserData = route.params.customUserData;
   const { actorData, updateActorField, validateActorForm } = useActorStore();
   const validateInstitutionForm = useInstitutionStore().validateInstitutionForm;
+  const { coopData, validateCoopForm } = useCoopStore();
   const exportedFarmerType = route.params?.farmerType;
 
    // address
@@ -57,22 +59,6 @@ export default function FarmerRegistration({ route, navigation }: any) {
 
   const [farmerType, setFarmerType] = useState(exportedFarmerType);
 
-  // Group states
-  const [groupType, setGroupType] = useState("");
-  const [groupName, setGroupName] = useState("");
-  const [groupAdminPost, setGroupAdminPost] = useState("");
-  const [groupVillage, setGroupVillage] = useState("");
-  const [groupOperatingLicence, setGroupOperatingLicence] = useState("");
-  const [groupNuit, setGroupNuit] = useState("");
-  const [groupNuel, setGroupNuel] = useState("");
-  const [groupAffiliationYear, setGroupAffiliationYear] = useState("");
-  const [groupMembersNumber, setGroupMembersNumber] = useState("");
-  const [groupWomenNumber, setGroupWomenNumber] = useState("");
-  const [groupGoals, setGroupGoals] = useState([]);
-  const [groupCreationYear, setGroupCreationYear] = useState("");
-  const [groupLegalStatus, setGroupLegalStatus] = useState("");
-  const [isGroupActive, setIsGroupActive] = useState(false);
-  const [isGroupInactive, setIsGroupInactive] = useState(false);
 
   // -------------------------------------------------------------
   const [loadingActivitiyIndicator, setLoadingActivityIndicator] =
@@ -95,6 +81,14 @@ export default function FarmerRegistration({ route, navigation }: any) {
       }
       navigation.navigate("InstitutionFormDataPreview");
     }
+    else if (farmerType?.includes(farmerTypes.group)) {
+      if (!validateCoopForm()) {
+        setErrorAlert(true);
+        return;
+      }
+      navigation.navigate("CoopFormDataPreview");
+    }
+    
   };
 
   useEffect(() => {
@@ -171,7 +165,7 @@ export default function FarmerRegistration({ route, navigation }: any) {
 
             <View className="flex justify-center items-center py-2 w-full">
               <Text className="text-black dark:text-black font-bold text-xl">
-                Registo
+                Registo de Produtor
               </Text>
             </View>
           </View>
@@ -221,41 +215,7 @@ export default function FarmerRegistration({ route, navigation }: any) {
           {/* Cooperative data collecting form */}
           {farmerType === farmerTypes.group && (
             <GroupFarmerForm
-              groupType={groupType}
-              setGroupType={setGroupType}
-              groupName={groupName}
-              setGroupName={setGroupName}
-              groupAdminPost={groupAdminPost}
-              setGroupAdminPost={setGroupAdminPost}
-              groupVillage={groupVillage}
-              setGroupVillage={setGroupVillage}
-              groupOperatingLicence={groupOperatingLicence}
-              setGroupOperatingLicence={setGroupOperatingLicence}
-              groupNuel={groupNuel}
-              setGroupNuel={setGroupNuel}
-              groupNuit={groupNuit}
-              setGroupNuit={setGroupNuit}
-              groupAffiliationYear={groupAffiliationYear}
-              setGroupAffiliationYear={setGroupAffiliationYear}
-              groupMembersNumber={groupMembersNumber}
-              setGroupMembersNumber={setGroupMembersNumber}
-              groupWomenNumber={groupWomenNumber}
-              setGroupWomenNumber={setGroupWomenNumber}
-              errors={errors}
-              setErrors={setErrors}
               selectedAddressAdminPosts={selectedAddressAdminPosts}
-              setSelectedAddressAdminPosts={setSelectedAddressAdminPosts}
-              // addressAdminPost={addressAdminPost}
-              groupGoals={groupGoals}
-              setGroupGoals={setGroupGoals}
-              groupCreationYear={groupCreationYear}
-              setGroupCreationYear={setGroupCreationYear}
-              setGroupLegalStatus={setGroupLegalStatus}
-              groupLegalStatus={groupLegalStatus}
-              isGroupActive={isGroupActive}
-              setIsGroupActive={setIsGroupActive}
-              isGroupInactive={isGroupInactive}
-              setIsGroupInactive={setIsGroupInactive}
             />
           )}
 

@@ -18,7 +18,6 @@ export const Group = {
     address: "Address",
     numberOfMembers: "Members",
     members: "string[]",
-    // manager: 'Manager',
     manager: "string?", // actor _id (the manager is a registered actor)
 
     licence: "string?", // alvara
@@ -34,7 +33,6 @@ export const Group = {
     userId: "string",
     userName: "string?",
 
-    // validation properties (pending, invalidated, validated)
     status: { type: "string", default: "pending" },
     checkedBy: "string?",
 

@@ -1,29 +1,16 @@
-import { Text, SafeAreaView, ScrollView, TextInput, View } from "react-native";
+import { Text, View } from "react-native";
 import React, { useState, useEffect } from "react";
-import {
-
-  FormControl,
-  Select,
-  CheckIcon,
-} from "native-base";
-import { Icon, Button, CheckBox } from "@rneui/themed";
+import { FormControl, Select, CheckIcon } from "native-base";
+import { Icon } from "@rneui/themed";
 import {
   MultipleSelectList,
   SelectList,
 } from "react-native-dropdown-select-list";
-
-import { CustomInput } from "../../components/Inputs/CustomInput";
 import villages from "../../consts/villages";
-import CustomDivider from "../../components/Divider/CustomDivider";
 import styles from "./styles";
 
-import {
-  getFullYears,
-  getFullYears2,
-  localeDateService,
-  useDatepickerState,
-} from "../../helpers/dates";
-import { groups, institutions } from "../../consts/farmerTypes";
+import { getFullYears, getFullYears2 } from "../../helpers/dates";
+import { groups } from "../../consts/farmerTypes";
 import { groupPurposes } from "../../consts/groupPurposes";
 
 import { realmContext } from "../../models/realmContext";
@@ -31,92 +18,66 @@ import COLORS from "../../consts/colors";
 import {
   groupAffiliationStatus,
   groupAffiliationStatus2,
+  groupAffiliationStatus3,
 } from "../../consts/groupAffiliationStatus";
 import InputLabel from "../../components/InputLabel/InputLabel";
 import InputCheckBox from "../../components/InputCheckBox/InputCheckBox";
 import { Input } from "../../../components/Input";
+import { useCoopStore } from "../../app/stores/coopStore";
 const { useRealm } = realmContext;
 
-export default function GroupFarmerForm({
-  route,
-  navigation,
-  groupType,
-  setGroupType,
-  groupName,
-  setGroupName,
-  groupAdminPost,
-  setGroupAdminPost,
-  groupVillage,
-  setGroupVillage,
-  groupOperatingLicence,
-  setGroupOperatingLicence,
-  groupNuel,
-  setGroupNuel,
-  groupNuit,
-  setGroupNuit,
-  groupAffiliationYear,
-  setGroupAffiliationYear,
-  groupMembersNumber,
-  setGroupMembersNumber,
-  groupWomenNumber,
-  setGroupWomenNumber,
-  errors,
-  setErrors,
-  selectedAddressAdminPosts,
-  groupGoals,
-  setGroupGoals,
-  groupCreationYear,
-  setGroupCreationYear,
-  groupLegalStatus,
-  setGroupLegalStatus,
-  isGroupActive,
-  setIsGroupActive,
-  isGroupInactive,
-  setIsGroupInactive,
-}: any) {
+interface Props {
+  selectedAddressAdminPosts: string[];
+}
+
+export default function GroupFarmerForm({ selectedAddressAdminPosts }: Props) {
+  const { coopData, updateCoopField, resetCoopForm } = useCoopStore();
+
+  useEffect(() => {
+    resetCoopForm();
+  }, []);
+
   return (
     <View className="px-3 pt-6">
       <View className="w-full">
-        <FormControl isRequired isInvalid={"isGroupActive" in errors}>
-          <InputLabel label="Esta organização é..." />
+        <FormControl isRequired isInvalid={"isActive" in coopData.errors}>
+          <InputLabel label="Esta organização está..." />
           <View className="flex flex-row mx-3 w-full justify-between gap-2 ">
             <View className="flex-1 justify-start">
               <InputCheckBox
                 title="Activa"
-                isChecked={isGroupActive}
+                isChecked={coopData.isActive === "Sim" ? true : false}
                 onPress={() => {
-                  setIsGroupInactive(false);
-                  setIsGroupActive(true);
-                  setErrors({
-                    ...errors,
-                    isGroupActive: "",
+                  updateCoopField("isActive", "Sim");
+                  updateCoopField("errors", {
+                    ...coopData?.errors,
+                    isActive: "",
                   });
                 }}
-                errorProperty={errors?.isGroupActive}
+                errorProperty={coopData.errors?.isActive}
               />
             </View>
             <View className="flex-1 justify-end">
               <InputCheckBox
                 title="Inactiva"
-                isChecked={isGroupInactive}
+                isChecked={coopData.isActive === "Não" ? true : false}
                 onPress={() => {
-                  setIsGroupInactive(true);
-                  setIsGroupActive(false);
-                  setErrors({
-                    ...errors,
-                    isGroupActive: "",
+                  updateCoopField("isActive", "Não");
+                  updateCoopField("errors", {
+                    ...coopData?.errors,
+                    isActive: "",
                   });
                 }}
-                errorProperty={errors?.isGroupActive}
+                errorProperty={coopData.errors?.isActive}
               />
             </View>
           </View>
-          {"isGroupActive" in errors ? (
+          {"isActive" in coopData.errors ? (
             <FormControl.ErrorMessage
               leftIcon={<Icon name="error-outline" size={16} color="red" />}
               _text={{ fontSize: "xs" }}
             >
-              {}
+              {coopData.errors.isActive}
             </FormControl.ErrorMessage>
           ) : (
             <FormControl.HelperText></FormControl.HelperText>
@@ -125,16 +86,14 @@ export default function GroupFarmerForm({
       </View>
 
       <View className="">
-        <FormControl isRequired my="1" isInvalid={"groupType" in errors}>
-          <InputLabel 
-            label="Tipo de organização"
-          />
+        <FormControl isRequired my="1" isInvalid={"type" in coopData.errors}>
+          <InputLabel label="Tipo de organização" />
           <Select
-            selectedValue={groupType}
+            selectedValue={coopData.type}
             placeholder="Tipo de grupo "
             minHeight={50}
             _selectedItem={{
-              bg: "teal.600",
+              bg: "gray.200",
               fontSize: "lg",
               endIcon: <CheckIcon size="5" />,
             }}
@@ -147,23 +106,23 @@ export default function GroupFarmerForm({
               />
             }
             onValueChange={(newGroupType) => {
-              setErrors((prev: any) => ({
-                ...prev,
-                groupType: "",
-              }));
-              setGroupType(newGroupType);
+              updateCoopField("type", newGroupType);
+              updateCoopField("errors", {
+                ...coopData?.errors,
+                type: "",
+              });
             }}
           >
             {groups?.map((group, index) => (
               <Select.Item key={index} label={group} value={group} />
             ))}
           </Select>
-          {"groupType" in errors ? (
+          {"type" in coopData.errors ? (
             <FormControl.ErrorMessage
               leftIcon={<Icon name="error-outline" size={16} color="red" />}
               _text={{ fontSize: "xs" }}
             >
-              {errors?.groupType}
+              {coopData.errors?.type}
             </FormControl.ErrorMessage>
           ) : (
             <FormControl.HelperText></FormControl.HelperText>
@@ -172,27 +131,27 @@ export default function GroupFarmerForm({
       </View>
 
       <View className="">
-        <FormControl isRequired my="1" isInvalid={"groupName" in errors}>
-          <InputLabel label="Nome da organização" />
+        <FormControl isRequired my="1" isInvalid={"name" in coopData.errors}>
+          <InputLabel label="Designação da organização" />
 
           <Input
             placeholder="Nome da organização"
-            value={groupName}
+            value={coopData.name}
             autoCapitalize="words"
             onChangeText={(newGroupName: any) => {
-              setErrors((prev: any) => ({
-                ...prev,
-                groupName: "",
-              }));
-              setGroupName(newGroupName);
+              updateCoopField("name", newGroupName);
+              updateCoopField("errors", {
+                ...coopData?.errors,
+                name: "",
+              });
             }}
           />
-          {"groupName" in errors ? (
+          {"name" in coopData.errors ? (
             <FormControl.ErrorMessage
               leftIcon={<Icon name="error-outline" size={16} color="red" />}
               _text={{ fontSize: "xs" }}
             >
-              {errors?.groupName}
+              {coopData.errors?.name}
             </FormControl.ErrorMessage>
           ) : (
             <FormControl.HelperText></FormControl.HelperText>
@@ -200,90 +159,107 @@ export default function GroupFarmerForm({
         </FormControl>
       </View>
 
-      <View>
-        <FormControl isInvalid={"groupMembersNumber" in errors} isRequired>
-          <InputLabel label="Membros" />
-          <View className="flex flex-row w-full  items-center justify-center">
-            <View className="flex-1 mr-1">
-              <Input
-                value={groupMembersNumber}
-                onChangeText={(groupMembers: any) => {
-                  setErrors((prev: any) => ({
-                    ...prev,
-                    groupMembersNumber: "",
-                  }));
-                  setGroupMembersNumber(groupMembers);
-                }}
-                keyboardType="numeric"
-                placeholder="Total"
-                className="text-center"
-              />
+      <View className="flex flex-row w-full space-x-2">
+        <View className="flex-1">
+          <FormControl  my="1" isInvalid={"total"  in coopData.errors} isRequired>
+            <InputLabel label="Membros" />
+            <View className="">
+              <View className="mr-1">
+                <Input
+                  value={coopData.numberOfMembers.total}
+                  onChangeText={(groupMembers: number) => {
+                    updateCoopField("numberOfMembers", {
+                      ...coopData.numberOfMembers,
+                      total: groupMembers,
+                    });
+                    updateCoopField("errors", {
+                      ...coopData?.errors,
+                      total: "",
+                      women: "",
+                    });
+                  }}
+                  keyboardType="numeric"
+                  placeholder="Total"
+                  className="text-center"
+                />
+                {"total" in coopData.errors ? (
+                  <FormControl.ErrorMessage
+                    leftIcon={
+                      <Icon name="error-outline" size={16} color="red" />
+                    }
+                    _text={{ fontSize: "xs" }}
+                  >
+                    {coopData?.errors.total}
+                  </FormControl.ErrorMessage>
+                ) : (
+                  <FormControl.HelperText></FormControl.HelperText>
+                )}
+              </View>
             </View>
-            <View className="flex-1 ml-1">
-              <Input
-                keyboardType="numeric"
-                placeholder="Mulheres"
-                className="text-center"
-                onChangeText={(womenNumber: any) => {
-                  setErrors((prev: any) => ({
-                    ...prev,
-                    groupWomenNumber: "",
-                  }));
-                  setGroupWomenNumber(womenNumber);
-                }}
-              />
-            </View>
+          </FormControl>
           </View>
-
-          <View className="flex flex-row w-full  items-center justify-center">
-            <View className="flex-1 mr-1">
-              {"groupMembersNumber" in errors ? (
-                <FormControl.ErrorMessage
-                  leftIcon={<Icon name="error-outline" size={16} color="red" />}
-                  _text={{ fontSize: "xs" }}
-                >
-                  {errors?.groupMembersNumber}
-                </FormControl.ErrorMessage>
-              ) : (
-                <FormControl.HelperText></FormControl.HelperText>
-              )}
+          <View className="flex-1">
+          <FormControl  my="1" isInvalid={"women" in coopData.errors} isRequired>
+            <InputLabel label="Mulheres" />
+            <View className="">
+              <View className=" ml-1">
+                <Input
+                  value={coopData.numberOfMembers.women}
+                  keyboardType="numeric"
+                  placeholder="Mulheres"
+                  className="text-center"
+                  onChangeText={(womenNumber: number) => {
+                    updateCoopField("numberOfMembers", {
+                      ...coopData.numberOfMembers,
+                      women: womenNumber,
+                    });
+                    updateCoopField("errors", {
+                      ...coopData?.errors,
+                      women: "",
+                      total: "",
+                    });
+                  }}
+                />
+                {"women" in coopData.errors ? (
+                  <FormControl.ErrorMessage
+                    leftIcon={
+                      <Icon name="error-outline" size={16} color="red" />
+                    }
+                    _text={{ fontSize: "xs" }}
+                  >
+                    {coopData.errors?.women}
+                  </FormControl.ErrorMessage>
+                ) : (
+                  <FormControl.HelperText></FormControl.HelperText>
+                )}
+              </View>
             </View>
-            <View className="flex-1 ml-1">
-              {"groupWomenNumber" in errors ? (
-                <FormControl.ErrorMessage
-                  leftIcon={<Icon name="error-outline" size={16} color="red" />}
-                  _text={{ fontSize: "xs" }}
-                >
-                  {errors?.groupWomenNumber}
-                </FormControl.ErrorMessage>
-              ) : (
-                <FormControl.HelperText></FormControl.HelperText>
-              )}
-            </View>
-          </View>
-        </FormControl>
+          </FormControl>
+        </View>
       </View>
 
       <View direction="row" mx="3" w="100%">
         <View w="100%" px="1" my="2">
-          <FormControl isInvalid={"groupGoals" in errors} isRequired>
+          <FormControl isInvalid={"purposes" in coopData.errors} isRequired>
             <InputLabel
-              label={`Finalidades de ${!groupType ? "Grupo" : groupType}`}
+              label={`Finalidades da ${
+                !coopData.type ? "organização" : coopData.type
+              }`}
             />
             <MultipleSelectList
-              setSelected={(goal: any) => {
-                setErrors((prev: any) => ({
-                  ...prev,
-                  groupGoals: "",
-                }));
-                setGroupGoals(goal);
+              setSelected={(purpose: string) => {
+                updateCoopField("purposes", [...coopData.purposes, purpose]);
+                updateCoopField("errors", {
+                  ...coopData?.errors,
+                  purposes: "",
+                });
               }}
               data={groupPurposes}
               notFoundText={"Finalidade não encontrada"}
               placeholder="Finalidade de grupo"
               searchPlaceholder="Seleccionar finalidades"
               save="value"
-              label="Finalidade de grupo"
+              label="Finalidade da organização"
               badgeStyles={{
                 backgroundColor: COLORS.main,
               }}
@@ -306,7 +282,8 @@ export default function GroupFarmerForm({
               }}
               inputStyles={{
                 fontSize: 15,
-                color: groupGoals?.length > 0 ? COLORS.black : COLORS.grey,
+                color:
+                  coopData.purposes?.length > 0 ? COLORS.black : COLORS.grey,
               }}
               boxStyles={{
                 minHeight: 50,
@@ -314,12 +291,12 @@ export default function GroupFarmerForm({
                 borderColor: COLORS.lightgrey,
               }}
             />
-            {"groupGoals" in errors ? (
+            {"purposes" in coopData.errors ? (
               <FormControl.ErrorMessage
                 leftIcon={<Icon name="error-outline" size={16} color="red" />}
                 _text={{ fontSize: "xs" }}
               >
-                {errors?.groupGoals}
+                {coopData.errors?.purposes}
               </FormControl.ErrorMessage>
             ) : (
               <FormControl.HelperText></FormControl.HelperText>
@@ -333,17 +310,50 @@ export default function GroupFarmerForm({
           <FormControl
             isRequired
             my="1"
-            isInvalid={"groupCreationYear" in errors}
+            isInvalid={"creationYear" in coopData.errors}
           >
             <InputLabel label="Ano de criação" />
-            <SelectList
-              data={getFullYears2(50)}
-              setSelected={(newYear: any) => {
-                setErrors((prev: any) => ({
-                  ...prev,
-                  groupCreationYear: "",
-                }));
-                setGroupCreationYear(newYear);
+
+            <Select
+              selectedValue={coopData.creationYear?.toString()}
+              placeholder="Escolher ano"
+              minHeight={50}
+              _selectedItem={{
+                bg: "gray.200",
+                fontSize: "4xl",
+                endIcon: <CheckIcon size="5" />,
+              }}
+              dropdownCloseIcon={
+                <Icon
+                  // size={45}
+                  name="arrow-drop-down"
+                  color={COLORS.main}
+                />
+              }
+              mt={1}
+              onValueChange={(newYear: string) => {
+                updateCoopField("creationYear", newYear);
+                updateCoopField("errors", {
+                  ...coopData?.errors,
+                  creationYear: "",
+                  affiliationYear: "",
+                });
+              }}
+            >
+              {getFullYears(50)?.map((year: any) => (
+                <Select.Item key={year} label={year} value={year} />
+              ))}
+            </Select>
+
+            {/* <SelectList
+              data={getFullYears(50)}
+              setSelected={(newYear: number) => {
+                updateCoopField("creationYear", newYear);
+                updateCoopField("errors", {
+                  ...coopData?.errors,
+                  creationYear: "",
+                  affiliationYear: "",
+                });
               }}
               save="value"
               placeholder="Escolher ano"
@@ -366,7 +376,7 @@ export default function GroupFarmerForm({
               closeicon={<Icon name="close" size={20} color={COLORS.grey} />}
               inputStyles={{
                 fontSize: 15,
-                color: groupCreationYear ? COLORS.black : COLORS.grey,
+                color: coopData.creationYear ? COLORS.black : COLORS.grey,
               }}
               boxStyles={{
                 minHeight: 50,
@@ -374,14 +384,14 @@ export default function GroupFarmerForm({
                 borderColor: COLORS.lightgrey,
                 marginTop: 5,
               }}
-            />
+            /> */}
 
-            {"groupCreationYear" in errors ? (
+            {"creationYear" in coopData.errors ? (
               <FormControl.ErrorMessage
                 leftIcon={<Icon name="error-outline" size={16} color="red" />}
                 _text={{ fontSize: "xs" }}
               >
-                {errors?.groupCreationYear}
+                {coopData.errors?.creationYear}
               </FormControl.ErrorMessage>
             ) : (
               <FormControl.HelperText></FormControl.HelperText>
@@ -393,26 +403,58 @@ export default function GroupFarmerForm({
           <FormControl
             isRequired
             my="1"
-            isInvalid={"groupLegalStatus" in errors}
+            isInvalid={"legalStatus" in coopData.errors}
           >
-            <InputLabel label="Situação Legal" />
+            <InputLabel label="Situação legal" />
 
-            <SelectList
+            <Select
+              selectedValue={coopData.legalStatus}
+              placeholder="Escolher situação"
+              minHeight={50}
+              _selectedItem={{
+                bg: "gray.200",
+                fontSize: "4xl",
+                endIcon: <CheckIcon size="5" />,
+              }}
+              dropdownCloseIcon={
+                <Icon
+                  // size={45}
+                  name="arrow-drop-down"
+                  color={COLORS.main}
+                />
+              }
+              mt={1}
+              onValueChange={(status: string) => {
+                updateCoopField("legalStatus", status);
+                updateCoopField("errors", {
+                  ...coopData?.errors,
+                  creationYear: "",
+                  nuel: "",
+                  nuit: "",
+                  licence: "",
+                  affiliationYear: "",
+                  legalStatus: "",
+                });
+              }}
+            >
+              {groupAffiliationStatus3?.map((status: any) => (
+                <Select.Item key={status} label={status} value={status} />
+              ))}
+            </Select>
+
+            {/* <SelectList
               data={groupAffiliationStatus2}
-              setSelected={(status: any) => {
-                setErrors((prev: any) => ({
-                  ...prev,
-                  groupCreationYear: "",
-                  groupLegalStatus: "",
-                  groupNuel: "",
-                  groupNuit: "",
-                  groupOperatingLicence: "",
-                  groupAffiliationYear: "",
-                }));
-                setGroupLegalStatus(status);
-                setGroupNuit();
-                setGroupOperatingLicence("");
-                setGroupAffiliationYear("");
+              setSelected={(status: string) => {
+                updateCoopField("legalStatus", status);
+                updateCoopField("errors", {
+                  ...coopData?.errors,
+                  creationYear: "",
+                  nuel: "",
+                  nuit: "",
+                  licence: "",
+                  affiliationYear: "",
+                  legalStatus: "",
+                });
               }}
               save="value"
               placeholder="Escolher situação"
@@ -435,7 +477,7 @@ export default function GroupFarmerForm({
               closeicon={<Icon name="close" size={20} color={COLORS.grey} />}
               inputStyles={{
                 fontSize: 15,
-                color: groupLegalStatus ? COLORS.black : COLORS.grey,
+                color: coopData.legalStatus ? COLORS.black : COLORS.grey,
               }}
               boxStyles={{
                 minHeight: 50,
@@ -443,14 +485,14 @@ export default function GroupFarmerForm({
                 borderColor: COLORS.lightgrey,
                 marginTop: 5,
               }}
-            />
+            /> */}
 
-            {"groupLegalStatus" in errors ? (
+            {"legalStatus" in coopData.errors ? (
               <FormControl.ErrorMessage
                 leftIcon={<Icon name="error-outline" size={16} color="red" />}
                 _text={{ fontSize: "xs" }}
               >
-                {errors?.groupLegalStatus}
+                {coopData.errors.legalStatus}
               </FormControl.ErrorMessage>
             ) : (
               <FormControl.HelperText></FormControl.HelperText>
@@ -459,7 +501,7 @@ export default function GroupFarmerForm({
         </View>
       </View>
 
-      {groupLegalStatus === groupAffiliationStatus.affiliated && (
+      {coopData.legalStatus === groupAffiliationStatus.affiliated && (
         <>
           <View direction="row" mx="3" w="100%">
             <View w="50%" px="1">
@@ -467,21 +509,52 @@ export default function GroupFarmerForm({
                 isRequired
                 my="1"
                 isInvalid={
-                  groupLegalStatus === groupAffiliationStatus.affiliated &&
-                  "groupAffiliationYear" in errors
+                  coopData.legalStatus === groupAffiliationStatus.affiliated &&
+                  "affiliationYear" in coopData.errors
                 }
               >
-                <InputLabel 
-                  label="Ano de legalização"
-                />
-                <SelectList
+                <InputLabel label="Ano de legalização" />
+
+                <Select
+                  selectedValue={coopData.affiliationYear?.toString()}
+                  placeholder="Escolher ano"
+                  minHeight={50}
+                  _selectedItem={{
+                    bg: "gray.200",
+                    fontSize: "4xl",
+                    endIcon: <CheckIcon size="5" />,
+                  }}
+                  dropdownCloseIcon={
+                    <Icon
+                      // size={45}
+                      name="arrow-drop-down"
+                      color={COLORS.main}
+                    />
+                  }
+                  mt={1}
+                  onValueChange={(newYear: string) => {
+                    updateCoopField("affiliationYear", Number(newYear));
+                    updateCoopField("errors", {
+                      ...coopData?.errors,
+                      affiliationYear: "",
+                      creationYear: "",
+                    });
+                  }}
+                >
+                  {getFullYears(50)?.map((year: any) => (
+                    <Select.Item key={year} label={year} value={year} />
+                  ))}
+                </Select>
+
+                {/* <SelectList
                   data={getFullYears2(50)}
-                  setSelected={(newYear: any) => {
-                    setErrors((prev: any) => ({
-                      ...prev,
-                      groupAffiliationYear: "",
-                    }));
-                    setGroupAffiliationYear(newYear);
+                  setSelected={(newYear: number) => {
+                    updateCoopField("affiliationYear", newYear);
+                    updateCoopField("errors", {
+                      ...coopData?.errors,
+                      affiliationYear: "",
+                      creationYear: "",
+                    });
                   }}
                   save="value"
                   placeholder="Escolher ano"
@@ -506,7 +579,7 @@ export default function GroupFarmerForm({
                   }
                   inputStyles={{
                     fontSize: 15,
-                    color: groupAffiliationYear ? COLORS.black : COLORS.grey,
+                    color: coopData.affiliationYear ? COLORS.black : COLORS.grey,
                   }}
                   boxStyles={{
                     minHeight: 50,
@@ -514,17 +587,17 @@ export default function GroupFarmerForm({
                     borderColor: COLORS.lightgrey,
                     marginTop: 5,
                   }}
-                />
+                /> */}
 
-                {groupLegalStatus === groupAffiliationStatus.affiliated &&
-                "groupAffiliationYear" in errors ? (
+                {coopData.legalStatus === groupAffiliationStatus.affiliated &&
+                "affiliationYear" in coopData.errors ? (
                   <FormControl.ErrorMessage
                     leftIcon={
                       <Icon name="error-outline" size={16} color="red" />
                     }
                     _text={{ fontSize: "xs" }}
                   >
-                    {errors?.groupAffiliationYear}
+                    {coopData.errors?.affiliationYear}
                   </FormControl.ErrorMessage>
                 ) : (
                   <FormControl.HelperText></FormControl.HelperText>
@@ -536,34 +609,34 @@ export default function GroupFarmerForm({
               <FormControl
                 my="1"
                 isInvalid={
-                  groupLegalStatus === groupAffiliationStatus.affiliated &&
-                  "groupOperatingLicence" in errors
+                  coopData.legalStatus === groupAffiliationStatus.affiliated &&
+                  "licence" in coopData.errors
                 }
                 isRequired
               >
-                <InputLabel label="Licença de Operação" />
+                <InputLabel label="Licença de operação" />
                 <Input
                   autoCapitalize="characters"
                   placeholder="Licença de Operação"
-                  value={groupOperatingLicence}
-                  onChangeText={(newOperatingLicence: any) => {
-                    setErrors((prev: any) => ({
-                      ...prev,
-                      groupOperatingLicence: "",
-                    }));
-                    setGroupOperatingLicence(newOperatingLicence);
+                  value={coopData.licence}
+                  onChangeText={(newOperatingLicence: string) => {
+                    updateCoopField("licence", newOperatingLicence);
+                    updateCoopField("errors", {
+                      ...coopData?.errors,
+                      licence: "",
+                    });
                   }}
                 />
 
-                {groupLegalStatus === groupAffiliationStatus.affiliated &&
-                "groupOperatingLicence" in errors ? (
+                {coopData.legalStatus === groupAffiliationStatus.affiliated &&
+                "licence" in coopData.errors ? (
                   <FormControl.ErrorMessage
                     leftIcon={
                       <Icon name="error-outline" size={16} color="red" />
                     }
                     _text={{ fontSize: "xs" }}
                   >
-                    {errors?.groupOperatingLicence}
+                    {coopData.errors?.licence}
                   </FormControl.ErrorMessage>
                 ) : (
                   <FormControl.HelperText></FormControl.HelperText>
@@ -577,34 +650,34 @@ export default function GroupFarmerForm({
               <FormControl
                 my="1"
                 isInvalid={
-                  groupLegalStatus === groupAffiliationStatus.affiliated &&
-                  "groupNuit" in errors
+                  coopData.legalStatus === groupAffiliationStatus.affiliated &&
+                  "nuit" in coopData.errors
                 }
                 isRequired
               >
                 <InputLabel label="NUIT" />
                 <Input
-                  value={groupNuit}
-                  onChangeText={(newNuit: any) => {
-                    setErrors((prev: any) => ({
-                      ...prev,
-                      groupNuit: "",
-                    }));
-                    setGroupNuit(newNuit);
+                  value={coopData.nuit}
+                  onChangeText={(newNuit: number) => {
+                    updateCoopField("nuit", newNuit);
+                    updateCoopField("errors", {
+                      ...coopData?.errors,
+                      nuit: "",
+                    });
                   }}
                   keyboardType="numeric"
                   placeholder="NUIT"
                   className="text-center"
                 />
-                {groupLegalStatus === groupAffiliationStatus.affiliated &&
-                "groupNuit" in errors ? (
+                {coopData.legalStatus === groupAffiliationStatus.affiliated &&
+                "nuit" in coopData.errors ? (
                   <FormControl.ErrorMessage
                     leftIcon={
                       <Icon name="error-outline" size={16} color="red" />
                     }
                     _text={{ fontSize: "xs" }}
                   >
-                    {errors?.groupNuit}
+                    {coopData.errors?.nuit}
                   </FormControl.ErrorMessage>
                 ) : (
                   <FormControl.HelperText></FormControl.HelperText>
@@ -614,37 +687,37 @@ export default function GroupFarmerForm({
 
             <View className="w-1/2">
               <FormControl
-              my="1"
+                my="1"
                 isInvalid={
-                  groupLegalStatus === groupAffiliationStatus.affiliated &&
-                  "groupNuel" in errors
+                  coopData.legalStatus === groupAffiliationStatus.affiliated &&
+                  "nuel" in coopData.errors
                 }
                 isRequired
               >
                 <InputLabel label="NUEL" />
                 <Input
                   keyboardType="numeric"
-                  value={groupNuel}
-                  onChangeText={(newNuel: any) => {
-                    setErrors((prev: any) => ({
-                      ...prev,
-                      groupNuel: "",
-                    }));
-                    setGroupNuel(newNuel);
+                  value={coopData.nuel}
+                  onChangeText={(newNuel: number) => {
+                    updateCoopField("nuel", newNuel);
+                    updateCoopField("errors", {
+                      ...coopData?.errors,
+                      nuel: "",
+                    });
                   }}
                   placeholder="NUEL"
                   className="text-center"
                 />
 
-                {groupLegalStatus === groupAffiliationStatus.affiliated &&
-                "groupNuel" in errors ? (
+                {coopData.legalStatus === groupAffiliationStatus.affiliated &&
+                "nuel" in coopData.errors ? (
                   <FormControl.ErrorMessage
                     leftIcon={
                       <Icon name="error-outline" size={16} color="red" />
                     }
                     _text={{ fontSize: "xs" }}
                   >
-                    {errors?.groupNuel}
+                    {coopData.errors?.nuel}
                   </FormControl.ErrorMessage>
                 ) : (
                   <FormControl.HelperText></FormControl.HelperText>
@@ -661,10 +734,14 @@ export default function GroupFarmerForm({
 
       <View className="flex flex-row w-full justify-center space-x-2">
         <View className="w-1/2">
-          <FormControl isRequired my="1" isInvalid={"groupAdminPost" in errors}>
+          <FormControl
+            isRequired
+            my="1"
+            isInvalid={"adminPost" in coopData.errors}
+          >
             <InputLabel label="Posto Administrativo" />
             <Select
-              selectedValue={groupAdminPost}
+              selectedValue={coopData.address.adminPost}
               placeholder="Posto Administrativo"
               minHeight={50}
               _selectedItem={{
@@ -674,44 +751,45 @@ export default function GroupFarmerForm({
               }}
               dropdownCloseIcon={
                 <Icon
-                // size={45}
-                name="arrow-drop-down"
-                color={COLORS.main}
-              />
+                  // size={45}
+                  name="arrow-drop-down"
+                  color={COLORS.main}
+                />
               }
               mt={1}
-              onValueChange={(newAdminPost) => {
-                setErrors((prev: any) => ({
-                  ...prev,
-                  groupAdminPost: "",
-                }));
-                setGroupAdminPost(newAdminPost);
+              onValueChange={(newAdminPost: string) => {
+                updateCoopField("address", {
+                  ...coopData.address,
+                  adminPost: newAdminPost,
+                });
+                updateCoopField("errors", {
+                  ...coopData?.errors,
+                  adminPost: "",
+                });
               }}
             >
               {selectedAddressAdminPosts?.map((adminPost: any, index: any) => (
                 <Select.Item key={index} label={adminPost} value={adminPost} />
               ))}
             </Select>
-            {"groupAdminPost" in errors ? (
+            {"adminPost" in coopData.errors ? (
               <FormControl.ErrorMessage
                 leftIcon={<Icon name="error-outline" size={16} color="red" />}
                 _text={{ fontSize: "xs" }}
               >
-                {errors?.groupAdminPost}
+                {coopData.errors.adminPost}
               </FormControl.ErrorMessage>
             ) : (
               <FormControl.HelperText></FormControl.HelperText>
             )}
           </FormControl>
         </View>
-        
+
         <View className="w-1/2">
           <FormControl isRequired my="1">
-            <InputLabel 
-              label="Localidade"
-            />
+            <InputLabel label="Localidade" />
             <Select
-              selectedValue={groupVillage}
+              selectedValue={coopData.address.village}
               placeholder="Localidade"
               minHeight={50}
               _selectedItem={{
@@ -721,17 +799,25 @@ export default function GroupFarmerForm({
               }}
               dropdownCloseIcon={
                 <Icon
-                // size={45}
-                name="arrow-drop-down"
-                color={COLORS.main}
-              />
+                  // size={45}
+                  name="arrow-drop-down"
+                  color={COLORS.main}
+                />
               }
               mt={1}
-              onValueChange={(newVillage) => setGroupVillage(newVillage)}
+              onValueChange={(newVillage: string) => {
+                updateCoopField("address", {
+                  ...coopData.address,
+                  village: newVillage,
+                });
+              }}
             >
-              {villages[groupAdminPost]?.map((village: any, index: any) => (
-                <Select.Item key={index} label={village} value={village} />
-              ))}
+              {coopData.address.adminPost &&
+                villages[coopData.address.adminPost]?.map(
+                  (village: any, index: any) => (
+                    <Select.Item key={index} label={village} value={village} />
+                  ),
+                )}
             </Select>
             <FormControl.ErrorMessage>{""}</FormControl.ErrorMessage>
           </FormControl>

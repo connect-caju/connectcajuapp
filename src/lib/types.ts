@@ -1,5 +1,22 @@
 import { Realm } from "@realm/react";
 
+export type CoopFormDataTypes = {
+  isActive: "Sim" | "Não" | undefined;
+  type: string;
+  name: string;
+  creationYear?: number;
+  affiliationYear?: number;
+  legalStatus?: string;
+  purposes: string[];
+  address: Address;
+  numberOfMembers: Members;
+  licence?: string;
+  nuel?: number;
+  nuit?: number;
+
+  errors: ErrorType;
+};
+
 export type ActorFormDataTypes = {
   isSprayingAgent: "Sim" | "Não" | undefined;
   names: Names;
@@ -108,6 +125,11 @@ export type UserDetails = {
   userName?: string;
 };
 
+export type Members = {
+  total: number;
+  women: number;
+}
+
 
 type PartialUserDetails = Partial<UserDetails>
 type PartialActorDetails = Partial<RealmActorObject>
@@ -115,3 +137,8 @@ type PartialInstitionDetails = Partial<InstitutionFormDataTypes>
 
 export type CombinedPartialsUserActor = PartialActorDetails & PartialUserDetails;
 export type CombinedPartialsUserInstitution = PartialInstitionDetails & PartialUserDetails;
+
+export type FarmerType = {
+  [key: string] : "Indivíduo" | "Grupo" | "Instituição"
+}
+

@@ -66,17 +66,17 @@ export const useDatepickerState = (initialDate = null) => {
 };
 
 export const getFullYears = (count = 20) => {
-  let years = [];
-  // let count = 20;
+  let years: string[] = [];
+  let startYear = new Date().getFullYear();
   for (let i = 0; i <= count; i++) {
-    years[i] = (new Date().getFullYear() - i).toString();
+    // years.push((new Date().getFullYear() - i).toString());
+    years.push((startYear - i).toString());
   }
   return years;
 };
 
 export const getFullYears2 = (count = 20) => {
   let years = [];
-  // let count = 20;
   for (let i = 0; i <= count; i++) {
     years[i] = { key: i, value: (new Date().getFullYear() - i).toString() };
   }

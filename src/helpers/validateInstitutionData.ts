@@ -1,13 +1,8 @@
-import { ActorFormDataTypes, useActorStore } from "../app/stores/actorStore";
-import { InstitutionFormDataTypes } from "../app/stores/institutionStore";
-import { assetTypes } from "../consts/assetTypes";
-import categories from "../consts/categories";
-import { ErrorType } from "../lib/types";
+
+import { ErrorType, InstitutionFormDataTypes } from "../lib/types";
 import { capitalize } from "./capitalize";
 import { containsNonNumeric } from "./containsNonNumeric";
-import { generateUAID } from "./generateUAID";
 
-// const updateActorField = useActorStore.getState().updateActorField
 
 export const validateInstitutionData = (
   institutionData: InstitutionFormDataTypes,
@@ -37,7 +32,7 @@ export const validateInstitutionData = (
     errors["name"] = "Indica a designação da instituição";
   } 
 
-  if (!capitalize(manager.fullname.trim())) {
+  if (!capitalize(manager.fullname.trim()) || manager.fullname.split(" ").length <= 1) {
     errors["managerName"] = "Indica o nome do responsável";
   } 
 

@@ -45,7 +45,7 @@ type ActorFormStore = {
   ) => Promise<void>;
 };
 
-const initialFormState = {
+const initialFormState : ActorFormDataTypes = {
   isSprayingAgent: undefined,
   names: {
     surname: "",

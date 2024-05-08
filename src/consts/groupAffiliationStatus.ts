@@ -9,3 +9,9 @@ export const groupAffiliationStatus2 = [
   { key: 2, value: "Legalizado" },
   { key: 3, value: "Não Legalizado" },
 ];
+
+export const groupAffiliationStatus3 = [
+  "Em processo de Legalização",
+  "Legalizado",
+  "Não Legalizado",
+];

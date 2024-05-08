@@ -1,3 +1,5 @@
+import { FarmerType } from "../lib/types";
+
 /* eslint-disable semi */
 export const institutions = [
   "Escola Primária (EP1)",
@@ -44,7 +46,9 @@ export const groups2 = [
   { key: 4, value: "Escola na Machamba do Camponês" },
 ];
 
-export const farmerTypes = {
+
+
+export const farmerTypes : FarmerType = {
   farmer: "Indivíduo",
   group: "Grupo",
   institution: "Instituição",

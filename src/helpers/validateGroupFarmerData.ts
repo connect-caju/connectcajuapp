@@ -47,11 +47,7 @@ const validateGroupFarmerData = (
   const retrievedGroupDistrict = groupDistrict?.trim();
   const retrievedGroupAdminPost = groupAdminPost?.trim();
   const retrievedGroupVillage = groupVillage?.trim();
-  // const retrievedGroupManagerName = capitalize(groupManagerName.trim());
-  // const retrievedGroupManagerPhone = Number(parseInt(groupManagerPhone)) ? Number(parseInt(groupManagerPhone)) : 0;
 
-  //  normalize asset array
-  // const normalizeAssets = (assets)=>{
   let normalizedAssets = retrievedGroupGoals?.map((asset: any) => {
     return {
       category: categories.group.category,
@@ -59,14 +55,6 @@ const validateGroupFarmerData = (
       assetType: assetTypes.cashew,
     };
   });
-  // console.log('assets: ', assets)
-  // if (assets?.lenght > 0) {
-
-  //     return normalizedAssets;
-  // }
-  // }
-
-  // console.log('assets: ', normalizeAssets(retrievedGroupGoals))
 
   if (
     (!retrievedIsGroupActive && !retrievedIsGroupInactive) ||
