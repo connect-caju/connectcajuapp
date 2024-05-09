@@ -25,11 +25,12 @@ import { v4 as uuidv4 } from "uuid";
 import { realmContext } from "../../models/realmContext";
 import { useUser } from "@realm/react";
 import { FarmersStackParamList } from "../../navigation/Stacks/FarmersStackScreen";
-import {
-  CoopFormDataTypes,
-  UserDetails,
-} from "../../lib/types";
+import { CoopFormDataTypes, UserDetails } from "../../lib/types";
 import { useCoopStore } from "../../app/stores/coopStore";
+import {
+  groupAffiliationStatus,
+  groupAffiliationStatus2,
+} from "../../consts/groupAffiliationStatus";
 const { useRealm, useQuery, useObject } = realmContext;
 
 type Props = NativeStackScreenProps<
@@ -37,18 +38,14 @@ type Props = NativeStackScreenProps<
   "CoopFormDataPreview"
 >;
 
-export default function CoopFormDataPreview({
-  route,
-  navigation,
-}: Props) {
+export default function CoopFormDataPreview({ route, navigation }: Props) {
   const realm = useRealm();
   const { coopData, submitCoopForm } = useCoopStore();
 
   const [showFloatingButton, setShowFloatingButton] = useState(true);
   const [coop, setCoop] = useState<Realm.Object>();
   const [coopId, setCoopId] = useState<string>();
-  const [formattedData, setFormattedData] =
-    useState<CoopFormDataTypes>();
+  const [formattedData, setFormattedData] = useState<CoopFormDataTypes>();
 
   const user = useUser();
   const customUserData = user?.customData;
@@ -118,7 +115,12 @@ export default function CoopFormDataPreview({
 
   useEffect(() => {
     setFormattedData(coopData);
-  }, []);
+
+  }, [ ]);
+
+  console.log(JSON.stringify(formattedData));
+
+ 
 
   return (
     <SafeAreaProvider>
@@ -139,17 +141,17 @@ export default function CoopFormDataPreview({
               Confirmar Dados
             </Text>
           </View>
-          <TouchableOpacity onPress={() => {}}>
+          {/* <TouchableOpacity onPress={() => {}}>
             <View className="relative min-w-[50px] flex justify-center items-center">
               <View className="animate animate-pulse transition-all duration-300 absolute z-10 min-w-[20px] -top-5 right-3 bg-red-600 rounded-full px-2 justify-center items-center ">
                 <Text className="text-white text-lg ">2</Text>
               </View>
               <FontAwesomeIcon icon={faBell} size={24} color={COLORS.grey} />
             </View>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
 
-        <View className="border border-gray-400 shadow-md rounded-md  p-2 flex flex-col my-2">
+        <View className="border border-gray-400 bg-white dark:bg-black shadow-md rounded-md  p-2 flex flex-col mt-2 mb-8">
           <View className="flex flex-wrap justify-between items-center space-x-2 w-full">
             <Text className="text-lg text-black font-bold dark:text-white leading-5">
               {formattedData?.type}: {formattedData?.name}
@@ -157,57 +159,83 @@ export default function CoopFormDataPreview({
           </View>
 
           <Text className="text-sm text-black dark:text-white italic leading-5">
-            {formattedData?.isActive === "Sim"
-              ? "Instituição Privada"
-              : "Instituição Pública"}
+            {formattedData?.legalStatus === groupAffiliationStatus.affiliated
+              ? "Legalizada"
+              : "Não Legalizada"}
           </Text>
+        </View>
+
+        <View className="my flex flex-row justify-between items-center space-x-3 flex-wrap gap-2">
+          <View className="border border-gray-400 shadow-md rounded-md w-[100px]  p-2">
+            <Text className="text-lg text-black font-bold text-center dark:text-white tracking-widest">
+              {formattedData?.numberOfMembers.total}
+            </Text>
+            <Text className="text-sm text-gray-500 dark:text-white italic text-center">
+              Membros
+            </Text>
+          </View>
+          <View className="border border-gray-400 shadow-md rounded-md w-[100px]  p-2">
+            <Text className="text-lg text-black text-center font-bold dark:text-white tracking-widest">
+              {formattedData?.creationYear}
+            </Text>
+            <Text className="text-sm text-gray-500 dark:text-white italic text-center ">
+              Criação
+            </Text>
+          </View>
+          {formattedData?.affiliationYear && (
+            <View className="border border-gray-400 shadow-md w-[100px] rounded-md  p-2">
+              <Text className="text-lg text-black font-bold text-center dark:text-white tracking-widest">
+                {formattedData?.affiliationYear}
+              </Text>
+              <Text className="text-sm text-gray-500 dark:text-white italic text-center">
+              Legalização
+              </Text>
+            </View>
+          )}
         </View>
 
         <View className="border border-gray-400 shadow-md rounded-md  p-2 my-3">
+          <View className="flex flex-col my-2">
+            <Text className="text-sm text-gray-500 dark:text-white italic ">
+              Finalidade
+            </Text>
 
-        <View className="flex flex-col my-2">
-          <Text className="text-sm text-gray-500 dark:text-white italic ">
-            Contatos
-          </Text>
-
-          {/* <View className="">
-            <Text className="text-lg text-black text-right dark:text-white tracking-widest">
-              {formattedData?.manager?.fullname}
-            </Text>
-            <Text className="text-lg text-black text-right  dark:text-white tracking-widest">
-              {formattedData?.manager?.phone}
-            </Text>
-          </View> */}
-          
-        </View>
-
-        {/* <View className="w-full h-0.5 bg-gray-400" /> */}
-        <View className="flex flex-row my-2  space-x-2">
-          <Text className="text-sm text-gray-500 dark:text-white italic">
-            Endereço
-          </Text>
-
-          <View className="flex-1 flex-col justify-center items-end">
-            <Text className="text-lg text-black dark:text-white">
-              {formattedData?.address?.district}
-            </Text>
-            <Text className="text-lg text-black  dark:text-white">
-              {formattedData?.address?.adminPost}
-            </Text>
-            <Text className="text-lg text-black  dark:text-white">
-              {formattedData?.address?.village &&
-                formattedData.address?.village}
-            </Text>
+            <View className="">
+            {
+              formattedData?.purposes.map((purpose, index)=>(
+                <Text className="text-lg text-black dark:text-white" key={index}>{purpose}</Text>
+              ))
+            }
           </View>
-        </View>
-        {/* <View className="w-full h-0.5 bg-gray-400" /> */}
+          </View>
 
-        <View className="flex flex-col my-2  space-y-2">
-          <Text className="text-sm text-gray-500 dark:text-white italic">
-            Documentação
-          </Text>
+          {/* <View className="w-full h-0.5 bg-gray-400" /> */}
+          <View className="flex flex-row my-2  space-x-2">
+            <Text className="text-sm text-gray-500 dark:text-white italic">
+              Endereço
+            </Text>
 
-          {/* <View className="flex flex-col justify-end items-end">
+            <View className="flex-1 flex-col justify-center items-end">
+              <Text className="text-lg text-black dark:text-white">
+                {formattedData?.address?.district}
+              </Text>
+              <Text className="text-lg text-black  dark:text-white">
+                {formattedData?.address?.adminPost}
+              </Text>
+              <Text className="text-lg text-black  dark:text-white">
+                {formattedData?.address?.village &&
+                  formattedData.address?.village}
+              </Text>
+            </View>
+          </View>
+          {/* <View className="w-full h-0.5 bg-gray-400" /> */}
+
+          <View className="flex flex-col my-2  space-y-2">
+            <Text className="text-sm text-gray-500 dark:text-white italic">
+              Documentação
+            </Text>
+
+            {/* <View className="flex flex-col justify-end items-end">
             {formattedData?.nuit ? (
               <Text className="text-lg italic text-black  dark:text-white">
                 NUIT: {formattedData.nuit}
@@ -227,42 +255,32 @@ export default function CoopFormDataPreview({
               </Text>
             )}
           </View> */}
+          </View>
         </View>
-        </View>
-
       </ScrollView>
 
-        <View  className="px-3 py-3">
-          <PrimaryButton
-            onPress={async () => {
-              try {
-                await submitCoopForm(
-                  realm,
-                  coopData,
-                  userDetails,
-                  setCoop,
-                );
-              } catch (error) {
-                throw new Error("Failed to register Institution", {
-                  cause: error,
-                });
-              }
-            }}
-            title="Salvar dados"
-          />
-        </View>
+      <View className="px-3 py-3">
+        <PrimaryButton
+          onPress={async () => {
+            try {
+              await submitCoopForm(realm, coopData, userDetails, setCoop);
+            } catch (error) {
+              throw new Error("Failed to register Institution", {
+                cause: error,
+              });
+            }
+          }}
+          title="Salvar dados"
+        />
+      </View>
 
-        <StatusBar backgroundColor="transparent" />
+      <StatusBar backgroundColor="transparent" />
       {showFloatingButton && (
         <TouchableOpacity
           onPress={() => navigation.goBack()}
           className="absolute bottom-20 left-5 opacity-80  rounded-full p-3 bg-[#008000] z-[100]"
         >
-          <FontAwesomeIcon
-            icon={faChevronCircleLeft}
-            size={25}
-            color={COLORS.white}
-          />
+          <FontAwesomeIcon icon={faArrowLeft} size={25} color={COLORS.white} />
         </TouchableOpacity>
       )}
     </SafeAreaProvider>

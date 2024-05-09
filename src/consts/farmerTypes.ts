@@ -13,10 +13,10 @@ export const institutions = [
 ];
 
 export const groups = [
-  "Associação",
   "Cooperativa",
+  "Associação",
   "Grupo de Produtores",
-  "Escola na Machamba do Camponês",
+  // "Escola na Machamba do Camponês",
 ];
 
 export const publicInstitutions = [

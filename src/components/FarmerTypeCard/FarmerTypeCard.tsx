@@ -22,7 +22,7 @@ export function FarmerTypeCard({
           farmerType: item?.farmerType,
         });
       }}
-      className="justify-center items-center"
+      className="justify-center m-3 rounded-lg items-center bg-white dark:bg-black"
     >
       <View
         style={{
@@ -81,6 +81,7 @@ export function FarmerTypeCard({
                   textAlign: "right",
                   // color: !pop ? item?.color : COLORS.lightgrey,
                 }}
+                className="text-black dark:text-white"
                 numberOfLines={2}
                 ellipsizeMode={"tail"}
               >
@@ -107,7 +108,7 @@ export function FarmerTypeCard({
                 alignItems: "flex-end",
               }}
             >
-              {!pop && <Icon name="arrow-forward-ios" size={25} color={COLORS.grey} />}
+              {!pop && <Icon name="arrow-forward-ios" size={25} color={COLORS.main} />}
             </View>
           </View>
         </View>

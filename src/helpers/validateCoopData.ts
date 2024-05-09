@@ -41,7 +41,8 @@ export const validateCoopData = (coopData: CoopFormDataTypes) => {
     errors["women"] = "Indica o número de mulheres";
   } else if (
     Number(numberOfMembers.women) &&
-    numberOfMembers.women > numberOfMembers.total
+    Number(numberOfMembers.total) &&
+    Number(numberOfMembers.women) > Number(numberOfMembers.total)
   ) {
 
     errors["women"] = "Número de mulher superior ao total";
@@ -97,7 +98,7 @@ export const validateCoopData = (coopData: CoopFormDataTypes) => {
     errors["adminPost"] = "Indica o Posto Administrativo";
   }
 
-  console.log("errorMessages:", errors);
+ 
   return {
     isValid: Object.keys(errors).length > 0 ? false : true,
     errorMessages: errors,

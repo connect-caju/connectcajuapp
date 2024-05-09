@@ -11,7 +11,7 @@ const PrimaryButton = ({
         <TouchableOpacity
             disabled={disabled}
             onPress={onPress}
-            className="bg-green-700 disabled:bg-gray-300"
+            className="bg-[#008000] disabled:bg-gray-300"
             style={{
                 // backgroundColor: COLORS.main,
                 width: "100%",

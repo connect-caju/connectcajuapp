@@ -1,17 +1,13 @@
-import { Text, View } from "react-native";
+import { Text, View, StyleSheet } from "react-native";
 import React, { useState, useEffect } from "react";
 import { FormControl, Select, CheckIcon } from "native-base";
 import { Icon } from "@rneui/themed";
-import {
-  MultipleSelectList,
-  SelectList,
-} from "react-native-dropdown-select-list";
+import { MultiSelect } from "react-native-element-dropdown";
 import villages from "../../consts/villages";
-import styles from "./styles";
 
 import { getFullYears, getFullYears2 } from "../../helpers/dates";
 import { groups } from "../../consts/farmerTypes";
-import { groupPurposes } from "../../consts/groupPurposes";
+import { groupPurposes, groupPurposes2 } from "../../consts/groupPurposes";
 
 import { realmContext } from "../../models/realmContext";
 import COLORS from "../../consts/colors";
@@ -24,6 +20,9 @@ import InputLabel from "../../components/InputLabel/InputLabel";
 import InputCheckBox from "../../components/InputCheckBox/InputCheckBox";
 import { Input } from "../../../components/Input";
 import { useCoopStore } from "../../app/stores/coopStore";
+import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
+import styles from "./styles";
+
 const { useRealm } = realmContext;
 
 interface Props {
@@ -32,6 +31,8 @@ interface Props {
 
 export default function GroupFarmerForm({ selectedAddressAdminPosts }: Props) {
   const { coopData, updateCoopField, resetCoopForm } = useCoopStore();
+  const [value, setValue] = useState<string | null>(null);
+  const [isFocus, setIsFocus] = useState(false);
 
   useEffect(() => {
     resetCoopForm();
@@ -161,7 +162,7 @@ export default function GroupFarmerForm({ selectedAddressAdminPosts }: Props) {
 
       <View className="flex flex-row w-full space-x-2">
         <View className="flex-1">
-          <FormControl  my="1" isInvalid={"total"  in coopData.errors} isRequired>
+          <FormControl my="1" isInvalid={"total" in coopData.errors} isRequired>
             <InputLabel label="Membros" />
             <View className="">
               <View className="mr-1">
@@ -197,9 +198,9 @@ export default function GroupFarmerForm({ selectedAddressAdminPosts }: Props) {
               </View>
             </View>
           </FormControl>
-          </View>
-          <View className="flex-1">
-          <FormControl  my="1" isInvalid={"women" in coopData.errors} isRequired>
+        </View>
+        <View className="flex-1">
+          <FormControl my="1" isInvalid={"women" in coopData.errors} isRequired>
             <InputLabel label="Mulheres" />
             <View className="">
               <View className=" ml-1">
@@ -239,15 +240,21 @@ export default function GroupFarmerForm({ selectedAddressAdminPosts }: Props) {
       </View>
 
       <View direction="row" mx="3" w="100%">
-        <View w="100%" px="1" my="2">
-          <FormControl isInvalid={"purposes" in coopData.errors} isRequired>
+        <View w="100%" px="1">
+          <FormControl
+            my="2"
+            isInvalid={"purposes" in coopData.errors}
+            isRequired
+          >
             <InputLabel
               label={`Finalidades da ${
                 !coopData.type ? "organização" : coopData.type
               }`}
             />
-            <MultipleSelectList
+
+            {/* <MultipleSelectList
               setSelected={(purpose: string) => {
+                console.log("purpose", JSON.stringify(purpose));
                 updateCoopField("purposes", [...coopData.purposes, purpose]);
                 updateCoopField("errors", {
                   ...coopData?.errors,
@@ -290,7 +297,7 @@ export default function GroupFarmerForm({ selectedAddressAdminPosts }: Props) {
                 borderRadius: 5,
                 borderColor: COLORS.lightgrey,
               }}
-            />
+            /> */}
             {"purposes" in coopData.errors ? (
               <FormControl.ErrorMessage
                 leftIcon={<Icon name="error-outline" size={16} color="red" />}
@@ -605,6 +612,12 @@ export default function GroupFarmerForm({ selectedAddressAdminPosts }: Props) {
               </FormControl>
             </View>
 
+            <View className="my-3">
+              <Text style={styles.formSectionDescription}>
+                Documentação
+              </Text>
+            </View>
+
             <View>
               <FormControl
                 my="1"
@@ -729,7 +742,7 @@ export default function GroupFarmerForm({ selectedAddressAdminPosts }: Props) {
       )}
 
       <View className="py-3">
-        <Text style={styles.formSectionDescription}>Endereço e Contacto</Text>
+        <Text style={styles.formSectionDescription}>Endereço</Text>
       </View>
 
       <View className="flex flex-row w-full justify-center space-x-2">

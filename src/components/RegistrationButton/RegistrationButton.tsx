@@ -14,6 +14,7 @@ import {
     faCartPlus,
 } from "@fortawesome/free-solid-svg-icons";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
+import FontAwesome from "react-native-vector-icons/FontAwesome";
 
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import COLORS from "../../consts/colors";
@@ -109,15 +110,10 @@ const RegistrationButton = ({
                         addFarmer(farmerTypes.farmer);
                     }}
                 >
-                    {pop && <Text style={{
-                        fontSize: 16,
-                        marginRight: 10,
-                        // fontFamily: "Roboto-Bold",
-                        // color: COLORS.grey,
-                    }}
-                    className="text-gray-600 font-bold"
+                    {pop && <Text 
+                    className="text-black dark:text-white text-xl mr-4"
                     >Produtor</Text>}
-                    <FontAwesomeIcon icon={faPerson} size={30} color={COLORS.main} />
+                    <FontAwesomeIcon icon={faPerson} size={35} color={COLORS.main} />
                 </TouchableOpacity>
             </Animated.View>
             <Animated.View
@@ -144,13 +140,10 @@ const RegistrationButton = ({
                         addFarmer(farmerTypes.group);
                     }}
                 >
-                    {pop && <Text style={{
-                        fontSize: 16,
-                        marginRight: 10,
-                    }}
-                    className="text-gray-600 font-bold"
+                    {pop && <Text 
+                    className="text-black dark:text-white text-xl mr-4"
                     >Comerciante</Text>}
-                    <MaterialIcons name={"monetization-on"} size={30} color={COLORS.main} />
+                    <MaterialIcons name={"monetization-on"} size={35} color={COLORS.main} />
                 </TouchableOpacity>
             </Animated.View>
             <Animated.View
@@ -177,19 +170,14 @@ const RegistrationButton = ({
                         addFarmer(farmerTypes.institution);
                     }}
                 >
-                    {pop && <Text style={{
-                        fontSize: 16,
-                        marginRight: 10,
-                    }}
-                    className="text-gray-600 font-bold"
+                    {pop && <Text 
+                    className="text-black dark:text-white text-xl mr-4"
                     >Cooperativa</Text>}
-                    <FontAwesomeIcon icon={faInstitution} size={30} color={COLORS.main} />
+                    <FontAwesomeIcon icon={faInstitution} size={35} color={COLORS.main} />
                 </TouchableOpacity>
             </Animated.View >
             <View
-                style={{
-                    zIndex: 10,
-                }}
+                className="z-10 relative"
             >
                 <View
                     style={{
@@ -207,7 +195,7 @@ const RegistrationButton = ({
                             justifyContent: "center",
                             borderRadius: 50,
                             borderWidth: 3,
-                            borderColor: COLORS.lightestgrey,
+                            borderColor: COLORS.white,
                             backgroundColor: COLORS.main,
                             padding: 2,
                         }}
@@ -215,9 +203,9 @@ const RegistrationButton = ({
                         <TouchableOpacity onPress={() => {
                             pop === false ? popIn() : popOut();
                         }}>
-                            <Icon
-                                name="app-registration"
-                                color={COLORS.lightestgrey}
+                            <MaterialIcons
+                                name="add"
+                                color={COLORS.white}
                                 size={40}
                             />
                         </TouchableOpacity>
@@ -230,7 +218,7 @@ const RegistrationButton = ({
                         bottom: 10,
                         right: 35,
                     }}
-                    className="font-bold italic text-gray-600 text-sm"
+                    className=" text-black dark:text-white font-bold text-sm"
                 >
                     Registar
                 </Text>

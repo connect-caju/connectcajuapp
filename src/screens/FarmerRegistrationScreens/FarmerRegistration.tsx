@@ -4,6 +4,7 @@ import {
   Pressable,
   View,
   TouchableOpacity,
+  StatusBar,
 } from "react-native";
 import React, { useState, useEffect } from "react";
 import { Box, Stack, Center } from "native-base";
@@ -255,6 +256,7 @@ export default function FarmerRegistration({ route, navigation }: any) {
           </Box>
         </Box>
       </KeyboardAwareScrollView>
+      <StatusBar barStyle="dark-content" backgroundColor="#ffffff" />
     </SafeAreaView>
   );
 }

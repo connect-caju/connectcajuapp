@@ -139,17 +139,17 @@ export default function InstitutionFormDataPreview({
               Confirmar Dados
             </Text>
           </View>
-          <TouchableOpacity onPress={() => {}}>
+          {/* <TouchableOpacity onPress={() => {}}>
             <View className="relative min-w-[50px] flex justify-center items-center">
               <View className="animate animate-pulse transition-all duration-300 absolute z-10 min-w-[20px] -top-5 right-3 bg-red-600 rounded-full px-2 justify-center items-center ">
                 <Text className="text-white text-lg ">2</Text>
               </View>
               <FontAwesomeIcon icon={faBell} size={24} color={COLORS.grey} />
             </View>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
 
-        <View className="border border-gray-400 shadow-md rounded-md  p-2 flex flex-col my-2">
+        <View className="border border-gray-400 bg-white dark:bg-black shadow-md rounded-md  p-2 flex flex-col my-2">
           <View className="flex flex-wrap justify-between items-center space-x-2 w-full">
             <Text className="text-lg text-black font-bold dark:text-white leading-5">
               {formattedData?.type}: {formattedData?.name}
@@ -259,7 +259,7 @@ export default function InstitutionFormDataPreview({
           className="absolute bottom-20 left-5 opacity-80  rounded-full p-3 bg-[#008000] z-[100]"
         >
           <FontAwesomeIcon
-            icon={faChevronCircleLeft}
+            icon={faArrowLeft}
             size={25}
             color={COLORS.white}
           />

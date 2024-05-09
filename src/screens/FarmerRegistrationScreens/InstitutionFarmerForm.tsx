@@ -191,7 +191,7 @@ export default function InstitutionFarmerForm({
       </View>
 
       <View className="my-3">
-        <Text style={styles.formSectionDescription}>Endereço e Contacto</Text>
+        <Text style={styles.formSectionDescription}>Endereço</Text>
       </View>
 
       <View className="flex flex-row justify-center w-full">
@@ -286,6 +286,10 @@ export default function InstitutionFarmerForm({
             <FormControl.ErrorMessage>{""}</FormControl.ErrorMessage>
           </FormControl>
         </View>
+      </View>
+
+      <View className="my-3">
+        <Text style={styles.formSectionDescription}>Ponto Focal e Contacto</Text>
       </View>
 
       <FormControl

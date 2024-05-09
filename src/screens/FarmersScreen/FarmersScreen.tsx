@@ -6,9 +6,10 @@ import {
   View,
   TouchableOpacity,
   ScrollView,
+  StatusBar,
 } from "react-native";
 import React, { useEffect, useState } from "react";
-import { Box, Pressable,  } from "native-base";
+import { Box, Pressable } from "native-base";
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import {
   faPeopleGroup,
@@ -19,7 +20,6 @@ import {
   faMoneyCheckDollar,
 } from "@fortawesome/free-solid-svg-icons";
 import { Icon } from "@rneui/themed";
-
 
 import { heightPercentageToDP as hp } from "react-native-responsive-screen";
 
@@ -246,143 +246,75 @@ export default function FarmersScreen({ route, navigation }: any) {
   }
 
   return (
-    <SafeAreaView className={`flex flex-1 pb-40 ${backgroundStyle}`}>
-      {/*
-      Show this if the user is a field agent only
-    */}
-
-      {customUserData?.role !== roles.provincialManager &&
-        customUserData?.role !== roles.ampcmSupervisor && (
-          <View
-            style={{
-              opacity: pop ? 0.2 : 1,
-            }}
-          >
-            <View
-              className={
-                "bg-[#EBEBE4] dark:bg-gray-800 p-2 h-20 justify-center"
-              }
+    <SafeAreaView className={`flex flex-1 pb-40  `}>
+      <View
+        style={{
+          opacity: pop ? 0.2 : 1,
+        }}
+      >
+        <View className={"bg-white dark:bg-black p-2 h-20 justify-center"}>
+          <View>
+            <Text
+              numberOfLines={1}
+              ellipsizeMode={"tail"}
+              className="font-bold text-black dark:text-white text-xl text-center"
             >
-              <View
-                style={{
-                  width: "80%",
-                }}
-              >
-                <Pressable
-                  // @ts-expect-error TS(2322): Type '{ children: Element; onPress: () => void; }'... Remove this comment to see the full error message
-                  onPress={() => {
-                    setRefresh(!refresh);
-                  }}
-                >
-                  <Text
-                    numberOfLines={1}
-                    ellipsizeMode={"tail"}
-                    // style={{
-                    //   fontFamily: "JosefinSans-Bold",
-                    //   fontSize: 24,
-                    //   color: COLORS.black,
-                    // }}
-                    className="font-bold text-gray-600 text-xl"
-                  >
-                    {customUserData?.userDistrict}
-                  </Text>
-                </Pressable>
-              </View>
-              <View
-                style={{
-                  borderRadius: 100,
-                  elevation: 8,
-                  position: "absolute",
-                  right: 25,
-                  top: 20,
-                }}
-              >
-                {!pop && (
-                  <View className="justify-center rounded-full bg-gray-400 dark:bg-gray-500 p-2">
-                    <TouchableOpacity disabled={pop} onPress={() => {}}>
-                      <View
-                        style={{
-                          width: 10,
-                          height: 10,
-                          backgroundColor: COLORS.danger,
-                          borderRadius: 50,
-                          position: "absolute",
-                          right: 4,
-                          top: 0,
-                          zIndex: 1,
-                        }}
-                      />
-                      <FontAwesomeIcon
-                        icon={faBell}
-                        size={20}
-                        color={COLORS.lightestgrey}
-                      />
-                    </TouchableOpacity>
-                  </View>
-                )}
-              </View>
-            </View>
-            {
-              <Box
-                // @ts-expect-error TS(2322): Type '{ children: Element; style: { justifyContent... Remove this comment to see the full error message
-                style={{
-                  // display: pop ? "none" : "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  height: "100%",
-                }}
-              >
-                <FlatList
-                  numColumns={1}
-                  horizontal={false}
-                  StickyHeaderComponent={() => (
-                    <Box
-                      // @ts-expect-error TS(2322): Type '{ style: { height: number; justifyContent: s... Remove this comment to see the full error message
-                      style={{
-                        height: hp("10%"),
-                        justifyContent: "center",
-                        alignItems: "center",
-                      }}
-                    ></Box>
-                  )}
-                  stickyHeaderHiddenOnScroll={true}
-                  data={farmersTypes}
-                  keyExtractor={keyExtractor}
-                  // onEndReached={handleEndReached}
-                  onEndReachedThreshold={0.1}
-                  ItemSeparatorComponent={() => (
-                    <CustomDivider thickness={1} bg={COLORS.lightestgrey} />
-                  )}
-                  renderItem={({ item }: any) => {
-                    if (item?.farmerType === "Grupo") {
-                      item["total"] = groups?.length;
-                    } else if (item?.farmerType === "Indivíduo") {
-                      item["total"] = farmers?.length;
-                    } else if (item?.farmerType === "Instituição") {
-                      item["total"] = institutions?.length;
-                    }
-                    return (
-                      <FarmerTypeCard route={route} item={item} pop={pop} />
-                    );
-                  }}
-                  ListFooterComponent={() => {
-                    return (
-                      <Box
-                        // @ts-expect-error TS(2322): Type '{ children: Element; style: { paddingBottom:... Remove this comment to see the full error message
-                        style={{
-                          paddingBottom: 100,
-                        }}
-                      >
-                        <Text></Text>
-                      </Box>
-                    );
-                  }}
-                />
-              </Box>
-            }
+              {customUserData?.userDistrict}
+            </Text>
           </View>
-        )}
+        </View>
+        {
+          <View
 
+          // className="space-y-6 flex flex-col gap-6"
+          >
+            <FlatList
+              numColumns={1}
+              horizontal={false}
+              StickyHeaderComponent={() => (
+                <Box
+                  // @ts-expect-error TS(2322): Type '{ style: { height: number; justifyContent: s... Remove this comment to see the full error message
+                  style={{
+                    height: hp("10%"),
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                ></Box>
+              )}
+              stickyHeaderHiddenOnScroll={true}
+              data={farmersTypes}
+              keyExtractor={keyExtractor}
+              // onEndReached={handleEndReached}
+              onEndReachedThreshold={0.1}
+              ItemSeparatorComponent={() => (
+                <CustomDivider thickness={1} bg={COLORS.lightestgrey} />
+              )}
+              renderItem={({ item }: any) => {
+                if (item?.farmerType === "Grupo") {
+                  item["total"] = groups?.length;
+                } else if (item?.farmerType === "Indivíduo") {
+                  item["total"] = farmers?.length;
+                } else if (item?.farmerType === "Instituição") {
+                  item["total"] = institutions?.length;
+                }
+                return <FarmerTypeCard route={route} item={item} pop={pop} />;
+              }}
+              ListFooterComponent={() => {
+                return (
+                  <Box
+                    // @ts-expect-error TS(2322): Type '{ children: Element; style: { paddingBottom:... Remove this comment to see the full error message
+                    style={{
+                      paddingBottom: 100,
+                    }}
+                  >
+                    <Text></Text>
+                  </Box>
+                );
+              }}
+            />
+          </View>
+        }
+      </View>
       {customUserData?.role !== roles.provincialManager &&
         customUserData?.role !== roles.ampcmSupervisor && (
           <RegistrationButton
@@ -393,6 +325,7 @@ export default function FarmersScreen({ route, navigation }: any) {
             route={route}
           />
         )}
+      <StatusBar barStyle="dark-content" backgroundColor="#ffffff" />
     </SafeAreaView>
   );
 }

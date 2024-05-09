@@ -221,7 +221,7 @@ export default function ActorFormDataPreview({ route, navigation }: Props) {
           </TouchableOpacity>
         </View>
 
-        <View className="border border-gray-400 shadow-md rounded-md  p-2 flex flex-col my-2">
+        <View className="border border-gray-400 bg-white dark:bg-black shadow-md rounded-md  p-2 flex flex-col my-2">
           <View className="flex flex-row justify-between items-center space-x-2 w-full">
             <View className="flex-1 justify-start">
               <Text className="text-sm text-gray-500 dark:text-white italic">
@@ -486,7 +486,7 @@ export default function ActorFormDataPreview({ route, navigation }: Props) {
           className="absolute bottom-20 left-5 opacity-80  rounded-full p-3 bg-[#008000] z-[100]"
         >
           <FontAwesomeIcon
-            icon={faChevronCircleLeft}
+            icon={faArrowLeft}
             size={25}
             color={COLORS.white}
           />
