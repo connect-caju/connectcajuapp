@@ -4,6 +4,7 @@ import React from "react";
 import { Icon } from "@rneui/themed";
 import { View, Text, TouchableOpacity } from "react-native";
 import COLORS from "../../consts/colors";
+import { cn } from "../../../lib/utils";
 
 export function FarmerTypeCard({
   route,
@@ -22,7 +23,11 @@ export function FarmerTypeCard({
           farmerType: item?.farmerType,
         });
       }}
-      className="justify-center m-3 rounded-lg items-center bg-white dark:bg-black"
+      className={cn("justify-center m-3 rounded-lg items-center bg-white dark:bg-black shadow-md shadow-[#008000]/50",
+        {
+          "shadow-none shadow-transparent": pop
+        }
+      )}
     >
       <View
         style={{

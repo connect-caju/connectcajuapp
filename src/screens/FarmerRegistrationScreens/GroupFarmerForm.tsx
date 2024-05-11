@@ -2,7 +2,7 @@ import { Text, View, StyleSheet } from "react-native";
 import React, { useState, useEffect } from "react";
 import { FormControl, Select, CheckIcon } from "native-base";
 import { Icon } from "@rneui/themed";
-import { MultiSelect } from "react-native-element-dropdown";
+
 import villages from "../../consts/villages";
 
 import { getFullYears, getFullYears2 } from "../../helpers/dates";
@@ -20,7 +20,6 @@ import InputLabel from "../../components/InputLabel/InputLabel";
 import InputCheckBox from "../../components/InputCheckBox/InputCheckBox";
 import { Input } from "../../../components/Input";
 import { useCoopStore } from "../../app/stores/coopStore";
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import styles from "./styles";
 
 const { useRealm } = realmContext;
@@ -31,8 +30,9 @@ interface Props {
 
 export default function GroupFarmerForm({ selectedAddressAdminPosts }: Props) {
   const { coopData, updateCoopField, resetCoopForm } = useCoopStore();
-  const [value, setValue] = useState<string | null>(null);
-  const [isFocus, setIsFocus] = useState(false);
+  const [isCoopPurpose1, setIsCoopPurpose1] = useState(false);
+  const [isCoopPurpose2, setIsCoopPurpose2] = useState(false);
+  const [isCoopPurpose3, setIsCoopPurpose3] = useState(false);
 
   useEffect(() => {
     resetCoopForm();
@@ -252,52 +252,103 @@ export default function GroupFarmerForm({ selectedAddressAdminPosts }: Props) {
               }`}
             />
 
-            {/* <MultipleSelectList
-              setSelected={(purpose: string) => {
-                console.log("purpose", JSON.stringify(purpose));
-                updateCoopField("purposes", [...coopData.purposes, purpose]);
-                updateCoopField("errors", {
-                  ...coopData?.errors,
-                  purposes: "",
-                });
-              }}
-              data={groupPurposes}
-              notFoundText={"Finalidade não encontrada"}
-              placeholder="Finalidade de grupo"
-              searchPlaceholder="Seleccionar finalidades"
-              save="value"
-              label="Finalidade da organização"
-              badgeStyles={{
-                backgroundColor: COLORS.main,
-              }}
-              badgeTextStyles={{
-                fontSize: 16,
-              }}
-              arrowicon={
-                <Icon
-                  // size={45}
-                  name="arrow-drop-down"
-                  color={COLORS.main}
-                />
-              }
-              closeicon={<Icon name="close" size={20} color="grey" />}
-              fontFamily="JosefinSans-Regular"
-              dropdownTextStyles={{
-                fontSize: 16,
-                color: COLORS.black,
-                padding: 5,
-              }}
-              inputStyles={{
-                fontSize: 15,
-                color:
-                  coopData.purposes?.length > 0 ? COLORS.black : COLORS.grey,
-              }}
-              boxStyles={{
-                minHeight: 50,
-                borderRadius: 5,
-                borderColor: COLORS.lightgrey,
-              }}
-            /> */}
+            <View className="-mb-4">
+              <InputCheckBox
+                title={groupPurposes[0]}
+                onPress={() => {
+                  if (
+                    isCoopPurpose1 &&
+                    coopData?.purposes.includes(groupPurposes[0]!)
+                  ) {
+                    let newPurposes = coopData.purposes.filter(
+                      (purpose) => purpose !== groupPurposes[0]!,
+                    );
+                    updateCoopField("purposes", newPurposes);
+                    setIsCoopPurpose1(false);
+                  } else {
+                    updateCoopField("purposes", [
+                      ...coopData.purposes,
+                      groupPurposes[0]!,
+                    ]);
+                    setIsCoopPurpose1(true);
+                  }
+
+                  updateCoopField("errors", {
+                    ...coopData?.errors,
+                    purposes: "",
+                  });
+                }}
+                errorProperty={coopData.errors?.purposes}
+                isChecked={
+                  coopData.purposes.includes(groupPurposes[0]!) ? true : false
+                }
+              />
+            </View>
+            <View className="-mb-4">
+              <InputCheckBox
+                title={groupPurposes[1]}
+                onPress={() => {
+                  if (
+                    isCoopPurpose1 &&
+                    coopData?.purposes.includes(groupPurposes[1]!)
+                  ) {
+                    let newPurposes = coopData.purposes.filter(
+                      (purpose) => purpose !== groupPurposes[1]!,
+                    );
+                    updateCoopField("purposes", newPurposes);
+                    setIsCoopPurpose2(false);
+                  } else {
+                    updateCoopField("purposes", [
+                      ...coopData.purposes,
+                      groupPurposes[1]!,
+                    ]);
+                    setIsCoopPurpose2(true);
+                  }
+
+                  updateCoopField("errors", {
+                    ...coopData?.errors,
+                    purposes: "",
+                  });
+                }}
+                errorProperty={coopData.errors?.purposes}
+                isChecked={
+                  coopData.purposes.includes(groupPurposes[1]!) ? true : false
+                }
+              />
+            </View>
+            <View className="-mb-4">
+              <InputCheckBox
+                title={groupPurposes[2]}
+                onPress={() => {
+                  if (
+                    isCoopPurpose3 &&
+                    coopData?.purposes.includes(groupPurposes[2]!)
+                  ) {
+                    let newPurposes = coopData.purposes.filter(
+                      (purpose) => purpose !== groupPurposes[2]!,
+                    );
+                    updateCoopField("purposes", newPurposes);
+                    setIsCoopPurpose3(false);
+                  } else {
+                    updateCoopField("purposes", [
+                      ...coopData.purposes,
+                      groupPurposes[2]!,
+                    ]);
+                    setIsCoopPurpose3(true);
+                  }
+
+                  updateCoopField("errors", {
+                    ...coopData?.errors,
+                    purposes: "",
+                  });
+                }}
+                errorProperty={coopData.errors?.purposes}
+                isChecked={
+                  coopData.purposes.includes(groupPurposes[2]!) ? true : false
+                }
+              />
+            </View>
+
             {"purposes" in coopData.errors ? (
               <FormControl.ErrorMessage
                 leftIcon={<Icon name="error-outline" size={16} color="red" />}
@@ -613,9 +664,7 @@ export default function GroupFarmerForm({ selectedAddressAdminPosts }: Props) {
             </View>
 
             <View className="my-3">
-              <Text style={styles.formSectionDescription}>
-                Documentação
-              </Text>
+              <Text style={styles.formSectionDescription}>Documentação</Text>
             </View>
 
             <View>

@@ -11,7 +11,7 @@ export const buildCoopObject = (
   coopData: CoopFormDataTypes,
   userDetails: UserDetails,
 ) => {
-  const { isActive, type, name, creationYear, affiliationYear, legalStatus,  address, nuit, licence, purposes, numberOfMembers, } =
+  const { isActive, type, name, creationYear, affiliationYear, legalStatus,  address, nuit, nuel, licence, purposes, numberOfMembers, } =
   coopData;
 
   let assets = purposes?.map((asset) => {
@@ -24,16 +24,16 @@ export const buildCoopObject = (
 
   let identifier = generateUniqueNumber(
     userDetails.userDistrict!,
-    farmerTypes.institution,
+    farmerTypes.group!,
   );
 
   const builtCoopData = {
     _id: uuidv4(),
     type,
-    name: capitalize(name),
+    name: capitalize(name.trim()),
     identifier,
-    creationYear,
-    affiliationYear,
+    creationYear: Number(creationYear),
+    affiliationYear: affiliationYear ?? Number(affiliationYear),
     legalStatus,
     operationalStatus: isActive === "Sim" ? true : false,
     address: {
@@ -42,10 +42,15 @@ export const buildCoopObject = (
       adminPost: address.adminPost,
       village: address.village,
     },
-    numberOfMembers,
+    numberOfMembers: {
+      ...numberOfMembers,
+      total: Number(numberOfMembers.total),
+      women: Number(numberOfMembers.women)
+    },
     assets,
     nuit: nuit ? Number(nuit) : 0,
-    licence,
+    licence: licence?.trim(),
+    nuel: nuel ? Number(nuel) : 0,
 
     userDistrict: userDetails?.userDistrict,
     userProvince: userDetails?.userProvince,

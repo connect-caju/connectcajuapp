@@ -11,13 +11,7 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 import COLORS from "../../consts/colors";
 import PrimaryButton from "../../components/Buttons/PrimaryButton";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import {
-  faArrowLeft,
-  faArrowRight,
-  faBell,
-  faChevronCircleLeft,
-  faChevronCircleRight,
-} from "@fortawesome/free-solid-svg-icons";
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 
 import "react-native-get-random-values";
 import { v4 as uuidv4 } from "uuid";
@@ -115,15 +109,17 @@ export default function CoopFormDataPreview({ route, navigation }: Props) {
 
   useEffect(() => {
     setFormattedData(coopData);
-
-  }, [ ]);
-
-  console.log(JSON.stringify(formattedData));
-
- 
+  }, []);
 
   return (
     <SafeAreaProvider>
+      <View className="px-3 flex flex-row justify-between items-center py-6 space-x-2 bg-white dark:bg-black min-h-[100px]">
+        <View className="flex-1 flex-wrap">
+          <Text className="text-2xl text-black dark:text-white font-bold">
+            Confirmar Dados
+          </Text>
+        </View>
+      </View>
       <ScrollView
         onScrollBeginDrag={handleScrollBeginDrag}
         onScrollEndDrag={handleScrollEndDrag}
@@ -131,27 +127,11 @@ export default function CoopFormDataPreview({ route, navigation }: Props) {
         contentContainerStyle={{
           flexGrow: 1,
           paddingHorizontal: 15,
-          paddingVertical: 60,
+          paddingBottom: 60,
         }}
         showsVerticalScrollIndicator={false}
       >
-        <View className="flex flex-row justify-between items-center py-6 space-x-2 ">
-          <View className="flex-1 flex-wrap">
-            <Text className="text-2xl text-black dark:text-white font-bold">
-              Confirmar Dados
-            </Text>
-          </View>
-          {/* <TouchableOpacity onPress={() => {}}>
-            <View className="relative min-w-[50px] flex justify-center items-center">
-              <View className="animate animate-pulse transition-all duration-300 absolute z-10 min-w-[20px] -top-5 right-3 bg-red-600 rounded-full px-2 justify-center items-center ">
-                <Text className="text-white text-lg ">2</Text>
-              </View>
-              <FontAwesomeIcon icon={faBell} size={24} color={COLORS.grey} />
-            </View>
-          </TouchableOpacity> */}
-        </View>
-
-        <View className="border border-gray-400 bg-white dark:bg-black shadow-md rounded-md  p-2 flex flex-col mt-2 mb-8">
+        <View className="border border-gray-400 bg-white dark:bg-black shadow-md rounded-md  p-2 flex flex-col mt-6 mb-8">
           <View className="flex flex-wrap justify-between items-center space-x-2 w-full">
             <Text className="text-lg text-black font-bold dark:text-white leading-5">
               {formattedData?.type}: {formattedData?.name}
@@ -188,7 +168,7 @@ export default function CoopFormDataPreview({ route, navigation }: Props) {
                 {formattedData?.affiliationYear}
               </Text>
               <Text className="text-sm text-gray-500 dark:text-white italic text-center">
-              Legalização
+                Legalização
               </Text>
             </View>
           )}
@@ -201,12 +181,15 @@ export default function CoopFormDataPreview({ route, navigation }: Props) {
             </Text>
 
             <View className="">
-            {
-              formattedData?.purposes.map((purpose, index)=>(
-                <Text className="text-lg text-black dark:text-white" key={index}>{purpose}</Text>
-              ))
-            }
-          </View>
+              {formattedData?.purposes.map((purpose, index) => (
+                <Text
+                  className="text-lg text-black dark:text-white text-right"
+                  key={index}
+                >
+                  {purpose}
+                </Text>
+              ))}
+            </View>
           </View>
 
           {/* <View className="w-full h-0.5 bg-gray-400" /> */}
@@ -235,26 +218,35 @@ export default function CoopFormDataPreview({ route, navigation }: Props) {
               Documentação
             </Text>
 
-            {/* <View className="flex flex-col justify-end items-end">
-            {formattedData?.nuit ? (
-              <Text className="text-lg italic text-black  dark:text-white">
-                NUIT: {formattedData.nuit}
-              </Text>
-            ) : (
-              <Text className="text-sm italic text-black  dark:text-white">
-                Não tem NUIT
-              </Text>
-            )}
-            {formattedData?.licence ? (
-              <Text className="text-lg italic text-black  dark:text-white">
-                Alvará: {formattedData.licence}
-              </Text>
-            ) : (
-              <Text className="text-sm italic text-black  dark:text-white">
-                Não tem Alvará
-              </Text>
-            )}
-          </View> */}
+            <View className="flex flex-col justify-end items-end">
+              {formattedData?.nuit ? (
+                <Text className="text-lg  text-black  dark:text-white">
+                  NUIT: {formattedData.nuit}
+                </Text>
+              ) : (
+                <Text className="text-sm italic text-black  dark:text-white">
+                  Não tem NUIT
+                </Text>
+              )}
+              {formattedData?.licence ? (
+                <Text className="text-lg  text-black  dark:text-white">
+                  Alvará: {formattedData.licence}
+                </Text>
+              ) : (
+                <Text className="text-sm italic text-black  dark:text-white">
+                  Não tem Alvará
+                </Text>
+              )}
+              {formattedData?.nuel ? (
+                <Text className="text-lg  text-black  dark:text-white">
+                  NUEL: {formattedData.nuel}
+                </Text>
+              ) : (
+                <Text className="text-sm italic text-black  dark:text-white">
+                  Não tem NUEL
+                </Text>
+              )}
+            </View>
           </View>
         </View>
       </ScrollView>

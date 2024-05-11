@@ -20,6 +20,8 @@ import {
   faMoneyCheckDollar,
 } from "@fortawesome/free-solid-svg-icons";
 import { Icon } from "@rneui/themed";
+import MaterialIcons  from "react-native-vector-icons/MaterialIcons";
+
 
 import { heightPercentageToDP as hp } from "react-native-responsive-screen";
 
@@ -36,6 +38,7 @@ import CustomDivider from "../../components/Divider/CustomDivider";
 import RegistrationButton from "../../components/RegistrationButton/RegistrationButton";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { backgroundStyle } from "../../styles/globals";
+import SectionedMultiSelect from "react-native-sectioned-multi-select";
 const { useRealm, useQuery } = realmContext;
 
 const provincialStats = "provincialStats";
@@ -246,11 +249,12 @@ export default function FarmersScreen({ route, navigation }: any) {
   }
 
   return (
-    <SafeAreaView className={`flex flex-1 pb-40  `}>
+    <SafeAreaView className={`flex flex-1 pb-40  `}  >
       <View
         style={{
           opacity: pop ? 0.2 : 1,
         }}
+       
       >
         <View className={"bg-white dark:bg-black p-2 h-20 justify-center"}>
           <View>
@@ -263,11 +267,7 @@ export default function FarmersScreen({ route, navigation }: any) {
             </Text>
           </View>
         </View>
-        {
-          <View
 
-          // className="space-y-6 flex flex-col gap-6"
-          >
             <FlatList
               numColumns={1}
               horizontal={false}
@@ -286,9 +286,9 @@ export default function FarmersScreen({ route, navigation }: any) {
               keyExtractor={keyExtractor}
               // onEndReached={handleEndReached}
               onEndReachedThreshold={0.1}
-              ItemSeparatorComponent={() => (
-                <CustomDivider thickness={1} bg={COLORS.lightestgrey} />
-              )}
+              // ItemSeparatorComponent={() => (
+              //   <CustomDivider thickness={1} bg={COLORS.lightestgrey} />
+              // )}
               renderItem={({ item }: any) => {
                 if (item?.farmerType === "Grupo") {
                   item["total"] = groups?.length;
@@ -301,22 +301,16 @@ export default function FarmersScreen({ route, navigation }: any) {
               }}
               ListFooterComponent={() => {
                 return (
-                  <Box
-                    // @ts-expect-error TS(2322): Type '{ children: Element; style: { paddingBottom:... Remove this comment to see the full error message
-                    style={{
-                      paddingBottom: 100,
-                    }}
-                  >
-                    <Text></Text>
-                  </Box>
+                  <View
+                  className="mb-96"
+                    />
                 );
               }}
             />
-          </View>
-        }
+
       </View>
-      {customUserData?.role !== roles.provincialManager &&
-        customUserData?.role !== roles.ampcmSupervisor && (
+
+
           <RegistrationButton
             customUserData={customUserData}
             pop={pop}
@@ -324,7 +318,7 @@ export default function FarmersScreen({ route, navigation }: any) {
             navigation={navigation}
             route={route}
           />
-        )}
+  
       <StatusBar barStyle="dark-content" backgroundColor="#ffffff" />
     </SafeAreaView>
   );
