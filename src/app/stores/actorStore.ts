@@ -114,7 +114,6 @@ export const useActorStore = create<ActorFormStore>((set, get) => ({
   ) => {
     // saving the actor to the Realm
 
-
     const builtActorData = buildActorObject(actorData, userDatails);
 
     // 1. generating the uaid (unique actor identifier)
